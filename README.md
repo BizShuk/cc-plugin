@@ -55,7 +55,7 @@ my-plugin/
 ├── .claude-plugin/
 │   └── plugin.json       # Plugin manifest
 ├── agents/
-│   └── security-reviewer.json
+│   └── *.md
 ├── hooks/
 │   └── hooks.json
 ├── monitors/
