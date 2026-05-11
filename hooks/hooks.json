@@ -10,17 +10,6 @@
           }
         ]
       }
-    ],
-    "PostAgentMessage": [
-      {
-        "matcher": ".*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo 'Agent completed task'"
-          }
-        ]
-      }
     ]
   }
 }

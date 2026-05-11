@@ -7,9 +7,6 @@
     "email": "shuk.liu@gmail.com"
   },
   "homepage": "https://github.com/bizshuk/cc-plugin",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bizshuk/cc-plugin"
-  },
+  "repository": "https://github.com/bizshuk/cc-plugin",
   "license": "MIT"
 }

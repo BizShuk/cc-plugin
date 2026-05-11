@@ -5,9 +5,9 @@ when_to_use: /hello, greet me, say hi, good morning, good afternoon, good evenin
 argument-hint: [name] [time-of-day]
 arguments: name time-of-day
 disable-model-invocation: false
-user-invocable: true
+user-invocable: false
 allowed-tools: Read
-model: inherit
+model: sonnet
 effort: medium
 context: fork
 agent: Explore
