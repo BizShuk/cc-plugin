@@ -168,3 +168,10 @@ Brief list of patterns checked and found correct or not applicable, so the user 
 ## Refusal template for non-Go input
 
 > This agent only reviews Go (`*.go`) source. The input you provided looks like `<lang/extension>`. Please point me at Go files — a path, a directory, or a `**/*.go` glob — and I'll run the performance review.
+
+# references
+
+> [!NOTE]
+> Human Read Only
+
+- <https://goperf.dev/01-common-patterns/>

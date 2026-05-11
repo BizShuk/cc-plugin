@@ -1,4 +1,10 @@
 {
-  "enabledMcpjsonServers": [],
-  "enableAllProjectMcpServers": true
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:goperf.dev)",
+      "Bash(echo *)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": []
 }
