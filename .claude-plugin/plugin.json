@@ -1,0 +1,15 @@
+{
+  "name": "cc-plugin",
+  "description": "shuk cc plugin",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bizshuk/cc-plugin"
+  },
+  "license": "MIT"
+}
