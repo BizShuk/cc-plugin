@@ -1,12 +1,32 @@
 {
   "name": "cc-plugin",
-  "description": "shuk cc plugin",
   "version": "1.0.0",
+  "description": "shuk cc plugin",
   "author": {
     "name": "Shuk Liu",
-    "email": "shuk.liu@gmail.com"
+    "email": "shuk.liu@gmail.com",
+    "url": "https://github.com/bizshuk"
   },
   "homepage": "https://github.com/bizshuk/cc-plugin",
   "repository": "https://github.com/bizshuk/cc-plugin",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "cc-plugin"
+  ],
+  "skills": "./skills",
+  "commands": [
+    "./commands"
+  ],
+  "agents": [
+    "./agents"
+  ],
+  "hooks": "./config/hooks.json",
+  "mcpServers": ".mcp-config.json",
+  "outputStyles": "./styles/",
+  "lspServers": ".lsp.json",
+  "experimental": {
+    "themes": "./themes/",
+    "monitors": "./monitors.json"
+  },
+  "dependencies": []
 }
