@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:goperf.dev)",
-      "Bash(echo *)"
+      "Bash(echo:*)",
+      "Bash(mkdir:*)"
+    ],
+    "additionalDirectories": [
+      "~/.claude/skills"
     ]
   },
   "enableAllProjectMcpServers": true,
