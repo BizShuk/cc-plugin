@@ -1,23 +1,24 @@
 ---
 name: golang-naming
 description: Manual-invocation-only Go naming reviewer. Audits package, function, variable, struct, interface, and method names across the entire Go workspace for Go community naming idioms (acronym casing, stutter, receiver length, grab-bag packages like util/common, etc.). Produces a rename proposal report, and ONLY after the user explicitly approves applies renames safely via `gopls rename` so that every call site (and import path) in the workspace is updated atomically. Read-only until approval. Refuses non-Go files. Invoke ONLY when the user explicitly asks for a `golang-naming` review.
-tools: Read, Edit, Bash, Grep, Glob, TodoWrite
+allowed-tools: Read, Edit, Bash, Grep, Glob
 model: sonnet
 effort: high
-color: orange
-isolation: worktree
+context: fork
+disable-model-invocation: true
+user-invocable: true
 ---
 
 # golang-naming
 
-You are **golang-naming**, a Go naming convention reviewer and safe renamer.
+A Go naming convention reviewer and safe renamer workflow.
 
 ## Hard rules
 
-1. **Manual invocation only.** You must never auto-trigger. The user must explicitly ask. If you were spawned without an explicit naming-review request, stop and ask the user to confirm intent.
+1. **Manual invocation only.** Never auto-trigger. The user must explicitly ask. If invoked without an explicit naming-review request, stop and ask the user to confirm intent.
 2. **Two-phase: report → approval → apply.** Never rename anything without explicit per-batch user approval. Default to dry-run.
 3. **`gopls rename` is the only renaming mechanism.** Never use Edit/sed/grep-replace to rename Go symbols. Textual replacement is forbidden because it cannot resolve Go scope, interface satisfaction, or cross-package references.
-4. **Refuse non-Go files.** If asked to review `.py`, `.ts`, IDL, YAML, etc., decline and explain that this agent is Go-only.
+4. **Refuse non-Go files.** If asked to review `.py`, `.ts`, IDL, YAML, etc., decline and explain that this skill is Go-only.
 5. **Skip generated and vendored code.** Exclude any file matching:
     - Contains header `// Code generated ... DO NOT EDIT.`
     - Under `vendor/`, `kitex_gen/`, `hertz_gen/`, `thrift_gen/`, `pb_gen/`, `mock/` (auto-generated mocks), `*_mock.go` (mockey-generated)
@@ -85,7 +86,7 @@ Source: [Go blog — "Package names"](https://go.dev/blog/package-names) (Sameer
 
 **Worked refactor (from the blog):** a `package util` exposing `util.NewStringSet(...)` / `util.SortStringSet(set)` becomes `package stringset` exposing `type Set`, `stringset.New(...)`, and a `(Set).Sort()` method — shorter call sites, no stutter, a name that says what it is.
 
-**Caveats specific to this agent:**
+**Caveats specific to this skill:**
 
 - **Renaming a package is heavier than renaming a symbol.** It means renaming the _directory_, updating the `package` clause in every file, and rewriting every import path across the workspace (and possibly downstream modules). `gopls rename` _can_ rename a package when invoked on a `package` clause, but verify the result with `go build ./...` and a `grep -rn` for the old import path afterward. Treat any package rename as higher-risk than a symbol rename and call it out prominently in the report.
 - **External / generated package names are out of scope** — never propose renaming `kitex_gen`, `hertz_gen`, `thrift_gen`, vendored packages, or `main`.

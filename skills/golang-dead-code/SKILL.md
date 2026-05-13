@@ -1,16 +1,13 @@
 ---
 name: golang-dead-code
-description: Detect and safely remove dead code in Go projects — unused functions/vars/types/consts, unreachable branches, and deprecated APIs marked with `// Deprecated:`. Use when the user wants to clean up a Go codebase, remove unused symbols, drop deprecated functions, eliminate dead branches, or audit a Go module for unreachable code.
-when_to_use: /golang-dead-code, remove dead code in go, clean unused go code, drop deprecated go functions, find unreachable go code, audit go module for dead symbols
+description: Detect and safely remove dead code in Go projects — unused functions/vars/types/consts, unreachable branches.
 argument-hint: [path]
 arguments: path
+user-invocable: false
 disable-model-invocation: true
-user-invocable: true
-allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuestion
-model: sonnet
-effort: high
+allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
+effort: xhigh
 context: fork
-shell: bash
 ---
 
 # Golang Dead Code Removal Skill
@@ -23,12 +20,12 @@ Target path: `$1` (default: current working directory if not provided).
 
 Handles four categories of dead code:
 
-| Category               | How it's detected                          | Default action       |
-| ---------------------- | ------------------------------------------ | -------------------- |
-| Unused symbols         | `staticcheck -checks U1000,U1001`          | Delete after confirm |
-| Unreachable code       | `go vet` + `staticcheck -checks SA4006`    | Delete after confirm |
-| Module-level dead code | `golang.org/x/tools/cmd/deadcode`          | Delete after confirm |
-| Deprecated APIs        | grep for `// Deprecated:` comments         | Migrate or delete    |
+| Category               | How it's detected                       | Default action       |
+| ---------------------- | --------------------------------------- | -------------------- |
+| Unused symbols         | `staticcheck -checks U1000,U1001`       | Delete after confirm |
+| Unreachable code       | `go vet` + `staticcheck -checks SA4006` | Delete after confirm |
+| Module-level dead code | `golang.org/x/tools/cmd/deadcode`       | Delete after confirm |
+| Deprecated APIs        | grep for `// Deprecated:` comments      | Migrate or delete    |
 
 ---
 
@@ -120,11 +117,11 @@ Read `/tmp/dead-*.txt` and produce a consolidated list of candidate symbols, eac
 
 For **each candidate**, classify into one of three risk buckets using `Grep` to cross-check usage:
 
-| Bucket                 | Criteria                                                                                  | Default        |
-| ---------------------- | ----------------------------------------------------------------------------------------- | -------------- |
-| **Safe**               | unexported (lowercase first letter), no test references, no reflect/plugin patterns       | Auto-stage     |
-| **Deprecated-in-use**  | marked `// Deprecated:` but `grep` finds active callers                                   | Show migration |
-| **Risky**              | exported symbol OR matches `reflect.`, `plugin.Open`, build tags, `//go:linkname`         | Skip by default|
+| Bucket                | Criteria                                                                            | Default         |
+| --------------------- | ----------------------------------------------------------------------------------- | --------------- |
+| **Safe**              | unexported (lowercase first letter), no test references, no reflect/plugin patterns | Auto-stage      |
+| **Deprecated-in-use** | marked `// Deprecated:` but `grep` finds active callers                             | Show migration  |
+| **Risky**             | exported symbol OR matches `reflect.`, `plugin.Open`, build tags, `//go:linkname`   | Skip by default |
 
 For each candidate, also run:
 
@@ -148,8 +145,8 @@ For each confirmed deletion:
 
 1. Use `Read` to load the surrounding context (±10 lines).
 2. Use `Edit` to remove the symbol AND its associated:
-   - Doc comment block immediately above
-   - Trailing blank line if removal would leave a double-blank
+    - Doc comment block immediately above
+    - Trailing blank line if removal would leave a double-blank
 3. For **deprecated symbols with callers**, do NOT delete — instead, list the call sites for the user to migrate first.
 4. Process deletions in **batches per file** to keep diffs reviewable.
 
@@ -205,11 +202,11 @@ If anything fails:
 
 ## Known False-Positive Patterns to Watch For
 
-| Pattern                       | Why static tools flag it          | What to do            |
-| ----------------------------- | --------------------------------- | --------------------- |
-| `reflect.ValueOf(x).MethodByName(...)` | Method called by string name | Mark Risky, keep      |
-| `//go:linkname foo bar`       | Linked from another package       | Mark Risky, keep      |
-| Methods satisfying an interface | Tools may miss interface match  | Verify with `grep -rn "<MethodName>"` |
-| `init()` functions            | Called implicitly                 | Never delete          |
-| Test helpers (`testing.TB`)   | Only used in `_test.go`           | Check both file types |
-| `go:embed` target functions   | Used via embed directives         | Mark Risky, keep      |
+| Pattern                                | Why static tools flag it       | What to do                            |
+| -------------------------------------- | ------------------------------ | ------------------------------------- |
+| `reflect.ValueOf(x).MethodByName(...)` | Method called by string name   | Mark Risky, keep                      |
+| `//go:linkname foo bar`                | Linked from another package    | Mark Risky, keep                      |
+| Methods satisfying an interface        | Tools may miss interface match | Verify with `grep -rn "<MethodName>"` |
+| `init()` functions                     | Called implicitly              | Never delete                          |
+| Test helpers (`testing.TB`)            | Only used in `_test.go`        | Check both file types                 |
+| `go:embed` target functions            | Used via embed directives      | Mark Risky, keep                      |

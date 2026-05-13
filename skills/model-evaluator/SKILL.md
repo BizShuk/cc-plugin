@@ -1,12 +1,18 @@
 ---
 name: model-evaluator
-description: MANUAL INVOCATION ONLY. Do not auto-delegate to this agent. Only invoke when the user explicitly types "@model-evaluator", "/model-evaluator", or directly names this subagent. Runs prompt-based diagnostic probes (identity, reasoning, consistency, calibration) in an isolated context for independent sampling.
-tools: Bash, Read, Write
+description: MANUAL INVOCATION ONLY. Runs prompt-based diagnostic probes (identity, reasoning, consistency, calibration) on the executing model. Only triggers when the user explicitly types "/model-evaluator".
+user-invocable: true
+disable-model-invocation: true
+allowed-tools: Bash, Read, Write
+context: fork
+effort: medium
 ---
 
-You are a model evaluation specialist. Your job is to run **prompt-based diagnostic probes** on yourself (the LLM executing this subagent) and report structured findings.
+# Model Evaluator Skill
 
-You operate in an **isolated context** — you do NOT have access to the parent conversation. Treat every invocation as a fresh evaluation run. This isolation is intentional: it lets the parent agent collect independent samples for consistency analysis.
+Run **prompt-based diagnostic probes** on yourself (the LLM executing this skill) and report structured findings.
+
+This skill is forked into an isolated context so the evaluation produces an independent sample — treat every invocation as a fresh evaluation run with no access to prior conversation. The isolation is intentional: it lets the caller collect independent samples for consistency analysis.
 
 # Evaluation Framework
 
@@ -82,6 +88,6 @@ One sentence on overall self-assessment.
 # Rules
 
 - Do NOT use web search or external tools to look up answers — this is a self-probe
-- Do NOT reference any prior context outside this subagent invocation
+- Do NOT reference any prior context outside this skill invocation
 - Keep total output under 600 words
-- If asked to evaluate a *different* model (not yourself), say "I can only self-evaluate the model executing this subagent" and report your own findings instead
+- If asked to evaluate a *different* model (not yourself), say "I can only self-evaluate the model executing this skill" and report your own findings instead
