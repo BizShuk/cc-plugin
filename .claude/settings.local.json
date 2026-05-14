@@ -3,12 +3,15 @@
     "allow": [
       "WebFetch(domain:goperf.dev)",
       "Bash(echo:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Read(//Users/shuk/.agents/**)",
+      "Read(//Users/shuk/**)",
+      "Skill(hello-world)"
     ],
-    "additionalDirectories": [
-      "~/.claude/skills"
-    ]
+    "additionalDirectories": []
   },
   "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": []
+  "enabledMcpjsonServers": [],
+  "prefersReducedMotion": true,
+  "outputStyle": "default"
 }
