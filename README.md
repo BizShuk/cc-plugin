@@ -1,76 +1,13 @@
-# My Plugin
+# README
 
-A sample Claude Code plugin demonstrating all available plugin components.
+## MCP List
 
-## Installation
+`claude mcp add --scope [local|project|user] <mcp_name> <mcp_command>`
 
-```bash
-# Local development
-claude --plugin-dir ./my-plugin
+- `claude mcp add playwright npx @playwright/mcp@latest`, [Playwright](https://playwright.dev/docs/getting-started-mcp)
+- `claude mcp add chrome-devtools npx @chrome-devtools/mcp@latest`, [Chrome DevTools](https://github.com/ChromeDevTools/chrome-devtools-mcp)
 
-# Or install from marketplace when published
-/plugin install my-plugin
-```
-
-## Components
-
-### Skills
-
-- `/my-plugin:hello` - Greet users with a personalized message
-- `/my-plugin:code-review` - Review code for best practices
-
-### Agents
-
-- `security-reviewer` - Specialized agent for security-focused code review
-
-### Hooks
-
-- `PostToolUse` - Runs lint:fix after Write/Edit operations
-- `PostAgentMessage` - Logs after agent completion
-
-### Monitors
-
-- `error-log` - Watch `./logs/error.log` for errors
-- `access-log` - Watch `./logs/access.log` for access events
-
-### LSP
-
-- Go language server (`gopls`) for Go code intelligence
-
-### MCP
-
-- Filesystem MCP server for file operations
-
-## Development
-
-```bash
-# Reload plugins without restarting
-/reload-plugins
-```
-
-## Structure
-
-```
-my-plugin/
-├── .claude-plugin/
-│   └── plugin.json       # Plugin manifest
-├── agents/
-│   └── *.md
-├── hooks/
-│   └── hooks.json
-├── monitors/
-│   └── monitors.json
-├── skills/
-│   ├── hello/
-│   │   └── SKILL.md
-│   └── code-review/
-│       └── SKILL.md
-├── bin/                  # Executables added to PATH
-├── settings.json         # Default settings
-├── .lsp.json           # LSP server config
-└── .mcp.json           # MCP server config
-```
-
-## License
-
-MIT
+    ```sh
+    /plugin marketplace add ChromeDevTools/chrome-devtools-mcp
+    /plugin install chrome-devtools-mcp@chrome-devtools-plugins
+    ```
