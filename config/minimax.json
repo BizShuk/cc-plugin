@@ -6,6 +6,7 @@
         "API_TIMEOUT_MS": "3000000",
         "_____prompt": "_____",
         "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
+        "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "75",
         "_____model": "_____",
         "ANTHROPIC_MODEL": "MiniMax-M2.7",
         "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
@@ -76,7 +77,6 @@
         "refreshInterval": 10
     },
     "extraKnownMarketplaces": {},
-    "outputStyle": "Explanatory",
     "syntaxHighlightingDisabled": false,
     "alwaysThinkingEnabled": true,
     "effortLevel": "xhigh",

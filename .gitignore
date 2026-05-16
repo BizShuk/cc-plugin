@@ -1,3 +1,4 @@
 log/
 .claude/*
 .claude/settings.local.json
+.playwright-mcp/*

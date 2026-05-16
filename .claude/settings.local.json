@@ -18,12 +18,17 @@
       "WebFetch(domain:www.nasdaq.com)",
       "WebFetch(domain:query1.finance.yahoo.com)",
       "WebFetch(domain:stockanalysis.com)",
-      "WebFetch(domain:www.investing.com)"
+      "WebFetch(domain:www.investing.com)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_evaluate",
+      "WebFetch(domain:www.promptingguide.ai)"
     ],
     "additionalDirectories": []
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [],
-  "outputStyle": "default",
+  "outputStyle": "Explanatory",
   "prefersReducedMotion": true
 }

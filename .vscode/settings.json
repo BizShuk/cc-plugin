@@ -18,7 +18,8 @@
         "{__debug_bin*}": true,
         "{**/*_test.go}": true,
         "{gen/**,kitex_gen/**,thrift_gen/**}": true,
-        "-1": true
+        "-1": true,
+        ".playwright-mcp": true
     },
     "explorerExclude.backup": {}
 }
