@@ -6,12 +6,24 @@
       "Bash(mkdir:*)",
       "Read(//Users/shuk/.agents/**)",
       "Read(//Users/shuk/**)",
-      "Skill(hello-world)"
+      "Skill(hello-world)",
+      "WebSearch",
+      "WebFetch(domain:finance.yahoo.com)",
+      "WebFetch(domain:www.google.com)",
+      "WebFetch(domain:www.wsj.com)",
+      "WebFetch(domain:www.marketwatch.com)",
+      "WebFetch(domain:www.twstock.com)",
+      "WebFetch(domain:marketwatch.com)",
+      "WebFetch(domain:stockdata.org)",
+      "WebFetch(domain:www.nasdaq.com)",
+      "WebFetch(domain:query1.finance.yahoo.com)",
+      "WebFetch(domain:stockanalysis.com)",
+      "WebFetch(domain:www.investing.com)"
     ],
     "additionalDirectories": []
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [],
-  "prefersReducedMotion": true,
-  "outputStyle": "default"
+  "outputStyle": "default",
+  "prefersReducedMotion": true
 }
