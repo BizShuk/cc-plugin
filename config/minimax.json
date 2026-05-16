@@ -2,7 +2,7 @@
     "env": {
         "_____proxy": "_____",
         "ANTHROPIC_BASE_URL": "https://api.minimax.io/anthropic",
-        "ANTHROPIC_AUTH_TOKEN": "<MINIMAX_API_KEY>",
+        "ANTHROPIC_AUTH_TOKEN": "",
         "API_TIMEOUT_MS": "3000000",
         "_____prompt": "_____",
         "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
@@ -24,6 +24,7 @@
         "_____agent": "_____",
         "CLAUDE_CODE_SUBAGENT_MODEL": "MiniMax-M2.7",
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+        "CLAUDE_CODE_DISABLE_FAST_MODE": "1",
         "_____extra": "_____",
         "DISABLE_TELEMETRY": "1"
     },
