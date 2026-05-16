@@ -28,6 +28,7 @@
         "_____extra": "_____",
         "DISABLE_TELEMETRY": "1"
     },
+    "model": "MiniMax-M2.7",
     "permissions": {
         "allow": [
             "Bash(ls:*)",
