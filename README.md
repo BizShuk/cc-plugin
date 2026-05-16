@@ -1,5 +1,10 @@
 # README
 
+```bash
+# install claude code
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
 ## MCP List
 
 `claude mcp add --scope [local|project|user] <mcp_name> <mcp_command>`
