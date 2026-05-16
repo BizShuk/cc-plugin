@@ -23,7 +23,10 @@
       "mcp__playwright__browser_snapshot",
       "mcp__playwright__browser_click",
       "mcp__playwright__browser_evaluate",
-      "WebFetch(domain:www.promptingguide.ai)"
+      "WebFetch(domain:www.promptingguide.ai)",
+      "Bash(remindctl list *)",
+      "Bash(remindctl section *)",
+      "Bash(remindctl help *)"
     ],
     "additionalDirectories": []
   },

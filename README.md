@@ -19,4 +19,12 @@ curl -fsSL https://claude.ai/install.sh | bash
 
 ## skills
 
-- [Scrapling 技能 (Scrapling Skill)](https://github.com/D4Vinci/Scrapling/blob/main/agent-skill/Scrapling-Skill/SKILL.md)
+- [ ] [Scrapling 技能 (Scrapling Skill)](https://github.com/D4Vinci/Scrapling/blob/main/agent-skill/Scrapling-Skill/SKILL.md)
+
+### Market List
+
+<https://github.com/openclaw/openclaw>
+
+## agent pkg
+
+- [ ] <https://github.com/junhoyeo/tokscale>
