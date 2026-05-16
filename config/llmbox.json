@@ -1,0 +1,45 @@
+{
+    "apiKeyHelper": "/Users/bytedance/.llmbox/claude_byted_token.sh",
+    "env": {
+        "_____proxy": "_____",
+        "ANTHROPIC_BASE_URL": "https://llmbox.bytedance.net/",
+        "API_TIMEOUT_MS": "3000000",
+        "_____prompt": "_____",
+        "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
+        "_____model": "_____",
+        "ANTHROPIC_MODEL": "minimax-m2.7",
+        "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
+        "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek-v4-pro[1m]",
+        "ANTHROPIC_DEFAULT_OPUS_MODEL_NAME": "deepseek-v4-pro[1m]",
+        "ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION": "deepseek-v4-pro[1m]",
+        "ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+        "ANTHROPIC_DEFAULT_SONNET_MODEL": "gpt-5.4",
+        "ANTHROPIC_DEFAULT_SONNET_MODEL_NAME": "gpt-5.4",
+        "ANTHROPIC_DEFAULT_SONNET_MODEL_DESCRIPTION": "gpt-5.4",
+        "ANTHROPIC_DEFAULT_SONNET_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+        "ANTHROPIC_DEFAULT_HAIKU_MODEL": "minimax-m2.5",
+        "ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME": "minimax-m2.5",
+        "ANTHROPIC_DEFAULT_HAIKU_MODEL_DESCRIPTION": "minimax-m2.5",
+        "ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+        "ANTHROPIC_CUSTOM_MODEL_OPTION": "minimax-m2.7",
+        "ANTHROPIC_CUSTOM_MODEL_OPTION_NAME": "minimax-m2.7",
+        "ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION": "mini max 2.7",
+        "ANTHROPIC_CUSTOM_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+        "_____agent": "_____",
+        "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-v4-pro[1m]",
+        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+        "_____extra": "_____",
+        "DISABLE_TELEMETRY": "1"
+    },
+    "model": "minimax-m2.7",
+    "permissions": {
+        "allow": [
+            "Bash(bytedcli:*)",
+            "Bash(gdpa-cli:*)"
+        ]
+    },
+    "autoMemoryEnabled": true,
+    "enabledPlugins": {
+        "claude-mem@thedotmack": true
+    }
+}
