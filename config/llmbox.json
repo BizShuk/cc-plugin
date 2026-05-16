@@ -34,11 +34,72 @@
     "model": "minimax-m2.7",
     "permissions": {
         "allow": [
+            "Bash(ls:*)",
+            "Bash(df:*)",
+            "Bash(du:*)",
+            "Bash(mkdir:*)",
+            "Bash(head:*)",
+            "Bash(find:*)",
+            "Bash(grep:*)",
+            "Bash(go:*)",
+            "Bash(python:*)",
+            "Bash(python3:*)",
             "Bash(bytedcli:*)",
             "Bash(gdpa-cli:*)"
-        ]
+        ],
+        "deny": [
+            "Read(.env.key)",
+            "Read(~/.ssh/**)",
+            "Read(~/.aws/**)",
+            "Read(**/.env)",
+            "Read(**/secrets/**)",
+            "Read(~/.claude/settings.json)"
+        ],
+        "ask": [
+            "Bash(rm:*)"
+        ],
+        "defaultMode": "acceptEdits",
+        "additionalDirectories": []
     },
-    "autoMemoryEnabled": true,
+    "worktree": {
+        "baseRef": "fresh"
+    },
+    "defaultShell": "bash",
+    "allowedHttpHookUrls": [
+        "http://localhost:*"
+    ],
+    "httpHookAllowedEnvVars": [
+        "MY_TOKEN",
+        "HOOK_SECRET"
+    ],
+    "skillListingBudgetFraction": 0.01,
+    "statusLine": {
+        "type": "command",
+        "command": "npx -y ccstatusline@latest",
+        "padding": 0,
+        "refreshInterval": 10
+    },
+    "extraKnownMarketplaces": {},
+    "outputStyle": "Explanatory",
+    "syntaxHighlightingDisabled": false,
+    "alwaysThinkingEnabled": true,
+    "effortLevel": "xhigh",
+    "fastModePerSessionOptIn": true,
+    "promptSuggestionEnabled": false,
+    "autoUpdatesChannel": "latest",
+    "minimumVersion": "2.1.140",
+    "plansDirectory": "./plans",
+    "voice": {
+        "enabled": false,
+        "mode": "hold"
+    },
+    "prefersReducedMotion": true,
+    "autoMemoryEnabled": false,
+    "autoMemoryDirectory": "~/memory",
+    "theme": "dark-ansi",
+    "verbose": false,
+    "preferredNotifChannel": "auto",
+    "teammateMode": "in-process",
     "enabledPlugins": {
         "claude-mem@thedotmack": true
     }
