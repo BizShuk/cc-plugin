@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-ln -sf "$(pwd)/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md" 
+ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md" 
 
 
 ln -sf "$HOME/.claude"        "./config/"
