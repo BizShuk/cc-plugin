@@ -29,7 +29,8 @@
       "Bash(remindctl help *)",
       "Bash(remindctl add *)",
       "Bash(remindctl --help)",
-      "Bash(remindctl)"
+      "Bash(remindctl)",
+      "Skill(apple-reminders)"
     ],
     "additionalDirectories": []
   },
