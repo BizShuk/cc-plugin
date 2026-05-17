@@ -30,3 +30,11 @@ hermes config edit      # Open config in editor
 hermes gateway install  # Install gateway service (messaging + cron)
 hermes update           # Update to latest version
 ```
+
+## hermesd
+
+`hermesd` 是一個為 Hermes Agent 打造的即時 TUI 監控儀表板 (Real-time TUI monitoring dashboard)。它以唯讀模式 (read-only) 運作，自動讀取 `~/.hermes/` 內的狀態，提供一個統一的介面來查看網關狀態 (Gateway health)、活躍對話 (Sessions)、Token 消耗與成本估算 (Tokens / Cost)、排程任務 (Cron jobs)、已安裝的技能 (Skills) 及系統日誌 (Logs)。使用者無需查閱多個日誌檔案或反覆輸入狀態指令，即可一目了然掌握 Agent 運行全貌。
+
+```bash
+uvx hermesd
+```
