@@ -9,8 +9,4 @@ brew install docker-compose docker-buildx
 # docker buildx build .
 docker-compose up -d
 # Open http://localhost:8787
-
-
-
-
 ```
