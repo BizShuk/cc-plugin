@@ -21,9 +21,9 @@
 您可以使用 `npx` 或 `bunx` 來直接執行：
 
 ```bash
+mkdir -p ~/.config/tokscale/
+ln -sf  ~/projects/cc-plugin/pkg/tokscale/settings.json  ~/.config/tokscale/
 npx tokscale@latest
-# 或使用 bun
-bunx tokscale@latest
 ```
 
 ## `常用指令` (Common Commands)
