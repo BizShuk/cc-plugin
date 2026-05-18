@@ -2,7 +2,8 @@
 
 ## Context
 
-load @./CLAUDE.md as project structure, @./README.md as project overview
+Load @./CLAUDE.md as project structure, if any updates from strcuture, need to update too
+Load @./README.md as project overview, if any business scope change, need to update too
 
 ## Language
 
@@ -15,7 +16,7 @@ Use Traditional Chinese to reply message or descript the information/details. Fo
 
 ## Restriction
 
-### planning
+### Planning
 
 use @./plans/ to store plans
 
