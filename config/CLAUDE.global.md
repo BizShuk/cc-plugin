@@ -1,5 +1,9 @@
 # Global AI Rules
 
+## Context
+
+load @./CLAUDE.md as project structure, @./README.md as project overview
+
 ## Language
 
 Use Traditional Chinese to reply message or descript the information/details. For name/term, should use local language with English and round brackets. If it's a summary of a file, use the original language of the file.
@@ -10,6 +14,10 @@ Use Traditional Chinese to reply message or descript the information/details. Fo
 > ex2: Catedral de Santa Eulalia de Barcelona(Barcelona Cathedral)
 
 ## Restriction
+
+### planning
+
+use @./plans/ to store plans
 
 ### Context Only
 

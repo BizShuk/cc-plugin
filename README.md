@@ -17,6 +17,10 @@ curl -fsSL https://claude.ai/install.sh | bash
     /plugin install chrome-devtools-mcp@chrome-devtools-plugins
     ```
 
+## plugin
+
+- superpower, `claude plugin install superpowers@claude-plugins-official`
+
 ## skills
 
 - [ ] [Scrapling 技能 (Scrapling Skill)](https://github.com/D4Vinci/Scrapling/blob/main/agent-skill/Scrapling-Skill/SKILL.md)

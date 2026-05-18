@@ -5,7 +5,9 @@
 ```bash
 # Installation - git clone(including curl) will use .hermes/hermes-agent/ as root
 curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+# below will have whatsapp script not found issue
 pip install hermes-agent
+brew install hermes-agent
 
 
 # Verify the installation
