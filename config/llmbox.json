@@ -74,7 +74,7 @@
         "HOOK_SECRET"
     ],
     "CLAUDE_CODE_DISABLE_FAST_MODE": "1",
-    "skillListingBudgetFraction": 0.01,
+    "skillListingBudgetFraction": 0.02,
     "statusLine": {
         "type": "command",
         "command": "npx -y ccstatusline@latest",
