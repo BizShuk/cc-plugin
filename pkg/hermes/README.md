@@ -3,8 +3,10 @@
 ## Installation
 
 ```bash
-# Copy the plugin to the appropriate location
+# Installation - git clone(including curl) will use .hermes/hermes-agent/ as root
 curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+pip install hermes-agent
+
 
 # Verify the installation
 hermes doctor
