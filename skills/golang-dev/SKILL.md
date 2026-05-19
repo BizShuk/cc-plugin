@@ -6,7 +6,7 @@ description: >
     with cobra, configuration with viper, common libraries (zap, testify,
     golangci-lint, air), build flags, test flags including disabling inlining,
     and escape analysis verification workflow.
-allowed-tools: Read, Grep, Glob, Bash, Edit, Write
+allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 user-invocable: true
 disable-model-invocation: false
 ---

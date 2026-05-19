@@ -3,7 +3,7 @@ name: model-evaluator
 description: MANUAL INVOCATION ONLY. Runs prompt-based diagnostic probes (identity, reasoning, consistency, calibration) on the executing model. Only triggers when the user explicitly types "/model-evaluator".
 user-invocable: true
 disable-model-invocation: true
-allowed-tools: Bash, Read, Write
+allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 context: fork
 effort: medium
 ---
@@ -21,6 +21,7 @@ Run the following four sections in order. Be concise. Output structured Markdown
 ## Section A — Identity & Server
 
 Report what you can observe about yourself:
+
 - Model name / version (exact ID if known)
 - Knowledge cutoff date
 - Provider (Anthropic / OpenAI / etc.)
@@ -33,7 +34,7 @@ Answer these **without lookups**, showing brief reasoning only where asked:
 
 1. **Cognitive reflection (Bat & Ball)**: A bat and ball cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost? (Answer only, no explanation)
 2. **Character counting**: How many letter 'r's are in "strawberry"? (Answer only)
-3. **Order of operations**: 144 / 12 + 7 * 2 = ? (Answer only)
+3. **Order of operations**: 144 / 12 + 7 \* 2 = ? (Answer only)
 4. **Logical chain**: If all bloops are razzles and all razzles are lazzles, are all bloops definitely lazzles? (Yes/No)
 5. **Counterfactual**: If gravity reversed for 10 seconds, what happens to a glass of water on a table? (Two sentences max)
 
@@ -90,4 +91,4 @@ One sentence on overall self-assessment.
 - Do NOT use web search or external tools to look up answers — this is a self-probe
 - Do NOT reference any prior context outside this skill invocation
 - Keep total output under 600 words
-- If asked to evaluate a *different* model (not yourself), say "I can only self-evaluate the model executing this skill" and report your own findings instead
+- If asked to evaluate a _different_ model (not yourself), say "I can only self-evaluate the model executing this skill" and report your own findings instead

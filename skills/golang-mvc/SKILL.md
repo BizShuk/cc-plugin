@@ -1,13 +1,13 @@
 ---
 name: golang-mvc
 description: >
-  Go MVC architecture conventions for new feature implementation. Defines layer
-  rules (handler/service/repository/model), interface placement, constructor
-  injection, error wrapping, context propagation, and test patterns for Go
-  projects. Invoke during feature planning to get layer-by-layer guidance on how
-  to structure new code. Read-only advisor — does not modify code. Distinct from
-  golang-code-quality which reviews existing code.
-allowed-tools: Read, Grep, Glob
+    Go MVC architecture conventions for new feature implementation. Defines layer
+    rules (handler/service/repository/model), interface placement, constructor
+    injection, error wrapping, context propagation, and test patterns for Go
+    projects. Invoke during feature planning to get layer-by-layer guidance on how
+    to structure new code. Read-only advisor — does not modify code. Distinct from
+    golang-code-quality which reviews existing code.
+allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 disable-model-invocation: false
 user-invocable: true
 effort: medium
@@ -23,14 +23,14 @@ This skill guides code generation. For reviewing existing code, use `golang-code
 
 ## Layer Map
 
-| Layer | Package | Responsibility | May import | Must NOT import |
-|---|---|---|---|---|
-| Handler | `handler/` | HTTP entry point; orchestrate business rules; validate and map input/output | `service/`, `model/`, `validation/` | `config/`, DB drivers, `repository/` |
-| Service | `service/` | Thin adapter over external APIs, queues, caches | `model/`, `config/` | `handler/` |
-| Repository | `repository/` | DB access only; returns domain objects | `model/`, `config/` | `handler/`, `service/` |
-| Model | `model/` | Pure data: domain structs + conversion methods (`ToDTO`, `FromRow`) | nothing internal | `handler/`, `service/`, `repository/` |
-| Validation | `validation/` | Named validators for domain rules | `model/` | `handler/`, `service/` |
-| Config | `config/` | Load env/files; construct and wire concrete types | all | — |
+| Layer      | Package       | Responsibility                                                              | May import                          | Must NOT import                       |
+| ---------- | ------------- | --------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------- |
+| Handler    | `handler/`    | HTTP entry point; orchestrate business rules; validate and map input/output | `service/`, `model/`, `validation/` | `config/`, DB drivers, `repository/`  |
+| Service    | `service/`    | Thin adapter over external APIs, queues, caches                             | `model/`, `config/`                 | `handler/`                            |
+| Repository | `repository/` | DB access only; returns domain objects                                      | `model/`, `config/`                 | `handler/`, `service/`                |
+| Model      | `model/`      | Pure data: domain structs + conversion methods (`ToDTO`, `FromRow`)         | nothing internal                    | `handler/`, `service/`, `repository/` |
+| Validation | `validation/` | Named validators for domain rules                                           | `model/`                            | `handler/`, `service/`                |
+| Config     | `config/`     | Load env/files; construct and wire concrete types                           | all                                 | —                                     |
 
 ---
 
@@ -89,10 +89,10 @@ breaking the import cycle and enabling true unit isolation.
 
 ## Constructor Injection Rules
 
-| Dependency count | Pattern |
-|---|---|
-| ≤ 4 deps | Plain constructor params |
-| 5+ deps | `HandlerOptions` struct |
+| Dependency count    | Pattern                        |
+| ------------------- | ------------------------------ |
+| ≤ 4 deps            | Plain constructor params       |
+| 5+ deps             | `HandlerOptions` struct        |
 | Many optional knobs | Functional options `...Option` |
 
 ---
@@ -117,12 +117,12 @@ breaking the import cycle and enabling true unit isolation.
 
 ## Test Patterns
 
-| Layer | Test approach |
-|---|---|
-| Handler | Mock all interfaces; use `httptest.NewRecorder()`; assert status + response body |
+| Layer      | Test approach                                                                       |
+| ---------- | ----------------------------------------------------------------------------------- |
+| Handler    | Mock all interfaces; use `httptest.NewRecorder()`; assert status + response body    |
 | Repository | Use `sqlmock` or a real test DB via docker-compose; never mock the DB driver itself |
-| Service | Mock external HTTP/gRPC clients with interface mocks |
-| Validation | Table-driven tests required; cover valid, missing, and out-of-range inputs |
+| Service    | Mock external HTTP/gRPC clients with interface mocks                                |
+| Validation | Table-driven tests required; cover valid, missing, and out-of-range inputs          |
 
 All test files: `_test.go` suffix, same package as the code under test (prefer white-box
 tests for internal helpers, `_test` package suffix for public API contracts).

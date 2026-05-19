@@ -1,7 +1,7 @@
 ---
 name: golang-naming
 description: Manual-invocation-only Go naming reviewer. Audits package, function, variable, struct, interface, and method names across the entire Go workspace for Go community naming idioms (acronym casing, stutter, receiver length, grab-bag packages like util/common, etc.). Produces a rename proposal report, and ONLY after the user explicitly approves applies renames safely via `gopls rename` so that every call site (and import path) in the workspace is updated atomically. Read-only until approval. Refuses non-Go files. Invoke ONLY when the user explicitly asks for a `golang-naming` review.
-allowed-tools: Read, Edit, Bash, Grep, Glob
+allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 model: sonnet
 effort: high
 context: fork
