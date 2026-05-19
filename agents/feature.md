@@ -8,7 +8,7 @@ description: >
 tools: Read, Edit, Write, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: acceptEdits
-skills: domain, golang-mvc
+skills: golang-code-quality, golang-dead-code, golang-mvc, golang-naming, golang-network, golang-performance-tuning
 mcpServers:
 hooks:
 memory: local
@@ -141,7 +141,5 @@ For non-Go projects, use conventions from the `domain` skill output.
 | Non-Go project                 | Skip `golang-mvc`; rely on `domain` skill for conventions                      |
 | Feature touches DB schema      | Flag in Phase 2: ask user to run `domain-init` first                           |
 | Feature spans multiple repos   | Scope to this repo; instruct user to invoke `@feature` again in the other repo |
-| Ambiguous which layer to touch | Consult `golang-mvc` before deciding                                           |
-| New external API/service call  | Note in Phase 3 plan; flag for circuit-breaker and timeout design e other repo |
 | Ambiguous which layer to touch | Consult `golang-mvc` before deciding                                           |
 | New external API/service call  | Note in Phase 3 plan; flag for circuit-breaker and timeout design              |
