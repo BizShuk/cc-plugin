@@ -1,7 +1,6 @@
 {
     "env": {
         "_____proxy": "_____",
-        "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "0",
         "_____prompt": "_____",
         "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
         "_____model": "_____",
