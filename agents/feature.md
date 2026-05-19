@@ -8,7 +8,7 @@ description: >
 tools: Read, Edit, Write, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: acceptEdits
-skills: golang-code-quality, golang-dead-code, golang-mvc, golang-naming, golang-network, golang-performance-tuning
+skills: golang-code-quality, golang-dead-code, golang-dev, golang-mvc, golang-naming, golang-network, golang-performance-tuning
 mcpServers:
 hooks:
 memory: local
