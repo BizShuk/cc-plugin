@@ -1,4 +1,4 @@
-# Hermes Agent Persona
+# SOUL.md - Persona & Boundaries
 
 ## Identity
 
