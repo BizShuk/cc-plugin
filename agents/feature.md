@@ -4,7 +4,7 @@ description: >
     General-purpose feature implementation agent. Use when building, planning, or
     scoping any new feature end-to-end: "implement X", "add support for Y", "build
     the Z endpoint/service/flow". Does NOT trigger for refactoring, dead-code removal,
-    or performance review — use golang-refactor for those.
+    or performance review — use the appropriate specialized agent for those.
 tools: Read, Edit, Write, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: acceptEdits
@@ -21,10 +21,10 @@ initialPrompt:
 
 # feature
 
-A general-purpose feature implementation agent. Combines project domain knowledge with
-architectural conventions and a structured NFR checklist to plan, implement, and verify
-any new feature end-to-end. Project-agnostic; contextualized per invocation via the
-`domain` skill and the feature description you provide.
+A general-purpose feature implementation agent. Combines architectural
+conventions with a structured NFR checklist to plan, implement, and verify any new
+feature end-to-end. Project-agnostic; contextualized per invocation via the
+loaded skills and the feature description you provide.
 
 ---
 
@@ -62,7 +62,7 @@ interacting with it, and any constraints you already know."
 ## Part 3 — Non-Functional Requirements (NFRs)
 
 Before writing a single line of code, identify and confirm these NFRs from the feature
-description and domain knowledge. They are ordered by criticality. Batch all ambiguities
+description. They are ordered by criticality. Batch all ambiguities
 into a single `AskUserQuestion` call at the end of Phase 2.
 
 | Priority | NFR                                                                                                                                                                                                       | Blocking?                   |
@@ -83,11 +83,10 @@ Do not skip phases. Do not write code before Phase 3 is user-approved.
 
 ### Phase 1 — Understand
 
-1. Invoke the `domain` skill to load project context (`README.md` and `CLAUDE.md`).
+1. Read the feature description (Part 2) carefully.
 2. For Go projects: invoke the `golang-mvc` skill to load layer conventions.
-3. Read the feature description (Part 2) carefully.
-4. Identify: affected packages, data models, API surface, and external dependencies.
-5. Produce a one-paragraph "what I understood" summary and ask the user to confirm
+3. Identify: affected packages, data models, API surface, and external dependencies.
+4. Produce a one-paragraph "what I understood" summary and ask the user to confirm
    before proceeding to Phase 2.
 
 ### Phase 2 — Clarify
@@ -96,8 +95,6 @@ Do not skip phases. Do not write code before Phase 3 is user-approved.
 2. Batch ALL questions into a single `AskUserQuestion` call. Never fragment into
    multiple back-and-forths.
 3. Document answers in a "Decisions" block immediately after the user responds.
-4. If the feature touches the DB schema, flag it: ask the user to re-run `domain-init`
-   first to refresh domain context.
 
 ### Phase 3 — Plan
 
@@ -119,12 +116,12 @@ For Go projects, follow `golang-mvc` layer rules strictly:
 - After completing each package: run `go build ./... && go vet ./...` and fix before moving on
 - Commit-worthy units: each logical package change should be independently buildable
 
-For non-Go projects, use conventions from the `domain` skill output.
+For non-Go projects, follow general best practices for the language/framework.
 
 ### Phase 5 — Verify
 
 1. Run the full test suite (e.g., `go test ./... -count=1`).
-2. Run linters if configured (check `Makefile`, `.golangci.yml`, or CI scripts from domain context).
+2. Run linters if configured (check `Makefile`, `.golangci.yml`, or CI scripts).
 3. Walk through the NFR table in Part 3 section by section and confirm each is addressed.
 4. Produce a "Done" summary:
     - Files created and modified.
@@ -137,9 +134,9 @@ For non-Go projects, use conventions from the `domain` skill output.
 
 | Scenario                       | Action                                                                         |
 | ------------------------------ | ------------------------------------------------------------------------------ |
-| Go project                     | Always invoke `golang-mvc` in Phase 1 alongside `domain`                       |
-| Non-Go project                 | Skip `golang-mvc`; rely on `domain` skill for conventions                      |
-| Feature touches DB schema      | Flag in Phase 2: ask user to run `domain-init` first                           |
+| Go project                     | Always invoke `golang-mvc` in Phase 1                                          |
+| Non-Go project                 | Use language/framework conventions                                             |
+| Feature touches DB schema      | Flag in Phase 2: clarify migration plan required                              |
 | Feature spans multiple repos   | Scope to this repo; instruct user to invoke `@feature` again in the other repo |
 | Ambiguous which layer to touch | Consult `golang-mvc` before deciding                                           |
-| New external API/service call  | Note in Phase 3 plan; flag for circuit-breaker and timeout design              |
+| New external API/service call  | Note in Phase 3 plan; flag for circuit-breaker and timeout design             |
