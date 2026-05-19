@@ -1,11 +1,11 @@
 ---
 name: golang-dev
 description: >
-  Use when writing Go code, choosing Go libraries, setting up build/test
-  commands, or investigating memory escape issues. Covers CLI scaffolding
-  with cobra, configuration with viper, common libraries (zap, testify,
-  golangci-lint, air), build flags, test flags including disabling inlining,
-  and escape analysis verification workflow.
+    Use when writing Go code, choosing Go libraries, setting up build/test
+    commands, or investigating memory escape issues. Covers CLI scaffolding
+    with cobra, configuration with viper, common libraries (zap, testify,
+    golangci-lint, air), build flags, test flags including disabling inlining,
+    and escape analysis verification workflow.
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 user-invocable: true
 disable-model-invocation: false
@@ -160,12 +160,12 @@ func LoadConfig() (*Config, error) {
 ```yaml
 # .myapp.yaml
 server:
-  port: 8080
-  read_timeout: 30
+    port: 8080
+    read_timeout: 30
 db:
-  host: localhost
-  port: 5432
-  name: myapp
+    host: localhost
+    port: 5432
+    name: myapp
 ```
 
 ### Common pitfalls
@@ -178,16 +178,16 @@ db:
 
 ## 3. Common Libraries
 
-| Category | Library | When to use |
-|----------|---------|-------------|
-| Logging | `go.uber.org/zap` | Structured logging. `zap.NewProduction()` for JSON, `zap.NewDevelopment()` for console. |
-| Testing | `github.com/stretchr/testify` | `assert` (continue on fail), `require` (stop on fail), `mock` (interface mocking). |
-| Linting | `golangci-lint` | Meta-linter. Install: `go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`. |
-| HTTP | `net/http` (stdlib) | Prefer stdlib. Use `github.com/gin-gonic/gin` only when routing complexity justifies it. |
-| Hot Reload | `github.com/air-verse/air` | Dev-time file watcher. Run `air` instead of `go run`. |
-| Mocking | `github.com/bytedance/mockey` | Runtime monkey-patching for tests. |
-| CLI | `github.com/spf13/cobra` | CLI scaffolding (see Section 1). |
-| Config | `github.com/spf13/viper` | Config management (see Section 2). |
+| Category   | Library                       | When to use                                                                                    |
+| ---------- | ----------------------------- | ---------------------------------------------------------------------------------------------- |
+| Logging    | `go.uber.org/zap`             | Structured logging. `zap.NewProduction()` for JSON, `zap.NewDevelopment()` for console.        |
+| Testing    | `github.com/stretchr/testify` | `assert` (continue on fail), `require` (stop on fail), `mock` (interface mocking).             |
+| Linting    | `golangci-lint`               | Meta-linter. Install: `go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`. |
+| HTTP       | `net/http` (stdlib)           | Prefer stdlib. Use `github.com/gin-gonic/gin` only when routing complexity justifies it.       |
+| Hot Reload | `github.com/air-verse/air`    | Dev-time file watcher. Run `air` instead of `go run`.                                          |
+| Mocking    | `github.com/bytedance/mockey` | Runtime monkey-patching for tests.                                                             |
+| CLI        | `github.com/spf13/cobra`      | CLI scaffolding (see Section 1).                                                               |
+| Config     | `github.com/spf13/viper`      | Config management (see Section 2).                                                             |
 
 ### zap quick setup
 
@@ -217,14 +217,14 @@ func TestGetUser(t *testing.T) {
 
 ## 4. Build Commands
 
-| Task | Command |
-|------|---------|
-| Standard build | `go build ./...` |
-| Production binary | `go build -ldflags="-s -w" -o bin/app ./cmd/app` |
-| Static binary (no CGO) | `CGO_ENABLED=0 go build -ldflags="-s -w" -o bin/app ./cmd/app` |
-| Version injection | `go build -ldflags="-X main.version=1.2.3 -X main.buildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)"` |
-| Cross compile (Linux) | `GOOS=linux GOARCH=amd64 go build -o bin/app-linux ./cmd/app` |
-| Race detector | `go build -race ./...` |
+| Task                   | Command                                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| Standard build         | `go build ./...`                                                                             |
+| Production binary      | `go build -ldflags="-s -w" -o bin/app ./cmd/app`                                             |
+| Static binary (no CGO) | `CGO_ENABLED=0 go build -ldflags="-s -w" -o bin/app ./cmd/app`                               |
+| Version injection      | `go build -ldflags="-X main.version=1.2.3 -X main.buildTime=$(date -u +%Y-%m-%dT%H:%M:%SZ)"` |
+| Cross compile (Linux)  | `GOOS=linux GOARCH=amd64 go build -o bin/app-linux ./cmd/app`                                |
+| Race detector          | `go build -race ./...`                                                                       |
 
 ### Flag explanation
 
@@ -236,19 +236,19 @@ func TestGetUser(t *testing.T) {
 
 ## 5. Test Commands
 
-| Task | Command |
-|------|---------|
-| Run all tests | `go test ./...` |
-| Verbose | `go test -v ./...` |
-| Race detector | `go test -race ./...` |
-| Coverage | `go test -cover -coverprofile=coverage.out ./...` |
-| View coverage HTML | `go tool cover -html=coverage.out` |
-| Specific test | `go test -run TestFunctionName ./pkg/...` |
-| Benchmarks | `go test -bench=. -benchmem -run=^$ ./...` |
-| Short mode | `go test -short ./...` |
-| Disable caching | `go test -count=1 ./...` |
-| Timeout | `go test -timeout 30s ./...` |
-| **Disable inlining** | `go test -gcflags="all=-N -l" ./...` |
+| Task                 | Command                                           |
+| -------------------- | ------------------------------------------------- |
+| Run all tests        | `go test ./...`                                   |
+| Verbose              | `go test -v ./...`                                |
+| Race detector        | `go test -race ./...`                             |
+| Coverage             | `go test -cover -coverprofile=coverage.out ./...` |
+| View coverage HTML   | `go tool cover -html=coverage.out`                |
+| Specific test        | `go test -run TestFunctionName ./pkg/...`         |
+| Benchmarks           | `go test -bench=. -benchmem -run=^$ ./...`        |
+| Short mode           | `go test -short ./...`                            |
+| Disable caching      | `go test -count=1 ./...`                          |
+| Timeout              | `go test -timeout 30s ./...`                      |
+| **Disable inlining** | `go test -gcflags="all=-N -l" ./...`              |
 
 ### Disabling inlining and optimizations
 
@@ -261,6 +261,7 @@ go test -gcflags="all=-N -l" ./...
 - `all=` applies the flags to **all packages** being compiled, not just the test package. Without `all=`, only the direct test target gets the flags — dependencies may still be inlined.
 
 **Use cases:**
+
 - Debugging with `dlv` (delve) — requires non-inlined frames for accurate breakpoints and variable inspection.
 - Accurate escape analysis — inlining can change escape decisions, so disable it to see "true" escape behavior.
 - Diagnosing bugs that only manifest with/without compiler optimizations.
@@ -289,13 +290,13 @@ go build -gcflags='-m=2' ./... 2>&1 | grep "escapes to heap"
 
 ### Common escape reasons
 
-| Output | Cause | Fix |
-|--------|-------|-----|
-| `leaking param: x` | Param stored beyond function scope | Avoid storing pointer params in long-lived structs |
-| `moved to heap: too large` | Stack frame exceeds ~10MB | Break into smaller allocations or use `sync.Pool` |
-| `moved to heap: captured by closure` | Variable captured in closure | Pass value explicitly as parameter |
-| `moved to heap: interface conversion` | Concrete assigned to `any`/`interface{}` | Use concrete types in hot paths |
-| `&x escapes to heap` | Returning address of local | Return value instead of pointer when possible |
+| Output                                | Cause                                    | Fix                                                |
+| ------------------------------------- | ---------------------------------------- | -------------------------------------------------- |
+| `leaking param: x`                    | Param stored beyond function scope       | Avoid storing pointer params in long-lived structs |
+| `moved to heap: too large`            | Stack frame exceeds ~10MB                | Break into smaller allocations or use `sync.Pool`  |
+| `moved to heap: captured by closure`  | Variable captured in closure             | Pass value explicitly as parameter                 |
+| `moved to heap: interface conversion` | Concrete assigned to `any`/`interface{}` | Use concrete types in hot paths                    |
+| `&x escapes to heap`                  | Returning address of local               | Return value instead of pointer when possible      |
 
 ### Verification workflow
 
@@ -311,19 +312,19 @@ go build -gcflags='-m=2' ./... 2>&1 | grep "escapes to heap"
 
 ## 7. Quick Reference
 
-| Task | Command |
-|------|---------|
-| Build (dev) | `go build ./...` |
-| Build (prod) | `go build -ldflags="-s -w" -o bin/app ./cmd/app` |
-| Build (static) | `CGO_ENABLED=0 go build -ldflags="-s -w" -o bin/app ./cmd/app` |
-| Test | `go test ./...` |
-| Test (race) | `go test -race ./...` |
-| Test (cover) | `go test -cover -coverprofile=coverage.out ./...` |
-| Test (no inline) | `go test -gcflags="all=-N -l" ./...` |
-| Test (bench) | `go test -bench=. -benchmem -run=^$ ./...` |
-| Escape analysis | `go build -gcflags='-m=2' ./...` |
-| Lint | `golangci-lint run ./...` |
-| Vet | `go vet ./...` |
-| Format | `gofmt -w .` or `goimports -w .` |
-| Hot reload | `air` |
-| Cross compile | `GOOS=linux GOARCH=amd64 go build -o bin/app ./cmd/app` |
+| Task             | Command                                                        |
+| ---------------- | -------------------------------------------------------------- |
+| Build (dev)      | `go build ./...`                                               |
+| Build (prod)     | `go build -ldflags="-s -w" -o bin/app ./cmd/app`               |
+| Build (static)   | `CGO_ENABLED=0 go build -ldflags="-s -w" -o bin/app ./cmd/app` |
+| Test             | `go test ./...`                                                |
+| Test (race)      | `go test -race ./...`                                          |
+| Test (cover)     | `go test -cover -coverprofile=coverage.out ./...`              |
+| Test (no inline) | `go test -gcflags="all=-N -l" ./...`                           |
+| Test (bench)     | `go test -bench=. -benchmem -run=^$ ./...`                     |
+| Escape analysis  | `go build -gcflags='-m=2' ./...`                               |
+| Lint             | `golangci-lint run ./...`                                      |
+| Vet              | `go vet ./...`                                                 |
+| Format           | `gofmt -w .` or `goimports -w .`                               |
+| Hot reload       | `air`                                                          |
+| Cross compile    | `GOOS=linux GOARCH=amd64 go build -o bin/app ./cmd/app`        |
