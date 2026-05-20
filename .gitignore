@@ -4,3 +4,6 @@ log/
 .playwright-mcp/*
 models/bge-m3-Q8_0.gguf
 config/.gemini
+config/litellm_config.yaml
+pkg/summarize.sh/config.sample.json
+config/.summarize

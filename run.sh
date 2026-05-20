@@ -18,3 +18,12 @@ ln -sf "$(pwd)/pkg/hermes/MEMORY.md" $HOME/.hermes/
 ln -sf "$(pwd)/pkg/hermes/USER.md" $HOME/.hermes/
 
 
+# LiteLLM
+mkdir -p "$HOME/.config/litellm"
+ln -sf "$HOME/.config/litellm/litellm_config.yaml" "$(pwd)/config/" 
+
+
+# SKILL: summarize
+mkdir -p ~/.summarize/
+cp "$(pwd)/pkg/summarize.sh/config.sample.json" ~/.summarize/config.json
+ln -s ~/.summarize ./config/
