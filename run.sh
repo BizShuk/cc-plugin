@@ -2,9 +2,11 @@
 
 # Claude
 ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md" 
-ln -sf "$(pwd)/config/settings.json" "$HOME/.claude/settings.json" 
+ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.gemini/GEMINI.md" 
+ln -sf "$(pwd)/config/settings.json"    "$HOME/.claude/settings.json" 
 
-# Claude plugin
+# Global plugin
+ln -sf "$HOME/.gemini"        "./config/"
 ln -sf "$HOME/.claude"        "./config/"
 ln -sf "$HOME/.claude-mem"    "./config/"
 ln -sf "$HOME/.claude.json"   "./config/"
