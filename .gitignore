@@ -2,6 +2,5 @@ log/
 .claude/*
 .claude/settings.local.json
 .playwright-mcp/*
-**/hermes-webui
 models/bge-m3-Q8_0.gguf
 config/.gemini
