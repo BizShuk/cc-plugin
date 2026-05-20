@@ -10,12 +10,12 @@ metadata:
     hermes:
         tags: [Notes, tasks, todo, macOS, Apple]
 prerequisites:
-    commands: [macnotesapp]
+    commands: [notes]
 ---
 
 # 蘋果備忘錄 (apple-notes / macnotesapp)
 
-使用 `notes` 或 `macnotesapp` 指令可以在終端機 (terminal) 直接與 Apple MacOS Notes.app 進行互動。此工具也提供了 Python API，方便在腳本中調用。
+使用 `notes` 指令可以在終端機 (terminal) 直接與 Apple MacOS Notes.app 進行互動。此工具也提供了 Python API，方便在腳本中調用。
 
 ## 初始設定 (Setup)
 

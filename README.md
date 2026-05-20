@@ -24,7 +24,6 @@ curl -fsSL https://claude.ai/install.sh | bash
 ## skills
 
 - [ ] [Scrapling 技能 (Scrapling Skill)](https://github.com/D4Vinci/Scrapling/blob/main/agent-skill/Scrapling-Skill/SKILL.md)
-- [ ] [firecrawl/skills](https://github.com/firecrawl/skills/blob/main/SKILL.md)
 
 ### Market List
 
