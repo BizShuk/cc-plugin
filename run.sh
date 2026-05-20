@@ -2,6 +2,7 @@
 
 # Claude
 ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md" 
+ln -sf "$(pwd)/config/settings.json" "$HOME/.claude/settings.json" 
 
 # Claude plugin
 ln -sf "$HOME/.claude"        "./config/"
