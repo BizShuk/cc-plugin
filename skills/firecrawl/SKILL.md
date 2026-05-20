@@ -7,6 +7,7 @@ description: |
     skills, and outcome-focused workflow skills. Route the reader to the
     right usage path after install.
 disable-model-invocation: true
+user-invocable: true
 ---
 
 # Firecrawl
