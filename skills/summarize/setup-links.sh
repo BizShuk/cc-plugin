@@ -5,7 +5,6 @@
 #   workspace_root: path to the project root (default: current directory)
 #
 # Creates:
-#   GEMINI.md     -> CLAUDE.md
 #   AGENTS.md     -> CLAUDE.md
 #   .geminiignore -> .gitignore
 
@@ -41,7 +40,6 @@ create_symlink() {
 # ── main ─────────────────────────────────────────────────────────────
 echo "── setup-links: $(pwd) ──"
 
-create_symlink "CLAUDE.md"  "GEMINI.md"
 create_symlink "CLAUDE.md"  "AGENTS.md"
 create_symlink ".gitignore" ".geminiignore"
 
