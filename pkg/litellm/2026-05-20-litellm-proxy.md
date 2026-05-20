@@ -29,12 +29,14 @@
 ## Task 1: 建立目錄骨架與更新 .gitignore
 
 **Files:**
+
 - Create: `litellm-proxy/logs/.gitkeep`
 - Modify: `.gitignore`
 
 - [ ] **Step 1: 建立目錄與 logs 佔位檔**
 
 Run:
+
 ```bash
 mkdir -p litellm-proxy/logs && touch litellm-proxy/logs/.gitkeep
 ```
@@ -43,7 +45,7 @@ mkdir -p litellm-proxy/logs && touch litellm-proxy/logs/.gitkeep
 
 讀取專案根目錄 `.gitignore`，在檔案末尾新增以下兩行：
 
-```
+```sh
 litellm-proxy/.env
 litellm-proxy/logs/
 ```
@@ -67,6 +69,7 @@ git commit -m "chore: scaffold litellm-proxy directory and gitignore rules"
 ## Task 2: 核對 minimax endpoint 並寫 config.yaml
 
 **Files:**
+
 - Create: `litellm-proxy/config.yaml`
 
 - [ ] **Step 1: 核對 minimax 的 API endpoint 與模型名稱**
@@ -84,37 +87,37 @@ Run: WebFetch `https://www.minimax.io/platform/document/platform%20introduction`
 
 ```yaml
 model_list:
-  # ---- minimax (啟用) ----
-  - model_name: minimax-m2
-    litellm_params:
-      model: openai/MiniMax-M2
-      api_base: https://api.minimax.io/v1
-      api_key: os.environ/MINIMAX_API_KEY
+    # ---- minimax (啟用) ----
+    - model_name: minimax-m2
+      litellm_params:
+          model: openai/MiniMax-M2
+          api_base: https://api.minimax.io/v1
+          api_key: os.environ/MINIMAX_API_KEY
 
-  # ---- openai (預留模板，註解) ----
-  # - model_name: gpt-4o
-  #   litellm_params:
-  #     model: openai/gpt-4o
-  #     api_key: os.environ/OPENAI_API_KEY
+    # ---- openai (預留模板，註解) ----
+    # - model_name: gpt-4o
+    #   litellm_params:
+    #     model: openai/gpt-4o
+    #     api_key: os.environ/OPENAI_API_KEY
 
-  # ---- anthropic (預留模板，註解) ----
-  # - model_name: claude-sonnet
-  #   litellm_params:
-  #     model: anthropic/claude-sonnet-4-6
-  #     api_key: os.environ/ANTHROPIC_API_KEY
+    # ---- anthropic (預留模板，註解) ----
+    # - model_name: claude-sonnet
+    #   litellm_params:
+    #     model: anthropic/claude-sonnet-4-6
+    #     api_key: os.environ/ANTHROPIC_API_KEY
 
 router_settings:
-  num_retries: 2
-  # fallbacks: []                       # 加第二家 provider 後填入
+    num_retries: 2
+    # fallbacks: []                       # 加第二家 provider 後填入
 
 litellm_settings:
-  json_logs: true
-  # success_callback: []                # 預留外部 logging 整合
+    json_logs: true
+    # success_callback: []                # 預留外部 logging 整合
 
 general_settings:
-  master_key: os.environ/LITELLM_MASTER_KEY
-  # database_url: os.environ/DATABASE_URL    # 升級 DB 時解開
-  # store_model_in_db: true                  # 升級 DB 時解開
+    master_key: os.environ/LITELLM_MASTER_KEY
+    # database_url: os.environ/DATABASE_URL    # 升級 DB 時解開
+    # store_model_in_db: true                  # 升級 DB 時解開
 ```
 
 - [ ] **Step 3: 驗證 YAML 語法**
@@ -134,6 +137,7 @@ git commit -m "feat: add litellm proxy config with minimax model"
 ## Task 3: 寫 .env.example
 
 **Files:**
+
 - Create: `litellm-proxy/.env.example`
 
 - [ ] **Step 1: 建立 .env.example**
@@ -171,6 +175,7 @@ git commit -m "feat: add litellm proxy env template"
 ## Task 4: 寫 docker-compose.yml
 
 **Files:**
+
 - Create: `litellm-proxy/docker-compose.yml`
 
 - [ ] **Step 1: 建立 docker-compose.yml**
@@ -179,38 +184,39 @@ git commit -m "feat: add litellm proxy env template"
 
 ```yaml
 services:
-  litellm:
-    image: ghcr.io/berriai/litellm:main-stable
-    ports:
-      - "4000:4000"
-    volumes:
-      - ./config.yaml:/app/config.yaml
-      - ./logs:/app/logs
-    env_file: .env
-    command: ["--config", "/app/config.yaml", "--port", "4000"]
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/health/liveliness"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    restart: unless-stopped
+    litellm:
+        image: ghcr.io/berriai/litellm:main-stable
+        ports:
+            - "4000:4000"
+        volumes:
+            - ./config.yaml:/app/config.yaml
+            - ./logs:/app/logs
+        env_file: .env
+        command: ["--config", "/app/config.yaml", "--port", "4000"]
+        healthcheck:
+            test:
+                ["CMD", "curl", "-f", "http://localhost:4000/health/liveliness"]
+            interval: 30s
+            timeout: 5s
+            retries: 3
+        restart: unless-stopped
 
-  db:
-    image: postgres:16
-    profiles: ["db"]
-    environment:
-      POSTGRES_USER: litellm
-      POSTGRES_PASSWORD: litellm
-      POSTGRES_DB: litellm
-    volumes:
-      - litellm-db:/var/lib/postgresql/data
+    db:
+        image: postgres:16
+        profiles: ["db"]
+        environment:
+            POSTGRES_USER: litellm
+            POSTGRES_PASSWORD: litellm
+            POSTGRES_DB: litellm
+        volumes:
+            - litellm-db:/var/lib/postgresql/data
 
-  cache:
-    image: redis:7
-    profiles: ["db"]
+    cache:
+        image: redis:7
+        profiles: ["db"]
 
 volumes:
-  litellm-db:
+    litellm-db:
 ```
 
 - [ ] **Step 2: 驗證 YAML 語法**
@@ -232,6 +238,7 @@ git commit -m "feat: add litellm proxy docker-compose with db profile"
 ## Task 5: 寫 README.md
 
 **Files:**
+
 - Create: `litellm-proxy/README.md`
 
 - [ ] **Step 1: 建立 README.md**
@@ -300,6 +307,7 @@ git commit -m "docs: add litellm proxy usage readme"
 ## Task 6: 啟動 proxy 並驗證端點
 
 **Files:**
+
 - Create: `litellm-proxy/.env`（不進版控）
 
 註：本 Task 需要真實的 `MINIMAX_API_KEY`。若執行時無法取得，停在 Step 1 並請使用者提供。
@@ -307,11 +315,13 @@ git commit -m "docs: add litellm proxy usage readme"
 - [ ] **Step 1: 建立 .env 並填入金鑰**
 
 Run:
+
 ```bash
 cd litellm-proxy && cp .env.example .env
 ```
 
 編輯 `litellm-proxy/.env`：
+
 - `MINIMAX_API_KEY` 填入真實 minimax 金鑰
 - `LITELLM_MASTER_KEY` 填入下列指令產生的值：
 
@@ -338,15 +348,18 @@ Expected: 回傳存活回應（如 `"I'm alive!"`）。容器剛起需數秒，�
 - [ ] **Step 5: 驗證模型清單**
 
 Run:
+
 ```bash
 source litellm-proxy/.env
 curl -s -H "Authorization: Bearer $LITELLM_MASTER_KEY" http://localhost:4000/v1/models
 ```
+
 Expected: JSON 含 `minimax-m2`。
 
 - [ ] **Step 6: 驗證 OpenAI 格式端點**
 
 Run:
+
 ```bash
 source litellm-proxy/.env
 curl -s http://localhost:4000/v1/chat/completions \
@@ -354,11 +367,13 @@ curl -s http://localhost:4000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{"model":"minimax-m2","messages":[{"role":"user","content":"ping"}],"max_tokens":32}'
 ```
+
 Expected: JSON 含 minimax 回應的 `choices[0].message.content`。
 
 - [ ] **Step 7: 驗證 Anthropic 格式端點**
 
 Run:
+
 ```bash
 source litellm-proxy/.env
 curl -s http://localhost:4000/v1/messages \
@@ -367,6 +382,7 @@ curl -s http://localhost:4000/v1/messages \
   -H "Content-Type: application/json" \
   -d '{"model":"minimax-m2","max_tokens":32,"messages":[{"role":"user","content":"ping"}]}'
 ```
+
 Expected: JSON 含 `content[0].text`。
 
 註：本 Task 不 commit — 唯一新增的 `.env` 已被 `.gitignore` 排除。
@@ -380,6 +396,7 @@ Expected: JSON 含 `content[0].text`。
 - [ ] **Step 1: 設定 Claude Code 環境變數**
 
 Run:
+
 ```bash
 source litellm-proxy/.env
 export ANTHROPIC_BASE_URL=http://localhost:4000
@@ -400,9 +417,11 @@ Expected: log 出現對應 Step 2 的 `/v1/messages` 請求紀錄。
 - [ ] **Step 4: 驗證 DB profile 預留可用（不長期啟用）**
 
 Run:
+
 ```bash
 cd litellm-proxy && docker compose --profile db up -d && docker compose ps
 ```
+
 Expected: `litellm`、`db`、`cache` 三個 service 都在執行。
 
 Run: `cd litellm-proxy && docker compose --profile db down`
@@ -415,6 +434,7 @@ Expected: 收掉 db profile 的容器，確認預留機制可運作。
 ## Self-Review
 
 Spec coverage（對照 `2026-05-20-litellm-proxy-design.md`）：
+
 - 概述/動機 → README (Task 5)
 - config.yaml（minimax 啟用 + provider 模板）→ Task 2
 - .env / .env.example → Task 3、Task 6

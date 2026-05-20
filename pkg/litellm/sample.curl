@@ -1,0 +1,48 @@
+curl http://0.0.0.0:4000/v1/audio/speech \
+  -H "Authorization: Bearer sk-EcBnmLFiKK4IDL4wiQsdF9litbKCTdix8W7tgoaD3qM" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "tts",
+    "input": "The quick brown fox jumped over the lazy dog.",
+    "voice": "alloy"
+  }' \
+  --output speech.mp3
+
+
+curl -L -X POST 'http://0.0.0.0:4000/key/generate' \
+-H 'Authorization: Bearer sk-1234' \
+-H 'Content-Type: application/json' \
+-d '{
+    "rpm_limit": 1
+}'
+
+curl --location 'http://0.0.0.0:4000/chat/completions' \
+-H 'Authorization: Bearer sk-1234' \
+--header 'Content-Type: application/json' \
+--data ' {
+      "model": "minimax/MiniMax-M2.7",
+      "messages": [
+        {
+          "role": "user",
+          "content": "what llm are you"
+        }
+      ]
+    }
+'
+
+curl -X POST 'http://0.0.0.0:4000/chat/completions' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer sk-EcBnmLFiKK4IDL4wiQsdF9litbKCTdix8W7tgoaD3qM' \
+-d '{
+    "model": "minimax/MiniMax-M2.7",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are an LLM named MiniMax-M2.7"
+      },
+      {
+        "role": "user",
+        "content": "what is your name?"
+      }
+    ]
+}'

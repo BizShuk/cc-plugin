@@ -1,0 +1,16 @@
+model_list:
+  - model_name: minimax/MiniMax-M2.7
+    litellm_params:
+      model: minimax/MiniMax-M2.7
+      api_key: os.environ/MINIMAX_API_KEY
+      api_base: https://api.minimax.io/anthropic/v1/messages
+router_settings:
+  num_retries: 2
+  # fallbacks: []                       # 加第二家 provider 後填入
+litellm_settings:
+  json_logs: true
+  # success_callback: []                # 預留外部 logging 整合
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  # database_url: os.environ/DATABASE_URL    # 升級 DB 時解開
+  # store_model_in_db: true                  # 升級 DB 時解開

@@ -11,15 +11,15 @@
 
 ## 需求決策
 
-| 項目 | 決策 |
-|------|------|
-| 範圍 | `minimax` 為主，config 結構預留多 provider 擴充 |
+| 項目       | 決策                                                                             |
+| ---------- | -------------------------------------------------------------------------------- |
+| 範圍       | `minimax` 為主，config 結構預留多 provider 擴充                                  |
 | 客戶端格式 | 同時暴露 Anthropic 格式 (`/v1/messages`) 與 OpenAI 格式 (`/v1/chat/completions`) |
-| 金鑰管理 | 静態金鑰起步（單一 master key），預留 DB 升級至動態虛擬金鑰 |
-| 部署 | Docker / docker-compose |
-| 預留機制 | `方法 C` — compose profiles，DB 與 cache service 寫在檔案內、預設不啟動 |
-| 存放位置 | cc-plugin 專案內的 `litellm-proxy/` 子目錄 |
-| 可觀測性 | 兩階段，對齊 DB profile；不自寫工具 |
+| 金鑰管理   | 静態金鑰起步（單一 master key），預留 DB 升級至動態虛擬金鑰                      |
+| 部署       | Docker / docker-compose                                                          |
+| 預留機制   | `方法 C` — compose profiles，DB 與 cache service 寫在檔案內、預設不啟動          |
+| 存放位置   | cc-plugin 專案內的 `litellm-proxy/` 子目錄                                       |
+| 可觀測性   | 兩階段，對齊 DB profile；不自寫工具                                              |
 
 ## 架構
 
@@ -67,37 +67,37 @@
 
 ```yaml
 model_list:
-  # ---- minimax (啟用) ----
-  - model_name: minimax-m2
-    litellm_params:
-      model: openai/MiniMax-M2          # 以 OpenAI 相容 provider 接入
-      api_base: https://api.minimax.io/v1
-      api_key: os.environ/MINIMAX_API_KEY
+    # ---- minimax (啟用) ----
+    - model_name: minimax-m2
+      litellm_params:
+          model: openai/MiniMax-M2 # 以 OpenAI 相容 provider 接入
+          api_base: https://api.minimax.io/v1
+          api_key: os.environ/MINIMAX_API_KEY
 
-  # ---- openai (預留模板，註解) ----
-  # - model_name: gpt-4o
-  #   litellm_params:
-  #     model: openai/gpt-4o
-  #     api_key: os.environ/OPENAI_API_KEY
+    # ---- openai (預留模板，註解) ----
+    # - model_name: gpt-4o
+    #   litellm_params:
+    #     model: openai/gpt-4o
+    #     api_key: os.environ/OPENAI_API_KEY
 
-  # ---- anthropic (預留模板，註解) ----
-  # - model_name: claude-sonnet
-  #   litellm_params:
-  #     model: anthropic/claude-sonnet-4-6
-  #     api_key: os.environ/ANTHROPIC_API_KEY
+    # ---- anthropic (預留模板，註解) ----
+    # - model_name: claude-sonnet
+    #   litellm_params:
+    #     model: anthropic/claude-sonnet-4-6
+    #     api_key: os.environ/ANTHROPIC_API_KEY
 
 router_settings:
-  num_retries: 2
-  # fallbacks: []                       # 加第二家 provider 後填入
+    num_retries: 2
+    # fallbacks: []                       # 加第二家 provider 後填入
 
 litellm_settings:
-  json_logs: true
-  # success_callback: []                # 預留外部 logging 整合
+    json_logs: true
+    # success_callback: []                # 預留外部 logging 整合
 
 general_settings:
-  master_key: os.environ/LITELLM_MASTER_KEY
-  # database_url: os.environ/DATABASE_URL    # 升級 DB 時解開
-  # store_model_in_db: true                  # 升級 DB 時解開
+    master_key: os.environ/LITELLM_MASTER_KEY
+    # database_url: os.environ/DATABASE_URL    # 升級 DB 時解開
+    # store_model_in_db: true                  # 升級 DB 時解開
 ```
 
 實作時以 `minimax` 官方文件核對 `api_base` 與模型名稱（國際站與中國站 endpoint 不同），並確認 LiteLLM 對該模型的最佳 provider 前綴。
@@ -120,38 +120,39 @@ LITELLM_MASTER_KEY=sk-local-master-<隨機字串>
 
 ```yaml
 services:
-  litellm:
-    image: ghcr.io/berriai/litellm:main-stable
-    ports:
-      - "4000:4000"
-    volumes:
-      - ./config.yaml:/app/config.yaml
-      - ./logs:/app/logs
-    env_file: .env
-    command: ["--config", "/app/config.yaml", "--port", "4000"]
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/health/liveliness"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    restart: unless-stopped
+    litellm:
+        image: ghcr.io/berriai/litellm:main-stable
+        ports:
+            - "4000:4000"
+        volumes:
+            - ./config.yaml:/app/config.yaml
+            - ./logs:/app/logs
+        env_file: .env
+        command: ["--config", "/app/config.yaml", "--port", "4000"]
+        healthcheck:
+            test:
+                ["CMD", "curl", "-f", "http://localhost:4000/health/liveliness"]
+            interval: 30s
+            timeout: 5s
+            retries: 3
+        restart: unless-stopped
 
-  db:
-    image: postgres:16
-    profiles: ["db"]
-    environment:
-      POSTGRES_USER: litellm
-      POSTGRES_PASSWORD: litellm
-      POSTGRES_DB: litellm
-    volumes:
-      - litellm-db:/var/lib/postgresql/data
+    db:
+        image: postgres:16
+        profiles: ["db"]
+        environment:
+            POSTGRES_USER: litellm
+            POSTGRES_PASSWORD: litellm
+            POSTGRES_DB: litellm
+        volumes:
+            - litellm-db:/var/lib/postgresql/data
 
-  cache:
-    image: redis:7
-    profiles: ["db"]
+    cache:
+        image: redis:7
+        profiles: ["db"]
 
 volumes:
-  litellm-db:
+    litellm-db:
 ```
 
 預設啟動：`docker compose up -d`（只有 litellm）。
