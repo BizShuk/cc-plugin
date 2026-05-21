@@ -202,7 +202,6 @@ The script creates:
 
 | Symlink         | Target       | Purpose             |
 | --------------- | ------------ | ------------------- |
-| `GEMINI.md`     | `CLAUDE.md`  | Gemini CLI 讀取     |
 | `AGENTS.md`     | `CLAUDE.md`  | 通用 agent context  |
 | `.geminiignore` | `.gitignore` | Gemini CLI 忽略檔案 |
 
@@ -220,7 +219,6 @@ README.md: <line count> 行, <N> 項改善建議
 CLAUDE.md: <line count> 行, <N> 個核心模組
 
 Symlinks:
-- GEMINI.md -> CLAUDE.md ✅ (created | already exists | skipped)
 - AGENTS.md -> CLAUDE.md ✅ (created | already exists | skipped)
 - .geminiignore -> .gitignore ✅ (created | already exists | skipped)
 

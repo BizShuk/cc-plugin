@@ -69,7 +69,6 @@ The `.local/` folder stores user-specific data, configurations, and environment 
 │   └── settings.json       # Project-specific agent settings
 ├── .gemini/                # Symlink to .agent
 ├── .gitignore              # Git ignore file (symlinked to .geminiignore)
-├── GEMINI.md               # Project-specific AI context
 ├── README.md               # Project overview (Must include domain folder structure)
 ├── README.todo             # Task tracking and open items
 ├── specs/                  # Phase-based specifications and plans
