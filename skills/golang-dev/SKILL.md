@@ -181,7 +181,7 @@ db:
 | Category   | Library                       | When to use                                                                                    |
 | ---------- | ----------------------------- | ---------------------------------------------------------------------------------------------- |
 | Logging    | `go.uber.org/zap`             | Structured logging. `zap.NewProduction()` for JSON, `zap.NewDevelopment()` for console.        |
-| Testing    | `github.com/stretchr/testify` | `assert` (continue on fail), `require` (stop on fail), `mock` (interface mocking).             |
+| Testing    | `github.com/stretchr/testify` | `assert` (continue on fail), `require` (stop on fail).                                         |
 | Linting    | `golangci-lint`               | Meta-linter. Install: `go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`. |
 | HTTP       | `net/http` (stdlib)           | Prefer stdlib. Use `github.com/gin-gonic/gin` only when routing complexity justifies it.       |
 | Hot Reload | `github.com/air-verse/air`    | Dev-time file watcher. Run `air` instead of `go run`.                                          |
@@ -210,6 +210,23 @@ func TestGetUser(t *testing.T) {
     user, err := GetUser(ctx, "123")
     require.NoError(err)            // stops test if err != nil
     assert.Equal("Alice", user.Name) // continues even if fails
+}
+```
+
+### mockey quick pattern
+
+Use `mockey` to mock functions and methods. Always execute mocking code within `mockey.PatchConcurrently` to ensure thread safety:
+
+```go
+func TestGetUserDiscount(t *testing.T) {
+    mockey.PatchConcurrently(t, func() {
+        // Mock a package-level function
+        mockey.Mock(FetchUserFromDB).Return(&User{ID: "123", Age: 65}, nil).Build()
+
+        discount, err := GetUserDiscount("123")
+        assert.NoError(t, err)
+        assert.Equal(t, 0.2, discount)
+    })
 }
 ```
 
@@ -248,7 +265,7 @@ func TestGetUser(t *testing.T) {
 | Short mode           | `go test -short ./...`                            |
 | Disable caching      | `go test -count=1 ./...`                          |
 | Timeout              | `go test -timeout 30s ./...`                      |
-| **Disable inlining** | `go test -gcflags="all=-N -l" ./...`              |
+| `Disable inlining` | `go test -gcflags="all=-N -l" ./...`              |
 
 ### Disabling inlining and optimizations
 
@@ -258,11 +275,12 @@ go test -gcflags="all=-N -l" ./...
 
 - `-N` disables all compiler optimizations.
 - `-l` disables inlining (function calls remain as actual calls, not inlined).
-- `all=` applies the flags to **all packages** being compiled, not just the test package. Without `all=`, only the direct test target gets the flags — dependencies may still be inlined.
+- `all=` applies the flags to `all packages` being compiled, not just the test package. Without `all=`, only the direct test target gets the flags — dependencies may still be inlined.
 
-**Use cases:**
+`Use cases:`
 
 - Debugging with `dlv` (delve) — requires non-inlined frames for accurate breakpoints and variable inspection.
+- Mocking and patching — libraries like `mockey` (or other monkey-patching libraries) rewrite function machine code at runtime. If a target function is inlined or optimized, the patch will fail because there is no independent function entry point to rewrite.
 - Accurate escape analysis — inlining can change escape decisions, so disable it to see "true" escape behavior.
 - Diagnosing bugs that only manifest with/without compiler optimizations.
 
