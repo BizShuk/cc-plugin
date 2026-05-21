@@ -97,5 +97,9 @@
     "theme": "dark-ansi",
     "verbose": false,
     "preferredNotifChannel": "auto",
-    "teammateMode": "in-process"
+    "teammateMode": "in-process",
+    "enabledPlugins": {
+        "claude-mem@thedotmack": true,
+        "gopls-lsp@claude-plugins-official": true
+    }
 }

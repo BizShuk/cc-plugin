@@ -7,3 +7,7 @@ config/.gemini
 config/litellm_config.yaml
 pkg/summarize.sh/config.sample.json
 config/.summarize
+config/.claude
+config/.claude.json
+config/.claude-mem
+config/.hermes

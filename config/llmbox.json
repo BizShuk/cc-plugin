@@ -105,6 +105,7 @@
     "preferredNotifChannel": "auto",
     "teammateMode": "in-process",
     "enabledPlugins": {
-        "claude-mem@thedotmack": true
+        "claude-mem@thedotmack": true,
+        "gopls-lsp@claude-plugins-official": true
     }
 }
