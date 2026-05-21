@@ -7,8 +7,8 @@ description: >
     golangci-lint, air), build flags, test flags including disabling inlining,
     and escape analysis verification workflow.
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
-user-invocable: true
-disable-model-invocation: false
+user-invocable: false
+disable-model-invocation: true
 ---
 
 # golang-dev
@@ -21,7 +21,7 @@ Go development best-practices guide. Covers library choices, build/test commands
 
 Always use `github.com/spf13/cobra`. Structure:
 
-```
+```tree
 cmd/
   root.go      # Root command + global flags
   serve.go     # Subcommand: serve

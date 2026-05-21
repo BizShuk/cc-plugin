@@ -8,8 +8,8 @@ description: >
     to structure new code. Read-only advisor — does not modify code. Distinct from
     golang-code-quality which reviews existing code.
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
-disable-model-invocation: false
-user-invocable: true
+disable-model-invocation: true
+user-invocable: false
 effort: medium
 context: fork
 ---

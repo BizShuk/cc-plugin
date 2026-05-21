@@ -78,9 +78,10 @@
   "prefersReducedMotion": true,
   "autoMemoryEnabled": true,
   "autoMemoryDirectory": "~/memory",
+  "skipDangerousModePermissionPrompt": true,
   "theme": "dark-ansi",
   "verbose": false,
   "preferredNotifChannel": "auto",
   "teammateMode": "in-process",
-  "skipDangerousModePermissionPrompt": true
+  "model": "opus"
 }

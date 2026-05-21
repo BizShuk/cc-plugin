@@ -6,7 +6,7 @@ model: sonnet
 effort: high
 context: fork
 disable-model-invocation: true
-user-invocable: true
+user-invocable: false
 ---
 
 # golang-naming
