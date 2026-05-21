@@ -19,11 +19,9 @@ committed per team preference).
 
 | File | Location |
 |------|----------|
-| Feature agent | `~/.claude/agents/feature.md` |
-| Domain skill | `skills/domain/SKILL.md` |
+| Feature agent | `agents/feature.md` |
+| Domain skill | `skills/domain/SKILL.md` (not ready — will patch later) |
 | Golang MVC skill | `skills/golang-mvc/SKILL.md` |
-| Domain init skill | `skills/domain-init/SKILL.md` |
-| External registry (per-project convention) | `workspace/domains.json` |
 
 ---
 
@@ -42,7 +40,7 @@ description: >
 tools: Read, Edit, Write, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: acceptEdits
-skills: domain, golang-mvc
+skills: golang-code-quality, golang-dev, golang-mvc, golang-naming
 mcpServers:
 hooks:
 memory: local
@@ -89,7 +87,7 @@ Agent batches all NFR ambiguities into a single `AskUserQuestion` call in Phase 
 
 **Part 4 — Workflow Phases**
 
-1. **Understand** — invoke `domain` skill; read feature description; identify affected packages/models/APIs; confirm summary with user
+1. **Understand** — read feature description; for Go projects invoke `golang-mvc` skill; identify affected packages/models/APIs; confirm summary with user
 2. **Clarify** — batch ALL questions (feature + NFR ambiguities) into one `AskUserQuestion`; document decisions
 3. **Plan** — write implementation plan (new files, modified packages, interface definitions, migration steps, test plan); get user approval before writing code
 4. **Implement** — follow `golang-mvc` layer rules; build top-down (models → repos/services → handlers → wiring); write tests alongside each layer; run `go build ./... && go vet ./...` after each package
@@ -101,10 +99,9 @@ Agent batches all NFR ambiguities into a single `AskUserQuestion` call in Phase 
 
 | Scenario | Action |
 |---|---|
-| Go project | Always invoke `golang-mvc` in Phase 1 alongside `domain` |
-| `workspace/domains.json` exists | Load each listed external skill in Phase 1 |
-| Non-Go project | Skip `golang-mvc`; rely on `domain` skill for conventions |
-| Feature touches DB schema | Flag: ask user to re-run `domain-init` first |
+| Go project | Always invoke `golang-mvc` in Phase 1 |
+| Non-Go project | Use language/framework conventions |
+| Feature touches DB schema | Flag in Phase 2: clarify migration plan required |
 | Feature spans multiple repos | Scope to one repo; instruct user to invoke `@feature` a second time in the other repo |
 
 ---
@@ -151,20 +148,20 @@ External Skill Registry: <contents of domains.json or "none">
 
 ## 3. Golang MVC Skill — `skills/golang-mvc/SKILL.md`
 
-Forward-looking (guides new code generation). Distinct from `golang-code-quality`
-(backward-looking, reviews existing code). Read-only — no Edit/Write tools.
+Actively enforces and applies MVC layer conventions. Modifies and refactors code
+that violates layer boundaries. Distinct from `golang-code-quality` which focuses
+on SOLID and code-level patterns.
 
 ```yaml
 ---
 name: golang-mvc
 description: >
-  Go MVC architecture conventions for new feature implementation. Defines layer
-  rules (handler/service/repository/model), interface placement, constructor
-  injection, error wrapping, context propagation, and test patterns for Go
-  projects. Invoke during feature planning to get layer-by-layer guidance.
-allowed-tools: Read, Grep, Glob
-disable-model-invocation: false
-user-invocable: true
+  Go MVC architecture conventions for feature implementation and refactoring.
+  Actively enforces and applies layer conventions — modifies and refactors code
+  that violates MVC boundaries.
+allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
+disable-model-invocation: true
+user-invocable: false
 effort: medium
 context: fork
 ---
@@ -182,35 +179,10 @@ context: fork
 
 ---
 
-## 4. Domain Init Skill — `skills/domain-init/SKILL.md`
+## 4. Domain Init Skill — REMOVED
 
-Generates/updates `workspace/README.md`. Idempotent: preserves `<!-- MANUAL -->`-marked
-blocks on re-run, only regenerates auto-detected sections.
-
-```yaml
----
-name: domain-init
-description: >
-  Generates or updates workspace/README.md by scanning the project and optionally
-  processing input documents (spec, PRD, API contract). Run once per project to
-  bootstrap domain context, then re-run after major structural changes.
-  Triggers on "initialize domain knowledge", "generate workspace README",
-  "document this project", or when domain skill reports missing context.
-argument-hint: [docs-path]
-arguments: docs-path
-allowed-tools: Read, Write, Bash, Grep, Glob
-disable-model-invocation: false
-user-invocable: true
-effort: high
----
-```
-
-**Procedure:**
-1. `mkdir -p workspace`
-2. If `$1` (docs path) provided: read and extract entities, workflows, bounded contexts, external systems
-3. Scan project: `find . -maxdepth 4 -name "*.go"` → infer packages; parse `go.mod` for key deps; detect entry points
-4. Write `workspace/README.md` with sections: Business Domain (overview, entities, workflows, bounded contexts) + Project Architecture (entry points, package map, external deps, conventions) + Glossary
-5. On re-run: read existing file, preserve `<!-- MANUAL -->` blocks, regenerate auto-sections, output diff summary
+> Removed from the project. Domain knowledge bootstrapping will be handled
+> differently when the `domain` skill is ready.
 
 ---
 

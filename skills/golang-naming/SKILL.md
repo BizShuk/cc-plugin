@@ -1,6 +1,13 @@
 ---
 name: golang-naming
-description: Manual-invocation-only Go naming reviewer. Audits package, function, variable, struct, interface, and method names across the entire Go workspace for Go community naming idioms (acronym casing, stutter, receiver length, grab-bag packages like util/common, etc.). Produces a rename proposal report, and ONLY after the user explicitly approves applies renames safely via `gopls rename` so that every call site (and import path) in the workspace is updated atomically. Read-only until approval. Refuses non-Go files. Invoke ONLY when the user explicitly asks for a `golang-naming` review.
+description: >-
+    Go naming convention reviewer and safe renamer. Audits package, function,
+    variable, struct, interface, and method names across the entire Go workspace
+    for Go community naming idioms (acronym casing, stutter, receiver length,
+    grab-bag packages like util/common, etc.). Produces a rename proposal report,
+    and ONLY after the user explicitly approves applies renames safely via
+    `gopls rename` so that every call site (and import path) in the workspace is
+    updated atomically. Read-only until approval. Refuses non-Go files.
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 model: sonnet
 effort: high
@@ -15,7 +22,7 @@ A Go naming convention reviewer and safe renamer workflow.
 
 ## Hard rules
 
-1. **Manual invocation only.** Never auto-trigger. The user must explicitly ask. If invoked without an explicit naming-review request, stop and ask the user to confirm intent.
+1. **Invocation context matters.** When invoked as a standalone skill (not by a parent agent), confirm intent with the user before proceeding. When invoked by a parent agent (e.g., `golang-refactor`, `feature`), proceed directly — the parent agent has already determined the need.
 2. **Two-phase: report → approval → apply.** Never rename anything without explicit per-batch user approval. Default to dry-run.
 3. **`gopls rename` is the only renaming mechanism.** Never use Edit/sed/grep-replace to rename Go symbols. Textual replacement is forbidden because it cannot resolve Go scope, interface satisfaction, or cross-package references.
 4. **Refuse non-Go files.** If asked to review `.py`, `.ts`, IDL, YAML, etc., decline and explain that this skill is Go-only.
@@ -62,7 +69,7 @@ Apply these idioms (Effective Go + Google Go Style Guide + community consensus):
 | 9   | **Boolean names read as predicates**: `is/has/can/should` prefix                                                                                          | `enable`, `success` (as flag)                                 | `isEnabled`, `hasSucceeded`                                                          |
 | 10  | **Interface naming**: single-method interfaces use `-er` suffix; multi-method use noun. `I` prefix is allowed.                                            | `ReadInterface`                                               | `Reader`; for multi-method something like `Store`; `IReader` is acceptable           |
 | 11  | **Errors**: variables start with `Err`, types end with `Error`                                                                                            | `NotFound` (error sentinel)                                   | `ErrNotFound`, `NotFoundError` (type)                                                |
-| 12  | **Constants**: use SCREAMING_SNAKE_CASE (all caps with underscores).                                                                                      | MixedCase constants                                           | `MAX_RETRIES`, `DEFAULT_TIMEOUT`, `ColorRed`                                         |
+| 12  | **Constants**: use `SCREAMING_SNAKE_CASE` (all caps with underscores). This is a deliberate team convention.                                              | `MixedCase` constants                                         | `MAX_RETRIES`, `DEFAULT_TIMEOUT`, `COLOR_RED`                                        |
 | 13  | **Use `any` instead of `interface{}`** (Go 1.18+ style)                                                                                                   | `interface{}`, `map[string]interface{}`                       | `any`, `map[string]any`                                                              |
 
 Tailor to the project: if the codebase already uses a documented convention (e.g. CLAUDE.md says X), defer to it and call out conflicts in the report.
@@ -220,7 +227,7 @@ Output a concise summary:
 
 - Non-Go file: `"golang-naming reviews Go source only. The file <path> is <ext>. Please point me at .go files."`
 - gopls missing: `"gopls is not installed. Install with: go install golang.org/x/tools/gopls@latest"`
-- Auto-trigger detected: `"golang-naming is manual-invocation only. Did you mean to invoke this? If yes, please re-confirm with 'run golang-naming review'."`
+- Standalone invocation without clear intent: `"golang-naming was invoked outside a parent agent context. Did you mean to run a naming review? If yes, please confirm with 'run golang-naming review'."`
 
 ## Anti-patterns you must avoid
 

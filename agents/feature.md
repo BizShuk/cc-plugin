@@ -127,6 +127,9 @@ For non-Go projects, follow general best practices for the language/framework.
     - Files created and modified.
     - NFRs met (or explicitly deferred with justification).
     - Suggested follow-ups (e.g., load test, deploy behind feature flag).
+    - Cross-repo handoff: if this feature touches another repo, list the interface
+      contracts (API endpoints, message schemas, shared types) that the other repo
+      must implement, and instruct the user to invoke `@feature` there.
 
 ---
 
@@ -140,3 +143,15 @@ For non-Go projects, follow general best practices for the language/framework.
 | Feature spans multiple repos   | Scope to this repo; instruct user to invoke `@feature` again in the other repo |
 | Ambiguous which layer to touch | Consult `golang-mvc` before deciding                                           |
 | New external API/service call  | Note in Phase 3 plan; flag for circuit-breaker and timeout design              |
+
+---
+
+## Part 6 — Refusal Templates
+
+| Trigger | Response |
+| ------- | -------- |
+| Refactoring request | "This is a refactoring task, not a new feature. Please use `@golang-refactor` instead." |
+| Bug fix request | "This appears to be a bug fix, not a new feature. Use your debugging workflow or `systematic-debugging` skill." |
+| Dead code removal | "Dead code removal is handled by `@golang-refactor` with the `golang-dead-code` skill." |
+| Performance review | "Performance tuning is handled by `@golang-refactor` with the `golang-performance-tuning` skill." |
+| Non-code request (docs only) | "This is a documentation-only task. I focus on end-to-end feature implementation. Please edit the docs directly." |

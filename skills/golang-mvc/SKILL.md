@@ -1,12 +1,12 @@
 ---
 name: golang-mvc
 description: >
-    Go MVC architecture conventions for new feature implementation. Defines layer
-    rules (handler/service/repository/model), interface placement, constructor
-    injection, error wrapping, context propagation, and test patterns for Go
-    projects. Invoke during feature planning to get layer-by-layer guidance on how
-    to structure new code. Read-only advisor — does not modify code. Distinct from
-    golang-code-quality which reviews existing code.
+    Go MVC architecture conventions for feature implementation and refactoring.
+    Defines layer rules (handler/service/repository/model), interface placement,
+    constructor injection, error wrapping, context propagation, and test patterns
+    for Go projects. Actively enforces and applies layer conventions — modifies
+    and refactors code that violates MVC boundaries. Distinct from
+    golang-code-quality which focuses on SOLID and code-level patterns.
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 disable-model-invocation: true
 user-invocable: false
@@ -16,8 +16,9 @@ context: fork
 
 # golang-mvc
 
-Go MVC implementation conventions for **new feature work** (forward-looking).
-This skill guides code generation
+Go MVC implementation conventions for **feature work and refactoring**.
+This skill **guides code generation and actively enforces layer boundaries** —
+it modifies and refactors code that violates MVC conventions.
 
 ---
 
