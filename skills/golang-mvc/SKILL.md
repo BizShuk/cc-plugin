@@ -17,7 +17,7 @@ context: fork
 # golang-mvc
 
 Go MVC implementation conventions for **new feature work** (forward-looking).
-This skill guides code generation. For reviewing existing code, use `golang-code-quality`.
+This skill guides code generation
 
 ---
 
