@@ -253,19 +253,19 @@ func TestGetUserDiscount(t *testing.T) {
 
 ## 5. Test Commands
 
-| Task                 | Command                                           |
-| -------------------- | ------------------------------------------------- |
-| Run all tests        | `go test ./...`                                   |
-| Verbose              | `go test -v ./...`                                |
-| Race detector        | `go test -race ./...`                             |
-| Coverage             | `go test -cover -coverprofile=coverage.out ./...` |
-| View coverage HTML   | `go tool cover -html=coverage.out`                |
-| Specific test        | `go test -run TestFunctionName ./pkg/...`         |
-| Benchmarks           | `go test -bench=. -benchmem -run=^$ ./...`        |
-| Short mode           | `go test -short ./...`                            |
-| Disable caching      | `go test -count=1 ./...`                          |
-| Timeout              | `go test -timeout 30s ./...`                      |
-| `Disable inlining` | `go test -gcflags="all=-N -l" ./...`              |
+| Task               | Command                                           |
+| ------------------ | ------------------------------------------------- |
+| Run all tests      | `go test ./...`                                   |
+| Verbose            | `go test -v ./...`                                |
+| Race detector      | `go test -race ./...`                             |
+| Coverage           | `go test -cover -coverprofile=coverage.out ./...` |
+| View coverage HTML | `go tool cover -html=coverage.out`                |
+| Specific test      | `go test -run TestFunctionName ./pkg/...`         |
+| Benchmarks         | `go test -bench=. -benchmem -run=^$ ./...`        |
+| Short mode         | `go test -short ./...`                            |
+| Disable caching    | `go test -count=1 ./...`                          |
+| Timeout            | `go test -timeout 30s ./...`                      |
+| Disable inlining   | `go test -gcflags="all=-N -l" ./...`              |
 
 ### Disabling inlining and optimizations
 
