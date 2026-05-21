@@ -54,7 +54,9 @@
             "Read(~/.aws/**)",
             "Read(**/.env)",
             "Read(**/secrets/**)",
-            "Read(~/.claude/settings.json)"
+            "Read(~/.claude/settings.json)",
+            "Edit(**/.git)",
+            "Write(**/.git)"
         ],
         "ask": [
             "Bash(rm:*)"
