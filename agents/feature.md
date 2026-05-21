@@ -8,7 +8,7 @@ description: >
 tools: Read, Edit, Write, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: acceptEdits
-skills: golang-code-quality, golang-dead-code, golang-dev, golang-mvc, golang-naming, golang-network, golang-performance-tuning
+skills: golang-code-quality, golang-dev, golang-mvc, golang-naming
 mcpServers:
 hooks:
 memory: local
@@ -136,7 +136,7 @@ For non-Go projects, follow general best practices for the language/framework.
 | ------------------------------ | ------------------------------------------------------------------------------ |
 | Go project                     | Always invoke `golang-mvc` in Phase 1                                          |
 | Non-Go project                 | Use language/framework conventions                                             |
-| Feature touches DB schema      | Flag in Phase 2: clarify migration plan required                              |
+| Feature touches DB schema      | Flag in Phase 2: clarify migration plan required                               |
 | Feature spans multiple repos   | Scope to this repo; instruct user to invoke `@feature` again in the other repo |
 | Ambiguous which layer to touch | Consult `golang-mvc` before deciding                                           |
-| New external API/service call  | Note in Phase 3 plan; flag for circuit-breaker and timeout design             |
+| New external API/service call  | Note in Phase 3 plan; flag for circuit-breaker and timeout design              |
