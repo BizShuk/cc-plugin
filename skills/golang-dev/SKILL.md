@@ -17,7 +17,7 @@ Go development best-practices guide. Covers library choices, build/test commands
 
 ## 1. CLI Development (cobra)
 
-**When to use:** Any Go project exposing a command-line interface.
+`When to use:` Any Go project exposing a command-line interface.
 
 Always use `github.com/spf13/cobra`. Structure:
 
@@ -58,11 +58,11 @@ func Execute() {
 }
 
 func init() {
-    cobra.OnInitialize(initConfig)
+    cobra.OnInitialize(InitConfig)
     rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default $HOME/.myapp.yaml)")
 }
 
-func initConfig() {
+func InitConfig() {
     if cfgFile != "" {
         viper.SetConfigFile(cfgFile)
     } else {
@@ -118,14 +118,14 @@ func init() {
 
 ## 2. Configuration (viper)
 
-**When to use:** Any Go project that needs configuration management.
+`When to use:` Any Go project that needs configuration management.
 
 Always use `github.com/spf13/viper`. Loading precedence (highest wins):
 
-1. **Environment variables** (`viper.AutomaticEnv()`)
-2. **CLI flags** (bound via `viper.BindPFlag()`)
-3. **Config file** (YAML preferred)
-4. **Defaults** (`viper.SetDefault()`)
+1. `Environment variables` (`viper.AutomaticEnv()`)
+2. `CLI flags` (bound via `viper.BindPFlag()`)
+3. `Config file` (YAML preferred)
+4. `Defaults` (`viper.SetDefault()`)
 
 ### Config struct pattern
 
@@ -170,9 +170,9 @@ db:
 
 ### Common pitfalls
 
-- **Env prefix:** Call `viper.SetEnvPrefix("MYAPP")` so env vars like `MYAPP_SERVER_PORT` map correctly.
-- **Nested keys in env:** Use `viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))` so `server.port` maps to `MYAPP_SERVER_PORT`.
-- **Type mismatch:** `viper.Unmarshal` uses `mapstructure` tags, not `json` or `yaml` tags.
+- `Env prefix:` Call `viper.SetEnvPrefix("MYAPP")` so env vars like `MYAPP_SERVER_PORT` map correctly.
+- `Nested keys in env:` Use `viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))` so `server.port` maps to `MYAPP_SERVER_PORT`.
+- `Type mismatch:` `viper.Unmarshal` uses `mapstructure` tags, not `json` or `yaml` tags.
 
 ---
 
@@ -288,7 +288,7 @@ go test -gcflags="all=-N -l" ./...
 
 ## 6. Escape Analysis
 
-**When to use:** Investigating heap allocations, optimizing memory-sensitive hot paths.
+`When to use:` Investigating heap allocations, optimizing memory-sensitive hot paths.
 
 ### Commands
 
@@ -319,12 +319,12 @@ go build -gcflags='-m=2' ./... 2>&1 | grep "escapes to heap"
 ### Verification workflow
 
 1. Run `go build -gcflags='-m=2' ./... 2>&1 | grep "escapes to heap"` to find escaping allocations.
-2. Focus on **hot paths** — handlers, loops, frequently called functions. Don't optimize cold code.
+2. Focus on `hot paths` — handlers, loops, frequently called functions. Don't optimize cold code.
 3. Run `go test -bench=. -benchmem` to measure allocs/op before and after changes.
 4. Apply fix, re-run escape analysis to confirm the allocation moved to stack.
 5. Re-run benchmarks to verify measurable improvement.
 
-**Reference:** Stack allocation ~0.26ns vs heap ~10.55ns — ~40x penalty per escaped allocation.
+`Reference:` Stack allocation ~0.26ns vs heap ~10.55ns — ~40x penalty per escaped allocation.
 
 ---
 
