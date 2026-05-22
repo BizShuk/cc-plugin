@@ -7,7 +7,7 @@ description: >
     golangci-lint, air), build flags, test flags including disabling inlining,
     and escape analysis verification workflow.
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
-user-invocable: false
+user-invocable: true
 disable-model-invocation: true
 ---
 
