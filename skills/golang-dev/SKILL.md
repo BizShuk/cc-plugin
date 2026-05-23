@@ -9,6 +9,7 @@ description: >
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 user-invocable: true
 disable-model-invocation: true
+context: fork
 ---
 
 # golang-dev

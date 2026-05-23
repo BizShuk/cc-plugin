@@ -10,7 +10,6 @@ description: >
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 disable-model-invocation: true
 user-invocable: false
-effort: medium
 context: fork
 ---
 

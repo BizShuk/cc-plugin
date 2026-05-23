@@ -2,8 +2,6 @@
 name: golang-network
 description: Manual-invocation-only Go networking reviewer. Audits *.go network code (servers, clients, raw net.Conn, HTTP/gRPC/QUIC, TLS) against the goperf.dev networking playbook (19 patterns covering benchmarking, the net/net/http package, server lifecycle, 10k-connection scaling, low-level socket and scheduler tuning, resilience — circuit breakers, load shedding, retries — long-lived connections, transport selection, DNS, TLS, and connection observability) and produces a prioritized report with concrete code suggestions, OS/sysctl checklists, and expected impact. Read-only — never modifies source. Refuses non-Go files. Invoke only when the user explicitly asks for a go-network review.
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
-model: opus[1m]
-effort: max
 context: fork
 user-invocable: false
 disable-model-invocation: true

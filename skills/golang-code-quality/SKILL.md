@@ -4,6 +4,7 @@ description: Golang code quality reviewer focused on simplicity and scalability 
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
 disable-model-invocation: false
 user-invocable: false
+context: fork
 ---
 
 # golang-code-quality
