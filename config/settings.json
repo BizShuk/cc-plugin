@@ -46,7 +46,7 @@
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
   },
-  "model": "haiku",
+  "model": "opus",
   "worktree": {
     "baseRef": "fresh"
   },
