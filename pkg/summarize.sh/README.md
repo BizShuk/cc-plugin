@@ -2,7 +2,7 @@
 
 ```bash
 
-mdkir -p ~/.summarize/
+mkdir -p ~/.summarize/
 cp config.sample.json ~/.summarize/config.json
 ln -s ~/.summarize ./config/
 

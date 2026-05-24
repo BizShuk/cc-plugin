@@ -60,7 +60,7 @@
   ],
   "statusLine": {
     "type": "command",
-    "command": "npx -y ccstatusline@latest",
+    "command": "npx ccstatusline",
     "padding": 0,
     "refreshInterval": 10
   },

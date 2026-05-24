@@ -11,3 +11,5 @@ config/.claude
 config/.claude.json
 config/.claude-mem
 config/.hermes
+config/ccstatusline
+config/tokscale
