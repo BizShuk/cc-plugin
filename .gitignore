@@ -1,3 +1,5 @@
+logs/*
+!logs/.gitkeep
 log/
 .claude/*
 .claude/settings.local.json
@@ -13,3 +15,4 @@ config/.claude-mem
 config/.hermes
 config/ccstatusline
 config/tokscale
+skills/tmp/*

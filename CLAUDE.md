@@ -1,32 +1,37 @@
-# My Plugin
+# CC Plugin
 
-A sample Claude Code plugin demonstrating all available plugin components.
+A global Claude Code plugin demonstrating settings, hooks, monitors, skills, and agents.
 
 ## Installation
 
 ```bash
-# Local development
-claude --plugin-dir ./my-plugin
+# Local development installation
+claude --plugin-dir .
 
 # Or install from marketplace when published
-/plugin install my-plugin
+# /plugin install cc-plugin
 ```
 
 ## Components
 
 ### Skills
 
-- `/my-plugin:hello` - Greet users with a personalized message
-- `/my-plugin:code-review` - Review code for best practices
+- `apple-calendar` - Manage Apple Calendar events
+- `apple-notes` - Manage Apple Notes
+- `apple-reminders` - Manage Apple Reminders
+- `golang-code-quality` - Review Go code for SOLID principles and idioms
+- `golang-mvc` - Guide on Go MVC patterns
+- `summarize` - Onboard projects and create README.md/CLAUDE.md
+- `superpower` - Check and invoke relevant skills
 
 ### Agents
 
-- `security-reviewer` - Specialized agent for security-focused code review
+- `golang-refactor` - Specialized agent for Go code refactoring
+- `feature` - Guide and implement features
 
 ### Hooks
 
-- `PostToolUse` - Runs lint:fix after Write/Edit operations
-- `PostAgentMessage` - Logs after agent completion
+- `PostToolUse` - Automatically format files using specific tools (e.g., `go fmt` for Go files)
 
 ### Monitors
 
@@ -51,24 +56,28 @@ claude --plugin-dir ./my-plugin
 ## Structure
 
 ```
-my-plugin/
+.
 ├── .claude-plugin/
 │   └── plugin.json       # Plugin manifest
-├── agents/
-│   └── *.md
-├── hooks/
-│   └── hooks.json
-├── monitors/
+├── agents/               # Custom Agents
+│   ├── feature.md
+│   └── golang-refactor.md
+├── hooks/                # Hooks configuration & scripts
+│   ├── hooks.json
+│   └── post-tool.sh
+├── monitors/             # Monitors configuration
 │   └── monitors.json
-├── skills/
-│   ├── hello/
-│   │   └── SKILL.md
-│   └── code-review/
-│       └── SKILL.md
-├── bin/                  # Executables added to PATH
+├── skills/               # Custom Skills
+│   ├── apple-*/
+│   ├── golang-*/
+│   └── ...
+├── pkg/                  # Package configuration templates & resources
+├── config/               # Symlinked configurations (local and home)
 ├── settings.json         # Default settings
-├── .lsp.json           # LSP server config
-└── .mcp.json           # MCP server config
+├── .lsp.json             # LSP server config
+├── .mcp.json             # MCP server config
+├── run.sh                # Setup script for Unix/macOS
+└── run.ps1               # Setup script for Windows
 ```
 
 ## License

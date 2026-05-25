@@ -2,11 +2,11 @@
   "hooks": {
     "PostToolUse": [
       {
-        "matcher": "Write|Edit",
+        "matcher": "Write|Edit|replace_file_content|multi_replace_file_content|write_to_file",
         "hooks": [
           {
             "type": "command",
-            "command": "echo hook"
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/post-tool.sh\""
           }
         ]
       }

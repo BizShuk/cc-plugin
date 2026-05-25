@@ -14,19 +14,14 @@
     "cc-plugin"
   ],
   "skills": "./skills",
-  "commands": [
-    "./commands"
-  ],
   "agents": [
     "./agents"
   ],
-  "hooks": "./config/hooks.json",
-  "mcpServers": ".mcp-config.json",
-  "outputStyles": "./styles/",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": ".mcp.json",
   "lspServers": ".lsp.json",
   "experimental": {
-    "themes": "./themes/",
-    "monitors": "./monitors.json"
+    "monitors": "./monitors/monitors.json"
   },
   "dependencies": []
 }
