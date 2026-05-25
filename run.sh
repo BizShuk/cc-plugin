@@ -55,7 +55,7 @@ mkdir -p "$HOME/.config/ccstatusline"
 if [ -f "$HOME/.config/ccstatusline/settings.json" ] && [ ! -L "$HOME/.config/ccstatusline/settings.json" ]; then
     mv "$HOME/.config/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json.bak"
 fi
-ln -sf "$(pwd)/pkg/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
+ln -sf "$(pwd)/pkg/usage/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
 ln -sf "$HOME/.config/ccstatusline" "$(pwd)/config/"
 
 # Tokscale
@@ -63,5 +63,5 @@ mkdir -p "$HOME/.config/tokscale"
 if [ -f "$HOME/.config/tokscale/settings.json" ] && [ ! -L "$HOME/.config/tokscale/settings.json" ]; then
     mv "$HOME/.config/tokscale/settings.json" "$HOME/.config/tokscale/settings.json.bak"
 fi
-ln -sf "$(pwd)/pkg/tokscale/settings.json" "$HOME/.config/tokscale/settings.json"
+ln -sf "$(pwd)/pkg/usage/tokscale/settings.json" "$HOME/.config/tokscale/settings.json"
 ln -sf "$HOME/.config/tokscale" "$(pwd)/config/"
