@@ -4,12 +4,12 @@
 
 ## 核心功能 (Key Features)
 
-*   **多維度報告 (Multi-dimensional Reports)**：支援每日 (Daily)、每月 (Monthly) 以及對話會話 (Session) 等級別的聚合報告。
-*   **成本估算 (Cost Estimation)**：自動根據最新的 LiteLLM 定價資料，計算 Input、Output 以及快取 (Cache) 的美金成本。
-*   **模型追蹤 (Model Tracking)**：清晰顯示不同模型（如 Claude 3.5 Sonnet, Claude 3 Opus 等）的使用分布。
-*   **快取分析 (Cache Metrics)**：追蹤快取寫入 (Cache Creation) 與快取讀取 (Cache Read) 的 Token，優化 Prompt Caching 策略。
-*   **靈活過濾 (Filtering)**：支援日期範圍 (--since/--until)、特定專案 (--project) 以及多實例 (--instances) 過濾。
-*   **狀態欄整合 (Statusline Integration)**：提供緊湊的狀態字串，可與 Claude Code 的 Hook 整合，在終端機顯示即時成本。
+- **多維度報告 (Multi-dimensional Reports)**：支援每日 (Daily)、每月 (Monthly) 以及對話會話 (Session) 等級別的聚合報告。
+- **成本估算 (Cost Estimation)**：自動根據最新的 LiteLLM 定價資料，計算 Input、Output 以及快取 (Cache) 的美金成本。
+- **模型追蹤 (Model Tracking)**：清晰顯示不同模型（如 Claude 3.5 Sonnet, Claude 3 Opus 等）的使用分布。
+- **快取分析 (Cache Metrics)**：追蹤快取寫入 (Cache Creation) 與快取讀取 (Cache Read) 的 Token，優化 Prompt Caching 策略。
+- **靈活過濾 (Filtering)**：支援日期範圍 (--since/--until)、特定專案 (--project) 以及多實例 (--instances) 過濾。
+- **狀態欄整合 (Statusline Integration)**：提供緊湊的狀態字串，可與 Claude Code 的 Hook 整合，在終端機顯示即時成本。
 
 ## 常用指令 (Common Commands)
 
@@ -24,5 +24,5 @@ npx ccusage statusline  # 用於 Hook 的精簡狀態行 (Beta)
 
 ## 相關連結 (Links)
 
-*   **GitHub**: <https://github.com/ryoppippi/ccusage>
-*   **官方網站**: <https://ccusage.com/>
+- **GitHub**: <https://github.com/ryoppippi/ccusage>
+  -\*官方網站\*\*: <https://ccusage.com/>

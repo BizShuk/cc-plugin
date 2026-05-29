@@ -1,92 +1,86 @@
 {
-  "skillListingBudgetFraction": 0.01,
-  "env": {
-    "_____proxy": "_____",
-    "_____prompt": "_____",
-    "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
-    "_____model": "_____",
-    "_____agent": "_____",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_CODE_DISABLE_AGENT_VIEW": "0",
-    "_____extra": "_____",
-    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "0",
-    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "0",
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
-    "OTEL_METRICS_EXPORTER": "otlp"
-  },
-  "permissions": {
-    "allow": [
-      "Bash(ls:*)",
-      "Bash(df:*)",
-      "Bash(du:*)",
-      "Bash(mkdir:*)",
-      "Bash(head:*)",
-      "Bash(find:*)",
-      "Bash(grep:*)",
-      "Bash(go:*)",
-      "Bash(python:*)",
-      "Bash(python3:*)",
-      "Bash(bytedcli:*)",
-      "Bash(gdpa-cli:*)"
-    ],
-    "deny": [
-      "Read(.env*)",
-      "Read(~/.ssh/**)",
-      "Read(~/.aws/**)",
-      "Read(**/.env)",
-      "Read(**/secrets/**)",
-      "Read(~/.claude/settings.json)",
-      "Edit(**/.git)",
-      "Write(**/.git)"
-    ],
-    "ask": [
-      "Bash(rm:*)"
-    ],
-    "defaultMode": "acceptEdits",
-    "additionalDirectories": []
-  },
-  "model": "sonnet",
-  "worktree": {
-    "baseRef": "fresh"
-  },
-  "defaultShell": "bash",
-  "allowedHttpHookUrls": [
-    "http://localhost:*"
-  ],
-  "httpHookAllowedEnvVars": [
-    "MY_TOKEN",
-    "HOOK_SECRET"
-  ],
-  "statusLine": {
-    "type": "command",
-    "command": "npx ccstatusline",
-    "padding": 0,
-    "refreshInterval": 10
-  },
-  "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {},
-  "outputStyle": "Explanatory",
-  "syntaxHighlightingDisabled": false,
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
-  "fastModePerSessionOptIn": true,
-  "promptSuggestionEnabled": false,
-  "autoUpdatesChannel": "latest",
-  "minimumVersion": "2.1.140",
-  "plansDirectory": "./plans",
-  "voice": {
-    "enabled": false,
-    "mode": "hold"
-  },
-  "prefersReducedMotion": true,
-  "autoMemoryEnabled": true,
-  "autoMemoryDirectory": "~/memory",
-  "skipDangerousModePermissionPrompt": true,
-  "theme": "dark-ansi",
-  "verbose": false,
-  "preferredNotifChannel": "auto",
-  "teammateMode": "in-process"
+    "skillListingBudgetFraction": 0.01,
+    "env": {
+        "_____proxy": "_____",
+        "_____prompt": "_____",
+        "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
+        "_____model": "_____",
+        "_____agent": "_____",
+        "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
+        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+        "CLAUDE_CODE_DISABLE_AGENT_VIEW": "0",
+        "_____extra": "_____",
+        "CLAUDE_CODE_DISABLE_1M_CONTEXT": "0",
+        "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "0",
+        "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+        "OTEL_METRICS_EXPORTER": "otlp"
+    },
+    "permissions": {
+        "allow": [
+            "Bash(ls:*)",
+            "Bash(df:*)",
+            "Bash(du:*)",
+            "Bash(mkdir:*)",
+            "Bash(head:*)",
+            "Bash(find:*)",
+            "Bash(grep:*)",
+            "Bash(go:*)",
+            "Bash(python:*)",
+            "Bash(python3:*)",
+            "Bash(bytedcli:*)",
+            "Bash(gdpa-cli:*)"
+        ],
+        "deny": [
+            "Read(.env*)",
+            "Read(~/.ssh/**)",
+            "Read(~/.aws/**)",
+            "Read(**/.env)",
+            "Read(**/secrets/**)",
+            "Read(~/.claude/settings.json)",
+            "Edit(**/.git)",
+            "Write(**/.git)"
+        ],
+        "ask": ["Bash(rm:*)"],
+        "defaultMode": "acceptEdits",
+        "additionalDirectories": []
+    },
+    "model": "sonnet",
+    "worktree": {
+        "baseRef": "fresh"
+    },
+    "enableWorkflows": false,
+    "defaultShell": "bash",
+    "allowedHttpHookUrls": ["http://localhost:*"],
+    "httpHookAllowedEnvVars": ["MY_TOKEN", "HOOK_SECRET"],
+    "statusLine": {
+        "type": "command",
+        "command": "npx ccstatusline",
+        "padding": 0,
+        "refreshInterval": 10
+    },
+    "enabledPlugins": {
+        "gopls-lsp@claude-plugins-official": true
+    },
+    "extraKnownMarketplaces": {},
+    "outputStyle": "Explanatory",
+    "syntaxHighlightingDisabled": false,
+    "alwaysThinkingEnabled": true,
+    "effortLevel": "xhigh",
+    "fastModePerSessionOptIn": true,
+    "promptSuggestionEnabled": false,
+    "autoUpdatesChannel": "latest",
+    "plansDirectory": "./plans",
+    "voice": {
+        "enabled": false,
+        "mode": "hold"
+    },
+    "prefersReducedMotion": true,
+    "autoMemoryEnabled": true,
+    "autoMemoryDirectory": "~/memory",
+    "skipDangerousModePermissionPrompt": true,
+    "theme": "dark-ansi",
+    "verbose": false,
+    "preferredNotifChannel": "auto",
+    "teammateMode": "in-process",
+    "minimumVersion": "2.1.150"
 }
