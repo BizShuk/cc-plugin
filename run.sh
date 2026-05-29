@@ -6,7 +6,8 @@ mkdir -p "$HOME/.gemini"
 mkdir -p "$HOME/.claude-mem"
 mkdir -p "$HOME/.hermes"
 
-# Create local logs directory
+# Create local directories
+mkdir -p config
 mkdir -p logs
 
 # Claude
@@ -55,7 +56,7 @@ mkdir -p "$HOME/.config/ccstatusline"
 if [ -f "$HOME/.config/ccstatusline/settings.json" ] && [ ! -L "$HOME/.config/ccstatusline/settings.json" ]; then
     mv "$HOME/.config/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json.bak"
 fi
-ln -sf "$(pwd)/pkg/usage/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
+ln -sf "$(pwd)/pkg/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
 ln -sf "$HOME/.config/ccstatusline" "$(pwd)/config/"
 
 # Tokscale

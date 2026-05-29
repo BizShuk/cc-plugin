@@ -51,6 +51,26 @@ claude --plugin-dir .
 
 ---
 
+### 4. 移除與清理 (Cleanup & Uninstall)
+
+如果您需要移除軟連結並回復備份的設定檔案，可以使用以下指令稿：
+
+#### macOS / Linux 環境
+
+```bash
+chmod +x uninstall.sh
+./uninstall.sh
+```
+
+#### Windows 環境 (PowerShell)
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+.\uninstall.ps1
+```
+
+---
+
 ## 常用 MCP 與插件列表 (MCP & Plugin Reference)
 
 ### 1. 新增專案專屬 MCP

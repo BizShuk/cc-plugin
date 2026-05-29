@@ -72,12 +72,13 @@ claude --plugin-dir .
 │   ├── golang-*/
 │   └── ...
 ├── pkg/                  # Package configuration templates & resources
-├── config/               # Symlinked configurations (local and home)
-├── settings.json         # Default settings
+├── config/               # Symlinked configurations (local and home) & default settings (e.g. config/settings.json)
 ├── .lsp.json             # LSP server config
 ├── .mcp.json             # MCP server config
 ├── run.sh                # Setup script for Unix/macOS
-└── run.ps1               # Setup script for Windows
+├── run.ps1               # Setup script for Windows
+├── uninstall.sh          # Cleanup script for Unix/macOS
+└── uninstall.ps1         # Cleanup script for Windows
 ```
 
 ## License
