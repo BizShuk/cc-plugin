@@ -16,3 +16,4 @@ config/.hermes
 config/ccstatusline
 config/tokscale
 skills/tmp/*
+.gdpa
