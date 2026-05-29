@@ -1,5 +1,4 @@
 {
-    "apiKeyHelper": "/Users/bytedance/.llmbox/claude_byted_token.sh",
     "env": {
         "_____proxy": "_____",
         "ANTHROPIC_BASE_URL": "https://llmbox.bytedance.net/",
