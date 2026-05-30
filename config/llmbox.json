@@ -45,7 +45,8 @@
             "Bash(python:*)",
             "Bash(python3:*)",
             "Bash(bytedcli:*)",
-            "Bash(gdpa-cli:*)"
+            "Bash(gdpa-cli:*)",
+            "Bash(rm:*)"
         ],
         "deny": [
             "Read(.env.key)",
@@ -57,9 +58,7 @@
             "Edit(**/.git)",
             "Write(**/.git)"
         ],
-        "ask": [
-            "Bash(rm:*)"
-        ],
+        "ask": [],
         "defaultMode": "acceptEdits",
         "additionalDirectories": []
     },
