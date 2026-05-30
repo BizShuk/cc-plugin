@@ -40,7 +40,7 @@ Build in this order. Do not skip steps.
 
 ### Step 1 — Model first (`model/`)
 
-- Define new domain structs in `model/`.
+- Define new domain structs in `model/` (use `model` (singular) as the default package for domain models, unless there are more than 30 models, in which case they must be split into domain-specific packages).
 - No behavior beyond conversion methods (`ToDTO()`, `FromRow()`).
 - Every exported field: snake_case JSON tag.
 
@@ -66,7 +66,8 @@ Build in this order. Do not skip steps.
 ### Step 5 — Wiring (`main.go` or `bootstrap.go`)
 
 - Concrete types only in `main.go`/`bootstrap.go`.
-- Inject interfaces everywhere else.
+- Inject interfaces everywhere else. (Exception: global state is acceptable/good for client, handler, and configuration if they are immutable).
+- Configuration loading: Prefer `config.Default()` from `github.com/bizshuk/gosdk`, falling back to raw `viper` manual setup only if the SDK is not supported/available.
 - Initialization order: config → DB connection → repositories → services → handlers → router.
 
 ---
@@ -97,12 +98,13 @@ breaking the import cycle and enabling true unit isolation.
 
 ---
 
-## Error Handling Conventions
+## Error & Constant Conventions
 
 - Wrap at every layer boundary: `fmt.Errorf("handler.GetUser: %w", err)`
 - Sentinel errors defined in the package that owns the concept: `var ErrNotFound = errors.New("not found")`
 - HTTP status mapping lives in the handler layer only — never map errors in service or repository
 - Log once at the handler boundary; service and repository only wrap and return
+- All constants must use `SCREAMING_SNAKE_CASE` (e.g. `MAX_RETRIES`, `DEFAULT_TIMEOUT`).
 
 ---
 

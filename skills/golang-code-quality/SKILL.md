@@ -69,7 +69,7 @@ Enforce this layered architecture. **Dependencies flow downward only** — handl
 
 | Package                | Responsibility                                                                                      | What MUST NOT be there                          |
 | ---------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| `config/`              | Load configuration (env, files, flags). Initialize external clients (DB, Redis, S3, HTTP clients).  | Business logic, domain types                    |
+| `config/`              | Load configuration. Prefer `config.Default()` from `github.com/bizshuk/gosdk`, falling back to `viper` if not supported. Initialize external clients (DB, Redis, S3, HTTP clients). | Business logic, domain types                    |
 | `handler/`             | Aggregate domain logic. Orchestrate calls to services. **All business rules live here.**            | Direct DB calls, raw HTTP calls, config loading |
 | `service/` (or `svc/`) | Wrap external services. Basic error handling, retries, timeout enforcement. **Thin adapters only.** | Domain logic, business rules                    |
 | `model/`               | Data structures + conversions between them (DTO ↔ domain ↔ persistence).                            | Behavior beyond conversion, I/O                 |
@@ -97,9 +97,9 @@ Validators must be named for **what they check**, not where they're used:
 Enforce these rules strictly:
 
 - **Short, lowercase, no underscores, no mixedCaps.** `userauth` not `user_auth` or `userAuth`.
-- **Singular, not plural.** `user` not `users`, `model` not `models`. (The directory name IS the package name.)
+- **Singular, not plural.** `user` not `users`. (Use `model` (singular) as the default package for domain models, unless there are more than 30 models, in which case they must be split into domain-specific packages).
 - **Avoid generic names**: `util`, `common`, `base`, `helpers`, `misc`, `shared`. These signal a missing abstraction.
-- **No stutter.** If the package is `user`, the type is `User` not `user.UserModel`. Callers write `user.New()` not `user.NewUser()`.
+- **No stutter.** If the package is `user`, the type is `User` not `user.UserModel`. Callers write `user.New()` not `user.NewUser()`. (Exception: the `model` package can contain a `model.User` or similar domain structs).
 - **Name describes what it provides, not what it contains.** `http` not `httpfunctions`.
 - The acceptable exception to `utils/` per the user's convention: it stays narrowly for non-business cross-cutting concerns (metrics, callbacks). If it grows beyond that, split it.
 
@@ -188,7 +188,7 @@ func NewHandler(repo UserRepo, opts ...Option) *Handler { ... }
 
 - **Wire dependencies in `main.go` or a single `wire.go` / `bootstrap.go`.** This is the only place concrete types meet.
 - **Accept interfaces, return concrete types.** This lets callers narrow what they depend on.
-- **No global state.** No package-level `var db *sql.DB`. Inject it.
+- **No global state.** Inject databases/services. (Exception: global state is acceptable/good for client, handler, and configuration if they are immutable).
 - **No service locator pattern.** No `container.Get("UserService")`.
 
 ---
@@ -220,6 +220,7 @@ When asked to review Go code:
 - Stutter in naming (`user.UserService`)
 - Errors returned without `%w` wrapping
 - Validators with non-descriptive names
+- Constants not using `SCREAMING_SNAKE_CASE`
 
 **🟢 Suggestions (consider)**
 

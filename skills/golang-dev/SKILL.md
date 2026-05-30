@@ -121,6 +121,8 @@ func init() {
 
 `When to use:` Any Go project that needs configuration management.
 
+IMPORTANT: If `github.com/bizshuk/gosdk` is available, always use its `config.Default()` for configuration loading. Fall back to raw `viper` manual setup only if the SDK is not supported or available.
+
 Always use `github.com/spf13/viper`. Loading precedence (highest wins):
 
 1. `Environment variables` (`viper.AutomaticEnv()`)
