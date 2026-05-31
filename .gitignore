@@ -17,3 +17,4 @@ config/ccstatusline
 config/tokscale
 skills/tmp/*
 .gdpa
+config/.gbrain

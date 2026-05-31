@@ -2,7 +2,23 @@
 
 <https://github.com/thedotmack/claude-mem>
 
-### 工作原理 (How It Works)
+## Integration
+
+### Configure for API Key
+
+> ~/.claude-mem/.env
+
+## export
+
+```bash
+npx tsx scripts/export-memories.ts "windows" windows-memories.json
+=> Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/shuk/projects/cc-plugin/scripts/export-memories.ts' imported from /Users/shuk/projects/cc-plugin/
+Need to clone the project to run. But can’t find a way to dump them all
+
+cp ~/.claude-mem/claude-mem.db ./claude-mem-backup.db
+```
+
+## 工作原理 (How It Works)
 
 `claude-mem` 是一個為 `Claude Code`、`OpenClaw` 和 `Gemini CLI` 等 `AI 代理 (AI Agents)` 設計的`持久化記憶壓縮系統 (Persistent Memory Compression System)`。
 
@@ -12,7 +28,7 @@
 4. `混合搜尋 (Hybrid Search)`：結合 `Chroma` 向量資料庫進行語義搜尋，並搭配關鍵字搜尋，精準檢索過往知識。
 5. `三層工作流 (3-Layer Workflow)`：採用 `search` (搜尋索引)、`timeline` (時間軸上下文) 及 `get_observations` (獲取詳細觀察) 的分層模式，最大化節省 `Token` 成本。
 
-### 主要優勢 (Key Benefits)
+## 主要優勢 (Key Benefits)
 
 - `持久化上下文 (Persistent Context)`：知識可跨對話階段 (Sessions) 存續，代理能「記住」過去的工作內容。
 - `提升連續性 (Enhanced Continuity)`：即使在對話中斷或重啟後，仍能維持專案知識的連續性。

@@ -31,6 +31,12 @@ fi
 if [ -d "$HOME/.hermes" ]; then
     ln -sf "$HOME/.hermes"        "./config/"
 fi
+if [ -d "$HOME/.gbrain" ]; then
+    ln -sf "$HOME/.gbrain"        "./config/"
+fi
+
+
+
 
 # Hermes
 ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.hermes/AGENTS.md" 
@@ -66,3 +72,5 @@ if [ -f "$HOME/.config/tokscale/settings.json" ] && [ ! -L "$HOME/.config/toksca
 fi
 ln -sf "$(pwd)/pkg/usage/tokscale/settings.json" "$HOME/.config/tokscale/settings.json"
 ln -sf "$HOME/.config/tokscale" "$(pwd)/config/"
+
+
