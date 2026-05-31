@@ -110,3 +110,78 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 
 - **技能 (Skills)**：放置於 `skills/` 資料夾下，如 `apple-calendar/SKILL.md`，可藉由 `view_file` 或 Claude Code 的內建載入機制啟用。
 - **代理 (Agents)**：放置於 `agents/` 資料夾下，如 `golang-refactor.md`，定義特定領域的 AI 角色扮演與指令指引。
+
+## command distill
+
+```mermaid
+graph TD
+    %% Sources
+    subgraph sources ["外部資料源 (External Data Sources)"]
+        GB[gbrain/working 目錄]
+        CM[claude-mem SQLite 資料庫]
+    end
+
+    %% Read Commands
+    subgraph read_cmds ["讀取命令 (Read Commands)"]
+        R_GB[read-gbrain]
+        R_CM[read-claudemem]
+    end
+
+    %% Middle Command & LLM
+    subgraph extraction ["提取命令 (Extraction)"]
+        EXT[extract]
+        OL[Ollama Service]
+    end
+
+    %% State Database
+    subgraph state_mgmt ["狀態管理 (State Management)"]
+        DB[("State SQLite DB")]
+        RET[retain]
+    end
+
+    %% Destination Write Commands
+    subgraph write_cmds ["寫入命令 (Write Commands)"]
+        W_AM[write-agentmemory]
+        W_MP[write-mempalace]
+    end
+
+    %% Destinations
+    subgraph memory_stores ["記憶儲存庫 (Memory Stores)"]
+        AM[agentmemory API]
+        MP[mempalace CLI]
+    end
+
+    %% Orchestrator
+    DIST[distill]
+
+    %% Connections - Orchestration Flow
+    DIST -. 呼叫邏輯 .-> R_GB
+    DIST -. 呼叫邏輯 .-> R_CM
+    DIST -. 呼叫邏輯 .-> EXT
+    DIST -. 呼叫邏輯 .-> W_AM
+    DIST -. 呼叫邏輯 .-> W_MP
+    DIST -. 呼叫邏輯 .-> RET
+
+    %% Connections - Data Flow
+    GB --> R_GB
+    CM --> R_CM
+
+    R_GB -- "JSON 觀察值 (Observations)" --> EXT
+    R_CM -- "JSON 觀察值 (Observations)" --> EXT
+
+    EXT -- "調用 LLM" --> OL
+    OL -- "解析出候選對象" --> EXT
+
+    EXT -- "提煉後的記憶 (Memories)" --> W_AM
+    EXT -- "驗證後的事實 (Facts)" --> W_MP
+
+    W_AM --> AM
+    W_MP --> MP
+
+    %% State store interaction
+    R_GB <-->|讀寫游標| DB
+    R_CM <-->|讀寫游標| DB
+    DIST <-->|判斷重複/記錄已提煉| DB
+    RET <-->|查詢並清理過期狀態| DB
+    RET -->|刪除已提煉檔案| GB
+```
