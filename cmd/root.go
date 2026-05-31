@@ -26,8 +26,6 @@ func init() {
 	RootCmd = DistillCmd()
 
 	RootCmd.AddCommand(RetainCmd())
-	RootCmd.AddCommand(ReadGbrainCmd())
-	RootCmd.AddCommand(ReadClaudeMemCmd())
 	RootCmd.AddCommand(WriteAgentMemoryCmd())
 	RootCmd.AddCommand(WriteMempalaceCmd())
 	RootCmd.AddCommand(ExtractCmd())

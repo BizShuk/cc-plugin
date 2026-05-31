@@ -1,4 +1,4 @@
-package cmd
+package export
 
 import (
 	"encoding/json"
@@ -12,16 +12,20 @@ import (
 	"github.com/spf13/viper"
 )
 
-func readGbrainLogic(store *StateStore, workingDir string) ([]model.Observation, int64, error) {
-	lastTS, err := store.GetCursor("gbrain-working")
-	if err != nil {
-		return nil, 0, err
+func gbrainRead(s *model.StateStore, workingDir string, fromCursor bool) ([]model.Observation, int64, error) {
+	lastTS := int64(0)
+	if fromCursor {
+		var err error
+		lastTS, err = s.GetCursor("gbrain-working")
+		if err != nil {
+			return nil, 0, err
+		}
 	}
 
 	var observations []model.Observation
 	var maxTS = lastTS
 
-	err = filepath.Walk(workingDir, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(workingDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
@@ -56,40 +60,40 @@ func readGbrainLogic(store *StateStore, workingDir string) ([]model.Observation,
 	return observations, maxTS, nil
 }
 
-func ReadGbrainCmd() *cobra.Command {
-	var workingDir string
+// GbrainCmd returns the gbrain export subcommand.
+func GbrainCmd() *cobra.Command {
+	var dir string
 
 	cmd := &cobra.Command{
-		Use:   "read-gbrain",
-		Short: "Read new markdown logs from gbrain/working and update cursor",
+		Use:   "gbrain",
+		Short: "Export markdown logs from gbrain/working directory",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if workingDir == "" {
-				workingDir = expandPath(viper.GetString("sources.gbrain_working.root"))
+			if dir == "" {
+				dir = model.ExpandPath(viper.GetString("sources.gbrain_working.root"))
 			}
 
-			store, err := NewStateStore()
+			s, err := model.NewStateStore()
 			if err != nil {
 				return err
 			}
-			defer store.Close()
+			defer s.Close()
 
-			observations, maxTS, err := readGbrainLogic(store, workingDir)
+			observations, maxTS, err := gbrainRead(s, dir, !cmd.Flags().Changed("all"))
 			if err != nil {
 				return err
 			}
 
-			// Output observations as JSON
 			output, err := json.MarshalIndent(observations, "", "  ")
 			if err != nil {
 				return err
 			}
 			fmt.Println(string(output))
 
-			// Update cursor if we read new items
-			if maxTS > viper.GetInt64("state.gbrain_working.cursor") && maxTS > 0 {
-				lastTS, _ := store.GetCursor("gbrain-working")
-				if maxTS > lastTS {
-					if err := store.SetCursor("gbrain-working", maxTS); err != nil {
+			// Update cursor only after export/write finished
+			if maxTS > 0 {
+				lastCursor, _ := s.GetCursor("gbrain-working")
+				if maxTS > lastCursor {
+					if err := s.SetCursor("gbrain-working", maxTS); err != nil {
 						return err
 					}
 				}
@@ -99,7 +103,8 @@ func ReadGbrainCmd() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&workingDir, "dir", "", "Path to gbrain/working directory")
+	cmd.Flags().StringVar(&dir, "dir", "", "Path to gbrain/working directory")
+	cmd.Flags().Bool("all", false, "Export all records from epoch 0 instead of from cursor (stored in lastTS)")
 
 	return cmd
 }

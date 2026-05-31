@@ -1,5 +1,7 @@
 # Global AI Rules
 
+If any conflict and can't determine, AskUserQuestions and wait for the answer.
+
 ## Output Style
 
 - answer conclusion first

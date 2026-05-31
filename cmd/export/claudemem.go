@@ -1,4 +1,4 @@
-package cmd
+package export
 
 import (
 	"encoding/json"
@@ -12,19 +12,17 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-func readClaudeMemLogic() ([]model.Observation, int64, error) {
-	store, err := NewStateStore()
-	if err != nil {
-		return nil, 0, err
-	}
-	defer store.Close()
-
-	lastTS, err := store.GetCursor("claude-mem")
-	if err != nil {
-		return nil, 0, err
+func claudeMemRead(s *model.StateStore, fromCursor bool) ([]model.Observation, int64, error) {
+	lastTS := int64(0)
+	if fromCursor {
+		var err error
+		lastTS, err = s.GetCursor("claude-mem")
+		if err != nil {
+			return nil, 0, err
+		}
 	}
 
-	dbPath := expandPath(viper.GetString("sources.claude_mem.db_path"))
+	dbPath := model.ExpandPath(viper.GetString("sources.claude_mem.db_path"))
 	cmDB, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
@@ -57,12 +55,21 @@ func readClaudeMemLogic() ([]model.Observation, int64, error) {
 	return observations, maxTS, nil
 }
 
-func ReadClaudeMemCmd() *cobra.Command {
+// ClaudeMemCmd returns the claude-mem export subcommand.
+func ClaudeMemCmd() *cobra.Command {
+	var allFlag bool
+
 	cmd := &cobra.Command{
-		Use:   "read-claudemem",
-		Short: "Read observations from claude-mem SQLite DB",
+		Use:   "claudemem",
+		Short: "Export observations from claude-mem SQLite DB",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			observations, maxTS, err := readClaudeMemLogic()
+			s, err := model.NewStateStore()
+			if err != nil {
+				return err
+			}
+			defer s.Close()
+
+			observations, maxTS, err := claudeMemRead(s, !allFlag)
 			if err != nil {
 				return err
 			}
@@ -73,16 +80,11 @@ func ReadClaudeMemCmd() *cobra.Command {
 			}
 			fmt.Println(string(output))
 
+			// Update cursor only after export/write finished
 			if maxTS > 0 {
-				store, err := NewStateStore()
-				if err != nil {
-					return err
-				}
-				defer store.Close()
-
-				lastCursor, _ := store.GetCursor("claude-mem")
+				lastCursor, _ := s.GetCursor("claude-mem")
 				if maxTS > lastCursor {
-					if err := store.SetCursor("claude-mem", maxTS); err != nil {
+					if err := s.SetCursor("claude-mem", maxTS); err != nil {
 						return err
 					}
 				}
@@ -91,6 +93,8 @@ func ReadClaudeMemCmd() *cobra.Command {
 			return nil
 		},
 	}
+
+	cmd.Flags().BoolVar(&allFlag, "all", false, "Export all records from epoch 0 instead of from cursor")
 
 	return cmd
 }
