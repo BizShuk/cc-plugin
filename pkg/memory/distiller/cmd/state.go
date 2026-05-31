@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"database/sql"
@@ -9,6 +9,29 @@ import (
 
 	_ "github.com/mattn/go-sqlite3"
 )
+
+type Observation struct {
+	Source    string `json:"source"`
+	SourceID  string `json:"source_id"`
+	Timestamp int64  `json:"timestamp"`
+	Text      string `json:"text"`
+}
+
+type Memory struct {
+	Fingerprint string   `json:"fingerprint"`
+	Text        string   `json:"text"`
+	Entities    []string `json:"entities"`
+	Kind        string   `json:"kind"`
+	CreatedAt   int64    `json:"created_at"`
+}
+
+type Fact struct {
+	Fingerprint string     `json:"fingerprint"`
+	Text        string     `json:"text"`
+	Entities    []string   `json:"entities"`
+	Evidence    [][]string `json:"evidence"`
+	CreatedAt   int64      `json:"created_at"`
+}
 
 type StateStore struct {
 	db   *sql.DB
