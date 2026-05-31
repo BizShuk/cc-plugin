@@ -9,7 +9,36 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
+
+func writeAgentMemoryLogic(memories []Memory, url string) error {
+	for _, mem := range memories {
+		// Map to agentmemory format
+		payload := map[string]interface{}{
+			"content":  mem.Text,
+			"concepts": append([]string{mem.Kind}, mem.Entities...),
+			"files":    []string{},
+		}
+
+		payloadBytes, err := json.Marshal(payload)
+		if err != nil {
+			return err
+		}
+
+		resp, err := http.Post(url, "application/json", bytes.NewBuffer(payloadBytes))
+		if err != nil {
+			return fmt.Errorf("failed to send remember request to agentmemory: %w", err)
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
+			body, _ := io.ReadAll(resp.Body)
+			return fmt.Errorf("agentmemory server returned error status %d: %s", resp.StatusCode, string(body))
+		}
+	}
+	return nil
+}
 
 func WriteAgentMemoryCmd() *cobra.Command {
 	var url string
@@ -18,6 +47,10 @@ func WriteAgentMemoryCmd() *cobra.Command {
 		Use:   "write-agentmemory",
 		Short: "Post distilled memories from stdin into agentmemory API",
 		RunE: func(cmd *cobra.Command, args []string) error {
+			if url == "" {
+				url = viper.GetString("stores.agentmemory.url")
+			}
+
 			decoder := json.NewDecoder(os.Stdin)
 			var memories []Memory
 
@@ -36,29 +69,8 @@ func WriteAgentMemoryCmd() *cobra.Command {
 				memories = append(memories, single)
 			}
 
-			for _, mem := range memories {
-				// Map to agentmemory format
-				payload := map[string]interface{}{
-					"content":  mem.Text,
-					"concepts": append([]string{mem.Kind}, mem.Entities...),
-					"files":    []string{},
-				}
-
-				payloadBytes, err := json.Marshal(payload)
-				if err != nil {
-					return err
-				}
-
-				resp, err := http.Post(url, "application/json", bytes.NewBuffer(payloadBytes))
-				if err != nil {
-					return fmt.Errorf("failed to send remember request to agentmemory: %w", err)
-				}
-				defer resp.Body.Close()
-
-				if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
-					body, _ := io.ReadAll(resp.Body)
-					return fmt.Errorf("agentmemory server returned error status %d: %s", resp.StatusCode, string(body))
-				}
+			if err := writeAgentMemoryLogic(memories, url); err != nil {
+				return err
 			}
 
 			fmt.Printf("Successfully wrote %d memories into agentmemory.\n", len(memories))
@@ -66,7 +78,7 @@ func WriteAgentMemoryCmd() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&url, "url", "http://localhost:3111/agentmemory/remember", "agentmemory API remember endpoint")
+	cmd.Flags().StringVar(&url, "url", "", "agentmemory API remember endpoint")
 
 	return cmd
 }

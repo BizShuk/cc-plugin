@@ -1,10 +1,14 @@
 package cmd
 
 import (
+	"crypto/sha256"
 	"database/sql"
+	"encoding/hex"
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
+	"strings"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -31,6 +35,15 @@ type Fact struct {
 	Entities    []string   `json:"entities"`
 	Evidence    [][]string `json:"evidence"`
 	CreatedAt   int64      `json:"created_at"`
+}
+
+type Candidate struct {
+	Text             string     `json:"text"`
+	Entities         []string   `json:"entities"`
+	Kind             string     `json:"kind"` // "fact" | "experience" | "preference" | "inference"
+	FirstPerson      bool       `json:"first_person"`
+	ConfirmedByHuman bool       `json:"confirmed_by_human"`
+	SourceRefs       [][]string `json:"source_refs"` // [[source, source_id], ...]
 }
 
 type StateStore struct {
@@ -191,4 +204,25 @@ func (s *StateStore) DropDistilled(source string, sourceID string) error {
 
 func (s *StateStore) Close() error {
 	return s.db.Close()
+}
+
+func Fingerprint(text string, entities []string) string {
+	normalizedText := strings.ToLower(strings.Join(strings.Fields(text), " "))
+	sortedEntities := make([]string, len(entities))
+	copy(sortedEntities, entities)
+	sort.Strings(sortedEntities)
+
+	h := sha256.New()
+	h.Write([]byte(normalizedText))
+	h.Write([]byte("|"))
+	h.Write([]byte(strings.Join(sortedEntities, "|")))
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+func expandPath(p string) string {
+	if strings.HasPrefix(p, "~") {
+		home, _ := os.UserHomeDir()
+		return filepath.Join(home, p[1:])
+	}
+	return p
 }

@@ -17,26 +17,30 @@ ln -sf "$(pwd)/config/settings.json"    "$HOME/.claude/settings.json"
 
 # Global plugin configuration links back to local project (only link if the target actually exists)
 if [ -d "$HOME/.gemini" ]; then
-    ln -sf "$HOME/.gemini"        "./config/"
+    ln -sf "$HOME/.gemini"        "./tmp/"
 fi
 if [ -d "$HOME/.claude" ]; then
-    ln -sf "$HOME/.claude"        "./config/"
+    ln -sf "$HOME/.claude"        "./tmp/"
 fi
 if [ -d "$HOME/.claude-mem" ]; then
-    ln -sf "$HOME/.claude-mem"    "./config/"
+    ln -sf "$HOME/.claude-mem"    "./tmp/"
 fi
 if [ -f "$HOME/.claude.json" ]; then
-    ln -sf "$HOME/.claude.json"   "./config/"
+    ln -sf "$HOME/.claude.json"   "./tmp/"
 fi
 if [ -d "$HOME/.hermes" ]; then
-    ln -sf "$HOME/.hermes"        "./config/"
+    ln -sf "$HOME/.hermes"        "./tmp/"
 fi
 if [ -d "$HOME/.gbrain" ]; then
-    ln -sf "$HOME/.gbrain"        "./config/"
+    ln -sf "$HOME/.gbrain"        "./tmp/"
 fi
 
 if [ -d "$HOME/.mempalace" ]; then
-    ln -sf "$HOME/.mempalace"        "./config/"
+    ln -sf "$HOME/.mempalace"        "./tmp/"
+fi
+
+if [ -d "$HOME/.config/cc-plugin" ]; then
+    ln -sf "$HOME/.config/cc-plugin"        "./tmp/"
 fi
 
 

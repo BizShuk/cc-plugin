@@ -9,7 +9,47 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
+
+func writeMempalaceLogic(facts []Fact, tempDir, wing string) error {
+	// Create temp room directory
+	roomDir := filepath.Join(tempDir, "general")
+	if err := os.MkdirAll(roomDir, 0755); err != nil {
+		return err
+	}
+
+	for _, fact := range facts {
+		evidenceStr, _ := json.Marshal(fact.Evidence)
+		entitiesStr, _ := json.Marshal(fact.Entities)
+		content := fmt.Sprintf("# Fact: %s\n\n%s\n\nEntities: %s\nEvidence: %s\n", fact.Fingerprint, fact.Text, string(entitiesStr), string(evidenceStr))
+
+		filePath := filepath.Join(roomDir, fmt.Sprintf("%s.md", fact.Fingerprint))
+		if err := os.WriteFile(filePath, []byte(content), 0644); err != nil {
+			return fmt.Errorf("failed to write fact file: %w", err)
+		}
+	}
+
+	// Initialize mempalace if mempalace.yaml doesn't exist
+	yamlPath := filepath.Join(tempDir, "mempalace.yaml")
+	if _, err := os.Stat(yamlPath); os.IsNotExist(err) {
+		defaultYaml := fmt.Sprintf("wing: %s\nrooms:\n  general: ['*.md']\n", wing)
+		if err := os.WriteFile(yamlPath, []byte(defaultYaml), 0644); err != nil {
+			return fmt.Errorf("failed to write mempalace.yaml: %w", err)
+		}
+	}
+
+	// Run mempalace mine
+	mineCmd := exec.Command("mempalace", "mine", tempDir, "--wing", wing)
+	var stdout, stderr bytes.Buffer
+	mineCmd.Stdout = &stdout
+	mineCmd.Stderr = &stderr
+	if err := mineCmd.Run(); err != nil {
+		return fmt.Errorf("mempalace mine failed: %w\nstdout: %s\nstderr: %s", err, stdout.String(), stderr.String())
+	}
+
+	return nil
+}
 
 func WriteMempalaceCmd() *cobra.Command {
 	var tempDir string
@@ -19,6 +59,13 @@ func WriteMempalaceCmd() *cobra.Command {
 		Use:   "write-mempalace",
 		Short: "Write verified facts to temp files and run mempalace mine",
 		RunE: func(cmd *cobra.Command, args []string) error {
+			if tempDir == "" {
+				tempDir = expandPath(viper.GetString("stores.mempalace.temp_dir"))
+			}
+			if wing == "" {
+				wing = viper.GetString("stores.mempalace.wing")
+			}
+
 			decoder := json.NewDecoder(os.Stdin)
 			var facts []Fact
 
@@ -36,41 +83,8 @@ func WriteMempalaceCmd() *cobra.Command {
 				facts = append(facts, single)
 			}
 
-			// Create temp room directory
-			roomDir := filepath.Join(tempDir, "general")
-			if err := os.MkdirAll(roomDir, 0755); err != nil {
+			if err := writeMempalaceLogic(facts, tempDir, wing); err != nil {
 				return err
-			}
-
-			for _, fact := range facts {
-				evidenceStr, _ := json.Marshal(fact.Evidence)
-				entitiesStr, _ := json.Marshal(fact.Entities)
-				content := fmt.Sprintf("# Fact: %s\n\n%s\n\nEntities: %s\nEvidence: %s\n", fact.Fingerprint, fact.Text, string(entitiesStr), string(evidenceStr))
-
-				filePath := filepath.Join(roomDir, fmt.Sprintf("%s.md", fact.Fingerprint))
-				if err := os.WriteFile(filePath, []byte(content), 0644); err != nil {
-					return fmt.Errorf("failed to write fact file: %w", err)
-				}
-			}
-
-			// Initialize mempalace if mempalace.yaml doesn't exist
-			yamlPath := filepath.Join(tempDir, "mempalace.yaml")
-			if _, err := os.Stat(yamlPath); os.IsNotExist(err) {
-				// Run in non-interactive if possible, or create default config
-				// We can just create a basic mempalace.yaml ourselves to make it fully automated and non-interactive!
-				defaultYaml := fmt.Sprintf("wing: %s\nrooms:\n  general: ['*.md']\n", wing)
-				if err := os.WriteFile(yamlPath, []byte(defaultYaml), 0644); err != nil {
-					return fmt.Errorf("failed to write mempalace.yaml: %w", err)
-				}
-			}
-
-			// Run mempalace mine
-			mineCmd := exec.Command("mempalace", "mine", tempDir, "--wing", wing)
-			var stdout, stderr bytes.Buffer
-			mineCmd.Stdout = &stdout
-			mineCmd.Stderr = &stderr
-			if err := mineCmd.Run(); err != nil {
-				return fmt.Errorf("mempalace mine failed: %w\nstdout: %s\nstderr: %s", err, stdout.String(), stderr.String())
 			}
 
 			fmt.Printf("Successfully mined %d facts into mempalace (wing %s).\n", len(facts), wing)
@@ -78,8 +92,8 @@ func WriteMempalaceCmd() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&tempDir, "temp-dir", "/tmp/mempalace-temp", "Temporary directory to stage facts")
-	cmd.Flags().StringVar(&wing, "wing", "main", "Wing name to mine into")
+	cmd.Flags().StringVar(&tempDir, "temp-dir", "", "Temporary directory to stage facts")
+	cmd.Flags().StringVar(&wing, "wing", "", "Wing name to mine into")
 
 	return cmd
 }
