@@ -1,4 +1,4 @@
-module distiller
+module github.com/bizshuk/cc-plugin
 
 go 1.25.0
 
