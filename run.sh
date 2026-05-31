@@ -43,6 +43,10 @@ if [ -d "$HOME/.config/cc-plugin" ]; then
     ln -sf "$HOME/.config/cc-plugin"        "./tmp/"
 fi
 
+if [ -d "$HOME/.agentmemory" ]; then
+    ln -sf "$HOME/.agentmemory"        "./tmp/"
+fi
+
 
 
 
