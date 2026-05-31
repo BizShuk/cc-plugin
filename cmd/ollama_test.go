@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -30,7 +31,7 @@ func TestOllamaExtract(t *testing.T) {
 
 	svc := NewOllamaService()
 	obs := []model.Observation{{Source: "test", SourceID: "1", Text: "alice likes tea"}}
-	cands, err := svc.Extract(obs)
+	cands, err := svc.Extract(context.Background(), obs)
 	if err != nil {
 		t.Fatalf("Extract failed: %v", err)
 	}

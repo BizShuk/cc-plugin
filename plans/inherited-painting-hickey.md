@@ -74,14 +74,13 @@
 
 ### High 優先級
 
-4. 為 `StateStore` 和 `OllamaService` 定義介面以提高測試性
-5. 定義 error sentinel 以區分可復原與致命錯誤
-6. 啟動時的設定驗證
-7. distill pipeline 狀態操作的 transaction 包裝
+4. 定義 error sentinel 以區分可復原與致命錯誤
+5. 啟動時的設定驗證
+6. distill pipeline 狀態操作的 transaction 包裝
 
 ### Medium 優先級
 
-8. 將 `expandPath` 提取至 pkg utility
+8. 使用 `homedir` package 替換 `expandPath`（platform 相容性）
 9. 添加 pipeline 的整合測試
 10. 移除測試中的全域 viper 狀態
 11. OllamaService 中 HTTP client 重用

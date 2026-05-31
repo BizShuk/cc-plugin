@@ -37,6 +37,8 @@ func writeAgentMemoryLogic(memories []model.Memory, url string) error {
 			body, _ := io.ReadAll(resp.Body)
 			return fmt.Errorf("agentmemory server returned error status %d: %s", resp.StatusCode, string(body))
 		}
+		// Drain and discard response body to allow connection reuse
+		io.Copy(io.Discard, resp.Body)
 	}
 	return nil
 }

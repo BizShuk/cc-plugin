@@ -129,6 +129,36 @@ func (s *StateStore) DropDistilled(source, sourceID string) error {
 	return s.db.Where("source = ? AND source_id = ?", source, sourceID).Delete(&Distilled{}).Error
 }
 
+func (s *StateStore) MarkDistilledBatch(items []DistilledItem, at int64) error {
+	return s.db.Transaction(func(tx *gorm.DB) error {
+		for _, item := range items {
+			d := Distilled{Source: item.Source, SourceID: item.SourceID, DistilledAt: at}
+			if err := tx.Clauses(clause.OnConflict{
+				Columns:   []clause.Column{{Name: "source"}, {Name: "source_id"}},
+				DoUpdates: clause.AssignmentColumns([]string{"distilled_at"}),
+			}).Create(&d).Error; err != nil {
+				return err
+			}
+		}
+		return nil
+	})
+}
+
+func (s *StateStore) SetCursorsBatch(cursors map[string]int64) error {
+	return s.db.Transaction(func(tx *gorm.DB) error {
+		for source, ts := range cursors {
+			c := Cursor{Source: source, LastTs: ts}
+			if err := tx.Clauses(clause.OnConflict{
+				Columns:   []clause.Column{{Name: "source"}},
+				DoUpdates: clause.AssignmentColumns([]string{"last_ts"}),
+			}).Create(&c).Error; err != nil {
+				return err
+			}
+		}
+		return nil
+	})
+}
+
 func (s *StateStore) Reset() error {
 	return s.db.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Session(&gorm.Session{AllowGlobalUpdate: true}).Delete(&Cursor{}).Error; err != nil {

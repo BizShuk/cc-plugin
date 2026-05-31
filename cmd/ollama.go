@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -26,7 +27,7 @@ func ExtractCmd() *cobra.Command {
 			}
 
 			svc := NewOllamaService()
-			candidates, err := svc.Extract(observations)
+			candidates, err := svc.Extract(cmd.Context(), observations)
 			if err != nil {
 				return err
 			}
@@ -45,6 +46,7 @@ func ExtractCmd() *cobra.Command {
 type OllamaService struct {
 	Model   string
 	Host    string
+	Client  *http.Client
 	Timeout time.Duration
 }
 
@@ -53,6 +55,7 @@ func NewOllamaService() *OllamaService {
 	return &OllamaService{
 		Model:   model,
 		Host:    strings.TrimSuffix(host, "/"),
+		Client:  &http.Client{Timeout: 120 * time.Second},
 		Timeout: 120 * time.Second,
 	}
 }
@@ -66,7 +69,7 @@ const ExtractSystemPrompt = `You extract durable, reusable memories from agent/c
 	`confirmed_by_human (true only if the human explicitly confirmed it). ` +
 	`Omit chit-chat and transient operational noise.`
 
-func (s *OllamaService) Extract(observations []model.Observation) ([]model.Candidate, error) {
+func (s *OllamaService) Extract(ctx context.Context, observations []model.Observation) ([]model.Candidate, error) {
 	if len(observations) == 0 {
 		return nil, nil
 	}
@@ -93,14 +96,13 @@ func (s *OllamaService) Extract(observations []model.Observation) ([]model.Candi
 	}
 
 	url := s.Host + "/api/chat"
-	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(payloadBytes))
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewBuffer(payloadBytes))
 	if err != nil {
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{Timeout: s.Timeout}
-	resp, err := client.Do(req)
+	resp, err := s.Client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to call Ollama API: %w", err)
 	}

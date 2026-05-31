@@ -59,7 +59,7 @@ func DistillCmd() *cobra.Command {
 
 			// 3. Extract candidates via Ollama Service
 			llm := NewOllamaService()
-			candidates, err := llm.Extract(allObs)
+			candidates, err := llm.Extract(cmd.Context(), allObs)
 			if err != nil {
 				return err
 			}
@@ -120,20 +120,24 @@ func DistillCmd() *cobra.Command {
 			}
 
 			// Mark observations as distilled
+			var distilledItems []model.DistilledItem
 			for _, o := range allObs {
-				if err := store.MarkDistilled(o.Source, o.SourceID, now); err != nil {
-					return err
-				}
+				distilledItems = append(distilledItems, model.DistilledItem{Source: o.Source, SourceID: o.SourceID})
+			}
+			if err := store.MarkDistilledBatch(distilledItems, now); err != nil {
+				return err
 			}
 
 			// Update cursors
+			cursors := make(map[string]int64)
 			if gbrainMaxTS > 0 {
-				if err := store.SetCursor("gbrain-working", gbrainMaxTS); err != nil {
-					return err
-				}
+				cursors["gbrain-working"] = gbrainMaxTS
 			}
 			if cmMaxTS > 0 {
-				if err := store.SetCursor("claude-mem", cmMaxTS); err != nil {
+				cursors["claude-mem"] = cmMaxTS
+			}
+			if len(cursors) > 0 {
+				if err := store.SetCursorsBatch(cursors); err != nil {
 					return err
 				}
 			}

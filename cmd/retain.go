@@ -59,7 +59,7 @@ func retainLogic() error {
 			}
 		}
 		if err := store.DropDistilled(item.Source, item.SourceID); err != nil {
-			return fmt.Errorf("failed to drop distilled item %s: %w", item.SourceID, err)
+			fmt.Fprintf(os.Stderr, "Warning: failed to drop distilled item %s: %v\n", item.SourceID, err)
 		}
 	}
 
