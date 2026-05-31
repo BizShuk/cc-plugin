@@ -8,13 +8,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var RootCmd = &cobra.Command{
-	Use:   "distiller",
-	Short: "Distiller CLI manages memory systems cross laptop and server",
-}
+var RootCmd *cobra.Command
 
 func init() {
 	config.Init()
+
+	RootCmd = DistillCmd()
 
 	RootCmd.AddCommand(RetainCmd())
 	RootCmd.AddCommand(ReadGbrainCmd())
@@ -22,7 +21,6 @@ func init() {
 	RootCmd.AddCommand(WriteAgentMemoryCmd())
 	RootCmd.AddCommand(WriteMempalaceCmd())
 	RootCmd.AddCommand(ExtractCmd())
-	RootCmd.AddCommand(DistillCmd())
 }
 
 func Execute() {

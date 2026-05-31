@@ -8,11 +8,12 @@ import (
 	"os/exec"
 	"path/filepath"
 
+	"github.com/bizshuk/cc-plugin/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-func writeMempalaceLogic(facts []Fact, tempDir, wing string) error {
+func writeMempalaceLogic(facts []model.Fact, tempDir, wing string) error {
 	// Create temp room directory
 	roomDir := filepath.Join(tempDir, "general")
 	if err := os.MkdirAll(roomDir, 0755); err != nil {
@@ -67,7 +68,7 @@ func WriteMempalaceCmd() *cobra.Command {
 			}
 
 			decoder := json.NewDecoder(os.Stdin)
-			var facts []Fact
+			var facts []model.Fact
 
 			var raw json.RawMessage
 			if err := decoder.Decode(&raw); err != nil {
@@ -76,7 +77,7 @@ func WriteMempalaceCmd() *cobra.Command {
 
 			// Try array first
 			if err := json.Unmarshal(raw, &facts); err != nil {
-				var single Fact
+				var single model.Fact
 				if err2 := json.Unmarshal(raw, &single); err2 != nil {
 					return fmt.Errorf("stdin must be a JSON array of Fact or a single Fact object")
 				}

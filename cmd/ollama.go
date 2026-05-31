@@ -10,9 +10,37 @@ import (
 	"strings"
 	"time"
 
+	"github.com/bizshuk/cc-plugin/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
+
+func ExtractCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "extract",
+		Short: "Directly extract memories from JSON observations on stdin using Ollama",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			var observations []model.Observation
+			if err := json.NewDecoder(os.Stdin).Decode(&observations); err != nil {
+				return fmt.Errorf("failed to parse observations from stdin: %w", err)
+			}
+
+			svc := NewOllamaService()
+			candidates, err := svc.Extract(observations)
+			if err != nil {
+				return err
+			}
+
+			output, err := json.MarshalIndent(candidates, "", "  ")
+			if err != nil {
+				return err
+			}
+			fmt.Println(string(output))
+			return nil
+		},
+	}
+	return cmd
+}
 
 type OllamaService struct {
 	Model   string
@@ -45,7 +73,7 @@ const ExtractSystemPrompt = `You extract durable, reusable memories from agent/c
 	`confirmed_by_human (true only if the human explicitly confirmed it). ` +
 	`Omit chit-chat and transient operational noise.`
 
-func (s *OllamaService) Extract(observations []Observation) ([]Candidate, error) {
+func (s *OllamaService) Extract(observations []model.Observation) ([]model.Candidate, error) {
 	if len(observations) == 0 {
 		return nil, nil
 	}
@@ -72,7 +100,7 @@ func (s *OllamaService) Extract(observations []Observation) ([]Candidate, error)
 	}
 
 	url := s.Host + "/api/chat"
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer(payloadBytes))
+	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(payloadBytes))
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +128,7 @@ func (s *OllamaService) Extract(observations []Observation) ([]Candidate, error)
 	}
 
 	var responseObj struct {
-		Candidates []Candidate `json:"candidates"`
+		Candidates []model.Candidate `json:"candidates"`
 	}
 	if err := json.Unmarshal([]byte(reply.Message.Content), &responseObj); err != nil {
 		return nil, fmt.Errorf("failed to parse structured JSON from Ollama content: %w. raw content: %s", err, reply.Message.Content)
@@ -116,31 +144,4 @@ func (s *OllamaService) Extract(observations []Observation) ([]Candidate, error)
 	}
 
 	return responseObj.Candidates, nil
-}
-
-func ExtractCmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "extract",
-		Short: "Directly extract memories from JSON observations on stdin using Ollama",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			var observations []Observation
-			if err := json.NewDecoder(os.Stdin).Decode(&observations); err != nil {
-				return fmt.Errorf("failed to parse observations from stdin: %w", err)
-			}
-
-			svc := NewOllamaService()
-			candidates, err := svc.Extract(observations)
-			if err != nil {
-				return err
-			}
-
-			output, err := json.MarshalIndent(candidates, "", "  ")
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(output))
-			return nil
-		},
-	}
-	return cmd
 }

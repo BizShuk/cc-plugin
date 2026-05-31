@@ -1,21 +1,17 @@
 {
     "state": {
-        "db_path": "~/.distiller/state.db"
+        "db_path": "~/.config/cc-plugin/state.db"
     },
     "retention": {
         "max_age_days": 30
     },
     "llm": {
-        "model": "qwen2.5",
+        "model": "qwen3:14b-q4_K_M",
         "host": "http://localhost:11434"
     },
     "sources": {
         "claude_mem": {
-            "db_path": "~/.claude-mem/claude-mem.db",
-            "table": "observations",
-            "id_col": "id",
-            "ts_col": "created_at_epoch",
-            "text_col": "text"
+            "db_path": "~/.claude-mem/claude-mem.db"
         },
         "gbrain_working": {
             "root": "~/brain/working"

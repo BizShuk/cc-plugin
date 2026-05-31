@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/bizshuk/cc-plugin/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-func QualifiesForTruth(c Candidate, corroboration int) bool {
+func QualifiesForTruth(c model.Candidate, corroboration int) bool {
 	if c.Kind == "inference" {
 		return false
 	}
@@ -31,8 +32,7 @@ func DistillCmd() *cobra.Command {
 		Use:   "distill",
 		Short: "Distill memories from source databases and local markdown notes",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			statePath := expandPath(viper.GetString("state.db_path"))
-			store, err := NewStateStore(statePath)
+			store, err := NewStateStore()
 			if err != nil {
 				return err
 			}
@@ -46,19 +46,14 @@ func DistillCmd() *cobra.Command {
 			}
 
 			// 2. Read claude-mem observations
-			cmDB := expandPath(viper.GetString("sources.claude_mem.db_path"))
-			cmTable := viper.GetString("sources.claude_mem.table")
-			cmIdCol := viper.GetString("sources.claude_mem.id_col")
-			cmTsCol := viper.GetString("sources.claude_mem.ts_col")
-			cmTextCol := viper.GetString("sources.claude_mem.text_col")
-			cmObs, cmMaxTS, err := readClaudeMemLogic(store, cmDB, cmTable, cmIdCol, cmTsCol, cmTextCol)
+			cmObs, cmMaxTS, err := readClaudeMemLogic()
 			if err != nil {
 				return err
 			}
 
 			allObs := append(gbrainObs, cmObs...)
 			if len(allObs) == 0 {
-				fmt.Println("[distiller] No new observations found.")
+				fmt.Println("No new observations found.")
 				return nil
 			}
 
@@ -70,8 +65,8 @@ func DistillCmd() *cobra.Command {
 			}
 
 			// 4. Process candidates into Memories and Facts
-			var memories []Memory
-			var facts []Fact
+			var memories []model.Memory
+			var facts []model.Fact
 			now := time.Now().Unix()
 
 			for _, c := range candidates {
@@ -88,7 +83,7 @@ func DistillCmd() *cobra.Command {
 					}
 				}
 
-				memories = append(memories, Memory{
+				memories = append(memories, model.Memory{
 					Fingerprint: fp,
 					Text:        c.Text,
 					Entities:    c.Entities,
@@ -97,7 +92,7 @@ func DistillCmd() *cobra.Command {
 				})
 
 				if QualifiesForTruth(c, corroboration) {
-					facts = append(facts, Fact{
+					facts = append(facts, model.Fact{
 						Fingerprint: fp,
 						Text:        c.Text,
 						Entities:    c.Entities,
@@ -147,12 +142,7 @@ func DistillCmd() *cobra.Command {
 
 			// 5. Sweep retention
 			if !noRetain {
-				maxAgeDays := viper.GetInt("retention.max_age_days")
-				if maxAgeDays == 0 {
-					maxAgeDays = 30
-				}
-				pruneGbrainDir := expandPath(viper.GetString("sources.gbrain_working.root"))
-				if err := retainLogic(store, maxAgeDays, pruneGbrainDir); err != nil {
+				if err := retainLogic(); err != nil {
 					return err
 				}
 			}

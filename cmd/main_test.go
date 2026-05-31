@@ -8,6 +8,9 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/bizshuk/cc-plugin/model"
+	"github.com/spf13/viper"
 )
 
 func TestReadGbrainLogic(t *testing.T) {
@@ -44,7 +47,7 @@ func TestReadGbrainLogic(t *testing.T) {
 	os.Chtimes(file3, time.Unix(3000, 0), time.Unix(3000, 0))
 
 	// Verify reading since 0
-	var observations []Observation
+	var observations []model.Observation
 	err = filepath.Walk(tmpDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -54,7 +57,7 @@ func TestReadGbrainLogic(t *testing.T) {
 			if mtime > 0 {
 				content, _ := os.ReadFile(path)
 				rel, _ := filepath.Rel(tmpDir, path)
-				observations = append(observations, Observation{
+				observations = append(observations, model.Observation{
 					Source:    "gbrain-working",
 					SourceID:  rel,
 					Timestamp: mtime,
@@ -73,7 +76,7 @@ func TestReadGbrainLogic(t *testing.T) {
 	}
 
 	// Verify reading since thresholdTime
-	var newObservations []Observation
+	var newObservations []model.Observation
 	err = filepath.Walk(tmpDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -83,7 +86,7 @@ func TestReadGbrainLogic(t *testing.T) {
 			if mtime > thresholdTime {
 				content, _ := os.ReadFile(path)
 				rel, _ := filepath.Rel(tmpDir, path)
-				newObservations = append(newObservations, Observation{
+				newObservations = append(newObservations, model.Observation{
 					Source:    "gbrain-working",
 					SourceID:  rel,
 					Timestamp: mtime,
@@ -122,11 +125,7 @@ func TestReadClaudeMemLogic(t *testing.T) {
 		CREATE TABLE observations (
 			id INTEGER PRIMARY KEY,
 			created_at_epoch INTEGER,
-			text TEXT,
-			title TEXT,
-			subtitle TEXT,
-			facts TEXT,
-			narrative TEXT
+			text TEXT
 		)
 	`)
 	if err != nil {
@@ -134,76 +133,61 @@ func TestReadClaudeMemLogic(t *testing.T) {
 	}
 
 	_, err = db.Exec(`
-		INSERT INTO observations (id, created_at_epoch, text, title, subtitle, facts, narrative)
+		INSERT INTO observations (id, created_at_epoch, text)
 		VALUES 
-		(1, 100, 'first memory', 'title1', 'subtitle1', '[]', 'narrative1'),
-		(2, 200, '', 'title2', 'subtitle2', '["fact1"]', 'narrative2')
+		(1, 100, 'first memory'),
+		(2, 200, 'second memory')
 	`)
 	if err != nil {
 		t.Fatalf("failed to seed table: %v", err)
 	}
 
-	// Query with timestamp filter
-	rows, err := db.Query("SELECT id, created_at_epoch, text, title, subtitle, facts, narrative FROM observations WHERE created_at_epoch > ? ORDER BY created_at_epoch ASC", 150)
+	statePath := filepath.Join(tmpDir, "state.db")
+	viper.Set("sources.claude_mem.db_path", dbPath)
+	viper.Set("state.db_path", statePath)
+
+	store, err := NewStateStore()
 	if err != nil {
-		t.Fatalf("query failed: %v", err)
+		t.Fatalf("failed to create state store: %v", err)
 	}
-	defer rows.Close()
+	defer store.Close()
 
-	var observations []Observation
-	for rows.Next() {
-		var sid string
-		var ts int64
-		var textVal, title, subtitle, facts, narrative sql.NullString
-		err = rows.Scan(&sid, &ts, &textVal, &title, &subtitle, &facts, &narrative)
-		if err != nil {
-			t.Fatalf("scan failed: %v", err)
-		}
+	// Initial read should return both observations
+	observations, maxTS, err := readClaudeMemLogic()
+	if err != nil {
+		t.Fatalf("readClaudeMemLogic failed: %v", err)
+	}
 
-		var fullText string
-		if textVal.Valid && textVal.String != "" {
-			fullText = textVal.String
-		} else {
-			var parts []string
-			if title.Valid && title.String != "" {
-				parts = append(parts, "Title: "+title.String)
-			}
-			if subtitle.Valid && subtitle.String != "" {
-				parts = append(parts, "Subtitle: "+subtitle.String)
-			}
-			if narrative.Valid && narrative.String != "" {
-				parts = append(parts, "Narrative: "+narrative.String)
-			}
-			if facts.Valid && facts.String != "" {
-				parts = append(parts, "Facts: "+facts.String)
-			}
-			fullText = strings.Join(parts, "\n")
-		}
+	if len(observations) != 2 {
+		t.Errorf("expected 2 observations, got %d", len(observations))
+	}
+	if maxTS != 200 {
+		t.Errorf("expected maxTS 200, got %d", maxTS)
+	}
 
-		observations = append(observations, Observation{
-			Source:    "claude-mem",
-			SourceID:  sid,
-			Timestamp: ts,
-			Text:      fullText,
-		})
+	// Update cursor to 150 and read again (should only return second memory)
+	if err := store.SetCursor("claude-mem", 150); err != nil {
+		t.Fatalf("failed to set cursor: %v", err)
+	}
+
+	observations, maxTS, err = readClaudeMemLogic()
+	if err != nil {
+		t.Fatalf("readClaudeMemLogic failed: %v", err)
 	}
 
 	if len(observations) != 1 {
 		t.Fatalf("expected 1 observation, got %d", len(observations))
 	}
-
 	if observations[0].SourceID != "2" {
 		t.Errorf("expected observation ID 2, got %s", observations[0].SourceID)
 	}
-
-	expectedText := "Title: title2\nSubtitle: subtitle2\nNarrative: narrative2\nFacts: [\"fact1\"]"
-	if observations[0].Text != expectedText {
-		t.Errorf("expected concatenated text:\n%s\n\ngot:\n%s", expectedText, observations[0].Text)
+	if observations[0].Text != "second memory" {
+		t.Errorf("expected text 'second memory', got %s", observations[0].Text)
 	}
 }
 
 func TestWriteAgentMemoryPayloadMapping(t *testing.T) {
-	mem := Memory{
+	mem := model.Memory{
 		Fingerprint: "fp123",
 		Text:        "hello world",
 		Entities:    []string{"alice", "bob"},

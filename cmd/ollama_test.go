@@ -6,6 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/bizshuk/cc-plugin/model"
 	"github.com/spf13/viper"
 )
 
@@ -28,7 +29,7 @@ func TestOllamaExtract(t *testing.T) {
 	viper.Set("llm.model", "test-model")
 
 	svc := NewOllamaService()
-	obs := []Observation{{Source: "test", SourceID: "1", Text: "alice likes tea"}}
+	obs := []model.Observation{{Source: "test", SourceID: "1", Text: "alice likes tea"}}
 	cands, err := svc.Extract(obs)
 	if err != nil {
 		t.Fatalf("Extract failed: %v", err)

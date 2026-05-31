@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"crypto/sha256"
-	"database/sql"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -11,53 +11,30 @@ import (
 	"strings"
 	"time"
 
-	_ "github.com/mattn/go-sqlite3"
+	"github.com/bizshuk/cc-plugin/model"
+	"github.com/spf13/viper"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
+	"gorm.io/gorm/logger"
 )
 
-type Observation struct {
-	Source    string `json:"source"`
-	SourceID  string `json:"source_id"`
-	Timestamp int64  `json:"timestamp"`
-	Text      string `json:"text"`
-}
-
-type Memory struct {
-	Fingerprint string   `json:"fingerprint"`
-	Text        string   `json:"text"`
-	Entities    []string `json:"entities"`
-	Kind        string   `json:"kind"`
-	CreatedAt   int64    `json:"created_at"`
-}
-
-type Fact struct {
-	Fingerprint string     `json:"fingerprint"`
-	Text        string     `json:"text"`
-	Entities    []string   `json:"entities"`
-	Evidence    [][]string `json:"evidence"`
-	CreatedAt   int64      `json:"created_at"`
-}
-
-type Candidate struct {
-	Text             string     `json:"text"`
-	Entities         []string   `json:"entities"`
-	Kind             string     `json:"kind"` // "fact" | "experience" | "preference" | "inference"
-	FirstPerson      bool       `json:"first_person"`
-	ConfirmedByHuman bool       `json:"confirmed_by_human"`
-	SourceRefs       [][]string `json:"source_refs"` // [[source, source_id], ...]
-}
-
 type StateStore struct {
-	db   *sql.DB
+	db   *gorm.DB
 	path string
 }
 
-func NewStateStore(path string) (*StateStore, error) {
+func NewStateStore() (*StateStore, error) {
+	path := expandPath(viper.GetString("state.db_path"))
+
 	dir := filepath.Dir(path)
-	if err := os.MkdirAll(dir, 0755); err != nil {
+	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return nil, fmt.Errorf("failed to create state directory: %w", err)
 	}
 
-	db, err := sql.Open("sqlite3", path)
+	db, err := gorm.Open(sqlite.Open(path), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Silent),
+	})
 	if err != nil {
 		return nil, fmt.Errorf("failed to open sqlite database: %w", err)
 	}
@@ -68,7 +45,6 @@ func NewStateStore(path string) (*StateStore, error) {
 	}
 
 	if err := store.initSchema(); err != nil {
-		db.Close()
 		return nil, err
 	}
 
@@ -76,25 +52,7 @@ func NewStateStore(path string) (*StateStore, error) {
 }
 
 func (s *StateStore) initSchema() error {
-	schema := `
-	CREATE TABLE IF NOT EXISTS cursor (
-		source TEXT PRIMARY KEY,
-		last_ts INTEGER NOT NULL
-	);
-	CREATE TABLE IF NOT EXISTS seen (
-		fingerprint TEXT NOT NULL,
-		source TEXT NOT NULL,
-		first_seen INTEGER NOT NULL,
-		PRIMARY KEY (fingerprint, source)
-	);
-	CREATE TABLE IF NOT EXISTS distilled (
-		source TEXT NOT NULL,
-		source_id TEXT NOT NULL,
-		distilled_at INTEGER NOT NULL,
-		PRIMARY KEY (source, source_id)
-	);
-	`
-	_, err := s.db.Exec(schema)
+	err := s.db.AutoMigrate(&model.Cursor{}, &model.Seen{}, &model.Distilled{})
 	if err != nil {
 		return fmt.Errorf("failed to initialize schema: %w", err)
 	}
@@ -102,23 +60,23 @@ func (s *StateStore) initSchema() error {
 }
 
 func (s *StateStore) GetCursor(source string) (int64, error) {
-	var lastTS int64
-	err := s.db.QueryRow("SELECT last_ts FROM cursor WHERE source = ?", source).Scan(&lastTS)
-	if err == sql.ErrNoRows {
-		return 0, nil
-	}
+	var c model.Cursor
+	err := s.db.First(&c, "source = ?", source).Error
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return 0, nil
+		}
 		return 0, fmt.Errorf("failed to get cursor: %w", err)
 	}
-	return lastTS, nil
+	return c.LastTs, nil
 }
 
 func (s *StateStore) SetCursor(source string, ts int64) error {
-	query := `
-	INSERT INTO cursor (source, last_ts) VALUES (?, ?)
-	ON CONFLICT(source) DO UPDATE SET last_ts = excluded.last_ts
-	`
-	_, err := s.db.Exec(query, source, ts)
+	c := model.Cursor{Source: source, LastTs: ts}
+	err := s.db.Clauses(clause.OnConflict{
+		Columns:   []clause.Column{{Name: "source"}},
+		DoUpdates: clause.AssignmentColumns([]string{"last_ts"}),
+	}).Create(&c).Error
 	if err != nil {
 		return fmt.Errorf("failed to set cursor: %w", err)
 	}
@@ -126,42 +84,45 @@ func (s *StateStore) SetCursor(source string, ts int64) error {
 }
 
 func (s *StateStore) RecordSeen(fingerprint string, source string) (int, error) {
-	_, err := s.db.Exec(
-		"INSERT OR IGNORE INTO seen (fingerprint, source, first_seen) VALUES (?, ?, ?)",
-		fingerprint, source, time.Now().Unix(),
-	)
+	seen := model.Seen{
+		Fingerprint: fingerprint,
+		Source:      source,
+		FirstSeen:   time.Now().Unix(),
+	}
+	err := s.db.Clauses(clause.OnConflict{
+		DoNothing: true,
+	}).Create(&seen).Error
 	if err != nil {
 		return 0, fmt.Errorf("failed to record seen fingerprint: %w", err)
 	}
 
-	var count int
-	err = s.db.QueryRow("SELECT COUNT(*) FROM seen WHERE fingerprint = ?", fingerprint).Scan(&count)
+	var count int64
+	err = s.db.Model(&model.Seen{}).Where("fingerprint = ?", fingerprint).Count(&count).Error
 	if err != nil {
 		return 0, fmt.Errorf("failed to count seen fingerprint: %w", err)
 	}
-	return count, nil
+	return int(count), nil
 }
 
 func (s *StateStore) AlreadyDistilled(source string, sourceID string) (bool, error) {
-	var val int
-	err := s.db.QueryRow(
-		"SELECT 1 FROM distilled WHERE source = ? AND source_id = ?",
-		source, sourceID,
-	).Scan(&val)
-	if err == sql.ErrNoRows {
-		return false, nil
-	}
+	var count int64
+	err := s.db.Model(&model.Distilled{}).Where("source = ? AND source_id = ?", source, sourceID).Count(&count).Error
 	if err != nil {
 		return false, fmt.Errorf("failed to check already distilled: %w", err)
 	}
-	return true, nil
+	return count > 0, nil
 }
 
 func (s *StateStore) MarkDistilled(source string, sourceID string, at int64) error {
-	query := `
-	INSERT OR REPLACE INTO distilled (source, source_id, distilled_at) VALUES (?, ?, ?)
-	`
-	_, err := s.db.Exec(query, source, sourceID, at)
+	d := model.Distilled{
+		Source:      source,
+		SourceID:    sourceID,
+		DistilledAt: at,
+	}
+	err := s.db.Clauses(clause.OnConflict{
+		Columns:   []clause.Column{{Name: "source"}, {Name: "source_id"}},
+		DoUpdates: clause.AssignmentColumns([]string{"distilled_at"}),
+	}).Create(&d).Error
 	if err != nil {
 		return fmt.Errorf("failed to mark distilled: %w", err)
 	}
@@ -174,28 +135,24 @@ type DistilledItem struct {
 }
 
 func (s *StateStore) DueForPrune(beforeTS int64) ([]DistilledItem, error) {
-	rows, err := s.db.Query(
-		"SELECT source, source_id FROM distilled WHERE distilled_at < ? ORDER BY source, source_id",
-		beforeTS,
-	)
+	var dbItems []model.Distilled
+	err := s.db.Where("distilled_at < ?", beforeTS).Order("source, source_id").Find(&dbItems).Error
 	if err != nil {
 		return nil, fmt.Errorf("failed to query distilled for prune: %w", err)
 	}
-	defer rows.Close()
 
-	var items []DistilledItem
-	for rows.Next() {
-		var item DistilledItem
-		if err := rows.Scan(&item.Source, &item.SourceID); err != nil {
-			return nil, fmt.Errorf("failed to scan distilled item: %w", err)
+	items := make([]DistilledItem, len(dbItems))
+	for i, d := range dbItems {
+		items[i] = DistilledItem{
+			Source:   d.Source,
+			SourceID: d.SourceID,
 		}
-		items = append(items, item)
 	}
 	return items, nil
 }
 
 func (s *StateStore) DropDistilled(source string, sourceID string) error {
-	_, err := s.db.Exec("DELETE FROM distilled WHERE source = ? AND source_id = ?", source, sourceID)
+	err := s.db.Where("source = ? AND source_id = ?", source, sourceID).Delete(&model.Distilled{}).Error
 	if err != nil {
 		return fmt.Errorf("failed to delete distilled: %w", err)
 	}
@@ -203,7 +160,11 @@ func (s *StateStore) DropDistilled(source string, sourceID string) error {
 }
 
 func (s *StateStore) Close() error {
-	return s.db.Close()
+	sqlDB, err := s.db.DB()
+	if err != nil {
+		return fmt.Errorf("failed to get sql.DB: %w", err)
+	}
+	return sqlDB.Close()
 }
 
 func Fingerprint(text string, entities []string) string {

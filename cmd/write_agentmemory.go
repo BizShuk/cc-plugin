@@ -8,11 +8,12 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/bizshuk/cc-plugin/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-func writeAgentMemoryLogic(memories []Memory, url string) error {
+func writeAgentMemoryLogic(memories []model.Memory, url string) error {
 	for _, mem := range memories {
 		// Map to agentmemory format
 		payload := map[string]interface{}{
@@ -52,7 +53,7 @@ func WriteAgentMemoryCmd() *cobra.Command {
 			}
 
 			decoder := json.NewDecoder(os.Stdin)
-			var memories []Memory
+			var memories []model.Memory
 
 			// Read stdin as a JSON array or single object
 			var raw json.RawMessage
@@ -62,7 +63,7 @@ func WriteAgentMemoryCmd() *cobra.Command {
 
 			// Try array first
 			if err := json.Unmarshal(raw, &memories); err != nil {
-				var single Memory
+				var single model.Memory
 				if err2 := json.Unmarshal(raw, &single); err2 != nil {
 					return fmt.Errorf("stdin must be a JSON array of Memory or a single Memory object")
 				}

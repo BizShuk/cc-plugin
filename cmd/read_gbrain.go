@@ -7,17 +7,18 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/bizshuk/cc-plugin/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-func readGbrainLogic(store *StateStore, workingDir string) ([]Observation, int64, error) {
+func readGbrainLogic(store *StateStore, workingDir string) ([]model.Observation, int64, error) {
 	lastTS, err := store.GetCursor("gbrain-working")
 	if err != nil {
 		return nil, 0, err
 	}
 
-	var observations []Observation
+	var observations []model.Observation
 	var maxTS = lastTS
 
 	err = filepath.Walk(workingDir, func(path string, info os.FileInfo, err error) error {
@@ -35,7 +36,7 @@ func readGbrainLogic(store *StateStore, workingDir string) ([]Observation, int64
 				if err != nil {
 					return err
 				}
-				observations = append(observations, Observation{
+				observations = append(observations, model.Observation{
 					Source:    "gbrain-working",
 					SourceID:  rel,
 					Timestamp: mtime,
@@ -56,21 +57,17 @@ func readGbrainLogic(store *StateStore, workingDir string) ([]Observation, int64
 }
 
 func ReadGbrainCmd() *cobra.Command {
-	var statePath string
 	var workingDir string
 
 	cmd := &cobra.Command{
 		Use:   "read-gbrain",
 		Short: "Read new markdown logs from gbrain/working and update cursor",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if statePath == "" {
-				statePath = expandPath(viper.GetString("state.db_path"))
-			}
 			if workingDir == "" {
 				workingDir = expandPath(viper.GetString("sources.gbrain_working.root"))
 			}
 
-			store, err := NewStateStore(statePath)
+			store, err := NewStateStore()
 			if err != nil {
 				return err
 			}
@@ -102,7 +99,6 @@ func ReadGbrainCmd() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&statePath, "state", "", "Path to state.db")
 	cmd.Flags().StringVar(&workingDir, "dir", "", "Path to gbrain/working directory")
 
 	return cmd

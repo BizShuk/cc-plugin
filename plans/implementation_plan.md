@@ -1,65 +1,72 @@
-# Implementation Plan - Update Go Skills Guidelines
+# 使用 GORM 重構狀態儲存與 claude-mem 讀取機制 (Use GORM to Refactor State Storage and claude-mem Reading Mechanism)
 
-This plan outlines the modifications to the Go guidelines (`golang-code-quality`, `golang-mvc`, `golang-naming`, and `golang-dev` skills) to align with the user's explicit preferences.
+將原本使用原生 `database/sql` 實作的 `cmd/state.go` 及 `cmd/read_claudemem.go` 重構為使用 `GORM` 物件關係對映 (Object-Relational Mapping, ORM) 與 `SQLite` 驅動，使其架構更簡潔、更易於維護，並完整相容現行的測試。
 
-## User Review Required
+## 使用者審查項目 (User Review Required)
 
 > [!IMPORTANT]
-> The following rules will be applied across all Go-related skill files:
->
-> 1. All constants must use `SCREAMING_SNAKE_CASE`.
-> 2. Configuration loading must use `config.Default()` from `github.com/bizshuk/gosdk`, falling back to `viper` only if not supported.
-> 3. Global state is acceptable/good for client, handler, and configuration if they are immutable.
-> 4. Use `model` (singular) as the default package for domain models, unless there are more than 30 models (then split into domain-specific packages).
+> 此次修改將全面替換原生 `database/sql` 操作為 `GORM` 框架，涉及的核心檔案有 `state.go` 與 `read_claudemem.go`。
+> 我們將使用 `GORM` 的自動遷移 `AutoMigrate` 功能取代原生的 `initSchema` SQL 字串。
 
-## Proposed Changes
+## 開放性問題 (Open Questions)
 
----
-
-### golang-code-quality
-
-#### [MODIFY] [SKILL.md](file:///Users/shuk/projects/cc-plugin/skills/golang-code-quality/SKILL.md)
-
-- Update package singular rule to explicitly state `model` is used as default, but must be split into domain-specific packages if there are more than 30 models.
-- Relax the `No global state` rule: allow global state for client, handler, and configuration if they are immutable.
-- Explicitly add the rule that constants must use `SCREAMING_SNAKE_CASE`.
-- Specify that configuration loading uses `config.Default()` from the Go SDK, falling back to `viper`.
+> [!NOTE]
+> 目前沒有懸而未決的開放性問題。實作將完全相容現有的 API 界面 and 測試邏輯。
 
 ---
 
-### golang-mvc
+## 預期變更內容 (Proposed Changes)
 
-#### [MODIFY] [SKILL.md](file:///Users/shuk/projects/cc-plugin/skills/golang-mvc/SKILL.md)
+### 依賴管理 (Dependency Management)
 
-- Update Step 1 `Model first` to specify `model/` (singular) is the default package, unless there are >30 models (then split into domain-specific packages).
-- Update Step 5 `Wiring` to require `config.Default()` from the SDK, falling back to `viper`.
-- Update error/constant rules to enforce `SCREAMING_SNAKE_CASE` for constants.
-- Allow global state for client, handler, and configuration if they are immutable.
+#### [MODIFY] [go.mod](file:///Users/shuk/projects/cc-plugin/go.mod)
+將 `gorm.io/gorm` 和 `gorm.io/driver/sqlite` 從間接依賴 (`indirect`) 升級為直接依賴 (`require`)。
 
 ---
 
-### golang-naming
+### 狀態儲存模組 (State Store Module)
 
-#### [MODIFY] [SKILL.md](file:///Users/shuk/projects/cc-plugin/skills/golang-naming/SKILL.md)
+#### [MODIFY] [state.go](file:///Users/shuk/projects/cc-plugin/cmd/state.go)
+- 使用 `gorm.io/gorm` 和 `gorm.io/driver/sqlite` 取代原生的 `database/sql`。
+- 定義三個 `GORM` 模型模型：
+  - `Cursor` 代表 `cursor` 資料表。
+  - `Seen` 代表 `seen` 資料表（複合主鍵：`Fingerprint` 與 `Source`）。
+  - `Distilled` 代表 `distilled` 資料表（複合主鍵：`Source` 與 `SourceID`）。
+- 使用 `db.AutoMigrate` 初始化資料庫 Schema。
+- 使用 `GORM` 的查詢與寫入 API 來實作以下方法：
+  - `GetCursor` / `SetCursor`
+  - `RecordSeen`
+  - `AlreadyDistilled` / `MarkDistilled`
+  - `DueForPrune` / `DropDistilled`
+- 使用 `Close()` 方法：因為 `gorm.DB` 通常不需手動關閉，但為了維持向後相容性，我們會透過底層的 `sql.DB` 取得連接並進行 `Close`。
 
-- Update Rule P5: Specify that `model` (singular) is the default package for domain types, unless there are more than 30 models (then group/split them).
+#### [MODIFY] [state_test.go](file:///Users/shuk/projects/cc-plugin/cmd/state_test.go)
+- 調整測試中的資料庫初始化邏輯，使其搭配 `GORM` 版本進行運作。
 
 ---
 
-### golang-dev
+### Claude 記憶讀取模組 (Claude Memory Reader Module)
 
-#### [MODIFY] [SKILL.md](file:///Users/shuk/projects/cc-plugin/skills/golang-dev/SKILL.md)
+#### [MODIFY] [read_claudemem.go](file:///Users/shuk/projects/cc-plugin/cmd/read_claudemem.go)
+- 定義 `ClaudeMemObservation` 作為對應外部 `claude-mem` 的模型。
+- 使用 `GORM` 開啟外部資料庫，以物件化方式查詢 `observations` 內容。
 
-- Update Section 2 `Configuration (viper)` to prefer `config.Default()` from the Go SDK, falling back to raw `viper` manual setup only if the SDK is not supported/available.
+#### [MODIFY] [main_test.go](file:///Users/shuk/projects/cc-plugin/cmd/main_test.go)
+- 調整 `TestReadClaudeMemLogic` 的 mock 資料庫建立方式與讀取比對，以配合 `GORM` 版本的實作。
 
 ---
 
-## Verification Plan
+## 驗證計畫 (Verification Plan)
 
-### Manual Verification
+### 自動化測試 (Automated Tests)
+我們將在終端機執行 Go 單元測試，確保所有測試皆能正確通過：
+```bash
+go test -v ./cmd/...
+```
+確保 `TestStateStore`、`TestReadClaudeMemLogic` 還有 `TestReadGbrainLogic` 均能正常執行並通過。
 
-## Verification Plan
-
-### Manual Verification
-
-- Review all modified markdown files to ensure the updated rules are clear, consistent, and do not contain any `**` bolding (only `backtick` highlighting).
+### 手動驗證 (Manual Verification)
+- 由於此重構僅限於底層資料庫存取層，只需確保單元測試 100% 通過，且專案建置正常即可：
+```bash
+go build -o /dev/null main.go
+```

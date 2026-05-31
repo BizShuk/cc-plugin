@@ -4,6 +4,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/spf13/viper"
 )
 
 func TestStateStore(t *testing.T) {
@@ -14,7 +16,8 @@ func TestStateStore(t *testing.T) {
 	defer os.RemoveAll(tmpDir)
 
 	dbPath := filepath.Join(tmpDir, "state.db")
-	store, err := NewStateStore(dbPath)
+	viper.Set("state.db_path", dbPath)
+	store, err := NewStateStore()
 	if err != nil {
 		t.Fatalf("failed to create state store: %v", err)
 	}
