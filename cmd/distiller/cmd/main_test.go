@@ -19,18 +19,18 @@ func TestReadGbrainLogic(t *testing.T) {
 
 	// Create test files
 	file1 := filepath.Join(tmpDir, "alice.md")
-	if err := os.WriteFile(file1, []byte("alice context"), 0644); err != nil {
+	if err := os.WriteFile(file1, []byte("alice context"), 0o644); err != nil {
 		t.Fatalf("failed to write test file: %v", err)
 	}
 	os.Chtimes(file1, time.Unix(1000, 0), time.Unix(1000, 0))
 
 	subDir := filepath.Join(tmpDir, "topics")
-	if err := os.MkdirAll(subDir, 0755); err != nil {
+	if err := os.MkdirAll(subDir, 0o755); err != nil {
 		t.Fatalf("failed to create sub dir: %v", err)
 	}
 
 	file2 := filepath.Join(subDir, "trip.md")
-	if err := os.WriteFile(file2, []byte("trip notes"), 0644); err != nil {
+	if err := os.WriteFile(file2, []byte("trip notes"), 0o644); err != nil {
 		t.Fatalf("failed to write test file: %v", err)
 	}
 	os.Chtimes(file2, time.Unix(2000, 0), time.Unix(2000, 0))
@@ -38,7 +38,7 @@ func TestReadGbrainLogic(t *testing.T) {
 	thresholdTime := int64(2500)
 
 	file3 := filepath.Join(tmpDir, "new.md")
-	if err := os.WriteFile(file3, []byte("new notes"), 0644); err != nil {
+	if err := os.WriteFile(file3, []byte("new notes"), 0o644); err != nil {
 		t.Fatalf("failed to write test file: %v", err)
 	}
 	os.Chtimes(file3, time.Unix(3000, 0), time.Unix(3000, 0))
