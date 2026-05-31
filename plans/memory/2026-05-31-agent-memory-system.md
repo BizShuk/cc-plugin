@@ -535,7 +535,7 @@ git commit -m "feat(distiller): add mempalace verification policy"
 - Create: `pkg/memory/distiller/src/distiller/state.py`
 - Test: `pkg/memory/distiller/tests/test_state.py`
 
-- [ ] **Step 1: 寫失敗測試**
+- [x] **Step 1: 寫失敗測試**
 
 `tests/test_state.py`:
 
@@ -571,12 +571,12 @@ def test_distilled_marking_and_due_for_prune(tmp_path):
     s.close()
 ```
 
-- [ ] **Step 2: 跑測試確認失敗**
+- [x] **Step 2: 跑測試確認失敗**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_state.py -q`
 Expected: FAIL（`ModuleNotFoundError: distiller.state`）。
 
-- [ ] **Step 3: 實作 StateStore**
+- [x] **Step 3: 實作 StateStore**
 
 `src/distiller/state.py`:
 
@@ -681,12 +681,12 @@ class StateStore:
         self.con.close()
 ```
 
-- [ ] **Step 4: 跑測試確認通過**
+- [x] **Step 4: 跑測試確認通過**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_state.py -q`
 Expected: PASS（3 passed）。
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add pkg/memory/distiller/src/distiller/state.py pkg/memory/distiller/tests/test_state.py
@@ -860,7 +860,7 @@ git commit -m "feat(distiller): add distillation pipeline orchestrator"
 - Create: `pkg/memory/distiller/src/distiller/retention.py`
 - Test: `pkg/memory/distiller/tests/test_retention.py`
 
-- [ ] **Step 1: 寫失敗測試**
+- [x] **Step 1: 寫失敗測試**
 
 `tests/test_retention.py`:
 
@@ -896,12 +896,12 @@ def test_sweep_skips_sources_without_pruner_but_still_drops_state(tmp_path):
     state.close()
 ```
 
-- [ ] **Step 2: 跑測試確認失敗**
+- [x] **Step 2: 跑測試確認失敗**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_retention.py -q`
 Expected: FAIL（`ModuleNotFoundError: distiller.retention`）。
 
-- [ ] **Step 3: 實作 retention**
+- [x] **Step 3: 實作 retention**
 
 `src/distiller/retention.py`:
 
@@ -922,12 +922,12 @@ def sweep(state, pruners: dict, now: int, max_age_days: int = 30) -> int:
     return count
 ```
 
-- [ ] **Step 4: 跑測試確認通過**
+- [x] **Step 4: 跑測試確認通過**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_retention.py -q`
 Expected: PASS（2 passed）。
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add pkg/memory/distiller/src/distiller/retention.py pkg/memory/distiller/tests/test_retention.py
@@ -946,7 +946,7 @@ git commit -m "feat(distiller): add 30-day retention sweep"
 - Create: `pkg/memory/distiller/src/distiller/adapters/gbrain_working.py`
 - Test: `pkg/memory/distiller/tests/test_gbrain_working.py`
 
-- [ ] **Step 1: 寫失敗測試**
+- [x] **Step 1: 寫失敗測試**
 
 `tests/test_gbrain_working.py`:
 
@@ -984,12 +984,12 @@ def test_prune_deletes_file(tmp_path):
     assert not p.exists()
 ```
 
-- [ ] **Step 2: 跑測試確認失敗**
+- [x] **Step 2: 跑測試確認失敗**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_gbrain_working.py -q`
 Expected: FAIL（`ModuleNotFoundError: distiller.adapters.gbrain_working`）。
 
-- [ ] **Step 3: 實作 reader（兼任 pruner）**
+- [x] **Step 3: 實作 reader（兼任 pruner）**
 
 `src/distiller/adapters/__init__.py`:
 
@@ -1034,12 +1034,12 @@ class GbrainWorkingReader:
             target.unlink()
 ```
 
-- [ ] **Step 4: 跑測試確認通過**
+- [x] **Step 4: 跑測試確認通過**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_gbrain_working.py -q`
 Expected: PASS（3 passed）。
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add pkg/memory/distiller/src/distiller/adapters pkg/memory/distiller/tests/test_gbrain_working.py
@@ -1059,7 +1059,7 @@ git commit -m "feat(distiller): add gbrain/working source reader and pruner"
 - Create: `pkg/memory/distiller/src/distiller/adapters/claude_mem.py`
 - Test: `pkg/memory/distiller/tests/test_claude_mem.py`
 
-- [ ] **Step 1: 寫失敗測試（用臨時 sqlite 模擬 claude-mem 表）**
+- [x] **Step 1: 寫失敗測試（用臨時 sqlite 模擬 claude-mem 表）**
 
 `tests/test_claude_mem.py`:
 
@@ -1100,12 +1100,12 @@ def test_reads_all_when_cursor_zero(tmp_path):
     assert len(list(reader.read_since(0))) == 2
 ```
 
-- [ ] **Step 2: 跑測試確認失敗**
+- [x] **Step 2: 跑測試確認失敗**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_claude_mem.py -q`
 Expected: FAIL（`ModuleNotFoundError: distiller.adapters.claude_mem`）。
 
-- [ ] **Step 3: 實作 reader**
+- [x] **Step 3: 實作 reader**
 
 `src/distiller/adapters/claude_mem.py`:
 
@@ -1146,12 +1146,12 @@ class ClaudeMemReader:
 
 注意：表/欄名來自受信任的設定檔（非外部輸入），故以 f-string 組裝可接受。
 
-- [ ] **Step 4: 跑測試確認通過**
+- [x] **Step 4: 跑測試確認通過**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_claude_mem.py -q`
 Expected: PASS（2 passed）。
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add pkg/memory/distiller/src/distiller/adapters/claude_mem.py pkg/memory/distiller/tests/test_claude_mem.py
@@ -1171,7 +1171,7 @@ git commit -m "feat(distiller): add config-driven claude-mem sqlite reader"
 - Create: `pkg/memory/distiller/src/distiller/adapters/command_writer.py`
 - Test: `pkg/memory/distiller/tests/test_command_writer.py`
 
-- [ ] **Step 1: 寫失敗測試**
+- [x] **Step 1: 寫失敗測試**
 
 `tests/test_command_writer.py`:
 
@@ -1221,12 +1221,12 @@ def test_command_writer_invokes_subprocess_with_stdin_json(monkeypatch):
     assert captured["check"] is True
 ```
 
-- [ ] **Step 2: 跑測試確認失敗**
+- [x] **Step 2: 跑測試確認失敗**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_command_writer.py -q`
 Expected: FAIL（`ModuleNotFoundError: distiller.adapters.command_writer`）。
 
-- [ ] **Step 3: 實作 writers**
+- [x] **Step 3: 實作 writers**
 
 `src/distiller/adapters/command_writer.py`:
 
@@ -1276,12 +1276,12 @@ class MempalaceStore:
         })
 ```
 
-- [ ] **Step 4: 跑測試確認通過**
+- [x] **Step 4: 跑測試確認通過**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_command_writer.py -q`
 Expected: PASS（3 passed）。
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add pkg/memory/distiller/src/distiller/adapters/command_writer.py pkg/memory/distiller/tests/test_command_writer.py
