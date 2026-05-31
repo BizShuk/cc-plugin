@@ -62,6 +62,10 @@ claude --plugin-dir .
 ├── agents/               # Custom Agents
 │   ├── feature.md
 │   └── golang-refactor.md
+├── cmd/                  # Go distiller subcommands (retain, read, write)
+│   ├── root.go           # Cobra CLI root
+│   ├── state.go          # SQLite database state store
+│   └── ...
 ├── hooks/                # Hooks configuration & scripts
 │   ├── hooks.json
 │   └── post-tool.sh
@@ -75,6 +79,9 @@ claude --plugin-dir .
 ├── config/               # Symlinked configurations (local and home) & default settings (e.g. config/settings.json)
 ├── .lsp.json             # LSP server config
 ├── .mcp.json             # MCP server config
+├── main.go               # Go distiller entrypoint
+├── go.mod                # Go module file
+├── go.sum                # Go checksum file
 ├── run.sh                # Setup script for Unix/macOS
 ├── run.ps1               # Setup script for Windows
 ├── uninstall.sh          # Cleanup script for Unix/macOS

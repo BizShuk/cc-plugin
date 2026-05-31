@@ -18,3 +18,4 @@ config/tokscale
 skills/tmp/*
 .gdpa
 config/.gbrain
+config/.mempalace

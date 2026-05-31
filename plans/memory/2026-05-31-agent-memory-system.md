@@ -26,7 +26,7 @@
 
 ## File Structure
 
-```
+```tree
 pkg/memory/distiller/
 ├── pyproject.toml                      # uv 專案、entry point: distiller
 ├── INTERFACES.md                       # Phase 0 探查輸出（各工具確切 CLI/schema）
@@ -63,7 +63,7 @@ pkg/memory/distiller/
 
 伺服器/筆電佈署相關變更：
 
-```
+```bash
 run.sh                                  # 新增：安裝 distiller、建 ~/.distiller、cron 安裝
 pkg/memory/distiller/scripts/install_cron.sh   # 安裝每日 03:00 cron
 pkg/memory/distiller/scripts/syncthing.md      # syncthing 兩 folder 設定程序

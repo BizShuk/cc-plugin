@@ -35,6 +35,10 @@ if [ -d "$HOME/.gbrain" ]; then
     ln -sf "$HOME/.gbrain"        "./config/"
 fi
 
+if [ -d "$HOME/.mempalace" ]; then
+    ln -sf "$HOME/.mempalace"        "./config/"
+fi
+
 
 
 
