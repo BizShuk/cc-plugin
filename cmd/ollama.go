@@ -49,14 +49,7 @@ type OllamaService struct {
 }
 
 func NewOllamaService() *OllamaService {
-	host := viper.GetString("llm.host")
-	if host == "" {
-		host = "http://localhost:11434"
-	}
-	model := viper.GetString("llm.model")
-	if model == "" {
-		model = "qwen2.5"
-	}
+	host, model := viper.GetString("llm.host"), viper.GetString("llm.model")
 	return &OllamaService{
 		Model:   model,
 		Host:    strings.TrimSuffix(host, "/"),

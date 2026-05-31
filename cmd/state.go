@@ -159,6 +159,22 @@ func (s *StateStore) DropDistilled(source string, sourceID string) error {
 	return nil
 }
 
+func (s *StateStore) Reset() error {
+	err := s.db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Session(&gorm.Session{AllowGlobalUpdate: true}).Delete(&model.Cursor{}).Error; err != nil {
+			return fmt.Errorf("failed to reset cursor table: %w", err)
+		}
+		if err := tx.Session(&gorm.Session{AllowGlobalUpdate: true}).Delete(&model.Seen{}).Error; err != nil {
+			return fmt.Errorf("failed to reset seen table: %w", err)
+		}
+		if err := tx.Session(&gorm.Session{AllowGlobalUpdate: true}).Delete(&model.Distilled{}).Error; err != nil {
+			return fmt.Errorf("failed to reset distilled table: %w", err)
+		}
+		return nil
+	})
+	return err
+}
+
 func (s *StateStore) Close() error {
 	sqlDB, err := s.db.DB()
 	if err != nil {

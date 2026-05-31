@@ -21,6 +21,7 @@ func init() {
 	RootCmd.AddCommand(WriteAgentMemoryCmd())
 	RootCmd.AddCommand(WriteMempalaceCmd())
 	RootCmd.AddCommand(ExtractCmd())
+	RootCmd.AddCommand(ResetCmd())
 }
 
 func Execute() {

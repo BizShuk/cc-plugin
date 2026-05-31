@@ -48,9 +48,7 @@ func WriteAgentMemoryCmd() *cobra.Command {
 		Use:   "write-agentmemory",
 		Short: "Post distilled memories from stdin into agentmemory API",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if url == "" {
-				url = viper.GetString("stores.agentmemory.url")
-			}
+			url = viper.GetString("stores.agentmemory.url")
 
 			decoder := json.NewDecoder(os.Stdin)
 			var memories []model.Memory

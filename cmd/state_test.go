@@ -114,4 +114,26 @@ func TestStateStore(t *testing.T) {
 	if len(items) != 0 {
 		t.Errorf("expected 0 items due for prune after drop, got %d", len(items))
 	}
+
+	// Test Reset
+	err = store.Reset()
+	if err != nil {
+		t.Errorf("Reset failed: %v", err)
+	}
+
+	val, err = store.GetCursor("test-source")
+	if err != nil {
+		t.Errorf("GetCursor after reset failed: %v", err)
+	}
+	if val != 0 {
+		t.Errorf("expected cursor 0 after reset, got %d", val)
+	}
+
+	distilled, err = store.AlreadyDistilled("sourceA", "id1")
+	if err != nil {
+		t.Errorf("AlreadyDistilled after reset failed: %v", err)
+	}
+	if distilled {
+		t.Errorf("expected not distilled after reset, but got true")
+	}
 }
