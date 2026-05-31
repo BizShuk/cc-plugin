@@ -24,4 +24,5 @@ func Init() {
 	viper.SetDefault("stores.agentmemory.url", "http://localhost:3111/agentmemory/remember")
 	viper.SetDefault("stores.mempalace.wing", "main")
 	viper.SetDefault("stores.mempalace.temp_dir", "/tmp/mempalace-temp")
+	viper.SetDefault("stores.mempalace.config_dir", "~/.mempalace")
 }

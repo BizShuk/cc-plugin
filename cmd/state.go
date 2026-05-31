@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/bizshuk/cc-plugin/model"
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -25,7 +26,11 @@ type StateStore struct {
 }
 
 func NewStateStore() (*StateStore, error) {
-	path := expandPath(viper.GetString("state.db_path"))
+	dbPath := viper.GetString("state.db_path")
+	path, err := homedir.Expand(dbPath)
+	if err != nil {
+		path = dbPath
+	}
 
 	dir := filepath.Dir(path)
 	if err := os.MkdirAll(dir, 0o755); err != nil {
@@ -194,12 +199,4 @@ func Fingerprint(text string, entities []string) string {
 	h.Write([]byte("|"))
 	h.Write([]byte(strings.Join(sortedEntities, "|")))
 	return hex.EncodeToString(h.Sum(nil))
-}
-
-func expandPath(p string) string {
-	if strings.HasPrefix(p, "~") {
-		home, _ := os.UserHomeDir()
-		return filepath.Join(home, p[1:])
-	}
-	return p
 }

@@ -4,9 +4,19 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/bizshuk/cc-plugin/cmd/export"
 	"github.com/bizshuk/cc-plugin/config"
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 )
+
+func expandPath(p string) string {
+	expanded, err := homedir.Expand(p)
+	if err != nil {
+		return p
+	}
+	return expanded
+}
 
 var RootCmd *cobra.Command
 
@@ -22,6 +32,7 @@ func init() {
 	RootCmd.AddCommand(WriteMempalaceCmd())
 	RootCmd.AddCommand(ExtractCmd())
 	RootCmd.AddCommand(ResetCmd())
+	RootCmd.AddCommand(export.ExportCmd())
 }
 
 func Execute() {
