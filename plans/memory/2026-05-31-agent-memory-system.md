@@ -1299,7 +1299,7 @@ git commit -m "feat(distiller): add config-driven agentmemory/mempalace writers"
 - Create: `pkg/memory/distiller/src/distiller/llm_ollama.py`
 - Test: `pkg/memory/distiller/tests/test_llm_ollama.py`
 
-- [ ] **Step 1: 寫失敗測試（monkeypatch urlopen）**
+- [x] **Step 1: 寫失敗測試（monkeypatch urlopen）**
 
 `tests/test_llm_ollama.py`:
 
@@ -1343,12 +1343,12 @@ def test_extract_empty_when_no_candidates(monkeypatch):
     assert OllamaLLM(model="qwen2.5").extract(obs) == []
 ```
 
-- [ ] **Step 2: 跑測試確認失敗**
+- [x] **Step 2: 跑測試確認失敗**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_llm_ollama.py -q`
 Expected: FAIL（`ModuleNotFoundError: distiller.llm_ollama`）。
 
-- [ ] **Step 3: 實作 OllamaLLM**
+- [x] **Step 3: 實作 OllamaLLM**
 
 `src/distiller/llm_ollama.py`:
 
@@ -1413,12 +1413,12 @@ class OllamaLLM:
         return results
 ```
 
-- [ ] **Step 4: 跑測試確認通過**
+- [x] **Step 4: 跑測試確認通過**
 
 Run: `cd pkg/memory/distiller && uv run pytest tests/test_llm_ollama.py -q`
 Expected: PASS（2 passed）。
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add pkg/memory/distiller/src/distiller/llm_ollama.py pkg/memory/distiller/tests/test_llm_ollama.py
@@ -1437,7 +1437,7 @@ git commit -m "feat(distiller): add ollama extraction client"
 - Create: `pkg/memory/distiller/src/distiller/cli.py`
 - Create: `pkg/memory/distiller/config.sample.toml`
 
-- [ ] **Step 1: 寫設定範本**
+- [x] **Step 1: 寫設定範本**
 
 `config.sample.toml`（值由 Phase 0 探查後替換 `<...>`）:
 
@@ -1469,7 +1469,7 @@ cmd = ["<agentmemory-ingest-command>", "-"]
 cmd = ["<mempalace-ingest-command>", "-"]
 ```
 
-- [ ] **Step 2: 實作 config（載入 + 組裝）**
+- [x] **Step 2: 實作 config（載入 + 組裝）**
 
 `src/distiller/config.py`:
 
@@ -1535,7 +1535,7 @@ class AppConfig:
         return MempalaceStore(CommandWriter(self.data["stores"]["mempalace"]["cmd"]))
 ```
 
-- [ ] **Step 3: 實作 cli**
+- [x] **Step 3: 實作 cli**
 
 `src/distiller/cli.py`:
 
@@ -1588,7 +1588,7 @@ if __name__ == "__main__":
     sys.exit(main())
 ```
 
-- [ ] **Step 4: 全套件測試 + CLI 煙霧測試（--help）**
+- [x] **Step 4: 全套件測試 + CLI 煙霧測試（--help）**
 
 Run:
 
@@ -1598,7 +1598,7 @@ cd pkg/memory/distiller && uv run pytest -q && uv run distiller --help
 
 Expected: 全部測試 PASS；`distiller --help` 印出 usage（含 run/retain）。
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add pkg/memory/distiller/src/distiller/config.py pkg/memory/distiller/src/distiller/cli.py pkg/memory/distiller/config.sample.toml
@@ -1616,7 +1616,7 @@ git commit -m "feat(distiller): add config loader and CLI entrypoint"
 - Create: `pkg/memory/distiller/scripts/install_cron.sh`
 - Modify: `run.sh`（新增 distiller 區塊）
 
-- [ ] **Step 1: 寫 cron 安裝腳本**
+- [x] **Step 1: 寫 cron 安裝腳本**
 
 `pkg/memory/distiller/scripts/install_cron.sh`:
 
@@ -1633,7 +1633,7 @@ echo "Installed daily 03:00 distiller cron:"
 crontab -l | grep 'distiller run'
 ```
 
-- [ ] **Step 2: 在 run.sh 新增 distiller 區塊**
+- [x] **Step 2: 在 run.sh 新增 distiller 區塊**
 
 在 `run.sh` 末端（CCStatusline 區塊之後）新增：
 
@@ -1648,7 +1648,7 @@ ln -sf "$HOME/.distiller/config.toml" "$(pwd)/config/"
 ( cd "$(pwd)/pkg/memory/distiller" && uv sync )
 ```
 
-- [ ] **Step 3: 驗證安裝流程（伺服器）**
+- [x] **Step 3: 驗證安裝流程（伺服器）**
 
 Run:
 
@@ -1661,7 +1661,7 @@ bash pkg/memory/distiller/scripts/install_cron.sh
 
 Expected: 印出 `config OK`，並列出已安裝的 `0 3 * * * ... distiller run` cron。
 
-- [ ] **Step 4: 端到端 dry-run（填好 config 後）**
+- [x] **Step 4: 端到端 dry-run（填好 config 後）**
 
 Run:
 
@@ -1671,7 +1671,7 @@ cd pkg/memory/distiller && uv run distiller run --no-retain --config ~/.distille
 
 Expected: 印出 `[distiller] sources=... obs=... cand=... long_term=... facts=...`，無例外。
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add run.sh pkg/memory/distiller/scripts/install_cron.sh

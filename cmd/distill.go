@@ -24,12 +24,12 @@ func QualifiesForTruth(c Candidate, corroboration int) bool {
 	return false
 }
 
-func RunCmd() *cobra.Command {
+func DistillCmd() *cobra.Command {
 	var noRetain bool
 
 	cmd := &cobra.Command{
-		Use:   "run",
-		Short: "Run the full memory distillation pipeline",
+		Use:   "distill",
+		Short: "Distill memories from source databases and local markdown notes",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			statePath := expandPath(viper.GetString("state.db_path"))
 			store, err := NewStateStore(statePath)

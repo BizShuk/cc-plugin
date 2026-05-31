@@ -14,7 +14,7 @@ var RootCmd = &cobra.Command{
 }
 
 func init() {
-	config.Load()
+	config.Init()
 
 	RootCmd.AddCommand(RetainCmd())
 	RootCmd.AddCommand(ReadGbrainCmd())
@@ -22,7 +22,7 @@ func init() {
 	RootCmd.AddCommand(WriteAgentMemoryCmd())
 	RootCmd.AddCommand(WriteMempalaceCmd())
 	RootCmd.AddCommand(ExtractCmd())
-	RootCmd.AddCommand(RunCmd())
+	RootCmd.AddCommand(DistillCmd())
 }
 
 func Execute() {
