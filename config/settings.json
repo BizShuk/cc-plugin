@@ -47,6 +47,7 @@
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
   },
+  "model": "sonnet",
   "worktree": {
     "baseRef": "fresh"
   },
