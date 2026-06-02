@@ -60,14 +60,14 @@ mkdir -p "$HOME/.config/litellm"
 if [ ! -f "$HOME/.config/litellm/litellm_config.yaml" ]; then
     cp "$(pwd)/pkg/litellm/litellm_config.sample.yaml" "$HOME/.config/litellm/litellm_config.yaml"
 fi
-ln -sf "$HOME/.config/litellm/litellm_config.yaml" "$(pwd)/config/" 
+ln -sf "$HOME/.config/litellm/litellm_config.yaml" "$(pwd)/tmp/" 
 
 # SKILL: summarize
 mkdir -p "$HOME/.summarize"
 if [ ! -f "$HOME/.summarize/config.json" ]; then
     cp "$(pwd)/pkg/summarize.sh/config.sample.json" "$HOME/.summarize/config.json"
 fi
-ln -sf "$HOME/.summarize" "./config/"
+ln -sf "$HOME/.summarize" "$(pwd)/tmp/"
 
 # CCStatusline
 mkdir -p "$HOME/.config/ccstatusline"
@@ -75,7 +75,7 @@ if [ -f "$HOME/.config/ccstatusline/settings.json" ] && [ ! -L "$HOME/.config/cc
     mv "$HOME/.config/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json.bak"
 fi
 ln -sf "$(pwd)/pkg/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
-ln -sf "$HOME/.config/ccstatusline" "$(pwd)/config/"
+ln -sf "$HOME/.config/ccstatusline" "$(pwd)/tmp/"
 
 # Tokscale
 mkdir -p "$HOME/.config/tokscale"
@@ -83,6 +83,6 @@ if [ -f "$HOME/.config/tokscale/settings.json" ] && [ ! -L "$HOME/.config/toksca
     mv "$HOME/.config/tokscale/settings.json" "$HOME/.config/tokscale/settings.json.bak"
 fi
 ln -sf "$(pwd)/pkg/usage/tokscale/settings.json" "$HOME/.config/tokscale/settings.json"
-ln -sf "$HOME/.config/tokscale" "$(pwd)/config/"
+ln -sf "$HOME/.config/tokscale" "$(pwd)/tmp/"
 
 
