@@ -55,7 +55,7 @@ claude --plugin-dir .
 
 ## Structure
 
-```
+```tree
 .
 ├── .claude-plugin/
 │   └── plugin.json       # Plugin manifest
