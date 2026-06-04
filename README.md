@@ -1,187 +1,128 @@
 # CC-Plugin 全域設定配置庫 (CC-Plugin Global Configuration Repository)
 
-本專案是一個針對 `Claude Code` 的全域設定配置庫，提供集中化的設定管理、客製化插件 (Plugins)、自訂技能 (Skills) 與專屬代理 (Agents) 配置。
+本專案是一個針對 `Claude Code` 與其他 AI 編碼代理的全域設定配置庫，提供集中化的設定管理、客製化插件 (Plugins)、自訂技能 (Skills) 與專屬代理 (Agents) 配置，並內建一套 Go 語言實作的記憶蒸餾管道 (Distiller Pipeline) 用於整合多個 AI 記憶來源。
 
-透過本專案，您可以快速將自訂的最佳實務（例如 Go 程式碼品質審查、Apple 生態系整合等技能）與全域編輯鉤子 (Hooks) 部署至本地的 `Claude Code` 與 `Gemini` 環境中。
+## 業務領域 (Business Domains)
 
-## 專案功能定位 (Project Position & Architecture)
+### 記憶蒸餾管道 (Memory Distillation Pipeline)
 
-- **環境初始化與配置同步**：提供 `run.sh` (macOS/Unix) 與 `run.ps1` (Windows) 初始化腳本，將本庫的設定檔與模版，防禦性地軟連結 (Symbolic Link) 至使用者的家目錄資料夾（例如 `$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes`）中。
-- **全域編輯鉤子 (Hooks)**：內建 `PostToolUse` 鉤子，在編輯或寫入檔案後觸發 `hooks/post-tool.sh`，可針對 Go 專案自動執行 `go fmt` 格式化與 `golangci-lint` 檢查。
-- **自訂技能集 (Custom Skills)**：提供多樣化的實用技能，包括 `apple-notes`、`apple-reminders`、`apple-calendar` 等 Apple 工具整合，以及 `golang-code-quality`、`summarize` 等開發工具。
-- **外部工具配置**：集中管理 LiteLLM (`litellm_config.yaml`)、CCStatusline、Tokscale 等工具的預設配置。
+從多個 AI 記憶來源（`gbrain`、`claude-mem`）自動讀取觀察值、透過本地 LLM（`Ollama`）提取候選記憶，再分流寫入兩個記憶儲存庫（`agentmemory` API、`mempalace` CLI），最後清理過期資料。
 
----
+`領域流程 (Domain Flow):`
 
-## 快速開始與初始化 (Quick Start & Initialization)
+1. `distill` 主命令啟動管道 → 呼叫 `readGbrainLogic()` 與 `readClaudeMemLogic()` 讀取新增觀察值
+2. 呼叫 `OllamaService.Extract()` 透過 LLM 提取候選記憶 → 分類為 `Memory` 與 `Fact`
+3. 寫入 `agentmemory` API（所有記憶）與 `mempalace mine`（通過真實性門檻的事實）
+4. 更新 `StateStore` 中的遊標與蒸餾狀態 → 由 `retain` 清理過期資料與檔案
 
-### 1. 安裝 Claude Code
+`核心實體 (Key Entities):` `Observation`, `Candidate`, `Memory`, `Fact`, `Cursor`, `Seen`, `Distilled`
 
-如果您尚未安裝 `Claude Code`，請執行以下指令：
-
-```bash
-curl -fsSL https://claude.ai/install.sh | bash
-```
-
-### 2. 執行初始化指令稿
-
-根據您的作業系統，執行對應的初始化腳本來建立目錄並完成軟連結：
-
-#### macOS / Linux 環境
-
-```bash
-chmod +x run.sh
-./run.sh
-```
-
-#### Windows 環境 (PowerShell)
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force
-.\run.ps1
-```
-
-### 3. 安裝/載入本插件
-
-在專案根目錄下執行以下指令以安裝本地開發插件：
-
-```bash
-claude --plugin-dir .
-```
+`相關處理器 (Related Handlers):` `DistillCmd()`, `ExtractCmd()`, `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()`, `RetainCmd()`, `ResetCmd()`
 
 ---
 
-### 4. 移除與清理 (Cleanup & Uninstall)
+### 資料匯出 (Data Export)
 
-如果您需要移除軟連結並回復備份的設定檔案，可以使用以下指令稿：
+提供從 `gbrain`、`claude-mem`、`mempalace` 三個儲存來源匯出原始資料的能力，支援增量匯出（基於遊標）與全量匯出。
 
-#### macOS / Linux 環境
+`領域流程 (Domain Flow):`
+
+1. 使用者執行 `cc-plugin export <子命令>` → 選擇匯出 `gbrain`、`claudemem` 或 `mempalace`
+2. 讀取 `StateStore` 遊標（增量模式）或從 epoch 0 開始（`--all` 模式）
+3. `mempalace` 子命令支援類別清單（CSV）與完整 Markdown 結構匯出（`--data`）
+
+`核心實體 (Key Entities):` `DrawerRow`, `Observation`
+
+`相關處理器 (Related Handlers):` `ExportCmd()`, `GbrainCmd()`, `ClaudeMemCmd()`, `MempalaceCmd()`
+
+---
+
+### 環境初始化與配置同步 (Environment Initialization & Config Sync)
+
+透過 `run.sh`（macOS/Unix）將本庫的設定檔與範本軟連結至使用者的家目錄資料夾（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes` 等），同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。
+
+`領域流程 (Domain Flow):`
+
+1. 執行 `run.sh` → 建立家目錄結構
+2. 軟連結全域設定檔（`CLAUDE.global.md`、`settings.json`）→ 至 Claude Code 與 Gemini CLI
+3. 複製或連結外部工具設定（LiteLLM、CCStatusline、Tokscale）
+4. 建立本專案 `tmp/` 下的反向連結以供調試
+
+`核心實體 (Key Entities):` `CLAUDE.global.md`, `settings.json`, `litellm_config.yaml`
+
+`相關處理器 (Related Handlers):` `run.sh`
+
+---
+
+### AI 技能與代理生態 (AI Skills & Agents Ecosystem)
+
+提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent。
+
+`領域流程 (Domain Flow):`
+
+1. 開發者在 `skills/` 下建立 `SKILL.md`（符合 agentskills.io 規範）
+2. 使用 `npx skills add .` 掃描並安裝技能至多個 AI Agent（Antigravity、Claude Code、Gemini CLI 等）
+3. 插件 manifest（`.claude-plugin/plugin.json`）定義 hooks、monitors、MCP/LSP 整合
+
+`核心實體 (Key Entities):` `SKILL.md`, `plugin.json`, `hooks.json`, `monitors.json`
+
+`相關處理器 (Related Handlers):` `feature` agent, `post-tool.sh` hook
+
+---
+
+## 領域關聯 (Domain Relationships)
+
+- `記憶蒸餾管道` 的輸出（`Memory`、`Fact`）寫入外部記憶儲存庫，而 `資料匯出` 則可從同一儲存庫反向匯出資料
+- `環境初始化` 負責將 `AI 技能與代理` 的設定檔同步至各個 AI Agent 的家目錄
+- `資料匯出` 與 `記憶蒸餾管道` 共用 `StateStore`（遊標機制）以支援增量操作
+
+## 使用方式 (Usage)
+
+### 記憶蒸餾
 
 ```bash
-chmod +x uninstall.sh
-./uninstall.sh
+# 執行完整蒸餾管道（讀取 → 提取 → 寫入 → 清理）
+cc-plugin distill
+
+# 僅提取記憶（從 stdin 讀取 JSON 觀察值）
+cc-plugin extract < observations.json
+
+# 清理狀態（重置遊標、已見、已蒸餾紀錄）
+cc-plugin reset
 ```
 
-#### Windows 環境 (PowerShell)
+### 資料匯出
 
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force
-.\uninstall.ps1
+```bash
+# 匯出 mempalace 類別清單
+cc-plugin export mempalace
+
+# 匯出 mempalace 完整 Markdown 結構
+cc-plugin export mempalace --data -o ./export
+
+# 匯出 gbrain 觀察值（增量）
+cc-plugin export gbrain
+
+# 匯出 claude-mem 觀察值（全量）
+cc-plugin export claudemem --all
 ```
 
----
+### 環境初始化
 
-## 常用 MCP 與插件列表 (MCP & Plugin Reference)
+```bash
+# 初始化軟連結與設定同步
+chmod +x run.sh && ./run.sh
 
-### 1. 新增專案專屬 MCP
-
-您可以透過 `claude mcp add` 將以下常用工具新增至專案或全域中：
-
-- **Playwright MCP**：
-
-    ```bash
-    claude mcp add --scope project playwright npx @playwright/mcp@latest
-    ```
-
-- **Chrome DevTools MCP**：
-
-    ```bash
-    claude mcp add --scope project chrome-devtools npx @chrome-devtools/mcp@latest
-    ```
-
-    或者透過插件市場進行安裝：
-
-    ```bash
-    /plugin marketplace add ChromeDevTools/chrome-devtools-mcp
-    /plugin install chrome-devtools-mcp@chrome-devtools-plugins
-    ```
-
-### 2. 官方插件推薦
-
-- **Superpowers 插件**（提供進階工具發現與流程引導）：
-
-    ```bash
-    claude plugin install superpowers@claude-plugins-official
-    ```
-
----
-
-## 自訂技能與代理擴充 (Custom Skills & Agents)
-
-- **技能 (Skills)**：放置於 `skills/` 資料夾下，如 `apple-calendar/SKILL.md`，可藉由 `view_file` 或 Claude Code 的內建載入機制啟用。
-- **代理 (Agents)**：放置於 `agents/` 資料夾下，如 `golang-refactor.md`，定義特定領域的 AI 角色扮演與指令指引。
-
-## command distill
-
-```mermaid
-graph TD
-    %% Sources
-    subgraph sources ["外部資料源 (External Data Sources)"]
-        GB[gbrain/working 目錄]
-        CM[claude-mem SQLite 資料庫]
-    end
-
-    %% Read Commands
-    subgraph read_cmds ["讀取命令 (Read Commands)"]
-        R_GB[read-gbrain]
-        R_CM[read-claudemem]
-    end
-
-    %% Middle Command & LLM
-    subgraph extraction ["提取命令 (Extraction)"]
-        EXT[extract]
-        OL[Ollama Service]
-    end
-
-    %% State Database
-    subgraph state_mgmt ["狀態管理 (State Management)"]
-        DB[("State SQLite DB")]
-        RET[retain]
-    end
-
-    %% Destination Write Commands
-    subgraph write_cmds ["寫入命令 (Write Commands)"]
-        W_AM[write-agentmemory]
-        W_MP[write-mempalace]
-    end
-
-    %% Destinations
-    subgraph memory_stores ["記憶儲存庫 (Memory Stores)"]
-        AM[agentmemory API]
-        MP[mempalace CLI]
-    end
-
-    %% Orchestrator
-    DIST[distill]
-
-    %% Connections - Orchestration Flow
-    DIST -. 呼叫邏輯 .-> R_GB
-    DIST -. 呼叫邏輯 .-> R_CM
-    DIST -. 呼叫邏輯 .-> EXT
-    DIST -. 呼叫邏輯 .-> W_AM
-    DIST -. 呼叫邏輯 .-> W_MP
-    DIST -. 呼叫邏輯 .-> RET
-
-    %% Connections - Data Flow
-    GB --> R_GB
-    CM --> R_CM
-
-    R_GB -- "JSON 觀察值 (Observations)" --> EXT
-    R_CM -- "JSON 觀察值 (Observations)" --> EXT
-
-    EXT -- "調用 LLM" --> OL
-    OL -- "解析出候選對象" --> EXT
-
-    EXT -- "提煉後的記憶 (Memories)" --> W_AM
-    EXT -- "驗證後的事實 (Facts)" --> W_MP
-
-    W_AM --> AM
-    W_MP --> MP
-
-    %% State store interaction
-    R_GB <-->|讀寫游標| DB
-    R_CM <-->|讀寫游標| DB
-    DIST <-->|判斷重複/記錄已提煉| DB
-    RET <-->|查詢並清理過期狀態| DB
-    RET -->|刪除已提煉檔案| GB
+# 安裝技能至 AI Agents
+npx skills add .
 ```
+
+## 改善建議 (Improvement Suggestions)
+
+Based on codebase analysis:
+
+- [ ] `readClaudeMemLogic()` 在 `cmd/read_logic.go` 中重複建立 `StateStore`，應接收外部傳入的 store 以避免連線浪費
+- [ ] `cmd/export/gbrain.go` 與 `cmd/read_logic.go` 中 `readGbrainLogic` / `gbrainRead` 功能幾乎重複，應整合為共用函數
+- [ ] `skills/anti-sabotage-skill.md` 是一個散落的技能草稿，未轉換為正式的 `SKILL.md` 目錄結構
+- [ ] `config/default_settings.json` 為空 (`{}`)，預設設定全部寫死在 `config.go` 中，建議遷移至 JSON 以利外部修改
+- [ ] `cmd/write_agentmemory.go` 中 `resp.Body` 的 `defer resp.Close()` 在迴圈內使用可能造成資源洩漏

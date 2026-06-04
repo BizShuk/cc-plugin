@@ -1,5 +1,5 @@
 ---
-name: summarize
+name: project-explore
 description: >
     Use when onboarding to a new project, after major refactors, or when README.md
     and CLAUDE.md are missing, outdated, or empty. Explores the entire workspace
@@ -13,7 +13,7 @@ effort: high
 context: fork
 ---
 
-# summarize
+# project-explore
 
 Explore and conclude the whole workspace, then write structured documentation
 into `README.md` and `CLAUDE.md` at the repository root.
