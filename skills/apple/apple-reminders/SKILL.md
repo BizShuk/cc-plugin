@@ -1,5 +1,6 @@
 ---
 name: apple-reminders
+pluginName: apple
 description: "Apple 提醒事項命令列管理工具 (Apple Reminders CLI)，透過 remindctl 檢視、新增、編輯、完成或刪除提醒事項與列表。"
 version: 1.0.0
 homepage: https://github.com/steipete/remindctl

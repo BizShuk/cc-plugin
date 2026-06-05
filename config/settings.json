@@ -47,7 +47,7 @@
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "sonnet",
   "worktree": {
     "baseRef": "fresh"
   },
