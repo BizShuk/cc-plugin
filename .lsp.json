@@ -1,9 +1,24 @@
 {
   "go": {
     "command": "gopls",
-    "args": ["serve"],
+    "args": [
+      "serve"
+    ],
     "extensionToLanguage": {
       ".go": "go"
     }
+  },
+  "marksman": {
+    "command": "marksman",
+    "args": [
+      "server"
+    ],
+    "transport": "stdio",
+    "extensionToLanguage": {
+      ".md": "markdown",
+      ".markdown": "markdown"
+    },
+    "startupTimeout": 10000,
+    "maxRestarts": 3
   }
 }

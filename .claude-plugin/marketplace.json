@@ -7,5 +7,37 @@
         "name": "DevTools Team",
         "email": "devtools@example.com"
     },
-    "plugins": []
+    "plugins": [
+        {
+            "name": "apple",
+            "source": "./apple",
+            "skills": [
+                "./skills/apple-calendar",
+                "./skills/apple-email",
+                "./skills/apple-notes",
+                "./skills/apple-reminders"
+            ]
+        },
+        {
+            "name": "general",
+            "source": "./general",
+            "skills": [
+                "./skills/content-summarizer",
+                "./skills/domain",
+                "./skills/firecrawl",
+                "./skills/model-evaluator",
+                "./skills/playwright-cli",
+                "./skills/project-explore",
+                "./skills/superpower",
+                "./skills/anti-sabotage-skill.md"
+            ]
+        },
+        {
+            "name": "tmp",
+            "source": "./tmp",
+            "skills": [
+                "./skills/tmp"
+            ]
+        }
+    ]
 }

@@ -1,0 +1,20 @@
+{
+  "name": "general",
+  "version": "1.0.0",
+  "description": "General purpose skills for Claude Code",
+  "author": {
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "license": "MIT",
+  "keywords": [
+    "general",
+    "content",
+    "web",
+    "browser",
+    "project"
+  ]
+}
