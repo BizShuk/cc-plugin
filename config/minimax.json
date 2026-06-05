@@ -25,6 +25,7 @@
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
         "CLAUDE_CODE_DISABLE_FAST_MODE": "1",
         "_____extra": "_____",
+        "ENABLE_LSP_TOOL": "1",
         "DISABLE_TELEMETRY": "1",
         "DISABLE_AUTOUPDATER": "1"
     },

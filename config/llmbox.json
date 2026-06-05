@@ -28,8 +28,11 @@
         "_____agent": "_____",
         "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-v4-pro[1m]",
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+        "CLAUDE_CODE_DISABLE_FAST_MODE": "1",
         "_____extra": "_____",
-        "DISABLE_TELEMETRY": "1"
+        "ENABLE_LSP_TOOL": "1",
+        "DISABLE_TELEMETRY": "1",
+        "DISABLE_AUTOUPDATER": "1"
     },
     "model": "minimax-m2.7",
     "permissions": {
