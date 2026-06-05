@@ -57,11 +57,12 @@
 ├── plans/                    # 實作計畫與記憶系統設計文件
 │   ├── agent/                # Agent 設計文件
 │   └── memory/               # 記憶系統架構文件
-├── skills/                   # 自訂技能集
-│   ├── apple-calendar/       # Apple Calendar 管理
-│   ├── apple-email/          # Apple Email 管理
-│   ├── apple-notes/          # Apple Notes 管理
-│   ├── apple-reminders/      # Apple Reminders 管理
+├── skills/                   # 自訂技能集（混合佈局：Catalog `skills/<cat>/<name>/` 與 flat `skills/<name>/`）
+│   ├── apple/                # macOS Apple 整合（Catalog 類別）
+│   │   ├── apple-calendar/   # Apple Calendar 管理（accli）
+│   │   ├── apple-email/      # Apple Mail 管理（macemailapp / email CLI）
+│   │   ├── apple-notes/      # Apple Notes 管理（macnotesapp / bizshuk fork）
+│   │   └── apple-reminders/  # Apple Reminders 管理（remindctl）
 │   ├── content-summarizer/   # 內容摘要（URL/文件/影片 → 重點 + 商業價值）
 │   ├── domain/               # 業務領域技能
 │   ├── firecrawl/            # Firecrawl 網頁擷取

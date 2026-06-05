@@ -441,7 +441,6 @@ email show -a iCloud -m INBOX --id 42 --source | head -50
 
 ## See Also
 
-- 專案 README:[`README.md`](../../README.md)
 - CLI 入口:`macemailapp/cli/cli.py`
 - 指令實作目錄:`macemailapp/cli/commands/`
 - Python API 對應實作:`macemailapp/mailapp.py`

@@ -333,4 +333,3 @@ notes config                         # 互動式設定預設 account、editor、
 - 上游：[`RhetTbull/macnotesapp`](https://github.com/RhetTbull/macnotesapp)
 - 此 fork：[`bizshuk/macnotesapp`](https://github.com/bizshuk/macnotesapp)
 - 文件站：[https://RhetTbull.github.io/macnotesapp/](https://RhetTbull.github.io/macnotesapp/)
-- 專案完整 CLI 參考：[README.cli.md](../../README.cli.md)
