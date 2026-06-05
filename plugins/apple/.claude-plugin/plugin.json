@@ -1,0 +1,30 @@
+{
+    "name": "apple",
+    "version": "0.1.0",
+    "description": "macOS Apple 整合技能集 (Skills for Apple Calendar, Reminders, Mail, and Notes on macOS)",
+    "author": {
+        "name": "Shuk Liu",
+        "email": "shuk.liu@gmail.com",
+        "url": "https://github.com/bizshuk"
+    },
+    "homepage": "https://github.com/BizShuk/cc-plugin/tree/master/plugins/apple",
+    "repository": "https://github.com/BizShuk/cc-plugin",
+    "license": "MIT",
+    "keywords": [
+        "apple",
+        "macos",
+        "calendar",
+        "reminders",
+        "mail",
+        "notes",
+        "accli",
+        "remindctl",
+        "macemailapp",
+        "macnotesapp"
+    ],
+    "skills": "./skills",
+    "platforms": [
+        "macos"
+    ],
+    "dependencies": []
+}

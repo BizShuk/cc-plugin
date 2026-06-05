@@ -1,0 +1,24 @@
+{
+    "metadata": {
+        "pluginRoot": "./plugins"
+    },
+    "name": "shuk-cc-plugin",
+    "owner": {
+        "name": "DevTools Team",
+        "email": "devtools@example.com"
+    },
+    "plugins": [
+        {
+            "name": "apple",
+            "source": "./plugins/apple",
+            "description": "Automatic code formatting on save",
+            "version": "2.1.0",
+            "author": {
+                "name": "DevTools Team"
+            },
+            "skills": [
+                "./plugins/apple/skills"
+            ]
+        }
+    ]
+}
