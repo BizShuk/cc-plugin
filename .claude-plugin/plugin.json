@@ -17,9 +17,9 @@
   "agents": [
     "./agents"
   ],
-  "hooks": "./hooks/hooks.json",
-  "mcpServers": ".mcp.json",
-  "lspServers": ".lsp.json",
+  "hooks": "..hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "lspServers": "./.lsp.json",
   "experimental": {
     "monitors": "./monitors/monitors.json"
   },
