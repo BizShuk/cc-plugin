@@ -22,14 +22,23 @@
             "name": "general",
             "source": "./general",
             "skills": [
-                "./skills/content-summarizer",
+                "./skills/anti-sabotage-skill.md",
                 "./skills/domain",
-                "./skills/firecrawl",
                 "./skills/model-evaluator",
-                "./skills/playwright-cli",
                 "./skills/project-explore",
-                "./skills/superpower",
-                "./skills/anti-sabotage-skill.md"
+                "./skills/superpower"
+            ]
+        },
+        {
+            "name": "explore",
+            "source": "./explore",
+            "skills": [
+                "./skills/content-summarizer",
+                "./skills/firecrawl",
+                "./skills/markitdown",
+                "./skills/playwright-cli",
+                "./skills/scrapling",
+                "./skills/summarize.sh"
             ]
         },
         {

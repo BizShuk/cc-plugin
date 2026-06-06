@@ -56,7 +56,7 @@
 
 ### AI 技能與代理生態 (AI Skills & Agents Ecosystem)
 
-提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為 `apple` (macOS 整合)、`general` (通用技能如 MarkItDown, Scrapling) 與 `tmp` (臨時測試) 三個模組化插件目錄，並透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent。
+提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為 `apple` (macOS 整合)、`explore` (抓取與摘要：MarkItDown, Scrapling, Firecrawl, Playwright)、`general` (通用技能：domain, project-explore, model-evaluator) 與 `tmp` (臨時測試) 四個模組化插件目錄，並透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent。
 
 `領域流程 (Domain Flow):`
 
