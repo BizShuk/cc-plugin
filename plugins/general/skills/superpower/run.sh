@@ -2,4 +2,4 @@
 
 
  
-npx skills add obra/superpowers --skill '*' -a claude-code -y
+npx skills add obra/superpowers --skill '*'
