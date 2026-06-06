@@ -1,0 +1,31 @@
+{
+  "name": "explore",
+  "version": "1.0.0",
+  "description": "Fetching, scraping, and content summarization skills",
+  "author": {
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "license": "MIT",
+  "keywords": [
+    "explore",
+    "scraping",
+    "fetching",
+    "summarize",
+    "scrapling",
+    "firecrawl",
+    "playwright",
+    "markitdown"
+  ],
+  "skills": [
+    "./skills/content-summarizer",
+    "./skills/firecrawl",
+    "./skills/markitdown",
+    "./skills/playwright-cli",
+    "./skills/scrapling",
+    "./skills/summarize.sh"
+  ]
+}
