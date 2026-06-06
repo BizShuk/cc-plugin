@@ -1,6 +1,14 @@
 ---
 name: apple-notes
-description: Use when working with Apple Notes (macOS Notes.app) from the command line via the `notes` CLI (macnotesapp / bizshuk fork, ID-first design) — listing, reading, creating, editing, deleting, moving notes, managing folders and attachments, or controlling Notes.app. Triggers on requests like "列出我的筆記", "list my Apple notes", "新增備忘錄", "edit a note", "find note containing X", "delete note by ID", "add attachment", "create folder in Notes".
+description: >
+    Use when working with Apple Notes (macOS Notes.app) from the command line via
+    the `notes` CLI (macnotesapp / bizshuk fork, ID-first design) — listing, reading,
+    creating, editing, deleting, moving notes, managing folders and attachments,
+    or controlling Notes.app. Triggers on: "列出我的筆記", "list my Apple notes",
+    "新增備忘錄", "edit a note", "find note containing X", "delete note by ID",
+    "add attachment", "create folder in Notes".
+version: "1.0.0"
+allowed-tools: Bash
 metadata:
     type: reference
     platforms: [macos]

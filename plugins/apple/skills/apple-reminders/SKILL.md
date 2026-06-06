@@ -1,16 +1,17 @@
 ---
 name: apple-reminders
-description: "Apple 提醒事項命令列管理工具 (Apple Reminders CLI)，透過 remindctl 檢視、新增、編輯、完成或刪除提醒事項與列表。"
-version: 1.0.0
-homepage: https://github.com/steipete/remindctl
-author: Hermes Agent
-license: MIT
-platforms: [macos]
+description: >
+    Use when managing Apple 提醒事項 (Apple Reminders) on macOS via the `remindctl`
+    CLI — listing, creating, editing, completing, or deleting reminders and lists.
+    Triggers on: "提醒我", "add reminder", "show today reminders", "complete reminder",
+    "delete reminder", "list Reminders", or any Reminders.app operation from the terminal.
+version: "1.0.0"
+allowed-tools: Bash
 metadata:
-    hermes:
-        tags: [Reminders, tasks, todo, macOS, Apple]
-prerequisites:
-    commands: [remindctl]
+    type: reference
+    platforms: [macos]
+    prerequisites:
+        commands: [remindctl]
 ---
 
 # Apple 提醒事項 (apple-reminders / remindctl)

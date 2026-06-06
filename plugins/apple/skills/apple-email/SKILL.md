@@ -1,6 +1,14 @@
 ---
 name: apple-email
-description: Use when interacting with Apple Mail.app on macOS via the `email` CLI (macemailapp) — listing accounts and mailboxes, reading and searching messages, marking read/flagged, moving between mailboxes, or composing and sending mail with a dry-run safety gate. Triggers on requests like "列出我的信箱", "show recent unread mail", "mark message 42 as read", "move this mail to Archive", "send mail to ...", or any operation against Apple Mail from the terminal.
+description: >
+    Use when interacting with Apple Mail.app on macOS via the `email` CLI
+    (macemailapp) — listing accounts and mailboxes, reading and searching messages,
+    marking read/flagged, moving between mailboxes, or composing and sending mail
+    with a dry-run safety gate. Triggers on: "列出我的信箱", "show recent unread mail",
+    "mark message 42 as read", "move this mail to Archive", "send mail to ...", or
+    any operation against Apple Mail from the terminal.
+version: "1.0.0"
+allowed-tools: Bash
 metadata:
     type: reference
     platforms: [macos]

@@ -1,6 +1,9 @@
 ---
 name: model-evaluator
-description: MANUAL INVOCATION ONLY. Runs prompt-based diagnostic probes (identity, reasoning, consistency, calibration) on the executing model. Only triggers when the user explicitly types "/model-evaluator".
+description: >
+    MANUAL INVOCATION ONLY. Runs prompt-based diagnostic probes (identity, reasoning,
+    consistency, calibration) on the executing model. Only triggers when the user
+    explicitly types "/model-evaluator".
 user-invocable: true
 disable-model-invocation: true
 allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest

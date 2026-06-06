@@ -16,10 +16,9 @@
     "utility"
   ],
   "skills": [
-    "./skills/anti-sabotage-skill.md",
+    "./skills/anti-sabotage",
     "./skills/domain",
     "./skills/model-evaluator",
-    "./skills/project-explore",
-    "./skills/superpower"
+    "./skills/project-explore"
   ]
 }

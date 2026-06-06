@@ -1,6 +1,18 @@
 ---
 name: apple-calendar
-description: This skill should be used when interacting with Apple Calendar on macOS. Use it for listing calendars, viewing events, creating/updating/deleting calendar events, and checking availability/free-busy times. Triggers on requests like "check my calendar", "schedule a meeting", "what's on my schedule", "am I free tomorrow", or any calendar-related operations.
+description: >
+    Use when interacting with Apple Calendar on macOS via the `accli` CLI. Use it
+    for listing calendars, viewing events, creating/updating/deleting calendar events,
+    and checking availability/free-busy times. Triggers on: "check my calendar",
+    "schedule a meeting", "what's on my schedule", "am I free tomorrow", or any
+    calendar-related operations.
+version: "1.0.0"
+allowed-tools: Bash
+metadata:
+    type: reference
+    platforms: [macos]
+    prerequisites:
+        commands: [accli]
 ---
 
 # Apple Calendar CLI (accli)

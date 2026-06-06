@@ -47,6 +47,11 @@
             "skills": [
                 "./skills/tmp"
             ]
+        },
+        {
+            "name": "superpowers",
+            "source": "github:obra/superpowers",
+            "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques (referenced from upstream GitHub repo, not vendored as a submodule)"
         }
     ]
 }
