@@ -117,33 +117,33 @@ and risk polluting the summary with irrelevant text.
 
 Scan the fetched Markdown and strip blocks that match these patterns:
 
-| Pattern | Examples |
-| ------- | -------- |
-| `Navigation / menus` | Top nav bars, hamburger menus, breadcrumbs, site-wide link lists |
-| `Site header / branding` | Logo blocks, search bars, login/signup links |
-| `Footer` | Copyright notices, site maps, "About Us" / "Contact" / "Terms" link clusters |
-| `Sidebar` | Tag clouds, category lists, "Popular posts", newsletter signup forms |
-| `Social / sharing` | Share buttons, follow links, social embeds |
-| `Ads / promotions` | Banner ads, sponsored content blocks, "You may also like" |
-| `Cookie / consent` | Cookie banners, GDPR consent text |
-| `Comments` | User comment sections, "Leave a reply" |
-| `Repeated boilerplate` | Identical blocks appearing at top and bottom (e.g. site tagline) |
+| Pattern                  | Examples                                                                     |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `Navigation / menus`     | Top nav bars, hamburger menus, breadcrumbs, site-wide link lists             |
+| `Site header / branding` | Logo blocks, search bars, login/signup links                                 |
+| `Footer`                 | Copyright notices, site maps, "About Us" / "Contact" / "Terms" link clusters |
+| `Sidebar`                | Tag clouds, category lists, "Popular posts", newsletter signup forms         |
+| `Social / sharing`       | Share buttons, follow links, social embeds                                   |
+| `Ads / promotions`       | Banner ads, sponsored content blocks, "You may also like"                    |
+| `Cookie / consent`       | Cookie banners, GDPR consent text                                            |
+| `Comments`               | User comment sections, "Leave a reply"                                       |
+| `Repeated boilerplate`   | Identical blocks appearing at top and bottom (e.g. site tagline)             |
 
 ### How to strip
 
 1. `Tool-level filtering (preferred)` — if the fetching tool supports it,
    filter at fetch time:
-   - `scrapling`: use `--ai-targeted` flag (auto-removes ads and non-main
-     content) or `--css-selector "main"` / `--css-selector "article"` to
-     extract only the primary content container.
-   - `markitdown`: does not have built-in filtering — proceed to manual
-     removal.
+    - `scrapling`: use `--ai-targeted` flag (auto-removes ads and non-main
+      content) or `--css-selector "main"` / `--css-selector "article"` to
+      extract only the primary content container.
+    - `markitdown`: does not have built-in filtering — proceed to manual
+      removal.
 2. `Manual removal` — after fetching, scan the Markdown output and delete
    obvious noise sections. Look for:
-   - Dense clusters of short links at the very top or bottom of the document.
-   - Repeated separator patterns (`---`, `***`) flanking non-content blocks.
-   - Sections whose headings are generic site-chrome labels (`Menu`,
-     `Navigation`, `Footer`, `Related Posts`, `Comments`).
+    - Dense clusters of short links at the very top or bottom of the document.
+    - Repeated separator patterns (`---`, `***`) flanking non-content blocks.
+    - Sections whose headings are generic site-chrome labels (`Menu`,
+      `Navigation`, `Footer`, `Related Posts`, `Comments`).
 3. `CSS selector pre-filtering` — when re-fetching is cheap, try fetching
    with a targeted selector (`main`, `article`, `#content`, `.post-body`)
    to grab only the primary content container.
@@ -239,11 +239,15 @@ Lead with the source so the summary is always traceable. Keep formatting light.
 Match length to type: Articles short; Index pages as long as the item count requires.
 
 ```md
-Source: [title](url) ·or· file: filename.pdf
+<title> or file: filename.pdf
+
+source: [title](url) or pdf attachment
 
 TL;DR: ...
 
-Key points
+<br><br>
+
+## Key points
 
 - ...
 
@@ -256,19 +260,21 @@ Key points
 -   - ...
 -   - ...
 
+<br><br>
+
 (if technical / operational) Configuration & fine print
 
 - setting / flag / option — what it does, default, caveat
 
-Business value (ideas / inference, not from the source)
+<br><br>
+
+## Business value (ideas / inference, not from the source)
 
 1. ...
 2. ...
    (1-3 items)
 
 (if any) Dates & action items
-
-- ...
 ```
 
 ## Step 6 — Calendar & Notes follow-ups

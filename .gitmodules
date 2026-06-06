@@ -1,0 +1,6 @@
+[submodule "plugins/explore/skills/scrapling/Scrapling"]
+	path = plugins/explore/skills/scrapling/Scrapling
+	url = https://github.com/D4Vinci/Scrapling.git
+[submodule "plugins/explore/skills/summarize.sh/summarize"]
+	path = plugins/explore/skills/summarize.sh/summarize
+	url = https://github.com/steipete/summarize.git

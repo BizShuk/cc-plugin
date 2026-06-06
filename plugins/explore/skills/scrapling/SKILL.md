@@ -340,7 +340,7 @@ class BlogCrawler(CrawlSpider):
         yield {"title": response.css("h1::text").get()}
 ```
 
-For sitemap-driven crawls, use `SitemapSpider` with the same `rules()` API. It fetches `sitemap_urls`, descends into sitemap indexes, and dispatches each URL through your rules. Put a `robots.txt` URL directly in `sitemap_urls` and the spider extracts each `Sitemap:` directive from it automatically. See `references/spiders/generic-templates.md` for the full reference, including `LinkExtractor`'s allow/deny/restrict_css/canonicalize options.
+For sitemap-driven crawls, use `SitemapSpider` with the same `rules()` API. It fetches `sitemap_urls`, descends into sitemap indexes, and dispatches each URL through your rules. Put a `robots.txt` URL directly in `sitemap_urls` and the spider extracts each `Sitemap:` directive from it automatically. See `Scrapling/agent-skill/Scrapling-Skill/references/spiders/generic-templates.md` for the full reference, including `LinkExtractor`'s allow/deny/restrict_css/canonicalize options.
 
 ### Advanced Parsing & Navigation
 
@@ -417,11 +417,11 @@ async with AsyncDynamicSession(capture_xhr=r"https://api\.example\.com/.*") as s
 
 You already had a good glimpse of what the library can do. Use the references below to dig deeper when needed
 
-- `references/mcp-server.md` - MCP server tools, persistent session management, and capabilities
-- `references/parsing` - Everything you need for parsing HTML
-- `references/fetching` - Everything you need to fetch websites and session persistence
-- `references/spiders` - Everything you need to write spiders, proxy rotation, and advanced features. It follows a Scrapy-like format
-- `references/migrating_from_beautifulsoup.md` - A quick API comparison between scrapling and Beautifulsoup
+- `Scrapling/agent-skill/Scrapling-Skill/references/mcp-server.md` - MCP server tools, persistent session management, and capabilities
+- `Scrapling/agent-skill/Scrapling-Skill/references/parsing` - Everything you need for parsing HTML
+- `Scrapling/agent-skill/Scrapling-Skill/references/fetching` - Everything you need to fetch websites and session persistence
+- `Scrapling/agent-skill/Scrapling-Skill/references/spiders` - Everything you need to write spiders, proxy rotation, and advanced features. It follows a Scrapy-like format
+- `Scrapling/agent-skill/Scrapling-Skill/references/migrating_from_beautifulsoup.md` - A quick API comparison between scrapling and Beautifulsoup
 - `https://github.com/D4Vinci/Scrapling/tree/main/docs` - Full official docs in Markdown for quick access (use only if current references do not look up-to-date).
 
 This skill encapsulates almost all the published documentation in Markdown, so don't check external sources or search online without the user's permission.

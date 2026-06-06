@@ -5,7 +5,6 @@ log/
 .claude/settings.local.json
 .playwright-mcp/*
 models/bge-m3-Q8_0.gguf
-pkg/summarize.sh
 skills/tmp/*
 .gdpa
 tmp

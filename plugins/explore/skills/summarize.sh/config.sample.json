@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "model": {
+    "id": "google/gemini-3-flash",
+    "mode": "auto"
+  },
+  "env": {},
+  "apiKeys": {
+    "openai": "",
+    "groq": "",
+    "assemblyai": "",
+    "anthropic": "",
+    "google": "",
+    "openrouter": "",
+    "xai": "",
+    "zai": "",
+    "apify": "",
+    "firecrawl": "",
+    "fal": ""
+  },
+  "output": {
+    "language": "auto",
+    "length": "xl"
+  },
+  "prompt": "",
+  "ui": {
+    "theme": "aurora"
+  },
+  "cache": {
+    "enabled": true,
+    "maxMb": 512,
+    "ttlDays": 30,
+    "path": "~/.summarize/cache.sqlite",
+    "media": {
+      "enabled": true,
+      "maxMb": 2048,
+      "ttlDays": 7,
+      "path": "~/.summarize/cache/media",
+      "verify": "size"
+    }
+  },
+  "slides": {
+    "enabled": true,
+    "ocr": false,
+    "dir": "",
+    "sceneThreshold": 0.0,
+    "max": 0,
+    "minDuration": 0.0
+  },
+  "logging": {
+    "enabled": false,
+    "level": "info",
+    "format": "json",
+    "file": "~/.summarize/logs/daemon.jsonl",
+    "maxMb": 10,
+    "maxFiles": 3
+  },
+  "models": {},
+  "openai": {
+    "serviceTier": "",
+    "thinking": "",
+    "textVerbosity": "",
+    "baseUrl": "",
+    "useChatCompletions": false,
+    "whisperUsdPerMinute": 0.0
+  },
+  "media": {
+    "videoMode": ""
+  },
+  "cli": {
+    "enabled": [],
+    "autoFallback": {
+      "enabled": false,
+      "onlyWhenNoApiKeys": false,
+      "order": []
+    },
+    "codex": {
+      "model": "",
+      "isolated": false
+    },
+    "claude": {
+      "binary": "",
+      "extraArgs": []
+    },
+    "agent": {
+      "binary": "",
+      "model": ""
+    },
+    "openclaw": {
+      "binary": "",
+      "model": ""
+    },
+    "opencode": {
+      "binary": "",
+      "model": ""
+    },
+    "copilot": {
+      "binary": "",
+      "model": ""
+    }
+  },
+  "nvidia": {
+    "baseUrl": ""
+  },
+  "anthropic": {
+    "baseUrl": ""
+  },
+  "google": {
+    "baseUrl": ""
+  },
+  "xai": {
+    "baseUrl": ""
+  },
+  "zai": {
+    "baseUrl": ""
+  },
+  "ollama": {
+    "baseUrl": ""
+  }
+}
