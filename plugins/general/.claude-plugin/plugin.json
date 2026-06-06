@@ -12,24 +12,14 @@
   "license": "MIT",
   "keywords": [
     "general",
-    "content",
-    "web",
-    "browser",
     "project",
-    "markitdown",
-    "document",
-    "scrapling"
+    "utility"
   ],
   "skills": [
     "./skills/anti-sabotage-skill.md",
-    "./skills/content-summarizer",
     "./skills/domain",
-    "./skills/firecrawl",
-    "./skills/markitdown",
     "./skills/model-evaluator",
-    "./skills/playwright-cli",
     "./skills/project-explore",
-    "./skills/scrapling",
     "./skills/superpower"
   ]
 }

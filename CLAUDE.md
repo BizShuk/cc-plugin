@@ -52,9 +52,11 @@
 ├── plugins/                  # 模組化插件目錄 (Modular Plugins)
 │   ├── apple/                # macOS Apple 整合插件
 │   │   └── skills/           # Apple 相關技能 (apple-calendar, apple-email, apple-notes, apple-reminders)
+│   ├── explore/              # 探索與抓取插件 (explore, scraping, fetching)
+│   │   └── skills/           # 抓取與摘要技能 (content-summarizer, firecrawl, markitdown, playwright-cli, scrapling, summarize.sh)
 │   ├── general/              # 通用功能插件
 │   │   ├── agents/           # 自訂代理 (feature.md)
-│   │   └── skills/           # 通用技能 (content-summarizer, markitdown, scrapling, 等)
+│   │   └── skills/           # 通用技能 (anti-sabotage-skill.md, domain, model-evaluator, project-explore, superpower)
 │   └── tmp/                  # 臨時與測試用插件
 │       ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
 │       ├── monitors/         # Monitors (monitors.json)
@@ -86,7 +88,7 @@
 - `真實性門檻 (Truth Qualification)`：僅經人類確認、第一人稱事實/經驗、或 2+ 來源佐證的候選才寫入 mempalace 作為 Fact
 - `agentskills.io 規範`：技能採用 YAML frontmatter + Markdown 格式，支援跨 Agent 安裝
 - `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源
-- `模組化插件架構 (Modular Plugin Architecture)`：將技能、代理、掛鉤與監控器拆分為 `apple`、`general` 與 `tmp` 獨立插件目錄，便於分類管理與跨插件打包。
+- `模組化插件架構 (Modular Plugin Architecture)`：將技能、代理、掛鉤與監控器拆分為 `apple`、`explore`、`general` 與 `tmp` 獨立插件目錄，便於分類管理與跨插件打包。
 - `整合 Marksman LSP`：引進 `marksman` Language Server 以提供 Markdown 的補全、診斷與檔案鏈結管理。
 
 ## 模組對應 (Module Mapping)
@@ -100,36 +102,8 @@
 | 資料匯出 | `cmd/export/` | `ExportCmd()` |
 | 狀態管理 | `model/store.go`, `model/cursor.go` | `NewStateStore()` |
 | 環境初始化 | `run.sh`, `config/` | `config.Init()` |
-| AI 技能 | `plugins/` (apple, general, tmp) | 各 `SKILL.md` |
-| AI 代理 | `plugins/general/agents/` | `feature.md` |ON 預設（`go:embed`）
-- ORM: `gorm` + `SQLite`（state store, claude-mem 讀取, mempalace 讀取）
-- LLM: `Ollama` HTTP API（預設模型 `qwen3:14b-q4_K_M`）
-- Custom SDK: `github.com/bizshuk/gosdk`（config 模組）
-- Key dependencies: `go-homedir`, `gocsv`, `zap`
-
-## 關鍵決策 (Key Decisions)
-
-- `Cobra + Viper` 組合：CLI 指令定義與設定管理標準模式，支援環境變數覆蓋
-- `GORM + SQLite` 作為狀態儲存：輕量、無需外部資料庫服務、適合單機排程任務
-- `Ollama 本地 LLM`：隱私優先，不將記憶資料傳至雲端 API
-- `指紋 (Fingerprint) 去重`：透過 SHA-256 雜湊（正規化文本 + 排序實體）避免重複記憶
-- `真實性門檻 (Truth Qualification)`：僅經人類確認、第一人稱事實/經驗、或 2+ 來源佐證的候選才寫入 mempalace 作為 Fact
-- `agentskills.io 規範`：技能採用 YAML frontmatter + Markdown 格式，支援跨 Agent 安裝
-- `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源
-
-## 模組對應 (Module Mapping)
-
-| 業務領域 (Domain) | 套件/模組 (Package/Module) | 進入點 (Entry Point) |
-| ----------------- | -------------------------- | -------------------- |
-| 記憶蒸餾管道 | `cmd/`, `model/` | `DistillCmd()` |
-| LLM 提取 | `cmd/ollama.go` | `ExtractCmd()`, `OllamaService.Extract()` |
-| 讀取來源 | `cmd/read_logic.go` | `readGbrainLogic()`, `readClaudeMemLogic()` |
-| 寫入儲存 | `cmd/write_*.go` | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()` |
-| 資料匯出 | `cmd/export/` | `ExportCmd()` |
-| 狀態管理 | `model/store.go`, `model/cursor.go` | `NewStateStore()` |
-| 環境初始化 | `run.sh`, `config/` | `config.Init()` |
-| AI 技能 | `skills/` | 各 `SKILL.md` |
-| AI 代理 | `agents/` | `feature.md` |
+| AI 技能 | `plugins/` (apple, explore, general, tmp) | 各 `SKILL.md` |
+| AI 代理 | `plugins/general/agents/` | `feature.md` |
 
 ## 開發指南 (Development Guide)
 
