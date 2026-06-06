@@ -17,7 +17,8 @@
     "browser",
     "project",
     "markitdown",
-    "document"
+    "document",
+    "scrapling"
   ],
   "skills": [
     "./skills/anti-sabotage-skill.md",
@@ -28,6 +29,7 @@
     "./skills/model-evaluator",
     "./skills/playwright-cli",
     "./skills/project-explore",
+    "./skills/scrapling",
     "./skills/superpower"
   ]
 }
