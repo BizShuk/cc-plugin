@@ -21,10 +21,7 @@
         "{gen/**,kitex_gen/**,thrift_gen/**}": true,
         "{docs,plans,specs,reports}": false,
         "-1": true,
-        "{.specify,.gemini,.agent,.serena,.ttadk,.coco,.vscode}": true,
         "{.specify,.gemini,.agent,.serena,.ttadk,.coco}": true,
-        "{.vscode}": false,
-        ".playwright-mcp": true
     },
     "explorerExclude.backup": {}
 }
