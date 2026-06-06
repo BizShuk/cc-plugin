@@ -14,6 +14,9 @@ description: >
 Turn a web page, document, social post, or video into key points, plus a few
 business-value ideas. Every summary must be traceable to a source (URL or file name).
 
+Primary content extraction tool: `markitdown` (microsoft/markitdown) — a Python
+CLI that converts files and URLs to clean Markdown.
+
 ## When to Use
 
 - User shares a URL → summarize
@@ -23,12 +26,24 @@ business-value ideas. Every summary must be traceable to a source (URL or file n
 
 ## Know your setup (before acting)
 
-Do not assume specific tools exist. Early on, determine which relevant
-`capabilities` are actually available in this environment — web fetching, video
-transcripts, calendar, and notes — and adapt to what is there. Refer to needs by
-capability, not by a fixed tool name, and only invoke a tool once you have
-confirmed you have it. When something needed is missing, see "When a capability
-is missing".
+Check what tools are available before acting. The preferred content extraction
+tool is `markitdown` — verify it exists by running `markitdown --version`.
+
+`markitdown` natively handles:
+
+| Category  | Formats                                                  |
+| --------- | -------------------------------------------------------- |
+| Web       | URLs (fetches and converts HTML to Markdown)             |
+| Documents | PDF, DOCX, PPTX, XLSX, XLS, EPUB                         |
+| Data      | CSV, JSON, XML                                           |
+| Media     | Images (EXIF + OCR), Audio (EXIF + speech transcription) |
+| Video     | YouTube URLs (transcript extraction)                     |
+| Archives  | ZIP (iterates over contents)                             |
+| Other     | Outlook messages (.msg), plain HTML files                |
+
+Also check for calendar and notes capabilities (Apple Calendar, Apple Notes)
+and adapt to what is available. When something is missing, see "When a
+capability is missing".
 
 ## Workflow
 
@@ -46,25 +61,47 @@ Copy this checklist and track progress:
 
 Never claim to have read something that was not actually retrieved.
 
-- `File attached` → read it directly. Most reliable path.
-- `URL given` → retrieve it with your available web-fetching capability, then inspect the result:
-    - Substantial readable body text returned → proceed.
-    - Error, login/paywall page, cookie-consent shell, near-empty body, or
-      obvious JavaScript-only page → `STOP and warn`. Do not guess or fabricate.
+### Fetching with `markitdown`
 
-When retrieval fails, say so plainly and offer options:
+`markitdown` is the preferred tool for both URLs and local files:
 
-1. Paste the text directly into the chat.
+```bash
+# URL → Markdown
+markitdown https://example.com/article
+
+# Local file → Markdown
+markitdown path/to/file.pdf
+
+# Pipe content
+cat file.docx | markitdown
+
+# Save output
+markitdown input.pptx -o output.md
+```
+
+After running `markitdown`, inspect the output:
+
+- Substantial readable text returned → proceed.
+- Error, login/paywall page, cookie-consent shell, near-empty body, or
+  obvious JavaScript-only page → `STOP and warn`. Do not guess or fabricate.
+- For YouTube URLs, `markitdown` extracts the transcript directly — no
+  separate transcript tool needed (requires `youtube-transcription` extra).
+
+### When `markitdown` is not available
+
+Fall back to any available web-fetching capability. If none exist:
+
+1. Ask the user to paste the text directly into the chat.
 2. Provide a clean-reader version of the URL.
-3. Add a fetch / transcript capability (see "When a capability is missing").
-4. For video: provide the transcript or captions.
+3. Suggest installing markitdown: `pip install 'markitdown[all]'`.
+4. For video: request the transcript or captions.
 
 `Known hard cases — warn early, before attempting a full summary:`
 
-- YouTube and most video: page HTML is not the spoken content; a transcript/captions are required.
 - X/Twitter, Instagram, Facebook, private LinkedIn posts: usually blocked or login-gated.
 - Paywalled news and members-only articles.
 - Google Docs / Notion / files requiring sign-in.
+- YouTube without the `youtube-transcription` extra installed.
 
 ## Step 2 — Classify the content shape
 
@@ -74,9 +111,13 @@ When retrieval fails, say so plainly and offer options:
 - `Single article / post` → one self-contained piece (blog post, news story,
   essay, product page, a single social post or thread). Use the `Article strategy`.
 - `Video` → apply the `Article strategy` to the transcript, but add timestamps
-  for key moments.
-- `Document (PDF/DOCX/etc.)` → treat as Article, unless it is clearly a
-  directory of separate items, then treat as Index.
+  for key moments. If using `markitdown` on a YouTube URL, the transcript is
+  extracted automatically.
+- `Document (PDF/DOCX/PPTX/XLSX/etc.)` → run through `markitdown` first to
+  get Markdown, then treat as Article unless it is clearly a directory of
+  separate items (then treat as Index).
+- `Data file (CSV/JSON/XML)` → `markitdown` converts these to readable
+  Markdown tables/structure. Treat as Article.
 
 Quick test: many short titled links pointing elsewhere = Index; continuous body text = Article.
 
@@ -200,21 +241,30 @@ launch, conference session):
 
 ## When a capability is missing
 
-First confirm what you already have (see "Know your setup"). If a needed
-capability is genuinely absent, tell the user and suggest adding a tool,
-connector, or skill of the right `type` — describe the capability, not a
-specific product, since availability differs per setup:
+First confirm what you already have (see "Know your setup"). The most common
+missing piece is `markitdown` itself — suggest:
 
-- `Clean extraction` of cluttered or JavaScript-heavy pages: a web reader /
-  scraper capability.
-- `Video transcripts`: a transcript or caption source for the platform.
+```bash
+pip install 'markitdown[all]'
+```
+
+Or install only the extras you need:
+
+```bash
+pip install 'markitdown[pdf,docx,pptx,xlsx,youtube-transcription]'
+```
+
+For other missing capabilities:
+
+- `JavaScript-heavy / SPA pages`: a browser-automation capability (e.g.
+  Playwright) — `markitdown` fetches static HTML only.
 - `Login-gated or interactive pages`: a browser-automation capability.
 - `Apple Notes / Calendar` (e.g. on a desktop client): a connector or local
   integration that exposes those apps.
-- `Documents`: a document-handling skill (such as the built-in PDF / Word
-  skills).
 - `Search-first cases`: a web-search capability, when the source must be found
   before it can be summarized.
+- `OCR on embedded images in documents`: install `markitdown-ocr` plugin and
+  use `markitdown --use-plugins` with an LLM client configured.
 
 When you do invoke a known tool, use its fully qualified name (`ServerName:tool_name`).
 

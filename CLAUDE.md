@@ -168,3 +168,4 @@ crontab -e
 - Testing: 測試檔案與實作同目錄，使用 `_test.go` 後綴
 - Configuration: 設定路徑統一使用 `~` 前綴，由 `go-homedir` 展開；預設值寫在 `config.go`
 - Skills: 遵循 `agentskills.io` 規範，YAML frontmatter 必須包含 `name` 與 `description`
+- Plugin Manifest: 新增 skill 時需同步更新 `plugins/<name>/.claude-plugin/plugin.json` 的 `skills` 陣列（目錄型 `"./skills/skill-name"`，單檔型 `"./skills/skill-name.md"`），可選加 `keywords`
