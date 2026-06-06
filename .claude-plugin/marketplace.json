@@ -50,8 +50,8 @@
         },
         {
             "name": "superpowers",
-            "source": "github:obra/superpowers",
-            "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques (referenced from upstream GitHub repo, not vendored as a submodule)"
+            "source": "./superpower",
+            "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques (vendored as git submodule from https://github.com/obra/superpowers)"
         }
     ]
 }

@@ -4,3 +4,6 @@
 [submodule "plugins/explore/skills/summarize.sh/summarize"]
 	path = plugins/explore/skills/summarize.sh/summarize
 	url = https://github.com/steipete/summarize.git
+[submodule "plugins/superpower"]
+	path = plugins/superpower
+	url = https://github.com/obra/superpowers.git
