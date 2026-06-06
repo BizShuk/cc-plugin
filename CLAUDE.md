@@ -1,14 +1,10 @@
 # CC-Plugin — 技術脈絡 (Technical Context)
 
 ## 專案結構 (Project Structure)
-
 ```tree
 .
-├── .claude-plugin/
-│   └── plugin.json           # 插件 manifest（定義 skills, agents, hooks, monitors, MCP, LSP）
-├── agents/                   # 自訂 AI 代理 (Custom Agents)
-│   ├── feature.md            # 通用功能實作代理
-│   └── README.md
+├── .lsp.json                 # LSP 伺服器設定（gopls, marksman）
+├── .mcp.json                 # MCP 伺服器設定（Playwright, codegraph）
 ├── cmd/                      # Cobra CLI 子命令
 │   ├── root.go               # CLI root，註冊所有子命令
 │   ├── distill.go            # distill 主命令 — 完整蒸餾管道編排
@@ -19,22 +15,21 @@
 │   ├── retain.go             # 過期資料清理
 │   ├── reset.go              # 狀態重置
 │   ├── state.go              # StateStore 向後相容包裝
-│   └── export/               # export 子命令群
-│       ├── export.go         # 頂層 export 命令
-│       ├── claudemem.go      # export claudemem
-│       ├── gbrain.go         # export gbrain
-│       └── mempalace.go      # export mempalace（CSV / Markdown）
+│   ├── export/               # export 子命令群
+│   │   ├── export.go         # 頂層 export 命令
+│   │   ├── claudemem.go      # export claudemem
+│   │   ├── gbrain.go         # export gbrain
+│   │   └── mempalace.go      # export mempalace（CSV / Markdown）
+│   └── sample/               # Python API 使用範例
+│       └── api/              # MiniMax 服務整合範例
 ├── config/                   # 設定管理
 │   ├── config.go             # Viper 初始化 + 嵌入預設值
-│   ├── default_settings.json # 空白預設（設定寫死在 config.go）
-│   ├── CLAUDE.global.md      # 全域 AI Agent 指令（軟連結至 $HOME）
+│   ├── default_settings.json # 空白預設
+│   ├── CLAUDE.global.md      # 全域 AI Agent 指令
 │   ├── settings.json         # Claude Code 使用者設定
 │   ├── keybindings.json      # 快捷鍵設定
 │   ├── llmbox.json           # LLMBox 設定
 │   └── minimax.json          # MiniMax 設定
-├── hooks/                    # Hooks 配置與腳本
-│   ├── hooks.json            # PostToolUse hook 定義
-│   └── post-tool.sh          # Go 檔案自動 fmt + lint
 ├── model/                    # 核心領域模型
 │   ├── agentmemory.go        # Memory 結構
 │   ├── claudemem.go          # ClaudeMemObservation 結構
@@ -42,47 +37,71 @@
 │   ├── distiller.go          # Candidate 結構
 │   ├── gbrain.go             # Observation 結構
 │   ├── mempalace.go          # Fact 結構
-│   ├── store.go              # StateStore — SQLite 狀態管理
-│   └── model/                # 嵌入式模型資源
-│       └── bge-m3-gguf.md    # BGE-M3 模型文件
-├── monitors/                 # Monitors 配置
-│   └── monitors.json         # error-log / access-log 監控
+│   └── store.go              # StateStore — SQLite 狀態管理
 ├── pkg/                      # 外部工具設定範本與資源
 │   ├── ccstatusline/         # CCStatusline 設定
 │   ├── claude-code-system-prompts/ # Claude Code 系統提示詞
-│   ├── hermes/               # Hermes Agent 設定（MEMORY.md, USER.md）
+│   ├── hermes/               # Hermes Agent 設定
 │   ├── litellm/              # LiteLLM proxy 設定範本
-│   ├── summarize.sh/         # summarize CLI 設定
+│   ├── lsp/                  # Marksman LSP 設定與 README
+│   ├── tools/                # 外部工具依賴設定 (MarkItDown)
 │   └── usage/tokscale/       # Tokscale 設定
 ├── plans/                    # 實作計畫與記憶系統設計文件
 │   ├── agent/                # Agent 設計文件
 │   └── memory/               # 記憶系統架構文件
-├── skills/                   # 自訂技能集（混合佈局：Catalog `skills/<cat>/<name>/` 與 flat `skills/<name>/`）
-│   ├── apple/                # macOS Apple 整合（Catalog 類別）
-│   │   ├── apple-calendar/   # Apple Calendar 管理（accli）
-│   │   ├── apple-email/      # Apple Mail 管理（macemailapp / email CLI）
-│   │   ├── apple-notes/      # Apple Notes 管理（macnotesapp / bizshuk fork）
-│   │   └── apple-reminders/  # Apple Reminders 管理（remindctl）
-│   ├── content-summarizer/   # 內容摘要（URL/文件/影片 → 重點 + 商業價值）
-│   ├── domain/               # 業務領域技能
-│   ├── firecrawl/            # Firecrawl 網頁擷取
-│   ├── model-evaluator/      # 模型評估
-│   ├── playwright-cli/       # Playwright 瀏覽器自動化
-│   ├── project-explore/      # 專案探索與文件化
-│   └── superpower/           # 技能路由（自動發現並載入適用技能）
-├── .lsp.json                 # LSP 伺服器設定（gopls）
-├── .mcp.json                 # MCP 伺服器設定（Playwright, codegraph）
+├── plugins/                  # 模組化插件目錄 (Modular Plugins)
+│   ├── apple/                # macOS Apple 整合插件
+│   │   └── skills/           # Apple 相關技能 (apple-calendar, apple-email, apple-notes, apple-reminders)
+│   ├── general/              # 通用功能插件
+│   │   ├── agents/           # 自訂代理 (feature.md)
+│   │   └── skills/           # 通用技能 (content-summarizer, markitdown, scrapling, 等)
+│   └── tmp/                  # 臨時與測試用插件
+│       ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
+│       ├── monitors/         # Monitors (monitors.json)
+│       └── skills/           # 臨時與草稿技能 (celebrity-quotes, 等)
 ├── main.go                   # Go CLI 入口點
 ├── go.mod                    # Go 模組定義
 ├── run.sh                    # 環境初始化腳本（macOS/Unix）
-└── crontab.txt               # 排程設定（每日 03:00 執行 distill）
+├── crontab.txt               # 排程設定（每日 03:00 執行 distill）
+└── skills.json               # 技能註冊表
 ```
 
 ## 技術棧 (Tech Stack)
 
-- Language: `Go 1.25`
+- Language: `Go 1.25`, `Python 3.10+` (用於輔助技能與範例)
 - CLI Framework: `spf13/cobra`
 - Configuration: `spf13/viper` + 嵌入式 JSON 預設（`go:embed`）
+- ORM: `gorm` + `SQLite`（state store, claude-mem 讀取, mempalace 讀取）
+- LLM: `Ollama` HTTP API（預設模型 `qwen3:14b-q4_K_M`）
+- LSP: `gopls` (Go), `marksman` (Markdown)
+- Custom SDK: `github.com/bizshuk/gosdk`（config 模組）
+- Key dependencies: `go-homedir`, `gocsv`, `zap`
+
+## 關鍵決策 (Key Decisions)
+
+- `Cobra + Viper` 組合：CLI 指令定義與設定管理標準模式，支援環境變數覆蓋
+- `GORM + SQLite` 作為狀態儲存：輕量、無需外部資料庫服務、適合單機排程任務
+- `Ollama 本地 LLM`：隱私優先，不將記憶資料傳至雲端 API
+- `指紋 (Fingerprint) 去重`：透過 SHA-256 雜湊（正規化文本 + 排序實體）避免重複記憶
+- `真實性門檻 (Truth Qualification)`：僅經人類確認、第一人稱事實/經驗、或 2+ 來源佐證的候選才寫入 mempalace 作為 Fact
+- `agentskills.io 規範`：技能採用 YAML frontmatter + Markdown 格式，支援跨 Agent 安裝
+- `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源
+- `模組化插件架構 (Modular Plugin Architecture)`：將技能、代理、掛鉤與監控器拆分為 `apple`、`general` 與 `tmp` 獨立插件目錄，便於分類管理與跨插件打包。
+- `整合 Marksman LSP`：引進 `marksman` Language Server 以提供 Markdown 的補全、診斷與檔案鏈結管理。
+
+## 模組對應 (Module Mapping)
+
+| 業務領域 (Domain) | 套件/模組 (Package/Module) | 進入點 (Entry Point) |
+| ----------------- | -------------------------- | -------------------- |
+| 記憶蒸餾管道 | `cmd/`, `model/` | `DistillCmd()` |
+| LLM 提取 | `cmd/ollama.go` | `ExtractCmd()`, `OllamaService.Extract()` |
+| 讀取來源 | `cmd/read_logic.go` | `readGbrainLogic()`, `readClaudeMemLogic()` |
+| 寫入儲存 | `cmd/write_*.go` | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()` |
+| 資料匯出 | `cmd/export/` | `ExportCmd()` |
+| 狀態管理 | `model/store.go`, `model/cursor.go` | `NewStateStore()` |
+| 環境初始化 | `run.sh`, `config/` | `config.Init()` |
+| AI 技能 | `plugins/` (apple, general, tmp) | 各 `SKILL.md` |
+| AI 代理 | `plugins/general/agents/` | `feature.md` |ON 預設（`go:embed`）
 - ORM: `gorm` + `SQLite`（state store, claude-mem 讀取, mempalace 讀取）
 - LLM: `Ollama` HTTP API（預設模型 `qwen3:14b-q4_K_M`）
 - Custom SDK: `github.com/bizshuk/gosdk`（config 模組）

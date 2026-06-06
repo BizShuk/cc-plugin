@@ -56,15 +56,15 @@
 
 ### AI 技能與代理生態 (AI Skills & Agents Ecosystem)
 
-提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent。
+提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為 `apple` (macOS 整合)、`general` (通用技能如 MarkItDown, Scrapling) 與 `tmp` (臨時測試) 三個模組化插件目錄，並透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent。
 
 `領域流程 (Domain Flow):`
 
-1. 開發者在 `skills/` 下建立 `SKILL.md`（符合 agentskills.io 規範）
-2. 使用 `npx skills add .` 掃描並安裝技能至多個 AI Agent（Antigravity、Claude Code、Gemini CLI 等）
-3. 插件 manifest（`.claude-plugin/plugin.json`）定義 hooks、monitors、MCP/LSP 整合
+1. 開發者在對應的 `plugins/<name>/skills/` 目錄下建立 `SKILL.md`（符合 agentskills.io 規範）
+2. 使用 `npx skills add .` 掃描並註冊技能至 `skills.json`，並安裝至多個 AI Agent（Antigravity、Claude Code、Gemini CLI 等）
+3. 各插件的 manifest（`plugins/<name>/.claude-plugin/plugin.json`）定義專屬的 hooks、monitors、MCP/LSP 整合
 
-`核心實體 (Key Entities):` `SKILL.md`, `plugin.json`, `hooks.json`, `monitors.json`
+`核心實體 (Key Entities):` `SKILL.md`, `plugin.json`, `hooks.json`, `monitors.json`, `skills.json`
 
 `相關處理器 (Related Handlers):` `feature` agent, `post-tool.sh` hook
 
@@ -123,6 +123,6 @@ Based on codebase analysis:
 
 - [ ] `readClaudeMemLogic()` 在 `cmd/read_logic.go` 中重複建立 `StateStore`，應接收外部傳入的 store 以避免連線浪費
 - [ ] `cmd/export/gbrain.go` 與 `cmd/read_logic.go` 中 `readGbrainLogic` / `gbrainRead` 功能幾乎重複，應整合為共用函數
-- [ ] `skills/anti-sabotage-skill.md` 是一個散落的技能草稿，未轉換為正式的 `SKILL.md` 目錄結構
+- [ ] `plugins/general/skills/anti-sabotage-skill.md` 是一個散落的技能草稿，未轉換為正式的 `SKILL.md` 目錄結構
 - [ ] `config/default_settings.json` 為空 (`{}`)，預設設定全部寫死在 `config.go` 中，建議遷移至 JSON 以利外部修改
 - [ ] `cmd/write_agentmemory.go` 中 `resp.Body` 的 `defer resp.Close()` 在迴圈內使用可能造成資源洩漏
