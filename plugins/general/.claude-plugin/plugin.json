@@ -13,11 +13,14 @@
   "keywords": [
     "general",
     "project",
-    "utility"
+    "utility",
+    "mermaid",
+    "diagram"
   ],
   "skills": [
     "./skills/anti-sabotage",
     "./skills/domain",
+    "./skills/mermaid",
     "./skills/model-evaluator",
     "./skills/project-explore"
   ]
