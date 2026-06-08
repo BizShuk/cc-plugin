@@ -1,6 +1,6 @@
 module github.com/bizshuk/cc-plugin
 
-go 1.25.0
+go 1.26.3
 
 require (
 	github.com/anthropics/anthropic-sdk-go v1.48.0

@@ -1,2 +1,0 @@
-# 每晨 03:00 執行 cc-plugin 記憶蒸餾整合管道
-0 3 * * * $HOME/go/bin/cc-plugin >> $HOME/.distiller/logs/run.log 2>&1
