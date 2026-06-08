@@ -49,4 +49,4 @@ if can't be resolved, then stop and error out explicitly.
 
 ### Command Line
 
-- `monitor` sub command is used to overall monitoring for the command
+- `monitor` sub command is used to overall monitoring for the command, with `--merge` is one time fetch and merge into pre defined files
