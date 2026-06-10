@@ -22,12 +22,12 @@
             "name": "general",
             "source": "./general",
             "skills": [
-                "./skills/anti-sabotage-skill.md",
+                "./skills/anti-sabotage",
                 "./skills/domain",
-                "./skills/model-evaluator",
-                "./skills/project-explore",
+                "./skills/markdownlint",
                 "./skills/mermaid",
-                "./skills/superpower"
+                "./skills/model-evaluator",
+                "./skills/project-explore"
             ]
         },
         {

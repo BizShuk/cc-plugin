@@ -25,7 +25,7 @@
         "ANTHROPIC_DEFAULT_HAIKU_MODEL_DESCRIPTION": "MiniMax-M2.5",
         "ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
         "_____agent": "_____",
-        "CLAUDE_CODE_SUBAGENT_MODEL": "MiniMax-M3",
+        "CLAUDE_CODE_SUBAGENT_MODEL": "MiniMax-M2.7",
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
         "CLAUDE_CODE_DISABLE_FAST_MODE": "1",
         "_____extra": "_____",
@@ -67,6 +67,7 @@
     "worktree": {
         "baseRef": "fresh"
     },
+    "enableWorkflows": true,
     "defaultShell": "bash",
     "allowedHttpHookUrls": [
         "http://localhost:*"

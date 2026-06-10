@@ -15,11 +15,13 @@
     "project",
     "utility",
     "mermaid",
-    "diagram"
+    "diagram",
+    "markdownlint"
   ],
   "skills": [
     "./skills/anti-sabotage",
     "./skills/domain",
+    "./skills/markdownlint",
     "./skills/mermaid",
     "./skills/model-evaluator",
     "./skills/project-explore"
