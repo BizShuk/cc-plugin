@@ -46,7 +46,3 @@ Check the error and try to fix it. max retry times is 5.
 if can't be resolved, then stop and error out explicitly.
 
 ## Convention
-
-### Command Line
-
-- `monitor` sub command is used to overall monitoring for the command, with `--merge` is one time fetch and merge into pre defined files
