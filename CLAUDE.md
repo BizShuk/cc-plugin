@@ -1,6 +1,7 @@
 # CC-Plugin — 技術脈絡 (Technical Context)
 
 ## 專案結構 (Project Structure)
+
 ```tree
 .
 ├── .lsp.json                 # LSP 伺服器設定（gopls, marksman）
@@ -93,17 +94,17 @@
 
 ## 模組對應 (Module Mapping)
 
-| 業務領域 (Domain) | 套件/模組 (Package/Module) | 進入點 (Entry Point) |
-| ----------------- | -------------------------- | -------------------- |
-| 記憶蒸餾管道 | `cmd/`, `model/` | `DistillCmd()` |
-| LLM 提取 | `cmd/ollama.go` | `ExtractCmd()`, `OllamaService.Extract()` |
-| 讀取來源 | `cmd/read_logic.go` | `readGbrainLogic()`, `readClaudeMemLogic()` |
-| 寫入儲存 | `cmd/write_*.go` | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()` |
-| 資料匯出 | `cmd/export/` | `ExportCmd()` |
-| 狀態管理 | `model/store.go`, `model/cursor.go` | `NewStateStore()` |
-| 環境初始化 | `run.sh`, `config/` | `config.Init()` |
-| AI 技能 | `plugins/` (apple, explore, general, tmp) | 各 `SKILL.md` |
-| AI 代理 | `plugins/general/agents/` | `feature.md` |
+| 業務領域 (Domain) | 套件/模組 (Package/Module)                | 進入點 (Entry Point)                           |
+| ----------------- | ----------------------------------------- | ---------------------------------------------- |
+| 記憶蒸餾管道      | `cmd/`, `model/`                          | `DistillCmd()`                                 |
+| LLM 提取          | `cmd/ollama.go`                           | `ExtractCmd()`, `OllamaService.Extract()`      |
+| 讀取來源          | `cmd/read_logic.go`                       | `readGbrainLogic()`, `readClaudeMemLogic()`    |
+| 寫入儲存          | `cmd/write_*.go`                          | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()` |
+| 資料匯出          | `cmd/export/`                             | `ExportCmd()`                                  |
+| 狀態管理          | `model/store.go`, `model/cursor.go`       | `NewStateStore()`                              |
+| 環境初始化        | `run.sh`, `config/`                       | `config.Init()`                                |
+| AI 技能           | `plugins/` (apple, explore, general, tmp) | 各 `SKILL.md`                                  |
+| AI 代理           | `plugins/general/agents/`                 | `feature.md`                                   |
 
 ## 開發指南 (Development Guide)
 
@@ -168,11 +169,11 @@ crontab -e
 
 YAML frontmatter 分三個 tier，由簡至詳擇一使用：
 
-| Tier | 必填欄位 | 選填欄位 | 適用情境 |
-|------|---------|---------|---------|
-| `minimal` | `name`, `description` | — | 參考文件、靜態知識 |
-| `standard` | `name`, `description` | `version`, `allowed-tools` | 一般 CLI 工具技能 |
-| `full` | `name`, `description` | `version`, `allowed-tools`, `user-invocable`, `disable-model-invocation`, `effort`, `context`, `metadata` | 需要控制模型呼叫行為的進階技能 |
+| Tier       | 必填欄位              | 選填欄位                                                                                                  | 適用情境                       |
+| ---------- | --------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `minimal`  | `name`, `description` | —                                                                                                         | 參考文件、靜態知識             |
+| `standard` | `name`, `description` | `version`, `allowed-tools`                                                                                | 一般 CLI 工具技能              |
+| `full`     | `name`, `description` | `version`, `allowed-tools`, `user-invocable`, `disable-model-invocation`, `effort`, `context`, `metadata` | 需要控制模型呼叫行為的進階技能 |
 
 額外規範：
 
