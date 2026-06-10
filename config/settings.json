@@ -52,7 +52,7 @@
   "worktree": {
     "baseRef": "fresh"
   },
-  "enableWorkflows": false,
+  "enableWorkflows": true,
   "defaultShell": "bash",
   "allowedHttpHookUrls": [
     "http://localhost:*"
