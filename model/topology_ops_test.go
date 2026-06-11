@@ -172,3 +172,57 @@ func TestRenderBacklinksSection(t *testing.T) {
 		t.Errorf("not idempotent with following section")
 	}
 }
+
+func TestRenderIndex(t *testing.T) {
+	topo, err := LoadTopology(writeFixture(t))
+	if err != nil {
+		t.Fatal(err)
+	}
+	existing := "# Old\n\n## Frontier\n\n- `payment-gateway` — 外部收款 API\n"
+	out := topo.RenderIndex(existing)
+	for _, want := range []string{
+		"| [[service-a]] | payments | service | 2 |",
+		"subgraph core",
+		"payment-gateway", // Frontier 保留
+		"## Unlinked",
+		"- [[billing-db]]",
+		"- 無 (None)",
+	} {
+		if !strings.Contains(out, want) {
+			t.Errorf("index missing %q in:\n%s", want, out)
+		}
+	}
+	if !strings.HasSuffix(strings.TrimRight(out, "\n"), "- [[billing-db]]") {
+		t.Errorf("Unlinked 必須是檔尾章節:\n%s", out)
+	}
+}
+
+func TestUnlinkedIsolatedEntity(t *testing.T) {
+	root := writeFixture(t)
+	isolate := `---
+name: isolate
+type: module
+zone: core
+---
+
+# Isolate
+
+## Alone
+
+kind: concept
+`
+	if err := os.WriteFile(filepath.Join(root, "core", "isolate.md"), []byte(isolate), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	topo, err := LoadTopology(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	noIn, noOut := topo.Unlinked()
+	if len(noIn) != 1 || noIn[0] != "isolate" {
+		t.Errorf("noInbound = %v, want [isolate]", noIn)
+	}
+	if len(noOut) != 2 || noOut[0] != "billing-db" || noOut[1] != "isolate" {
+		t.Errorf("noOutbound = %v, want [billing-db isolate]", noOut)
+	}
+}

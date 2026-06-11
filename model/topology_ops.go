@@ -3,6 +3,7 @@ package model
 import (
 	"fmt"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 )
@@ -108,6 +109,88 @@ func RenderBacklinksSection(content string, lines []string) string {
 		return content[:idx] + section + rest[next+1:]
 	}
 	return content[:idx] + section
+}
+
+// RenderIndex 產生 _index.md 內容；existing 為現有檔案內容（無檔給空字串），
+// 其 ## Frontier 區段原文保留。Unlinked 依 skill 規範必為檔尾章節。
+func (t *Topology) RenderIndex(existing string) string {
+	var b strings.Builder
+	b.WriteString("# Topology Index\n\n## Entity Registry\n\n")
+	b.WriteString("| Entity | Zone | Type | Dimensions |\n| :--- | :--- | :--- | :--- |\n")
+	names := t.Names()
+	sort.SliceStable(names, func(i, j int) bool {
+		zi, zj := t.Entities[names[i]].Zone, t.Entities[names[j]].Zone
+		if zi != zj {
+			return zi < zj
+		}
+		return names[i] < names[j]
+	})
+	for _, n := range names {
+		e := t.Entities[n]
+		fmt.Fprintf(&b, "| [[%s]] | %s | %s | %d |\n", n, e.Zone, e.Type, len(e.Dimensions))
+	}
+	b.WriteString("\n## Overview Diagram\n\n```mermaid\nflowchart LR\n")
+	id := map[string]string{}
+	zones := map[string][]string{}
+	for _, n := range names {
+		id[n] = fmt.Sprintf("n%d", len(id))
+		zones[t.Entities[n].Zone] = append(zones[t.Entities[n].Zone], n)
+	}
+	zoneNames := make([]string, 0, len(zones))
+	for z := range zones {
+		zoneNames = append(zoneNames, z)
+	}
+	sort.Strings(zoneNames)
+	for _, z := range zoneNames {
+		fmt.Fprintf(&b, "    subgraph %s\n", z)
+		for _, n := range zones[z] {
+			fmt.Fprintf(&b, "        %s[%s]\n", id[n], n)
+		}
+		b.WriteString("    end\n")
+	}
+	seen := map[string]bool{}
+	for _, ed := range t.Edges() {
+		if ed.FromEntity == ed.ToEntity {
+			continue
+		}
+		if _, ok := t.Entities[ed.ToEntity]; !ok {
+			continue
+		}
+		key := ed.FromEntity + ">" + ed.ToEntity
+		if seen[key] {
+			continue
+		}
+		seen[key] = true
+		fmt.Fprintf(&b, "    %s --> %s\n", id[ed.FromEntity], id[ed.ToEntity])
+	}
+	b.WriteString("```\n\n")
+	b.WriteString(frontierSection(existing))
+	noIn, noOut := t.Unlinked()
+	b.WriteString("\n## Unlinked\n\n無入邊 (no inbound)：\n\n")
+	b.WriteString(wikiList(noIn))
+	b.WriteString("\n無出邊 (no outbound)：\n\n")
+	b.WriteString(wikiList(noOut))
+	return b.String()
+}
+
+func wikiList(names []string) string {
+	if len(names) == 0 {
+		return "- 無 (None)\n"
+	}
+	var b strings.Builder
+	for _, n := range names {
+		fmt.Fprintf(&b, "- [[%s]]\n", n)
+	}
+	return b.String()
+}
+
+func frontierSection(existing string) string {
+	re := regexp.MustCompile(`(?s)## Frontier\n.*?(\n## |\z)`)
+	if m := re.FindString(existing); m != "" {
+		m = strings.TrimSuffix(m, "\n## ")
+		return strings.TrimRight(m, "\n") + "\n"
+	}
+	return "## Frontier\n\n- 無 (None)\n"
 }
 
 // Unlinked 回傳無入邊與無出邊的 entity 清單。
