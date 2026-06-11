@@ -3,6 +3,8 @@ package model
 import (
 	"fmt"
 	"path/filepath"
+	"sort"
+	"strings"
 )
 
 // Verify 回傳所有機械可查的規則違反；空切片代表通過。
@@ -68,6 +70,44 @@ func hasDim(e *TopoEntity, name string) bool {
 		}
 	}
 	return false
+}
+
+const topoBacklinkMarker = "<!-- auto-generated: do not hand-edit -->"
+
+// BacklinksFor 由全圖正向邊重算 name 的 backlink 行（排序去重）。
+func (t *Topology) BacklinksFor(name string) []string {
+	seen := map[string]bool{}
+	var lines []string
+	for _, ed := range t.Edges() {
+		if ed.ToEntity != name || ed.FromEntity == name {
+			continue
+		}
+		l := fmt.Sprintf("- %s ← [[%s#%s]]", ed.Relation, ed.FromEntity, ed.FromDim)
+		if !seen[l] {
+			seen[l] = true
+			lines = append(lines, l)
+		}
+	}
+	sort.Strings(lines)
+	return lines
+}
+
+// RenderBacklinksSection 以 lines 重寫 content 的 ## Backlinks 區段；
+// 區段不存在時附加到檔尾。
+func RenderBacklinksSection(content string, lines []string) string {
+	section := "## Backlinks\n\n" + topoBacklinkMarker + "\n"
+	if len(lines) > 0 {
+		section += "\n" + strings.Join(lines, "\n") + "\n"
+	}
+	idx := strings.Index(content, "## Backlinks")
+	if idx == -1 {
+		return strings.TrimRight(content, "\n") + "\n\n" + section
+	}
+	rest := content[idx:]
+	if next := strings.Index(rest[1:], "\n## "); next != -1 {
+		return content[:idx] + section + rest[next+2:]
+	}
+	return content[:idx] + section
 }
 
 // Unlinked 回傳無入邊與無出邊的 entity 清單。

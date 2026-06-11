@@ -123,3 +123,42 @@ func TestUnlinked(t *testing.T) {
 		t.Errorf("noOutbound = %v, want [billing-db]", noOut)
 	}
 }
+
+func TestBacklinksFor(t *testing.T) {
+	topo, err := LoadTopology(writeFixture(t))
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := topo.BacklinksFor("billing-db")
+	want := []string{
+		"- reads-from ← [[service-b#Validate]]",
+		"- writes-to ← [[service-a#Checkout]]",
+	}
+	if len(got) != len(want) {
+		t.Fatalf("got %v, want %v", got, want)
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Errorf("line %d = %q, want %q", i, got[i], want[i])
+		}
+	}
+}
+
+func TestRenderBacklinksSection(t *testing.T) {
+	content := "# X\n\n## Dim\n\nkind: method\n\n## Backlinks\n\n" +
+		"<!-- auto-generated: do not hand-edit -->\n\n- stale ← [[old#Gone]]\n"
+	out := RenderBacklinksSection(content, []string{"- calls ← [[a#B]]"})
+	if !strings.Contains(out, "- calls ← [[a#B]]") {
+		t.Errorf("missing new backlink:\n%s", out)
+	}
+	if strings.Contains(out, "stale") {
+		t.Errorf("stale entry survived:\n%s", out)
+	}
+	if !strings.Contains(out, "## Dim") {
+		t.Errorf("earlier section lost:\n%s", out)
+	}
+	// 冪等：重跑結果不變
+	if again := RenderBacklinksSection(out, []string{"- calls ← [[a#B]]"}); again != out {
+		t.Errorf("not idempotent")
+	}
+}
