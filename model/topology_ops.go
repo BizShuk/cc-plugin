@@ -26,7 +26,9 @@ func (t *Topology) Verify() []string {
 			}
 		}
 	}
+	forward := map[string]bool{}
 	for _, ed := range t.Edges() {
+		forward[edgeKey(ed)] = true
 		if !TopoRelations[ed.Relation] {
 			findings = append(findings,
 				fmt.Sprintf("%s#%s: unknown relation %q", ed.FromEntity, ed.FromDim, ed.Relation))
@@ -42,10 +44,6 @@ func (t *Topology) Verify() []string {
 				fmt.Sprintf("%s#%s: missing heading: [[%s#%s]]",
 					ed.FromEntity, ed.FromDim, ed.ToEntity, ed.ToDim))
 		}
-	}
-	forward := map[string]bool{}
-	for _, ed := range t.Edges() {
-		forward[edgeKey(ed)] = true
 	}
 	for _, n := range t.Names() {
 		for _, b := range t.Entities[n].Backlinks {
