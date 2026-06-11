@@ -161,4 +161,14 @@ func TestRenderBacklinksSection(t *testing.T) {
 	if again := RenderBacklinksSection(out, []string{"- calls ← [[a#B]]"}); again != out {
 		t.Errorf("not idempotent")
 	}
+
+	// Backlinks 非最後區段：後續章節與空行分隔必須保留
+	mid := "# X\n\n## Backlinks\n\n" + topoBacklinkMarker + "\n\n- stale ← [[old#Gone]]\n\n## After\n\ntext\n"
+	out2 := RenderBacklinksSection(mid, []string{"- calls ← [[a#B]]"})
+	if !strings.Contains(out2, "- calls ← [[a#B]]\n\n## After") {
+		t.Errorf("blank line before following section lost:\n%s", out2)
+	}
+	if again := RenderBacklinksSection(out2, []string{"- calls ← [[a#B]]"}); again != out2 {
+		t.Errorf("not idempotent with following section")
+	}
 }

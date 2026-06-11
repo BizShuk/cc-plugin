@@ -105,7 +105,7 @@ func RenderBacklinksSection(content string, lines []string) string {
 	}
 	rest := content[idx:]
 	if next := strings.Index(rest[1:], "\n## "); next != -1 {
-		return content[:idx] + section + rest[next+2:]
+		return content[:idx] + section + rest[next+1:]
 	}
 	return content[:idx] + section
 }
