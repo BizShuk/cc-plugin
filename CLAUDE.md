@@ -57,7 +57,7 @@
 │   │   └── skills/           # 抓取與摘要技能 (content-summarizer, firecrawl, markitdown, playwright-cli, scrapling, summarize.sh)
 │   ├── general/              # 通用功能插件
 │   │   ├── agents/           # 自訂代理 (feature.md)
-│   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, domain, markdownlint, mermaid, model-evaluator, project-explore)
+│   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, domain, markdownlint, mermaid, model-evaluator, project-explore, topology-builder)
 │   └── tmp/                  # 臨時與測試用插件
 │       ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
 │       ├── monitors/         # Monitors (monitors.json)

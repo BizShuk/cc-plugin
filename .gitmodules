@@ -7,3 +7,6 @@
 [submodule "plugins/superpower"]
 	path = plugins/superpower
 	url = https://github.com/obra/superpowers.git
+[submodule "pkg/model/system_prompts"]
+	path = pkg/model/system_prompts
+	url = https://github.com/elder-plinius/CL4R1T4S.git

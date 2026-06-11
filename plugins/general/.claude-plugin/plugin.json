@@ -16,7 +16,9 @@
     "utility",
     "mermaid",
     "diagram",
-    "markdownlint"
+    "markdownlint",
+    "knowledge-graph",
+    "topology"
   ],
   "skills": [
     "./skills/anti-sabotage",
@@ -25,6 +27,7 @@
     "./skills/markdownlint",
     "./skills/mermaid",
     "./skills/model-evaluator",
-    "./skills/project-explore"
+    "./skills/project-explore",
+    "./skills/topology-builder"
   ]
 }
