@@ -23,6 +23,7 @@
             "source": "./general",
             "skills": [
                 "./skills/anti-sabotage",
+                "./skills/business-extract",
                 "./skills/domain",
                 "./skills/markdownlint",
                 "./skills/mermaid",
