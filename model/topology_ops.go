@@ -69,3 +69,28 @@ func hasDim(e *TopoEntity, name string) bool {
 	}
 	return false
 }
+
+// Unlinked 回傳無入邊與無出邊的 entity 清單。
+// 只計跨實體正向邊：同檔引用與 Backlinks 區段一律不計。
+func (t *Topology) Unlinked() (noInbound, noOutbound []string) {
+	in, out := map[string]bool{}, map[string]bool{}
+	for _, ed := range t.Edges() {
+		if ed.ToEntity == ed.FromEntity {
+			continue
+		}
+		if _, ok := t.Entities[ed.ToEntity]; !ok {
+			continue
+		}
+		out[ed.FromEntity] = true
+		in[ed.ToEntity] = true
+	}
+	for _, n := range t.Names() {
+		if !in[n] {
+			noInbound = append(noInbound, n)
+		}
+		if !out[n] {
+			noOutbound = append(noOutbound, n)
+		}
+	}
+	return noInbound, noOutbound
+}

@@ -109,3 +109,17 @@ kind: concept
 		}
 	}
 }
+
+func TestUnlinked(t *testing.T) {
+	topo, err := LoadTopology(writeFixture(t))
+	if err != nil {
+		t.Fatal(err)
+	}
+	noIn, noOut := topo.Unlinked()
+	if len(noIn) != 0 {
+		t.Errorf("noInbound = %v, want empty (三個 entity 都有入邊)", noIn)
+	}
+	if len(noOut) != 1 || noOut[0] != "billing-db" {
+		t.Errorf("noOutbound = %v, want [billing-db]", noOut)
+	}
+}
