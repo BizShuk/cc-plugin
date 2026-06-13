@@ -13,3 +13,6 @@
 [submodule "pkg/system-prompts/CL4R1T4S"]
 	path = pkg/system-prompts/CL4R1T4S
 	url = https://github.com/elder-plinius/CL4R1T4S.git
+[submodule "pkg/tooks/career-ops"]
+	path = pkg/tooks/career-ops
+	url = https://github.com/santifer/career-ops
