@@ -58,6 +58,8 @@
 │   ├── general/              # 通用功能插件
 │   │   ├── agents/           # 自訂代理 (feature.md)
 │   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, domain, markdownlint, mermaid, model-evaluator, project-explore, topology-builder)
+│   ├── god/                  # 系統大一統理論插件 (Grand Unified Theory)
+│   │   └── skills/           # 架構哲學技能 (llm-mechanics, domain-exploration, system-roles-laws, fusion-methods, unified-matrix, grand-unified-theory)
 │   └── tmp/                  # 臨時與測試用插件
 │       ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
 │       ├── monitors/         # Monitors (monitors.json)

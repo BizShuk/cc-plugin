@@ -1,0 +1,40 @@
+{
+  "name": "god",
+  "version": "1.0.0",
+  "description": "Grand Unified Theory of Systems — architectural philosophy, LLM mechanics, and system design laws",
+  "author": {
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "philosophy",
+    "system-design",
+    "llm",
+    "unified-theory",
+    "roles",
+    "laws",
+    "fusion",
+    "singularity",
+    "prompting"
+  ],
+  "skills": [
+    "./skills/llm-mechanics",
+    "./skills/domain-exploration",
+    "./skills/system-law-space",
+    "./skills/system-law-time",
+    "./skills/system-law-gravity",
+    "./skills/system-law-causality",
+    "./skills/system-law-chaos",
+    "./skills/system-law-spirit",
+    "./skills/system-law-life",
+    "./skills/system-law-destruction",
+    "./skills/fusion-methods",
+    "./skills/unified-matrix",
+    "./skills/grand-unified-theory"
+  ]
+}
