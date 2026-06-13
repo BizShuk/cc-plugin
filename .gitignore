@@ -14,3 +14,4 @@ plans/walkthrough.md
 cc-plugin
 .antigravitycli
 .playwright-cli
+plugins/explore/skills/summarize.sh/**
