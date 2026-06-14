@@ -90,6 +90,10 @@
       {
         "id": "a024993d-605d-493d-882f-961eafc8b578",
         "type": "total-speed"
+      },
+      {
+        "id": "8fc842ce-9f14-42e0-b129-be034002af8a",
+        "type": "current-working-dir"
       }
     ],
     [
@@ -163,6 +167,7 @@
   "defaultPadding": "",
   "inheritSeparatorColors": false,
   "globalBold": true,
+  "gitCacheTtlSeconds": 5,
   "minimalistMode": true,
   "powerline": {
     "enabled": false,

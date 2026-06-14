@@ -9,7 +9,7 @@ description: >
     diagram", "visualize this architecture", "which chart type should I use",
     "render a graph", "畫一張圖", "用 mermaid".
 version: "1.0.0"
-allowed-tools: Read, Glob
+allowed-tools: Read, Glob, Bash
 disable-model-invocation: false
 user-invocable: true
 effort: low
@@ -31,9 +31,63 @@ keyword, syntax notes and a copy-paste example.
 2. Read the linked `references/NN-*.md` for that type — each file holds the
    keyword, a one-line 說明, and a ready-to-render example.
 3. Copy the fenced `mermaid` block, adapt the labels/data, and emit it.
+4. If the output target is a **terminal** (no markdown preview / browser),
+   pipe the diagram through `mermaid-ascii` to render it as ASCII art
+   (see Terminal rendering below).
 
 All examples are valid against current Mermaid.js; `-beta` keywords are the
 official spelling and must be kept (they are not placeholders).
+
+## Terminal rendering
+
+When the user is working in a terminal context (SSH, CLI output, no browser),
+use [`mermaid-ascii`](https://github.com/AlexanderGrooff/mermaid-ascii) to
+render diagrams as Unicode/ASCII art instead of emitting a raw fenced block.
+
+### Prerequisites
+
+If `mermaid-ascii` is not on `$PATH`, install it first:
+
+```bash
+go install github.com/AlexanderGrooff/mermaid-ascii@master
+```
+
+### Usage
+
+```bash
+# From stdin (pipe the mermaid syntax)
+printf 'graph LR\n  A --> B --> C' | mermaid-ascii -f-
+
+# From a file
+mermaid-ascii -f diagram.mmd
+```
+
+### Key flags
+
+| Flag | Description |
+| ---- | ----------- |
+| `-f-` | Read mermaid from stdin |
+| `-f FILE` | Read from file |
+| `-a` | Pure ASCII (no Unicode box-drawing) |
+| `-x N` | Horizontal spacing between nodes (default 5) |
+| `-y N` | Vertical spacing between nodes (default 5) |
+| `-p N` | Padding between text and border (default 1) |
+
+### Supported diagram types
+
+`mermaid-ascii` supports `graph` / `flowchart` (TD, TB, LR) and
+`sequenceDiagram`. Other Mermaid types (state, class, ER, gantt, etc.) are
+**not supported** — fall back to a fenced mermaid block for those.
+
+### Example output
+
+```
+┌───┐     ┌───┐     ┌───┐
+│   │     │   │     │   │
+│ A ├────►│ B ├────►│ C │
+│   │     │   │     │   │
+└───┘     └───┘     └───┘
+```
 
 ## Selection guide
 
@@ -95,3 +149,8 @@ Full index: [references/README.md](references/README.md).
 - Forgetting `stateDiagram-v2` (v1 is legacy) or `classDiagram` casing.
 - Wrapping the example's `title`/labels in the wrong quote style — keep the
   quoting shown in each reference file.
+- Using `mermaid-ascii` with unsupported diagram types (anything other than
+  `graph`/`flowchart` and `sequenceDiagram`) — it will error out; use a
+  fenced mermaid block instead.
+- Putting the entire mermaid on one semicolon-separated line when piping to
+  `mermaid-ascii` — it requires newline-separated syntax.
