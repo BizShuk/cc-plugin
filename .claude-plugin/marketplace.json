@@ -28,7 +28,8 @@
                 "./skills/markdownlint",
                 "./skills/mermaid",
                 "./skills/model-evaluator",
-                "./skills/project-explore"
+                "./skills/project-explore",
+                "./skills/topology-builder"
             ]
         },
         {
