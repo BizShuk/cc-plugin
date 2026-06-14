@@ -17,7 +17,7 @@ context: fork
 metadata:
     type: reference
     platforms: [macos, linux]
-    homepage: [https://mermaid.](https://mermaid.ai/open-source/intro/)ai/open-source/syntax
+    homepage: https://mermaid.js.org
 ---
 
 # mermaid
