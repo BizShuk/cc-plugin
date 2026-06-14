@@ -46,3 +46,7 @@ Check the error and try to fix it. max retry times is 5.
 if can't be resolved, then stop and error out explicitly.
 
 ## Convention
+
+If there is a convention, then DO NOT create extra option to customize it.
+like gosdk has app log dir, app config dir, app data dir,
+in service layer, do not create config path to data dir .
