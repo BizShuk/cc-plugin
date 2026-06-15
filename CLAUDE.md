@@ -60,6 +60,8 @@
 │   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, domain, markdownlint, mermaid, model-evaluator, project-explore, topology-builder)
 │   ├── god/                  # 系統大一統理論插件 (Grand Unified Theory)
 │   │   └── skills/           # 架構哲學技能 (llm-mechanics, domain-exploration, system-roles-laws, fusion-methods, unified-matrix, grand-unified-theory)
+│   ├── review/               # 審查插件 (Review) — 一致性、業務改善、結構/命名/文件/依賴/測試審查
+│   │   └── skills/           # 審查技能 (consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, test-coverage)
 │   └── tmp/                  # 臨時與測試用插件
 │       ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
 │       ├── monitors/         # Monitors (monitors.json)
@@ -105,7 +107,8 @@
 | 資料匯出          | `cmd/export/`                             | `ExportCmd()`                                  |
 | 狀態管理          | `model/store.go`, `model/cursor.go`       | `NewStateStore()`                              |
 | 環境初始化        | `run.sh`, `config/`                       | `config.Init()`                                |
-| AI 技能           | `plugins/` (apple, explore, general, tmp) | 各 `SKILL.md`                                  |
+| AI 技能           | `plugins/` (apple, explore, general, god, review, tmp) | 各 `SKILL.md`                     |
+| 程式碼審查        | `plugins/review/skills/`                  | 各 `SKILL.md` (consistency 等 7 項)            |
 | AI 代理           | `plugins/general/agents/`                 | `feature.md`                                   |
 
 ## 開發指南 (Development Guide)

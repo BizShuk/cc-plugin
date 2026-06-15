@@ -1,0 +1,33 @@
+{
+  "name": "review",
+  "version": "1.0.0",
+  "description": "Review skills — consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, and test coverage",
+  "author": {
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "license": "MIT",
+  "keywords": [
+    "review",
+    "audit",
+    "consistency",
+    "business-improvement",
+    "folder-structure",
+    "naming",
+    "doc-sync",
+    "dependency-hygiene",
+    "test-coverage"
+  ],
+  "skills": [
+    "./skills/consistency",
+    "./skills/business-improvement",
+    "./skills/folder-structure",
+    "./skills/naming-convention",
+    "./skills/doc-sync",
+    "./skills/dependency-hygiene",
+    "./skills/test-coverage"
+  ]
+}

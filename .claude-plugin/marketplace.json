@@ -45,6 +45,19 @@
             ]
         },
         {
+            "name": "review",
+            "source": "./review",
+            "skills": [
+                "./skills/consistency",
+                "./skills/business-improvement",
+                "./skills/folder-structure",
+                "./skills/naming-convention",
+                "./skills/doc-sync",
+                "./skills/dependency-hygiene",
+                "./skills/test-coverage"
+            ]
+        },
+        {
             "name": "tmp",
             "source": "./tmp",
             "skills": [
