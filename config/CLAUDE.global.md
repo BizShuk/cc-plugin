@@ -50,3 +50,8 @@ if can't be resolved, then stop and error out explicitly.
 If there is a convention, then DO NOT create extra option to customize it.
 like gosdk has app log dir, app config dir, app data dir,
 in service layer, do not create config path to data dir .
+
+## Evoluation
+
+- if somethings encounter errors/issues multiple times, then note how it get resolved in Memory
+-
