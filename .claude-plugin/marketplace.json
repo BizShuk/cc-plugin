@@ -84,6 +84,22 @@
                 "./skills/writing-plans",
                 "./skills/writing-skills"
             ]
+        },
+        {
+            "name": "gosdk",
+            "source": "./gosdk",
+            "description": "Go development toolkit for projects built on github.com/bizshuk/gosdk — bundles 9 Go-focused skills (idiomatic review, MVC layering, performance/network audits, dead-code detection, naming, zap→slog migration, gosdk usage) and the golang-refactor agent.",
+            "skills": [
+                "./skills/golang-code-quality",
+                "./skills/golang-dead-code",
+                "./skills/golang-dev",
+                "./skills/golang-gosdk",
+                "./skills/golang-mvc",
+                "./skills/golang-naming",
+                "./skills/golang-network",
+                "./skills/golang-performance-tuning",
+                "./skills/migrate-zap-to-slog"
+            ]
         }
     ]
 }

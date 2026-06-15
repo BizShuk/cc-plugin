@@ -16,3 +16,6 @@
 [submodule "pkg/tools/career-ops"]
 	path = pkg/tools/career-ops
 	url = https://github.com/santifer/career-ops
+[submodule "plugins/gosdk"]
+	path = plugins/gosdk
+	url = https://github.com/bizshuk/gosdk
