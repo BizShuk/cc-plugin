@@ -35,19 +35,19 @@ ranks what to add by business impact.
 
 ## What to look for
 
-| Gap / smell      | Why it matters                                           |
-| ---------------- | -------------------------------------------------------- |
-| Untested core    | The logic that earns or loses money has no test           |
-| Missing error path | Only the happy path is covered                          |
-| Edge cases       | Empty, nil, boundary, concurrency, timezone untested      |
-| No assertion     | Test runs code but asserts nothing (false coverage)       |
-| Tautology        | Assertion restates the implementation; always passes      |
-| Over-mocking     | Mocks so heavy the test proves only the mock works         |
-| Brittle coupling | Asserts on internals; breaks on safe refactors            |
+| Gap / smell        | Why it matters                                       |
+| ------------------ | ---------------------------------------------------- |
+| Untested core      | The logic that earns or loses money has no test      |
+| Missing error path | Only the happy path is covered                       |
+| Edge cases         | Empty, nil, boundary, concurrency, timezone untested |
+| No assertion       | Test runs code but asserts nothing (false coverage)  |
+| Tautology          | Assertion restates the implementation; always passes |
+| Over-mocking       | Mocks so heavy the test proves only the mock works   |
+| Brittle coupling   | Asserts on internals; breaks on safe refactors       |
 
 ## Output
 
-```
+```text
 Test coverage review (ranked by risk)
 1. [high] cmd/distill.go fingerprint dedup — no test for hash collision path
 2. [high] model/store.go retain() — error path untested

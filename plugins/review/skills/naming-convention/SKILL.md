@@ -35,18 +35,18 @@ the established pattern wins over any external style guide.
 ## Dimensions
 
 | Dimension     | Failure                                                     |
-| ------------- | ---------------------------------------------------------- |
-| Casing        | `userId` next to `user_id`; convention applied unevenly    |
-| Synonym drift | `fetch` / `get` / `load` for the same operation            |
-| Vagueness     | `data`, `handle`, `manager`, `util` that say nothing       |
-| Misleading    | Name implies behavior the code does not have               |
+| ------------- | ----------------------------------------------------------- |
+| Casing        | `userId` next to `user_id`; convention applied unevenly     |
+| Synonym drift | `fetch` / `get` / `load` for the same operation             |
+| Vagueness     | `data`, `handle`, `manager`, `util` that say nothing        |
+| Misleading    | Name implies behavior the code does not have                |
 | Abbreviation  | A shortened form the rest of the codebase spells out        |
 | Symmetry      | `open` without `close`; `start` without `stop`              |
 | Scope fit     | A long name for a tiny scope, or a terse one for a wide API |
 
 ## Output
 
-```
+```text
 Naming review (inferred convention: Go exported = PascalCase, files = snake)
 - cmd/Read_Logic.go     → read_logic.go (file casing drift)
 - func GetUser/FetchUser → pick one verb for the same op (synonym drift)

@@ -46,7 +46,7 @@ it does not run installs or modify lockfiles unless asked.
 
 ## Output
 
-```
+```text
 Dependency hygiene review (go.mod)
 - drop:    github.com/x/unused — no imports found
 - pin:     example.com/lib @ latest → pin to v1.4.2

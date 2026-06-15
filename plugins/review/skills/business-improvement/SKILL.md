@@ -46,7 +46,7 @@ must cite the code or flow it improves and the outcome it moves.
 
 ## Output
 
-```
+```text
 Business improvement — <goal in one line>
 1. [high value / low effort] <change> — improves <outcome>, at <file:line/flow>
 2. [med / med]               <change> — improves <outcome>, at <...>

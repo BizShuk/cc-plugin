@@ -33,15 +33,15 @@ with a concrete target path, not vague preferences.
 
 ## Heuristics
 
-| Smell                | Rule it violates                                         |
-| -------------------- | -------------------------------------------------------- |
-| Mixed concerns       | One folder holds unrelated responsibilities              |
-| Wrong layer          | A file sits in a layer that should not own it             |
-| Inconsistent depth   | Sibling features nested at different depths               |
-| Orphan               | A folder nothing references and no doc explains           |
-| Duplication          | Two folders doing the same job under different names      |
-| Loose file           | A file at a level the convention reserves for subfolders  |
-| Undeclared           | A real folder the structure doc never mentions            |
+| Smell              | Rule it violates                                         |
+| ------------------ | -------------------------------------------------------- |
+| Mixed concerns     | One folder holds unrelated responsibilities              |
+| Wrong layer        | A file sits in a layer that should not own it            |
+| Inconsistent depth | Sibling features nested at different depths              |
+| Orphan             | A folder nothing references and no doc explains          |
+| Duplication        | Two folders doing the same job under different names     |
+| Loose file         | A file at a level the convention reserves for subfolders |
+| Undeclared         | A real folder the structure doc never mentions           |
 
 ## Convention first
 
@@ -51,7 +51,7 @@ path that competes with an established convention.
 
 ## Output
 
-```
+```text
 Folder structure review (declared tree = source of truth)
 - cmd/helpers.go        → cmd/util/ (loose file; siblings are subpackages)
 - pkg/old-litellm/      → remove (orphan; nothing imports it)

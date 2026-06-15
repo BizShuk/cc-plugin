@@ -45,7 +45,7 @@ with the contradicting reality.
 
 ## Output
 
-```
+```text
 Doc sync review
 - CLAUDE.md tree: omits plugins/god/ and plugins/superpower/ (both exist)
 - CLAUDE.md module map: DistillCmd() — confirmed at cmd/distill.go
