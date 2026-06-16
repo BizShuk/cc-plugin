@@ -65,7 +65,7 @@
         },
         {
             "name": "review",
-            "source": "./plugins/review",
+            "source": "./review",
             "description": "Review plugin — coordinates 7 review skills (consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, learning) via the review-coordinator agent.",
             "agents": [
                 "./agents/review-coordinator.md"
