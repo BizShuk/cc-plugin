@@ -1,7 +1,7 @@
 {
   "name": "review",
   "version": "1.0.0",
-  "description": "Review skills — consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, and test coverage",
+  "description": "Review skills — consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, test coverage, and learning",
   "author": {
     "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
@@ -20,6 +20,9 @@
     "doc-sync",
     "dependency-hygiene",
     "test-coverage"
+  ],
+  "agents": [
+    "./agents/review-coordinator"
   ],
   "skills": [
     "./skills/consistency",

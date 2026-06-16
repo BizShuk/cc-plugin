@@ -48,10 +48,8 @@
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
   },
-  "model": "opus",
-  "worktree": {
-    "baseRef": "fresh"
-  },
+  "model": "opus[1m]",
+  "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
   "allowedHttpHookUrls": [
@@ -64,13 +62,26 @@
   "statusLine": {
     "type": "command",
     "command": "npx ccstatusline",
-    "padding": 0,
-    "refreshInterval": 10
+    "padding": 0
   },
   "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "claude-notifications-go@claude-notifications-go": true
   },
-  "extraKnownMarketplaces": {},
+  "extraKnownMarketplaces": {
+    "claude-notifications-go": {
+      "source": {
+        "source": "github",
+        "repo": "777genius/claude-notifications-go"
+      }
+    },
+    "shuk-cc-plugin": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/bytedance/projects/cc-plugin"
+      }
+    }
+  },
   "outputStyle": "Explanatory",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
@@ -88,6 +99,7 @@
   "autoMemoryEnabled": true,
   "autoMemoryDirectory": "~/memory",
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "theme": "dark-ansi",
   "verbose": false,
   "preferredNotifChannel": "auto",

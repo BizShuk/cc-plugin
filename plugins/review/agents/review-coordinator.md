@@ -6,12 +6,13 @@ description: >
     deduplicates and cross-links overlapping findings, and produces a single
     severity-ranked report. Use when asked to "review this", "do a full review",
     "全面審查", "review before merge", or to audit consistency, business value,
-    structure, naming, docs, dependencies, and tests together. Does NOT hunt for
-    logic/security bugs — route those to /code-review and /security-review.
+    structure, naming, docs, dependencies, tests, and onboarding / learning
+    docs together. Does NOT hunt for logic/security bugs — route those to
+    /code-review and /security-review.
 tools: Read, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: default
-skills: consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, test-coverage
+skills: consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, test-coverage, learning-document
 mcpServers:
 hooks:
 memory: local
@@ -71,15 +72,16 @@ If no target was given, resolve in this order:
 Each dimension maps to one skill. Run a dimension only when the target contains
 something it can judge; skip the rest and record why.
 
-| Dimension            | Skill                  | Run when the target includes              |
-| -------------------- | ---------------------- | ----------------------------------------- |
-| Cross-file coherence | `consistency`          | Any change (always applicable)            |
-| Business value       | `business-improvement` | A feature, flow, or user-facing behavior  |
-| Directory layout     | `folder-structure`     | New/moved files or whole-repo scope       |
-| Identifier quality   | `naming-convention`    | Any code, config keys, or endpoints       |
-| Docs vs code         | `doc-sync`             | README/CLAUDE.md, comments, or doc edits  |
-| Dependencies         | `dependency-hygiene`   | go.mod, package.json, requirements, locks |
-| Test quality         | `test-coverage`        | Any code carrying logic                   |
+| Dimension            | Skill                  | Run when the target includes                            |
+| -------------------- | ---------------------- | ------------------------------------------------------- |
+| Cross-file coherence | `consistency`          | Any change (always applicable)                          |
+| Business value       | `business-improvement` | A feature, flow, or user-facing behavior                |
+| Directory layout     | `folder-structure`     | New/moved files or whole-repo scope                     |
+| Identifier quality   | `naming-convention`    | Any code, config keys, or endpoints                     |
+| Docs vs code         | `doc-sync`             | README/CLAUDE.md, comments, or doc edits                |
+| Dependencies         | `dependency-hygiene`   | go.mod, package.json, requirements, locks               |
+| Test quality         | `test-coverage`        | Any code carrying logic                                 |
+| Project onboarding   | `learning-document`    | Step-by-step tutorials, onboarding, or concept docs     |
 
 Routing rules:
 
@@ -176,6 +178,6 @@ genuinely matters; a short ranked report beats an exhaustive one.
 
 - Skills coordinated: `[[consistency]]`, `[[business-improvement]]`,
   `[[folder-structure]]`, `[[naming-convention]]`, `[[doc-sync]]`,
-  `[[dependency-hygiene]]`, `[[test-coverage]]`
+  `[[dependency-hygiene]]`, `[[test-coverage]]`, `[[learning-document]]`
 - Adjacent agents: `feature` (build new work), and the `/code-review` /
   `/security-review` commands for correctness and security.
