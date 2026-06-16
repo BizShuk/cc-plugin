@@ -23,7 +23,7 @@
     "learning-document"
   ],
   "agents": [
-    "./agents/review-coordinator"
+    "./agents/review-coordinator.md"
   ],
   "skills": [
     "./skills/consistency",
