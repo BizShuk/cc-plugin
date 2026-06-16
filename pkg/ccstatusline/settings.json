@@ -92,6 +92,10 @@
         "type": "total-speed"
       },
       {
+        "id": "726be937-f787-42f8-aab9-f215d6146601",
+        "type": "separator"
+      },
+      {
         "id": "8fc842ce-9f14-42e0-b129-be034002af8a",
         "type": "current-working-dir"
       }
@@ -134,30 +138,22 @@
       {
         "id": "73836c62-3145-4b5e-9f92-bf195eb2ad6b",
         "type": "compaction-counter"
-      }
-    ],
-    [
-      {
-        "id": "5b945235-ca2a-4ba6-8d0e-e4afbcc4162c",
-        "type": "git-branch",
-        "rawValue": false,
-        "metadata": {
-          "hideNoGit": "true"
-        }
       },
       {
-        "id": "6991eacd-d02b-49e6-b394-75489754612d",
-        "type": "git-changes",
-        "metadata": {
-          "hideNoGit": "true"
-        }
+        "id": "0c8e6556-121c-4d84-896e-7dcf1c43ab59",
+        "type": "separator"
       },
       {
-        "id": "bf0568d7-a687-4bdb-a62b-8bb030e8d514",
-        "type": "git-worktree",
-        "metadata": {
-          "hideNoGit": "true"
-        }
+        "id": "e0f15dde-4d36-4eb6-b7cf-909c8678a35f",
+        "type": "git-branch"
+      },
+      {
+        "id": "89d403ca-3b95-4186-95c0-9f0a1bfc0e3f",
+        "type": "git-changes"
+      },
+      {
+        "id": "1e6afcef-1e39-4daf-8567-0908a938c1e1",
+        "type": "git-worktree"
       }
     ]
   ],

@@ -30,7 +30,7 @@
         "ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION": "gpt-5.3-codex",
         "ANTHROPIC_CUSTOM_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
         "_____agent": "_____",
-        "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-v4-pro[1m]",
+        "CLAUDE_CODE_SUBAGENT_MODEL": "minimax-m3",
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
         "CLAUDE_CODE_DISABLE_FAST_MODE": "1",
         "_____extra": "_____",
