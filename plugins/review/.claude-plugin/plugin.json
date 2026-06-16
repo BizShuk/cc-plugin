@@ -19,7 +19,8 @@
     "naming",
     "doc-sync",
     "dependency-hygiene",
-    "test-coverage"
+    "test-coverage",
+    "learning-document"
   ],
   "agents": [
     "./agents/review-coordinator"
