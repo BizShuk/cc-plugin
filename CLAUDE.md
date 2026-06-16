@@ -170,6 +170,7 @@ crontab -e
 - Skills: 遵循 `agentskills.io` 規範，YAML frontmatter 必須包含 `name` 與 `description`
 - Plugin Manifest: 新增 skill 時需同步更新 `plugins/<name>/.claude-plugin/plugin.json` 的 `skills` 陣列（目錄型 `"./skills/skill-name"`，單檔型 `"./skills/skill-name.md"`），可選加 `keywords`
 - 鬆散技能檔案禁止：`plugins/<plugin>/skills/` 頂層只放子目錄，所有 `SKILL.md` 必須位於獨立子目錄內
+- 插件說明文件 (Plugin README)：位於 `plugins/` 目錄下的每個插件 (Plugin) 都必須在其資料夾內擁有一個 `README.md` 用以說明該插件的用途與使用方法；更新插件 (Plugin) 時亦必須同步更新對應的 `README.md`
 
 ### SKILL Frontmatter 規範 (Frontmatter Spec)
 

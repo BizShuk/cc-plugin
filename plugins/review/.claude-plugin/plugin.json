@@ -28,6 +28,7 @@
     "./skills/naming-convention",
     "./skills/doc-sync",
     "./skills/dependency-hygiene",
-    "./skills/test-coverage"
+    "./skills/test-coverage",
+    "./skills/learning-document"
   ]
 }
