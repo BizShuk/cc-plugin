@@ -25,6 +25,7 @@
     "./skills/firecrawl",
     "./skills/markitdown",
     "./skills/playwright-cli",
+    "./skills/project-route",
     "./skills/scrapling",
     "./skills/summarize.sh"
   ]
