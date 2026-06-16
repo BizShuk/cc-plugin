@@ -19,6 +19,18 @@
             ]
         },
         {
+            "name": "explore",
+            "source": "./explore",
+            "skills": [
+                "./skills/content-summarizer",
+                "./skills/firecrawl",
+                "./skills/markitdown",
+                "./skills/playwright-cli",
+                "./skills/scrapling",
+                "./skills/summarize.sh"
+            ]
+        },
+        {
             "name": "general",
             "source": "./general",
             "skills": [
@@ -33,21 +45,28 @@
             ]
         },
         {
-            "name": "explore",
-            "source": "./explore",
+            "name": "gosdk",
+            "source": "./gosdk",
+            "description": "Go development toolkit for github.com/bizshuk/gosdk — bundles 9 Go-focused skills (code-quality, dead-code, dev, gosdk, mvc, naming, network, performance-tuning, zap→slog) and the assertive `golang-refactor` agent that auto-invokes eight specialized skills to actively rewrite code breaking SOLID, MVC, naming, error handling, context propagation, or performance conventions (not just report). Triggers: refactor, review, audit, clean up, restructure, improve.",
+            "agents": [
+                "./agents/review-coordinator.md"
+            ],
             "skills": [
-                "./skills/content-summarizer",
-                "./skills/firecrawl",
-                "./skills/markitdown",
-                "./skills/playwright-cli",
-                "./skills/scrapling",
-                "./skills/summarize.sh"
+                "./skills/golang-code-quality",
+                "./skills/golang-dead-code",
+                "./skills/golang-dev",
+                "./skills/golang-gosdk",
+                "./skills/golang-mvc",
+                "./skills/golang-naming",
+                "./skills/golang-network",
+                "./skills/golang-performance-tuning",
+                "./skills/migrate-zap-to-slog"
             ]
         },
         {
             "name": "review",
             "source": "./plugins/review",
-            "description": "Review plugin — coordinates 8 review skills (consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, test coverage, learning) via the review-coordinator agent.",
+            "description": "Review plugin — coordinates 7 review skills (consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, learning) via the review-coordinator agent.",
             "agents": [
                 "./agents/review-coordinator.md"
             ],
@@ -58,7 +77,6 @@
                 "./skills/naming-convention",
                 "./skills/doc-sync",
                 "./skills/dependency-hygiene",
-                "./skills/test-coverage",
                 "./skills/learning-document"
             ]
         },
@@ -81,22 +99,6 @@
                 "./skills/verification-before-completion",
                 "./skills/writing-plans",
                 "./skills/writing-skills"
-            ]
-        },
-        {
-            "name": "gosdk",
-            "source": "./gosdk",
-            "description": "Go development toolkit for projects built on github.com/bizshuk/gosdk — bundles 9 Go-focused skills (idiomatic review, MVC layering, performance/network audits, dead-code detection, naming, zap→slog migration, gosdk usage) and the golang-refactor agent.",
-            "skills": [
-                "./skills/golang-code-quality",
-                "./skills/golang-dead-code",
-                "./skills/golang-dev",
-                "./skills/golang-gosdk",
-                "./skills/golang-mvc",
-                "./skills/golang-naming",
-                "./skills/golang-network",
-                "./skills/golang-performance-tuning",
-                "./skills/migrate-zap-to-slog"
             ]
         }
     ]

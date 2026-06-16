@@ -8,7 +8,7 @@
 
 ## 核心架構 (Core Architecture)
 
-本插件由一個核心協調代理與八個專屬技能組成：
+本插件由一個核心協調代理與七個專屬技能組成：
 
 ```mermaid
 graph TD
@@ -19,15 +19,13 @@ graph TD
     Coordinator --> S4[命名規範 naming-convention]
     Coordinator --> S5[文件同步 doc-sync]
     Coordinator --> S6[依賴衛生 dependency-hygiene]
-    Coordinator --> S7[測試覆蓋 test-coverage]
-    Coordinator --> S8[學習文件 learning-document]
+    Coordinator --> S7[學習文件 learning-document]
     S1 --> Report[彙整報告 Consolidated Report]
     S2 --> Report
     S3 --> Report
     S4 --> Report
     S5 --> Report
     S6 --> Report
-    S7 --> Report
 ```
 
 ---
@@ -42,7 +40,6 @@ graph TD
 | 識別子命名品質 (Identifier naming quality) | `naming-convention` | 任何程式碼、設定鍵值或 API 端點變更 |
 | 文件與程式碼同步 (Docs vs code sync) | `doc-sync` | 涉及 README/CLAUDE.md、註解或文件編輯 |
 | 外部依賴管理 (Dependency management) | `dependency-hygiene` | 涉及依賴清單檔案（如 go.mod, package.json 等） |
-| 測試覆蓋與品質 (Test coverage and quality) | `test-coverage` | 任何帶有邏輯的程式碼變更 |
 | 專案引導與學習 (Project onboarding) | `learning-document` | 請求建立步驟式教學、專案引導或概念學習文件時 |
 
 ---
@@ -63,7 +60,6 @@ graph TD
     ├── folder-structure/     # 目錄結構審查技能 (Folder Structure Skill)
     ├── learning-document/    # 學習文件建立技能 (Learning Document Skill)
     ├── naming-convention/    # 命名規範審查技能 (Naming Convention Skill)
-    └── test-coverage/        # 測試覆蓋率審查技能 (Test Coverage Skill)
 ```
 
 ---

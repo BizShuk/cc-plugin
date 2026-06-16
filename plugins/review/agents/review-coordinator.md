@@ -12,7 +12,7 @@ description: >
 tools: Read, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: default
-skills: consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, test-coverage, learning-document
+skills: consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, learning-document
 mcpServers:
 hooks:
 memory: local
@@ -80,7 +80,6 @@ something it can judge; skip the rest and record why.
 | Identifier quality   | `naming-convention`    | Any code, config keys, or endpoints                     |
 | Docs vs code         | `doc-sync`             | README/CLAUDE.md, comments, or doc edits                |
 | Dependencies         | `dependency-hygiene`   | go.mod, package.json, requirements, locks               |
-| Test quality         | `test-coverage`        | Any code carrying logic                                 |
 | Project onboarding   | `learning-document`    | Step-by-step tutorials, onboarding, or concept docs     |
 
 Routing rules:
@@ -146,11 +145,11 @@ Output format:
 
 ```text
 Review — <scope in one line>
-Ran: consistency, naming-convention, test-coverage · Skipped: dependency-hygiene (no manifests touched)
+Ran: consistency, naming-convention, folder-structure · Skipped: dependency-hygiene (no manifests touched)
 
 [blocker] consistency  a.go:42 ↔ b.go:88 — rule X enforced inversely
           ↳ also naming-convention: same concept named "tenant" vs "account"
-[major]   test-coverage cmd/distill.go:— fingerprint dedup path untested
+[major]   folder-structure  cmd/distill.go:— loose file at cmd/ root
 [minor]   folder-structure cmd/helpers.go → cmd/util/ (loose file)
 [ok]      doc-sync — CLAUDE.md tree matches disk
 
@@ -178,6 +177,6 @@ genuinely matters; a short ranked report beats an exhaustive one.
 
 - Skills coordinated: `[[consistency]]`, `[[business-improvement]]`,
   `[[folder-structure]]`, `[[naming-convention]]`, `[[doc-sync]]`,
-  `[[dependency-hygiene]]`, `[[test-coverage]]`, `[[learning-document]]`
+  `[[dependency-hygiene]]`, `[[learning-document]]`
 - Adjacent agents: `feature` (build new work), and the `/code-review` /
   `/security-review` commands for correctness and security.
