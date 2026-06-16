@@ -66,7 +66,7 @@
             "Write(**/.git)"
         ],
         "ask": [],
-        "defaultMode": "acceptEdits",
+        "defaultMode": "bypassPermissions",
         "additionalDirectories": []
     },
     "worktree": {
