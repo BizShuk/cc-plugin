@@ -25,12 +25,12 @@ docs so downstream work obeys the project's conventions. This skill decides
 ## Config (single source of truth)
 
 - Index: `~/projects/.project_index/projects.json` — one combined JSON.
-  - Top-level: `generated_at` (ISO timestamp), `stale_after_days` (default 3),
-    `projects_root`, `projects`.
-  - Per project: `path`, `tags`, `purpose`, `stack`, `subprojects`,
-    `has_readme`, `has_claude`.
-  - Per subproject: `name`, `purpose` (extracted from its own `README.md`),
-    `has_readme`, `has_claude`.
+    - Top-level: `generated_at` (ISO timestamp), `stale_after_days` (default 3),
+      `projects_root`, `projects`.
+    - Per project: `path`, `tags`, `purpose`, `stack`, `subprojects`,
+      `has_readme`, `has_claude`.
+    - Per subproject: `name`, `purpose` (extracted from its own `README.md`),
+      `has_readme`, `has_claude`.
 - Router CLI: `~/projects/.project_index/router.py` — reads the same index.
 - `tags` is the routing signal (bilingual, lowercase). `tags` is hand-curated and
   is preserved across `router.py rebuild`; the auto-scan never overwrites it.
@@ -52,43 +52,41 @@ stale index as-is).
 
 2. Resolve the project. Prefer the CLI:
 
-   ```bash
-   python3 ~/projects/.project_index/router.py search "<keyword>"
-   ```
+    ```bash
+    python3 ~/projects/.project_index/router.py search "<keyword>"
+    ```
 
-   The CLI scores `name` (10) > `tags` (8) > `purpose` (5) > `stack` (3) >
-   `subprojects` (2) > README/CLAUDE full-text (1). The top hit is the candidate.
-   For a precise candidate, confirm its path:
+    The CLI scores `name` (10) > `tags` (8) > `purpose` (5) > `stack` (3) >
+    `subprojects` (2) > README/CLAUDE full-text (1). The top hit is the candidate.
+    For a precise candidate, confirm its path:
 
-   ```bash
-   python3 ~/projects/.project_index/router.py cd <project-name>
-   ```
+    ```bash
+    python3 ~/projects/.project_index/router.py cd <project-name>
+    ```
 
 3. Decide by confidence:
-   - `Single clear top hit` → that is the destination.
-   - `Several close scores / ambiguous` → read the candidates' `purpose` from the
-     index (or `router.py show <name>`) and pick; if still tied, ask the user.
-   - `No hit` → do NOT guess. Report "unmatched" and ask, or hold the item.
+    - `Single clear top hit` → that is the destination. Print the project's absolute path clearly to the user.
+    - `Several close scores / ambiguous` → read the candidates' `purpose` from the
+      index (or `router.py show <name>`) and pick; if still tied, ask the user. Once chosen, print the project's absolute path clearly to the user.
+    - `No hit` → do NOT guess. Report "unmatched" and ask, or hold the item.
 
 4. Load the chosen project's context BEFORE acting:
 
-   ```bash
-   cat ~/projects/<name>/README.md ~/projects/<name>/CLAUDE.md 2>/dev/null
-   ```
+    ```bash
+    cat ~/projects/<name>/README.md ~/projects/<name>/CLAUDE.md 2>/dev/null
+    ```
 
-   Honour that project's CLAUDE.md (naming, folder layout, hard rules). For
-   `collections`, that means the `receipts/invoices/agreements` layout and the
-   `<source>_<date>_<target>_<amount>.<ext>` naming convention.
+    Honour that project's CLAUDE.md (naming, folder layout, hard rules). For
+    `collections`, that means the `receipts/invoices/agreements` layout and the
+    `<source>_<date>_<target>_<amount>.<ext>` naming convention.
 
-5. Propose the destination path and the action. `Confirm before moving,
-   renaming, or creating any file` — these are real records. This skill returns a
-   routing decision; the caller performs the move only after confirmation.
+5. Propose the destination path and the action. When the target project is found or selected, you must explicitly print its absolute path to the user so they know where it is located. `Confirm before moving, renaming, or creating any file` — these are real records. This skill returns a routing decision; the caller performs the move only after confirmation.
 
 ## Maintaining the index
 
 - **You rarely need to rebuild manually** — the router does it for you every
   time the index is >3 days old. Run `python3 ~/projects/.project_index/router.py
-  rebuild` only if you want to force a refresh right now (e.g. you just added
+rebuild` only if you want to force a refresh right now (e.g. you just added
   a project, edited tags, or want to bypass the 3-day window).
 - A project with no tags is invisible to tag-based routing — add tags so it
   can receive content.
@@ -96,6 +94,7 @@ stale index as-is).
 ## Hard rules
 
 - Resolve to a project FIRST; never file by guesswork.
+- Always print the matched project's absolute path clearly to the user once it is found.
 - Never move/rename/delete without explicit confirmation.
 - The index is the routing signal; per-project README.md + CLAUDE.md are the
   authority on how to file inside the chosen project.
