@@ -58,6 +58,11 @@
 │   ├── general/              # 通用功能插件
 │   │   ├── agents/           # 自訂代理 (feature.md)
 │   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, domain, markdownlint, mermaid, model-evaluator, project-explore, topology-builder)
+│   ├── media/                # 影片生成與劇本創作插件
+│   │   ├── skills/           # 影片生成技能 (character-setting, prompt-to-story-script, scene-to-video-prompt)
+│   │   └── voice/            # VoxCPM 聲音樣板與語音克隆指南設定
+│   ├── team/                 # AI 代理團隊規劃與設計插件
+│   │   └── skills/           # 團隊相關技能 (orchestration-config, role-generator, team-design)
 │   ├── god/                  # 系統大一統理論插件 (Grand Unified Theory)
 │   │   └── skills/           # 架構哲學技能 (llm-mechanics, domain-exploration, system-roles-laws, fusion-methods, unified-matrix, grand-unified-theory)
 │   ├── review/               # 審查插件 (Review) — 一致性、業務改善、結構/命名/文件/依賴/測試/學習審查
@@ -113,7 +118,7 @@
 | 資料匯出          | `cmd/export/`                             | `ExportCmd()`                                  |
 | 狀態管理          | `model/store.go`, `model/cursor.go`       | `NewStateStore()`                              |
 | 環境初始化        | `run.sh`, `config/`                       | `config.Init()`                                |
-| AI 技能           | `plugins/` (apple, explore, general, god, review, tmp, superpowers, gosdk) | 各 `SKILL.md`                     |
+| AI 技能           | `plugins/` (apple, explore, general, god, review, tmp, superpowers, gosdk, media, team) | 各 `SKILL.md`                     |
 | 程式碼審查        | `plugins/review/skills/`                  | 各 `SKILL.md` (consistency 等 7 項)            |
 | AI 代理           | `plugins/general/agents/`, `plugins/review/agents/` | `feature.md`, `review-coordinator.md` |
 

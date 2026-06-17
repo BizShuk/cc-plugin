@@ -1,0 +1,9 @@
+{
+  "id": "06_children_story",
+  "name": "童趣故事 (Children's Story)",
+  "use_case": "兒童故事、繪本朗讀、教育內容",
+  "description": "活潑生動的聲音,情緒豐富,語調誇張可愛,適合說故事給小孩聽",
+  "cfg_value": 2.2,
+  "inference_timesteps": 12,
+  "comparison": "幼兒園老師說故事,聲音會「演」起來。"
+}

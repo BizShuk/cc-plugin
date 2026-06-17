@@ -1,0 +1,27 @@
+{
+  "name": "team",
+  "version": "1.0.0",
+  "description": "AI Agent Team Planning, Design, Prompt Generation, and Orchestration Toolkit",
+  "author": {
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "license": "MIT",
+  "keywords": [
+    "team",
+    "orchestration",
+    "system-prompt",
+    "agent-team",
+    "multi-agent",
+    "role",
+    "role-generator"
+  ],
+  "skills": [
+    "./skills/team-design",
+    "./skills/role-generator",
+    "./skills/orchestration-config"
+  ]
+}

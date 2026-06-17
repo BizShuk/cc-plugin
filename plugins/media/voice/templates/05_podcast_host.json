@@ -1,0 +1,9 @@
+{
+  "id": "05_podcast_host",
+  "name": "Podcast 主持人 (Conversational Host)",
+  "use_case": "對談節目、知識型 Podcast、口語內容",
+  "description": "三十多歲、自然口語的主持人聲音,親和有對話感,不死板",
+  "cfg_value": 1.8,
+  "inference_timesteps": 10,
+  "comparison": "朋友坐你對面聊天,不像在唸稿。"
+}

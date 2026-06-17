@@ -1,0 +1,9 @@
+{
+  "id": "09_corporate",
+  "name": "企業簡報 (Corporate Presenter)",
+  "use_case": "企業簡報、教學影片、產品介紹",
+  "description": "中性專業的成年聲音,清晰自信,沉穩不急躁,條理分明",
+  "cfg_value": 2.0,
+  "inference_timesteps": 12,
+  "comparison": "大型發表會上台報告的主管,穩、清楚、有信服力。"
+}

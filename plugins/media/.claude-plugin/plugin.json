@@ -1,0 +1,28 @@
+{
+  "name": "media",
+  "version": "1.0.0",
+  "description": "Media generation and script writing toolkit for video models",
+  "author": {
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "license": "MIT",
+  "keywords": [
+    "media",
+    "video",
+    "script",
+    "storyboard",
+    "kling",
+    "veo",
+    "sora",
+    "character"
+  ],
+  "skills": [
+    "./skills/prompt-to-story-script",
+    "./skills/scene-to-video-prompt",
+    "./skills/character-setting"
+  ]
+}

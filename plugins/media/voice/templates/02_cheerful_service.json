@@ -1,0 +1,9 @@
+{
+  "id": "02_cheerful_service",
+  "name": "活潑客服女聲 (Cheerful Service)",
+  "use_case": "客服、App 語音、教學引導",
+  "description": "一位年輕女性,明亮親切的聲線,語速適中,語氣帶著微笑",
+  "cfg_value": 2.0,
+  "inference_timesteps": 10,
+  "comparison": "接起電話第一句就讓你心情變好的客服。"
+}
