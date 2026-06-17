@@ -10,184 +10,117 @@ description: >
 
 # MarkItDown
 
-Python CLI and library (by Microsoft) that converts files and URLs to clean
-Markdown. Optimized for LLM pipelines — preserves headings, lists, tables,
-and links while staying token-efficient.
+Python CLI and library (by Microsoft) that converts files and URLs to clean,
+token-efficient Markdown for LLM pipelines — preserves headings, lists, tables,
+and links.
 
-Source: https://github.com/microsoft/markitdown
+Source: [GitHub - microsoft/markitdown: Python tool for converting files and office documents to Markdown](https://github.com/microsoft/markitdown)
 
 ## What It Works For
 
 | Category  | Formats                                                  |
 | --------- | -------------------------------------------------------- |
-| Web       | URLs (fetches HTML → Markdown)                           |
-| Documents | PDF, DOCX, PPTX, XLSX, XLS, EPUB                        |
+| Web       | URLs (fetches static HTML → Markdown)                    |
+| Documents | PDF, DOCX, PPTX, XLSX, XLS, EPUB                          |
 | Data      | CSV, JSON, XML                                           |
-| Media     | Images (EXIF + OCR), Audio (EXIF + speech transcription) |
+| Media     | Images (EXIF + OCR), Audio (EXIF + transcription)        |
 | Video     | YouTube URLs (transcript extraction)                     |
-| Archives  | ZIP (iterates over contents)                             |
-| Other     | Outlook `.msg`, plain HTML files                         |
+| Archives  | ZIP (iterates contents)                                  |
+| Other     | Outlook `.msg`, plain HTML                               |
 
-Not all formats are enabled by default — some require optional extras
-(see Installation).
+Some formats need optional extras (see Installation).
 
 ## Installation
 
 Requires `Python 3.10+`.
 
-### Check if installed
-
 ```bash
-markitdown --version
+markitdown --version                            # check if installed
+pip install 'markitdown[all]'                   # all formats
+pip install 'markitdown[pdf,docx,pptx,xlsx]'    # selective extras
 ```
 
-### Install (all formats)
+Extras: `[all]`, `[pdf]`, `[docx]`, `[pptx]`, `[xlsx]`, `[xls]`, `[outlook]`,
+`[audio-transcription]`, `[youtube-transcription]`, `[az-doc-intel]`. A missing
+format usually means its extra isn't installed.
+
+Plugins (disabled by default) extend support — list with `markitdown
+--list-plugins`, enable per run with `--use-plugins`. Notable:
+`markitdown-ocr` (LLM-Vision OCR on embedded images; `pip install markitdown-ocr`).
+
+## Usage
 
 ```bash
-pip install 'markitdown[all]'
-```
-
-### Install (selective extras)
-
-```bash
-pip install 'markitdown[pdf,docx,pptx,xlsx]'
-```
-
-Available extras:
-
-| Extra                      | What it enables                       |
-| -------------------------- | ------------------------------------- |
-| `[all]`                    | Everything below                      |
-| `[pdf]`                    | PDF files                             |
-| `[docx]`                   | Word documents                        |
-| `[pptx]`                   | PowerPoint presentations              |
-| `[xlsx]`                   | Excel spreadsheets                    |
-| `[xls]`                    | Older Excel files                     |
-| `[outlook]`                | Outlook `.msg` messages               |
-| `[audio-transcription]`    | WAV / MP3 speech transcription        |
-| `[youtube-transcription]`  | YouTube video transcript extraction   |
-| `[az-doc-intel]`           | Azure Document Intelligence           |
-| `[az-content-understanding]` | Azure Content Understanding         |
-
-### Plugins
-
-3rd-party plugins extend format support. Disabled by default.
-
-```bash
-# List installed plugins
-markitdown --list-plugins
-
-# Enable plugins for a conversion
-markitdown --use-plugins file.pdf
-```
-
-Notable plugin: `markitdown-ocr` — OCR on embedded images in PDF/DOCX/PPTX/XLSX
-via LLM Vision. Install with `pip install markitdown-ocr`.
-
-## Usage (3 ways)
-
-### 1. CLI — direct file or URL
-
-```bash
-# File → stdout
+# CLI: file / URL → stdout or file
 markitdown report.pdf
-
-# URL → stdout
 markitdown https://example.com/article
-
-# File → output file
 markitdown report.pdf -o report.md
-```
 
-### 2. CLI — pipe / stdin
-
-```bash
-# Pipe from another command
+# CLI: stdin (add -x .EXT when input has no extension)
 cat document.docx | markitdown
-
-# Redirect
-markitdown < presentation.pptx
-
-# With format hint (when stdin has no extension)
 cat data | markitdown -x .json
 ```
-
-### 3. Python API
 
 ```python
 from markitdown import MarkItDown
 
 md = MarkItDown()
-
-# Local file
-result = md.convert("report.pdf")
+result = md.convert("report.pdf")                # local file
+result = md.convert_url("https://example.com")   # URL
 print(result.text_content)
-
-# URL
-result = md.convert_url("https://example.com")
-print(result.text_content)
-
-# Stream
-with open("doc.docx", "rb") as f:
-    result = md.convert_stream(f, file_extension=".docx")
-    print(result.text_content)
 ```
 
-## CLI Options
+Key flags (`markitdown --help` for all): `-o FILE` output to file, `-x .EXT`
+extension hint, `-p / --use-plugins`, `--keep-data-uris` (keep base64 images,
+truncated by default), `-d / --use-docintel` (Azure Document Intelligence).
 
-Run `markitdown --help` for full details. Key flags:
+## Output
 
-| Flag                  | Purpose                                        |
-| --------------------- | ---------------------------------------------- |
-| `-o FILE`             | Write output to file instead of stdout         |
-| `-x .EXT`             | Hint file extension (useful with stdin)         |
-| `-m MIME`             | Hint MIME type                                 |
-| `-c CHARSET`          | Hint charset (e.g. UTF-8)                      |
-| `-p, --use-plugins`   | Enable 3rd-party plugins                       |
-| `--keep-data-uris`    | Keep base64-encoded images (truncated by default) |
-| `-d, --use-docintel`  | Use Azure Document Intelligence                |
+Clean Markdown for LLM consumption (not high-fidelity human rendering):
+headings → `#`, lists → `-` / `1.`, tables → pipe tables, links → `[text](url)`,
+images → `![alt](src)` (data URIs truncated by default).
 
-## Expected Output
+## Workflow: 轉換後存入 Apple Notes (Convert → Save to Apple Notes)
 
-Output is `clean Markdown` text. Structure is preserved:
+把任意來源（URL / PDF / DOCX…）轉成 Markdown 後存進 Apple Notes 長期保存，搭配
+`apple-notes` skill 寫入。
 
-- Headings → `#`, `##`, `###`
-- Lists → `-` or `1.`
-- Tables → Markdown pipe tables
-- Links → `[text](url)`
-- Images → `![alt](src)` (data URIs truncated by default)
-- Code blocks → fenced with language hints when detectable
+內容規則：
 
-Example (from a PDF):
+- 只留主要內容：去掉導覽列、頁尾、廣告、側欄等雜訊，只保留正文
+- 保留所有連結／參考：markitdown 產出的 `[text](url)` 與引用清單不要刪
+- Source 連結要帶頁面標題：在筆記開頭補一行 `Source: [頁面標題](原始 URL)`
 
-```md
-# Annual Report 2024
+```bash
+# 1) 轉成 markdown
+markitdown https://example.com/article -o /tmp/page.md
 
-## Executive Summary
+# 2) 清掉雜訊、保留正文與連結，並在開頭補上 `Source: [頁面標題](URL)`
 
-Revenue grew 15% year-over-year...
-
-| Quarter | Revenue | Growth |
-| ------- | ------- | ------ |
-| Q1      | $2.1M   | 12%    |
-| Q2      | $2.4M   | 18%    |
+# 3) 用 apple-notes skill 存入（-m 吃 markdown；-f 指定資料夾）
+notes add -F /tmp/page.md -m -f Report
 ```
 
-Output is meant for LLM consumption, not high-fidelity human rendering.
+要在 Notes 內取得「可點擊超連結 + 原生標題高亮」，改產生 HTML 並用 `notes add -h`
+（`<h1>` 原生標題、`<a href>` 超連結；見 `apple-notes` skill 的 Rich Text
+Formatting 說明）。
+
+> 純 URL 文章其實 `notes add -u <URL>` 就會自動抓取並清理；markitdown 路線的價值
+> 在於 PDF / DOCX / PPTX 等非 URL 來源，或需要精準控制 Markdown 結構時。
 
 ## Common Mistakes
 
-| Mistake                                        | Fix                                              |
-| ---------------------------------------------- | ------------------------------------------------ |
-| Expecting JS-rendered content from URL         | `markitdown` fetches static HTML only             |
-| Missing output for a format                    | Check if the matching extra is installed           |
-| Truncated images in output                     | Use `--keep-data-uris` if you need them           |
-| No YouTube transcript                          | Install `markitdown[youtube-transcription]`       |
-| Running on login-gated URL                     | Use browser automation instead, then pipe HTML    |
+| Mistake                                | Fix                                          |
+| -------------------------------------- | -------------------------------------------- |
+| Expecting JS-rendered content from URL | `markitdown` fetches static HTML only        |
+| Missing output for a format            | Check the matching extra is installed        |
+| Truncated images in output             | Use `--keep-data-uris`                       |
+| No YouTube transcript                  | Install `markitdown[youtube-transcription]`  |
+| Login-gated URL                        | Authenticate in browser, then pipe HTML in   |
 
 ## When NOT to Use
 
-- JavaScript-heavy SPAs → use Playwright or browser automation first
+- JavaScript-heavy SPAs → use Playwright / browser automation first
 - Login-gated pages → authenticate with browser, then pipe HTML to markitdown
-- High-fidelity document rendering for humans → use dedicated viewers
+- High-fidelity rendering for humans → use dedicated viewers
 - Real-time web scraping at scale → use a dedicated scraper

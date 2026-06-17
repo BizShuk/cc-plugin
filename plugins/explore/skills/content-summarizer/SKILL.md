@@ -52,7 +52,7 @@ Copy this checklist and track progress:
 ```md
 - [ ] Step 1: Confirm the content is fetchable (capability check)
 - [ ] Step 2: Strip side content (menus, footers, nav, ads)
-- [ ] Step 3: Classify the content shape (Index / Article / Video / Document)
+- [ ] Step 3: Classify the content shape (Index / Article / Video / Document / Links)
 - [ ] Step 4: Summarize using the matching strategy
 - [ ] Step 5: Extract 1-3 business-value / opportunity ideas (brainstorm)
 - [ ] Step 6: Assemble the output; offer calendar / notes follow-ups
