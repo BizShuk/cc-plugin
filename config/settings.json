@@ -65,7 +65,8 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "claude-notifications-go@claude-notifications-go": true
+    "claude-notifications-go@claude-notifications-go": true,
+    "understand-anything@shuk-cc-plugin": true
   },
   "extraKnownMarketplaces": {
     "claude-notifications-go": {

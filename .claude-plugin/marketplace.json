@@ -10,7 +10,7 @@
     "plugins": [
         {
             "name": "apple",
-            "source": "./apple",
+            "source": "./plugins/apple",
             "skills": [
                 "./skills/apple-calendar",
                 "./skills/apple-email",
@@ -20,7 +20,7 @@
         },
         {
             "name": "explore",
-            "source": "./explore",
+            "source": "./plugins/explore",
             "skills": [
                 "./skills/content-summarizer",
                 "./skills/firecrawl",
@@ -33,7 +33,7 @@
         },
         {
             "name": "general",
-            "source": "./general",
+            "source": "./plugins/general",
             "skills": [
                 "./skills/anti-sabotage",
                 "./skills/business-extract",
@@ -66,7 +66,7 @@
         },
         {
             "name": "review",
-            "source": "./review",
+            "source": "./plugins/review",
             "description": "Review plugin — coordinates 7 review skills (consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, learning) via the review-coordinator agent.",
             "agents": [
                 "./agents/review-coordinator.md"
@@ -83,7 +83,7 @@
         },
         {
             "name": "superpowers",
-            "source": "./superpower",
+            "source": "./plugins/superpower",
             "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques (vendored as git submodule from https://github.com/obra/superpowers)",
             "skills": [
                 "./skills/brainstorming",
@@ -104,7 +104,7 @@
         },
         {
             "name": "media",
-            "source": "./media",
+            "source": "./plugins/media",
             "description": "Media generation and script writing toolkit. Includes prompt expansion, multi-shot storyboard formatting, and character consistency setting for video generation models.",
             "skills": [
                 "./skills/character-setting",
@@ -114,7 +114,7 @@
         },
         {
             "name": "team",
-            "source": "./team",
+            "source": "./plugins/team",
             "description": "AI Agent Team planning, role prompt design, and orchestration config toolkit. Helps structure cross-functional agent setups and define long-term guidelines.",
             "skills": [
                 "./skills/orchestration-config",
@@ -124,7 +124,7 @@
         },
         {
             "name": "understand-anything",
-            "source": "./understand-anything/understand-anything-plugin",
+            "source": "./plugins/understand-anything/understand-anything-plugin",
             "description": "AI-powered codebase understanding — analyze, visualize, and explain any project",
             "agents": [
                 "./agents/architecture-analyzer.md",
