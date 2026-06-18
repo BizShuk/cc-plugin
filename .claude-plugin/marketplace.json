@@ -121,6 +121,32 @@
                 "./skills/role-generator",
                 "./skills/team-design"
             ]
+        },
+        {
+            "name": "understand-anything",
+            "source": "./understand-anything/understand-anything-plugin",
+            "description": "AI-powered codebase understanding — analyze, visualize, and explain any project",
+            "agents": [
+                "./agents/architecture-analyzer.md",
+                "./agents/article-analyzer.md",
+                "./agents/assemble-reviewer.md",
+                "./agents/domain-analyzer.md",
+                "./agents/file-analyzer.md",
+                "./agents/graph-reviewer.md",
+                "./agents/knowledge-graph-guide.md",
+                "./agents/project-scanner.md",
+                "./agents/tour-builder.md"
+            ],
+            "skills": [
+                "./skills/understand",
+                "./skills/understand-chat",
+                "./skills/understand-dashboard",
+                "./skills/understand-diff",
+                "./skills/understand-domain",
+                "./skills/understand-explain",
+                "./skills/understand-knowledge",
+                "./skills/understand-onboard"
+            ]
         }
     ]
 }

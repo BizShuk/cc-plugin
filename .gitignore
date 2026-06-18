@@ -15,3 +15,5 @@ cc-plugin
 .antigravitycli
 .playwright-cli
 plugins/explore/skills/summarize.sh/**
+plugins/superpower/**
+plugins/understand-anything/**

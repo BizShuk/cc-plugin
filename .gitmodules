@@ -19,3 +19,6 @@
 [submodule "plugins/gosdk"]
 	path = plugins/gosdk
 	url = https://github.com/bizshuk/gosdk
+[submodule "plugins/understand-anything"]
+	path = plugins/understand-anything
+	url = https://github.com/Egonex-AI/Understand-Anything

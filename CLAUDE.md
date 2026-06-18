@@ -76,7 +76,14 @@
 │   └── tmp/                  # 臨時與測試用插件
 │       ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
 │       ├── monitors/         # Monitors (monitors.json)
-│       └── skills/           # 臨時與草稿技能 (celebrity-quotes, gemini-tmp, security-scanner, social-business-explore)
+│   ├── tmp/                  # 臨時與測試用插件
+│   │   ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
+│   │   ├── monitors/         # Monitors (monitors.json)
+│   │   └── skills/           # 臨時與草稿技能 (celebrity-quotes, gemini-tmp, security-scanner, social-business-explore)
+│   └── understand-anything/  # AI 輔助代碼庫理解插件 (Understand Anything)
+│       └── understand-anything-plugin/ # 核心插件目錄
+│           ├── agents/       # 分析代理 (project-scanner, file-analyzer, 等 9 個)
+│           └── skills/       # 理解技能 (understand, understand-chat, 等 8 個)
 ├── main.go                   # Go CLI 入口點
 ├── go.mod                    # Go 模組定義
 ├── run.sh                    # 環境初始化腳本（macOS/Unix）
@@ -109,18 +116,18 @@
 
 ## 模組對應 (Module Mapping)
 
-| 業務領域 (Domain) | 套件/模組 (Package/Module)                                                              | 進入點 (Entry Point)                           |
-| ----------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| 記憶蒸餾管道      | `cmd/`, `model/`                                                                        | `DistillCmd()`                                 |
-| LLM 提取          | `cmd/ollama.go`                                                                         | `ExtractCmd()`, `OllamaService.Extract()`      |
-| 讀取來源          | `cmd/read_logic.go`                                                                     | `readGbrainLogic()`, `readClaudeMemLogic()`    |
-| 寫入儲存          | `cmd/write_*.go`                                                                        | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()` |
-| 資料匯出          | `cmd/export/`                                                                           | `ExportCmd()`                                  |
-| 狀態管理          | `model/store.go`, `model/cursor.go`                                                     | `NewStateStore()`                              |
-| 環境初始化        | `run.sh`, `config/`                                                                     | `config.Init()`                                |
-| AI 技能           | `plugins/` (apple, explore, general, god, review, tmp, superpowers, gosdk, media, team) | 各 `SKILL.md`                                  |
-| 程式碼審查        | `plugins/review/skills/`                                                                | 各 `SKILL.md` (consistency 等 7 項)            |
-| AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                     | `feature.md`, `review-coordinator.md`          |
+| 業務領域 (Domain) | 套件/模組 (Package/Module)                                                                                   | 進入點 (Entry Point)                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
+| 記憶蒸餾管道      | `cmd/`, `model/`                                                                                             | `DistillCmd()`                                 |
+| LLM 提取          | `cmd/ollama.go`                                                                                              | `ExtractCmd()`, `OllamaService.Extract()`      |
+| 讀取來源          | `cmd/read_logic.go`                                                                                          | `readGbrainLogic()`, `readClaudeMemLogic()`    |
+| 寫入儲存          | `cmd/write_*.go`                                                                                             | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()` |
+| 資料匯出          | `cmd/export/`                                                                                                | `ExportCmd()`                                  |
+| 狀態管理          | `model/store.go`, `model/cursor.go`                                                                          | `NewStateStore()`                              |
+| 環境初始化        | `run.sh`, `config/`                                                                                          | `config.Init()`                                |
+| AI 技能           | `plugins/` (apple, explore, general, god, review, tmp, superpowers, gosdk, media, team, understand-anything) | 各 `SKILL.md`                                  |
+| 程式碼審查        | `plugins/review/skills/`                                                                                     | 各 `SKILL.md` (consistency 等 7 項)            |
+| AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                                          | `feature.md`, `review-coordinator.md` |
 
 ## 開發指南 (Development Guide)
 
