@@ -1,0 +1,345 @@
+[
+  {
+    "title": "google-research / timesfm",
+    "url": "https://github.com/google-research/timesfm",
+    "desc": "TimesFM (Time Series Foundation Model) is a pretrained time-series foundation model developed by Google Research for time-series forecasting.",
+    "lang": "Python",
+    "totalStars": "23,547",
+    "starsToday": "844 stars today",
+    "forks": "2,235",
+    "builtBy": [
+      "@rajatsen91",
+      "@siriuz42",
+      "@misha-chertushkin",
+      "@darkpowerxo",
+      "@JustinGuese"
+    ],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2Fgoogle-research%2Ftimesfm"},
+      {"text": "google-research /\n\n      timesfm", "href": "/google-research/timesfm"},
+      {"text": "23,547", "href": "/google-research/timesfm/stargazers"},
+      {"text": "2,235", "href": "/google-research/timesfm/forks"},
+      {"text": null, "href": "/rajatsen91"},
+      {"text": null, "href": "/siriuz42"},
+      {"text": null, "href": "/misha-chertushkin"},
+      {"text": null, "href": "/darkpowerxo"},
+      {"text": null, "href": "/JustinGuese"}
+    ]
+  },
+  {
+    "title": "n0-computer / iroh",
+    "url": "https://github.com/n0-computer/iroh",
+    "desc": "IP addresses break, dial keys instead. Modular networking stack in Rust.",
+    "lang": "Rust",
+    "totalStars": "10,081",
+    "starsToday": "369 stars today",
+    "forks": "464",
+    "builtBy": ["@dignifiedquire", "@flub", "@rklaehn", "@Frando", "@ramfox"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2Fn0-computer%2Firoh"},
+      {"text": "n0-computer /\n\n      iroh", "href": "/n0-computer/iroh"},
+      {"text": "10,081", "href": "/n0-computer/iroh/stargazers"},
+      {"text": "464", "href": "/n0-computer/iroh/forks"},
+      {"text": null, "href": "/dignifiedquire"},
+      {"text": null, "href": "/flub"},
+      {"text": null, "href": "/rklaehn"},
+      {"text": null, "href": "/Frando"},
+      {"text": null, "href": "/ramfox"}
+    ]
+  },
+  {
+    "title": "freeCodeCamp / freeCodeCamp",
+    "url": "https://github.com/freeCodeCamp/freeCodeCamp",
+    "desc": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.",
+    "lang": "TypeScript",
+    "totalStars": "449,658",
+    "starsToday": "417 stars today",
+    "forks": "45,143",
+    "builtBy": ["@ojeytonwilliams", "@raisedadead", "@camperbot", "@renovate", "@renovate-bot"],
+    "links": [
+      {"text": "Sponsor", "href": "/sponsors/freeCodeCamp"},
+      {"text": "Star", "href": "/login?return_to=%2FfreeCodeCamp%2FfreeCodeCamp"},
+      {"text": "freeCodeCamp /\n\n      freeCodeCamp", "href": "/freeCodeCamp/freeCodeCamp"},
+      {"text": "449,658", "href": "/freeCodeCamp/freeCodeCamp/stargazers"},
+      {"text": "45,143", "href": "/freeCodeCamp/freeCodeCamp/forks"},
+      {"text": null, "href": "/ojeytonwilliams"},
+      {"text": null, "href": "/raisedadead"},
+      {"text": null, "href": "/camperbot"},
+      {"text": null, "href": "/apps/renovate"},
+      {"text": null, "href": "/renovate-bot"}
+    ]
+  },
+  {
+    "title": "obra / superpowers",
+    "url": "https://github.com/obra/superpowers",
+    "desc": "An agentic skills framework & software development methodology that works.",
+    "lang": "Shell",
+    "totalStars": "232,675",
+    "starsToday": "1,429 stars today",
+    "forks": "20,664",
+    "builtBy": ["@obra", "@claude", "@arittr", "@clkao", "@jjshanks"],
+    "links": [
+      {"text": "Sponsor", "href": "/sponsors/obra"},
+      {"text": "Star", "href": "/login?return_to=%2Fobra%2Fsuperpowers"},
+      {"text": "obra /\n\n      superpowers", "href": "/obra/superpowers"},
+      {"text": "232,675", "href": "/obra/superpowers/stargazers"},
+      {"text": "20,664", "href": "/obra/superpowers/forks"},
+      {"text": null, "href": "/obra"},
+      {"text": null, "href": "/claude"},
+      {"text": null, "href": "/arittr"},
+      {"text": null, "href": "/clkao"},
+      {"text": null, "href": "/jjshanks"}
+    ]
+  },
+  {
+    "title": "zai-org / GLM-5",
+    "url": "https://github.com/zai-org/GLM-5",
+    "desc": "GLM-5: From Vibe Coding to Agentic Engineering",
+    "lang": null,
+    "totalStars": "4,270",
+    "starsToday": "202 stars today",
+    "forks": "437",
+    "builtBy": ["@zRzRzRzRzRzRzR", "@JaredforReal", "@shifengmin", "@nakairika"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2Fzai-org%2FGLM-5"},
+      {"text": "zai-org /\n\n      GLM-5", "href": "/zai-org/GLM-5"},
+      {"text": "4,270", "href": "/zai-org/GLM-5/stargazers"},
+      {"text": "437", "href": "/zai-org/GLM-5/forks"},
+      {"text": null, "href": "/zRzRzRzRzRzRzR"},
+      {"text": null, "href": "/JaredforReal"},
+      {"text": null, "href": "/shifengmin"},
+      {"text": null, "href": "/nakairika"}
+    ]
+  },
+  {
+    "title": "DeusData / codebase-memory-mcp",
+    "url": "https://github.com/DeusData/codebase-memory-mcp",
+    "desc": "High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.",
+    "lang": "C",
+    "totalStars": "7,319",
+    "starsToday": "2,322 stars today",
+    "forks": "576",
+    "builtBy": ["@DeusData", "@claude", "@shanemccarron-maker", "@dependabot", "@dLo999"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2FDeusData%2Fcodebase-memory-mcp"},
+      {"text": "DeusData /\n\n      codebase-memory-mcp", "href": "/DeusData/codebase-memory-mcp"},
+      {"text": "7,319", "href": "/DeusData/codebase-memory-mcp/stargazers"},
+      {"text": "576", "href": "/DeusData/codebase-memory-mcp/forks"},
+      {"text": null, "href": "/DeusData"},
+      {"text": null, "href": "/claude"},
+      {"text": null, "href": "/shanemccarron-maker"},
+      {"text": null, "href": "/apps/dependabot"},
+      {"text": null, "href": "/dLo999"}
+    ]
+  },
+  {
+    "title": "alibaba / zvec",
+    "url": "https://github.com/alibaba/zvec",
+    "desc": "A lightweight, lightning-fast, in-process vector database",
+    "lang": "C++",
+    "totalStars": "11,353",
+    "starsToday": "259 stars today",
+    "forks": "658",
+    "builtBy": ["@iaojnh", "@feihongxu0824", "@egolearner", "@zhourrr", "@Cuiyus"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2Falibaba%2Fzvec"},
+      {"text": "alibaba /\n\n      zvec", "href": "/alibaba/zvec"},
+      {"text": "11,353", "href": "/alibaba/zvec/stargazers"},
+      {"text": "658", "href": "/alibaba/zvec/forks"},
+      {"text": null, "href": "/iaojnh"},
+      {"text": null, "href": "/feihongxu0824"},
+      {"text": null, "href": "/egolearner"},
+      {"text": null, "href": "/zhourrr"},
+      {"text": null, "href": "/Cuiyus"}
+    ]
+  },
+  {
+    "title": "withastro / flue",
+    "url": "https://github.com/withastro/flue",
+    "desc": "The sandbox agent framework.",
+    "lang": "TypeScript",
+    "totalStars": "5,583",
+    "starsToday": "162 stars today",
+    "forks": "308",
+    "builtBy": ["@FredKSchott", "@claude", "@stainlu", "@cpojer", "@ketankhairnar"],
+    "links": [
+      {"text": "Sponsor", "href": "/sponsors/withastro"},
+      {"text": "Star", "href": "/login?return_to=%2Fwithastro%2Fflue"},
+      {"text": "withastro /\n\n      flue", "href": "/withastro/flue"},
+      {"text": "5,583", "href": "/withastro/flue/stargazers"},
+      {"text": "308", "href": "/withastro/flue/forks"},
+      {"text": null, "href": "/FredKSchott"},
+      {"text": null, "href": "/claude"},
+      {"text": null, "href": "/stainlu"},
+      {"text": null, "href": "/cpojer"},
+      {"text": null, "href": "/ketankhairnar"}
+    ]
+  },
+  {
+    "title": "Kilo-Org / kilocode",
+    "url": "https://github.com/Kilo-Org/kilocode",
+    "desc": "Kilo is the all-in-one agentic engineering platform. Build, ship, and iterate faster with the most popular open source coding agent.",
+    "lang": "TypeScript",
+    "totalStars": "22,412",
+    "starsToday": "1,345 stars today",
+    "forks": "2,715",
+    "builtBy": ["@thdxr", "@adamdotdevin", "@markijbema", "@rekram1-node", "@marius-kilocode"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2FKilo-Org%2Fkilocode"},
+      {"text": "Kilo-Org /\n\n      kilocode", "href": "/Kilo-Org/kilocode"},
+      {"text": "22,412", "href": "/Kilo-Org/kilocode/stargazers"},
+      {"text": "2,715", "href": "/Kilo-Org/kilocode/forks"},
+      {"text": null, "href": "/thdxr"},
+      {"text": null, "href": "/adamdotdevin"},
+      {"text": null, "href": "/markijbema"},
+      {"text": null, "href": "/rekram1-node"},
+      {"text": null, "href": "/marius-kilocode"}
+    ]
+  },
+  {
+    "title": "makeplane / plane",
+    "url": "https://github.com/makeplane/plane",
+    "desc": "Open-source Jira, Linear, Monday, and ClickUp alternative. Plane is a modern project management platform to manage tasks, sprints, docs, and triage.",
+    "lang": "TypeScript",
+    "totalStars": "51,936",
+    "starsToday": "613 stars today",
+    "forks": "4,610",
+    "builtBy": ["@anmolsinghbhatia", "@aaryan610", "@pablohashescobar", "@sriramveeraghanta", "@NarayanBavisetti"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2Fmakeplane%2Fplane"},
+      {"text": "makeplane /\n\n      plane", "href": "/makeplane/plane"},
+      {"text": "51,936", "href": "/makeplane/plane/stargazers"},
+      {"text": "4,610", "href": "/makeplane/plane/forks"},
+      {"text": null, "href": "/anmolsinghbhatia"},
+      {"text": null, "href": "/aaryan610"},
+      {"text": null, "href": "/pablohashescobar"},
+      {"text": null, "href": "/sriramveeraghanta"},
+      {"text": null, "href": "/NarayanBavisetti"}
+    ]
+  },
+  {
+    "title": "Kong / insomnia",
+    "url": "https://github.com/Kong/insomnia",
+    "desc": "The open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE and gRPC. With Cloud, Local and Git storage.",
+    "lang": "TypeScript",
+    "totalStars": "38,756",
+    "starsToday": "18 stars today",
+    "forks": "2,294",
+    "builtBy": ["@gschier", "@jackkav", "@develohpanda", "@gatzjames", "@filfreire"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2FKong%2Finsomnia"},
+      {"text": "Kong /\n\n      insomnia", "href": "/Kong/insomnia"},
+      {"text": "38,756", "href": "/Kong/insomnia/stargazers"},
+      {"text": "2,294", "href": "/Kong/insomnia/forks"},
+      {"text": null, "href": "/gschier"},
+      {"text": null, "href": "/jackkav"},
+      {"text": null, "href": "/develohpanda"},
+      {"text": null, "href": "/gatzjames"},
+      {"text": null, "href": "/filfreire"}
+    ]
+  },
+  {
+    "title": "Universal-Debloater-Alliance / universal-android-debloater-next-generation",
+    "url": "https://github.com/Universal-Debloater-Alliance/universal-android-debloater-next-generation",
+    "desc": "Cross-platform GUI written in Rust using ADB to debloat non-rooted Android devices. Improve your privacy, the security and battery life of your device.",
+    "lang": "Rust",
+    "totalStars": "7,979",
+    "starsToday": "244 stars today",
+    "forks": "343",
+    "builtBy": ["@AnonymousWP", "@0x192", "@Frigyes06", "@Rudxain", "@lavafroth"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2FUniversal-Debloater-Alliance%2Funiversal-android-debloater-next-generation"},
+      {"text": "Universal-Debloater-Alliance /\n\n      universal-android-debloater-next-generation", "href": "/Universal-Debloater-Alliance/universal-android-debloater-next-generation"},
+      {"text": "7,979", "href": "/Universal-Debloater-Alliance/universal-android-debloater-next-generation/stargazers"},
+      {"text": "343", "href": "/Universal-Debloater-Alliance/universal-android-debloater-next-generation/forks"},
+      {"text": null, "href": "/AnonymousWP"},
+      {"text": null, "href": "/0x192"},
+      {"text": null, "href": "/Frigyes06"},
+      {"text": null, "href": "/Rudxain"},
+      {"text": null, "href": "/lavafroth"}
+    ]
+  },
+  {
+    "title": "dotnet / aspnetcore",
+    "url": "https://github.com/dotnet/aspnetcore",
+    "desc": "ASP.NET Core is a cross-platform .NET framework for building modern cloud-based web applications on Windows, Mac, or Linux.",
+    "lang": "C#",
+    "totalStars": "38,111",
+    "starsToday": "14 stars today",
+    "forks": "10,712",
+    "builtBy": ["@pranavkm", "@aspnetci", "@dotnet-maestro", "@dougbu", "@Tratcher"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2Fdotnet%2Faspnetcore"},
+      {"text": "dotnet /\n\n      aspnetcore", "href": "/dotnet/aspnetcore"},
+      {"text": "38,111", "href": "/dotnet/aspnetcore/stargazers"},
+      {"text": "10,712", "href": "/dotnet/aspnetcore/forks"},
+      {"text": null, "href": "/pranavkm"},
+      {"text": null, "href": "/aspnetci"},
+      {"text": null, "href": "/apps/dotnet-maestro"},
+      {"text": null, "href": "/dougbu"},
+      {"text": null, "href": "/Tratcher"}
+    ]
+  },
+  {
+    "title": "owainlewis / awesome-artificial-intelligence",
+    "url": "https://github.com/owainlewis/awesome-artificial-intelligence",
+    "desc": "A curated list of Artificial Intelligence (AI) courses, books, video lectures and papers.",
+    "lang": null,
+    "totalStars": "14,498",
+    "starsToday": "40 stars today",
+    "forks": "2,342",
+    "builtBy": ["@owainlewis", "@iamkeyur", "@antonymuga", "@ipcenas", "@orsenthil"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2Fowainlewis%2Fawesome-artificial-intelligence"},
+      {"text": "owainlewis /\n\n      awesome-artificial-intelligence", "href": "/owainlewis/awesome-artificial-intelligence"},
+      {"text": "14,498", "href": "/owainlewis/awesome-artificial-intelligence/stargazers"},
+      {"text": "2,342", "href": "/owainlewis/awesome-artificial-intelligence/forks"},
+      {"text": null, "href": "/owainlewis"},
+      {"text": null, "href": "/iamkeyur"},
+      {"text": null, "href": "/antonymuga"},
+      {"text": null, "href": "/ipcenas"},
+      {"text": null, "href": "/orsenthil"}
+    ]
+  },
+  {
+    "title": "Lightricks / LTX-2",
+    "url": "https://github.com/Lightricks/LTX-2",
+    "desc": "Official Python inference and LoRA trainer package for the LTX-2 audio–video generative model.",
+    "lang": "Python",
+    "totalStars": "7,538",
+    "starsToday": "51 stars today",
+    "forks": "1,211",
+    "builtBy": ["@michaellightricks", "@github-actions", "@AlexeyKravtsov1987"],
+    "links": [
+      {"text": "Star", "href": "/login?return_to=%2FLightricks%2FLTX-2"},
+      {"text": "Lightricks /\n\n      LTX-2", "href": "/Lightricks/LTX-2"},
+      {"text": "7,538", "href": "/Lightricks/LTX-2/stargazers"},
+      {"text": "1,211", "href": "/Lightricks/LTX-2/forks"},
+      {"text": null, "href": "/michaellightricks"},
+      {"text": null, "href": "/apps/github-actions"},
+      {"text": null, "href": "/AlexeyKravtsov1987"}
+    ]
+  },
+  {
+    "title": "LibreTranslate / LibreTranslate",
+    "url": "https://github.com/LibreTranslate/LibreTranslate",
+    "desc": "Free and Open Source Machine Translation API. Self-hosted, offline capable and easy to setup.",
+    "lang": "Python",
+    "totalStars": "15,055",
+    "starsToday": "51 stars today",
+    "forks": "1,536",
+    "builtBy": ["@pierotofy", "@dingedi", "@PJ-Finlay", "@comradekingu", "@vemonet"],
+    "links": [
+      {"text": "Sponsor", "href": "/sponsors/LibreTranslate"},
+      {"text": "Star", "href": "/login?return_to=%2FLibreTranslate%2FLibreTranslate"},
+      {"text": "LibreTranslate /\n\n      LibreTranslate", "href": "/LibreTranslate/LibreTranslate"},
+      {"text": "15,055", "href": "/LibreTranslate/LibreTranslate/stargazers"},
+      {"text": "1,536", "href": "/LibreTranslate/LibreTranslate/forks"},
+      {"text": null, "href": "/pierotofy"},
+      {"text": null, "href": "/dingedi"},
+      {"text": null, "href": "/PJ-Finlay"},
+      {"text": null, "href": "/comradekingu"},
+      {"text": null, "href": "/vemonet"}
+    ]
+  }
+]

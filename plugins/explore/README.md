@@ -86,7 +86,41 @@ graph LR
 └── fetch_scrapling.py
 ```
 
+## AI 基準測試 (AI Benchmark)
+
+完整的一步一步基準測試指南（含設定方式與 2026-06-19 結果）位於：
+
+- `plugins/explore/references/benchmark.md` — step-by-step setup guide, credential configuration, and timed benchmark results for all 6 skills against `https://github.com/trending`
+
+### 快速基準 (Quick Recap — 2026-06-19 v2)
+
+| 技能 (Skill) | 耗時 (Time) | 主要內容 (Major) | 次要內容 (Minor) | JS/CSS | 範例輸出 (Sample) |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| `firecrawl` | 1.1s | 5.3 KB | 0 | ✗ | `trending-major.md` |
+| `markitdown` | 1.2s | 5.4 KB | 345 lines | ✗ | `trending-major.md` |
+| `scrapling` | 1.9s | 13.2 KB | 0 | ✗ | `trending-cards.md` |
+| `content-summarizer` | 4s | 12.6 KB | 345 lines | ✗ | `summary.md` |
+| `summarize.sh` | 18s | 5.8 KB | 0 | ✗ | `summary.md` |
+| `playwright-cli` | 126s | 15.8 KB (JSON) | 0 | ✗ | `trending.json` |
+
+> 所有樣例輸出檔案位於 `/tmp/skill-test-v2-<skill>/` 目錄下。詳見 `references/benchmark.md` 的 Step 4-5 指令與 Step 7 完整結果。
+
+## 技能 AI 憑證需求 (Skill AI Credential Requirements)
+
+| 技能 (Skill) | 需要 API 金鑰？ | 如何設定 |
+|:---|:---:|:---|
+| `content-summarizer` | 隱含 (AI session) | 不需要獨立設定;由父 AI session 的 LLM 進行摘要 |
+| `firecrawl` | 可選 (guest tier 可用) | `export FIRECRAWL_API_KEY=fc-...` 或 `firecrawl init --browser` |
+| `markitdown` | 不需要 | — |
+| `playwright-cli` | 不需要 | — |
+| `scrapling` | 不需要 | — (Cloudflare bypass 自動處理,不需要 API key) |
+| `summarize.sh` | 必須 | `~/.summarize/config.json` — 填入 `apiKeys`, `prompt`, provider `baseUrl` |
+
+> 詳細設定範例（含 `~/.summarize/config.json` 最小可用範本）請參見 `references/benchmark.md` Step 2。
+
 ## 相關連結 (See Also)
 
 - 插件清單：`plugins/explore/.claude-plugin/plugin.json`
 - 技能註冊表：`skills.json`
+- 基準測試指南：`plugins/explore/references/benchmark.md`
+- 測試樣例輸出：`ls /tmp/skill-test-v2-*`
