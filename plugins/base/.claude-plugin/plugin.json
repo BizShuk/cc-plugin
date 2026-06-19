@@ -1,0 +1,22 @@
+{
+  "name": "base",
+  "version": "1.0.0",
+  "description": "Default base plugin — must-install hooks that run in every Claude Code session. Currently provides a terminal bell on Stop / StopFailure to notify the user when the agent finishes.",
+  "author": {
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "license": "MIT",
+  "keywords": [
+    "base",
+    "default",
+    "hooks",
+    "bell",
+    "notification",
+    "stop",
+    "stopfailure"
+  ]
+}

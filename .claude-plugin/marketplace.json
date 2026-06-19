@@ -9,6 +9,11 @@
     },
     "plugins": [
         {
+            "name": "base",
+            "source": "./plugins/base",
+            "description": "Default must-install plugin — provides always-on base hooks (terminal bell on Stop / StopFailure) that run in every Claude Code session."
+        },
+        {
             "name": "apple",
             "source": "./plugins/apple",
             "skills": [

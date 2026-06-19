@@ -58,6 +58,7 @@
 
 提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為十一個模組化插件目錄，並透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent：
 
+- `base` (預設基礎插件 — must-install：Stop/StopFailure 終端機 bell hook)
 - `apple` (macOS 整合)
 - `explore` (抓取與摘要：MarkItDown, Scrapling, Firecrawl, Playwright)
 - `general` (通用技能：domain, project-explore, model-evaluator)
