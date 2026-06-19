@@ -1,113 +1,108 @@
 {
-  "skillListingBudgetFraction": 0.01,
-  "env": {
-    "_____proxy": "_____",
-    "_____prompt": "_____",
-    "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
-    "_____model": "_____",
-    "_____agent": "_____",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_CODE_DISABLE_AGENT_VIEW": "0",
-    "_____extra": "_____",
-    "ENABLE_LSP_TOOL": "1",
-    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "0",
-    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "0",
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
-    "OTEL_METRICS_EXPORTER": "otlp"
-  },
-  "permissions": {
-    "allow": [
-      "Bash(ls:*)",
-      "Bash(df:*)",
-      "Bash(du:*)",
-      "Bash(mkdir:*)",
-      "Bash(head:*)",
-      "Bash(find:*)",
-      "Bash(grep:*)",
-      "Bash(go:*)",
-      "Bash(python:*)",
-      "Bash(python3:*)",
-      "Bash(bytedcli:*)",
-      "Bash(gdpa-cli:*)",
-      "Bash(rm:*)",
-      "Bash(echo \"=== pkg/ tree ===\" && find pkg -maxdepth 2 -type d | sort && echo \"\" && echo \"=== pkg/memory contents ===\" && find pkg/memory -maxdepth 3 | sort && echo \"\" && echo \"=== config ===\" && ls -la config/ 2>/dev/null && echo \"\" && echo \"=== config/.gbrain ===\" && ls -la config/.gbrain 2>/dev/null)",
-      "Read(//Users/shuk/.gbrain/**)"
-    ],
-    "deny": [
-      "Read(.env*)",
-      "Read(~/.ssh/**)",
-      "Read(~/.aws/**)",
-      "Read(**/.env)",
-      "Read(**/secrets/**)",
-      "Read(~/.claude/settings.json)",
-      "Edit(**/.git)",
-      "Write(**/.git)"
-    ],
-    "ask": [],
-    "defaultMode": "acceptEdits",
-    "additionalDirectories": []
-  },
-  "worktree": {},
-  "enableWorkflows": true,
-  "defaultShell": "bash",
-  "allowedHttpHookUrls": [
-    "http://localhost:*"
-  ],
-  "httpHookAllowedEnvVars": [
-    "MY_TOKEN",
-    "HOOK_SECRET"
-  ],
-  "statusLine": {
-    "type": "command",
-    "command": "npx ccstatusline",
-    "padding": 0
-  },
-  "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true,
-    "claude-notifications-go@claude-notifications-go": true,
-    "understand-anything@shuk-cc-plugin": true
-  },
-  "extraKnownMarketplaces": {
-    "claude-notifications-go": {
-      "source": {
-        "source": "github",
-        "repo": "777genius/claude-notifications-go"
-      }
+    "skillListingBudgetFraction": 0.01,
+    "env": {
+        "_____proxy": "_____",
+        "_____prompt": "_____",
+        "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
+        "_____model": "_____",
+        "_____agent": "_____",
+        "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
+        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+        "CLAUDE_CODE_DISABLE_AGENT_VIEW": "0",
+        "_____extra": "_____",
+        "ENABLE_LSP_TOOL": "1",
+        "CLAUDE_CODE_DISABLE_1M_CONTEXT": "0",
+        "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "0",
+        "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+        "OTEL_METRICS_EXPORTER": "otlp"
     },
-    "shuk-cc-plugin": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/bytedance/projects/cc-plugin"
-      }
+    "permissions": {
+        "allow": [
+            "Bash(ls:*)",
+            "Bash(df:*)",
+            "Bash(du:*)",
+            "Bash(mkdir:*)",
+            "Bash(head:*)",
+            "Bash(find:*)",
+            "Bash(grep:*)",
+            "Bash(go:*)",
+            "Bash(python:*)",
+            "Bash(python3:*)",
+            "Bash(bytedcli:*)",
+            "Bash(gdpa-cli:*)",
+            "Bash(rm:*)",
+            "Bash(echo \"=== pkg/ tree ===\" && find pkg -maxdepth 2 -type d | sort && echo \"\" && echo \"=== pkg/memory contents ===\" && find pkg/memory -maxdepth 3 | sort && echo \"\" && echo \"=== config ===\" && ls -la config/ 2>/dev/null && echo \"\" && echo \"=== config/.gbrain ===\" && ls -la config/.gbrain 2>/dev/null)",
+            "Read(//Users/shuk/.gbrain/**)"
+        ],
+        "deny": [
+            "Read(.env*)",
+            "Read(~/.ssh/**)",
+            "Read(~/.aws/**)",
+            "Read(**/.env)",
+            "Read(**/secrets/**)",
+            "Read(~/.claude/settings.json)",
+            "Edit(**/.git)",
+            "Write(**/.git)"
+        ],
+        "ask": [],
+        "defaultMode": "acceptEdits",
+        "additionalDirectories": []
     },
-    "wallet-mp-qa": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/bytedance/projects/qa/wallet_and_mp_qa_skill"
-      }
-    }
-  },
-  "outputStyle": "Explanatory",
-  "syntaxHighlightingDisabled": false,
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
-  "fastModePerSessionOptIn": true,
-  "promptSuggestionEnabled": false,
-  "autoUpdatesChannel": "latest",
-  "minimumVersion": "2.1.150",
-  "plansDirectory": "./plans",
-  "voice": {
-    "enabled": false,
-    "mode": "hold"
-  },
-  "prefersReducedMotion": true,
-  "autoMemoryEnabled": true,
-  "autoMemoryDirectory": "~/memory",
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
-  "theme": "dark-ansi",
-  "verbose": false,
-  "preferredNotifChannel": "auto",
-  "teammateMode": "in-process"
+    "worktree": {},
+    "enableWorkflows": true,
+    "defaultShell": "bash",
+    "allowedHttpHookUrls": ["http://localhost:*"],
+    "httpHookAllowedEnvVars": ["MY_TOKEN", "HOOK_SECRET"],
+    "statusLine": {
+        "type": "command",
+        "command": "npx ccstatusline",
+        "padding": 0
+    },
+    "enabledPlugins": {
+        "gopls-lsp@claude-plugins-official": true,
+        "claude-notifications-go@claude-notifications-go": true,
+        "understand-anything@shuk-cc-plugin": true
+    },
+    "extraKnownMarketplaces": {
+        "claude-notifications-go": {
+            "source": {
+                "source": "github",
+                "repo": "777genius/claude-notifications-go"
+            }
+        },
+        "shuk-cc-plugin": {
+            "source": {
+                "source": "directory",
+                "path": "/Users/bytedance/projects/cc-plugin"
+            }
+        },
+        "wallet-mp-qa": {
+            "source": {
+                "source": "directory",
+                "path": "/Users/bytedance/projects/qa/wallet_and_mp_qa_skill"
+            }
+        }
+    },
+    "outputStyle": "Explanatory",
+    "syntaxHighlightingDisabled": false,
+    "alwaysThinkingEnabled": true,
+    "effortLevel": "high",
+    "fastModePerSessionOptIn": true,
+    "promptSuggestionEnabled": false,
+    "autoUpdatesChannel": "latest",
+    "minimumVersion": "2.1.150",
+    "plansDirectory": "./plans",
+    "voice": {
+        "enabled": true,
+        "mode": "hold"
+    },
+    "prefersReducedMotion": true,
+    "autoMemoryEnabled": true,
+    "autoMemoryDirectory": "~/memory",
+    "skipDangerousModePermissionPrompt": true,
+    "skipWorkflowUsageWarning": true,
+    "theme": "dark-ansi",
+    "verbose": false,
+    "preferredNotifChannel": "auto",
+    "teammateMode": "in-process"
 }
