@@ -18,20 +18,21 @@
     },
     "permissions": {
         "allow": [
-            "Bash(ls:*)",
-            "Bash(df:*)",
-            "Bash(du:*)",
-            "Bash(mkdir:*)",
-            "Bash(head:*)",
-            "Bash(find:*)",
-            "Bash(grep:*)",
-            "Bash(go:*)",
-            "Bash(python:*)",
-            "Bash(python3:*)",
-            "Bash(bytedcli:*)",
-            "Bash(gdpa-cli:*)",
-            "Bash(rm:*)",
-            "Bash(echo \"=== pkg/ tree ===\" && find pkg -maxdepth 2 -type d | sort && echo \"\" && echo \"=== pkg/memory contents ===\" && find pkg/memory -maxdepth 3 | sort && echo \"\" && echo \"=== config ===\" && ls -la config/ 2>/dev/null && echo \"\" && echo \"=== config/.gbrain ===\" && ls -la config/.gbrain 2>/dev/null)",
+            "Bash(ls *)",
+            "Bash(df *)",
+            "Bash(du *)",
+            "Bash(mkdir *)",
+            "Bash(head *)",
+            "Bash(find *)",
+            "Bash(sed *)",
+            "Bash(grep *)",
+            "Bash(go *)",
+            "Bash(python *)",
+            "Bash(python3 *)",
+            "Bash(rm *)",
+            "Bash(git *)",
+            "Bash(cat *)",
+            "Bash(chmod +x *)",
             "Read(//Users/shuk/.gbrain/**)"
         ],
         "deny": [
@@ -44,7 +45,7 @@
             "Edit(**/.git)",
             "Write(**/.git)"
         ],
-        "ask": [],
+        "ask": ["Bash(git push*)"],
         "defaultMode": "acceptEdits",
         "additionalDirectories": []
     },
@@ -93,8 +94,7 @@
     "minimumVersion": "2.1.150",
     "plansDirectory": "./plans",
     "voice": {
-        "enabled": true,
-        "mode": "hold"
+        "enabled": true
     },
     "prefersReducedMotion": true,
     "autoMemoryEnabled": true,
