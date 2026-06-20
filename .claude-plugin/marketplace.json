@@ -42,6 +42,7 @@
             "skills": [
                 "./skills/anti-sabotage",
                 "./skills/business-extract",
+                "./skills/daily-summary",
                 "./skills/domain",
                 "./skills/markdownlint",
                 "./skills/mermaid",
