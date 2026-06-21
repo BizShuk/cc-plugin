@@ -22,3 +22,6 @@
 [submodule "plugins/understand-anything"]
 	path = plugins/understand-anything
 	url = https://github.com/Egonex-AI/Understand-Anything
+[submodule "plugins/media/seedance-2.0"]
+	path = plugins/media/seedance-2.0
+	url = https://github.com/Emily2040/seedance-2.0

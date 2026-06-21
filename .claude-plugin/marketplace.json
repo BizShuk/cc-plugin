@@ -1,7 +1,4 @@
 {
-    "metadata": {
-        "pluginRoot": "./plugins"
-    },
     "name": "shuk-cc-plugin",
     "owner": {
         "name": "DevTools Team",
