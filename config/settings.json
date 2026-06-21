@@ -8,11 +8,8 @@
         "_____agent": "_____",
         "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-        "CLAUDE_CODE_DISABLE_AGENT_VIEW": "0",
         "_____extra": "_____",
         "ENABLE_LSP_TOOL": "1",
-        "CLAUDE_CODE_DISABLE_1M_CONTEXT": "0",
-        "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "0",
         "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
         "OTEL_METRICS_EXPORTER": "otlp"
     },

@@ -19,8 +19,7 @@
     "markdownlint",
     "knowledge-graph",
     "topology",
-    "daily-summary",
-    "工作日報"
+    "daily-summary"
   ],
   "skills": [
     "./skills/anti-sabotage",
