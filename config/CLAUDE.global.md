@@ -11,6 +11,9 @@ If any conflict and can't determine, AskUserQuestions and wait for the answer.
     - Minimalist Relationship Expression
     - Mermaid
     - Markdown Table
+    - svg
+
+MUST: Mermaid for edge text should be wrapped by double quotes
 
 ## Context
 
