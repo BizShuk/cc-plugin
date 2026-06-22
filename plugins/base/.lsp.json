@@ -1,13 +1,4 @@
 {
-  "go": {
-    "command": "gopls",
-    "args": [
-      "serve"
-    ],
-    "extensionToLanguage": {
-      ".go": "go"
-    }
-  },
   "marksman": {
     "command": "marksman",
     "args": [
