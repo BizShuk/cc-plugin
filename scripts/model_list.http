@@ -1,0 +1,48 @@
+# ==========================================
+# Anthropic
+# ==========================================
+
+# Anthropic LLMBox Proxy API
+GET https://llmbox.bytedance.net/v1/models
+x-api-key: <sk_key>
+anthropic-version: 2023-06-01
+
+###
+
+# Anthropic Official API
+GET https://api.anthropic.com/v1/models
+x-api-key: <sk_key>
+anthropic-version: 2023-06-01
+
+###
+
+# ==========================================
+# MiniMax
+# ==========================================
+
+# MiniMax Anthropic-Compatible API
+GET https://api.minimax.io/anthropic/v1/models
+x-api-key: <sk_key>
+anthropic-version: 2023-06-01
+
+###
+
+# MiniMax OpenAI-Compatible API
+GET https://api.minimax.io/v1/models
+Authorization: Bearer <sk_key>
+
+###
+
+# ==========================================
+# OpenAI
+# ==========================================
+
+# OpenAI Official API
+GET https://api.openai.com/v1/models
+Authorization: Bearer <sk_key>
+
+###
+
+# LLMBox OpenAI Proxy API
+GET https://llmbox.bytedance.net/v1/models
+Authorization: Bearer <sk_key>
