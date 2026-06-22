@@ -9,6 +9,7 @@
   },
   "homepage": "https://github.com/bizshuk/cc-plugin",
   "repository": "https://github.com/bizshuk/cc-plugin",
+  "mcpServers": ".mcp.json",
   "license": "MIT",
   "keywords": [
     "explore",
