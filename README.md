@@ -61,6 +61,7 @@
 - `base` (預設基礎插件 — must-install：Stop/StopFailure 終端機 bell hook)
 - `apple` (macOS 整合)
 - `explore` (抓取與摘要：MarkItDown, Scrapling, Firecrawl, Playwright)
+- `last30days-skill` (趨勢與研究：Matt Van Horn 的 Last 30 Days 趨勢搜尋插件，支援 Reddit, X, YouTube 等多來源研究)
 - `general` (通用技能：domain, project-explore, model-evaluator)
 - `god` (系统大一統理論：LLM 力學、領域探索、融合方法)
 - `review` (審查插件：consistency、business-improvement、folder-structure、naming-convention、doc-sync、dependency-hygiene、learning-document)

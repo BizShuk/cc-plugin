@@ -57,6 +57,8 @@
 │   │   └── skills/           # Apple 相關技能 (apple-calendar, apple-email, apple-notes, apple-reminders)
 │   ├── explore/              # 探索與抓取插件 (explore, scraping, fetching)
 │   │   └── skills/           # 抓取與摘要技能 (content-summarizer, firecrawl, markitdown, playwright-cli, scrapling, summarize.sh)
+│   ├── last30days-skill/     # 趨勢與研究插件 (Matt Van Horn) — 支援 Reddit, X, YouTube 等趨勢研究
+│   │   └── skills/           # 趨勢研究技能 (last30days)
 │   ├── general/              # 通用功能插件
 │   │   ├── agents/           # 自訂代理 (feature.md)
 │   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, domain, markdownlint, mermaid, model-evaluator, project-explore, topology-builder)
@@ -75,9 +77,6 @@
 │   ├── gosdk/                # Go 開發工具包 (基於 github.com/bizshuk/gosdk)
 │   │   ├── agents/           # Go 代理 (golang-refactor)
 │   │   └── skills/           # Go 技能 (golang-code-quality, golang-mvc, golang-performance-tuning, 等)
-│   └── tmp/                  # 臨時與測試用插件
-│       ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
-│       ├── monitors/         # Monitors (monitors.json)
 │   ├── tmp/                  # 臨時與測試用插件
 │   │   ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
 │   │   ├── monitors/         # Monitors (monitors.json)
@@ -127,7 +126,7 @@
 | 資料匯出          | `cmd/export/`                                                                                                      | `ExportCmd()`                                  |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                                                                                | `NewStateStore()`                              |
 | 環境初始化        | `run.sh`, `config/`                                                                                                | `config.Init()`                                |
-| AI 技能           | `plugins/` (base, apple, explore, general, god, review, tmp, superpowers, gosdk, media, team, understand-anything) | 各 `SKILL.md`                                  |
+| AI 技能           | `plugins/` (base, apple, explore, last30days-skill, general, god, review, tmp, superpowers, gosdk, media, team, understand-anything) | 各 `SKILL.md`                                  |
 | 程式碼審查        | `plugins/review/skills/`                                                                                           | 各 `SKILL.md` (consistency 等 7 項)            |
 | AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                                                | `feature.md`, `review-coordinator.md`          |
 

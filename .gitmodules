@@ -25,3 +25,6 @@
 [submodule "plugins/media/seedance-2.0"]
 	path = plugins/media/seedance-2.0
 	url = https://github.com/Emily2040/seedance-2.0
+[submodule "plugins/last30days-skill"]
+	path = plugins/last30days-skill
+	url = https://github.com/mvanhorn/last30days-skill.git

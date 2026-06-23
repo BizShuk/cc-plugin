@@ -151,6 +151,14 @@
                 "./skills/understand-knowledge",
                 "./skills/understand-onboard"
             ]
+        },
+        {
+            "name": "last30days",
+            "source": "./plugins/last30days-skill",
+            "description": "Research any topic across Reddit, X, YouTube, TikTok, Instagram, Hacker News, Polymarket, GitHub, and 5+ more sources. AI agent scores by upvotes, likes, and real money - not editors.",
+            "skills": [
+                "./skills/last30days"
+            ]
         }
     ]
 }

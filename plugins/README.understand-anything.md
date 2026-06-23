@@ -104,45 +104,45 @@ Phase 7   SAVE              寫入 knowledge-graph.json + 指紋基準
 
 ### 13 種節點類型 (Node Types)
 
-| Type | 說明 | ID Convention |
-|------|------|---------------|
-| `file` | 原始碼檔案 | `file:<relative-path>` |
-| `function` | 函式/方法 | `function:<relative-path>:<name>` |
-| `class` | 類別/介面/型別 | `class:<relative-path>:<name>` |
-| `module` | 邏輯模組/套件 | `module:<name>` |
-| `concept` | 抽象概念/模式 | `concept:<name>` |
-| `config` | 設定檔 (YAML, JSON, TOML, env) | `config:<relative-path>` |
-| `document` | 文件檔 (Markdown, RST, TXT) | `document:<relative-path>` |
-| `service` | 可部署服務定義 (Dockerfile, K8s) | `service:<relative-path>` |
-| `table` | 資料表/遷移 | `table:<relative-path>:<table-name>` |
-| `endpoint` | API 端點/路由 | `endpoint:<relative-path>:<endpoint-name>` |
-| `pipeline` | CI/CD 管線 | `pipeline:<relative-path>` |
-| `schema` | Schema 定義 (GraphQL, Protobuf, Prisma) | `schema:<relative-path>` |
-| `resource` | 基礎設施資源 (Terraform, CloudFormation) | `resource:<relative-path>` |
+| Type       | 說明                                     | ID Convention                              |
+| ---------- | ---------------------------------------- | ------------------------------------------ |
+| `file`     | 原始碼檔案                               | `file:<relative-path>`                     |
+| `function` | 函式/方法                                | `function:<relative-path>:<name>`          |
+| `class`    | 類別/介面/型別                           | `class:<relative-path>:<name>`             |
+| `module`   | 邏輯模組/套件                            | `module:<name>`                            |
+| `concept`  | 抽象概念/模式                            | `concept:<name>`                           |
+| `config`   | 設定檔 (YAML, JSON, TOML, env)           | `config:<relative-path>`                   |
+| `document` | 文件檔 (Markdown, RST, TXT)              | `document:<relative-path>`                 |
+| `service`  | 可部署服務定義 (Dockerfile, K8s)         | `service:<relative-path>`                  |
+| `table`    | 資料表/遷移                              | `table:<relative-path>:<table-name>`       |
+| `endpoint` | API 端點/路由                            | `endpoint:<relative-path>:<endpoint-name>` |
+| `pipeline` | CI/CD 管線                               | `pipeline:<relative-path>`                 |
+| `schema`   | Schema 定義 (GraphQL, Protobuf, Prisma)  | `schema:<relative-path>`                   |
+| `resource` | 基礎設施資源 (Terraform, CloudFormation) | `resource:<relative-path>`                 |
 
 ### 26 種邊類型 (Edge Types, 7 類)
 
-| 類別 | 邊類型 |
-|------|--------|
-| 結構 (Structural) | `imports`, `exports`, `contains`, `inherits`, `implements` |
-| 行為 (Behavioral) | `calls`, `subscribes`, `publishes`, `middleware` |
-| 資料流 (Data flow) | `reads_from`, `writes_to`, `transforms`, `validates` |
-| 依賴 (Dependencies) | `depends_on`, `tested_by`, `configures` |
-| 語意 (Semantic) | `related`, `similar_to` |
-| 基礎設施 (Infrastructure) | `deploys`, `serves`, `provisions`, `triggers` |
-| Schema/資料 (Schema/Data) | `migrates`, `documents`, `routes`, `defines_schema` |
+| 類別                      | 邊類型                                                     |
+| ------------------------- | ---------------------------------------------------------- |
+| 結構 (Structural)         | `imports`, `exports`, `contains`, `inherits`, `implements` |
+| 行為 (Behavioral)         | `calls`, `subscribes`, `publishes`, `middleware`           |
+| 資料流 (Data flow)        | `reads_from`, `writes_to`, `transforms`, `validates`       |
+| 依賴 (Dependencies)       | `depends_on`, `tested_by`, `configures`                    |
+| 語意 (Semantic)           | `related`, `similar_to`                                    |
+| 基礎設施 (Infrastructure) | `deploys`, `serves`, `provisions`, `triggers`              |
+| Schema/資料 (Schema/Data) | `migrates`, `documents`, `routes`, `defines_schema`        |
 
 ### 邊權重 (Edge Weight Conventions)
 
-| Edge Type | Weight |
-|-----------|--------|
-| `contains` | 1.0 |
-| `inherits`, `implements` | 0.9 |
-| `calls`, `exports`, `defines_schema` | 0.8 |
-| `imports`, `deploys`, `migrates` | 0.7 |
-| `depends_on`, `configures`, `triggers` | 0.6 |
-| `tested_by`, `documents`, `provisions`, `serves`, `routes` | 0.5 |
-| 其他 | 0.5 (default) |
+| Edge Type                                                  | Weight        |
+| ---------------------------------------------------------- | ------------- |
+| `contains`                                                 | 1.0           |
+| `inherits`, `implements`                                   | 0.9           |
+| `calls`, `exports`, `defines_schema`                       | 0.8           |
+| `imports`, `deploys`, `migrates`                           | 0.7           |
+| `depends_on`, `configures`, `triggers`                     | 0.6           |
+| `tested_by`, `documents`, `provisions`, `serves`, `routes` | 0.5           |
+| 其他                                                       | 0.5 (default) |
 
 ## 增量更新機制 (Incremental)
 
@@ -182,6 +182,7 @@ React 18 + TypeScript strict
 **設計風格**:深黑奢華 (`#0a0a0a` + `#d4a574` 金色),DM Serif Display 字型,75% 圖譜 + 360px 右側欄。
 
 **互動**:
+
 - 節點點擊 → plain-English 解釋 + 關係 + 引導學習
 - Persona-Adaptive UI (junior dev / PM / power user 看到不同細節層級)
 - 程式碼檢視從底部滑入,可展開成全螢幕 modal
@@ -192,16 +193,16 @@ React 18 + TypeScript strict
 
 `install.sh` 支援 15+ AI CLI / IDE 平台:
 
-| 平台 | 安裝方式 |
-|------|---------|
-| Claude Code | 原生 plugin marketplace |
-| Cursor | 自動發現 (`.cursor-plugin/plugin.json`) |
-| VS Code + Copilot | 自動發現 (`.copilot-plugin/plugin.json`) |
-| Codex | `install.sh codex` |
-| OpenCode / OpenClaw / Antigravity | `install.sh <platform>` |
-| Gemini CLI / Pi Agent / Vibe CLI | `install.sh <platform>` |
-| Hermes / Cline / KIMI CLI / Trae | `install.sh <platform>` |
-| Nanobot / Kiro | `install.sh <platform>` |
+| 平台                              | 安裝方式                                 |
+| --------------------------------- | ---------------------------------------- |
+| Claude Code                       | 原生 plugin marketplace                  |
+| Cursor                            | 自動發現 (`.cursor-plugin/plugin.json`)  |
+| VS Code + Copilot                 | 自動發現 (`.copilot-plugin/plugin.json`) |
+| Codex                             | `install.sh codex`                       |
+| OpenCode / OpenClaw / Antigravity | `install.sh <platform>`                  |
+| Gemini CLI / Pi Agent / Vibe CLI  | `install.sh <platform>`                  |
+| Hermes / Cline / KIMI CLI / Trae  | `install.sh <platform>`                  |
+| Nanobot / Kiro                    | `install.sh <platform>`                  |
 
 ## 使用方式 (Quick Start)
 
