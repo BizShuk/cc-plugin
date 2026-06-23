@@ -118,18 +118,18 @@
 
 ## 模組對應 (Module Mapping)
 
-| 業務領域 (Domain) | 套件/模組 (Package/Module)                                                                                   | 進入點 (Entry Point)                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
-| 記憶蒸餾管道      | `cmd/`, `model/`                                                                                             | `DistillCmd()`                                 |
-| LLM 提取          | `cmd/ollama.go`                                                                                              | `ExtractCmd()`, `OllamaService.Extract()`      |
-| 讀取來源          | `cmd/read_logic.go`                                                                                          | `readGbrainLogic()`, `readClaudeMemLogic()`    |
-| 寫入儲存          | `cmd/write_*.go`                                                                                             | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()` |
-| 資料匯出          | `cmd/export/`                                                                                                | `ExportCmd()`                                  |
-| 狀態管理          | `model/store.go`, `model/cursor.go`                                                                          | `NewStateStore()`                              |
-| 環境初始化        | `run.sh`, `config/`                                                                                          | `config.Init()`                                |
+| 業務領域 (Domain) | 套件/模組 (Package/Module)                                                                                         | 進入點 (Entry Point)                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
+| 記憶蒸餾管道      | `cmd/`, `model/`                                                                                                   | `DistillCmd()`                                 |
+| LLM 提取          | `cmd/ollama.go`                                                                                                    | `ExtractCmd()`, `OllamaService.Extract()`      |
+| 讀取來源          | `cmd/read_logic.go`                                                                                                | `readGbrainLogic()`, `readClaudeMemLogic()`    |
+| 寫入儲存          | `cmd/write_*.go`                                                                                                   | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()` |
+| 資料匯出          | `cmd/export/`                                                                                                      | `ExportCmd()`                                  |
+| 狀態管理          | `model/store.go`, `model/cursor.go`                                                                                | `NewStateStore()`                              |
+| 環境初始化        | `run.sh`, `config/`                                                                                                | `config.Init()`                                |
 | AI 技能           | `plugins/` (base, apple, explore, general, god, review, tmp, superpowers, gosdk, media, team, understand-anything) | 各 `SKILL.md`                                  |
-| 程式碼審查        | `plugins/review/skills/`                                                                                     | 各 `SKILL.md` (consistency 等 7 項)            |
-| AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                                          | `feature.md`, `review-coordinator.md` |
+| 程式碼審查        | `plugins/review/skills/`                                                                                           | 各 `SKILL.md` (consistency 等 7 項)            |
+| AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                                                | `feature.md`, `review-coordinator.md`          |
 
 ## 開發指南 (Development Guide)
 
