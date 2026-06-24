@@ -46,6 +46,7 @@
         "defaultMode": "acceptEdits",
         "additionalDirectories": []
     },
+    "model": "opus",
     "worktree": {},
     "enableWorkflows": true,
     "defaultShell": "bash",
