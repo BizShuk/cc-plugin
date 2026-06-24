@@ -89,7 +89,6 @@
         "refreshInterval": 10
     },
     "extraKnownMarketplaces": {},
-    "outputStyle": "Explanatory",
     "syntaxHighlightingDisabled": false,
     "alwaysThinkingEnabled": true,
     "effortLevel": "xhigh",

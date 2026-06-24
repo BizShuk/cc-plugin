@@ -1,106 +1,112 @@
 {
-    "skillListingBudgetFraction": 0.01,
-    "env": {
-        "_____proxy": "_____",
-        "_____prompt": "_____",
-        "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
-        "_____model": "_____",
-        "_____agent": "_____",
-        "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
-        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-        "_____extra": "_____",
-        "ENABLE_LSP_TOOL": "1",
-        "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
-        "OTEL_METRICS_EXPORTER": "otlp"
+  "skillListingBudgetFraction": 0.01,
+  "env": {
+    "_____proxy": "_____",
+    "_____prompt": "_____",
+    "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
+    "_____model": "_____",
+    "_____agent": "_____",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "_____extra": "_____",
+    "ENABLE_LSP_TOOL": "1",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "OTEL_METRICS_EXPORTER": "otlp"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(ls *)",
+      "Bash(df *)",
+      "Bash(du *)",
+      "Bash(mkdir *)",
+      "Bash(head *)",
+      "Bash(find *)",
+      "Bash(sed *)",
+      "Bash(grep *)",
+      "Bash(go *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(rm *)",
+      "Bash(git *)",
+      "Bash(cat *)",
+      "Bash(chmod +x *)",
+      "Read(//Users/shuk/.gbrain/**)"
+    ],
+    "deny": [
+      "Read(.env*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(**/.env)",
+      "Read(**/secrets/**)",
+      "Read(~/.claude/settings.json)",
+      "Edit(**/.git)",
+      "Write(**/.git)"
+    ],
+    "ask": [
+      "Bash(git push*)"
+    ],
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": []
+  },
+  "model": "opus",
+  "worktree": {},
+  "enableWorkflows": true,
+  "defaultShell": "bash",
+  "allowedHttpHookUrls": [
+    "http://localhost:*"
+  ],
+  "httpHookAllowedEnvVars": [
+    "MY_TOKEN",
+    "HOOK_SECRET"
+  ],
+  "statusLine": {
+    "type": "command",
+    "command": "npx ccstatusline",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "claude-notifications-go@claude-notifications-go": true,
+    "understand-anything@shuk-cc-plugin": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-notifications-go": {
+      "source": {
+        "source": "github",
+        "repo": "777genius/claude-notifications-go"
+      }
     },
-    "permissions": {
-        "allow": [
-            "Bash(ls *)",
-            "Bash(df *)",
-            "Bash(du *)",
-            "Bash(mkdir *)",
-            "Bash(head *)",
-            "Bash(find *)",
-            "Bash(sed *)",
-            "Bash(grep *)",
-            "Bash(go *)",
-            "Bash(python *)",
-            "Bash(python3 *)",
-            "Bash(rm *)",
-            "Bash(git *)",
-            "Bash(cat *)",
-            "Bash(chmod +x *)",
-            "Read(//Users/shuk/.gbrain/**)"
-        ],
-        "deny": [
-            "Read(.env*)",
-            "Read(~/.ssh/**)",
-            "Read(~/.aws/**)",
-            "Read(**/.env)",
-            "Read(**/secrets/**)",
-            "Read(~/.claude/settings.json)",
-            "Edit(**/.git)",
-            "Write(**/.git)"
-        ],
-        "ask": ["Bash(git push*)"],
-        "defaultMode": "acceptEdits",
-        "additionalDirectories": []
+    "shuk-cc-plugin": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/bytedance/projects/cc-plugin"
+      }
     },
-    "model": "opus",
-    "worktree": {},
-    "enableWorkflows": true,
-    "defaultShell": "bash",
-    "allowedHttpHookUrls": ["http://localhost:*"],
-    "httpHookAllowedEnvVars": ["MY_TOKEN", "HOOK_SECRET"],
-    "statusLine": {
-        "type": "command",
-        "command": "npx ccstatusline",
-        "padding": 0
-    },
-    "enabledPlugins": {
-        "gopls-lsp@claude-plugins-official": true,
-        "claude-notifications-go@claude-notifications-go": true,
-        "understand-anything@shuk-cc-plugin": true
-    },
-    "extraKnownMarketplaces": {
-        "claude-notifications-go": {
-            "source": {
-                "source": "github",
-                "repo": "777genius/claude-notifications-go"
-            }
-        },
-        "shuk-cc-plugin": {
-            "source": {
-                "source": "directory",
-                "path": "/Users/bytedance/projects/cc-plugin"
-            }
-        },
-        "wallet-mp-qa": {
-            "source": {
-                "source": "directory",
-                "path": "/Users/bytedance/projects/qa/wallet_and_mp_qa_skill"
-            }
-        }
-    },
-    "outputStyle": "Explanatory",
-    "syntaxHighlightingDisabled": false,
-    "alwaysThinkingEnabled": true,
-    "effortLevel": "high",
-    "fastModePerSessionOptIn": true,
-    "promptSuggestionEnabled": false,
-    "autoUpdatesChannel": "latest",
-    "minimumVersion": "2.1.150",
-    "plansDirectory": "./plans",
-    "voice": {
-        "enabled": true
-    },
-    "prefersReducedMotion": true,
-    "autoMemoryEnabled": true,
-    "autoMemoryDirectory": "~/memory",
-    "skipDangerousModePermissionPrompt": true,
-    "skipWorkflowUsageWarning": true,
-    "theme": "dark-ansi",
-    "verbose": false,
-    "preferredNotifChannel": "auto",
-    "teammateMode": "in-process"
+    "wallet-mp-qa": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/bytedance/projects/qa/wallet_and_mp_qa_skill"
+      }
+    }
+  },
+  "syntaxHighlightingDisabled": false,
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "fastModePerSessionOptIn": true,
+  "promptSuggestionEnabled": false,
+  "autoUpdatesChannel": "latest",
+  "minimumVersion": "2.1.150",
+  "plansDirectory": "./plans",
+  "voice": {
+    "enabled": true
+  },
+  "prefersReducedMotion": true,
+  "autoMemoryEnabled": true,
+  "autoMemoryDirectory": "~/memory",
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark-ansi",
+  "verbose": false,
+  "preferredNotifChannel": "auto",
+  "teammateMode": "in-process"
 }
