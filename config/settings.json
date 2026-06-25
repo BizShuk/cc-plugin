@@ -48,7 +48,7 @@
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "sonnet",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -97,6 +97,7 @@
   "autoUpdatesChannel": "latest",
   "minimumVersion": "2.1.150",
   "plansDirectory": "./plans",
+  "tui": "fullscreen",
   "voice": {
     "enabled": true
   },

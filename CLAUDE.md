@@ -61,7 +61,7 @@
 │   │   └── skills/           # 趨勢研究技能 (last30days)
 │   ├── general/              # 通用功能插件
 │   │   ├── agents/           # 自訂代理 (feature.md)
-│   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, domain, markdownlint, mermaid, model-evaluator, project-explore, topology-builder)
+│   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, business-planner, daily-summary, domain, markdownlint, mermaid, model-evaluator, project-explore, system-planner, topology-builder)
 │   ├── media/                # 影片生成與劇本創作插件
 │   │   ├── skills/           # 影片生成技能 (character-setting, prompt-to-story-script, scene-to-video-prompt)
 │   │   └── voice/            # VoxCPM 聲音樣板與語音克隆指南設定
