@@ -10,8 +10,6 @@ description: >
     "解耦重構", "system-planner".
 version: "1.1.0"
 allowed-tools: Read, Bash, Glob, Grep, Write
-user-invocable: true
-disable-model-invocation: true
 effort: high
 context: fork
 ---

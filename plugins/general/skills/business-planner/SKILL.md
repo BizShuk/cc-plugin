@@ -9,8 +9,6 @@ description: >
     "go-to-market", "商業價值擴充", "業務規劃", "商業模式設計", "business-planner".
 version: "1.1.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, WebSearch
-user-invocable: true
-disable-model-invocation: true
 effort: high
 context: fork
 ---
