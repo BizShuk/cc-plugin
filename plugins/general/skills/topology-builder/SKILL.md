@@ -21,8 +21,13 @@ effort: high
 
 ## Overview
 
-核心原則：身分先於連結 (identity before edges)。先確立每個實體的唯一身分與
+核心原則一：身分先於連結 (identity before edges)。先確立每個實體的唯一身分與
 歸屬 zone，再萃取內部維度，最後才建邊；順序顛倒會產生重複實體與斷鏈。
+
+核心原則二：證據先於邊 (evidence before edges)、信號先於噪音 (signal over noise)。
+每條邊必須有發起方自身來源的直接佐證，禁止以命名相似、分層慣例或「看起來
+合理」推斷；無佐證寧可不建。實體、維度與邊只收對「系統如何運作」有解釋力的
+單元，基礎設施雜訊一律在 Discover 階段排除。
 
 ## When to Use
 
@@ -128,6 +133,21 @@ References:
 - `References:` 只放 entity 維度之間的邊；引用目標不是 entity
   （設定鍵、環境變數、未生效的旗標等）時寫在維度內文描述，不建邊
 - 外部 URL 不用 wikilink，放 `## External Sources` 或維度行內標準連結
+- 基礎設施依賴過濾 (Dependency Filtering)：禁止將 logger、config、error
+  wrappers、utils 等通用基礎設施元件建立正向邊。此類調用直接在維度的內文以
+  文字描述，不放進 `References:`，避免拓撲圖充斥無業務/架構意義的雜訊邊
+
+### 邊的真實性 (Edge Grounding)
+
+- 每條邊必須有發起方「自身來源」的直接佐證：程式呼叫、import、SQL、設定鍵
+  讀取、訊息內文。佐證寫進補充說明（`檔案:行`、API、表名）；指不出佐證即不建邊
+- 禁止推斷式建邊：命名相似（`*Service` 互連）、分層慣例（同層必相連）、
+  「應該會呼叫」皆非佐證。Phase 4 讀 sibling 檔只為抄標題，
+  sibling 檔存在本身不是邊存在的依據
+- 有弱訊號但無法確認的關係：不寫成正向邊，於維度內文以一句話描述，
+  或列入 `_index.md` 的 `Frontier` 待下一輪確認
+- `mentions` 是最後手段：每個維度 `mentions` 邊以 1~2 條為限；超出代表
+  該關係應收斂為更精確的動詞，或根本不該建
 
 ## Identity Rules
 
@@ -138,9 +158,13 @@ References:
 - 每個 entity 維度章節 2~12 個；超過先做概念歸併，
   只剩 1 個時重新檢視是否應併入其他 entity
 - canonical name 確立後同步寫入檔名與 frontmatter `name`；其餘稱呼進 `aliases`
-- 多來源發現同一實體（`name` 或 `aliases` 命中）→ 合併為一檔，`sources` 累積
 - 去重針對「同一實體的多次發現」，不是「相似程式邏輯」：行為不同的平行實作
   各自成為所屬 entity 的維度，互以 `mentions` 交叉引用即可
+- 噪音排除規則 (Noise Exclusion Rules)：
+  - 排除任何測試檔案（例如 `*_test.go`, `*.spec.ts`）、模擬測試物件（mocks/fakes/stubs）與測試用 fixtures。
+  - 排除單純的基礎設施與工具庫（如 `logger`, `json-parser`, `config-loader`, `db-driver` 等），它們不應被識別為 entity。
+  - 排除標準庫與非專案特有的第三方依賴包（如 `cobra`, `lodash`）。
+  - 對於不同 zone 的相似命名實體（例如 `payments/handler` 與 `auth/handler`），絕對不可因為名稱相似而合併為同一個 entity，必須以 context 區分並於檔名中加上 zone 區隔（例如 `payments-handler` 與 `auth-handler`）。
 
 ## Pipeline
 
@@ -209,6 +233,12 @@ done
 - `無入邊 (no inbound)` 列：沒有任何實體連向它；
   `無出邊 (no outbound)` 列：它未連向任何實體
 - Unlinked 兩列同時出現者加註 `(orphan)`；任一列為空時明寫「無 (None)」
+- 邊佐證抽查 (edge grounding audit)：複核 agent 隨機抽 N 條正向邊，要求指出
+  發起方來源的佐證位置（`檔案:行`、表名、API）；指不出佐證者刪除該邊，
+  或降級為維度內文描述。報告列出被刪/降級的邊
+- 樞紐噪音偵測 (hub-noise detection)：入邊+出邊合計異常高、且關係多為
+  `mentions` 的 entity 列為噪音候選；確認是基礎設施工具（logger、metrics）
+  者拆除其邊或併為實作細節，報告供人工裁決
 
 ## Workflow Script
 
@@ -240,6 +270,10 @@ Workflow({
 | 把「被 X 呼叫」寫成正向邊 `calls [[x]]`        | 方向 = 發起者 → 接受者；反向關係交給 Backlinks |
 | Backlinks 手寫、與正向邊不一致                 | 一律由全圖正向邊重算推導                       |
 | 無限制向外爬連結                               | 2 hop 上限，之外進 Frontier                    |
+| 誤將 common helper 或 logger 視為實體並建邊     | 排除 infrastructure noise，僅為實質業務/架構依賴建邊 |
+| 不同 zone 的相似名稱 (例如 handler) 誤判合併   | 依據 business context 保持獨立，檔名與名稱加上 zone 做區隔 |
+| 憑命名相似/分層慣例推斷邊（無來源佐證）         | 邊須有發起方來源佐證；指不出佐證即不建或降級為內文     |
+| `mentions` 邊浮濫成為樞紐噪音                    | 每維度 `mentions` ≤ 2 條，否則收斂為精確動詞或刪除      |
 
 ## Failure Modes
 
