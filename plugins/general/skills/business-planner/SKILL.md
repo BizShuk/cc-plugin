@@ -17,7 +17,7 @@ context: fork
 
 指導 AI 代理 (AI Agent) 評估現有系統的核心價值，系統化盤點水平與垂直擴充機會，依 `投資報酬 (ROI)` 排序後，產出一份可執行、可衡量的商業價值擴充提案報告。
 
-> `僅規劃 (Only Planning)`：本技能只產出規劃報告，不實作、不修改任何程式碼或設定，
+> `Planning Only`：本技能只產出規劃報告，不實作、不修改任何程式碼或設定，
 > 唯一寫入的檔案是 `${cwd}/plans/` 下的提案報告。
 
 ## 概述 (Overview)
@@ -46,11 +46,11 @@ context: fork
 
 ### Step 1 — 蒐集脈絡與界定範圍 (Context Gathering & Scope)
 
-| 輸入型態    | 處理方式                                                     |
-| :---------- | :---------------------------------------------------------- |
+| 輸入型態    | 處理方式                                                      |
+| :---------- | :------------------------------------------------------------ |
 | folder/repo | Glob 頂層結構，鎖定 entry points、handler/service/cmd、設定檔 |
-| 單一檔案    | 直接 Read，必要時追蹤直接相依                               |
-| 文件/純文字 | 直接分析，不掃描檔案系統                                    |
+| 單一檔案    | 直接 Read，必要時追蹤直接相依                                 |
+| 文件/純文字 | 直接分析，不掃描檔案系統                                      |
 
 排除噪音：`.git`, `node_modules`, `vendor`, `dist`, 產生碼。
 若現有核心價值不明確，先呼叫 `business-extract` 取得業務基線再繼續。
@@ -109,12 +109,12 @@ quadrantChart
 
 ### Step 7 — 撰寫提案報告 (Write Report)
 
-`<name>` 取分析目標路徑最後一段（即專案名稱）。報告寫入
-`./plans/business-expansion-<name>.md`（目錄不存在先 `mkdir -p plans`）；
+`<feature_name>` 取與擴充計畫相關之名稱，或目標路徑最後一段（即專案名稱）。報告寫入
+`./plans/business-<feature_name>.md`（目錄不存在先 `mkdir -p plans`）；
 純文字輸入且未指定路徑時，輸出於對話並詢問是否落檔。結構如下：
 
 ```markdown
-# 業務擴充提案 — <專案名稱> (Business Expansion Proposal)
+# 業務擴充提案 — <feature_name> (Business Expansion Proposal)
 
 ## 1. 現有核心價值分析 (Current Core Value Analysis)
 
