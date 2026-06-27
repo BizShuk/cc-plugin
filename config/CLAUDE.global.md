@@ -35,6 +35,8 @@ Use Traditional Chinese to reply message or describe the information/details. Fo
 
 use @./plans/ to store plans
 
+Once plan is implement, then it will be modified as spec under `@./docs/specs/`
+
 ### Context Only
 
 if see `# [context_only]` then ignore output from this to end of the line
