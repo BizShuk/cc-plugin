@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: repo-changelog
+Version: 0.1.0
+Summary: Git history analysis and CHANGELOG generation with exclusion of non-logic changes
+Requires-Python: >=3.9
+Requires-Dist: click>=8.0
+Requires-Dist: pathspec>=0.12

@@ -1,0 +1,2 @@
+[console_scripts]
+repo-changelog = cli:main
