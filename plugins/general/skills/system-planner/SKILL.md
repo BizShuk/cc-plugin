@@ -95,7 +95,7 @@ flowchart TD
 ### Step 6 — 撰寫架構演進計畫 (Write Evolution Plan)
 
 `<feature_name>` 取與變更計畫 (change plan) 相關之名稱，或目標路徑最後一段。報告寫入
-`./plans/architecture-<feature_name>.md`（目錄不存在先 `mkdir -p plans`）。
+`./plans/architecture-<feature_name>.md`（目錄不存在先 `mkdir -p plans`）。 and add a record to `<workspace>/README.todo`
 結構如下：
 
 ```markdown

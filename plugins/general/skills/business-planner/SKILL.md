@@ -110,7 +110,7 @@ quadrantChart
 ### Step 7 — 撰寫提案報告 (Write Report)
 
 `<feature_name>` 取與擴充計畫相關之名稱，或目標路徑最後一段（即專案名稱）。報告寫入
-`./plans/business-<feature_name>.md`（目錄不存在先 `mkdir -p plans`）；
+`./plans/business-<feature_name>.md`（目錄不存在先 `mkdir -p plans`）；and add a record to `<workspace>/README.todo`
 純文字輸入且未指定路徑時，輸出於對話並詢問是否落檔。結構如下：
 
 ```markdown
