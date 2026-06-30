@@ -48,13 +48,15 @@ def iso_week(date_str: str) -> str:
 
 
 def iso_week_range(week: str) -> tuple[str, str]:
-    """Given '2026-W25', return (monday_date, sunday_date) as 'YYYY-MM-DD'."""
-    from datetime import timedelta
+    """Given '2026-W25', return (monday_date, sunday_date) as 'YYYY-MM-DD'.
+
+    Uses ISO calendar so the range matches iso_week()'s isocalendar() numbering
+    (which differs from %W around year boundaries).
+    """
+    from datetime import date, timedelta
     year, _, wk = week.partition("-W")
-    d = datetime.strptime(f"{year}-{int(wk)}-1", "%Y-%W-%w")
-    # Python's %W is Monday-based, week 1 is first week with a Monday
-    d = d + timedelta(days=1)  # Monday
-    return d.strftime("%Y-%m-%d"), (d + timedelta(days=6)).strftime("%Y-%m-%d")
+    monday = date.fromisocalendar(int(year), int(wk), 1)
+    return monday.isoformat(), (monday + timedelta(days=6)).isoformat()
 
 
 def write_jsonl(path: Path, items: list[dict]):
