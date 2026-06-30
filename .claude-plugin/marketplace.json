@@ -46,6 +46,7 @@
                 "./skills/mermaid",
                 "./skills/model-evaluator",
                 "./skills/project-explore",
+                "./skills/sort-todo",
                 "./skills/system-planner",
                 "./skills/topology-builder"
             ]
