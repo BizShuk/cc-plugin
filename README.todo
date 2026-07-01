@@ -1,14 +1,32 @@
 # CC-Plugin TODO
 
-- [ ] 執行 `plans/architecture-cc-plugin-evolution.md` 中的系統架構演進與優化計畫。
-- [ ] 執行 `plans/architecture-system-modularization.md` 中的系統模組化與解耦計畫。
-- [ ] 執行 `plans/architecture-cc-plugin.md` 中的系統架構簡化與解耦計畫：
-  - [ ] `Phase 1` — 建立單一 store 連線與設定純淨化 (30% 進度)
-  - [ ] `Phase 2` — 消除重複代碼與修正資源洩漏 (55% 進度)
-  - [ ] `Phase 3` — 建立核心服務層與介面抽離 (80% 進度)
-  - [ ] `Phase 4` — 規範檔案更名與整合驗證 (100% 進度)
-- [ ] 執行 `plans/architecture-cc-distiller.md` 中的記憶蒸餾管道架構簡化與解耦優化計畫。
-- [ ] 執行 `plans/architecture-system-simplification.md` 中的系統架構簡化與優化計畫。
-- [ ] 執行 `plans/architecture-cc-plugin-decoupling.md` 中的系統架構解耦與優化計畫。
+## 架構重構藍圖 (Architecture Refactoring Roadmap)
 
+依 [`plans/roadmap.md`](plans/roadmap.md) 拆分為四個漸進式階段：
 
+- `Phase 1` — 建立單一 store 連線與設定純淨化 (30% 進度)
+    - [ ] [plans/feat-single-state-store.md](plans/feat-single-state-store.md) — 單一 `StateStore` 連線，移除 `viper` 直接依賴
+    - [ ] [plans/feat-config-externalization.md](plans/feat-config-externalization.md) — 硬編碼預設值移至 `default_settings.json`
+    - [ ] [plans/feat-resource-leak-fix.md](plans/feat-resource-leak-fix.md) — 修復 `defer resp.Body.Close()` 於迴圈內的資源洩漏
+- `Phase 2` — 消除重複代碼與服務層初步抽取 (55% 進度)
+    - [ ] [plans/feat-reader-deduplication.md](plans/feat-reader-deduplication.md) — 合併 `gbrain` 與 `claudemem` 重複的讀取邏輯
+    - [ ] [plans/feat-utility-extraction.md](plans/feat-utility-extraction.md) — `ExpandPath` 與 `temp_dir` 收斂至 `pkg/utils/`
+- `Phase 3` — 建立核心服務層與介面抽離 (80% 進度)
+    - [ ] [plans/feat-service-layer-extraction.md](plans/feat-service-layer-extraction.md) — 業務邏輯自 `cmd/` 移至 `internal/service/` 並定義介面
+    - [ ] [plans/feat-static-registry.md](plans/feat-static-registry.md) — `Reader`/`Writer` 靜態註冊表
+    - [ ] [plans/feat-structured-logging.md](plans/feat-structured-logging.md) — `fmt.Printf` 遷移至 `log/slog`
+- `Phase 4` — 規範檔案更名與整合驗證 (100% 進度)
+    - [ ] [plans/feat-skill-md-renaming.md](plans/feat-skill-md-renaming.md) — `anti-sabotage.md` 重命名為 `SKILL.md` 並補 frontmatter
+    - [ ] [plans/feat-topology-extraction.md](plans/feat-topology-extraction.md) — `model/topology` 遷移至 `pkg/topology` 並新增 `cmd/topology` CLI
+
+## 對應原始計畫 (Legacy References)
+
+合併自以下已歸檔的架構計畫，所有內容已拆分至上述 feature 檔案：
+
+- `architecture-cc-plugin.md` → 已歸檔
+- `architecture-cc-plugin-reorganization.md` → 已歸檔
+- `architecture-cc-plugin-evolution.md` → 已歸檔
+- `architecture-cc-plugin-decoupling.md` → 已歸檔
+- `architecture-system-modularization.md` → 已歸檔
+- `architecture-system-simplification.md` → 已歸檔
+- `architecture-cc-distiller.md` → 已歸檔

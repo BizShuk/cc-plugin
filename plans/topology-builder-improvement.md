@@ -13,7 +13,7 @@
 
 ---
 
-#### [MODIFY] [SKILL.md](file:///Users/bytedance/projects/cc-plugin/plugins/general/skills/topology-builder/SKILL.md)
+#### [MODIFY] [SKILL.md](../plugins/general/skills/topology-builder/SKILL.md)
 
 1. 在 `Identity Rules` 區段新增 `Noise Exclusion Rules` (噪音排除規則) 子區段，明確界定哪些不是實體：
    - 排除測試檔案與 mocks。
@@ -26,7 +26,7 @@
    - 誤將 common helper 或 logger 視為實體並建邊。
    - 將不同 zone 的相似名稱 (例如不同服務的 `handler`) 誤判為相同實體。
 
-#### [MODIFY] [workflow.js](file:///Users/bytedance/projects/cc-plugin/plugins/general/skills/topology-builder/workflow.js)
+#### [MODIFY] [workflow.js](../plugins/general/skills/topology-builder/workflow.js)
 
 1. 在 `RULES` 常數中同步新增 `noise exclusion`、`topology accuracy` 與 `alias merging` 的指導規則。
 2. 調整 `Discover` phase 的 prompt，明確指示 Agent 排除測試、mocks 及基礎設施 helper 套件。

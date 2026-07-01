@@ -5,16 +5,16 @@
 ## 變更摘要 (Changes Summary)
 
 ### 新增插件與技能目錄
-- 建立插件說明檔 [README.md](file:///Users/shuk/projects/cc-plugin/plugins/team/README.md)，描述插件架構與工作流。
-- 建立設定檔 [plugin.json](file:///Users/shuk/projects/cc-plugin/plugins/team/.claude-plugin/plugin.json)，宣告 `team` 插件元數據與其技能。
-- 實作團隊規劃技能 [team-design/SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/team/skills/team-design/SKILL.md)。
-- 實作角色提示生成技能 [role-generator/SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/team/skills/role-generator/SKILL.md)。
-- 實作團隊編排配置技能 [orchestration-config/SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/team/skills/orchestration-config/SKILL.md)。
+- 建立插件說明檔 [README.md](../plugins/team/README.md)，描述插件架構與工作流。
+- 建立設定檔 [plugin.json](../plugins/team/.claude-plugin/plugin.json)，宣告 `team` 插件元數據與其技能。
+- 實作團隊規劃技能 [team-design/SKILL.md](../plugins/team/skills/team-design/SKILL.md)。
+- 實作角色提示生成技能 [role-generator/SKILL.md](../plugins/team/skills/role-generator/SKILL.md)。
+- 實作團隊編排配置技能 [orchestration-config/SKILL.md](../plugins/team/skills/orchestration-config/SKILL.md)。
 
 ### 更新全域配置
-- 於 [.claude-plugin/marketplace.json](file:///Users/shuk/projects/cc-plugin/.claude-plugin/marketplace.json) 註冊 `team` 插件與對應技能。
-- 於 [CLAUDE.md](file:///Users/shuk/projects/cc-plugin/CLAUDE.md) 中更新專案目錄結構與 AI 技能模組對應表。
-- 於 [README.md](file:///Users/shuk/projects/cc-plugin/README.md) 中更新插件數量由九個至十個，並加入 `team` 插件的描述。
+- 於 [.claude-plugin/marketplace.json](../.claude-plugin/marketplace.json) 註冊 `team` 插件與對應技能。
+- 於 [CLAUDE.md](../CLAUDE.md) 中更新專案目錄結構與 AI 技能模組對應表。
+- 於 [README.md](../README.md) 中更新插件數量由九個至十個，並加入 `team` 插件的描述。
 
 ---
 

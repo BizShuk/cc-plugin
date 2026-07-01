@@ -29,25 +29,25 @@
 
 ### [Component Name] Go Distiller Codebase
 
-#### [MODIFY] [root.go](file:///Users/shuk/projects/cc-plugin/cmd/root.go)
+#### [MODIFY] [root.go](../cmd/root.go)
 
-#### [NEW] [ollama.go](file:///Users/shuk/projects/cc-plugin/cmd/ollama.go)
+#### [NEW] [ollama.go](../cmd/ollama.go)
 
-#### [NEW] [run.go](file:///Users/shuk/projects/cc-plugin/cmd/run.go)
+#### [NEW] [run.go](../cmd/run.go)
 
-#### [NEW] [crontab.txt](file:///Users/shuk/projects/cc-plugin/crontab.txt)
+#### [NEW] [crontab.txt](../crontab.txt)
 
-#### [MODIFY] [state.go](file:///Users/shuk/projects/cc-plugin/cmd/state.go)
+#### [MODIFY] [state.go](../cmd/state.go)
 
-#### [MODIFY] [read_gbrain.go](file:///Users/shuk/projects/cc-plugin/cmd/read_gbrain.go)
+#### [MODIFY] [read_gbrain.go](../cmd/read_gbrain.go)
 
-#### [MODIFY] [read_claudemem.go](file:///Users/shuk/projects/cc-plugin/cmd/read_claudemem.go)
+#### [MODIFY] [read_claudemem.go](../cmd/read_claudemem.go)
 
-#### [MODIFY] [write_agentmemory.go](file:///Users/shuk/projects/cc-plugin/cmd/write_agentmemory.go)
+#### [MODIFY] [write_agentmemory.go](../cmd/write_agentmemory.go)
 
-#### [MODIFY] [write_mempalace.go](file:///Users/shuk/projects/cc-plugin/cmd/write_mempalace.go)
+#### [MODIFY] [write_mempalace.go](../cmd/write_mempalace.go)
 
-#### [MODIFY] [retain.go](file:///Users/shuk/projects/cc-plugin/cmd/retain.go)
+#### [MODIFY] [retain.go](../cmd/retain.go)
 
 ---
 

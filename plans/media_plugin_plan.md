@@ -21,43 +21,43 @@
 
 ### 建立多媒體插件 (Create Media Plugin)
 
-#### [NEW] [README.md](file:///Users/shuk/projects/cc-plugin/plugins/media/README.md)
+#### [NEW] [README.md](../plugins/media/README.md)
 
 - 建立 `plugins/media/README.md`，說明 `media` 插件的用途與三個技能的工作流。
 
-#### [NEW] [plugin.json](file:///Users/shuk/projects/cc-plugin/plugins/media/.claude-plugin/plugin.json)
+#### [NEW] [plugin.json](../plugins/media/.claude-plugin/plugin.json)
 
 - 建立 `plugins/media/.claude-plugin/plugin.json`，定義插件資訊與技能清單。
 
 ### 實作多媒體技能 (Implement Media Skills)
 
-#### [NEW] [SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/media/skills/prompt-to-story-script/SKILL.md)
+#### [NEW] [SKILL.md](../plugins/media/skills/prompt-to-story-script/SKILL.md)
 
 - 實作劇本創作優化技能。
 - 功能：將簡單的想法擴展成具備 Setup、Turn、Payoff 故事弧線的畫面化腳本。
 
-#### [NEW] [SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/media/skills/scene-to-video-prompt/SKILL.md)
+#### [NEW] [SKILL.md](../plugins/media/skills/scene-to-video-prompt/SKILL.md)
 
 - 實作分鏡提示詞轉換技能。
 - 功能：將腳本拆分成多鏡分鏡，並按六要素（主體、動作、場景、鏡頭、光線、風格）輸出符合 Kling 等多分鏡介面的英文提示詞，並鎖定角色與場景的一致性。
 
-#### [NEW] [SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/media/skills/character-setting/SKILL.md)
+#### [NEW] [SKILL.md](../plugins/media/skills/character-setting/SKILL.md)
 
 - 實作角色一致性設定技能。
 - 功能：設計一套角色設定範本，產生詳細外觀與特徵描述，維持跨鏡頭的角色一致性。
 
 ### 更新系統配置 (Update System Configurations)
 
-#### [MODIFY] [marketplace.json](file:///Users/shuk/projects/cc-plugin/.claude-plugin/marketplace.json)
+#### [MODIFY] [marketplace.json](../.claude-plugin/marketplace.json)
 
 - 在 `plugins` 陣列中新增 `media` 插件的註冊，包含其技能路徑。
 
-#### [MODIFY] [CLAUDE.md](file:///Users/shuk/projects/cc-plugin/CLAUDE.md)
+#### [MODIFY] [CLAUDE.md](../CLAUDE.md)
 
 - 在專案結構與模組對應中加入 `media` 插件。
 - 在 AI 技能與代理生態中更新說明。
 
-#### [MODIFY] [README.md](file:///Users/shuk/projects/cc-plugin/README.md)
+#### [MODIFY] [README.md](../README.md)
 
 - 在 `AI 技能與代理生態` 部份加入 `media` 插件。
 

@@ -24,43 +24,43 @@
 
 ### 建立團隊插件 (Create Team Plugin)
 
-#### [NEW] [README.md](file:///Users/shuk/projects/cc-plugin/plugins/team/README.md)
+#### [NEW] [README.md](../plugins/team/README.md)
 
 - 建立 `plugins/team/README.md`，說明 `team` 插件的用途與三個技能的工作流。
 
-#### [NEW] [plugin.json](file:///Users/shuk/projects/cc-plugin/plugins/team/.claude-plugin/plugin.json)
+#### [NEW] [plugin.json](../plugins/team/.claude-plugin/plugin.json)
 
 - 建立 `plugins/team/.claude-plugin/plugin.json`，定義插件資訊與技能清單。
 
 ### 實作團隊技能 (Implement Team Skills)
 
-#### [NEW] [SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/team/skills/team-design/SKILL.md)
+#### [NEW] [SKILL.md](../plugins/team/skills/team-design/SKILL.md)
 
 - 實作團隊架構設計技能。
 - 功能：根據專案需求與交付目標，規劃跨職能團隊的角色編制與主要職責。
 
-#### [NEW] [SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/team/skills/role-generator/SKILL.md)
+#### [NEW] [SKILL.md](../plugins/team/skills/role-generator/SKILL.md)
 
 - 實作角色提示生成技能。
 - 功能：依據五大原則設計 `系統提示 (System Prompt)`，並可選融合 Meta/Google/Amazon/TikTok 等大廠的文化特質與技能需求。
 
-#### [NEW] [SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/team/skills/orchestration-config/SKILL.md)
+#### [NEW] [SKILL.md](../plugins/team/skills/orchestration-config/SKILL.md)
 
 - 實作團隊編排與共享配置技能。
 - 功能：規劃 `協調者模式 (Orchestrator Pattern)` 或 `流水線模式 (Pipeline Pattern)` 的編排邏輯，並設定專案層級的共享規則。
 
 ### 更新系統配置 (Update System Configurations)
 
-#### [MODIFY] [marketplace.json](file:///Users/shuk/projects/cc-plugin/.claude-plugin/marketplace.json)
+#### [MODIFY] [marketplace.json](../.claude-plugin/marketplace.json)
 
 - 在 `plugins` 陣列中新增 `team` 插件的註冊，包含其技能路徑。
 
-#### [MODIFY] [CLAUDE.md](file:///Users/shuk/projects/cc-plugin/CLAUDE.md)
+#### [MODIFY] [CLAUDE.md](../CLAUDE.md)
 
 - 在專案結構與模組對應中加入 `team` 插件。
 - 在 AI 技能與代理生態中更新說明。
 
-#### [MODIFY] [README.md](file:///Users/shuk/projects/cc-plugin/README.md)
+#### [MODIFY] [README.md](../README.md)
 
 - 在 `AI 技能與代理生態` 部分加入 `team` 插件。
 

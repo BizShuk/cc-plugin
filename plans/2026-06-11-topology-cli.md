@@ -56,7 +56,7 @@
 
 - [ ] Step 1: 確認 yaml.v3 目前為間接依賴
 
-Run: `grep yaml /Users/shuk/projects/cc-plugin/go.mod`
+Run: `grep yaml ../go.mod`
 Expected: `gopkg.in/yaml.v3 ... // indirect`
 
 - [ ] Step 2: 升為直接依賴

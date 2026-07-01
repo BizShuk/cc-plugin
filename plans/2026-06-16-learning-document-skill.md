@@ -17,7 +17,7 @@
 
 - [ ] **Step 1: 建立技能檔案**
 
-建立 `/Users/bytedance/projects/cc-plugin/plugins/review/skills/learning-document/SKILL.md`，內容須包含 `Use when...` 起頭的 YAML frontmatter 觸發條件描述，且以 Traditional Chinese 撰寫技能指引。
+建立 `../plugins/review/skills/learning-document/SKILL.md`，內容須包含 `Use when...` 起頭的 YAML frontmatter 觸發條件描述，且以 Traditional Chinese 撰寫技能指引。
 
 內容如下：
 ```markdown
@@ -72,7 +72,7 @@ metadata:
 
 - [ ] **Step 1: 修改 plugin.json 註冊新技能**
 
-修改 `/Users/bytedance/projects/cc-plugin/plugins/review/.claude-plugin/plugin.json`，將新技能的相對路徑 `./skills/learning-document` 加入 `skills` 陣列中。
+修改 `../plugins/review/.claude-plugin/plugin.json`，將新技能的相對路徑 `./skills/learning-document` 加入 `skills` 陣列中。
 
 修改處：
 ```json
@@ -90,7 +90,7 @@ metadata:
 
 - [ ] **Step 2: 更新 plugins/review/README.md**
 
-根據 CLAUDE.md 中「更新插件時也必須同步更新對應的 README.md」的規則，修改 `/Users/bytedance/projects/cc-plugin/plugins/review/README.md`，在技能列表中加入 `learning-document` 的描述。
+根據 CLAUDE.md 中「更新插件時也必須同步更新對應的 README.md」的規則，修改 `../plugins/review/README.md`，在技能列表中加入 `learning-document` 的描述。
 
 修改處：
 在目錄結構與技能對照表中加入 `learning-document` 相關內容。

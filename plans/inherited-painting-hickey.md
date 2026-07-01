@@ -94,8 +94,8 @@
 
 ### 關鍵檔案清單
 
-- `/Users/shuk/projects/cc-plugin/cmd/state.go`
-- `/Users/shuk/projects/cc-plugin/cmd/ollama.go`
-- `/Users/shuk/projects/cc-plugin/cmd/distill.go`
-- `/Users/shuk/projects/cc-plugin/config/config.go`
-- `/Users/shuk/projects/cc-plugin/cmd/root.go`
+- `../cmd/state.go`
+- `../cmd/ollama.go`
+- `../cmd/distill.go`
+- `../config/config.go`
+- `../cmd/root.go`

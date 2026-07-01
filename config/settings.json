@@ -6,14 +6,13 @@
         "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
         "_____model": "_____",
         "_____agent": "_____",
-        "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
         "_____extra": "_____",
         "ENABLE_LSP_TOOL": "1",
         "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
         "OTEL_METRICS_EXPORTER": "otlp"
     },
-    "model": "opus",
+    "model": "claude-sonnet-5",
     "permissions": {
         "allow": [
             "Bash(ls *)",
@@ -73,12 +72,6 @@
             "source": {
                 "source": "directory",
                 "path": "/Users/bytedance/projects/cc-plugin"
-            }
-        },
-        "wallet-mp-qa": {
-            "source": {
-                "source": "directory",
-                "path": "/Users/bytedance/projects/qa/wallet_and_mp_qa_skill"
             }
         }
     },

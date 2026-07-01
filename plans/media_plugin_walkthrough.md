@@ -6,18 +6,18 @@
 
 ### 1. 建立插件結構與設定
 - 新增插件目錄 `plugins/media`
-- 建立說明文件 [plugins/media/README.md](file:///Users/shuk/projects/cc-plugin/plugins/media/README.md)
-- 建立插件配置檔 [plugins/media/.claude-plugin/plugin.json](file:///Users/shuk/projects/cc-plugin/plugins/media/.claude-plugin/plugin.json)
+- 建立說明文件 [plugins/media/README.md](../plugins/media/README.md)
+- 建立插件配置檔 [plugins/media/.claude-plugin/plugin.json](../plugins/media/.claude-plugin/plugin.json)
 
 ### 2. 實作三個核心技能
-- `prompt-to-story-script`：劇本創作優化技能，位於 [skills/prompt-to-story-script/SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/media/skills/prompt-to-story-script/SKILL.md)
-- `scene-to-video-prompt`：分鏡提示詞轉換技能，位於 [skills/scene-to-video-prompt/SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/media/skills/scene-to-video-prompt/SKILL.md)
-- `character-setting`：角色視覺一致性設定技能，位於 [skills/character-setting/SKILL.md](file:///Users/shuk/projects/cc-plugin/plugins/media/skills/character-setting/SKILL.md)
+- `prompt-to-story-script`：劇本創作優化技能，位於 [skills/prompt-to-story-script/SKILL.md](../plugins/media/skills/prompt-to-story-script/SKILL.md)
+- `scene-to-video-prompt`：分鏡提示詞轉換技能，位於 [skills/scene-to-video-prompt/SKILL.md](../plugins/media/skills/scene-to-video-prompt/SKILL.md)
+- `character-setting`：角色視覺一致性設定技能，位於 [skills/character-setting/SKILL.md](../plugins/media/skills/character-setting/SKILL.md)
 
 ### 3. 全域註冊與說明文件更新
-- 更新全域註冊表 [marketplace.json](file:///Users/shuk/projects/cc-plugin/.claude-plugin/marketplace.json)
-- 更新技術脈絡文件 [CLAUDE.md](file:///Users/shuk/projects/cc-plugin/CLAUDE.md)
-- 更新專案說明文件 [README.md](file:///Users/shuk/projects/cc-plugin/README.md)
+- 更新全域註冊表 [marketplace.json](../.claude-plugin/marketplace.json)
+- 更新技術脈絡文件 [CLAUDE.md](../CLAUDE.md)
+- 更新專案說明文件 [README.md](../README.md)
 
 ---
 

@@ -41,7 +41,7 @@
 
 ### 實作規劃技能 (Implement Planning Skills)
 
-#### [DONE] [SKILL.md](file:///Users/bytedance/projects/cc-plugin/plugins/general/skills/business-planner/SKILL.md)
+#### [DONE] [SKILL.md](../plugins/general/skills/business-planner/SKILL.md)
 
 `business-planner` 已實作 (`v1.1.0`)。設計重點（完整內容見檔案）：
 
@@ -50,7 +50,7 @@
 - 報告結構升級為八章，新增 `成功指標 (North Star)` 與 `風險與假設`。
 - `allowed-tools` 含 `WebSearch`（競品/市場佐證，須標來源與日期）。
 
-#### [DONE] [SKILL.md](file:///Users/bytedance/projects/cc-plugin/plugins/general/skills/system-planner/SKILL.md)
+#### [DONE] [SKILL.md](../plugins/general/skills/system-planner/SKILL.md)
 
 `system-planner` 已實作 (`v1.1.0`)。設計重點（完整內容見檔案）：
 
@@ -62,23 +62,23 @@
 
 ### 更新插件與系統配置 (Update Plugin & System Configurations)
 
-#### [MODIFY] [plugin.json](file:///Users/bytedance/projects/cc-plugin/plugins/general/.claude-plugin/plugin.json)
+#### [MODIFY] [plugin.json](../plugins/general/.claude-plugin/plugin.json)
 
 在 `skills` 列表中加入兩個新技能的相對路徑：
 - `./skills/business-planner`
 - `./skills/system-planner`
 
-#### [MODIFY] [marketplace.json](file:///Users/bytedance/projects/cc-plugin/.claude-plugin/marketplace.json)
+#### [MODIFY] [marketplace.json](../.claude-plugin/marketplace.json)
 
 在 `general` 插件的 `skills` 列表中更新這兩個新技能。
 
-#### [MODIFY] [README.md](file:///Users/bytedance/projects/cc-plugin/plugins/general/README.md)
+#### [MODIFY] [README.md](../plugins/general/README.md)
 
 更新 General 插件的 `README.md`，在 `## 技能 (Skills)` 表格中加入以下內容：
 - `business-planner` | 分析既有系統業務，規劃如何擴充商業價值與業務範疇
 - `system-planner` | 診斷現有系統複雜度，規劃如何進行架構簡化、目錄組織與可擴充性設計
 
-#### [MODIFY] [CLAUDE.md](file:///Users/bytedance/projects/cc-plugin/CLAUDE.md)
+#### [MODIFY] [CLAUDE.md](../CLAUDE.md)
 
 更新 `CLAUDE.md` 中的專案結構樹中關於 `plugins/general/skills/` 的註解，將這兩個新技能加進去。
 
