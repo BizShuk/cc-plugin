@@ -9,13 +9,13 @@ module.exports = {
         },
         // agy-cc-plugin (planner)
         {
-            name: "agy-cc-plugin",
+            name: "agy-cc-plugin-system",
             script: "agy",
             args: [
                 "--add-dir",
                 "/Users/shuk/projects/cc-plugin",
                 "-p",
-                "'run /system-planner for current workspace, and output under <workspace>/plans/'"
+                "'run /system-planner for current workspace'"
             ],
             namespace: "planner",
             cwd: "/Users/shuk/projects/cc-plugin",

@@ -1,0 +1,14 @@
+# CC-Plugin TODO
+
+- [ ] 執行 `plans/architecture-cc-plugin-evolution.md` 中的系統架構演進與優化計畫。
+- [ ] 執行 `plans/architecture-system-modularization.md` 中的系統模組化與解耦計畫。
+- [ ] 執行 `plans/architecture-cc-plugin.md` 中的系統架構簡化與解耦計畫：
+  - [ ] `Phase 1` — 建立單一 store 連線與設定純淨化 (30% 進度)
+  - [ ] `Phase 2` — 消除重複代碼與修正資源洩漏 (55% 進度)
+  - [ ] `Phase 3` — 建立核心服務層與介面抽離 (80% 進度)
+  - [ ] `Phase 4` — 規範檔案更名與整合驗證 (100% 進度)
+- [ ] 執行 `plans/architecture-cc-distiller.md` 中的記憶蒸餾管道架構簡化與解耦優化計畫。
+- [ ] 執行 `plans/architecture-system-simplification.md` 中的系統架構簡化與優化計畫。
+- [ ] 執行 `plans/architecture-cc-plugin-decoupling.md` 中的系統架構解耦與優化計畫。
+
+
