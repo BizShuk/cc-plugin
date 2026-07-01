@@ -25,8 +25,12 @@ def git_log_numstat(repo: Path, date_format: str = "short") -> str:
 
 
 def git_log_p(repo: Path, since: str, until: str) -> str:
-    """Run git log -p for a date range and return stdout."""
-    cmd = ["git", "-C", str(repo), "log", "-p",
+    """Run git log -p for a date range and return stdout.
+
+    Uses --first-parent to prevent merge commits from pulling in
+    ancestor commits outside the date range into the diff output.
+    """
+    cmd = ["git", "-C", str(repo), "log", "-p", "--first-parent",
            f"--since={since}", f"--until={until}"]
     return subprocess.run(cmd, capture_output=True, text=True, timeout=300).stdout
 
@@ -50,13 +54,17 @@ def iso_week(date_str: str) -> str:
 def iso_week_range(week: str) -> tuple[str, str]:
     """Given '2026-W25', return (monday_date, sunday_date) as 'YYYY-MM-DD'.
 
-    Uses ISO calendar so the range matches iso_week()'s isocalendar() numbering
-    (which differs from %W around year boundaries).
+    Uses ISO 8601: week starts Monday, week 1 is the week containing Jan 4.
     """
-    from datetime import date, timedelta
-    year, _, wk = week.partition("-W")
-    monday = date.fromisocalendar(int(year), int(wk), 1)
-    return monday.isoformat(), (monday + timedelta(days=6)).isoformat()
+    from datetime import timedelta
+    year_str, _, wk_str = week.partition("-W")
+    year, wk = int(year_str), int(wk_str)
+    # ISO week 1 is the week containing Jan 4
+    jan4 = datetime(year, 1, 4)
+    iso = jan4.isocalendar()
+    monday = jan4 - timedelta(days=iso.weekday - 1) + timedelta(weeks=wk - iso.week)
+    sunday = monday + timedelta(days=6)
+    return monday.strftime("%Y-%m-%d"), sunday.strftime("%Y-%m-%d")
 
 
 def write_jsonl(path: Path, items: list[dict]):

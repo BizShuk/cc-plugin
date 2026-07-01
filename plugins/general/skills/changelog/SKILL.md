@@ -1,8 +1,6 @@
 ---
 name: changelog
 description: Generate CHANGELOG.md with weekly LLM-narrated sections for all git repos under a root directory. Runs deterministic stats pipeline first, then spawns parallel subagents per repo to write weekly narratives from git diffs.
-user-invocable: true
-disable-model-invocation: true
 ---
 
 # /changelog
@@ -21,16 +19,12 @@ Defaults to current working directory if no root given.
 
 ### Phase 1: Deterministic pipeline
 
-First install the package, then run the pipeline for all repos. Install from
-this skill's own `scripts/` directory (resolve it relative to this SKILL.md,
-e.g. `${CLAUDE_PLUGIN_ROOT}/skills/changelog/scripts`):
+First install the package, then run the pipeline for all repos:
 
 ```bash
-pip install -e <path-to-this-skill>/scripts
+pip install -e .claude/skills/changelog/scripts
 repo-changelog run-all <root>
 ```
-
-Requires Python ≥ 3.11.
 
 This produces per repo: `stats.json`, `_diffs/*.diff`, and a `CHANGELOG.md` skeleton with `<!-- LLM: ... -->` placeholders.
 

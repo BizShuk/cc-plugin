@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "repo-changelog"
 version = "0.1.0"
 description = "Git history analysis and CHANGELOG generation with exclusion of non-logic changes"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 dependencies = [
     "click>=8.0",
     "pathspec>=0.12",
