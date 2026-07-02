@@ -68,7 +68,8 @@
 │   ├── team/                 # AI 代理團隊規劃與設計插件
 │   │   └── skills/           # 團隊相關技能 (orchestration-config, role-generator, team-design)
 │   ├── god/                  # 系統大一統理論插件 (Grand Unified Theory)
-│   │   └── skills/           # 架構哲學技能 (llm-mechanics, domain-exploration, system-roles-laws, fusion-methods, unified-matrix, grand-unified-theory)
+│   │   ├── references/       # 參考資料 (ontology-template, 12條宇宙法則)
+│   │   └── skills/           # 五大通用算子與透鏡技能 (universal-generate, universal-review, universal-consolidate, universal-aggregate, universal-evolve, system-laws, domain-exploration, llm-mechanics, grand-unified-theory)
 │   ├── review/               # 審查插件 (Review) — 一致性、業務改善、結構/命名/文件/依賴/測試/學習審查
 │   │   ├── agents/           # 審查代理 (review-coordinator — 編排全部審查技能)
 │   │   └── skills/           # 審查技能 (consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, learning-document)

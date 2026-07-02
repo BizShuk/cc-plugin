@@ -3,78 +3,66 @@ name: grand-unified-theory
 description: >
   Use when needing the complete Grand Unified Theory of Systems as a
   single reference, or when cross-referencing multiple god-plugin skills
-  together. This is the full philosophical framework combining LLM
-  mechanics, exploration strategy, 13 laws, 10 roles, 4 fusion methods,
-  and 4 ultimate structures. Triggers on: "grand unified theory",
-  "full reference", "god framework", "all laws and roles".
-version: "1.0.0"
+  together — the five universal operators, 13 laws, 10 roles, 4 fusion
+  methods, and 4 ultimate structures. Triggers on: "grand unified theory",
+  "full reference", "god framework", "universal operators", "all laws
+  and roles", "大一統".
+version: "2.0.0"
 metadata:
   type: reference
   tier: philosophy
 ---
 
-# grand-unified-theory
+# grand-unified-theory — 系統大一統理論
 
-系統大一統理論：從語言模型底層邏輯到宏觀架構哲學的完整參考。
+從語言模型底層邏輯到宏觀架構哲學的頂層索引。核心公理：`萬物皆產物，產物皆可被五算子作用`。
 
-> 本技能為完整參考文件。各章節的獨立技能可單獨使用：
->
-> - `llm-mechanics` — 壹、語言模型底層運算邏輯
-> - `domain-exploration` — 貳、未知領域的探索與收斂
-> - `system-law-*` — 參、10 大角色與 13 大法則（各法則獨立技能）
-> - `fusion-methods` — 肆、四大融合思維工具
-> - `unified-matrix` — 伍、系統大一統架構矩陣
+## 理論結構
 
-## 壹、語言模型的底層運算邏輯
+```mermaid
+graph TD
+    O[五大通用算子] -->|"作用於萬物"| X[任何產物]
+    L[13 法則 × 10 角色] -->|"提供透鏡"| O
+    F[四大融合思維] -->|"提供凝聚方法"| O
+    M[四大終極融合體] -->|"聚合的典範"| O
+    S[LLM 基底機制] -->|"執行者的物理"| O
+```
 
-LLM 本質是在高維度空間中進行「找方向、算距離」的矩陣運算。
+## 壹、五大通用算子 (Five Universal Operators)
 
-- `方向配對`：詞嵌入 → Attention → 相似度計算
-- `負面語意`：空間反轉與向量減法
-- `同音字解析`：位置編碼 + 詞性標註 → 獨立座標
-- `高階提示詞`：對 Thinking Mode 提供戰略目標，授權微觀推演
+| 算子 | 簽名 | 本質 | 技能 |
+| :--- | :--- | :--- | :--- |
+| 創生 (generate) | 意圖 → 產物 | 從無到有 | `universal-generate` |
+| 審視 (review) | 產物 → 發現 | 對照透鏡，正查 + 負查 | `universal-review` |
+| 凝聚 (consolidate) | 同類 ×N → 典範 ×1 | 去重合一 | `universal-consolidate` |
+| 聚合 (aggregate) | 異類 ×N → 整體 ×1 | 組合升維 | `universal-aggregate` |
+| 演化 (evolve) | 產物 + 回饋 + 記憶 → 產物' | 迴圈 + 選擇 + 記憶 | `universal-evolve` |
 
-## 貳、未知領域的探索與收斂
+封閉性：evolve 是前四者的閉合迴圈；五算子可作用於自身（生成技能、審視審查、凝聚技能庫、聚合成插件、演化整個系統）。
 
-漸進式收斂 (Progressive Convergence) 三階段：
+## 貳、13 法則 × 10 角色
 
-1. `地貌掃描` — 釐清「是什麼與不是什麼」
-2. `插旗測試` — 最小原型主動「撞牆」
-3. `結構化收斂` — 依限制確立架構
+四大域：`宇宙基石`（空間、時間、重力、因果）、`系統意志`（混沌、精神、生命、破壞）、`元素力量`（冰霜、烈焰、雷霆）、`狀態邊界`（光明、黑暗）。
 
-## 參、10 大角色與 13 大法則
+完整透鏡表見 `system-laws`。
 
-### 宇宙基石
+## 參、四大融合思維工具
 
-空間 ✖ 建築師 · 時間 ✖ 指揮家 · 重力 ✖ 指揮家 · 因果 ✖ 實驗家
+1. `正交性 (Orthogonality)` — 垂直交叉，互不干涉
+2. `同構性 (Isomorphism)` — 剝除表象，找底層共同結構
+3. `催化劑 (Catalyst)` — 互斥概念間插入輕量協議
+4. `辯證循環 (Dialectical Cycle)` — 對立概念拉長至時間軸成生命週期
 
-### 系統意志
+方法細節見 `universal-consolidate`。
 
-混沌 ✖ 探險家 · 精神 ✖ 造物主 · 生命 ✖ 造物主 · 破壞 ✖ 實驗家
+## 肆、四大終極融合體
 
-### 元素力量
+時空運行矩陣（正交性）、能量守恆引擎（同構性）、零信任稜鏡（催化劑）、無限演化之輪（辯證循環）。矩陣全表與完整性檢查見 `universal-aggregate`。
 
-冰霜 ✖ 修剪者 · 烈焰 ✖ 推進者 · 雷霆 ✖ 傳令官
+## 伍、基底：LLM 機制與探索策略
 
-### 狀態邊界
-
-光明 ✖ 啟明者 · 黑暗 ✖ 守密者
-
-## 肆、四大融合思維工具
-
-1. `正交性` — 垂直交叉，互不干涉
-2. `同構性` — 剝除表象，找底層共同結構
-3. `催化劑` — 互斥概念間插入輕量協議
-4. `辯證循環` — 對立概念拉長至時間軸形成生命週期
-
-## 伍、系統大一統架構矩陣
-
-| 終極融合體           | 融合工具   | 角色                         | 法則                     |
-| :------------------- | :--------- | :--------------------------- | :----------------------- |
-| 時空運行矩陣         | 正交性     | 建築師 ✖ 指揮家              | 空間 ✖ 時間              |
-| 能量守恆引擎         | 同構性     | 推進者+修剪者+傳令官+指揮家  | 烈焰+冰霜+雷霆+重力     |
-| 零信任稜鏡           | 催化劑     | 啟明者 ✖ 守密者              | 光明 ✖ 黑暗              |
-| 無限演化之輪         | 辯證循環   | 造物主→探險家→實驗家         | (精神+生命)→混沌→(因果+破壞) |
+- `llm-mechanics` — 語言模型是高維空間的「找方向、算距離」矩陣運算
+- `domain-exploration` — 未知領域的漸進式收斂：地貌掃描 → 插旗測試 → 結構化收斂
 
 ## 最終哲學
 

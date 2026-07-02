@@ -1,7 +1,7 @@
 {
   "name": "god",
-  "version": "1.0.0",
-  "description": "Grand Unified Theory of Systems — architectural philosophy, LLM mechanics, and system design laws",
+  "version": "2.0.0",
+  "description": "Grand Unified Theory of Systems — five universal operators (generate/review/consolidate/aggregate/evolve), 13 system laws, and LLM mechanics",
   "author": {
     "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
@@ -16,25 +16,24 @@
     "system-design",
     "llm",
     "unified-theory",
-    "roles",
+    "universal-operators",
+    "generate",
+    "review",
+    "consolidate",
+    "aggregate",
+    "evolve",
     "laws",
-    "fusion",
-    "singularity",
-    "prompting"
+    "fusion"
   ],
   "skills": [
-    "./skills/llm-mechanics",
+    "./skills/universal-generate",
+    "./skills/universal-review",
+    "./skills/universal-consolidate",
+    "./skills/universal-aggregate",
+    "./skills/universal-evolve",
+    "./skills/system-laws",
     "./skills/domain-exploration",
-    "./skills/system-law-space",
-    "./skills/system-law-time",
-    "./skills/system-law-gravity",
-    "./skills/system-law-causality",
-    "./skills/system-law-chaos",
-    "./skills/system-law-spirit",
-    "./skills/system-law-life",
-    "./skills/system-law-destruction",
-    "./skills/fusion-methods",
-    "./skills/unified-matrix",
+    "./skills/llm-mechanics",
     "./skills/grand-unified-theory"
   ]
 }
