@@ -19,11 +19,9 @@
     "daily-summary"
   ],
   "skills": [
-    "./skills/anti-sabotage",
     "./skills/business-extract",
     "./skills/changelog",
     "./skills/daily-summary",
-    "./skills/model-evaluator",
     "./skills/project-explore",
     "./skills/sort-todo",
     "./skills/topology-builder"

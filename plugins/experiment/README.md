@@ -12,17 +12,19 @@
 
 ## 內容 (Contents)
 
-`experiment` 目前收容以下八個技能：
+`experiment` 目前收容以下十個技能：
 
 | 技能 (Skill)        | 原位置 (Original Location)             | 預期正式歸屬 (Expected Destination) | 說明 (Notes)                                                |
 | ------------------- | -------------------------------------- | ------------------------------------ | ----------------------------------------------------------- |
+| `anti-sabotage`     | `plugins/general/skills/anti-sabotage` | `general`                            | 防範 Agent 自我破壞作業流程的檢查清單                       |
+| `business-planner`  | `plugins/general/skills/business-planner` | `general`                          | 規劃單一功能的商業價值                                      |
 | `firecrawl`         | `plugins/explore/skills/firecrawl`     | `explore`                            | Firecrawl 網頁爬取 SDK                                      |
+| `markdownlint`      | `~/.claude/skills/markdownlint`        | `general`                            | Markdown 格式檢查規則子集 + 自訂限制                        |
+| `mermaid`           | `plugins/general/skills/mermaid`      | `general`                            | Mermaid.js 圖表語法指南                                     |
+| `model-evaluator`   | `plugins/general/skills/model-evaluator` | `general`                          | 評估 LLM 模型品質 / 表現                                  |
 | `playwright-cli`    | `~/.claude/skills/playwright-cli`      | `explore`                            | Playwright 瀏覽器自動化 CLI                                 |
 | `scrapling`         | `plugins/explore/skills/scrapling`     | `explore`                            | Scrapling 反爬網頁抓取框架                                  |
 | `summarize.sh`      | `plugins/explore/skills/summarize.sh`  | `explore`                            | 透過 `summarize` CLI 摘要網頁 / 檔案 / YouTube / Podcast    |
-| `business-planner`  | `plugins/general/skills/business-planner` | `general`                          | 規劃單一功能的商業價值                                      |
-| `markdownlint`      | `~/.claude/skills/markdownlint`        | `general`                            | Markdown 格式檢查規則子集 + 自訂限制                        |
-| `mermaid`           | `plugins/general/skills/mermaid`      | `general`                            | Mermaid.js 圖表語法指南                                     |
 | `system-planner`    | `plugins/general/skills/system-planner` | `general`                           | 規劃單一功能的系統架構                                      |
 
 ## 結構 (Structure)

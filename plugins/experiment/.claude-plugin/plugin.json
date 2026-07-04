@@ -26,10 +26,12 @@
     "system-planner"
   ],
   "skills": [
+    "./skills/anti-sabotage",
     "./skills/business-planner",
     "./skills/firecrawl",
     "./skills/markdownlint",
     "./skills/mermaid",
+    "./skills/model-evaluator",
     "./skills/playwright-cli",
     "./skills/scrapling",
     "./skills/summarize.sh",

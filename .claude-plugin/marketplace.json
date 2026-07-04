@@ -34,11 +34,9 @@
             "name": "general",
             "source": "./plugins/general",
             "skills": [
-                "./skills/anti-sabotage",
                 "./skills/business-extract",
                 "./skills/changelog",
                 "./skills/daily-summary",
-                "./skills/model-evaluator",
                 "./skills/project-explore",
                 "./skills/sort-todo",
                 "./skills/topology-builder"
@@ -50,10 +48,12 @@
             "description": "Sandbox plugin for skills staged before merging into their formal destination plugins. Holds exploration / scraping skills previously under `explore` and planning / documentation skills previously under `general` so they can be evaluated, refactored, or promoted without disturbing the shipped plugin manifests. Not a stable surface — entries here are expected to graduate.",
             "keywords": ["experiment", "sandbox", "staging", "scraping", "fetching", "playwright", "firecrawl", "scrapling", "summarize", "mermaid", "markdownlint", "business-planner", "system-planner"],
             "skills": [
+                "./skills/anti-sabotage",
                 "./skills/business-planner",
                 "./skills/firecrawl",
                 "./skills/markdownlint",
                 "./skills/mermaid",
+                "./skills/model-evaluator",
                 "./skills/playwright-cli",
                 "./skills/scrapling",
                 "./skills/summarize.sh",
