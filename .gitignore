@@ -4,6 +4,7 @@ log/
 .claude/*
 .claude/skills/*
 !.claude/skills/happy/
+!.claude/skills/marketplace-config/
 .claude/settings.local.json
 .playwright-mcp/*
 models/bge-m3-Q8_0.gguf

@@ -1,0 +1,360 @@
+{
+  "version": 1,
+  "skills": {
+    "apple-calendar": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "d0728b8054bcd077cafec255c870f71b30d18ccbcee37b598a286e05300f7de0"
+    },
+    "apple-email": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "ccd247b49322e9978f959d75ef1aeac5fa02e660cd92eee874dc9d88700eb47e"
+    },
+    "apple-notes": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "0167d9e6bde90f0007276608c15252b78ad719757c81015d0c940d21b013e41d"
+    },
+    "apple-reminders": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "bdc7f1bcbf5c00a106a39939f11fb1740b2ca1a64e352e7548f8048b43c81a5b"
+    },
+    "banner-design": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "82c86217829268afd1f86e89390270e35cb3a1761854a0bbe6180929614ae022"
+    },
+    "brand": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "3c7acb846082f9e4cc873f1cf85bd57ade027206e18c7c050797f815e3a56af7"
+    },
+    "business-improvement": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "6db8aab812ac7ddcba108fff4c5deb2251607d1d912b296f21d5d360558f29aa"
+    },
+    "business-planner": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "c88326c7a401fbf0f2f81912d0c2e0941da225d0082b5f85ab18adb23225e93f"
+    },
+    "changelog": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "c4ccbf02af991fb23ca79841f5bee2fdf92652478b4547d685ab93cf30bef202"
+    },
+    "character-setting": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "4ae645bc5d72ff4c1a65c10ad6e66ee6ede3a0c10184bff4ff2685697d23b18c"
+    },
+    "consistency": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "b6d2daee5f034cb722d813b74f1aa51abb1dd0638379e7df59ff0b3669329117"
+    },
+    "content-summarizer": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "f95fe1597b4a7e66a3361a7e734e5c0664570943c546b2a3b3f04d7102537376"
+    },
+    "daily-summary": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "5750d5c4b22036eee7826068880c20b750dd3e83c8b203342b8faeccfe9d64fc"
+    },
+    "dependency-hygiene": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "2f847c01ae62d695ece97f1c0f4a95f57ca12435c47e27c423140182c40ab340"
+    },
+    "design": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "4e0412d29df74e6153e4944b367459a28cf52e3e81c7f45c1ecf4c2a8b21907c"
+    },
+    "design-system": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "a05715299135276628f53519484e1267ec8ad111e6355a09c2da1cf66aee2cc3"
+    },
+    "doc-sync": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "a34ce0262d6ea0d67af5df35d116b5fe68d3c9e8b399a7be0d073f43d7e74e8c"
+    },
+    "firecrawl": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "af6a0335fbf6d26e20841ac8e8fb6271df38b76bfff349d63ee60c0ed80125a6"
+    },
+    "folder-structure": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "73126b7b9a0dafa398cf23d3b586746652313c482d090eef7f7053041c05f590"
+    },
+    "golang-code-quality": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "5f9b6cfe571bc7c91ced60628dfcce38e02b70821417d48a32458394455a96f8"
+    },
+    "golang-dead-code": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "59127480563be52a9b8425d588e4c0c6d85733818920d202e4e9856c83eb34b7"
+    },
+    "golang-dev": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "87e58a9437c78b5876790a410d24020065eaeadc089b06b6d3b5ed5178b57627"
+    },
+    "golang-gosdk": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "4265553091ec772cf7ed3d4e9e54299db8a446109fe892b4fc8940da0299fbf9"
+    },
+    "golang-mvc": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "2eda7a024e2c6837abe10fe797ebfdccd96d3824c944ed9cc926a02b9d4d99c0"
+    },
+    "golang-naming": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "082ddda4b2c7a2e51e00940e13ac339494c2982d9aa5bf8a4b70441ecbeb2d5c"
+    },
+    "golang-network": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "0f76a0889b79a8c7ff240b12eea5a871e9936895eeeb9ddc96f40c92e48ef73b"
+    },
+    "golang-performance-tuning": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "8835ea2dc1f0aa747732738d53d8bb415079cc0d9ede9b20e1d9b0c4d3d544c3"
+    },
+    "kb-connect": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "55496fcf281237d4f9dfa674a628cb514998ea961a183a1468995749eba4acc3"
+    },
+    "kb-distill": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "da406216127407497d0f50cd0f9e38479b1735a6a7a79a377b32e43b50127951"
+    },
+    "kb-ingest-chat": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "8073bd452c3b5b9521a7f713e430b94d1c056a3080c57e5f0080e81526f3278f"
+    },
+    "kb-ingest-history": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "59c409c7d57449fa6cba2791808168e25c781717cc69a486f25158256cea65be"
+    },
+    "kb-ingest-repo": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "5d06ff31f3889d009a938e38d4b58dcf1a41d57e11fb6dbab0ddf8ed181ba9e4"
+    },
+    "kb-ingest-schema": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "f8c9b3bbeac07ccbd3780cef4d09f4906f4f1133ed4702e2640e3407c5e0c2b6"
+    },
+    "kb-ingest-web": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "daaf5d5f3092baf7ae5a096018d59433f5474a3e9efdafb6b6e4c6162ab0b497"
+    },
+    "kb-query": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "c5218cf1d6895bd9ab4db6d4c84e2511d4ce403593a6a12524378d41c8097579"
+    },
+    "kb-spec": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "5a7bf7989be59cf2d2b06b83c85ae6580c9636c7d4a8ed3118483677e470dd60"
+    },
+    "kb-verify": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "55504702e1590e239e425aa32f01318211d028f6b7088e0c41fc309fa680016a"
+    },
+    "last30days": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "4738972a272a2cb4f58fb1a494bc671be93cc1288ee08a91400efd6c3f6725ee"
+    },
+    "learning-document": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "90772beaefb48e5922f1b151c899f7233a0730019e3f63f051389b57dc2b71d7"
+    },
+    "markdownlint": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "4c93e8e397eaf8641ed7e266ff9ea370de2dabcf35fc5e75aa1d052fb3c0ca8b"
+    },
+    "marketplace-config": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "f2f63605d2e5b972f7ea172a445b8ccc43cf8c028aa361f85ab43eb6508b3740"
+    },
+    "markitdown": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "11001cdd7a12ea963fd95eb8e900789670172ed2d639e950fdee29bff235324a"
+    },
+    "mermaid": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "88bf6991baba15258a21cc68bec1d971b68c3e16bd30dbcd5de5787fb96b61f0"
+    },
+    "migrate-zap-to-slog": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "01b15f4d74452a755be2eee05d0ddb2162470721fd796461eb3b22bc0ed620bb"
+    },
+    "model-evaluator": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "61e4cbc67fe4a58d3fbe88a59d5dcb5fd61a8829335484119e7d9183f667e327"
+    },
+    "naming-convention": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "6b8fb201269a22181d35796bbcd7c7fbe43a2b45ea77e1a59a3c2959d2b6b651"
+    },
+    "orchestration-config": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "2a20874f8c9baaeac678e04e41962d358210dbee97b6cf4e287c18fb5f32c994"
+    },
+    "playwright-cli": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "c841b93f771ccb130464fc97e8f6523f00f6152717138d8426c2daf453e4332b"
+    },
+    "project-explore": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "8f3bbbb94d25a2def87ba36efa4658ad8ce7142cb6291ed298e5a853fadc153f"
+    },
+    "project-route": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "5c7f9b2c54d16aa97fb46c8b9bfac3ff477948aa08f598c9481cfef156b66605"
+    },
+    "prompt-to-story-script": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "d0da6c88ba26b0a857a197f9005460828fc7b26ba4855e242a974bf5ddeeacb6"
+    },
+    "role-generator": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "0712ce5fe615665ab3921fb4caa14098d8f913736be3181fb58b29d9db81b2ea"
+    },
+    "scene-to-video-prompt": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "7335da6913f5a1aa4a4a05eb6140584679f6697d406a9aa46243c4dcd210aaec"
+    },
+    "scrapling": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "d7c058d69f32def8a1b87f2f690f2f16e8f7cd203377167bdf1f45220f27ef12"
+    },
+    "slides": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "c72a8bcd2ee98a7caab8f00a816c7e7ccfa46bba6682539db2186e71220155f1"
+    },
+    "sort-todo": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "63652001b42d7cac79165041ba01c2141a8d45e3e469663ac4b62eaffdce7151"
+    },
+    "summarize.sh": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "fef4c9a3b49c3ee745358f0566f641a4e1a15e5f5127a29cd865c9e0fb3c0415"
+    },
+    "system-planner": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "72cf55d28c7b7b8ef75f55d67bfc2e1c1695996accf273e482abdd5484b31fa1"
+    },
+    "team-design": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "228c45abfdb14398eafacff6140eb8e904b7693b6bccf0be6a82072bfc4ff627"
+    },
+    "topology-builder": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "b31b62b254b0d4c574284ff6f1a3f064e5c21f586d6cf00593614e05cf519aaa"
+    },
+    "ui-styling": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "c5263c6dd5078d826da829036c2abd3249685e38dae40991a4763b3157017c27"
+    },
+    "ui-ux-pro-max": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "b0f78bc58cc5a3ac68afdf6f2de214e147b09a3f8686447cb3804a921fa198c2"
+    },
+    "ultra-explore": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "b321e12e2888c412c31febde8395a28fc0f2f8969fcae17f2cb2a6a653796a67"
+    },
+    "understand": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "47ff6c9964b835a52aaac5e251f2eef68e53ce03ddd85756343253886b35b056"
+    },
+    "understand-chat": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "3cec7cc6b02177b29d359c3889e311a3985314c61ef7a654ed6c22d43e44b080"
+    },
+    "understand-dashboard": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "32771fb738e732febba2c780df113354fdc08085aee73e6531ded3e0ad17ee29"
+    },
+    "understand-diff": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "e258781324eaab144a9340c32ea2a49f7584ec7b5984121e11dcffe16fbee03c"
+    },
+    "understand-domain": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "493ad301cd52ddc35f883dd990db0ea683abf84d8bae893da38707c35a22fe0c"
+    },
+    "understand-explain": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "8f6ef8bc8d4be5e0e8dd764c0d4c5a42b95fa47191e22edbb5ccc351828af7b6"
+    },
+    "understand-knowledge": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "91643a1d1c6657229ac9f93511cd155dcffed4ebc4647e51962dacf69905c990"
+    },
+    "understand-onboard": {
+      "source": "/Users/shuk/projects/cc-plugin",
+      "sourceType": "local",
+      "computedHash": "f486302a95dd1e871c5f1ac1dba1d87b8b40e61802fffedead5d203676fdc771"
+    }
+  }
+}
