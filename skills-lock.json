@@ -154,7 +154,7 @@
     "kb-ingest-history": {
       "source": "/Users/shuk/projects/cc-plugin",
       "sourceType": "local",
-      "computedHash": "59c409c7d57449fa6cba2791808168e25c781717cc69a486f25158256cea65be"
+      "computedHash": "a66947d0b403dee21f3c9fe34d34deba96533a10839cd012ab8bb4efbbc95064"
     },
     "kb-ingest-repo": {
       "source": "/Users/shuk/projects/cc-plugin",
@@ -269,7 +269,7 @@
     "scrapling": {
       "source": "/Users/shuk/projects/cc-plugin",
       "sourceType": "local",
-      "computedHash": "d7c058d69f32def8a1b87f2f690f2f16e8f7cd203377167bdf1f45220f27ef12"
+      "computedHash": "afee36378af427b981b47b653a25eb4c9ec09a8d209d79717890ef4ae461f640"
     },
     "slides": {
       "source": "/Users/shuk/projects/cc-plugin",
@@ -284,7 +284,7 @@
     "summarize.sh": {
       "source": "/Users/shuk/projects/cc-plugin",
       "sourceType": "local",
-      "computedHash": "fef4c9a3b49c3ee745358f0566f641a4e1a15e5f5127a29cd865c9e0fb3c0415"
+      "computedHash": "400aa4fdfac61e9784aee061c6bae7b5ab304bed550fe6606190c392829732f5"
     },
     "system-planner": {
       "source": "/Users/shuk/projects/cc-plugin",

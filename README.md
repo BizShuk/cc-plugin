@@ -56,21 +56,17 @@
 
 ### AI 技能與代理生態 (AI Skills & Agents Ecosystem)
 
-提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為十一個模組化插件目錄，並透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent：
+提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為七個模組化插件目錄，並透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent：
 
 - `base` (預設基礎插件 — must-install：Stop/StopFailure 終端機 bell hook)
 - `apple` (macOS 整合)
 - `explore` (抓取與摘要：MarkItDown, Scrapling, Firecrawl, Playwright)
-- `last30days-skill` (趨勢與研究：Matt Van Horn 的 Last 30 Days 趨勢搜尋插件，支援 Reddit, X, YouTube 等多來源研究)
 - `general` (通用技能：domain, project-explore, model-evaluator)
 - `god` (系统大一統理論：LLM 力學、領域探索、融合方法)
 - `review` (審查插件：consistency、business-improvement、folder-structure、naming-convention、doc-sync、dependency-hygiene、learning-document)
 - `media` (影片生成與劇本創作：prompt-to-story-script, scene-to-video-prompt, character-setting)
 - `team` (代理團隊規劃與設計：team-design, role-generator, orchestration-config)
 - `tmp` (臨時測試)
-- `superpowers` (核心流程：TDD、除錯、協作模式 — vendored from obra/superpowers)
-- `gosdk` (Go 開發：code-quality、mvc、performance、network、dead-code、naming、zap→slog 遷移)
-- `understand-anything` (AI 輔助代碼庫理解：代碼分析、架構分析與說明等 8 個技能與 9 個分析代理)
 
 `領域流程 (Domain Flow):`
 

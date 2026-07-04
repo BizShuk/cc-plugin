@@ -74,8 +74,6 @@
 │   ├── review/               # 審查插件 (Review) — 一致性、業務改善、結構/命名/文件/依賴/測試/學習審查
 │   │   ├── agents/           # 審查代理 (review-coordinator — 編排全部審查技能)
 │   │   └── skills/           # 審查技能 (consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, learning-document)
-│   ├── superpowers/          # 核心技能庫 (TDD、除錯、協作模式 — git submodule 來自 obra/superpowers)
-│   │   └── skills/           # 流程技能 (brainstorming, dispatching-parallel-agents, using-superpowers, 等)
 │   ├── gosdk/                # Go 開發工具包 (基於 github.com/bizshuk/gosdk)
 │   │   ├── agents/           # Go 代理 (golang-refactor)
 │   │   └── skills/           # Go 技能 (golang-code-quality, golang-mvc, golang-performance-tuning, 等)
@@ -128,7 +126,7 @@
 | 資料匯出          | `cmd/export/`                                                                                                                        | `ExportCmd()`                                  |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                                                                                                  | `NewStateStore()`                              |
 | 環境初始化        | `run.sh`, `config/`                                                                                                                  | `config.Init()`                                |
-| AI 技能           | `plugins/` (tools, explore, last30days-skill, general, god, review, tmp, superpowers, gosdk, media, team, ultra-explore, understand-anything) | 各 `SKILL.md`                                  |
+| AI 技能           | `plugins/` (tools, explore, general, god, review, tmp, media, team, ultra-explore) | 各 `SKILL.md`                                  |
 | 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/`                                                                     | `ultra-explore` 入口 + kb-* 10 項, `kb-coordinator.md` |
 | 程式碼審查        | `plugins/review/skills/`                                                                                                             | 各 `SKILL.md` (consistency 等 7 項)            |
 | AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                                                                  | `feature.md`, `review-coordinator.md`          |

@@ -4,9 +4,6 @@
 [submodule "plugins/explore/skills/summarize.sh/summarize"]
 	path = plugins/explore/skills/summarize.sh/summarize
 	url = https://github.com/steipete/summarize.git
-[submodule "plugins/superpower"]
-	path = plugins/superpower
-	url = https://github.com/obra/superpowers.git
 [submodule "pkg/system_prompts/CL4R1T4S"]
 	path = pkg/system_prompts/CL4R1T4S
 	url = https://github.com/elder-plinius/CL4R1T4S.git
@@ -16,18 +13,6 @@
 [submodule "pkg/tools/career-ops"]
 	path = pkg/tools/career-ops
 	url = https://github.com/santifer/career-ops
-[submodule "plugins/gosdk"]
-	path = plugins/gosdk
-	url = https://github.com/bizshuk/gosdk
-[submodule "plugins/understand-anything"]
-	path = plugins/understand-anything
-	url = https://github.com/Egonex-AI/Understand-Anything
 [submodule "plugins/media/seedance-2.0"]
 	path = plugins/media/seedance-2.0
 	url = https://github.com/Emily2040/seedance-2.0
-[submodule "plugins/last30days-skill"]
-	path = plugins/last30days-skill
-	url = https://github.com/mvanhorn/last30days-skill.git
-[submodule "plugins/ui-ux-pro-max-skill"]
-	path = plugins/ui-ux-pro-max-skill
-	url = https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git
