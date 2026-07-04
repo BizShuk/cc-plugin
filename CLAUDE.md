@@ -70,6 +70,9 @@
 │   ├── god/                  # 系統大一統理論插件 (Grand Unified Theory)
 │   │   ├── references/       # 參考資料 (ontology-template, 12條宇宙法則)
 │   │   └── skills/           # 五大通用算子與透鏡技能 (universal-generate, universal-review, universal-consolidate, universal-aggregate, universal-evolve, system-laws, domain-exploration, llm-mechanics, grand-unified-theory)
+│   ├── ultra-explore/        # 知識庫建構插件 (Ultra-Explore) — 單一手動入口，多來源入庫、蒸餾、建邊、驗證、查詢
+│   │   ├── agents/           # 編排代理 (kb-coordinator — 五階段管道編排)
+│   │   └── skills/           # 入口 (ultra-explore) + 知識庫技能 (kb-spec, kb-ingest-repo/history/web/chat/schema, kb-distill, kb-connect, kb-verify, kb-query)
 │   ├── review/               # 審查插件 (Review) — 一致性、業務改善、結構/命名/文件/依賴/測試/學習審查
 │   │   ├── agents/           # 審查代理 (review-coordinator — 編排全部審查技能)
 │   │   └── skills/           # 審查技能 (consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, learning-document)
@@ -127,7 +130,8 @@
 | 資料匯出          | `cmd/export/`                                                                                                                        | `ExportCmd()`                                  |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                                                                                                  | `NewStateStore()`                              |
 | 環境初始化        | `run.sh`, `config/`                                                                                                                  | `config.Init()`                                |
-| AI 技能           | `plugins/` (base, apple, explore, last30days-skill, general, god, review, tmp, superpowers, gosdk, media, team, understand-anything) | 各 `SKILL.md`                                  |
+| AI 技能           | `plugins/` (base, apple, explore, last30days-skill, general, god, review, tmp, superpowers, gosdk, media, team, ultra-explore, understand-anything) | 各 `SKILL.md`                                  |
+| 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/`                                                                     | `ultra-explore` 入口 + kb-* 10 項, `kb-coordinator.md` |
 | 程式碼審查        | `plugins/review/skills/`                                                                                                             | 各 `SKILL.md` (consistency 等 7 項)            |
 | AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                                                                  | `feature.md`, `review-coordinator.md`          |
 

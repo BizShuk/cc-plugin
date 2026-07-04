@@ -130,6 +130,28 @@
             ]
         },
         {
+            "name": "ultra-explore",
+            "source": "./plugins/ultra-explore",
+            "description": "Manual-entry knowledge base pipeline for large scale (1000+ file repos, 10000+ docs) — single /ultra-explore trigger (monofolder-aware, respects .gitignore) ingests git repos, commit histories (cached git log + last-commit cursor), web links, chat histories, and storage schemas into a verifiable wikilink knowledge base with truth tiers, fingerprint dedup, and per-batch resumable state under ~/projects/product/.",
+            "keywords": ["ultra-explore", "knowledge-base", "knowledge-graph", "ingest", "distill", "git-history", "provenance", "wikilink", "large-scale", "resumable"],
+            "agents": [
+                "./agents/kb-coordinator.md"
+            ],
+            "skills": [
+                "./skills/ultra-explore",
+                "./skills/kb-spec",
+                "./skills/kb-ingest-repo",
+                "./skills/kb-ingest-history",
+                "./skills/kb-ingest-web",
+                "./skills/kb-ingest-chat",
+                "./skills/kb-ingest-schema",
+                "./skills/kb-distill",
+                "./skills/kb-connect",
+                "./skills/kb-verify",
+                "./skills/kb-query"
+            ]
+        },
+        {
             "name": "understand-anything",
             "source": "./plugins/understand-anything/understand-anything-plugin",
             "description": "AI-powered codebase understanding — analyze, visualize, and explain any project",
