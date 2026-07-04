@@ -2,7 +2,7 @@
 
 `base` 是 **must-install 預設插件**。提供每次 Claude Code 工作階段都會執行的底層 hooks — 屬於「裝了就別關」這類的低噪音基礎設施。
 
-目前內容：1 個 hook，於 agent loop 結束時發出終端機鈴聲。
+目前內容：1 個 hook（agent loop 結束時的終端機鈴聲）+ 1 個跨插件通用技能 `markdownlint`（格式化檢查）。
 
 ## 為什麼要裝
 
@@ -26,6 +26,8 @@ plugins/base/
 ├── hooks/
 │   ├── hooks.json       # Stop / StopFailure 註冊
 │   └── stop-bell.sh     # 終端機 bell 實作
+├── skills/
+│   └── markdownlint/    # Markdown 格式檢查（自訂規則子集 + CUSTOM-01 no-bold）
 └── README.md
 ```
 

@@ -18,6 +18,7 @@
     "ingest",
     "distill",
     "git-history",
+    "changelog",
     "provenance",
     "truth-qualification",
     "wikilink",
@@ -39,6 +40,7 @@
     "./skills/kb-connect",
     "./skills/kb-verify",
     "./skills/kb-query",
-    "./skills/topology-builder"
+    "./skills/topology-builder",
+    "./skills/changelog"
   ]
 }

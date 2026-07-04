@@ -19,7 +19,7 @@
   ],
   "skills": [
     "./skills/business-extract",
-    "./skills/changelog",
+    "./skills/business-planner",
     "./skills/daily-summary",
     "./skills/project-explore",
     "./skills/sort-todo",

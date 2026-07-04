@@ -9,7 +9,9 @@
             "name": "base",
             "source": "./plugins/base",
             "description": "Default must-install plugin — provides always-on base hooks (terminal bell on Stop / StopFailure) that run in every Claude Code session.",
-            "skills": []
+            "skills": [
+                "./skills/markdownlint"
+            ]
         },
         {
             "name": "tools",
@@ -35,7 +37,7 @@
             "source": "./plugins/general",
             "skills": [
                 "./skills/business-extract",
-                "./skills/changelog",
+                "./skills/business-planner",
                 "./skills/daily-summary",
                 "./skills/project-explore",
                 "./skills/sort-todo",
@@ -46,12 +48,10 @@
             "name": "experiment",
             "source": "./plugins/experiment",
             "description": "Sandbox plugin for skills staged before merging into their formal destination plugins. Holds exploration / scraping skills previously under `explore` and planning / documentation skills previously under `general` so they can be evaluated, refactored, or promoted without disturbing the shipped plugin manifests. Not a stable surface — entries here are expected to graduate.",
-            "keywords": ["experiment", "sandbox", "staging", "scraping", "fetching", "playwright", "firecrawl", "scrapling", "summarize", "mermaid", "markdownlint", "business-planner"],
+            "keywords": ["experiment", "sandbox", "staging", "scraping", "fetching", "playwright", "firecrawl", "scrapling", "summarize", "mermaid"],
             "skills": [
                 "./skills/anti-sabotage",
-                "./skills/business-planner",
                 "./skills/firecrawl",
-                "./skills/markdownlint",
                 "./skills/mermaid",
                 "./skills/model-evaluator",
                 "./skills/playwright-cli",
@@ -156,7 +156,8 @@
                 "./skills/kb-connect",
                 "./skills/kb-verify",
                 "./skills/kb-query",
-                "./skills/topology-builder"
+                "./skills/topology-builder",
+                "./skills/changelog"
             ]
         },
         {

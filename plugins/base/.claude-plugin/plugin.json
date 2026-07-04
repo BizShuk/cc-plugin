@@ -1,7 +1,7 @@
 {
   "name": "base",
   "version": "1.0.0",
-  "description": "Default base plugin — must-install hooks that run in every Claude Code session. Currently provides a terminal bell on Stop / StopFailure to notify the user when the agent finishes.",
+  "description": "Default base plugin — must-install hooks that run in every Claude Code session. Currently provides a terminal bell on Stop / StopFailure to notify the user when the agent finishes, plus the always-available `markdownlint` skill for formatting Markdown files across all plugins.",
   "author": {
     "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
@@ -17,6 +17,10 @@
     "bell",
     "notification",
     "stop",
-    "stopfailure"
+    "stopfailure",
+    "markdownlint"
+  ],
+  "skills": [
+    "./skills/markdownlint"
   ]
 }

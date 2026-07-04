@@ -11,7 +11,6 @@
 | `business-planner` | 一次規劃一個 feature 的商業價值：挖掘未開發新價值或解鎖隱藏價值，輸出 `plans/business-<feature_name>.md` |
 | `daily-summary` | 彙整過去 24h 跨來源工作，產生工作日報並寫入 Apple Notes |
 | `domain` | 業務領域分析 |
-| `markdownlint` | Markdown 規則檢查（精選 rule + CUSTOM-01 no-bold） |
 | `mermaid` | Mermaid.js 圖表選型與語法 |
 | `model-evaluator` | 模型評估與比較 |
 | `project-explore` | 專案 onboarding，產生 README.md / CLAUDE.md |

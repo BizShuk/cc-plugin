@@ -73,6 +73,7 @@ flowchart TD
 | 9   | `kb-verify`         | 健檢：斷鏈/佐證抽查/矛盾/過期，報告落盤                  | 僅手動   |
 | 10  | `kb-query`          | 帶引用查詢，缺口記入 Frontier                            | 僅手動   |
 | 11  | `topology-builder`  | 跨來源連結拓撲／知識圖譜構建                              | 自動觸發 |
+| 12  | `changelog`         | git log 增量 → 結構化 commits.jsonl + CHANGELOG.md      | 僅手動 |
 
 代理 (Agent)：`kb-coordinator` — 由入口技能派工，phase gate 依 `_state/` 判定。
 
