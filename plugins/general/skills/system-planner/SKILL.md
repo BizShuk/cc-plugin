@@ -1,69 +1,82 @@
 ---
 name: system-planner
 description: >
-    Use when diagnosing system complexity and technical debt and planning
-    architecture simplification, modularization, and extensibility — coupling
-    diagnosis, decoupling/layering design, directory reorganization, plugin
-    system design, and incremental (strangler-fig) migration with a test safety
-    net. Triggers on: "system simplification", "architecture optimization",
-    "reduce coupling", "modularization", "系統架構簡化", "系統規劃",
+    Use when planning the system architecture for one feature — where it sits
+    in the overall architecture, its boundaries, interfaces, and data flow,
+    while keeping the whole system clear and highly scalable. One feature per
+    run; writes plans/architecture-<feature_name>.md. Triggers on:
+    "architecture plan", "system design", "architecture optimization",
+    "reduce coupling", "modularization", "系統架構", "架構規劃", "系統規劃",
     "解耦重構", "system-planner".
-version: "1.1.1"
+version: "2.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write
-effort: high
+effort: medium
 context: fork
 ---
 
 # system-planner
 
-指導 AI 代理 (AI Agent) 量測現有系統的複雜度與架構痛點，設計解耦與分層方案，規劃可擴充的模組化/插件化機制，並以漸進、可驗證的路徑落地。
+一次規劃 `一個 feature` 的系統架構：它放在整體架構的哪一層、邊界與介面長什麼樣、資料怎麼流，並確保整體架構保持 `清晰 (clear)` 且 `高度可擴充 (highly scalable)`。
 
-> `Planning Only`：本技能只產出架構演進計畫，不實作、不重構、不修改任何
-> 程式碼或設定，唯一寫入的檔案是 `${cwd}/plans/` 下的計畫報告。
+> `Planning Only`：只產出計畫，不實作、不重構、不修改任何程式碼或設定。
+> 唯一寫入：`<workspace>/plans/architecture-<feature_name>.md` 與 `<workspace>/README.todo`。
 
-## 概述 (Overview)
+## 分工 (Division of Labor)
 
-輸入為一個 repo 或子目錄。輸出回答：這個系統「哪裡太複雜、為什麼、怎麼拆、
-拆的順序、怎麼確保不拆壞」。所有結論必須有程式或量測依據，不可憑感覺。
+| 技能 (Skill)       | 角色 (Role)                              |
+| ------------------ | ---------------------------------------- |
+| `project-explore`  | 產出 README/CLAUDE.md 完整現況文件       |
+| `business-planner` | 規劃一個 feature 的商業價值              |
+| `system-planner`   | 規劃一個 feature 的系統架構 — 本技能     |
 
-與相鄰技能的分工：
+## 執行守則 (Execution Rules)
 
-| 技能 (Skill)       | 角色 (Role)                         |
-| ------------------ | ----------------------------------- |
-| `project-explore`  | 產出 README/CLAUDE.md 完整現況文件  |
-| `business-planner` | 規劃業務該往哪長                    |
-| `system-planner`   | 規劃架構怎麼撐起成長與簡化 — 本技能 |
+依序照做，不需要額外判斷：
 
-## 使用時機 (When to Use)
-
-- 程式碼體積膨脹、模組高度耦合、改一處牽動多處。
-- 需引進模組化/插件化架構以支撐未來擴充。
-- 不適用：規劃商業價值擴充時改用 `business-planner`；
-  僅需理解現況產文件時改用 `project-explore`。
+1. 一次只規劃 `一個 feature`。使用者一次給多個時：只取第一個，
+   其餘各以一行 `- [ ] architecture-<name>: pending` 記入 `README.todo`。
+2. 資訊不足時不要中斷：採用最簡單的假設，寫入報告的
+   `風險與假設 (Risks & Assumptions)` 章節。
+3. 掃描上限：最多 Read `15` 個檔案。排除 `.git`, `node_modules`,
+   `vendor`, `dist` 與產生碼。
+4. 有既有慣例就跟慣例（分層、命名、目錄），不新造分層、不引入新框架。
 
 ## 執行步驟 (Procedure)
 
-### Step 1 — 複雜度量測與痛點診斷 (Complexity Metrics & Diagnosis)
+### Step 1 — 界定 feature (Define the Feature)
 
-先量測再判斷，蒐集客觀訊號（依語言調整指令）：
+1. 決定 `<feature_name>`：kebab-case，取自使用者需求的核心名詞。
+2. 寫一句話目標：`誰` 用它 `做什麼`。
+3. 列 2~3 條 `不做什麼 (out of scope)`。
 
-| 訊號 (Signal)          | 取得方式 (How)                                  |
-| :--------------------- | :---------------------------------------------- |
-| 熱點/改動頻繁檔        | `git log --since=12.month --name-only` 統計次數 |
-| 巨型檔/長函數          | `wc -l`、超長函數掃描                           |
-| 扇入/扇出 (Fan-in/out) | Grep import/引用，找被依賴最廣與依賴最多的模組  |
-| 循環相依 (Cycles)      | 套件依賴圖檢查環狀引用                          |
-| 重複代碼               | 相似區塊比對                                    |
+產出：feature 名稱、一句話目標、範圍界線。
 
-排除噪音：`.git`, `node_modules`, `vendor`, `dist`, 產生碼。
-聚焦「高改動 × 高耦合」交集 — 那是重構 ROI 最高處。
+### Step 2 — 盤點現況架構 (Current Architecture Scan)
 
-### Step 2 — 簡化與解耦設計 (Simplification & Decoupling)
+| 要找的東西 (Target)   | 方法 (How)                                        |
+| :-------------------- | :------------------------------------------------ |
+| 頂層結構              | Glob 兩層目錄樹                                   |
+| 進入點 (Entry Points) | 找 `main` / `cmd` / `routes` / `handler`          |
+| 相關既有模組          | Grep feature 關鍵字與同義詞                       |
+| 高改動熱點            | `git log --since=6.month --name-only` 統計次數    |
 
-1. 定義清楚的分層（如 `Domain` / `Service` / `Repository`），明訂依賴方向：
-   只能由外層指向內層 (依賴反轉 Dependency Inversion)。
-2. 在耦合熱點插入介面 (Interface) 接縫，隔離具體實作。
-3. 提取通用邏輯至共享包 (Shared Package)；消除循環相依。
+產出：現況架構圖（Mermaid flowchart，節點 ≤ 10）+ 相關模組清單。
+
+### Step 3 — 架構位置與邊界 (Placement & Boundaries)
+
+1. 依專案既有分層放置該 feature（如 `Handler` / `Service` / `Domain` /
+   `Repository`）；寫一段話說明放哪裡、為什麼。
+2. 明訂依賴方向：只能由外層指向內層 (Dependency Inversion)。
+3. 定義邊界：這個 feature `擁有` 哪些資料與邏輯、`不碰` 哪些既有模組。
+
+產出：位置說明一段話 + 邊界清單。
+
+### Step 4 — 介面與資料流 (Interfaces & Data Flow)
+
+1. 為每個跨模組互動定義 `介面 (Interface / API Contract)`：
+   名稱、輸入、輸出、錯誤情況，一行一個列成表格。
+2. 介面數 ≤ 5；超過表示切太細，先合併再繼續。
+3. 用 Mermaid 畫資料流：
 
 ```mermaid
 flowchart TD
@@ -73,73 +86,88 @@ flowchart TD
     R -.->|"實作 implements"| I["Infra Adapter"]
 ```
 
-### Step 3 — 目錄與模組重整 (Directory & Module Reorganization)
+產出：介面表 + 資料流圖。
 
-1. 設計重整後目錄樹，確保職責單一 (Single Responsibility)。
-2. 提供舊→新遷移映射表 (Migration Map)，標註每筆的依賴方向是否合規。
-3. 明訂每個目錄的依賴原則（底層不可相依高層）。
+### Step 5 — 清晰與可擴充性檢查 (Clarity & Scalability Check)
 
-### Step 4 — 可擴充性與插件化 (Extensibility & Plugin System)
+逐項回答 `是` / `否` / `不適用`，每項附一句理由：
 
-1. 先判斷「是否需要」：擴充點少於 2~3 個時，介面+組合即可，勿過度設計。
-2. 若需要，定義核心與插件的 `契約 (Interface / API Contract)`。
-3. 設計載入機制：註冊表 (Registry)、配置驅動或事件驅動 (Event-driven)，
-   依需求選最簡可行者。
+1. 單一職責：新模組只有一個變更理由？
+2. 依賴方向：沒有內層指向外層？沒有循環相依？
+3. 可替換：外部依賴（DB、第三方服務）都隔在介面後？
+4. 水平擴充：無狀態、可多實例部署？
+5. 擴充點：下一個同類 feature 可以不改核心就加入？
 
-### Step 5 — 漸進式遷移與安全網 (Incremental Migration & Safety Net)
+任一項為 `否` → 回 Step 3/4 修正設計；最多修正 `2` 輪，
+仍為 `否` 的項目寫入 `風險與假設`。
 
-1. 重構前先補關鍵路徑的特徵測試 (Characterization Test) 作為安全網。
-2. 採絞殺榕模式 (Strangler-Fig)：新舊並存、逐步切換，每步可獨立交付與回滾。
-3. 依「風險低、收益高」排序步驟；每步定義驗證方式（測試綠燈、行為不變）。
+產出：檢查表結果。
 
-### Step 6 — 撰寫架構演進計畫 (Write Evolution Plan)
+### Step 6 — 漸進落地步驟 (Incremental Steps)
 
-`<feature_name>` 取與變更計畫 (change plan) 相關之名稱，或目標路徑最後一段。報告寫入
-`./plans/architecture-<feature_name>.md`（目錄不存在先 `mkdir -p plans`）。 and add a record to `<workspace>/README.todo`
-結構如下：
+拆成 `3~7` 步，每步一列，可獨立交付與回滾：
+
+| 步驟 (Step) | 做什麼 (What) | 驗證 (Verify) | 回滾 (Rollback) |
+| :---------- | :------------ | :------------ | :-------------- |
+
+產出：落地步驟表。
+
+### Step 7 — 撰寫計畫 (Write Plan)
+
+1. `mkdir -p plans`，寫入 `<workspace>/plans/architecture-<feature_name>.md`。
+2. 在 `<workspace>/README.todo` 追加一行：
+   `- [ ] architecture-<feature_name>: <一句話目標>`。
+
+報告結構（每章填入對應 Step 的產出）：
 
 ```markdown
-# 架構演進與優化計畫 — <feature_name> (Architecture Evolution & Optimization Plan)
+# 架構計畫 — <feature_name> (Architecture Plan)
 
-## 1. 現有架構診斷與技術債 (Architecture Diagnosis & Technical Debt)
+## 1. 目標與範圍 (Goal & Scope)
+<!-- Step 1：一句話目標 + out of scope -->
 
-## 2. 複雜度量測 (Complexity Metrics)
+## 2. 現況架構 (Current Architecture)
+<!-- Step 2：架構圖 + 相關模組清單 -->
 
-## 3. 架構簡化與解耦設計 (Simplification & Decoupling Design)
+## 3. 架構位置與邊界 (Placement & Boundaries)
+<!-- Step 3：位置說明 + 邊界清單 -->
 
-## 4. 目錄與模組重整方案 (Reorganization Map)
+## 4. 介面與資料流 (Interfaces & Data Flow)
+<!-- Step 4：介面表 + 資料流圖 -->
 
-## 5. 插件化與可擴充性機制 (Plugin & Extensibility Mechanism)
+## 5. 清晰與可擴充性檢查 (Clarity & Scalability Check)
+<!-- Step 5：檢查表結果 -->
 
-## 6. 漸進式重構路徑與驗證 (Refactoring Roadmap & Verification)
+## 6. 漸進落地步驟 (Incremental Steps)
+<!-- Step 6：落地步驟表 -->
 
-## 7. 風險與回滾策略 (Risks & Rollback)
+## 7. 風險與假設 (Risks & Assumptions)
+<!-- 執行中所有假設與未解決的「否」項 -->
 ```
 
 ## 規則 (Rules)
 
-- `僅規劃`：只產出計畫，不實作、不重構、不改設定；唯一輸出是 `./plans/` 下的報告。
-- 章節標題用繁體中文加英文括號；內文使用繁體中文，術語附英文與圓括號。
+- `僅規劃`：只產出計畫；唯一輸出是 `plans/` 報告與 `README.todo` 一行。
+- 章節標題用繁體中文加英文括號；術語附英文與圓括號。
 - 不使用粗體語法，一律以 `backtick` 強調。
 - 圖表一律 Mermaid；邊線文字 (edge text) 必須用雙引號包覆。
-- 每個診斷結論必須附程式或量測依據；遷移步驟必須可獨立交付與回滾。
-- 簡化方案以「移除」優先於「新增抽象」；插件機制需先論證必要性。
+- 簡化優先：`移除` 優於 `新增抽象`；擴充點少於 2 個時不做插件化。
 
 ## 常見錯誤 (Common Mistakes)
 
-| 錯誤                       | 修正                                  |
-| -------------------------- | ------------------------------------- |
-| 為簡化而引入過度複雜的機制 | 擴充點不足時，介面+組合即可           |
-| 一次性大範圍重構           | 拆成可獨立交付、可回滾的小步          |
-| 憑感覺判斷「哪裡髒」       | 先用 Step 1 量測，鎖定高改動×高耦合區 |
-| 無測試就動刀               | 先補特徵測試再重構                    |
-| 只畫新架構，缺遷移路徑     | 必附舊→新映射表與分步順序             |
+| 錯誤 (Mistake)             | 修正 (Fix)                             |
+| -------------------------- | -------------------------------------- |
+| 一次規劃多個 feature       | 只取第一個，其餘記入 `README.todo`     |
+| 新造分層或引入新框架       | 跟隨專案既有慣例                       |
+| 介面切太細                 | 介面數 ≤ 5，超過先合併                 |
+| 只畫新架構，缺落地路徑     | 必附 3~7 步可回滾的落地步驟表          |
+| 資訊不足就停下來反問       | 用最簡假設繼續，記入風險與假設         |
 
-## 失敗模式 (Failure Modes)
+## 完成前自檢 (Final Checklist)
 
-| 情境                 | 動作                                        |
-| -------------------- | ------------------------------------------- |
-| 系統龐大且無測試覆蓋 | 計畫第一階段優先補關鍵路徑測試              |
-| 輸入過大無法全讀     | 鎖定高改動熱點與核心模組，註明部分掃描      |
-| 循環相依過於盤根錯節 | 先以介面打破單一關鍵環，再逐步擴散          |
-| 需求其實是業務擴充   | 移交 `business-planner`，本技能只處理架構面 |
+- [ ] 只規劃了一個 feature
+- [ ] 檔案位於 `plans/architecture-<feature_name>.md`
+- [ ] 每個介面都有輸入 / 輸出 / 錯誤
+- [ ] 每個落地步驟都有驗證與回滾方式
+- [ ] 沒有粗體；Mermaid 邊線文字有雙引號
+- [ ] `README.todo` 已追加一行

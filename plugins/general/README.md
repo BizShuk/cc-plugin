@@ -8,14 +8,14 @@
 | --- | --- |
 | `anti-sabotage` | 防止破壞性行為的防護指引 |
 | `business-extract` | 從內容萃取業務領域知識 |
-| `business-planner` | 分析既有系統業務，規劃如何擴充商業價值與業務範疇 |
+| `business-planner` | 一次規劃一個 feature 的商業價值：挖掘未開發新價值或解鎖隱藏價值，輸出 `plans/business-<feature_name>.md` |
 | `daily-summary` | 彙整過去 24h 跨來源工作，產生工作日報並寫入 Apple Notes |
 | `domain` | 業務領域分析 |
 | `markdownlint` | Markdown 規則檢查（精選 rule + CUSTOM-01 no-bold） |
 | `mermaid` | Mermaid.js 圖表選型與語法 |
 | `model-evaluator` | 模型評估與比較 |
 | `project-explore` | 專案 onboarding，產生 README.md / CLAUDE.md |
-| `system-planner` | 診斷現有系統複雜度，規劃如何進行架構簡化、目錄組織與可擴充性設計 |
+| `system-planner` | 一次規劃一個 feature 的系統架構：位置、邊界、介面與資料流，保持整體清晰且可擴充，輸出 `plans/architecture-<feature_name>.md` |
 | `topology-builder` | 跨來源建立連結拓撲 / 知識圖譜 |
 
 ## daily-summary
