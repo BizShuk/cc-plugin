@@ -6,14 +6,9 @@
 
 | Skill | 用途 |
 | --- | --- |
-| `anti-sabotage` | 防止破壞性行為的防護指引 |
-| `business-extract` | 從內容萃取業務領域知識 |
 | `business-planner` | 一次規劃一個 feature 的商業價值：挖掘未開發新價值或解鎖隱藏價值，輸出 `plans/business-<feature_name>.md` |
 | `daily-summary` | 彙整過去 24h 跨來源工作，產生工作日報並寫入 Apple Notes |
-| `domain` | 業務領域分析 |
-| `mermaid` | Mermaid.js 圖表選型與語法 |
-| `model-evaluator` | 模型評估與比較 |
-| `project-explore` | 專案 onboarding，產生 README.md / CLAUDE.md |
+| `sort-todo` | 排序並格式化待辦清單 |
 | `system-planner` | 一次規劃一個 feature 的系統架構：位置、邊界、介面與資料流，保持整體清晰且可擴充，輸出 `plans/architecture-<feature_name>.md` |
 
 ## daily-summary

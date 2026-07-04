@@ -1,8 +1,10 @@
 # 探索插件 (Explore Plugin)
 
-`explore` 插件整合 6 個 `抓取`、`爬蟲` 與 `內容摘要` 技能，用於從網頁、檔案、影片等來源擷取並整理內容。
+`explore` 插件整合 4 個 `抓取`、`爬蟲` 與 `內容摘要` 技能（用於從網頁、檔案、影片等來源擷取並整理內容），加上 `project-explore` 技能做完整 workspace onboarding 與業務萃取。
 
 ## 技能清單 (Skills)
+
+### 抓取 / 摘要類 (Fetch & Summarize)
 
 | 技能                 | 工具                          | 路徑                          |
 | -------------------- | ----------------------------- | ----------------------------- |
@@ -12,6 +14,13 @@
 | `playwright-cli`     | `playwright-cli` 瀏覽器自動化 | `./skills/playwright-cli`     |
 | `scrapling`          | `scrapling` Python 框架       | `./skills/scrapling`          |
 | `summarize.sh`       | `summarize` CLI               | `./skills/summarize.sh`       |
+
+### Onboarding & 業務萃取 (Onboarding & Business)
+
+| 技能              | 用途                                                       | 路徑                         |
+| ----------------- | ---------------------------------------------------------- | ---------------------------- |
+| `project-explore` | Workspace 全掃描 → `README.md` + `CLAUDE.md` + `README.business.md` + symlinks（合併自 `project-explore` + `business-extract`） | `./skills/project-explore` |
+| `project-route`   | 將任意檔案路徑映射到所屬專案                                  | `./skills/project-route`     |
 
 ## 技能比較 (Skill Comparison)
 

@@ -29,6 +29,7 @@
             "skills": [
                 "./skills/content-summarizer",
                 "./skills/markitdown",
+                "./skills/project-explore",
                 "./skills/project-route"
             ]
         },
@@ -36,10 +37,8 @@
             "name": "general",
             "source": "./plugins/general",
             "skills": [
-                "./skills/business-extract",
                 "./skills/business-planner",
                 "./skills/daily-summary",
-                "./skills/project-explore",
                 "./skills/sort-todo",
                 "./skills/system-planner"
             ]
