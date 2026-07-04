@@ -17,38 +17,27 @@
         },
         {
             "name": "explore",
-            "source": "./plugins/explore",
-            "skills": [
-                "./skills/content-summarizer",
-                "./skills/markitdown",
-                "./skills/project-explore",
-                "./skills/project-route"
-            ]
+            "source": "./plugins/explore"
         },
         {
             "name": "general",
-            "source": "./plugins/general",
-            "skills": [
-                "./skills/business-planner",
-                "./skills/daily-summary",
-                "./skills/markdownlint",
-                "./skills/sort-todo",
-                "./skills/system-planner"
-            ]
+            "source": "./plugins/general"
         },
         {
             "name": "experiment",
             "source": "./plugins/experiment",
             "description": "Sandbox plugin for skills staged before merging into their formal destination plugins. Holds exploration / scraping skills previously under `explore` and planning / documentation skills previously under `general` so they can be evaluated, refactored, or promoted without disturbing the shipped plugin manifests. Not a stable surface — entries here are expected to graduate.",
-            "keywords": ["experiment", "sandbox", "staging", "scraping", "fetching", "playwright", "firecrawl", "scrapling", "summarize", "mermaid"],
-            "skills": [
-                "./skills/anti-sabotage",
-                "./skills/firecrawl",
-                "./skills/mermaid",
-                "./skills/model-evaluator",
-                "./skills/playwright-cli",
-                "./skills/scrapling",
-                "./skills/summarize.sh"
+            "keywords": [
+                "experiment",
+                "sandbox",
+                "staging",
+                "scraping",
+                "fetching",
+                "playwright",
+                "firecrawl",
+                "scrapling",
+                "summarize",
+                "mermaid"
             ]
         },
         {
@@ -57,21 +46,7 @@
                 "source": "github",
                 "repo": "bizshuk/gosdk"
             },
-            "description": "Go development toolkit for github.com/bizshuk/gosdk — bundles 9 Go-focused skills (code-quality, dead-code, dev, gosdk, mvc, naming, network, performance-tuning, zap→slog) and the assertive `golang-refactor` agent that auto-invokes eight specialized skills to actively rewrite code breaking SOLID, MVC, naming, error handling, context propagation, or performance conventions (not just report). Triggers: refactor, review, audit, clean up, restructure, improve.",
-            "agents": [
-                "./agents/golang-refactor.md"
-            ],
-            "skills": [
-                "./skills/golang-code-quality",
-                "./skills/golang-dead-code",
-                "./skills/golang-dev",
-                "./skills/golang-gosdk",
-                "./skills/golang-mvc",
-                "./skills/golang-naming",
-                "./skills/golang-network",
-                "./skills/golang-performance-tuning",
-                "./skills/migrate-zap-to-slog"
-            ]
+            "description": "Go development toolkit for github.com/bizshuk/gosdk — bundles 9 Go-focused skills (code-quality, dead-code, dev, gosdk, mvc, naming, network, performance-tuning, zap→slog) and the assertive `golang-refactor` agent that auto-invokes eight specialized skills to actively rewrite code breaking SOLID, MVC, naming, error handling, context propagation, or performance conventions (not just report). Triggers: refactor, review, audit, clean up, restructure, improve."
         },
         {
             "name": "review",
@@ -79,15 +54,6 @@
             "description": "Review plugin — coordinates 7 review skills (consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, learning) via the review-coordinator agent.",
             "agents": [
                 "./agents/review-coordinator.md"
-            ],
-            "skills": [
-                "./skills/consistency",
-                "./skills/business-improvement",
-                "./skills/folder-structure",
-                "./skills/naming-convention",
-                "./skills/doc-sync",
-                "./skills/dependency-hygiene",
-                "./skills/learning-document"
             ]
         },
         {
@@ -96,23 +62,7 @@
                 "source": "github",
                 "repo": "obra/superpowers"
             },
-            "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques (vendored as git submodule from https://github.com/obra/superpowers)",
-            "skills": [
-                "./skills/brainstorming",
-                "./skills/dispatching-parallel-agents",
-                "./skills/executing-plans",
-                "./skills/finishing-a-development-branch",
-                "./skills/receiving-code-review",
-                "./skills/requesting-code-review",
-                "./skills/subagent-driven-development",
-                "./skills/systematic-debugging",
-                "./skills/test-driven-development",
-                "./skills/using-git-worktrees",
-                "./skills/using-superpowers",
-                "./skills/verification-before-completion",
-                "./skills/writing-plans",
-                "./skills/writing-skills"
-            ]
+            "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques (vendored as git submodule from https://github.com/obra/superpowers)"
         },
         {
             "name": "media",
@@ -138,24 +88,17 @@
             "name": "ultra-explore",
             "source": "./plugins/ultra-explore",
             "description": "Manual-entry knowledge base pipeline for large scale (1000+ file repos, 10000+ docs) — single /ultra-explore trigger (monofolder-aware, respects .gitignore) ingests git repos, commit histories (cached git log + last-commit cursor), web links, chat histories, and storage schemas into a verifiable wikilink knowledge base with truth tiers, fingerprint dedup, and per-batch resumable state under ~/projects/product/.",
-            "keywords": ["ultra-explore", "knowledge-base", "knowledge-graph", "ingest", "distill", "git-history", "provenance", "wikilink", "large-scale", "resumable"],
-            "agents": [
-                "./agents/kb-coordinator.md"
-            ],
-            "skills": [
-                "./skills/ultra-explore",
-                "./skills/kb-spec",
-                "./skills/kb-ingest-repo",
-                "./skills/kb-ingest-history",
-                "./skills/kb-ingest-web",
-                "./skills/kb-ingest-chat",
-                "./skills/kb-ingest-schema",
-                "./skills/kb-distill",
-                "./skills/kb-connect",
-                "./skills/kb-verify",
-                "./skills/kb-query",
-                "./skills/topology-builder",
-                "./skills/changelog"
+            "keywords": [
+                "ultra-explore",
+                "knowledge-base",
+                "knowledge-graph",
+                "ingest",
+                "distill",
+                "git-history",
+                "provenance",
+                "wikilink",
+                "large-scale",
+                "resumable"
             ]
         },
         {
@@ -164,28 +107,7 @@
                 "source": "github",
                 "repo": "Egonex-AI/Understand-Anything"
             },
-            "description": "AI-powered codebase understanding — analyze, visualize, and explain any project",
-            "agents": [
-                "./agents/architecture-analyzer.md",
-                "./agents/article-analyzer.md",
-                "./agents/assemble-reviewer.md",
-                "./agents/domain-analyzer.md",
-                "./agents/file-analyzer.md",
-                "./agents/graph-reviewer.md",
-                "./agents/knowledge-graph-guide.md",
-                "./agents/project-scanner.md",
-                "./agents/tour-builder.md"
-            ],
-            "skills": [
-                "./skills/understand",
-                "./skills/understand-chat",
-                "./skills/understand-dashboard",
-                "./skills/understand-diff",
-                "./skills/understand-domain",
-                "./skills/understand-explain",
-                "./skills/understand-knowledge",
-                "./skills/understand-onboard"
-            ]
+            "description": "AI-powered codebase understanding — analyze, visualize, and explain any project"
         },
         {
             "name": "last30days",
@@ -193,10 +115,7 @@
                 "source": "github",
                 "repo": "mvanhorn/last30days-skill"
             },
-            "description": "Research any topic across Reddit, X, YouTube, TikTok, Instagram, Hacker News, Polymarket, GitHub, and 5+ more sources. AI agent scores by upvotes, likes, and real money - not editors.",
-            "skills": [
-                "./skills/last30days"
-            ]
+            "description": "Research any topic across Reddit, X, YouTube, TikTok, Instagram, Hacker News, Polymarket, GitHub, and 5+ more sources. AI agent scores by upvotes, likes, and real money - not editors."
         },
         {
             "name": "ui-ux-pro-max-skill",
@@ -205,15 +124,15 @@
                 "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
             },
             "description": "UI/UX design intelligence with 84 styles, 161 palettes, 73 font pairings, 99 UX guidelines, and 25 chart types across 17 tech stacks (React, Next.js, Vue, Nuxt.js, Nuxt UI, Svelte, Astro, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, Three.js). Triggers: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor UI/UX.",
-            "keywords": ["ui", "ux", "design", "design-system", "typography", "color-palette", "accessibility", "charts"],
-            "skills": [
-                "./.claude/skills/banner-design",
-                "./.claude/skills/brand",
-                "./.claude/skills/design",
-                "./.claude/skills/design-system",
-                "./.claude/skills/slides",
-                "./.claude/skills/ui-styling",
-                "./.claude/skills/ui-ux-pro-max"
+            "keywords": [
+                "ui",
+                "ux",
+                "design",
+                "design-system",
+                "typography",
+                "color-palette",
+                "accessibility",
+                "charts"
             ]
         }
     ]
