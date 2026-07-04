@@ -6,14 +6,6 @@
     },
     "plugins": [
         {
-            "name": "base",
-            "source": "./plugins/base",
-            "description": "Default must-install plugin — provides always-on base hooks (terminal bell on Stop / StopFailure) that run in every Claude Code session.",
-            "skills": [
-                "./skills/markdownlint"
-            ]
-        },
-        {
             "name": "tools",
             "source": "./plugins/tools",
             "skills": [
@@ -39,6 +31,7 @@
             "skills": [
                 "./skills/business-planner",
                 "./skills/daily-summary",
+                "./skills/markdownlint",
                 "./skills/sort-todo",
                 "./skills/system-planner"
             ]
