@@ -41,7 +41,7 @@ curated 檔案 = 排除 `_inbox/`、`_sources/`、`_index.md` 後的 `*.md`。
 ```bash
 root=~/projects/product/projects/<project>
 curated() { find "$root" -name '*.md' ! -path '*/_inbox/*' \
-  ! -path '*/_sources/*' ! -name '_index.md'; }
+  ! -path '*/_sources/*' ! -name '_index.md' ! -name 'CHANGELOG.md'; }
 
 # A1 檔名全域唯一
 curated | xargs -n1 basename | sort | uniq -d

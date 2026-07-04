@@ -46,9 +46,17 @@ metadata:
         │   └── 2026-07-04-payment-flow.md
         ├── _sources/          # 來源登記，供 corroboration 計數
         │   └── repo-service-a.md
+        ├── _raw/              # 工具產物：kb_history.py commit 清單 (commits.jsonl)
+        ├── _diffs/            # 工具產物：每 ISO 週過濾後 diff
+        ├── stats.json         # 工具產物：週分桶與作者統計
+        ├── CHANGELOG.md       # 工具產物：週敘事（kb-ingest-history 回填）
         └── payments/          # zone 一律用資料夾
             └── service-a.md   # curated entity
 ```
+
+工具產物（`_raw/`、`_diffs/`、`stats.json`、`CHANGELOG.md`）由
+`kb-ingest-history` 內建的 `kb_history.py` 管道產生、供其佐證與回填 —
+它們不是 entity、不是 capture，entity 掃描與驗證一律排除。
 
 - entity 檔名 `<entity_name>.md`，kebab-case，同一 `<proj>` 內跨 zone 全域唯一；
   wikilink 只在 `<proj>` 內解析，不跨專案

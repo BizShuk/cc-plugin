@@ -64,7 +64,7 @@ flowchart TD
 | 0   | `ultra-explore`     | 唯一全管道入口：解析來源 → 五階段 → 報告                 | 僅手動   |
 | 1   | `kb-spec`           | 規範單一事實來源：儲存佈局、格式、truth、狀態追蹤        | 參考文件 |
 | 2   | `kb-ingest-repo`    | git repo 現狀 → captures（每批 50 檔）                   | 僅手動   |
-| 3   | `kb-ingest-history` | git log 快取 + 游標增量 → 開發史 captures（每批 300）    | 僅手動   |
+| 3   | `kb-ingest-history` | 內建 kb_history.py 管道（週 diff 佐證）+ 游標增量 → 開發史 captures + 回填 CHANGELOG.md | 僅手動   |
 | 4   | `kb-ingest-web`     | URL → captures（markitdown/scrapling，每批 20 份）       | 僅手動   |
 | 5   | `kb-ingest-chat`    | 對話 → 決策/事實/承諾/主張 captures（每批 200 則）       | 僅手動   |
 | 6   | `kb-ingest-schema`  | RDB/KV/MQ/檔案結構 → captures（每批 30 物件）            | 僅手動   |
@@ -116,5 +116,9 @@ flowchart TD
 - 格式相容 `topology-builder`（entity/wikilink/邊規則），另加 truth 標註與
   `supersedes` / `contradicts` 動詞
 - 抓取複用 `explore` 插件的 `markitdown` / `scrapling` 工具鏈
+- `general` 插件的 `changelog` 技能已在本插件內重新開發為
+  `kb-ingest-history/scripts/kb_history.py`（單檔、純 stdlib、零安裝）：
+  確定性管道產出 `_raw/commits.jsonl` + `stats.json` + `_diffs/*.diff` +
+  `CHANGELOG.md` 骨架，蒸餾批次順手回填週敘事 — 不依賴原技能的 pip 套件
 - `project-explore` / `business-extract` 仍負責單 repo 文件產出；
   本插件負責跨來源集中知識庫

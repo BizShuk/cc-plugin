@@ -42,7 +42,7 @@ context: fork
 
 ```bash
 find <proj> -name '*.md' ! -path '*/_inbox/*' ! -path '*/_sources/*' \
-  ! -path '*/_state/*' ! -name '_index.md'
+  ! -path '*/_state/*' ! -name '_index.md' ! -name 'CHANGELOG.md'
 ```
 
 每 20 個 entity 一批寫 `manifest.json` + 初始 `progress.json`，`STATUS.md` 加一列。
