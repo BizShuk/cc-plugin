@@ -14,9 +14,6 @@
     "general",
     "project",
     "utility",
-    "mermaid",
-    "diagram",
-    "markdownlint",
     "knowledge-graph",
     "topology",
     "daily-summary"
@@ -24,15 +21,11 @@
   "skills": [
     "./skills/anti-sabotage",
     "./skills/business-extract",
-    "./skills/business-planner",
     "./skills/changelog",
     "./skills/daily-summary",
-    "./skills/markdownlint",
-    "./skills/mermaid",
     "./skills/model-evaluator",
     "./skills/project-explore",
     "./skills/sort-todo",
-    "./skills/system-planner",
     "./skills/topology-builder"
   ]
 }

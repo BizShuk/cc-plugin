@@ -16,18 +16,11 @@
     "scraping",
     "fetching",
     "summarize",
-    "scrapling",
-    "firecrawl",
-    "playwright",
     "markitdown"
   ],
   "skills": [
     "./skills/content-summarizer",
-    "./skills/firecrawl",
     "./skills/markitdown",
-    "./skills/playwright-cli",
-    "./skills/project-route",
-    "./skills/scrapling",
-    "./skills/summarize.sh"
+    "./skills/project-route"
   ]
 }
