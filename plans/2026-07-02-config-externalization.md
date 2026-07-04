@@ -24,7 +24,7 @@
    - `agentmemory.endpoint` — agentmemory API 端點
    - `mempalace.cli` — mempalace CLI 路徑
 2. 修改 `config.Init()` 使用 `viper.SetDefault()` 從 `default_settings.json` 載入預設值
-3. 移除 `model/store.go` 內部的 `viper.GetString` 直接呼叫，改為透過建構式注入 `dbPath`（見 [feat-single-state-store.md](feat-single-state-store.md)）
+3. 移除 `model/store.go` 內部的 `viper.GetString` 直接呼叫，改為透過建構式注入 `dbPath`（見 [2026-07-02-single-state-store.md](2026-07-02-single-state-store.md)）
 4. 驗證 `default_settings.json` 與環境變數覆蓋機制（環境變數優先）
 
 ## 驗證方式 (Verification)

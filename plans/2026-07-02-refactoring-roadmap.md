@@ -1,13 +1,13 @@
 # 架構重構執行藍圖 (Refactoring Execution Roadmap)
 
-本藍圖將 `plans/feat-*.md` 中各項功能對應到四個可獨立交付且可回滾的階段。每個階段皆須保留獨立的 git commit 並通過驗證測試。
+本藍圖將 `plans/2026-07-02-*.md` 中各項功能對應到四個可獨立交付且可回滾的階段。每個階段皆須保留獨立的 git commit 並通過驗證測試。
 
 ## Phase 1 — 建立單一 store 連線與設定純淨化 (30% 進度)
 
 **涵蓋功能：**
-- [`feat-single-state-store.md`](feat-single-state-store.md) — 單一 StateStore 連線與 viper 解耦
-- [`feat-config-externalization.md`](feat-config-externalization.md) — 硬編碼預設移至 `default_settings.json`
-- [`feat-resource-leak-fix.md`](feat-resource-leak-fix.md) — 修復 defer-in-loop 資源洩漏（可與 Phase 2 一併處理）
+- [`2026-07-02-single-state-store.md`](2026-07-02-single-state-store.md) — 單一 StateStore 連線與 viper 解耦
+- [`2026-07-02-config-externalization.md`](2026-07-02-config-externalization.md) — 硬編碼預設移至 `default_settings.json`
+- [`2026-07-02-resource-leak-fix.md`](2026-07-02-resource-leak-fix.md) — 修復 defer-in-loop 資源洩漏（可與 Phase 2 一併處理）
 
 **目標：**
 - 修改 `NewStateStore` 接受 `dbPath` 參數，移除 `viper` 直接依賴
@@ -23,8 +23,8 @@
 ## Phase 2 — 消除重複代碼與服務層初步抽取 (55% 進度)
 
 **涵蓋功能：**
-- [`feat-reader-deduplication.md`](feat-reader-deduplication.md) — gbrain/claudemem 讀取邏輯合併至 `internal/service/reader/`
-- [`feat-utility-extraction.md`](feat-utility-extraction.md) — `ExpandPath` 重複整合至 `pkg/utils/path.go`，temp_dir 收斂
+- [`2026-07-02-reader-deduplication.md`](2026-07-02-reader-deduplication.md) — gbrain/claudemem 讀取邏輯合併至 `internal/service/reader/`
+- [`2026-07-02-utility-extraction.md`](2026-07-02-utility-extraction.md) — `ExpandPath` 重複整合至 `pkg/utils/path.go`，temp_dir 收斂
 
 **目標：**
 - 將 `readGbrainLogic` 提取至 `internal/service/reader/gbrain.go`，讓 `cmd/export/gbrain.go` 與 `cmd/distill.go` 共用
@@ -40,9 +40,9 @@
 ## Phase 3 — 建立核心服務層與介面抽離 (80% 進度)
 
 **涵蓋功能：**
-- [`feat-service-layer-extraction.md`](feat-service-layer-extraction.md) — 業務邏輯自 `cmd/` 移至 `internal/service/`
-- [`feat-static-registry.md`](feat-static-registry.md) — Reader/Writer 靜態註冊表
-- [`feat-structured-logging.md`](feat-structured-logging.md) — `fmt.Printf` 遷移至 `slog`
+- [`2026-07-02-service-layer-extraction.md`](2026-07-02-service-layer-extraction.md) — 業務邏輯自 `cmd/` 移至 `internal/service/`
+- [`2026-07-02-static-registry.md`](2026-07-02-static-registry.md) — Reader/Writer 靜態註冊表
+- [`2026-07-02-structured-logging.md`](2026-07-02-structured-logging.md) — `fmt.Printf` 遷移至 `slog`
 
 **目標：**
 - 在 `internal/service/` 建立 `DistillerService`、`ReaderService`、`WriterService`
@@ -61,8 +61,8 @@
 ## Phase 4 — 規範檔案更名與整合驗證 (100% 進度)
 
 **涵蓋功能：**
-- [`feat-skill-md-renaming.md`](feat-skill-md-renaming.md) — `anti-sabotage.md` 重命名為 `SKILL.md` 並加上 frontmatter
-- [`feat-topology-extraction.md`](feat-topology-extraction.md) — `model/topology` 遷移至 `pkg/topology`，新增 `cmd/topology` CLI
+- [`2026-07-02-skill-md-renaming.md`](2026-07-02-skill-md-renaming.md) — `anti-sabotage.md` 重命名為 `SKILL.md` 並加上 frontmatter
+- [`2026-07-02-topology-extraction.md`](2026-07-02-topology-extraction.md) — `model/topology` 遷移至 `pkg/topology`，新增 `cmd/topology` CLI
 
 **目標：**
 - 重命名 `plugins/general/skills/anti-sabotage/anti-sabotage.md` 為 `SKILL.md`，補上標準 YAML frontmatter
