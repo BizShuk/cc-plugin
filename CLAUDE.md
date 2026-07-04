@@ -53,7 +53,7 @@
 ├── plugins/                  # 模組化插件目錄 (Modular Plugins)
 │   ├── base/                 # 預設基礎插件（must-install）— 提供 Stop/StopFailure 終端機 bell hook
 │   │   └── hooks/            # 終端機鈴聲 (stop-bell.sh, hooks.json)
-│   ├── apple/                # macOS Apple 整合插件
+│   ├── tools/                # macOS Apple 整合插件（容器改名自 apple，技能保留 apple-* 前綴）
 │   │   └── skills/           # Apple 相關技能 (apple-calendar, apple-email, apple-notes, apple-reminders)
 │   ├── explore/              # 探索與抓取插件 (explore, scraping, fetching)
 │   │   └── skills/           # 抓取與摘要技能 (content-summarizer, firecrawl, markitdown, playwright-cli, scrapling, summarize.sh)
@@ -116,7 +116,7 @@
 - `真實性門檻 (Truth Qualification)`：僅經人類確認、第一人稱事實/經驗、或 2+ 來源佐證的候選才寫入 mempalace 作為 Fact
 - `agentskills.io 規範`：技能採用 YAML frontmatter + Markdown 格式，支援跨 Agent 安裝
 - `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源
-- `模組化插件架構 (Modular Plugin Architecture)`：將技能、代理、掛鉤與監控器拆分為 `apple`、`explore`、`general` 與 `tmp` 獨立插件目錄，便於分類管理與跨插件打包。
+- `模組化插件架構 (Modular Plugin Architecture)`：將技能、代理、掛鉤與監控器拆分為 `tools`、`explore`、`general` 與 `tmp` 獨立插件目錄，便於分類管理與跨插件打包。
 - `整合 Marksman LSP`：引進 `marksman` Language Server 以提供 Markdown 的補全、診斷與檔案鏈結管理。
 
 ## 模組對應 (Module Mapping)
@@ -130,7 +130,7 @@
 | 資料匯出          | `cmd/export/`                                                                                                                        | `ExportCmd()`                                  |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                                                                                                  | `NewStateStore()`                              |
 | 環境初始化        | `run.sh`, `config/`                                                                                                                  | `config.Init()`                                |
-| AI 技能           | `plugins/` (base, apple, explore, last30days-skill, general, god, review, tmp, superpowers, gosdk, media, team, ultra-explore, understand-anything) | 各 `SKILL.md`                                  |
+| AI 技能           | `plugins/` (base, tools, explore, last30days-skill, general, god, review, tmp, superpowers, gosdk, media, team, ultra-explore, understand-anything) | 各 `SKILL.md`                                  |
 | 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/`                                                                     | `ultra-explore` 入口 + kb-* 10 項, `kb-coordinator.md` |
 | 程式碼審查        | `plugins/review/skills/`                                                                                                             | 各 `SKILL.md` (consistency 等 7 項)            |
 | AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                                                                  | `feature.md`, `review-coordinator.md`          |

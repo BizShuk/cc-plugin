@@ -12,8 +12,8 @@
             "skills": []
         },
         {
-            "name": "apple",
-            "source": "./plugins/apple",
+            "name": "tools",
+            "source": "./plugins/tools",
             "skills": [
                 "./skills/apple-calendar",
                 "./skills/apple-email",
