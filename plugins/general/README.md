@@ -16,7 +16,6 @@
 | `model-evaluator` | 模型評估與比較 |
 | `project-explore` | 專案 onboarding，產生 README.md / CLAUDE.md |
 | `system-planner` | 一次規劃一個 feature 的系統架構：位置、邊界、介面與資料流，保持整體清晰且可擴充，輸出 `plans/architecture-<feature_name>.md` |
-| `topology-builder` | 跨來源建立連結拓撲 / 知識圖譜 |
 
 ## daily-summary
 

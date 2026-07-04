@@ -39,14 +39,14 @@
                 "./skills/daily-summary",
                 "./skills/project-explore",
                 "./skills/sort-todo",
-                "./skills/topology-builder"
+                "./skills/system-planner"
             ]
         },
         {
             "name": "experiment",
             "source": "./plugins/experiment",
             "description": "Sandbox plugin for skills staged before merging into their formal destination plugins. Holds exploration / scraping skills previously under `explore` and planning / documentation skills previously under `general` so they can be evaluated, refactored, or promoted without disturbing the shipped plugin manifests. Not a stable surface — entries here are expected to graduate.",
-            "keywords": ["experiment", "sandbox", "staging", "scraping", "fetching", "playwright", "firecrawl", "scrapling", "summarize", "mermaid", "markdownlint", "business-planner", "system-planner"],
+            "keywords": ["experiment", "sandbox", "staging", "scraping", "fetching", "playwright", "firecrawl", "scrapling", "summarize", "mermaid", "markdownlint", "business-planner"],
             "skills": [
                 "./skills/anti-sabotage",
                 "./skills/business-planner",
@@ -56,8 +56,7 @@
                 "./skills/model-evaluator",
                 "./skills/playwright-cli",
                 "./skills/scrapling",
-                "./skills/summarize.sh",
-                "./skills/system-planner"
+                "./skills/summarize.sh"
             ]
         },
         {
@@ -156,7 +155,8 @@
                 "./skills/kb-distill",
                 "./skills/kb-connect",
                 "./skills/kb-verify",
-                "./skills/kb-query"
+                "./skills/kb-query",
+                "./skills/topology-builder"
             ]
         },
         {

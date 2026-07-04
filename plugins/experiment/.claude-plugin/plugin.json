@@ -22,8 +22,7 @@
     "summarize",
     "mermaid",
     "markdownlint",
-    "business-planner",
-    "system-planner"
+    "business-planner"
   ],
   "skills": [
     "./skills/anti-sabotage",
@@ -34,7 +33,6 @@
     "./skills/model-evaluator",
     "./skills/playwright-cli",
     "./skills/scrapling",
-    "./skills/summarize.sh",
-    "./skills/system-planner"
+    "./skills/summarize.sh"
   ]
 }

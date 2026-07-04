@@ -12,7 +12,7 @@
 
 ## 內容 (Contents)
 
-`experiment` 目前收容以下十個技能：
+`experiment` 目前收容以下九個技能：
 
 | 技能 (Skill)        | 原位置 (Original Location)             | 預期正式歸屬 (Expected Destination) | 說明 (Notes)                                                |
 | ------------------- | -------------------------------------- | ------------------------------------ | ----------------------------------------------------------- |
@@ -25,7 +25,6 @@
 | `playwright-cli`    | `~/.claude/skills/playwright-cli`      | `explore`                            | Playwright 瀏覽器自動化 CLI                                 |
 | `scrapling`         | `plugins/explore/skills/scrapling`     | `explore`                            | Scrapling 反爬網頁抓取框架                                  |
 | `summarize.sh`      | `plugins/explore/skills/summarize.sh`  | `explore`                            | 透過 `summarize` CLI 摘要網頁 / 檔案 / YouTube / Podcast    |
-| `system-planner`    | `plugins/general/skills/system-planner` | `general`                           | 規劃單一功能的系統架構                                      |
 
 ## 結構 (Structure)
 

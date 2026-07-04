@@ -52,8 +52,8 @@ flowchart TD
   即 corroboration 訊號
 - `游標增量 (Cursor)`：git log 快取只追加，`last-commit` 游標讓後續更新
   只處理新 commit
-- `證據先於邊 (Evidence before Edges)`：邊規則沿用 `topology-builder`，
-  每條邊必附發起方來源佐證
+- `證據先於邊 (Evidence before Edges)`：內建 `topology-builder` 提供
+  邊規則，每條邊必附發起方來源佐證
 - `每批落盤 (Persist per Batch)`：先寫 manifest、每批更新 progress、
   續跑先讀狀態 — 三條鐵律寫在 `kb-spec`
 
@@ -72,6 +72,7 @@ flowchart TD
 | 8   | `kb-connect`        | 建邊 + Backlinks 重算 + `_index.md` 重建                 | 僅手動   |
 | 9   | `kb-verify`         | 健檢：斷鏈/佐證抽查/矛盾/過期，報告落盤                  | 僅手動   |
 | 10  | `kb-query`          | 帶引用查詢，缺口記入 Frontier                            | 僅手動   |
+| 11  | `topology-builder`  | 跨來源連結拓撲／知識圖譜構建                              | 自動觸發 |
 
 代理 (Agent)：`kb-coordinator` — 由入口技能派工，phase gate 依 `_state/` 判定。
 

@@ -15,7 +15,6 @@
     "project",
     "utility",
     "knowledge-graph",
-    "topology",
     "daily-summary"
   ],
   "skills": [
@@ -24,6 +23,6 @@
     "./skills/daily-summary",
     "./skills/project-explore",
     "./skills/sort-todo",
-    "./skills/topology-builder"
+    "./skills/system-planner"
   ]
 }

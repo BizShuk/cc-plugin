@@ -14,6 +14,7 @@
     "ultra-explore",
     "knowledge-base",
     "knowledge-graph",
+    "knowledge-topology",
     "ingest",
     "distill",
     "git-history",
@@ -37,6 +38,7 @@
     "./skills/kb-distill",
     "./skills/kb-connect",
     "./skills/kb-verify",
-    "./skills/kb-query"
+    "./skills/kb-query",
+    "./skills/topology-builder"
   ]
 }
