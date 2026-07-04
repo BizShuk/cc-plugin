@@ -28,3 +28,6 @@
 [submodule "plugins/last30days-skill"]
 	path = plugins/last30days-skill
 	url = https://github.com/mvanhorn/last30days-skill.git
+[submodule "plugins/ui-ux-pro-max-skill"]
+	path = plugins/ui-ux-pro-max-skill
+	url = https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git

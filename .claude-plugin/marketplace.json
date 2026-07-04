@@ -162,6 +162,21 @@
             "skills": [
                 "./skills/last30days"
             ]
+        },
+        {
+            "name": "ui-ux-pro-max-skill",
+            "source": "./plugins/ui-ux-pro-max-skill",
+            "description": "UI/UX design intelligence with 84 styles, 161 palettes, 73 font pairings, 99 UX guidelines, and 25 chart types across 17 tech stacks (React, Next.js, Vue, Nuxt.js, Nuxt UI, Svelte, Astro, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, Three.js). Triggers: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor UI/UX.",
+            "keywords": ["ui", "ux", "design", "design-system", "typography", "color-palette", "accessibility", "charts"],
+            "skills": [
+                "./.claude/skills/banner-design",
+                "./.claude/skills/brand",
+                "./.claude/skills/design",
+                "./.claude/skills/design-system",
+                "./.claude/skills/slides",
+                "./.claude/skills/ui-styling",
+                "./.claude/skills/ui-ux-pro-max"
+            ]
         }
     ]
 }
