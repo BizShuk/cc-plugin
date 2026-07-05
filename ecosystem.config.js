@@ -1,6 +1,13 @@
 module.exports = {
     apps: [
-        // Agent Memory (Agent)
+        // Ollama
+        {
+            name: "Ollama",
+            script: "ollama",
+            namespace: "Agent",
+            args: ["serve"],
+            instances: 1
+        }, // Agent Memory (Agent)
         {
             name: "Agent Memory",
             script: "/Users/shuk/.local/nvm/versions/node/v24.11.1/bin/agentmemory",
@@ -18,7 +25,6 @@ module.exports = {
                 "'run /system-planner for current workspace'"
             ],
             namespace: "planner",
-            cwd: "/Users/shuk/projects/cc-plugin",
             instances: 1,
             cron: "10 0-9 * * *"
         }

@@ -2,6 +2,7 @@
 
 # Ensure home directories exist
 mkdir -p "$HOME/.claude"
+mkdir -p "$HOME/.codex"
 mkdir -p "$HOME/.gemini"
 mkdir -p "$HOME/.claude-mem"
 mkdir -p "$HOME/.hermes"
@@ -21,6 +22,9 @@ if [ -d "$HOME/.gemini" ]; then
 fi
 if [ -d "$HOME/.claude" ]; then
     ln -sf "$HOME/.claude"        "./tmp/"
+fi
+if [ -d "$HOME/.codex" ]; then
+    ln -sf "$HOME/.codex"        "./tmp/"
 fi
 if [ -d "$HOME/.claude-mem" ]; then
     ln -sf "$HOME/.claude-mem"    "./tmp/"
