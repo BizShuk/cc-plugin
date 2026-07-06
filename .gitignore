@@ -23,3 +23,4 @@ plugins/experiment/skills/scrapling/Scrapling/**
 plugins/superpower/**
 plugins/understand-anything/**
 .codegraphy/*
+pkg/model/continue/Continue.*.vsix

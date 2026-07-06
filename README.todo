@@ -11,6 +11,8 @@
 - [ ] `2026-07-02-architecture-structured-logging`: `CLI/開發者 (CLI/Developer)` 用它 `來將全域日誌輸出遷移至結構化的 log/slog，以支援現代觀測性與日誌等級過濾`
 - [ ] `2026-07-05-architecture-utility-extraction`: `開發者 (Developer)` 用它 `來將公用程式與硬編碼路徑解耦，統一收斂至獨立的 utils 套件並支持自封裝的臨時目錄設定`
 - [ ] `2026-07-06-architecture-resource-leak-fix`: `開發者 (Developer)` 用它 `來修復 writeAgentMemoryLogic 中迴圈內 defer 導致的連線與檔案描述符資源洩漏，確保大量記憶寫入時系統的穩定性`
+- [ ] `2026-07-06-architecture-skill-md-renaming`: `開發者 (Developer)` 用它 `來將特定插件的技能 markdown 檔重命名為標準的 SKILL.md 並加上 frontmatter，以符合 agentskills.io 規範與平台自動發現機制`
+
 
 
 依 [`plans/2026-07-02-refactoring-roadmap.md`](plans/2026-07-02-refactoring-roadmap.md) 拆分為四個漸進式階段：
