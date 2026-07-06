@@ -26,20 +26,7 @@
         },
         {
             "name": "experiment",
-            "source": "./plugins/experiment",
-            "description": "Sandbox plugin for skills staged before merging into their formal destination plugins. Holds exploration / scraping skills previously under `explore` and planning / documentation skills previously under `general` so they can be evaluated, refactored, or promoted without disturbing the shipped plugin manifests. Not a stable surface — entries here are expected to graduate.",
-            "keywords": [
-                "experiment",
-                "sandbox",
-                "staging",
-                "scraping",
-                "fetching",
-                "playwright",
-                "firecrawl",
-                "scrapling",
-                "summarize",
-                "mermaid"
-            ]
+            "source": "./plugins/experiment"
         },
         {
             "name": "gosdk",
@@ -47,15 +34,17 @@
                 "source": "github",
                 "repo": "bizshuk/gosdk"
             },
-            "description": "Go development toolkit for github.com/bizshuk/gosdk — bundles 9 Go-focused skills (code-quality, dead-code, dev, gosdk, mvc, naming, network, performance-tuning, zap→slog) and the assertive `golang-refactor` agent that auto-invokes eight specialized skills to actively rewrite code breaking SOLID, MVC, naming, error handling, context propagation, or performance conventions (not just report). Triggers: refactor, review, audit, clean up, restructure, improve."
+        },
+        {
+            "name": "inf",
+            "source": {
+                "source": "github",
+                "repo": "bizshuk/inf"
+            }
         },
         {
             "name": "review",
             "source": "./plugins/review",
-            "description": "Review plugin — coordinates 7 review skills (consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, learning) via the review-coordinator agent.",
-            "agents": [
-                "./agents/review-coordinator.md"
-            ]
         },
         {
             "name": "superpowers",
@@ -63,34 +52,18 @@
                 "source": "github",
                 "repo": "obra/superpowers"
             },
-            "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques (vendored as git submodule from https://github.com/obra/superpowers)"
         },
         {
             "name": "media",
             "source": "./plugins/media",
-            "description": "Media generation and script writing toolkit. Includes prompt expansion, multi-shot storyboard formatting, and character consistency setting for video generation models."
         },
         {
             "name": "team",
             "source": "./plugins/team",
-            "description": "AI Agent Team planning, role prompt design, and orchestration config toolkit. Helps structure cross-functional agent setups and define long-term guidelines."
         },
         {
             "name": "ultra-explore",
-            "source": "./plugins/ultra-explore",
-            "description": "Manual-entry knowledge base pipeline for large scale (1000+ file repos, 10000+ docs) — single /ultra-explore trigger (monofolder-aware, respects .gitignore) ingests git repos, commit histories (cached git log + last-commit cursor), web links, chat histories, and storage schemas into a verifiable wikilink knowledge base with truth tiers, fingerprint dedup, and per-batch resumable state under ~/projects/product/.",
-            "keywords": [
-                "ultra-explore",
-                "knowledge-base",
-                "knowledge-graph",
-                "ingest",
-                "distill",
-                "git-history",
-                "provenance",
-                "wikilink",
-                "large-scale",
-                "resumable"
-            ]
+            "source": "./plugins/ultra-explore"
         },
         {
             "name": "understand-anything",
@@ -98,7 +71,6 @@
                 "source": "github",
                 "repo": "Egonex-AI/Understand-Anything"
             },
-            "description": "AI-powered codebase understanding — analyze, visualize, and explain any project"
         },
         {
             "name": "last30days",
@@ -106,25 +78,13 @@
                 "source": "github",
                 "repo": "mvanhorn/last30days-skill"
             },
-            "description": "Research any topic across Reddit, X, YouTube, TikTok, Instagram, Hacker News, Polymarket, GitHub, and 5+ more sources. AI agent scores by upvotes, likes, and real money - not editors."
         },
         {
             "name": "ui-ux-pro-max-skill",
             "source": {
                 "source": "github",
                 "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
-            },
-            "description": "UI/UX design intelligence with 84 styles, 161 palettes, 73 font pairings, 99 UX guidelines, and 25 chart types across 17 tech stacks (React, Next.js, Vue, Nuxt.js, Nuxt UI, Svelte, Astro, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, Three.js). Triggers: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor UI/UX.",
-            "keywords": [
-                "ui",
-                "ux",
-                "design",
-                "design-system",
-                "typography",
-                "color-palette",
-                "accessibility",
-                "charts"
-            ]
+            }
         }
     ]
 }
