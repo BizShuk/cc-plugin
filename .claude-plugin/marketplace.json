@@ -18,7 +18,7 @@
             "source": "./plugins/general"
         },
         {
-            "name": "general",
+            "name": "awesome-claude-code-subagents",
             "source": {
                 "source": "github",
                 "repo": "VoltAgent/awesome-claude-code-subagents"
