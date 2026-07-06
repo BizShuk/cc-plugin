@@ -14,35 +14,34 @@
   },
   "permissions": {
     "allow": [
-      "Bash(ls *)",
-      "Bash(df *)",
-      "Bash(du *)",
-      "Bash(mkdir *)",
-      "Bash(head *)",
-      "Bash(find *)",
-      "Bash(sed *)",
-      "Bash(grep *)",
-      "Bash(go *)",
-      "Bash(python *)",
-      "Bash(python3 *)",
-      "Bash(rm *)",
-      "Bash(git *)",
-      "Bash(cat *)",
-      "Bash(chmod +x *)",
+      "Bash(ls:*)",
+      "Bash(df:*)",
+      "Bash(du:*)",
+      "Bash(mkdir:*)",
+      "Bash(head:*)",
+      "Bash(find:*)",
+      "Bash(sed:*)",
+      "Bash(grep:*)",
+      "Bash(go:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(rm:*)",
+      "Bash(git:*)",
+      "Bash(cat:*)",
+      "Bash(chmod +x:*)",
       "Read(//Users/shuk/.gbrain/**)"
     ],
     "deny": [
-      "Read(.env*)",
       "Read(~/.ssh/**)",
       "Read(~/.aws/**)",
-      "Read(**/.env)",
       "Read(**/secrets/**)",
       "Read(~/.claude/settings.json)",
       "Edit(**/.git)",
       "Write(**/.git)"
     ],
     "ask": [
-      "Bash(git push*)"
+      "Bash(git push:*)",
+      "Read(.env*)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
