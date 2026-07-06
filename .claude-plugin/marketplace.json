@@ -7,13 +7,7 @@
     "plugins": [
         {
             "name": "tools",
-            "source": "./plugins/tools",
-            "skills": [
-                "./skills/apple-calendar",
-                "./skills/apple-email",
-                "./skills/apple-notes",
-                "./skills/apple-reminders"
-            ]
+            "source": "./plugins/tools"
         },
         {
             "name": "explore",
@@ -22,6 +16,13 @@
         {
             "name": "general",
             "source": "./plugins/general"
+        },
+        {
+            "name": "general",
+            "source": {
+                "source": "github",
+                "repo": "VoltAgent/awesome-claude-code-subagents"
+            }
         },
         {
             "name": "experiment",
@@ -67,22 +68,12 @@
         {
             "name": "media",
             "source": "./plugins/media",
-            "description": "Media generation and script writing toolkit. Includes prompt expansion, multi-shot storyboard formatting, and character consistency setting for video generation models.",
-            "skills": [
-                "./skills/character-setting",
-                "./skills/prompt-to-story-script",
-                "./skills/scene-to-video-prompt"
-            ]
+            "description": "Media generation and script writing toolkit. Includes prompt expansion, multi-shot storyboard formatting, and character consistency setting for video generation models."
         },
         {
             "name": "team",
             "source": "./plugins/team",
-            "description": "AI Agent Team planning, role prompt design, and orchestration config toolkit. Helps structure cross-functional agent setups and define long-term guidelines.",
-            "skills": [
-                "./skills/orchestration-config",
-                "./skills/role-generator",
-                "./skills/team-design"
-            ]
+            "description": "AI Agent Team planning, role prompt design, and orchestration config toolkit. Helps structure cross-functional agent setups and define long-term guidelines."
         },
         {
             "name": "ultra-explore",

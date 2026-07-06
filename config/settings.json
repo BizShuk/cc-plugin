@@ -47,7 +47,7 @@
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
   },
-  "model": "claude-sonnet-5",
+  "model": "opus",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
