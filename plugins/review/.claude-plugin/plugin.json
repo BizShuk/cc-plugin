@@ -24,13 +24,5 @@
   "agents": [
     "./agents/review-coordinator.md"
   ],
-  "skills": [
-    "./skills/consistency",
-    "./skills/business-improvement",
-    "./skills/folder-structure",
-    "./skills/naming-convention",
-    "./skills/doc-sync",
-    "./skills/dependency-hygiene",
-    "./skills/learning-document"
-  ]
+  "skills": []
 }

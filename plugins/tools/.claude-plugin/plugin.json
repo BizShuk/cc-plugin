@@ -18,10 +18,5 @@
     "notes",
     "reminders"
   ],
-  "skills": [
-    "./skills/apple-calendar",
-    "./skills/apple-email",
-    "./skills/apple-notes",
-    "./skills/apple-reminders"
-  ]
+  "skills": []
 }

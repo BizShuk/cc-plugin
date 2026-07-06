@@ -22,13 +22,5 @@
     "summarize",
     "mermaid"
   ],
-  "skills": [
-    "./skills/anti-sabotage",
-    "./skills/firecrawl",
-    "./skills/mermaid",
-    "./skills/model-evaluator",
-    "./skills/playwright-cli",
-    "./skills/scrapling",
-    "./skills/summarize.sh"
-  ]
+  "skills": []
 }

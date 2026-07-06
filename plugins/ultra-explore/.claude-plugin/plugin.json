@@ -25,22 +25,6 @@
     "large-scale",
     "resumable"
   ],
-  "agents": [
-    "./agents/kb-coordinator.md"
-  ],
-  "skills": [
-    "./skills/ultra-explore",
-    "./skills/kb-spec",
-    "./skills/kb-ingest-repo",
-    "./skills/kb-ingest-history",
-    "./skills/kb-ingest-web",
-    "./skills/kb-ingest-chat",
-    "./skills/kb-ingest-schema",
-    "./skills/kb-distill",
-    "./skills/kb-connect",
-    "./skills/kb-verify",
-    "./skills/kb-query",
-    "./skills/topology-builder",
-    "./skills/changelog"
-  ]
+  "agents": [],
+  "skills": []
 }

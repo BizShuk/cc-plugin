@@ -20,9 +20,5 @@
     "sora",
     "character"
   ],
-  "skills": [
-    "./skills/prompt-to-story-script",
-    "./skills/scene-to-video-prompt",
-    "./skills/character-setting"
-  ]
+  "skills": []
 }

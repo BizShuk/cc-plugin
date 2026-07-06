@@ -20,10 +20,5 @@
     "business-extract",
     "markitdown"
   ],
-  "skills": [
-    "./skills/content-summarizer",
-    "./skills/markitdown",
-    "./skills/project-explore",
-    "./skills/project-route"
-  ]
+  "skills": []
 }

@@ -19,9 +19,5 @@
     "role",
     "role-generator"
   ],
-  "skills": [
-    "./skills/team-design",
-    "./skills/role-generator",
-    "./skills/orchestration-config"
-  ]
+  "skills": []
 }

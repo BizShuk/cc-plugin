@@ -25,15 +25,5 @@
     "laws",
     "fusion"
   ],
-  "skills": [
-    "./skills/universal-generate",
-    "./skills/universal-review",
-    "./skills/universal-consolidate",
-    "./skills/universal-aggregate",
-    "./skills/universal-evolve",
-    "./skills/system-laws",
-    "./skills/domain-exploration",
-    "./skills/llm-mechanics",
-    "./skills/grand-unified-theory"
-  ]
+  "skills": []
 }
