@@ -74,8 +74,27 @@ flowchart TD
 | `CLAUDE.md`           | 技術脈絡 (technical context)、結構、關鍵決策                           |
 | `AGENTS.md`           | 軟連結 `AGENTS.md -> CLAUDE.md`（一律建立，不例外）                    |
 | `plans/`              | 進行中計畫，命名 `YYYY-MM-DD-<topic>.md`                               |
-| `docs/specs/`         | 計畫實作完成後轉入之規格（單一事實來源），統一 `YYYY-MM-DD-<topic>.md` |
+| `docs/backlog/`       | 待辦想法 (pending ideas)                                               |
+| `docs/specs/`         | 既有設計與規格 (existing design)，統一 `YYYY-MM-DD-<topic>.md`         |
 | `ecosystem.config.js` | 若有常駐程序或 cron 任務，置於 repo 根目錄，由 pm2 管理                |
+| `scripts/`            | 專案相關腳本 (project related script)                                  |
+| `tmp/`                | 實例專屬之資料與設定 (data/config per instance, not source code/logic) |
+| `run.sh`              | 預設執行程序，可隨時執行 (default process, can run always)             |
+| `README.todo`         | 待辦事項 (pending todo item)                                           |
+
+`README.todo` 格式規範：
+
+```markdown
+# TODO
+
+- [ ] xxx
+
+## <feature>
+
+- [ ] yyy
+
+## Archive
+```
 
 `.project_index/`（`projects.json` + `INDEX.md`）為全工作區的機器可讀註冊表，
 依 README/CLAUDE.md 對自動探索；新增 repo 只要符合統一介面即自動被收錄。

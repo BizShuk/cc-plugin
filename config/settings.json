@@ -93,6 +93,6 @@
     "verbose": false,
     "preferredNotifChannel": "auto",
     "teammateMode": "in-process",
-    "agentPushNotifEnabled": false,
-    "inputNeededNotifEnabled": true
+    "inputNeededNotifEnabled": true,
+    "agentPushNotifEnabled": true
 }
