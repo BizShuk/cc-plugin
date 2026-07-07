@@ -31,6 +31,9 @@
 - `Phase 4` — 規範檔案更名與整合驗證 (100% 進度)
     - [ ] [plans/2026-07-02-skill-md-renaming.md](plans/2026-07-02-skill-md-renaming.md) — `anti-sabotage.md` 重命名為 `SKILL.md` 並補 frontmatter
     - [ ] [plans/2026-07-02-topology-extraction.md](plans/2026-07-02-topology-extraction.md) — `model/topology` 遷移至 `pkg/topology` 並新增 `cmd/topology` CLI
+- `Feature Add-on`
+    - [ ] [plans/prompt-todo.md](plans/prompt-todo.md) — `prompt-todo` 自動提取功能並寫入待辦清單
+
 
 
 ## Archive

@@ -82,7 +82,7 @@
   },
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",
