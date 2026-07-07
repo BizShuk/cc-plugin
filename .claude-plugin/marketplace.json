@@ -33,7 +33,7 @@
             "source": {
                 "source": "github",
                 "repo": "bizshuk/gosdk"
-            },
+            }
         },
         {
             "name": "inf",
@@ -44,22 +44,22 @@
         },
         {
             "name": "review",
-            "source": "./plugins/review",
+            "source": "./plugins/review"
         },
         {
             "name": "superpowers",
             "source": {
                 "source": "github",
                 "repo": "obra/superpowers"
-            },
+            }
         },
         {
             "name": "media",
-            "source": "./plugins/media",
+            "source": "./plugins/media"
         },
         {
             "name": "team",
-            "source": "./plugins/team",
+            "source": "./plugins/team"
         },
         {
             "name": "ultra-explore",
@@ -70,14 +70,14 @@
             "source": {
                 "source": "github",
                 "repo": "Egonex-AI/Understand-Anything"
-            },
+            }
         },
         {
             "name": "last30days",
             "source": {
                 "source": "github",
                 "repo": "mvanhorn/last30days-skill"
-            },
+            }
         },
         {
             "name": "ui-ux-pro-max-skill",
