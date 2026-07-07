@@ -46,7 +46,7 @@
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
   },
-  "model": "fable",
+  "model": "opus",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -82,7 +82,7 @@
   },
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",

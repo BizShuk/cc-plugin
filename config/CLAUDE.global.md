@@ -150,7 +150,7 @@ flowchart LR
 - 孵化在 `playground/`，成熟晉升為頂層獨立 repo，退役移入 `archive/`（保留不刪除）。
 - `tmp/` 只放真正的暫存物；已成形的 repo 應晉升至 `~/projects/<name>`，不長住 `tmp/`。
 
-## 文件格式 (Doc Format)
+## Output Format (including terminal output and file output)
 
 - 繁體中文為主，術語以 local language 搭配英文圓括號。
 - 名詞/術語範例：
@@ -159,4 +159,3 @@ flowchart LR
 - 若為檔案摘要，使用該檔案的原始語言。
 - 不使用粗體，一律以 `backtick` 強調。
 - Mermaid 邊線文字必須雙引號包覆（`A -->|"文字"| B`）。
-- Claude Code skills 置於 `.agents/skills/<name>/`，以 `.claude/skills/<name>` 軟連結曝露。
