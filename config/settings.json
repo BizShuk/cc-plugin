@@ -46,7 +46,7 @@
     "defaultMode": "acceptEdits",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "minimax-m3",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
