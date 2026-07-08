@@ -68,19 +68,19 @@ flowchart TD
 
 每個 repo（含 monorepo 內的子專案）必須具備：
 
-| 檔案                  | 職責                                                                   |
-| --------------------- | ---------------------------------------------------------------------- |
-| `README.md`           | 業務定義 (business definition)、domain flow                            |
-| `CLAUDE.md`           | 技術脈絡 (technical context)、結構、關鍵決策                           |
-| `AGENTS.md`           | 軟連結 `AGENTS.md -> CLAUDE.md`（一律建立，不例外）                    |
-| `plans/`              | 進行中計畫，命名 `YYYY-MM-DD-<topic>.md`                               |
-| `docs/backlog/`       | 待辦想法 (pending ideas)                                               |
-| `docs/specs/`         | 既有設計與規格 (existing design)，統一 `YYYY-MM-DD-<topic>.md`         |
-| `ecosystem.config.js` | 若有常駐程序或 cron 任務，置於 repo 根目錄，由 pm2 管理                |
-| `scripts/`            | 專案相關腳本 (project related script)                                  |
-| `tmp/`                | 實例專屬之資料與設定 (data/config per instance, not source code/logic) |
-| `run.sh`              | 預設執行程序，可隨時執行 (default process, can run always)             |
-| `README.todo`         | 待辦事項 (pending todo item)                                           |
+| 檔案                  | 必要性 | 職責                                                                   |
+| --------------------- | ------ | ---------------------------------------------------------------------- |
+| `README.md`           | 必備   | 業務定義 (business definition)、domain flow                            |
+| `CLAUDE.md`           | 必備   | 技術脈絡 (technical context)、結構、關鍵決策                           |
+| `AGENTS.md`           | 必備   | 軟連結 `AGENTS.md -> CLAUDE.md`（一律建立，不例外）                    |
+| `plans/`              | 選備   | 進行中計畫，命名 `YYYY-MM-DD-<topic>.md`                               |
+| `docs/backlog/`       | 選備   | 待辦想法 (pending ideas)                                               |
+| `docs/specs/`         | 選備   | 既有設計與規格 (existing design)，統一 `YYYY-MM-DD-<topic>.md`         |
+| `ecosystem.config.js` | 選備   | 若有常駐程序或 cron 任務，置於 repo 根目錄，由 pm2 管理                |
+| `scripts/`            | 選備   | 專案相關腳本 (project related script)                                  |
+| `tmp/`                | 選備   | 實例專屬之資料與設定 (data/config per instance, not source code/logic) |
+| `run.sh`              | 選備   | 預設執行程序，可隨時執行 (default process, can run always)             |
+| `README.todo`         | 必備   | 待辦事項 (pending todo item)                                           |
 
 `README.todo` 格式規範：
 
