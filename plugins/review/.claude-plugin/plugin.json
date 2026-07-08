@@ -13,16 +13,12 @@
   "keywords": [
     "review",
     "audit",
-    "consistency",
-    "business-improvement",
-    "folder-structure",
     "naming",
     "doc-sync",
-    "dependency-hygiene",
-    "learning-document"
+    "learning-document",
+    "system-planner",
+    "business-planner"
   ],
-  "agents": [
-    "./agents/review-coordinator.md"
-  ],
+  "agents": [],
   "skills": []
 }

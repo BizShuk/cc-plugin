@@ -13,19 +13,16 @@
 ```mermaid
 graph TD
     Target[審查目標 Target: Diff/File/Folder] --> Coordinator[審查協調代理 review-coordinator]
-    Coordinator --> S1[一致性 consistency]
-    Coordinator --> S2[業務價值 business-improvement]
-    Coordinator --> S3[目錄結構 folder-structure]
-    Coordinator --> S4[命名規範 naming-convention]
-    Coordinator --> S5[文件同步 doc-sync]
-    Coordinator --> S6[依賴衛生 dependency-hygiene]
-    Coordinator --> S7[學習文件 learning-document]
+    Coordinator --> S1[商業價值 business-planner]
+    Coordinator --> S2[命名規範 naming-convention]
+    Coordinator --> S3[文件同步 doc-sync]
+    Coordinator --> S4[學習文件 learning-document]
+    Coordinator --> S5[系統與品質 system-planner]
     S1 --> Report[彙整報告 Consolidated Report]
     S2 --> Report
     S3 --> Report
     S4 --> Report
     S5 --> Report
-    S6 --> Report
 ```
 
 ---
@@ -34,13 +31,15 @@ graph TD
 
 | 審查維度 (Review Dimension) | 對應技能 (Corresponding Skill) | 觸發條件 (Run Condition) |
 | --- | --- | --- |
-| 跨檔案一致性 (Cross-file coherence) | `consistency` | 任何變更（預設一律啟用） |
-| 業務流程改善 (Business flow improvement) | `business-improvement` | 涉及功能、流程或使用者行為的變更 |
-| 目錄佈局調整 (Directory layout audit) | `folder-structure` | 新增/移動檔案，或全專案審查時 |
+| 跨檔案一致性 (Cross-file coherence) | `system-planner` | 任何變更（預設一律啟用） |
+| 商業價值分析 (Business value analysis) | `business-planner` | 審查業務摩擦點與缺陷，或規劃新功能的商業變現模式 |
+| 目錄佈局調整 (Directory layout audit) | `system-planner` | 新增/移動檔案，或全專案審查時 |
 | 識別子命名品質 (Identifier naming quality) | `naming-convention` | 任何程式碼、設定鍵值或 API 端點變更 |
 | 文件與程式碼同步 (Docs vs code sync) | `doc-sync` | 涉及 README/CLAUDE.md、註解或文件編輯 |
-| 外部依賴管理 (Dependency management) | `dependency-hygiene` | 涉及依賴清單檔案（如 go.mod, package.json 等） |
+| 外部依賴管理 (Dependency management) | `system-planner` | 涉及依賴清單檔案（如 go.mod, package.json 等） |
 | 專案引導與學習 (Project onboarding) | `learning-document` | 請求建立步驟式教學、專案引導或概念學習文件時 |
+| 程式碼編寫原則 (Coding principles) | `system-planner` | 任何程式碼、重融或審查請求 |
+| 系統架構規劃 (System architecture planning) | `system-planner` | 規劃新功能或重構的系統架構與資料流 |
 
 ---
 
@@ -53,13 +52,11 @@ graph TD
 ├── agents/
 │   └── review-coordinator.md # 審查協調代理 (Review Coordinator Agent)
 └── skills/
-    ├── business-improvement/ # 業務流程改善技能 (Business Improvement Skill)
-    ├── consistency/          # 跨檔案一致性技能 (Consistency Skill)
-    ├── dependency-hygiene/   # 依賴衛生審查技能 (Dependency Hygiene Skill)
+    ├── business-planner/     # 商業價值分析技能 (Business Value Skill)
     ├── doc-sync/             # 文件同步審查技能 (Doc Sync Skill)
-    ├── folder-structure/     # 目錄結構審查技能 (Folder Structure Skill)
     ├── learning-document/    # 學習文件建立技能 (Learning Document Skill)
     ├── naming-convention/    # 命名規範審查技能 (Naming Convention Skill)
+    ├── system-planner/       # 系統架構規劃與品質審查技能 (System & Quality Skill)
 ```
 
 ---

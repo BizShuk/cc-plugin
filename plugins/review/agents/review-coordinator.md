@@ -12,7 +12,7 @@ description: >
 tools: Read, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: default
-skills: consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, learning-document
+skills: business-planner, doc-sync, learning-document, naming-convention, system-planner
 mcpServers:
 hooks:
 memory: local
@@ -74,20 +74,20 @@ something it can judge; skip the rest and record why.
 
 | Dimension            | Skill                  | Run when the target includes                            |
 | -------------------- | ---------------------- | ------------------------------------------------------- |
-| Cross-file coherence | `consistency`          | Any change (always applicable)                          |
-| Business value       | `business-improvement` | A feature, flow, or user-facing behavior                |
-| Directory layout     | `folder-structure`     | New/moved files or whole-repo scope                     |
+| Cross-file coherence | `system-planner`       | Any change (always applicable)                          |
+| Business value       | `business-planner`     | A feature, flow, or user-facing behavior                |
+| Directory layout     | `system-planner`       | New/moved files or whole-repo scope                     |
 | Identifier quality   | `naming-convention`    | Any code, config keys, or endpoints                     |
 | Docs vs code         | `doc-sync`             | README/CLAUDE.md, comments, or doc edits                |
-| Dependencies         | `dependency-hygiene`   | go.mod, package.json, requirements, locks               |
+| Dependencies         | `system-planner`       | go.mod, package.json, requirements, locks               |
 | Project onboarding   | `learning-document`    | Step-by-step tutorials, onboarding, or concept docs     |
 
 Routing rules:
 
-- A pure-docs target runs `doc-sync` (+ `consistency`); skip the code dimensions.
-- A dependency-manifest-only change runs `dependency-hygiene` (+ `consistency`).
+- A pure-docs target runs `doc-sync` (+ `system-planner`); skip the code dimensions.
+- A dependency-manifest-only change runs `system-planner`.
 - Whole-repo scope runs every dimension.
-- `consistency` runs in every review; it is the backbone that the others feed.
+- `system-planner` runs in every review; it is the backbone that the others feed.
 
 ---
 
@@ -175,8 +175,7 @@ genuinely matters; a short ranked report beats an exhaustive one.
 
 ## Part 7 — Related
 
-- Skills coordinated: `[[consistency]]`, `[[business-improvement]]`,
-  `[[folder-structure]]`, `[[naming-convention]]`, `[[doc-sync]]`,
-  `[[dependency-hygiene]]`, `[[learning-document]]`
+- Skills coordinated: `[[business-planner]]`, `[[doc-sync]]`,
+  `[[learning-document]]`, `[[naming-convention]]`, `[[system-planner]]`
 - Adjacent agents: `feature` (build new work), and the `/code-review` /
   `/security-review` commands for correctness and security.

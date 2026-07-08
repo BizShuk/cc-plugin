@@ -21,9 +21,11 @@
     "stopfailure",
     "output-style",
     "markdownlint",
-    "business-planner",
-    "system-planner",
     "daily-summary"
   ],
-  "skills": []
+  "skills": [
+    "./skills/daily-summary",
+    "./skills/markdownlint",
+    "./skills/sort-todo"
+  ]
 }

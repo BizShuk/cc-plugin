@@ -59,7 +59,7 @@
 │   │   └── skills/           # 趨勢研究技能 (last30days)
 │   ├── general/              # 通用功能插件
 │   │   ├── agents/           # 自訂代理 (feature.md)
-│   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, business-planner, daily-summary, domain, markdownlint, mermaid, model-evaluator, project-explore, system-planner, topology-builder)
+│   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, daily-summary, domain, markdownlint, mermaid, model-evaluator, project-explore, sort-todo, topology-builder)
 │   ├── media/                # 影片生成與劇本創作插件
 │   │   ├── skills/           # 影片生成技能 (character-setting, prompt-to-story-script, scene-to-video-prompt)
 │   │   └── voice/            # VoxCPM 聲音樣板與語音克隆指南設定
@@ -71,9 +71,9 @@
 │   ├── ultra-explore/        # 知識庫建構插件 (Ultra-Explore) — 單一手動入口，多來源入庫、蒸餾、建邊、驗證、查詢
 │   │   ├── agents/           # 編排代理 (kb-coordinator — 五階段管道編排)
 │   │   └── skills/           # 入口 (ultra-explore) + 知識庫技能 (kb-spec, kb-ingest-repo/history/web/chat/schema, kb-distill, kb-connect, kb-verify, kb-query)
-│   ├── review/               # 審查插件 (Review) — 一致性、業務改善、結構/命名/文件/依賴/測試/學習審查
+│   ├── review/               # 審查插件 (Review) — 商業價值、結構/命名/文件/依賴與品質審查
 │   │   ├── agents/           # 審查代理 (review-coordinator — 編排全部審查技能)
-│   │   └── skills/           # 審查技能 (consistency, business-improvement, folder-structure, naming-convention, doc-sync, dependency-hygiene, learning-document)
+│   │   └── skills/           # 審查技能 (business-planner, doc-sync, learning-document, naming-convention, system-planner)
 │   ├── gosdk/                # Go 開發工具包 (基於 github.com/bizshuk/gosdk)
 │   │   ├── agents/           # Go 代理 (golang-refactor)
 │   │   └── skills/           # Go 技能 (golang-code-quality, golang-mvc, golang-performance-tuning, 等)

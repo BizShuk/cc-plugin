@@ -15,11 +15,11 @@
 
 | Skill | 用途 |
 | --- | --- |
-| `business-planner` | 一次規劃一個 feature 的商業價值：挖掘未開發新價值或解鎖隱藏價值，輸出 `plans/business-<feature_name>.md` |
 | `daily-summary` | 彙整過去 24h 跨來源工作，產生工作日報並寫入 Apple Notes |
 | `markdownlint` | Markdown 格式檢查（精選 rule + CUSTOM-01 no-bold），所有插件的 `.md` 檔通用 |
 | `sort-todo` | 排序並格式化待辦清單 |
-| `system-planner` | 一次規劃一個 feature 的系統架構：位置、邊界、介面與資料流，保持整體清晰且可擴充，輸出 `plans/architecture-<feature_name>.md` |
+
+
 
 ## Hooks
 
