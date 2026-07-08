@@ -1,8 +1,8 @@
 ---
 name: business-planner
 description: >
-  Use when reviewing a codebase for business-value improvements (gaps, friction, missed revenue/retention) or when planning and expanding the commercial value of a feature (asset inventory, opportunity scoring, MVP design).
-  Triggers on: "business value", "business improvement", "how to improve this", "業務改善", "增加價值", "business expansion plan", "expand commercial value", "monetization", "hidden value", "商業價值", "業務規劃", "商業模式設計", "business-planner".
+    Use when reviewing a codebase for business-value improvements (gaps, friction, missed revenue/retention) or when planning and expanding the commercial value of a feature (asset inventory, opportunity scoring, MVP design).
+    Triggers on: "business value", "business improvement", "how to improve this", "業務改善", "增加價值", "business expansion plan", "expand commercial value", "monetization", "hidden value", "商業價值", "業務規劃", "商業模式設計", "business-planner".
 version: "1.0.0"
 allowed-tools: read_file, write_file, search_web
 user-invocable: true
@@ -10,8 +10,8 @@ disable-model-invocation: false
 effort: high
 context: workspace
 metadata:
-  type: methodology
-  platforms: [macos, linux]
+    type: methodology
+    platforms: [macos, linux]
 ---
 
 # business-planner
@@ -23,6 +23,7 @@ metadata:
 ## When to Use
 
 當您面臨以下情境時，應使用本技能：
+
 - 審查功能流程，找出使用者摩擦點 (friction)、功能缺口 (gaps) 或未被衡量的成效時。
 - 為特定功能 (feature) 進行商業定位、盤點系統資產、挖掘價值機會並規劃 MVP 與驗證指標時。
 
@@ -31,12 +32,14 @@ metadata:
 尋找產品未達成功商業目標的痛點，並提出依價值排序的具體修改建議。
 
 ### 審查步驟 (Procedure)
+
 1. `理解目標`：閱讀 `README.md` 與 `CLAUDE.md` 以掌握專案業務範疇。
 2. `分析核心流程`：追蹤用戶註冊、激活、核心操作與留存的完整路徑，尋找系統可以代勞的動作。
 3. `評估發現`：依下方鏡頭清單評估問題，並依價值與努力程度 (Value-over-Effort) 排序。
 4. `產出報告`：列出具體發現與推薦修復路徑。
 
 ### 審查鏡頭 (Review Lenses)
+
 - `摩擦點 (Friction)`：多餘步驟、人工輸入或是不必要的等待。
 - `缺口 (Gap)`：產品承諾了某項價值但流程中並未交付。
 - `槓桿點 (Leverage)`：一項小改動即可顯著提升營收或留存。
@@ -48,9 +51,10 @@ metadata:
 
 ## Mode 2 — 商業價值規劃 (Planning Mode)
 
-一次規劃 `一個 feature` 的商業模型。規劃結果寫入 `plans/business-<feature_name>.md` 與 `README.todo`。
+一次規劃 `一個 feature` 的商業模型。
 
 ### 規劃步驟 (Procedure)
+
 1. `界定功能`：決定 `feature_name` (kebab-case)，說明該功能為誰創造何種價值，並列出 out of scope 項目。
 2. `盤點資產`：找出專案既有的數據資產 (DB schema 等)、功能資產 (API 等)、用戶資產 (上下游整合) 與知識資產。
 3. `挖掘機會`：找出 `隱藏價值 (Hidden Value)` (如未曝光數據) 與 `未開發價值 (Unexplored Value)` (延伸至新客群)。
@@ -63,33 +67,31 @@ metadata:
 
 ## Output Examples
 
-### Review Mode Output
+規劃結果寫入 `plans/<YYYY-MM-DD>-business-<feature_name>.md`
 
-```text
-Business value review — cc-plugin monetization
-1. [high value / low effort] simplify payment flow — auto-fill billing address at cmd/checkout.go:12
-2. [med / med]               track export failure — add prometheus metric for failed exports at cmd/export.go
-   Risk: checkout fails silently on timeout if payment gateway is down
-```
-
-### Planning Mode Output Structure (plans/business-*.md)
+### Planning Mode Output Structure (plans/business-\*.md)
 
 ```markdown
 # 商業價值計畫 — <feature_name> (Business Value Plan)
 
 ## 1. 目標與範圍 (Goal & Scope)
+
 <!-- 一句話目標與 out of scope 項目 -->
 
 ## 2. 既有資產盤點 (Asset Inventory)
+
 <!-- 數據、功能、用戶與知識資產清單 -->
 
 ## 3. 價值機會與評分 (Opportunities & Scoring)
+
 <!-- RICE 評分表與選定的提案 -->
 
 ## 4. 價值主張與商業模式 (Value Proposition & Business Model)
+
 <!-- 價值主張、商業模式、整合點 -->
 
 ## 5. MVP 與驗證計畫 (MVP & Validation)
+
 <!-- 兩週 MVP 範圍與北極星指標 -->
 ```
 
