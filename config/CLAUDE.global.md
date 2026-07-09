@@ -3,9 +3,16 @@
 本檔為 `~/projects/` 全工作區的方向性規範 (direction)，所有 repo 的 session 均會繼承。
 各 repo 細節以其自身 `CLAUDE.md` 為準；本檔只定規則與分層，不放具體內容。
 
-## 全域 AI 規則 (Global AI Rules)
+## Output Style
 
-衝突無法判斷時，使用 AskUserQuestions 並等待回覆。
+- 繁體中文為主，術語以 local language 搭配英文圓括號。
+    - 名詞/術語範例：
+        - `中正紀念堂 (Chiang Kai-shek Memorial Hall)` — 位於台灣台北，以繁體中文附英文
+            - `Catedral de Santa Eulalia de Barcelona (Barcelona Cathedral)` — 保留原文附英文
+- 若為檔案摘要，使用該檔案的原始語言。
+- 不使用粗體，一律以 `backtick` 強調。
+- Mermaid 邊線文字必須雙引號包覆（`A -->|"文字"| B`）。
+  衝突無法判斷時，使用 AskUserQuestions 並等待回覆。
 
 ### 輸出風格 (Output Style)
 
@@ -149,13 +156,3 @@ flowchart LR
 
 - 孵化在 `playground/`，成熟晉升為頂層獨立 repo，退役移入 `archive/`（保留不刪除）。
 - `tmp/` 只放真正的暫存物；已成形的 repo 應晉升至 `~/projects/<name>`，不長住 `tmp/`。
-
-## Output Format (including terminal output and file output)
-
-- 繁體中文為主，術語以 local language 搭配英文圓括號。
-- 名詞/術語範例：
-    - `中正紀念堂 (Chiang Kai-shek Memorial Hall)` — 位於台灣台北，以繁體中文附英文
-    - `Catedral de Santa Eulalia de Barcelona (Barcelona Cathedral)` — 保留原文附英文
-- 若為檔案摘要，使用該檔案的原始語言。
-- 不使用粗體，一律以 `backtick` 強調。
-- Mermaid 邊線文字必須雙引號包覆（`A -->|"文字"| B`）。
