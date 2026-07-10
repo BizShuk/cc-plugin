@@ -12,7 +12,7 @@ description: >
 tools: Read, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: default
-skills: business-planner, doc-sync, learning-document, naming-convention, system-planner
+skills: business-planner, doc-sync, tutorial, naming-convention, system-planner
 mcpServers:
 hooks:
 memory: local
@@ -80,7 +80,7 @@ something it can judge; skip the rest and record why.
 | Identifier quality   | `naming-convention`    | Any code, config keys, or endpoints                     |
 | Docs vs code         | `doc-sync`             | README/CLAUDE.md, comments, or doc edits                |
 | Dependencies         | `system-planner`       | go.mod, package.json, requirements, locks               |
-| Project onboarding   | `learning-document`    | Step-by-step tutorials, onboarding, or concept docs     |
+| Project onboarding   | `tutorial`             | Step-by-step tutorials, onboarding, or concept docs     |
 
 Routing rules:
 
@@ -176,6 +176,6 @@ genuinely matters; a short ranked report beats an exhaustive one.
 ## Part 7 — Related
 
 - Skills coordinated: `[[business-planner]]`, `[[doc-sync]]`,
-  `[[learning-document]]`, `[[naming-convention]]`, `[[system-planner]]`
+  `[[tutorial]]`, `[[naming-convention]]`, `[[system-planner]]`
 - Adjacent agents: `feature` (build new work), and the `/code-review` /
   `/security-review` commands for correctness and security.

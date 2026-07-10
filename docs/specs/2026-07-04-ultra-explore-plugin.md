@@ -12,7 +12,7 @@
 | `markitdown`           | 任意檔案/URL → Markdown                                            | 無 provenance、無去噪後入庫流程                |
 | `content-summarizer`   | fetch-first、來源可追溯、fact 與 inference 分離                    | 摘要即終點，不落入知識庫                       |
 | `project-route`        | index + staleness auto-rebuild 概念                                | —（借用 staleness 概念）                       |
-| `learning-document`    | 教學文件輸出規範                                                   | 無知識庫作為輸入源                             |
+| `tutorial`             | 教學文件輸出規範                                                   | 無知識庫作為輸入源                             |
 | `understand-anything`  | 多 agent 分工、graph-reviewer 驗收概念                             | Node.js 重依賴、輸出 JSON graph 非 Markdown    |
 | `team`                 | orchestrator/pipeline 編排模式                                     | —（借用 coordinator agent 模式）               |
 | cc-plugin distill 管道 | 指紋去重 (SHA-256)、真實性門檻 (truth qualification)               | —（核心規則直接移植）                          |

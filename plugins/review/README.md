@@ -16,7 +16,7 @@ graph TD
     Coordinator --> S1[商業價值 business-planner]
     Coordinator --> S2[命名規範 naming-convention]
     Coordinator --> S3[文件同步 doc-sync]
-    Coordinator --> S4[學習文件 learning-document]
+    Coordinator --> S4[學習文件 tutorial]
     Coordinator --> S5[系統與品質 system-planner]
     S1 --> Report[彙整報告 Consolidated Report]
     S2 --> Report
@@ -38,7 +38,7 @@ graph TD
 | 識別子命名品質 (Identifier naming quality) | `naming-convention` | 任何程式碼、設定鍵值或 API 端點變更 |
 | 文件與程式碼同步 (Docs vs code sync) | `doc-sync` | 涉及 README/CLAUDE.md、註解或文件編輯 |
 | 外部依賴管理 (Dependency management) | `system-planner` | 涉及依賴清單檔案（如 go.mod, package.json 等） |
-| 專案引導與學習 (Project onboarding) | `learning-document` | 請求建立步驟式教學、專案引導或概念學習文件時 |
+| 專案引導與學習 (Project onboarding) | `tutorial` | 請求建立步驟式教學、專案引導或概念學習文件時 |
 | 程式碼編寫原則 (Coding principles) | `system-planner` | 任何程式碼、重融或審查請求 |
 | 系統架構規劃 (System architecture planning) | `system-planner` | 規劃新功能或重構的系統架構與資料流 |
 | Session 復盤 (Session retro) | `session_retro` | 請求復盤/post-mortem，分析 skill/token/錯誤率與委託邊界 |
@@ -56,7 +56,7 @@ graph TD
 └── skills/
     ├── business-planner/     # 商業價值分析技能 (Business Value Skill)
     ├── doc-sync/             # 文件同步審查技能 (Doc Sync Skill)
-    ├── learning-document/    # 學習文件建立技能 (Learning Document Skill)
+    ├── tutorial/    # 教程建立技能 (Tutorial Skill)
     ├── naming-convention/    # 命名規範審查技能 (Naming Convention Skill)
     ├── session_retro/        # Session 復盤技能 (Session Retro Skill)
     ├── system-planner/       # 系統架構規劃與品質審查技能 (System & Quality Skill)

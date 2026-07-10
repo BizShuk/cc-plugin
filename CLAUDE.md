@@ -73,7 +73,7 @@
 │   │   └── skills/           # 入口 (ultra-explore) + 知識庫技能 (kb-spec, kb-ingest-repo/history/web/chat/schema, kb-distill, kb-connect, kb-verify, kb-query)
 │   ├── review/               # 審查插件 (Review) — 商業價值、結構/命名/文件/依賴與品質審查
 │   │   ├── agents/           # 審查代理 (review-coordinator — 編排全部審查技能)
-│   │   └── skills/           # 審查技能 (business-planner, doc-sync, learning-document, naming-convention, system-planner)
+│   │   └── skills/           # 審查技能 (business-planner, doc-sync, tutorial, naming-convention, system-planner)
 │   ├── gosdk/                # Go 開發工具包 (基於 github.com/bizshuk/gosdk)
 │   │   ├── agents/           # Go 代理 (golang-refactor)
 │   │   └── skills/           # Go 技能 (golang-code-quality, golang-mvc, golang-performance-tuning, 等)

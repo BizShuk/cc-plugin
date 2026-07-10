@@ -1,5 +1,5 @@
 ---
-name: learning-document
+name: tutorial
 description: >
     Use when generating tutorials, step-by-step guides, domain knowledge documents, onboarding materials, or learning resources for the workspace. Triggers on "create learning document", "generate tutorials", "學習文件", "學習指南".
 version: "1.0.0"
@@ -12,7 +12,7 @@ metadata:
     platforms: [macos, linux]
 ---
 
-# 學習文件 (Learning Document)
+# 教程 (Tutorial)
 
 ## 概述 (Overview)
 

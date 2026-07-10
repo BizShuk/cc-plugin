@@ -63,7 +63,7 @@
 - `explore` (抓取與摘要：MarkItDown, Scrapling, Firecrawl, Playwright)
 - `general` (通用技能：domain, project-explore, model-evaluator)
 - `god` (系统大一統理論：LLM 力學、領域探索、融合方法)
-- `review` (審查插件：consistency、business-improvement、folder-structure、naming-convention、doc-sync、dependency-hygiene、learning-document)
+- `review` (審查插件：consistency、business-improvement、folder-structure、naming-convention、doc-sync、dependency-hygiene、tutorial)
 - `media` (影片生成與劇本創作：prompt-to-story-script, scene-to-video-prompt, character-setting)
 - `team` (代理團隊規劃與設計：team-design, role-generator, orchestration-config)
 - `tmp` (臨時測試)
