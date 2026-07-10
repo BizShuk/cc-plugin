@@ -17,7 +17,8 @@
     "doc-sync",
     "learning-document",
     "system-planner",
-    "business-planner"
+    "business-planner",
+    "session_retro"
   ],
   "agents": [],
   "skills": []
