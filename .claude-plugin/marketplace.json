@@ -15,7 +15,10 @@
         },
         {
             "name": "pm2",
-            "source": "../tmp/pm2"
+            "source": {
+                "source": "github",
+                "repo": "bizshuk/pm2"
+            }
         },
         {
             "name": "general",
