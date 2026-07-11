@@ -24,6 +24,7 @@
     "daily-summary"
   ],
   "skills": [
+    "./skills/claude-plugin-metadata",
     "./skills/daily-summary",
     "./skills/markdownlint",
     "./skills/sort-todo"

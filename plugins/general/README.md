@@ -15,6 +15,7 @@
 
 | Skill | 用途 |
 | --- | --- |
+| `claude-plugin-metadata` | 建立與更新 Claude 插件與技能的元資料（含 plugin.json 與 marketplace.json） |
 | `daily-summary` | 彙整過去 24h 跨來源工作，產生工作日報並寫入 Apple Notes |
 | `markdownlint` | Markdown 格式檢查（精選 rule + CUSTOM-01 no-bold），所有插件的 `.md` 檔通用 |
 | `sort-todo` | 排序並格式化待辦清單 |
@@ -59,7 +60,7 @@ plugins/general/
 │   ├── detailed.md
 │   ├── review.md
 │   └── README.md
-├── skills/              # 5 個技能目錄
+├── skills/              # 4 個技能目錄
 └── README.md
 ```
 
