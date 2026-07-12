@@ -4,8 +4,8 @@ description: >
     Use when generating tutorials, step-by-step guides, domain knowledge documents, onboarding materials, or learning resources for the workspace. Triggers on "create learning document", "generate tutorials", "學習文件", "學習指南".
 version: "1.0.0"
 allowed-tools: Read, Write, Glob
-user-invocable: false
-disable-model-invocation: false
+user-invocable: true
+disable-model-invocation: true
 effort: high
 metadata:
     type: reference
