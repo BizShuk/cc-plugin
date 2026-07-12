@@ -5,7 +5,7 @@ description: >
 version: "1.0.0"
 allowed-tools: Read, Write, Glob
 user-invocable: true
-disable-model-invocation: true
+disable-model-invocation: false
 effort: high
 metadata:
     type: reference
