@@ -61,8 +61,11 @@
             }
         },
         {
-            "name": "media",
-            "source": "./plugins/media"
+            "name": "ip-incubation",
+            "source": {
+                "source": "github",
+                "repo": "bizshuk/ip-incubation"
+            }
         },
         {
             "name": "team",

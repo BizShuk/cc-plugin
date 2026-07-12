@@ -1,9 +1,0 @@
-{
-  "id": "04_soothing_asmr",
-  "name": "療癒助眠 (Soothing / ASMR)",
-  "use_case": "冥想引導、助眠、放鬆內容",
-  "description": "輕柔氣聲的女性,語速非常慢,溫柔放鬆,像在耳邊低語",
-  "cfg_value": 1.8,
-  "inference_timesteps": 15,
-  "comparison": "深呼吸瑜伽老師,聽著聽著肩膀就鬆了。"
-}

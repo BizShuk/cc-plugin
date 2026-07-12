@@ -1,9 +1,0 @@
-{
-  "id": "07_energetic_ad",
-  "name": "廣告促銷 (Energetic Ad)",
-  "use_case": "廣告配音、促銷、開場",
-  "description": "高能量、興奮有說服力的聲音,語速偏快,充滿熱情",
-  "cfg_value": 2.3,
-  "inference_timesteps": 10,
-  "comparison": "購物台主持人,讓你忍不住想下單。"
-}

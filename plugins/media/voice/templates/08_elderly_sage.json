@@ -1,9 +1,0 @@
-{
-  "id": "08_elderly_sage",
-  "name": "長者智者 (Elderly Sage)",
-  "use_case": "角色配音、長者旁白、寓言",
-  "description": "一位年長男性,溫厚緩慢的嗓音,帶有歲月與智慧的滄桑感",
-  "cfg_value": 2.0,
-  "inference_timesteps": 15,
-  "comparison": "電影裡那位什麼都看透了的老爺爺。"
-}

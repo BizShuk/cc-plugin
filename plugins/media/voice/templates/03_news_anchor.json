@@ -1,9 +1,0 @@
-{
-  "id": "03_news_anchor",
-  "name": "沉穩新聞主播 (News Anchor)",
-  "use_case": "新聞播報、正式公告、財經摘要",
-  "description": "專業中性的成年聲音,字正腔圓,清晰穩定,語氣客觀",
-  "cfg_value": 2.2,
-  "inference_timesteps": 12,
-  "comparison": "晚間七點新聞主播,可信、不情緒化。"
-}

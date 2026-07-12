@@ -60,9 +60,6 @@
 │   ├── general/              # 通用功能插件
 │   │   ├── agents/           # 自訂代理 (feature.md)
 │   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, daily-summary, domain, markdownlint, mermaid, model-evaluator, project-explore, sort-todo, topology-builder)
-│   ├── media/                # 影片生成與劇本創作插件
-│   │   ├── skills/           # 影片生成技能 (character-setting, prompt-to-story-script, scene-to-video-prompt)
-│   │   └── voice/            # VoxCPM 聲音樣板與語音克隆指南設定
 │   ├── team/                 # AI 代理團隊規劃與設計插件
 │   │   └── skills/           # 團隊相關技能 (orchestration-config, role-generator, team-design)
 │   ├── god/                  # 系統大一統理論插件 (Grand Unified Theory)
@@ -126,7 +123,7 @@
 | 資料匯出          | `cmd/export/`                                                                                                                        | `ExportCmd()`                                  |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                                                                                                  | `NewStateStore()`                              |
 | 環境初始化        | `run.sh`, `config/`                                                                                                                  | `config.Init()`                                |
-| AI 技能           | `plugins/` (tools, explore, general, god, review, tmp, media, team, ultra-explore) | 各 `SKILL.md`                                  |
+| AI 技能           | `plugins/` (tools, explore, general, god, review, tmp, team, ultra-explore) | 各 `SKILL.md`                                  |
 | 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/`                                                                     | `ultra-explore` 入口 + kb-* 10 項, `kb-coordinator.md` |
 | 程式碼審查        | `plugins/review/skills/`                                                                                                             | 各 `SKILL.md` (consistency 等 7 項)            |
 | AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                                                                                  | `feature.md`, `review-coordinator.md`          |

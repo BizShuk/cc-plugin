@@ -1,9 +1,0 @@
-{
-  "id": "01_warm_narrator",
-  "name": "溫溫旁白 (Warm Narrator)",
-  "use_case": "有聲書、紀錄片旁白、長文朗讀",
-  "description": "一位四十歲左右的男性,溫暖低沉的嗓音,語速沉穩,帶有故事感",
-  "cfg_value": 2.0,
-  "inference_timesteps": 12,
-  "comparison": "深夜電台 DJ,讓人想一直聽下去。"
-}

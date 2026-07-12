@@ -1,9 +1,0 @@
-{
-  "id": "10_epic_trailer",
-  "name": "電影預告旁白 (Epic Trailer)",
-  "use_case": "電影預告、戲劇旁白、震撼開場",
-  "description": "低沉富磁性的男性嗓音,張力十足,語速緩慢戲劇化,充滿氣勢",
-  "cfg_value": 2.3,
-  "inference_timesteps": 15,
-  "comparison": "好萊塢預告片那句「In a world…」的聲音。"
-}
