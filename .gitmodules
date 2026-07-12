@@ -13,6 +13,3 @@
 [submodule "pkg/tools/career-ops"]
 	path = pkg/tools/career-ops
 	url = https://github.com/santifer/career-ops
-[submodule "plugins/media/seedance-2.0"]
-	path = plugins/media/seedance-2.0
-	url = https://github.com/Emily2040/seedance-2.0
