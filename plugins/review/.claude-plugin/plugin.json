@@ -18,8 +18,17 @@
     "tutorial",
     "system-planner",
     "business-planner",
-    "session_retro"
+    "session_retro",
+    "auto-evolving"
   ],
   "agents": [],
-  "skills": []
+  "skills": [
+    "./skills/auto-evolving",
+    "./skills/business-planner",
+    "./skills/doc-sync",
+    "./skills/naming-convention",
+    "./skills/session_retro",
+    "./skills/system-planner",
+    "./skills/tutorial"
+  ]
 }

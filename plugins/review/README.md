@@ -42,6 +42,7 @@ graph TD
 | 程式碼編寫原則 (Coding principles) | `system-planner` | 任何程式碼、重融或審查請求 |
 | 系統架構規劃 (System architecture planning) | `system-planner` | 規劃新功能或重構的系統架構與資料流 |
 | Session 復盤 (Session retro) | `session_retro` | 請求復盤/post-mortem，分析 skill/token/錯誤率與委託邊界 |
+| 知識自演化與信心衰減 (Knowledge evolution and decay) | `auto-evolving` | 建立或執行自演化知識引擎、信心衰減或知識項目晉升 |
 
 ---
 
@@ -54,6 +55,7 @@ graph TD
 ├── agents/
 │   └── review-coordinator.md # 審查協調代理 (Review Coordinator Agent)
 └── skills/
+    ├── auto-evolving/        # 自演化知識引擎技能 (Auto-Evolving Skill)
     ├── business-planner/     # 商業價值分析技能 (Business Value Skill)
     ├── doc-sync/             # 文件同步審查技能 (Doc Sync Skill)
     ├── tutorial/    # 教程建立技能 (Tutorial Skill)

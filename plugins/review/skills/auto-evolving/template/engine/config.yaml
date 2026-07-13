@@ -1,0 +1,34 @@
+# 自演化知識引擎 — 執行配置
+
+# 信心衰減機制
+confidence:
+  initial_value: 0.5          # 新知識的初始信心度
+  verification_boost: 0.1     # 每次驗證通過的增幅
+  decay_per_period: 0.05      # 每 N 個週期未引用的衰減量
+  decay_period: 7             # 觸發衰減的未引用週期數
+  max_value: 1.0              # 信心度上限
+  demotion_threshold: 0.3     # 低於此值自動降級或淘汰
+
+# 知識層級升降條件
+promotion:
+  hypothesis_to_principle: 1  # 假說升原則：所需驗證次數
+  principle_to_axiom: 3       # 原則升公理：所需驗證次數（且無反例）
+
+# 評估閾值
+evaluation:
+  high_value_threshold: 28    # 總分 ≥ 28 進入基礎更新
+  mid_value_threshold: 20     # 總分 20-27 降入假說層觀察
+  max_score: 40               # 四軸各 10 分，滿分 40
+
+# 執行週期
+cycle:
+  recent_cycles_to_read: 3    # 每次喚醒讀取最近 N 次週期記錄
+  blindspots_per_cycle: 1     # 每次週期只處理的盲點數
+
+# 重大變更定義
+major_change_triggers:
+  - "影響核心架構"
+  - "不可逆操作"
+  - "刪除公理層知識"
+  - "修改 engine/system_prompt.md"
+  - "修改 engine/config.yaml"
