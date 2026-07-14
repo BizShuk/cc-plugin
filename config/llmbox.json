@@ -38,7 +38,6 @@
         "DISABLE_TELEMETRY": "1",
         "DISABLE_AUTOUPDATER": "1"
     },
-    "model": "minimax-m3",
     "permissions": {
         "allow": [
             "Bash(ls:*)",

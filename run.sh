@@ -15,6 +15,7 @@ mkdir -p logs
 ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md" 
 ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.gemini/GEMINI.md" 
 ln -sf "$(pwd)/config/settings.json"    "$HOME/.claude/settings.json" 
+ln -sf "$(pwd)/config/config.toml"    "$HOME/.codex/config.toml" 
 
 # Global plugin configuration links back to local project (only link if the target actually exists)
 if [ -d "$HOME/.gemini" ]; then
@@ -31,6 +32,12 @@ if [ -d "$HOME/.claude-mem" ]; then
 fi
 if [ -f "$HOME/.claude.json" ]; then
     ln -sf "$HOME/.claude.json"   "./tmp/"
+fi
+if [ -d "$HOME/.cli-proxy-api" ]; then
+    ln -sf "$HOME/.cli-proxy-api"   "./tmp/"
+fi
+if [ -d "$HOME/.auth2api" ]; then
+    ln -sf "$HOME/.auth2api"   "./tmp/"
 fi
 if [ -d "$HOME/.hermes" ]; then
     ln -sf "$HOME/.hermes"        "./tmp/"
