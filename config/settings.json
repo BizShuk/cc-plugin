@@ -37,13 +37,14 @@
             "Read(~/.aws/**)",
             "Read(**/secrets/**)",
             "Read(~/.claude/settings.json)",
-            "Edit(**/.git)"
+            "Edit(**/.git)",
+            "Write(**/.git)"
         ],
         "ask": ["Bash(git push:*)", "Read(.env*)"],
         "defaultMode": "acceptEdits",
         "additionalDirectories": []
     },
-    "model": "opus",
+    "model": "claude-fable-5[1m]",
     "worktree": {},
     "enableWorkflows": true,
     "defaultShell": "bash",
