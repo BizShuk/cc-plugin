@@ -37,8 +37,7 @@
             "Read(~/.aws/**)",
             "Read(**/secrets/**)",
             "Read(~/.claude/settings.json)",
-            "Edit(**/.git)",
-            "Write(**/.git)"
+            "Edit(**/.git)"
         ],
         "ask": ["Bash(git push:*)", "Read(.env*)"],
         "defaultMode": "acceptEdits",
