@@ -1,6 +1,10 @@
-model = "gpt-5.6-terra"
-model_reasoning_effort = "high"
+model = "gpt-5.6-sol"
+model_reasoning_effort = "medium"
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+approvals_reviewer = "user"
+service_tier = "default"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
 
 [projects."/Users/shuk/projects/msgHub"]
 trust_level = "trusted"
@@ -77,10 +81,18 @@ cancel = []
 
 [tui.keymap.chat]
 
+[tui.model_availability_nux]
+"gpt-5.6-sol" = 3
+
 [marketplaces.openai-bundled]
-last_updated = "2026-07-14T14:35:26Z"
+last_updated = "2026-07-15T06:09:34Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-07-15T06:10:06Z"
+source_type = "local"
+source = "/Users/shuk/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [plugins."google-calendar@openai-curated"]
 enabled = true
@@ -94,8 +106,27 @@ enabled = true
 [plugins."browser@openai-bundled"]
 enabled = true
 
+[plugins."sites@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
 [features]
 js_repl = false
+memories = true
 
 [mcp_servers.node_repl]
 args = []
@@ -127,3 +158,12 @@ enabled = false
 conversationDetailMode = "STEPS_COMMANDS"
 ambient-suggestions-enabled = true
 followUpQueueMode = "queue"
+dictationDictionary = []
+microphoneInputDeviceId = "27a292bcc63ffa322b9b88c7b658d80714dd18b877fee7903e45ebb69fa7d08a"
+
+[sandbox_workspace_write]
+network_access = true
+
+[memories]
+generate_memories = true
+use_memories = true
