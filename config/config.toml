@@ -1,4 +1,4 @@
-model = "gpt-5.6-sol"
+model = "gpt-5.3-codex-spark"
 model_reasoning_effort = "medium"
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 approvals_reviewer = "user"
@@ -160,6 +160,12 @@ ambient-suggestions-enabled = true
 followUpQueueMode = "queue"
 dictationDictionary = []
 microphoneInputDeviceId = "27a292bcc63ffa322b9b88c7b658d80714dd18b877fee7903e45ebb69fa7d08a"
+
+[desktop.open-in-target-preferences]
+global = "terminal"
+
+[desktop.open-in-target-preferences.perPath]
+"/Users/shuk/projects/msgHub" = "terminal"
 
 [sandbox_workspace_write]
 network_access = true

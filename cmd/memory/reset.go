@@ -1,4 +1,4 @@
-package cmd
+package memory
 
 import (
 	"fmt"

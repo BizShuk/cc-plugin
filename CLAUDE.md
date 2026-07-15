@@ -8,19 +8,20 @@
 ├── .mcp.json                 # MCP 伺服器設定（Playwright, codegraph）
 ├── cmd/                      # Cobra CLI 子命令
 │   ├── root.go               # CLI root，註冊所有子命令
-│   ├── distill.go            # distill 主命令 — 完整蒸餾管道編排
-│   ├── ollama.go             # extract 命令 + OllamaService LLM 呼叫
-│   ├── read_logic.go         # gbrain / claude-mem 讀取邏輯
-│   ├── write_agentmemory.go  # 寫入 agentmemory API
-│   ├── write_mempalace.go    # 寫入 mempalace CLI
-│   ├── retain.go             # 過期資料清理
-│   ├── reset.go              # 狀態重置
-│   ├── state.go              # StateStore 向後相容包裝
 │   ├── export/               # export 子命令群
 │   │   ├── export.go         # 頂層 export 命令
 │   │   ├── claudemem.go      # export claudemem
 │   │   ├── gbrain.go         # export gbrain
 │   │   └── mempalace.go      # export mempalace（CSV / Markdown）
+│   ├── memory/               # 記憶相關子命令與邏輯
+│   │   ├── distill.go        # distill 主命令 — 完整蒸餾管道編排
+│   │   ├── ollama.go         # extract 命令 + OllamaService LLM 呼叫
+│   │   ├── read_logic.go     # gbrain / claude-mem 讀取邏輯
+│   │   ├── write_agentmemory.go # 寫入 agentmemory API
+│   │   ├── write_mempalace.go   # 寫入 mempalace CLI
+│   │   ├── retain.go         # 過期資料清理
+│   │   ├── reset.go          # 狀態重置
+│   │   └── state.go          # StateStore 向後相容包裝
 │   └── sample/               # API 使用範例 (Go with Anthropic SDK)
 │       └── api/              # Anthropic SDK + MiniMax 相容端點範例
 ├── config/                   # 設定管理
@@ -116,12 +117,13 @@
 
 | 業務領域 (Domain) | 套件/模組 (Package/Module)                                                  | 進入點 (Entry Point)                                    |
 | ----------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- |
-| 記憶蒸餾管道      | `cmd/`, `model/`                                                            | `DistillCmd()`                                          |
-| LLM 提取          | `cmd/ollama.go`                                                             | `ExtractCmd()`, `OllamaService.Extract()`               |
-| 讀取來源          | `cmd/read_logic.go`                                                         | `readGbrainLogic()`, `readClaudeMemLogic()`             |
-| 寫入儲存          | `cmd/write_*.go`                                                            | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()`          |
+| 記憶蒸餾管道      | `cmd/memory/`, `model/`                                                     | `DistillCmd()`                                          |
+| LLM 提取          | `cmd/memory/ollama.go`                                                      | `ExtractCmd()`, `OllamaService.Extract()`               |
+| 讀取來源          | `cmd/memory/read_logic.go`                                                  | `readGbrainLogic()`, `readClaudeMemLogic()`             |
+| 寫入儲存          | `cmd/memory/write_*.go`                                                     | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()`          |
 | 資料匯出          | `cmd/export/`                                                               | `ExportCmd()`                                           |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                                         | `NewStateStore()`                                       |
+| 狀態包裝          | `cmd/memory/state.go`                                                       | `NewStateStore()`                                       |
 | 環境初始化        | `run.sh`, `config/`                                                         | `config.Init()`                                         |
 | AI 技能           | `plugins/` (tools, explore, general, god, review, tmp, team, ultra-explore) | 各 `SKILL.md`                                           |
 | 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/`            | `ultra-explore` 入口 + kb-\* 10 項, `kb-coordinator.md` |
@@ -163,7 +165,7 @@ go build -o cc-plugin main.go
 go test ./... -count=1
 ```
 
-測試檔案：`cmd/distill_test.go`, `cmd/main_test.go`, `cmd/ollama_test.go`, `cmd/state_test.go`, `cmd/export/mempalace_test.go`
+測試檔案：`cmd/memory/distill_test.go`, `cmd/memory/main_test.go`, `cmd/memory/ollama_test.go`, `cmd/memory/state_test.go`, `cmd/export/mempalace_test.go`
 
 ### 部署 (Deploy)
 

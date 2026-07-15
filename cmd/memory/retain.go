@@ -1,4 +1,4 @@
-package cmd
+package memory
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/bizshuk/cc-plugin/model"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -30,7 +31,7 @@ func RetainCmd() *cobra.Command {
 
 func retainLogic() error {
 	maxAgeDays := viper.GetInt("retention.max_age_days")
-	pruneGbrainDir := expandPath(viper.GetString("sources.gbrain_working.root"))
+	pruneGbrainDir := model.ExpandPath(viper.GetString("sources.gbrain_working.root"))
 
 	store, err := NewStateStore()
 	if err != nil {

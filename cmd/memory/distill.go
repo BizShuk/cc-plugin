@@ -1,4 +1,4 @@
-package cmd
+package memory
 
 import (
 	"fmt"
@@ -39,7 +39,7 @@ func DistillCmd() *cobra.Command {
 			defer store.Close()
 
 			// 1. Read gbrain observations
-			gbrainRoot := expandPath(viper.GetString("sources.gbrain_working.root"))
+			gbrainRoot := model.ExpandPath(viper.GetString("sources.gbrain_working.root"))
 			gbrainObs, gbrainMaxTS, err := readGbrainLogic(store, gbrainRoot)
 			if err != nil {
 				return err
@@ -112,7 +112,7 @@ func DistillCmd() *cobra.Command {
 
 			// Write to mempalace CLI
 			if len(facts) > 0 {
-				tempDir := expandPath(viper.GetString("stores.mempalace.temp_dir"))
+				tempDir := model.ExpandPath(viper.GetString("stores.mempalace.temp_dir"))
 				wing := viper.GetString("stores.mempalace.wing")
 				if err := writeMempalaceLogic(facts, tempDir, wing); err != nil {
 					return err

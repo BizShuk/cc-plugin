@@ -1,4 +1,4 @@
-package cmd
+package memory
 
 import (
 	"fmt"
@@ -69,7 +69,7 @@ func readClaudeMemLogic() ([]model.Observation, int64, error) {
 		return nil, 0, err
 	}
 
-	dbPath := expandPath(viper.GetString("sources.claude_mem.db_path"))
+	dbPath := model.ExpandPath(viper.GetString("sources.claude_mem.db_path"))
 	cmDB, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})

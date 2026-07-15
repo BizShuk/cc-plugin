@@ -1,4 +1,4 @@
-package cmd
+package memory
 
 import (
 	"bytes"
@@ -61,7 +61,7 @@ func WriteMempalaceCmd() *cobra.Command {
 		Short: "Write verified facts to temp files and run mempalace mine",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if tempDir == "" {
-				tempDir = expandPath(viper.GetString("stores.mempalace.temp_dir"))
+				tempDir = model.ExpandPath(viper.GetString("stores.mempalace.temp_dir"))
 			}
 			if wing == "" {
 				wing = viper.GetString("stores.mempalace.wing")
