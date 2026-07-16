@@ -31,6 +31,8 @@
 2. 讀取 `StateStore` 遊標（增量模式）或從 epoch 0 開始（`--all` 模式）
 3. `mempalace` 子命令支援類別清單（CSV）與完整 Markdown 結構匯出（`--data`）
 
+`claudemem` 增量匯出使用獨立的 `claude-mem-export` 遊標，依 `observations.id` 的 autoincrement 順序讀取，不與記憶蒸餾的 timestamp 遊標共用。從舊版本升級後，第一次增量匯出會安全地完整匯出既有資料一次。
+
 `核心實體 (Key Entities):` `DrawerRow`, `Observation`
 
 `相關處理器 (Related Handlers):` `ExportCmd()`, `GbrainCmd()`, `ClaudeMemCmd()`, `MempalaceCmd()`

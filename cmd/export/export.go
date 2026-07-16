@@ -12,8 +12,5 @@ func ExportCmd() *cobra.Command {
 	}
 
 	exportCmd.AddCommand(ClaudeMemCmd())
-	exportCmd.AddCommand(GbrainCmd())
-	exportCmd.AddCommand(MempalaceCmd())
-
 	return exportCmd
 }

@@ -52,15 +52,24 @@ func (s *StateStore) initSchema() error {
 }
 
 func (s *StateStore) GetCursor(source string) (int64, error) {
+	position, err := s.GetCursorPosition(source)
+	if err != nil {
+		return 0, err
+	}
+	return position.LastTS, nil
+}
+
+// GetCursorPosition returns the timestamp and source ID stored for a source.
+func (s *StateStore) GetCursorPosition(source string) (CursorPosition, error) {
 	var c Cursor
 	err := s.db.First(&c, "source = ?", source).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return 0, nil
+			return CursorPosition{}, nil
 		}
-		return 0, fmt.Errorf("failed to get cursor: %w", err)
+		return CursorPosition{}, fmt.Errorf("failed to get cursor: %w", err)
 	}
-	return c.LastTs, nil
+	return CursorPosition{LastTS: c.LastTs, LastID: c.LastID}, nil
 }
 
 func (s *StateStore) SetCursor(source string, ts int64) error {
@@ -71,6 +80,19 @@ func (s *StateStore) SetCursor(source string, ts int64) error {
 	}).Create(&c).Error
 	if err != nil {
 		return fmt.Errorf("failed to set cursor: %w", err)
+	}
+	return nil
+}
+
+// SetCursorPosition stores the timestamp and source ID for a source.
+func (s *StateStore) SetCursorPosition(source string, position CursorPosition) error {
+	c := Cursor{Source: source, LastTs: position.LastTS, LastID: position.LastID}
+	err := s.db.Clauses(clause.OnConflict{
+		Columns:   []clause.Column{{Name: "source"}},
+		DoUpdates: clause.AssignmentColumns([]string{"last_ts", "last_id"}),
+	}).Create(&c).Error
+	if err != nil {
+		return fmt.Errorf("failed to set cursor position: %w", err)
 	}
 	return nil
 }

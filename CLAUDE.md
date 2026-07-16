@@ -68,25 +68,29 @@
 - `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源
 - `模組化插件架構 (Modular Plugin Architecture)`：8 個本地 plugin 依職責拆分，skill/agent 由標準目錄自動探索，manifest 不重複列舉檔案。
 - `整合 Marksman LSP`：引進 `marksman` Language Server 以提供 Markdown 的補全、診斷與檔案鏈結管理。
+- `Claude-mem 匯出 ID 遊標`：`export claudemem` 使用獨立 `claude-mem-export` 狀態與 `observations.id` autoincrement 順序，避免 timestamp 相同或回填造成漏匯，並以 SQLite `mode=ro` 讀取來源。
 
 ## 模組對應 (Module Mapping)
 
-| 業務領域 (Domain) | 套件/模組 (Package/Module)                                                  | 進入點 (Entry Point)                                    |
-| ----------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- |
-| 記憶蒸餾管道      | `cmd/memory/`, `model/`                                                     | `DistillCmd()`                                          |
-| LLM 提取          | `cmd/memory/ollama.go`                                                      | `ExtractCmd()`, `OllamaService.Extract()`               |
-| 讀取來源          | `cmd/memory/read_logic.go`                                                  | `readGbrainLogic()`, `readClaudeMemLogic()`             |
-| 寫入儲存          | `cmd/memory/write_*.go`                                                     | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()`          |
-| 資料匯出          | `cmd/export/`                                                               | `ExportCmd()`                                           |
-| Topology 圖譜     | `cmd/topology/`, `pkg/topology/`                                            | `TopologyCmd()`, `LoadTopology()`                       |
-| 狀態管理          | `model/store.go`, `model/cursor.go`                                         | `NewStateStore()`                                       |
-| 狀態包裝          | `cmd/memory/state.go`                                                       | `NewStateStore()`                                       |
-| 環境初始化        | `run.sh`, `config/`                                                         | `config.Init()`                                         |
-| AI 技能           | `plugins/` (experiment, explore, general, god, review, team, tools, ultra-explore) | 各 `SKILL.md`                                      |
-| 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/`            | `ultra-explore` 入口 + kb-\* 10 項, `kb-coordinator.md` |
-| 審查、規劃與演化  | `plugins/review/skills/`                                                    | `auto-evolving` 單一演化閉環 + 各專項 `SKILL.md`        |
-| AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                         | `feature.md`, `review-coordinator.md`                   |
-| Plugin metadata   | `scripts/pluginmeta/`                                                       | `go run ./scripts/pluginmeta`                           |
+| 業務領域 (Domain) | 套件/模組 (Package/Module)          | 進入點 (Entry Point)                                            |
+| ----------------- | ----------------------------------- | --------------------------------------------------------------- |
+| 記憶蒸餾管道      | `cmd/memory/`, `model/`             | `DistillCmd()`                                                  |
+| LLM 提取          | `cmd/memory/ollama.go`              | `ExtractCmd()`, `OllamaService.Extract()`                       |
+| 讀取來源          | `cmd/memory/read_logic.go`          | `readGbrainLogic()`, `readClaudeMemLogic()`                     |
+| 寫入儲存          | `cmd/memory/write_*.go`             | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()`                  |
+| 資料匯出          | `cmd/export/`                       | `ExportCmd()`                                                   |
+| Topology 圖譜     | `cmd/topology/`, `pkg/topology/`    | `TopologyCmd()`, `LoadTopology()`                               |
+| 狀態管理          | `model/store.go`, `model/cursor.go` | `NewStateStore()`                                               |
+| 狀態管理          | `model/store.go`, `model/cursor.go` | `NewStateStore()`, `GetCursorPosition()`, `SetCursorPosition()` |
+
+> > > > > > > 41351f1 (refactor: remove legacy API samples, update project configuration, and add provider HTTP templates)
+> > > > > > > | 狀態包裝 | `cmd/memory/state.go` | `NewStateStore()` |
+> > > > > > > | 環境初始化 | `run.sh`, `config/` | `config.Init()` |
+> > > > > > > | AI 技能 | `plugins/` (experiment, explore, general, god, review, team, tools, ultra-explore) | 各 `SKILL.md` |
+> > > > > > > | 知識庫建構 | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/` | `ultra-explore` 入口 + kb-\* 10 項, `kb-coordinator.md` |
+> > > > > > > | 審查、規劃與演化 | `plugins/review/skills/` | `auto-evolving` 單一演化閉環 + 各專項 `SKILL.md` |
+> > > > > > > | AI 代理 | `plugins/general/agents/`, `plugins/review/agents/` | `feature.md`, `review-coordinator.md` |
+> > > > > > > | Plugin metadata | `scripts/pluginmeta/` | `go run ./scripts/pluginmeta` |
 
 ## 開發指南 (Development Guide)
 

@@ -21,12 +21,37 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/tally"]
 trust_level = "trusted"
 
+[projects."/Users/shuk/projects/tmp/gosdk"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tmp/skills"]
+trust_level = "trusted"
+
 [projects."/Users/shuk/projects/env_setup"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/yfin"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tmp/superset"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tmp/dux"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/data"]
+trust_level = "trusted"
+
+[projects."/Users/shuk"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tmp/grok-build"]
 trust_level = "trusted"
 
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "approval-mode", "weekly-limit", "task-progress"]
 status_line_use_colors = true
+terminal_title = ["activity", "task-progress"]
 
 [tui.keymap.global]
 copy = []
@@ -88,10 +113,11 @@ cancel = []
 [tui.keymap.chat]
 
 [tui.model_availability_nux]
+"gpt-5.5" = 2
 "gpt-5.6-sol" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-07-15T06:31:24Z"
+last_updated = "2026-07-16T15:31:06Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
@@ -112,9 +138,6 @@ enabled = true
 [plugins."sites@openai-bundled"]
 enabled = true
 
-[plugins."browser@openai-bundled"]
-enabled = true
-
 [plugins."documents@openai-primary-runtime"]
 enabled = true
 
@@ -128,6 +151,9 @@ enabled = true
 enabled = true
 
 [plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
 enabled = true
 
 [features]
@@ -145,13 +171,13 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_n
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/shuk/.codex"
 CODEX_HOME = "/Users/shuk/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,cf732b4a285497bfd7e75a2ac14879bce9ae644eb4e1babeb17bb6a840dfc9bd"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,7abc8b22abade944bcd80135500416c7aee60c0e94290c7d644b54428a0013ab"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.707.72221"
+BROWSER_USE_CODEX_APP_VERSION = "26.707.91948"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [mcp_servers.computer-use]
@@ -163,7 +189,7 @@ enabled = false
 [desktop]
 conversationDetailMode = "STEPS_COMMANDS"
 ambient-suggestions-enabled = true
-followUpQueueMode = "queue"
+followUpQueueMode = "steer"
 selected-avatar-id = "rocky"
 localeOverride = "en-US"
 show-context-window-usage = true
@@ -185,3 +211,8 @@ use_memories = true
 
 [sandbox_workspace_write]
 network_access = true
+
+
+[features.multi_agent_v2]
+enabled = true
+max_concurrent_threads_per_session = 20
