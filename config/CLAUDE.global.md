@@ -24,6 +24,7 @@
     - Mermaid
     - Markdown Table
     - SVG
+- markdown link reference 使用 relative path
 
 ### 上下文 (Context)
 
@@ -143,17 +144,3 @@ flowchart TD
 `product` 是唯一的成果匯集點：任何專案的最終 Markdown 產出（分析報告、研究結論）
 由產生端（pm2 cron 或手動）發佈到 `product/reports/<app>/`，研究型內容則封裝為 `product/pkg/<topic>/` 子專案。
 個人隱私資產與原始監控 dump 不進 `product`，移往外部私有倉庫。
-
-## 生命週期 (Lifecycle)
-
-```mermaid
-flowchart LR
-    I["點子 idea"] -->|"孵化"| PG["playground/<exp>"]
-    PG -->|"成熟後晉升"| R["~/projects/<name> 獨立 repo"]
-    PG -->|"退役"| AR["playground/archive/"]
-    R -->|"計畫"| PL["plans/*.md"]
-    PL -->|"實作完成"| SP["docs/specs/*.md"]
-```
-
-- 孵化在 `playground/`，成熟晉升為頂層獨立 repo，退役移入 `archive/`（保留不刪除）。
-- `tmp/` 只放真正的暫存物；已成形的 repo 應晉升至 `~/projects/<name>`，不長住 `tmp/`。
