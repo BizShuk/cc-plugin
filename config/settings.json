@@ -37,14 +37,13 @@
             "Read(~/.aws/**)",
             "Read(**/secrets/**)",
             "Read(~/.claude/settings.json)",
-            "Edit(**/.git)",
-            "Write(**/.git)"
+            "Edit(**/.git)"
         ],
         "ask": ["Bash(git push:*)", "Read(.env*)"],
-        "defaultMode": "acceptEdits",
+        "defaultMode": "auto",
         "additionalDirectories": []
     },
-    "model": "claude-fable-5[1m]",
+    "model": "opus",
     "worktree": {},
     "enableWorkflows": true,
     "defaultShell": "bash",
@@ -75,7 +74,7 @@
     },
     "syntaxHighlightingDisabled": false,
     "alwaysThinkingEnabled": true,
-    "effortLevel": "high",
+    "effortLevel": "low",
     "fastModePerSessionOptIn": true,
     "promptSuggestionEnabled": false,
     "autoUpdatesChannel": "latest",

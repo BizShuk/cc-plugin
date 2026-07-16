@@ -1,10 +1,9 @@
-model = "gpt-5.3-codex-spark"
-model_reasoning_effort = "medium"
+model = "gpt-5.6-sol"
+model_reasoning_effort = "high"
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
-approvals_reviewer = "user"
-service_tier = "default"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
+service_tier = "default"
 
 [projects."/Users/shuk/projects/msgHub"]
 trust_level = "trusted"
@@ -15,7 +14,10 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/cc-plugin"]
 trust_level = "trusted"
 
-[projects."/Users/shuk"]
+[projects."/Users/shuk/projects/playground/pkg/game_engine"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tally"]
 trust_level = "trusted"
 
 [tui]
@@ -86,11 +88,12 @@ cancel = []
 
 [marketplaces.openai-bundled]
 last_updated = "2026-07-15T06:09:34Z"
+
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-07-15T06:10:06Z"
+last_updated = "2026-07-15T08:13:20Z"
 source_type = "local"
 source = "/Users/shuk/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
@@ -103,8 +106,12 @@ enabled = true
 [plugins."visualize@openai-bundled"]
 enabled = true
 
+[plugins."sites@openai-bundled"]
+enabled = true
+
 [plugins."browser@openai-bundled"]
 enabled = true
+
 
 [plugins."sites@openai-bundled"]
 enabled = true
@@ -158,18 +165,25 @@ enabled = false
 conversationDetailMode = "STEPS_COMMANDS"
 ambient-suggestions-enabled = true
 followUpQueueMode = "queue"
+
+selected-avatar-id = "rocky"
+localeOverride = "en-US"
+show-context-window-usage = true
+notifications-turn-mode = "always"
 dictationDictionary = []
-microphoneInputDeviceId = "27a292bcc63ffa322b9b88c7b658d80714dd18b877fee7903e45ebb69fa7d08a"
+show-ultra-in-model-picker-slider = true
+avatar-overlay-mascot-width-px = 80
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "max"]
 
 [desktop.open-in-target-preferences]
-global = "terminal"
+global = "systemDefault"
 
 [desktop.open-in-target-preferences.perPath]
-"/Users/shuk/projects/msgHub" = "terminal"
-
-[sandbox_workspace_write]
-network_access = true
+"/Users/shuk/projects/playground/pkg/game_engine" = "xcode"
 
 [memories]
 generate_memories = true
 use_memories = true
+
+[sandbox_workspace_write]
+network_access = true

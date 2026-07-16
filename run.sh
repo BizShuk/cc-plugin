@@ -14,6 +14,7 @@ mkdir -p logs
 # Claude
 ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md" 
 ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.gemini/GEMINI.md" 
+ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.codex/AGENTS.md" 
 ln -sf "$(pwd)/config/settings.json"    "$HOME/.claude/settings.json" 
 ln -sf "$(pwd)/config/config.toml"    "$HOME/.codex/config.toml" 
 

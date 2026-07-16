@@ -3,7 +3,6 @@
   "env": {
     "_____proxy": "_____",
     "ANTHROPIC_BASE_URL": "http://127.0.0.1:8317",
-    "ANTHROPIC_AUTH_TOKEN": "xyz",
     "_____prompt": "_____",
     "_____model": "_____",
     "ANTHROPIC_MODEL": "gpt-5.5",
