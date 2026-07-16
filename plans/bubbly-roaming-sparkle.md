@@ -2,7 +2,7 @@
 
 ## Context
 
-`review all claude history ... evaluate how to be more effective` 的後續。手動分析已揭示：`2926` 個 session / `1.6G`、`62%` 是 memory observer 自身冗餘、`Bash` 佔 `39%` 工具呼叫、`3%` session 破 `1MB`。但這些洞察目前只能靠一次性 shell + python 取得，無法重複探索。
+`review all claude history ... evaluate how to be more effective` 的後續。手動分析已揭示：`2926` 個 session / `1.6G`、`Bash` 佔 `39%` 工具呼叫、`3%` session 破 `1MB`。但這些洞察目前只能靠一次性 shell + python 取得，無法重複探索。
 
 本計畫新增 `cc-plugin tui` 指令：bubbletea 互動式介面，左側類別選單、右側明細面板，串流掃描 `~/.claude/projects/*.jsonl` 與 `~/.claude/history.jsonl`，讓使用統計可即時分層瀏覽（Overview → Sessions/Prompts/Tokens/Projects → 單一項目明細）。cc-plugin 目前無任何互動式程式碼，本指令同時建立 TUI 與 JSONL 串流兩項新慣例。
 
@@ -96,9 +96,8 @@ type ScanResult struct {
 ## 掃描器（`tui_scan.go`）
 
 - **串流**：`bufio.NewScanner` + `scanner.Buffer(make([]byte,1<<20), 10<<20)`（10MB 上限），逐行 `json.Unmarshal`，**只累積 `SessionStat`、不保留逐筆 record** — 防 145MB 大檔 OOM。
-- **`ScanOptions`**：`ProjectsDir`、`HistoryPath`、`IncludeObserver`（預設 false）、`MaxFileBytes`、`Progress chan<- ScanProgress`。
+- **`ScanOptions`**：`ProjectsDir`、`HistoryPath`、`MaxFileBytes`、`Progress chan<- ScanProgress`。
 - **type 分派**：`assistant`→解碼 `Message` 聚合 token；`user`→`PromptCount++`；`ai-title`→首筆獲勝；`last-prompt`→用首輪建立的 `leafTs map[string]time.Time` 解析精確 `LastActive`；其餘 skip。
-- **observer 排除**：預設排除 encoded dir `*-claude-mem-observer-sessions`（佔 983M/820 檔，為 memory 系統自身 churn）；`--include-observer` 開啟；被排除計數寫入 `Warnings`。
 - **TypedCount**：掃完 history 後以 `map[sessionID]count` O(n+m) join 回填（取代從 session file 偵測 `isCompactSummary`，較穩）。
 - **時間防呆**：`parseTimestamp(s) (time.Time, bool)`，失敗 fallback mtime 並記 `Warnings`。
 - **背景載入 + spinner**：`scanCmd(opts) tea.Cmd` 回傳 `scanDoneMsg`/`scanErrMsg`；載入時顯示 `bubbles/spinner` + 進度行。
@@ -130,7 +129,7 @@ func renderBar(label string, value, max int64, width int) string {
 ```go
 func TuiCmd() *cobra.Command {
     var projectsDir, historyPath string
-    var includeObserver, dump bool
+    var dump bool
     var maxFileMB int
     cmd := &cobra.Command{
         Use:   "tui",
@@ -139,7 +138,6 @@ func TuiCmd() *cobra.Command {
             opts := ScanOptions{
                 ProjectsDir:     expandPath(projectsDir),   // cmd/root.go:13
                 HistoryPath:     expandPath(historyPath),
-                IncludeObserver: includeObserver,
                 MaxFileBytes:    int64(maxFileMB) << 20,
             }
             if dump { return tuiDump(opts) }
@@ -150,7 +148,6 @@ func TuiCmd() *cobra.Command {
         viper.GetString("sources.claude.projects_dir"), "...")
     cmd.Flags().StringVar(&historyPath, "history-path",
         viper.GetString("sources.claude.history_path"), "...")
-    cmd.Flags().BoolVar(&includeObserver, "include-observer", false, "...")
     cmd.Flags().IntVar(&maxFileMB, "max-file-mb", 0, "...")
     cmd.Flags().BoolVar(&dump, "dump", false, "Print stats as JSON and exit (no TUI)")
     return cmd
@@ -184,7 +181,6 @@ go mod tidy
 - `TestParseSessionFile_LastPrompt` — leafUuid 解析 `LastActive`
 - `TestParseSessionFile_TokenExtrasIgnored` — `server_tool_use`/`cache_creation.*` 容忍不解碼失敗
 - `TestParseSessionFile_PolymorphicUserContent` — string 與 array content 皆 `PromptCount++`
-- `TestLoadSessions_ExcludesObserver` — observer dir 預設排除並記 Warnings
 - `TestLoadHistory_Basic` — slash vs prompt 可由 `Display[0]` 區分
 - `TestScan_JoinsTypedCount` — history join 回填 TypedCount
 - `TestScanResult_GlobalAggregation` — 全域聚合 = 各 session 之和、ProjectCount 正確
@@ -201,7 +197,6 @@ go mod tidy
    - Projects 鑽入僅見該專案 sessions
    - Prompts 中 slash-command 視覺區分
    - `Esc` 返回、`q` 離開、`r` 重掃、`?` 說明
-5. `--include-observer` — 983M dir 出現且無 OOM（`runtime.MemStats` 測試 < 200MB）
 
 ## 實作順序
 
@@ -216,7 +211,6 @@ go mod tidy
 | 風險 | 緩解 |
 | --- | --- |
 | 145MB 檔爆 10MB scanner buffer | 單行即一筆 JSON record，極少破 10MB；超過則 scanner 報錯記 `Warnings` 並 skip 該 record |
-| observer dir 983M 拖慢首掃 | 預設排除，`--include-observer` opt-in |
 | `user` 多型 content 解碼失敗 | `Message` 保持 `json.RawMessage`，只對 `assistant` 解碼 |
 | 首掃 5s 空白 | spinner + `ScanProgress` 進度行 |
 | `time.Parse(RFC3339Nano)` 失敗 | `parseTimestamp` 回 `bool`，fallback mtime + Warnings |

@@ -13,7 +13,7 @@
 
 頂層結構:
 - `config/`: 設定管理（`config.go`、`default_settings.json`）
-- `cmd/`: CLI 進入點（`root.go`、`distill.go` 等）
+- `cmd/`: CLI 進入點（`root.go` 與各功能子命令）
 
 進入點 (Entry Points):
 - `config.Init()`: 在 CLI 啟動時被呼叫，用於初始化設定系統

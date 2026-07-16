@@ -7,13 +7,13 @@
 不做什麼 (Out of scope):
 - 不修改知識圖譜解析（Topology）的核心演算法與 AST 樹狀結構走訪邏輯。
 - 不引進除了 `pkg/topology/` 之外的額外套件（例如不引入外部圖資料庫）。
-- 不變更 distillation/memory 寫入相關的核心狀態管理流程。
+- 不變更其他 CLI 子命令或持久化流程。
 
 ## 2. 現況架構 (Current Architecture)
 
 頂層結構:
-- `model/`: 領域模型與資料庫狀態管理（例如 `store.go`, `cursor.go`），且目前包含了拓撲解析邏輯（`topology.go`, `topology_ops.go`）。
-- `cmd/`: Cobra CLI 命令定義（進入點如 `root.go`, `distill.go` 等）。
+- `model/`: 領域資料結構，且目前包含了拓撲解析邏輯（`topology.go`, `topology_ops.go`）。
+- `cmd/`: Cobra CLI 命令定義（進入點如 `root.go` 等）。
 
 進入點 (Entry Points):
 - `main.go`: 執行 `cmd.Execute()`。
@@ -28,9 +28,7 @@
 ```mermaid
 flowchart TD
     M["main.go"] --> CLI["cmd/root.go"]
-    CLI --> Distill["cmd/distill.go"]
-    Distill --> MS["model/store.go (StateStore)"]
-    MS --> DB[("SQLite DB")]
+    CLI --> Commands["cmd/* 子命令"]
     MT["model/topology.go (Topology)"] -.->|"tested by"| TST["model/topology_test.go"]
     MT_OPS["model/topology_ops.go"] -.->|"tested by"| TST_OPS["model/topology_ops_test.go"]
 ```
@@ -46,7 +44,7 @@ flowchart TD
 
 邊界:
 - 職責：`pkg/topology` 負責載入與解析本地 Markdown 知識圖譜，驗證維度、關係邊、反向連結，並產出/重寫對應的 Markdown index 與 backlinks 區段。
-- 不碰：不觸及核心的 `StateStore`、`sqlite`、`GORM` 持久化狀態、LLM 呼叫以及其他與 distill 相關的流程。
+- 不碰：不觸及其他 CLI 子命令、設定載入或持久化流程。
 
 ## 4. 介面與資料流 (Interfaces & Data Flow)
 

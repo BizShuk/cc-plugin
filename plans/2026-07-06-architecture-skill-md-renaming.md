@@ -7,7 +7,7 @@
 不做什麼 (Out of Scope)：
 - 不修改 `anti-sabotage` 技能內部的具體查驗與邏輯。
 - 不新增或修改 Go / Python 的 CLI 編譯代碼或執行流程。
-- 不涉及 SQLite 狀態庫或 distill 核心邏輯。
+- 不涉及 Go CLI 或資料持久化邏輯。
 
 ## 2. 現況架構 (Current Architecture)
 
@@ -23,9 +23,9 @@ flowchart TD
 ```
 
 相關既有模組：
-- [plugins/experiment/skills/anti-sabotage/anti-sabotage.md](file:///Users/shuk/projects/cc-plugin/plugins/experiment/skills/anti-sabotage/anti-sabotage.md)
-- [plugins/experiment/.claude-plugin/plugin.json](file:///Users/shuk/projects/cc-plugin/plugins/experiment/.claude-plugin/plugin.json)
-- [.claude-plugin/marketplace.json](file:///Users/shuk/projects/cc-plugin/.claude-plugin/marketplace.json)
+- [plugins/experiment/skills/anti-sabotage/anti-sabotage.md](../plugins/experiment/skills/anti-sabotage/anti-sabotage.md)
+- [plugins/experiment/.claude-plugin/plugin.json](../plugins/experiment/.claude-plugin/plugin.json)
+- [.claude-plugin/marketplace.json](../.claude-plugin/marketplace.json)
 
 ## 3. 架構位置與邊界 (Placement & Boundaries)
 

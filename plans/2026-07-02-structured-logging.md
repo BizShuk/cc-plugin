@@ -23,11 +23,7 @@
 
 ## 驗證方式 (Verification)
 
-- 執行 `cc-plugin distill` 確認輸出為合法 JSON 格式
+- 以單元測試建立 logger 並寫入測試 buffer，確認輸出為合法 JSON 格式
 - 設定 `log.level=debug` 後能輸出額外的診斷資訊
 - 將輸出導入 `jq` 解析無錯誤
 - 若部署於 Crontab，輸出可被 Loki/Filebeat 直接收集
-
-## 來源 (Source Plans)
-
-- [`architecture-system-modularization.md`](architecture-system-modularization.md) §1 診斷 6

@@ -1,14 +1,14 @@
 # 審查插件 (Review Plugin)
 
-本插件提供一套完整的程式碼審查與品質診斷工具，旨在幫助 `Claude Code` 等 AI 代理對專案的變更、檔案、資料夾或整個程式碼庫進行多維度的靜態審查。
+本插件提供程式碼審查、系統／商業規劃與 workspace 自演化工具，協助 `Claude Code` 等 AI 代理從多維度診斷問題、設計改善並在獲授權時完成更新。
 
-本插件的設計核心為 `唯讀 (Read-only)` 審查，專注於衛生、一致性與業務價值的診斷，不涉及執行邏輯的正確性與安全性缺陷（這些應交由專門的 Correctness 與 Security 代理）。
+審查協調代理預設維持 `唯讀 (Read-only)`，專注於衛生、一致性與業務價值診斷，不涵蓋執行邏輯正確性與安全漏洞。只有直接呼叫 `auto-evolving` 且未指定 plan-only 時，才會進入 `THINK → DESIGN → UPDATE → VERIFY → CONSOLIDATE` 的可寫入流程；外部、破壞性或不可逆操作仍須另外批准。
 
 ---
 
 ## 核心架構 (Core Architecture)
 
-本插件由一個核心協調代理與六個專屬技能組成：
+本插件由一個核心協調代理與七個專屬技能組成：
 
 ```mermaid
 graph TD
@@ -24,6 +24,8 @@ graph TD
     S4 --> Report
     S5 --> Report
     Session[Session 結束 / 使用者請求復盤] --> S6[Session 復盤 session_retro]
+    Workspace[Workspace 廣域演化] --> Evolve[自演化 auto-evolving]
+    Evolve --> MainFlow[單一主提案與 canonical workspace update]
 ```
 
 ---
@@ -42,7 +44,7 @@ graph TD
 | 程式碼編寫原則 (Coding principles) | `system-planner` | 任何程式碼、重融或審查請求 |
 | 系統架構規劃 (System architecture planning) | `system-planner` | 規劃新功能或重構的系統架構與資料流 |
 | Session 復盤 (Session retro) | `session_retro` | 請求復盤/post-mortem，分析 skill/token/錯誤率與委託邊界 |
-| 知識自演化與信心衰減 (Knowledge evolution and decay) | `auto-evolving` | 建立或執行自演化知識引擎、信心衰減或知識項目晉升 |
+| Workspace 廣域自演化 (Workspace evolution) | `auto-evolving` | 從使用者、業務、領域、系統、品質、運維、安全與知識等面向收斂一項改善，完成設計、更新、驗證與主流程知識整合 |
 
 ---
 
@@ -55,10 +57,10 @@ graph TD
 ├── agents/
 │   └── review-coordinator.md # 審查協調代理 (Review Coordinator Agent)
 └── skills/
-    ├── auto-evolving/        # 自演化知識引擎技能 (Auto-Evolving Skill)
+    ├── auto-evolving/        # 廣域思考、單點設計、更新與知識整合 (Auto-Evolving Skill)
     ├── business-planner/     # 商業價值分析技能 (Business Value Skill)
     ├── doc-sync/             # 文件同步審查技能 (Doc Sync Skill)
-    ├── tutorial/    # 教程建立技能 (Tutorial Skill)
+    ├── tutorial/             # 教程建立技能 (Tutorial Skill)
     ├── naming-convention/    # 命名規範審查技能 (Naming Convention Skill)
     ├── session_retro/        # Session 復盤技能 (Session Retro Skill)
     ├── system-planner/       # 系統架構規劃與品質審查技能 (System & Quality Skill)
@@ -96,3 +98,5 @@ npx skills add .
 - `review before merge`
 - `do a full review`
 - `audit consistency`
+- `evolve this workspace`
+- `think design update`

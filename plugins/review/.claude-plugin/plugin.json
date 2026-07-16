@@ -1,7 +1,7 @@
 {
   "name": "review",
-  "version": "1.0.0",
-  "description": "Review skills — consistency, business improvement, folder structure, naming, doc sync, dependency hygiene, and learning",
+  "version": "1.1.0",
+  "description": "Review, planning, and workspace evolution skills — converge broad analysis into one designed, verified, and consolidated update",
   "author": {
     "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
@@ -19,7 +19,10 @@
     "system-planner",
     "business-planner",
     "session_retro",
-    "auto-evolving"
+    "auto-evolving",
+    "workspace-evolution",
+    "think-design-update",
+    "knowledge-consolidation"
   ],
   "agents": [],
   "skills": [

@@ -1,5 +1,0 @@
-# 信心度登記簿
-# 所有知識條目的信心度追蹤
-# 格式：{ id, layer, topic, confidence, last_verified, last_cited, verification_count }
-
-entries: []

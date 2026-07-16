@@ -25,7 +25,7 @@ initialPrompt:
 
 # review-coordinator
 
-A read-only review orchestrator. It applies the review plugin's seven skills as
+A read-only review orchestrator. It applies five review-focused skills as
 coordinated dimensions of one review, then merges their findings into a single
 prioritized report. Project-agnostic; contextualized per invocation by the
 target you point it at.
@@ -177,5 +177,7 @@ genuinely matters; a short ranked report beats an exhaustive one.
 
 - Skills coordinated: `[[business-planner]]`, `[[doc-sync]]`,
   `[[tutorial]]`, `[[naming-convention]]`, `[[system-planner]]`
+- `auto-evolving` is a separate opt-in writable workflow and must not run as a
+  review dimension. `session_retro` runs only for explicit retrospective requests.
 - Adjacent agents: `feature` (build new work), and the `/code-review` /
   `/security-review` commands for correctness and security.

@@ -1,60 +1,20 @@
-# CC-Plugin TODO
+# TODO
 
-## Architecture
+- [ ] [一致性清理與結構性整合](plans/2026-07-08-consolidation-and-structural-plan.md)
 
-- [ ] `2026-07-02-architecture-single-state-store`: `CLI/排程器 (CLI/Scheduler)` 用它 `來以單一、解耦的 SQLite 連線安全地讀寫記憶狀態`
-- [ ] `2026-07-02-architecture-config-externalization`: `CLI/開發者 (CLI/Developer)` 用它 `來將硬編碼的預設設定外化至設定檔以支援靈活配置與環境變數覆蓋`
-- [ ] `2026-07-02-architecture-service-layer-extraction`: `CLI/開發者 (CLI/Developer)` 用它 `來將業務編排邏輯自 CLI 層抽離至獨立服務層並實現依賴反轉`
-- [ ] `2026-07-02-architecture-reader-deduplication`: `CLI/開發者 (CLI/Developer)` 用它 `來合併與去重 gbrain 與 claude-mem 的重複讀取邏輯`
-- [ ] `2026-07-02-architecture-topology-extraction`: `CLI/開發者 (CLI/Developer)` 用它 `來將知識圖譜解析邏輯自核心模型層抽離至獨立套件並提供 CLI 命令進行驗證與操作`
-- [ ] `2026-07-02-architecture-static-registry`: `CLI/開發者 (CLI/Developer)` 用它 `來以動態註冊表解耦記憶來源讀取與寫入，支援靈活擴充而不修改核心邏輯`
-- [ ] `2026-07-02-architecture-structured-logging`: `CLI/開發者 (CLI/Developer)` 用它 `來將全域日誌輸出遷移至結構化的 log/slog，以支援現代觀測性與日誌等級過濾`
-- [ ] `2026-07-05-architecture-utility-extraction`: `開發者 (Developer)` 用它 `來將公用程式與硬編碼路徑解耦，統一收斂至獨立的 utils 套件並支持自封裝的臨時目錄設定`
-- [ ] `2026-07-06-architecture-resource-leak-fix`: `開發者 (Developer)` 用它 `來修復 writeAgentMemoryLogic 中迴圈內 defer 導致的連線與檔案描述符資源洩漏，確保大量記憶寫入時系統的穩定性`
-- [ ] `2026-07-06-architecture-skill-md-renaming`: `開發者 (Developer)` 用它 `來將特定插件的技能 markdown 檔重命名為標準的 SKILL.md 並加上 frontmatter，以符合 agentskills.io 規範與平台自動發現機制`
-- [ ] `2026-07-08-consolidation-and-structural-plan`: `開發者 (Developer)` 用它 `來整合 3 條 explore 線索 (Go 核心/插件生態/文件/部署) 的 73 項不一致，分 5 個 Phase 與 1 個 Add-on 循序處理：資源安全 → 結構重構 → 插件清理 → 文件單一來源 → 部署可移植`
+## CLI 基礎設施 (CLI Infrastructure)
 
+- [ ] [設定檔外化](plans/2026-07-02-architecture-config-externalization.md)
+- [ ] 合併 [結構化日誌 feature plan](plans/2026-07-02-structured-logging.md) 至 [architecture plan](plans/2026-07-02-architecture-structured-logging.md)
+- [ ] 對齊 [Topology CLI](plans/2026-06-11-topology-cli.md)、[Topology feature plan](plans/2026-07-02-topology-extraction.md) 與 [architecture plan](plans/2026-07-02-architecture-topology-extraction.md)
 
+## 插件 (Plugins)
 
-依 [`plans/2026-07-02-refactoring-roadmap.md`](plans/2026-07-02-refactoring-roadmap.md) 拆分為四個漸進式階段：
+- [ ] 合併 [技能命名 feature plan](plans/2026-07-02-skill-md-renaming.md) 至 [architecture plan](plans/2026-07-06-architecture-skill-md-renaming.md)
 
-- `Phase 1` — 建立單一 store 連線與設定純淨化 (待 [2026-07-08-consolidation-and-structural-plan](plans/2026-07-08-consolidation-and-structural-plan.md) Phase 1 完成後重新評估)
-    - [ ] [plans/2026-07-02-single-state-store.md](plans/2026-07-02-single-state-store.md) — 單一 `StateStore` 連線，移除 `viper` 直接依賴
-    - [ ] [plans/2026-07-02-config-externalization.md](plans/2026-07-02-config-externalization.md) — 硬編碼預設值移至 `default_settings.json`
-    - [ ] [plans/2026-07-02-resource-leak-fix.md](plans/2026-07-02-resource-leak-fix.md) — 修復 `defer resp.Body.Close()` 於迴圈內的資源洩漏
-- `Phase 2` — 消除重複代碼與服務層初步抽取 (同上，待重構)
-    - [ ] [plans/2026-07-02-reader-deduplication.md](plans/2026-07-02-reader-deduplication.md) — 合併 `gbrain` 與 `claudemem` 重複的讀取邏輯
-    - [ ] [plans/2026-07-02-utility-extraction.md](plans/2026-07-02-utility-extraction.md) — `ExpandPath` 與 `temp_dir` 收斂至 `pkg/utils/`
-- `Phase 3` — 建立核心服務層與介面抽離 (同上，待重構)
-    - [ ] [plans/2026-07-02-service-layer-extraction.md](plans/2026-07-02-service-layer-extraction.md) — 業務邏輯自 `cmd/` 移至 `internal/service/` 並定義介面
-    - [ ] [plans/2026-07-02-static-registry.md](plans/2026-07-02-static-registry.md) — `Reader`/`Writer` 靜態註冊表
-    - [ ] [plans/2026-07-02-structured-logging.md](plans/2026-07-02-structured-logging.md) — `fmt.Printf` 遷移至 `log/slog`
-- `Phase 4` — 規範檔案更名與整合驗證 (原標 100% 不準確，實際待執行)
-    - [ ] [plans/2026-07-02-skill-md-renaming.md](plans/2026-07-02-skill-md-renaming.md) — `anti-sabotage.md` 重命名為 `SKILL.md` 並補 frontmatter
-    - [ ] [plans/2026-07-02-topology-extraction.md](plans/2026-07-02-topology-extraction.md) — `model/topology` 遷移至 `pkg/topology` 並新增 `cmd/topology` CLI
-- `Phase 5+` — [2026-07-08-consolidation-and-structural-plan](plans/2026-07-08-consolidation-and-structural-plan.md) 整合清理 (0% 進度)
-    - [ ] Phase 1 — Go 核心資源安全 (C1-C5, C13, C28)
-    - [ ] Phase 2 — Go 核心結構重構 (C6-C12, C14-C27, C29-C30)
-    - [ ] Phase 3 — 插件生態清理 (P1-P18)
-    - [ ] Phase 4 — 文件單一來源 (D1-D10)
-    - [ ] Phase 5 — 部署可移植性 (X1-X20)
-    - [ ] Add-on — Plugin manifest 自動同步腳本
-- `Feature Add-on`
-    - [ ] [plans/2026-07-08-consolidation-and-structural-plan](plans/2026-07-08-consolidation-and-structural-plan.md) — 整合清理主計畫 (新增)
-    - [ ] [plans/prompt-todo.md](plans/prompt-todo.md) — `prompt-todo` 自動提取功能並寫入待辦清單 (檔案不存在，待補建)
+## 產品與 Agent (Product & Agents)
 
-
+- [ ] 審核並決定是否實作 [Claude Code 使用統計 TUI](plans/bubbly-roaming-sparkle.md)
+- [ ] 整合 [Refactor Agent 架構抉擇](plans/agent/2026-05-11-refactor-agent-vs-specialized-agents.md) 與 [Feature Agent 設計](plans/agent/2026-05-14-feature-agent-design.md)
 
 ## Archive
-
-### 對應原始計畫 (Legacy References)
-
-合併自以下已歸檔的架構計畫，所有內容已拆分至上述 feature 檔案：
-
-- `architecture-cc-plugin.md` → 已歸檔
-- `architecture-cc-plugin-reorganization.md` → 已歸檔
-- `architecture-cc-plugin-evolution.md` → 已歸檔
-- `architecture-cc-plugin-decoupling.md` → 已歸檔
-- `architecture-system-modularization.md` → 已歸檔
-- `architecture-system-simplification.md` → 已歸檔
-- `architecture-cc-distiller.md` → 已歸檔

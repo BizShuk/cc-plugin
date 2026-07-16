@@ -48,9 +48,8 @@
 │   ├── lsp/                  # Marksman LSP 設定與 README
 │   ├── tools/                # 外部工具依賴設定 (MarkItDown)
 │   └── usage/tokscale/       # Tokscale 設定
-├── plans/                    # 實作計畫與記憶系統設計文件
-│   ├── agent/                # Agent 設計文件
-│   └── memory/               # 記憶系統架構文件
+├── plans/                    # 進行中的實作與設計計畫
+│   └── agent/                # Agent 設計文件
 ├── plugins/                  # 模組化插件目錄 (Modular Plugins)
 │   ├── tools/                # macOS Apple 整合插件（容器改名自 apple，技能保留 apple-* 前綴）
 │   │   └── skills/           # Apple 相關技能 (apple-calendar, apple-email, apple-notes, apple-reminders)
@@ -69,9 +68,9 @@
 │   ├── ultra-explore/        # 知識庫建構插件 (Ultra-Explore) — 單一手動入口，多來源入庫、蒸餾、建邊、驗證、查詢
 │   │   ├── agents/           # 編排代理 (kb-coordinator — 五階段管道編排)
 │   │   └── skills/           # 入口 (ultra-explore) + 知識庫技能 (kb-spec, kb-ingest-repo/history/web/chat/schema, kb-distill, kb-connect, kb-verify, kb-query)
-│   ├── review/               # 審查插件 (Review) — 商業價值、結構/命名/文件/依賴與品質審查
+│   ├── review/               # 審查與演化插件 — 廣域分析、系統/商業規劃、單一主流程更新與品質審查
 │   │   ├── agents/           # 審查代理 (review-coordinator — 編排全部審查技能)
-│   │   └── skills/           # 審查技能 (business-planner, doc-sync, tutorial, naming-convention, system-planner)
+│   │   └── skills/           # 演化、規劃與審查技能 (auto-evolving, business/system-planner, doc-sync 等)
 │   ├── gosdk/                # Go 開發工具包 (基於 github.com/bizshuk/gosdk)
 │   │   ├── agents/           # Go 代理 (golang-refactor)
 │   │   └── skills/           # Go 技能 (golang-code-quality, golang-mvc, golang-performance-tuning, 等)
@@ -127,7 +126,7 @@
 | 環境初始化        | `run.sh`, `config/`                                                         | `config.Init()`                                         |
 | AI 技能           | `plugins/` (tools, explore, general, god, review, tmp, team, ultra-explore) | 各 `SKILL.md`                                           |
 | 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/`            | `ultra-explore` 入口 + kb-\* 10 項, `kb-coordinator.md` |
-| 程式碼審查        | `plugins/review/skills/`                                                    | 各 `SKILL.md` (consistency 等 7 項)                     |
+| 審查、規劃與演化  | `plugins/review/skills/`                                                    | `auto-evolving` 單一演化閉環 + 各專項 `SKILL.md`        |
 | AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                         | `feature.md`, `review-coordinator.md`                   |
 
 ## 開發指南 (Development Guide)
