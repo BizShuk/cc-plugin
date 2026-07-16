@@ -83,12 +83,8 @@ cancel = []
 
 [tui.keymap.chat]
 
-[tui.model_availability_nux]
-"gpt-5.6-sol" = 3
-
 [marketplaces.openai-bundled]
-last_updated = "2026-07-15T06:09:34Z"
-
+last_updated = "2026-07-15T06:31:24Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
@@ -110,10 +106,6 @@ enabled = true
 enabled = true
 
 [plugins."browser@openai-bundled"]
-enabled = true
-
-
-[plugins."sites@openai-bundled"]
 enabled = true
 
 [plugins."documents@openai-primary-runtime"]
@@ -165,7 +157,6 @@ enabled = false
 conversationDetailMode = "STEPS_COMMANDS"
 ambient-suggestions-enabled = true
 followUpQueueMode = "queue"
-
 selected-avatar-id = "rocky"
 localeOverride = "en-US"
 show-context-window-usage = true
