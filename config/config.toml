@@ -89,7 +89,7 @@ source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-07-15T08:13:20Z"
+last_updated = "2026-07-16T04:13:25Z"
 source_type = "local"
 source = "/Users/shuk/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
