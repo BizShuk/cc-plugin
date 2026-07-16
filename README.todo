@@ -2,8 +2,6 @@
 
 ## 產品與 Agent (Product and Agents)
 
-- [ ] [Claude Code 使用統計 TUI：完成實作前 gate](docs/backlog/2026-07-16-claude-usage-tui.md)
-
 ## Archive
 
 - [x] [Viper 預設值單一來源](docs/specs/2026-07-02-architecture-config-externalization.md)
