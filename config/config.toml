@@ -1,5 +1,5 @@
 model = "gpt-5.6-sol"
-model_reasoning_effort = "high"
+model_reasoning_effort = "xhigh"
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
@@ -83,13 +83,16 @@ cancel = []
 
 [tui.keymap.chat]
 
+[tui.model_availability_nux]
+"gpt-5.6-sol" = 4
+
 [marketplaces.openai-bundled]
 last_updated = "2026-07-15T06:31:24Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-07-16T04:13:25Z"
+last_updated = "2026-07-16T03:48:27Z"
 source_type = "local"
 source = "/Users/shuk/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
