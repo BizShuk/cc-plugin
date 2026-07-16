@@ -10,7 +10,7 @@ module.exports = {
         }, // Agent Memory (Agent)
         {
             name: "Agent Memory",
-            script: "/Users/shuk/.local/nvm/versions/node/v24.11.1/bin/agentmemory",
+            script: "agentmemory",
             namespace: "Agent",
             instances: 1
         },
@@ -20,13 +20,15 @@ module.exports = {
             script: "agy",
             args: [
                 "--add-dir",
-                "/Users/shuk/projects/cc-plugin",
+                __dirname,
                 "-p",
-                "'run /system-planner for current workspace'"
+                "run /system-planner for current workspace"
             ],
             namespace: "planner",
             instances: 1,
-            cron: "10 0-9 * * *"
+            cron: "10 0-9 * * *",
+            autorestart: false,
+            watch: false
         }
     ]
 };

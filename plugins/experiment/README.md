@@ -12,17 +12,17 @@
 
 ## 內容 (Contents)
 
-`experiment` 目前收容以下七個技能：
+`experiment` 目前收容以下七個技能，表格路徑即 manifest 註冊路徑：
 
 | 技能 (Skill)        | 原位置 (Original Location)             | 預期正式歸屬 (Expected Destination) | 說明 (Notes)                                                |
 | ------------------- | -------------------------------------- | ------------------------------------ | ----------------------------------------------------------- |
-| `anti-sabotage`     | `plugins/general/skills/anti-sabotage` | `general`                            | 防範 Agent 自我破壞作業流程的檢查清單                       |
+| `anti-sabotage`     | `plugins/experiment/skills/anti-sabotage` | `experiment`                      | 防範 Agent 自我破壞作業流程的檢查清單                       |
 | `firecrawl`         | `plugins/explore/skills/firecrawl`     | `explore`                            | Firecrawl 網頁爬取 SDK                                      |
 | `mermaid`           | `plugins/general/skills/mermaid`      | `general`                            | Mermaid.js 圖表語法指南                                     |
 | `model-evaluator`   | `plugins/general/skills/model-evaluator` | `general`                          | 評估 LLM 模型品質 / 表現                                  |
 | `playwright-cli`    | `~/.claude/skills/playwright-cli`      | `explore`                            | Playwright 瀏覽器自動化 CLI                                 |
 | `scrapling`         | `plugins/explore/skills/scrapling`     | `explore`                            | Scrapling 反爬網頁抓取框架                                  |
-| `summarize.sh`      | `plugins/explore/skills/summarize.sh`  | `explore`                            | 透過 `summarize` CLI 摘要網頁 / 檔案 / YouTube / Podcast    |
+| `summarize-sh`      | `plugins/experiment/skills/summarize-sh` | `experiment`                      | 透過 `summarize.sh` CLI 摘要網頁 / 檔案 / YouTube / Podcast |
 
 ## 結構 (Structure)
 
@@ -32,19 +32,14 @@ plugins/experiment/
 │   └── plugin.json       # 插件 manifest — 列出所有收容技能
 ├── README.md             # 本文件
 └── skills/               # 技能目錄 (每個技能一個子目錄)
-    ├── business-planner/
+    ├── anti-sabotage/
     ├── firecrawl/
-    ├── markdownlint/
     ├── mermaid/
+    ├── model-evaluator/
     ├── playwright-cli/
     ├── scrapling/
-    ├── summarize.sh/
-    └── system-planner/
+    ├── summarize-sh/
 ```
-
-## 已知殘留副本 (Known Stale Copies)
-
-由於 `playwright-cli` 與 `markdownlint` 是從 `~/.claude/skills/` (此處為 `~/.agents/skills/` 的符號連結) 移動過來的，它們在 `plugins/explore/skills/playwright-cli/` 與 `plugins/general/skills/markdownlint/` 仍有對應的舊複本。這些舊複本已從 `explore` 與 `general` 的 `plugin.json` 與 `marketplace.json` 移除登錄，但實體檔案仍存在於 `plugins/explore/skills/` 與 `plugins/general/skills/`，待手動確認後清理。
 
 ## 遷出流程 (Graduation Flow)
 

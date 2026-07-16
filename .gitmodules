@@ -1,12 +1,3 @@
-[submodule "plugins/explore/skills/scrapling/Scrapling"]
-	path = plugins/explore/skills/scrapling/Scrapling
-	url = https://github.com/D4Vinci/Scrapling.git
-[submodule "plugins/explore/skills/summarize.sh/summarize"]
-	path = plugins/explore/skills/summarize.sh/summarize
-	url = https://github.com/steipete/summarize.git
-[submodule "pkg/system_prompts/CL4R1T4S"]
-	path = pkg/system_prompts/CL4R1T4S
-	url = https://github.com/elder-plinius/CL4R1T4S.git
 [submodule "pkg/system-prompts/CL4R1T4S"]
 	path = pkg/system-prompts/CL4R1T4S
 	url = https://github.com/elder-plinius/CL4R1T4S.git

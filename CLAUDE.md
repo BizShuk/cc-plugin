@@ -4,112 +4,69 @@
 
 ```tree
 .
-├── .lsp.json                 # LSP 伺服器設定（gopls, marksman）
-├── .mcp.json                 # MCP 伺服器設定（Playwright, codegraph）
+├── .claude-plugin/           # 根 marketplace 註冊表
+├── .vscode/                  # repo-relative launch 與 editor 設定
 ├── cmd/                      # Cobra CLI 子命令
 │   ├── root.go               # CLI root，註冊所有子命令
-│   ├── export/               # export 子命令群
-│   │   ├── export.go         # 頂層 export 命令
-│   │   ├── claudemem.go      # export claudemem
-│   │   ├── gbrain.go         # export gbrain
-│   │   └── mempalace.go      # export mempalace（CSV / Markdown）
+│   ├── export/               # gbrain / claudemem / mempalace 匯出
 │   ├── memory/               # 記憶相關子命令與邏輯
-│   │   ├── distill.go        # distill 主命令 — 完整蒸餾管道編排
-│   │   ├── ollama.go         # extract 命令 + OllamaService LLM 呼叫
-│   │   ├── read_logic.go     # gbrain / claude-mem 讀取邏輯
-│   │   ├── write_agentmemory.go # 寫入 agentmemory API
-│   │   ├── write_mempalace.go   # 寫入 mempalace CLI
-│   │   ├── retain.go         # 過期資料清理
-│   │   ├── reset.go          # 狀態重置
-│   │   └── state.go          # StateStore 向後相容包裝
-│   └── sample/               # API 使用範例 (Go with Anthropic SDK)
-│       └── api/              # Anthropic SDK + MiniMax 相容端點範例
-├── config/                   # 設定管理
-│   ├── config.go             # Viper 初始化 + 嵌入預設值
-│   ├── default_settings.json # 空白預設
-│   ├── CLAUDE.global.md      # 全域 AI Agent 指令
-│   ├── settings.json         # Claude Code 使用者設定
-│   ├── keybindings.json      # 快捷鍵設定
-│   ├── llmbox.json           # LLMBox 設定
-│   └── minimax.json          # MiniMax 設定
-├── model/                    # 核心領域模型
-│   ├── agentmemory.go        # Memory 結構
-│   ├── claudemem.go          # ClaudeMemObservation 結構
-│   ├── cursor.go             # Cursor, Seen, Distilled ORM 模型
-│   ├── distiller.go          # Candidate 結構
-│   ├── gbrain.go             # Observation 結構
-│   ├── mempalace.go          # Fact 結構
-│   └── store.go              # StateStore — SQLite 狀態管理
-├── pkg/                      # 外部工具設定範本與資源
+│   ├── topology/             # Markdown 知識圖譜驗證、查詢與重建
+│   └── sample/api/           # Anthropic SDK + MiniMax 相容端點範例
+├── config/                   # Viper 預設與各 AI Agent 設定
+├── docs/
+│   ├── backlog/              # 尚未進入實作的產品決策
+│   ├── memory/               # 歷史操作與決策
+│   ├── specs/                # 已完成並接受的設計
+│   └── tutorials/            # 教學文件
+├── model/                    # 記憶蒸餾領域模型與 SQLite StateStore
+├── pkg/
+│   ├── topology/             # 純 Markdown topology 解析與圖運算
 │   ├── ccstatusline/         # CCStatusline 設定
-│   ├── claude-code-system-prompts/ # Claude Code 系統提示詞
 │   ├── hermes/               # Hermes Agent 設定
 │   ├── litellm/              # LiteLLM proxy 設定範本
-│   ├── lsp/                  # Marksman LSP 設定與 README
-│   ├── tools/                # 外部工具依賴設定 (MarkItDown)
-│   └── usage/tokscale/       # Tokscale 設定
-├── plans/                    # 進行中的實作與設計計畫
-│   └── agent/                # Agent 設計文件
-├── plugins/                  # 模組化插件目錄 (Modular Plugins)
-│   ├── tools/                # macOS Apple 整合插件（容器改名自 apple，技能保留 apple-* 前綴）
-│   │   └── skills/           # Apple 相關技能 (apple-calendar, apple-email, apple-notes, apple-reminders)
-│   ├── explore/              # 探索與抓取插件 (explore, scraping, fetching)
-│   │   └── skills/           # 抓取與摘要技能 (content-summarizer, firecrawl, markitdown, playwright-cli, scrapling, summarize.sh)
-│   ├── last30days-skill/     # 趨勢與研究插件 (Matt Van Horn) — 支援 Reddit, X, YouTube 等趨勢研究
-│   │   └── skills/           # 趨勢研究技能 (last30days)
-│   ├── general/              # 通用功能插件
-│   │   ├── agents/           # 自訂代理 (feature.md)
-│   │   └── skills/           # 通用技能 (anti-sabotage, business-extract, daily-summary, domain, markdownlint, mermaid, model-evaluator, project-explore, sort-todo, topology-builder)
-│   ├── team/                 # AI 代理團隊規劃與設計插件
-│   │   └── skills/           # 團隊相關技能 (orchestration-config, role-generator, team-design)
-│   ├── god/                  # 系統大一統理論插件 (Grand Unified Theory)
-│   │   ├── references/       # 參考資料 (ontology-template, 12條宇宙法則)
-│   │   └── skills/           # 五大通用算子與透鏡技能 (universal-generate, universal-review, universal-consolidate, universal-aggregate, universal-evolve, system-laws, domain-exploration, llm-mechanics, grand-unified-theory)
-│   ├── ultra-explore/        # 知識庫建構插件 (Ultra-Explore) — 單一手動入口，多來源入庫、蒸餾、建邊、驗證、查詢
-│   │   ├── agents/           # 編排代理 (kb-coordinator — 五階段管道編排)
-│   │   └── skills/           # 入口 (ultra-explore) + 知識庫技能 (kb-spec, kb-ingest-repo/history/web/chat/schema, kb-distill, kb-connect, kb-verify, kb-query)
-│   ├── review/               # 審查與演化插件 — 廣域分析、系統/商業規劃、單一主流程更新與品質審查
-│   │   ├── agents/           # 審查代理 (review-coordinator — 編排全部審查技能)
-│   │   └── skills/           # 演化、規劃與審查技能 (auto-evolving, business/system-planner, doc-sync 等)
-│   ├── gosdk/                # Go 開發工具包 (基於 github.com/bizshuk/gosdk)
-│   │   ├── agents/           # Go 代理 (golang-refactor)
-│   │   └── skills/           # Go 技能 (golang-code-quality, golang-mvc, golang-performance-tuning, 等)
-│   ├── tmp/                  # 臨時與測試用插件
-│   │   ├── hooks/            # PostToolUse hooks (post-tool.sh, hooks.json)
-│   │   ├── monitors/         # Monitors (monitors.json)
-│   │   └── skills/           # 臨時與草稿技能 (celebrity-quotes, gemini-tmp, security-scanner, social-business-explore)
-│   └── understand-anything/  # AI 輔助代碼庫理解插件 (Understand Anything)
-│       └── understand-anything-plugin/ # 核心插件目錄
-│           ├── agents/       # 分析代理 (project-scanner, file-analyzer, 等 9 個)
-│           └── skills/       # 理解技能 (understand, understand-chat, 等 8 個)
+│   ├── lsp/                  # Marksman 安裝說明
+│   ├── system-prompts/       # 外部 system prompt 資源
+│   ├── tools/                # 外部工具與 submodule
+│   └── usage/                # 使用統計工具設定
+├── plugins/                  # 8 個本地 Claude Code plugins
+│   ├── experiment/           # 候選技能沙盒
+│   ├── explore/              # 摘要、轉檔、專案探索與路由；含 plugin-scoped MCP
+│   ├── general/              # 通用技能、feature agent、hooks、output styles、Marksman LSP
+│   ├── god/                  # 系統大一統理論與通用算子
+│   ├── review/               # 審查、規劃、自演化與 review-coordinator
+│   ├── team/                 # Agent team 設計與角色資料
+│   ├── tools/                # Apple Calendar/Mail/Notes/Reminders
+│   └── ultra-explore/        # 可續跑的知識庫建構管道
+├── scripts/pluginmeta/       # plugin/skill/agent metadata 稽核工具
+├── ecosystem.config.js      # PM2 常駐程序與 cron
 ├── main.go                   # Go CLI 入口點
 ├── go.mod                    # Go 模組定義
-├── run.sh                    # 環境初始化腳本（macOS/Unix）
-├── crontab.txt               # 排程設定（每日 03:00 執行 distill）
-└── skills.json               # 技能註冊表
+└── run.sh                    # 可重入環境初始化腳本（macOS/Unix）
 ```
 
 ## 技術棧 (Tech Stack)
 
-- Language: `Go 1.25`, `Python 3.10+` (用於輔助技能與範例)
+- Language: `Go 1.26.3`, `Python 3.10+` (用於輔助技能與範例)
 - CLI Framework: `spf13/cobra`
-- Configuration: `spf13/viper` + 嵌入式 JSON 預設（`go:embed`）
+- Configuration: `spf13/viper` + `viper.SetDefault` 直接宣告預設值
 - ORM: `gorm` + `SQLite`（state store, claude-mem 讀取, mempalace 讀取）
 - LLM: `Ollama` HTTP API（預設模型 `qwen3:14b-q4_K_M`）
 - LSP: `gopls` (Go), `marksman` (Markdown)
-- Custom SDK: `github.com/bizshuk/gosdk`（config 模組）
-- Key dependencies: `go-homedir`, `gocsv`, `zap`
+- Logging: Go `log/slog`，由 `github.com/bizshuk/gosdk/log` 安裝全域 handler
+- Custom SDK: `github.com/bizshuk/gosdk`（config、log）
+- Key dependencies: `go-homedir`, `gocsv`, `yaml.v3`
 
 ## 關鍵決策 (Key Decisions)
 
 - `Cobra + Viper` 組合：CLI 指令定義與設定管理標準模式，支援環境變數覆蓋
+- `Viper 預設值單一來源`：預設值集中於 `config/config.go`，不使用嵌入式 JSON 預設檔
 - `GORM + SQLite` 作為狀態儲存：輕量、無需外部資料庫服務、適合單機排程任務
 - `Ollama 本地 LLM`：隱私優先，不將記憶資料傳至雲端 API
 - `指紋 (Fingerprint) 去重`：透過 SHA-256 雜湊（正規化文本 + 排序實體）避免重複記憶
 - `真實性門檻 (Truth Qualification)`：僅經人類確認、第一人稱事實/經驗、或 2+ 來源佐證的候選才寫入 mempalace 作為 Fact
 - `agentskills.io 規範`：技能採用 YAML frontmatter + Markdown 格式，支援跨 Agent 安裝
 - `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源
-- `模組化插件架構 (Modular Plugin Architecture)`：將技能、代理、掛鉤與監控器拆分為 `tools`、`explore`、`general` 與 `tmp` 獨立插件目錄，便於分類管理與跨插件打包。
+- `模組化插件架構 (Modular Plugin Architecture)`：8 個本地 plugin 依職責拆分，skill/agent 由標準目錄自動探索，manifest 不重複列舉檔案。
 - `整合 Marksman LSP`：引進 `marksman` Language Server 以提供 Markdown 的補全、診斷與檔案鏈結管理。
 
 ## 模組對應 (Module Mapping)
@@ -121,23 +78,27 @@
 | 讀取來源          | `cmd/memory/read_logic.go`                                                  | `readGbrainLogic()`, `readClaudeMemLogic()`             |
 | 寫入儲存          | `cmd/memory/write_*.go`                                                     | `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()`          |
 | 資料匯出          | `cmd/export/`                                                               | `ExportCmd()`                                           |
+| Topology 圖譜     | `cmd/topology/`, `pkg/topology/`                                            | `TopologyCmd()`, `LoadTopology()`                       |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                                         | `NewStateStore()`                                       |
 | 狀態包裝          | `cmd/memory/state.go`                                                       | `NewStateStore()`                                       |
 | 環境初始化        | `run.sh`, `config/`                                                         | `config.Init()`                                         |
-| AI 技能           | `plugins/` (tools, explore, general, god, review, tmp, team, ultra-explore) | 各 `SKILL.md`                                           |
+| AI 技能           | `plugins/` (experiment, explore, general, god, review, team, tools, ultra-explore) | 各 `SKILL.md`                                      |
 | 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/`            | `ultra-explore` 入口 + kb-\* 10 項, `kb-coordinator.md` |
 | 審查、規劃與演化  | `plugins/review/skills/`                                                    | `auto-evolving` 單一演化閉環 + 各專項 `SKILL.md`        |
 | AI 代理           | `plugins/general/agents/`, `plugins/review/agents/`                         | `feature.md`, `review-coordinator.md`                   |
+| Plugin metadata   | `scripts/pluginmeta/`                                                       | `go run ./scripts/pluginmeta`                           |
 
 ## 開發指南 (Development Guide)
 
 ### 前置需求 (Prerequisites)
 
-- Go 1.25+
+- Go 1.26.3+
 - SQLite3
 - Ollama（用於 LLM 提取，預設 `http://localhost:11434`）
 - `mempalace` CLI（用於事實寫入）
 - `jq`（用於 hook 腳本解析 JSON）
+- `marksman`（選用；`plugins/general/.lsp.json` 的 Markdown LSP）
+- `codegraph`（選用；`plugins/explore/.mcp.json` 的 MCP server）
 
 ### 安裝 (Installation)
 
@@ -164,7 +125,7 @@ go build -o cc-plugin main.go
 go test ./... -count=1
 ```
 
-測試檔案：`cmd/memory/distill_test.go`, `cmd/memory/main_test.go`, `cmd/memory/ollama_test.go`, `cmd/memory/state_test.go`, `cmd/export/mempalace_test.go`
+主要測試套件：`cmd/export`, `cmd/memory`, `cmd/topology`, `pkg/topology`, `scripts/pluginmeta`
 
 ### 部署 (Deploy)
 
@@ -174,18 +135,18 @@ go install
 
 # 排程執行（每日 03:00）
 crontab -e
-# 加入: 0 3 * * * $HOME/go/bin/cc-plugin >> $HOME/.distiller/logs/run.log 2>&1
+# 加入: 0 3 * * * $HOME/go/bin/cc-plugin distill >> $HOME/.config/cc-plugin/logs/run.log 2>&1
 ```
 
 ## 慣例 (Conventions)
 
 - Naming: Go 檔案以功能命名（`distill.go`, `read_logic.go`, `write_mempalace.go`），命令函數統一使用 `XxxCmd()` 格式
 - Error handling: 使用 `fmt.Errorf("context: %w", err)` 包裝錯誤鏈，頂層由 Cobra 統一輸出至 stderr
-- Logging: 使用 `fmt.Printf` / `fmt.Fprintf(os.Stderr, ...)` 進行簡易輸出（未引入結構化日誌）
+- Logging: 診斷事件使用 `log/slog`；CLI 資料輸出保留 Cobra/stdout/file writer，避免污染 JSON/CSV/Markdown
 - Testing: 測試檔案與實作同目錄，使用 `_test.go` 後綴
 - Configuration: 設定路徑統一使用 `~` 前綴，由 `go-homedir` 展開；預設值寫在 `config.go`
 - Skills: 遵循 `agentskills.io` 規範，YAML frontmatter 必須包含 `name` 與 `description`
-- Plugin Manifest: 新增 skill 時需同步更新 `plugins/<name>/.claude-plugin/plugin.json` 的 `skills` 陣列（目錄型 `"./skills/skill-name"`，單檔型 `"./skills/skill-name.md"`），可選加 `keywords`
+- Plugin Manifest: `skills`／`agents` 維持空陣列，由 `plugins/<name>/skills/` 與 `plugins/<name>/agents/` 自動探索；不得重複列舉檔案
 - 鬆散技能檔案禁止：`plugins/<plugin>/skills/` 頂層只放子目錄，所有 `SKILL.md` 必須位於獨立子目錄內
 - 插件說明文件 (Plugin README)：位於 `plugins/` 目錄下的每個插件 (Plugin) 都必須在其資料夾內擁有一個 `README.md` 用以說明該插件的用途與使用方法；更新插件 (Plugin) 時亦必須同步更新對應的 `README.md`
 
@@ -202,7 +163,7 @@ YAML frontmatter 分三個 tier，由簡至詳擇一使用：
 額外規範：
 
 - `name` 必須與所在子目錄名稱一致，使用 `kebab-case`
-- `description` 採用 `>` 折疊式（`>` 或 `|`），長度 ≤ 1024 字元，且**必須**包含觸發詞（"Use when...", "Triggers on..."）
+- `description` 採用 `>` 折疊式（`>` 或 `|`），長度 ≤ 1024 字元，且`必須`包含觸發詞（"Use when...", "Triggers on..."）
 - `versio` 之類的拼字錯誤禁止（CI 將以 `yaml.Unmarshal` 驗證）
 - Rules-style frontmatter（`trigger: always_on` + `globs` + `scope`）僅 `consistency` 與 `go-convention` 兩個常駐技能使用，其餘不得混用
 - 標準 frontmatter 範例（`full` tier）：

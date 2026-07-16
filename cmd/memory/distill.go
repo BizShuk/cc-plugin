@@ -2,6 +2,7 @@ package memory
 
 import (
 	"fmt"
+	"log/slog"
 	"time"
 
 	"github.com/bizshuk/cc-plugin/model"
@@ -142,7 +143,12 @@ func DistillCmd() *cobra.Command {
 				}
 			}
 
-			fmt.Printf("[distiller] Pipeline ran successfully. Sources read=%d, Memories written=%d, Facts written=%d\n", len(allObs), len(memories), len(facts))
+			slog.Info(
+				"distillation completed",
+				"sources_read", len(allObs),
+				"memories_written", len(memories),
+				"facts_written", len(facts),
+			)
 
 			// 5. Sweep retention
 			if !noRetain {

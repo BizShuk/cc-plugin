@@ -1,15 +1,12 @@
 {
-  "name": "review",
-  "version": "1.1.0",
-  "description": "Review, planning, and workspace evolution skills — converge broad analysis into one designed, verified, and consolidated update",
+  "agents": [],
   "author": {
-    "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
+    "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"
   },
+  "description": "Review, planning, and workspace evolution skills — converge broad analysis into one designed, verified, and consolidated update",
   "homepage": "https://github.com/bizshuk/cc-plugin",
-  "repository": "https://github.com/bizshuk/cc-plugin",
-  "license": "MIT",
   "keywords": [
     "review",
     "audit",
@@ -24,14 +21,9 @@
     "think-design-update",
     "knowledge-consolidation"
   ],
-  "agents": [],
-  "skills": [
-    "./skills/auto-evolving",
-    "./skills/business-planner",
-    "./skills/doc-sync",
-    "./skills/naming-convention",
-    "./skills/session_retro",
-    "./skills/system-planner",
-    "./skills/tutorial"
-  ]
+  "license": "MIT",
+  "name": "review",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "skills": [],
+  "version": "1.1.0"
 }

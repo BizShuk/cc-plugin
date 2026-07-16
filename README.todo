@@ -1,20 +1,14 @@
 # TODO
 
-- [ ] [一致性清理與結構性整合](plans/2026-07-08-consolidation-and-structural-plan.md)
+## 產品與 Agent (Product and Agents)
 
-## CLI 基礎設施 (CLI Infrastructure)
-
-- [ ] [設定檔外化](plans/2026-07-02-architecture-config-externalization.md)
-- [ ] 合併 [結構化日誌 feature plan](plans/2026-07-02-structured-logging.md) 至 [architecture plan](plans/2026-07-02-architecture-structured-logging.md)
-- [ ] 對齊 [Topology CLI](plans/2026-06-11-topology-cli.md)、[Topology feature plan](plans/2026-07-02-topology-extraction.md) 與 [architecture plan](plans/2026-07-02-architecture-topology-extraction.md)
-
-## 插件 (Plugins)
-
-- [ ] 合併 [技能命名 feature plan](plans/2026-07-02-skill-md-renaming.md) 至 [architecture plan](plans/2026-07-06-architecture-skill-md-renaming.md)
-
-## 產品與 Agent (Product & Agents)
-
-- [ ] 審核並決定是否實作 [Claude Code 使用統計 TUI](plans/bubbly-roaming-sparkle.md)
-- [ ] 整合 [Refactor Agent 架構抉擇](plans/agent/2026-05-11-refactor-agent-vs-specialized-agents.md) 與 [Feature Agent 設計](plans/agent/2026-05-14-feature-agent-design.md)
+- [ ] [Claude Code 使用統計 TUI：完成實作前 gate](docs/backlog/2026-07-16-claude-usage-tui.md)
 
 ## Archive
+
+- [x] [Viper 預設值單一來源](docs/specs/2026-07-02-architecture-config-externalization.md)
+- [x] [結構化日誌](docs/specs/2026-07-02-architecture-structured-logging.md)
+- [x] [Topology 套件與 CLI](docs/specs/2026-07-02-topology-extraction.md)
+- [x] [Skill metadata 標準化](docs/specs/2026-07-06-skill-metadata-standardization.md)
+- [x] [Feature agent 與專門 agent 邊界](docs/specs/2026-05-14-feature-agent-design.md)
+- [x] [一致性清理與結構性整合](docs/memory/2026-07-16-consolidation-and-structural.md)

@@ -1,6 +1,10 @@
 ---
 name: sort-todo
-description: Use when asked to sort, prioritize, re-prioritize, triage, or re-organize a `.todo` file (e.g. README.todo) — assigns each item a P0/P1/P2 from business + UX + system lenses and regroups items under feature-domain sections. Applies ONLY to files with the `.todo` extension.
+description: >
+    Use when asked to sort, prioritize, re-prioritize, triage, or re-organize a
+    `.todo` file such as README.todo. Assigns each item a P0/P1/P2 from business,
+    UX, and system lenses, then regroups items under feature-domain sections.
+    Triggers only for files with the `.todo` extension.
 disable-model-invocation: true
 ---
 

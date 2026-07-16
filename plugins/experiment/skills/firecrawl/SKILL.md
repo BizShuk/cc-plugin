@@ -1,10 +1,10 @@
 ---
 name: firecrawl
 description: >
-    Firecrawl gives AI agents and apps fast, reliable web context with strong
-    search, scraping, and interaction tools. One install command sets up three
-    skill segments: live CLI tools, app-integration build skills, and outcome-focused
-    workflow skills. Route the reader to the right usage path after install.
+    Use when AI agents or apps need fast, reliable web search, scraping, or
+    interaction through Firecrawl. Triggers on: "Firecrawl", "scrape this site",
+    "web search API", "crawl this domain". Route the reader to the appropriate
+    CLI, app-integration, or outcome-focused workflow after installation.
 disable-model-invocation: true
 user-invocable: true
 ---
@@ -18,7 +18,7 @@ finished deliverables from web data.
 ## Install
 
 One command installs everything — the Firecrawl CLI for live web work,
-the build skills for integrating Firecrawl into application code, **and**
+the build skills for integrating Firecrawl into application code, `and`
 the workflow skills for producing repeatable deliverables. It also opens
 browser auth so the human can sign in or create an account.
 
@@ -28,11 +28,11 @@ npx -y firecrawl-cli@latest init --all --browser
 
 This gives you:
 
-- **CLI tools** — `firecrawl search`, `firecrawl scrape`, `firecrawl interact`, `firecrawl ask`, `firecrawl docs-search`, and more
-- **CLI skills** ([`firecrawl/cli`](https://github.com/firecrawl/cli)) — teach the agent how to drive the Firecrawl CLI during its own session: which command to run, when to scrape vs search vs interact, how to chain results, and how to recover when a job fails. Use these when the agent itself needs web data right now.
-- **Build skills** ([`firecrawl/skills`](https://github.com/firecrawl/skills)) — teach the agent how to add Firecrawl to a product's codebase: pick the right API endpoint, install the matching SDK, store `FIRECRAWL_API_KEY` safely, write the call site to match the project's conventions, and ship a smoke-tested integration. Use these when the agent is shipping code that other people will run, not running the agent's own web tools.
-- **Workflow skills** ([`firecrawl/firecrawl-workflows`](https://github.com/firecrawl/firecrawl-workflows)) — turn Firecrawl web data into finished deliverables such as research briefs, SEO audits, lead lists, QA reports, knowledge bases, and design clones. Use these when the agent's job is to produce a finished artifact, not raw extraction or product code.
-- **Browser auth** — walks the human through sign-in or account creation
+- `CLI tools` — `firecrawl search`, `firecrawl scrape`, `firecrawl interact`, `firecrawl ask`, `firecrawl docs-search`, and more
+- `CLI skills` ([`firecrawl/cli`](https://github.com/firecrawl/cli)) — teach the agent how to drive the Firecrawl CLI during its own session: which command to run, when to scrape vs search vs interact, how to chain results, and how to recover when a job fails. Use these when the agent itself needs web data right now.
+- `Build skills` ([`firecrawl/skills`](https://github.com/firecrawl/skills)) — teach the agent how to add Firecrawl to a product's codebase: pick the right API endpoint, install the matching SDK, store `FIRECRAWL_API_KEY` safely, write the call site to match the project's conventions, and ship a smoke-tested integration. Use these when the agent is shipping code that other people will run, not running the agent's own web tools.
+- `Workflow skills` ([`firecrawl/firecrawl-workflows`](https://github.com/firecrawl/firecrawl-workflows)) — turn Firecrawl web data into finished deliverables such as research briefs, SEO audits, lead lists, QA reports, knowledge bases, and design clones. Use these when the agent's job is to produce a finished artifact, not raw extraction or product code.
+- `Browser auth` — walks the human through sign-in or account creation
 
 The three skill segments map to three different jobs:
 
@@ -55,12 +55,12 @@ firecrawl scrape "https://firecrawl.dev" -o .firecrawl/install-check.md
 All paths use the same install above. The difference is what you do
 next.
 
-- **Need web data during this session** -> Path A (live tools)
-- **Need to add Firecrawl to app code** -> Path B (app integration)
-- **Need a finished deliverable from web data** -> Path C (workflow skills)
-- **Need more than one of the above** -> do them in sequence; the install already covers everything
-- **Need an account or API key first** -> Path D (auth only)
-- **Don't want to install anything** -> Path E (REST API directly)
+- `Need web data during this session` -> Path A (live tools)
+- `Need to add Firecrawl to app code` -> Path B (app integration)
+- `Need a finished deliverable from web data` -> Path C (workflow skills)
+- `Need more than one of the above` -> do them in sequence; the install already covers everything
+- `Need an account or API key first` -> Path D (auth only)
+- `Don't want to install anything` -> Path E (REST API directly)
 
 ---
 
@@ -95,7 +95,7 @@ If the task becomes "wire Firecrawl into product code," switch to Path B.
 ## Path B: Integrate Firecrawl Into an App
 
 Use this when you're building an application, agent, or workflow that
-calls the Firecrawl API **from code** — meaning the integration will run
+calls the Firecrawl API `from code` — meaning the integration will run
 inside the user's product (a web app, backend service, script, agent
 loop, or pipeline) rather than from the agent's own terminal session.
 
@@ -110,8 +110,8 @@ separate install needed.
 
 Choose the project mode before writing code:
 
-- **Fresh project** -> pick the stack, install the SDK, add env vars, and run a smoke test
-- **Existing project** -> inspect the repo first, then integrate Firecrawl where the project already handles APIs and secrets
+- `Fresh project` -> pick the stack, install the SDK, add env vars, and run a smoke test
+- `Existing project` -> inspect the repo first, then integrate Firecrawl where the project already handles APIs and secrets
 
 If you already have a key, save it to the project's environment:
 
@@ -130,7 +130,7 @@ Then hand off to the build skill that fits the step:
 
 The required question in the build path is:
 
-- **What should Firecrawl do in the product?**
+- `What should Firecrawl do in the product?`
 
 Use the answer to route to `/search`, `/scrape`, `/interact`, `/parse`, `/crawl`, or `/map`, then run one real Firecrawl request as a smoke test.
 
@@ -190,7 +190,7 @@ sign in at:
 If you're an agent and need the human to authorize an API key, use this
 flow:
 
-**Step 1 — Generate auth parameters:**
+`Step 1 — Generate auth parameters:`
 
 ```bash
 SESSION_ID=$(openssl rand -hex 32)
@@ -198,9 +198,9 @@ CODE_VERIFIER=$(openssl rand -base64 32 | tr '+/' '-_' | tr -d '=\n' | head -c 4
 CODE_CHALLENGE=$(printf '%s' "$CODE_VERIFIER" | openssl dgst -sha256 -binary | openssl base64 -A | tr '+/' '-_' | tr -d '=')
 ```
 
-**Step 2 — Ask the human to open this URL:**
+`Step 2 — Ask the human to open this URL:`
 
-```
+```text
 https://www.firecrawl.dev/cli-auth?code_challenge=$CODE_CHALLENGE&source=coding-agent#session_id=$SESSION_ID
 ```
 
@@ -208,7 +208,7 @@ If they already have a Firecrawl account, they'll sign in and authorize.
 If not, they'll create one first and then authorize. The API key comes
 back to you automatically after they click "Authorize."
 
-**Step 3 — Poll for the API key:**
+`Step 3 — Poll for the API key:`
 
 ```bash
 POST https://www.firecrawl.dev/api/auth/cli/status
@@ -222,7 +222,7 @@ Poll every 3 seconds. Responses:
 - `{"status": "pending"}` — keep polling
 - `{"status": "complete", "apiKey": "fc-...", "teamName": "..."}` — done
 
-**Step 4 — Save the key and continue:**
+`Step 4 — Save the key and continue:`
 
 ```bash
 echo "FIRECRAWL_API_KEY=fc-..." >> .env
@@ -235,20 +235,20 @@ echo "FIRECRAWL_API_KEY=fc-..." >> .env
 Use this when you don't want to install a CLI or skills package. This
 works for both use cases:
 
-- **Live web work** — an agent calling the API directly for search,
+- `Live web work` — an agent calling the API directly for search,
   scrape, or interact during a session
-- **Building with Firecrawl** — integrating the REST API into app code
+- `Building with Firecrawl` — integrating the REST API into app code
 
 You still need an API key. Two ways to get one:
 
-- **Human pastes it in** — if you already have a key, just set
+- `Human pastes it in` — if you already have a key, just set
   `FIRECRAWL_API_KEY=fc-...` in your environment or pass it directly
-- **Automated flow** — do Path D to walk the human through browser auth
+- `Automated flow` — do Path D to walk the human through browser auth
   and receive the key automatically
 
-**Base URL:** `https://api.firecrawl.dev/v2`
+`Base URL:` `https://api.firecrawl.dev/v2`
 
-**Auth header:** `Authorization: Bearer fc-YOUR_API_KEY`
+`Auth header:` `Authorization: Bearer fc-YOUR_API_KEY`
 
 ### Available endpoints
 
@@ -263,8 +263,8 @@ You still need an API key. Two ways to get one:
 The API docs are the source of truth for request/response schemas,
 parameters, and SDKs:
 
-- **API reference:** <https://docs.firecrawl.dev>
-- **Skills repo** (for agent integration patterns): <https://github.com/firecrawl/skills>
+- `API reference:` <https://docs.firecrawl.dev>
+- `Skills repo` (for agent integration patterns): <https://github.com/firecrawl/skills>
 
 ---
 

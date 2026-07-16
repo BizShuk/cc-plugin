@@ -1,11 +1,10 @@
 ---
 name: ultra-explore
 description: >
-    Single manual entry point for the ultra-explore plugin — runs the full
-    knowledge base pipeline (ingest repo/history/web/chat/schema → distill →
-    connect → verify) over the given sources, resumable at every step.
-    Manual invocation only: run /ultra-explore with a list of sources, or say
-    "ultra explore", "全量建庫". The model must never trigger this on its own.
+    Use when the user explicitly invokes /ultra-explore to run the full knowledge
+    base pipeline (ingest repo/history/web/chat/schema → distill → connect →
+    verify) over the given sources, resumable at every step. Triggers on:
+    "/ultra-explore", "ultra explore", "全量建庫". Manual invocation only.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit, Agent, AskUserQuestion
 user-invocable: true

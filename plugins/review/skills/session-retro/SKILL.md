@@ -1,5 +1,5 @@
 ---
-name: session_retro
+name: session-retro
 description: >
     Use when the user asks for a retrospective, post-mortem, or 復盤 of the current AI
     session — analyzing skills used, token cost per module, error rate and root causes,

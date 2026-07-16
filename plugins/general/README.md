@@ -2,7 +2,8 @@
 
 通用、跨專案的 Claude Code 插件。整合：
 
-- 5 個跨場景技能（商業 / 系統規劃、每日彙整、文件檢查、待辦排序）
+- 4 個跨場景技能（插件 metadata、每日彙整、文件檢查、待辦排序）
+- 1 個 `feature` 功能實作代理
 - 1 個 always-on hook（agent loop 結束時的終端機鈴聲）
 - 3 種 output-style（`brief` / `detailed` / `review`）
 
@@ -20,7 +21,11 @@
 | `markdownlint` | Markdown 格式檢查（精選 rule + CUSTOM-01 no-bold），所有插件的 `.md` 檔通用 |
 | `sort-todo` | 排序並格式化待辦清單 |
 
+## 代理 (Agents)
 
+| Agent | 用途 |
+| :--- | :--- |
+| `feature` (`./agents/feature.md`) | 規劃、實作並驗證端到端功能 |
 
 ## Hooks
 

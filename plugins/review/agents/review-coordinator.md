@@ -178,6 +178,6 @@ genuinely matters; a short ranked report beats an exhaustive one.
 - Skills coordinated: `[[business-planner]]`, `[[doc-sync]]`,
   `[[tutorial]]`, `[[naming-convention]]`, `[[system-planner]]`
 - `auto-evolving` is a separate opt-in writable workflow and must not run as a
-  review dimension. `session_retro` runs only for explicit retrospective requests.
+  review dimension. `session-retro` runs only for explicit retrospective requests.
 - Adjacent agents: `feature` (build new work), and the `/code-review` /
   `/security-review` commands for correctness and security.

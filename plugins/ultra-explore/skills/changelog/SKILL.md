@@ -1,6 +1,10 @@
 ---
 name: changelog
-description: Generate CHANGELOG.md with weekly LLM-narrated sections for all git repos under a root directory. Runs deterministic stats pipeline first, then spawns parallel subagents per repo to write weekly narratives from git diffs.
+description: >
+    Use when generating or maintaining CHANGELOG.md with weekly LLM-narrated
+    sections for git repositories under a root directory. Runs a deterministic
+    stats pipeline first, then spawns parallel agents per repository. Triggers on:
+    "generate changelog", "update CHANGELOG", "summarize git history".
 ---
 
 # /changelog

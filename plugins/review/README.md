@@ -10,6 +10,8 @@
 
 本插件由一個核心協調代理與七個專屬技能組成：
 
+協調代理的 manifest 路徑為 `./agents/review-coordinator.md`。
+
 ```mermaid
 graph TD
     Target[審查目標 Target: Diff/File/Folder] --> Coordinator[審查協調代理 review-coordinator]
@@ -23,7 +25,7 @@ graph TD
     S3 --> Report
     S4 --> Report
     S5 --> Report
-    Session[Session 結束 / 使用者請求復盤] --> S6[Session 復盤 session_retro]
+    Session[Session 結束 / 使用者請求復盤] --> S6[Session 復盤 session-retro]
     Workspace[Workspace 廣域演化] --> Evolve[自演化 auto-evolving]
     Evolve --> MainFlow[單一主提案與 canonical workspace update]
 ```
@@ -43,7 +45,7 @@ graph TD
 | 專案引導與學習 (Project onboarding) | `tutorial` | 請求建立步驟式教學、專案引導或概念學習文件時 |
 | 程式碼編寫原則 (Coding principles) | `system-planner` | 任何程式碼、重融或審查請求 |
 | 系統架構規劃 (System architecture planning) | `system-planner` | 規劃新功能或重構的系統架構與資料流 |
-| Session 復盤 (Session retro) | `session_retro` | 請求復盤/post-mortem，分析 skill/token/錯誤率與委託邊界 |
+| Session 復盤 (Session retro) | `session-retro` | 請求復盤/post-mortem，分析 skill/token/錯誤率與委託邊界 |
 | Workspace 廣域自演化 (Workspace evolution) | `auto-evolving` | 從使用者、業務、領域、系統、品質、運維、安全與知識等面向收斂一項改善，完成設計、更新、驗證與主流程知識整合 |
 
 ---
@@ -62,7 +64,7 @@ graph TD
     ├── doc-sync/             # 文件同步審查技能 (Doc Sync Skill)
     ├── tutorial/             # 教程建立技能 (Tutorial Skill)
     ├── naming-convention/    # 命名規範審查技能 (Naming Convention Skill)
-    ├── session_retro/        # Session 復盤技能 (Session Retro Skill)
+    ├── session-retro/        # Session 復盤技能 (Session Retro Skill)
     ├── system-planner/       # 系統架構規劃與品質審查技能 (System & Quality Skill)
 ```
 

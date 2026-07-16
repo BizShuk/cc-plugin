@@ -1,15 +1,12 @@
 {
-  "name": "tools",
-  "version": "1.0.0",
-  "description": "Apple ecosystem integration skills for macOS",
+  "agents": [],
   "author": {
-    "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
+    "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"
   },
+  "description": "Apple ecosystem integration skills for macOS",
   "homepage": "https://github.com/bizshuk/cc-plugin",
-  "repository": "https://github.com/bizshuk/cc-plugin",
-  "license": "MIT",
   "keywords": [
     "apple",
     "macos",
@@ -18,5 +15,9 @@
     "notes",
     "reminders"
   ],
-  "skills": []
+  "license": "MIT",
+  "name": "tools",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "skills": [],
+  "version": "1.0.0"
 }

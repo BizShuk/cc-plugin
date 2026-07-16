@@ -1,116 +1,93 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Ensure home directories exist
-mkdir -p "$HOME/.claude"
-mkdir -p "$HOME/.codex"
-mkdir -p "$HOME/.gemini"
-mkdir -p "$HOME/.claude-mem"
-mkdir -p "$HOME/.hermes"
+set -euo pipefail
 
-# Create local directories
-mkdir -p config
-mkdir -p logs
+REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+TMP_DIR="$REPO_ROOT/tmp"
 
-# Claude
-ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md" 
-ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.gemini/GEMINI.md" 
-ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.codex/AGENTS.md" 
-ln -sf "$(pwd)/config/settings.json"    "$HOME/.claude/settings.json" 
-ln -sf "$(pwd)/config/config.toml"    "$HOME/.codex/config.toml" 
+backup_and_link() {
+    local source=$1
+    local target=$2
+    local backup="${target}.bak"
 
-# Global plugin configuration links back to local project (only link if the target actually exists)
-if [ -d "$HOME/.gemini" ]; then
-    ln -sf "$HOME/.gemini"        "./tmp/"
-fi
-if [ -d "$HOME/.claude" ]; then
-    ln -sf "$HOME/.claude"        "./tmp/"
-fi
-if [ -d "$HOME/.codex" ]; then
-    ln -sf "$HOME/.codex"        "./tmp/"
-fi
-if [ -d "$HOME/.claude-mem" ]; then
-    ln -sf "$HOME/.claude-mem"    "./tmp/"
-fi
-if [ -f "$HOME/.claude.json" ]; then
-    ln -sf "$HOME/.claude.json"   "./tmp/"
-fi
-if [ -d "$HOME/.cli-proxy-api" ]; then
-    ln -sf "$HOME/.cli-proxy-api"   "./tmp/"
-fi
-if [ -d "$HOME/.auth2api" ]; then
-    ln -sf "$HOME/.auth2api"   "./tmp/"
-fi
-if [ -d "$HOME/.hermes" ]; then
-    ln -sf "$HOME/.hermes"        "./tmp/"
-fi
-if [ -d "$HOME/.gbrain" ]; then
-    ln -sf "$HOME/.gbrain"        "./tmp/"
-fi
+    mkdir -p "$(dirname -- "$target")"
+    if [[ -e "$target" && ! -L "$target" ]]; then
+        if [[ -e "$backup" || -L "$backup" ]]; then
+            printf 'Refusing to overwrite existing backup: %s\n' "$backup" >&2
+            return 1
+        fi
+        mv -- "$target" "$backup"
+    fi
+    ln -sfn -- "$source" "$target"
+}
 
-if [ -d "$HOME/.mempalace" ]; then
-    ln -sf "$HOME/.mempalace"        "./tmp/"
-fi
+link_to_tmp_if_present() {
+    local source=$1
+    if [[ -e "$source" || -L "$source" ]]; then
+        ln -sfn -- "$source" "$TMP_DIR/$(basename -- "$source")"
+    fi
+}
 
-if [ -d "$HOME/.config/cc-plugin" ]; then
-    ln -sf "$HOME/.config/cc-plugin"        "./tmp/"
-fi
+install_sample_if_missing() {
+    local sample=$1
+    local target=$2
+    mkdir -p "$(dirname -- "$target")"
+    if [[ ! -e "$target" ]]; then
+        cp -- "$sample" "$target"
+    fi
+}
 
-if [ -d "$HOME/.agentmemory" ]; then
-    ln -sf "$HOME/.agentmemory"        "./tmp/"
-fi
+mkdir -p \
+    "$HOME/.claude" \
+    "$HOME/.codex" \
+    "$HOME/.gemini" \
+    "$HOME/.claude-mem" \
+    "$HOME/.hermes" \
+    "$TMP_DIR"
 
-if [ -d "$HOME/.paperclip" ]; then
-    ln -sf "$HOME/.paperclip"        "./tmp/"
-fi
+backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md"
+backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.gemini/GEMINI.md"
+backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.codex/AGENTS.md"
+backup_and_link "$REPO_ROOT/config/settings.json" "$HOME/.claude/settings.json"
+backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
 
-if [ -d "$HOME/.codex" ]; then
-    ln -sf "$HOME/.codex"        "./tmp/"
-fi
+backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.hermes/AGENTS.md"
+backup_and_link "$REPO_ROOT/pkg/hermes/MEMORY.md" "$HOME/.hermes/MEMORY.md"
+backup_and_link "$REPO_ROOT/pkg/hermes/USER.md" "$HOME/.hermes/USER.md"
 
-if [ -d "$HOME/.config/opencode" ]; then
-    ln -sf "$HOME/.config/opencode"        "./tmp/"
-fi
+install_sample_if_missing \
+    "$REPO_ROOT/pkg/litellm/litellm_config.sample.yaml" \
+    "$HOME/.config/litellm/litellm_config.yaml"
+install_sample_if_missing \
+    "$REPO_ROOT/plugins/experiment/skills/summarize-sh/config.sample.json" \
+    "$HOME/.summarize/config.json"
 
+backup_and_link \
+    "$REPO_ROOT/pkg/ccstatusline/settings.json" \
+    "$HOME/.config/ccstatusline/settings.json"
+backup_and_link \
+    "$REPO_ROOT/pkg/usage/tokscale/settings.json" \
+    "$HOME/.config/tokscale/settings.json"
 
-
-
-
-
-# Hermes
-ln -sf "$(pwd)/config/CLAUDE.global.md" "$HOME/.hermes/AGENTS.md" 
-ln -sf "$(pwd)/pkg/hermes/MEMORY.md" "$HOME/.hermes/MEMORY.md"
-ln -sf "$(pwd)/pkg/hermes/USER.md" "$HOME/.hermes/USER.md"
-
-# LiteLLM
-mkdir -p "$HOME/.config/litellm"
-if [ ! -f "$HOME/.config/litellm/litellm_config.yaml" ]; then
-    cp "$(pwd)/pkg/litellm/litellm_config.sample.yaml" "$HOME/.config/litellm/litellm_config.yaml"
-fi
-
-ln -sf "$HOME/.config/litellm/litellm_config.yaml" "./tmp/" 
-
-# SKILL: summarize
-mkdir -p "$HOME/.summarize"
-if [ ! -f "$HOME/.summarize/config.json" ]; then
-    cp "$(pwd)/pkg/summarize.sh/config.sample.json" "$HOME/.summarize/config.json"
-fi
-ln -sf "$HOME/.summarize" "./tmp/"
-
-# CCStatusline
-mkdir -p "$HOME/.config/ccstatusline"
-if [ -f "$HOME/.config/ccstatusline/settings.json" ] && [ ! -L "$HOME/.config/ccstatusline/settings.json" ]; then
-    mv "$HOME/.config/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json.bak"
-fi
-ln -sf "$(pwd)/pkg/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
-
-ln -sf "$HOME/.config/ccstatusline" "./tmp/"
-
-# Tokscale
-mkdir -p "$HOME/.config/tokscale"
-if [ -f "$HOME/.config/tokscale/settings.json" ] && [ ! -L "$HOME/.config/tokscale/settings.json" ]; then
-    mv "$HOME/.config/tokscale/settings.json" "$HOME/.config/tokscale/settings.json.bak"
-fi
-ln -sf "$(pwd)/pkg/usage/tokscale/settings.json" "$HOME/.config/tokscale/settings.json"
-ln -sf "$HOME/.config/tokscale" "./tmp/"
-
-
+for path in \
+    "$HOME/.gemini" \
+    "$HOME/.claude" \
+    "$HOME/.codex" \
+    "$HOME/.claude-mem" \
+    "$HOME/.claude.json" \
+    "$HOME/.cli-proxy-api" \
+    "$HOME/.auth2api" \
+    "$HOME/.hermes" \
+    "$HOME/.gbrain" \
+    "$HOME/.mempalace" \
+    "$HOME/.config/cc-plugin" \
+    "$HOME/.agentmemory" \
+    "$HOME/.paperclip" \
+    "$HOME/.config/opencode" \
+    "$HOME/.config/litellm/litellm_config.yaml" \
+    "$HOME/.summarize" \
+    "$HOME/.config/ccstatusline" \
+    "$HOME/.config/tokscale"
+do
+    link_to_tmp_if_present "$path"
+done

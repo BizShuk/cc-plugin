@@ -1,20 +1,12 @@
 package config
 
 import (
-	_ "embed"
-
 	"github.com/bizshuk/gosdk/config"
 	"github.com/spf13/viper"
 )
 
-//go:embed default_settings.json
-var defaultSettingJSON string
-
 func Init() {
-	config.Default(
-		config.WithAppName("cc-plugin"),
-		config.WithDefaultValue(defaultSettingJSON),
-	)
+	config.Default(config.WithAppName("cc-plugin"))
 	viper.SetDefault("state.db_path", "~/.config/cc-plugin/state.db")
 	viper.SetDefault("retention.max_age_days", 30)
 	viper.SetDefault("llm.host", "http://localhost:11434")

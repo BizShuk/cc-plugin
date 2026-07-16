@@ -1,15 +1,12 @@
 {
-  "name": "god",
-  "version": "2.0.0",
-  "description": "Grand Unified Theory of Systems — five universal operators (generate/review/consolidate/aggregate/evolve), 13 system laws, and LLM mechanics",
+  "agents": [],
   "author": {
-    "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
+    "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"
   },
+  "description": "Grand Unified Theory of Systems — five universal operators (generate/review/consolidate/aggregate/evolve), 13 system laws, and LLM mechanics",
   "homepage": "https://github.com/bizshuk/cc-plugin",
-  "repository": "https://github.com/bizshuk/cc-plugin",
-  "license": "MIT",
   "keywords": [
     "architecture",
     "philosophy",
@@ -25,5 +22,9 @@
     "laws",
     "fusion"
   ],
-  "skills": []
+  "license": "MIT",
+  "name": "god",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "skills": [],
+  "version": "2.0.0"
 }

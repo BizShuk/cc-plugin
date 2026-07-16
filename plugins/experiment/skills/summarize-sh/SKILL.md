@@ -1,5 +1,5 @@
 ---
-name: summarize.sh
+name: summarize-sh
 description: >
     Use when a fast summary or extraction of web pages, local files, YouTube
     videos, or podcasts is needed. Invokes the `summarize` command-line tool.

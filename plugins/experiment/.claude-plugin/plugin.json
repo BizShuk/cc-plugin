@@ -1,15 +1,12 @@
 {
-  "name": "experiment",
-  "version": "1.0.0",
-  "description": "Sandbox plugin for skills staged before merging into their formal destination plugins. Holds exploration / scraping skills previously under `explore` and planning / documentation skills previously under `general` so they can be evaluated, refactored, or promoted without disturbing the shipped plugin manifests. Not a stable surface — entries here are expected to graduate.",
+  "agents": [],
   "author": {
-    "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
+    "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"
   },
+  "description": "Sandbox plugin for skills staged before merging into their formal destination plugins. Holds exploration / scraping skills previously under `explore` and planning / documentation skills previously under `general` so they can be evaluated, refactored, or promoted without disturbing the shipped plugin manifests. Not a stable surface — entries here are expected to graduate.",
   "homepage": "https://github.com/bizshuk/cc-plugin",
-  "repository": "https://github.com/bizshuk/cc-plugin",
-  "license": "MIT",
   "keywords": [
     "experiment",
     "sandbox",
@@ -22,5 +19,9 @@
     "summarize",
     "mermaid"
   ],
-  "skills": []
+  "license": "MIT",
+  "name": "experiment",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "skills": [],
+  "version": "1.0.0"
 }

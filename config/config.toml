@@ -1,5 +1,5 @@
 model = "gpt-5.6-sol"
-model_reasoning_effort = "xhigh"
+model_reasoning_effort = "high"
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
@@ -19,6 +19,9 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/shuk/projects/tally"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/env_setup"]
 trust_level = "trusted"
 
 [tui]

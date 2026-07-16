@@ -75,7 +75,7 @@ flowchart TD
 | 11  | `topology-builder`  | 跨來源連結拓撲／知識圖譜構建                              | 自動觸發 |
 | 12  | `changelog`         | git log 增量 → 結構化 commits.jsonl + CHANGELOG.md      | 僅手動 |
 
-代理 (Agent)：`kb-coordinator` — 由入口技能派工，phase gate 依 `_state/` 判定。
+代理 (Agent)：`kb-coordinator` (`./agents/kb-coordinator.md`) — 由入口技能派工，phase gate 依 `_state/` 判定。
 
 ## 儲存佈局 (Storage Layout)
 

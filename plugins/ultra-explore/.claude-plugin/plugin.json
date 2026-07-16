@@ -1,15 +1,12 @@
 {
-  "name": "ultra-explore",
-  "version": "1.0.0",
-  "description": "Manual-entry knowledge base pipeline — ingest git repos, commit histories, web links, chat histories, and storage schemas into a verifiable, resumable wikilink knowledge base at large scale",
+  "agents": [],
   "author": {
-    "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
+    "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"
   },
+  "description": "Manual-entry knowledge base pipeline — ingest git repos, commit histories, web links, chat histories, and storage schemas into a verifiable, resumable wikilink knowledge base at large scale",
   "homepage": "https://github.com/bizshuk/cc-plugin",
-  "repository": "https://github.com/bizshuk/cc-plugin",
-  "license": "MIT",
   "keywords": [
     "ultra-explore",
     "knowledge-base",
@@ -25,6 +22,9 @@
     "large-scale",
     "resumable"
   ],
-  "agents": [],
-  "skills": []
+  "license": "MIT",
+  "name": "ultra-explore",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "skills": [],
+  "version": "1.0.0"
 }

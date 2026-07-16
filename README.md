@@ -56,26 +56,26 @@
 
 ### AI 技能與代理生態 (AI Skills & Agents Ecosystem)
 
-提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為七個模組化插件目錄，並透過 `npx skills` CLI 安裝至 55+ 個支援的 AI Agent：
+提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為八個本地模組化插件目錄：
 
-- `base` (預設基礎插件 — must-install：Stop/StopFailure 終端機 bell hook)
-- `apple` (macOS 整合)
-- `explore` (抓取與摘要：MarkItDown, Scrapling, Firecrawl, Playwright)
-- `general` (通用技能：domain, project-explore, model-evaluator)
-- `god` (系统大一統理論：LLM 力學、領域探索、融合方法)
+- `tools` (macOS Apple Calendar、Mail、Notes、Reminders 整合)
+- `explore` (內容摘要、Markdown 轉換、專案探索與路由)
+- `experiment` (候選技能沙盒)
+- `general` (通用 metadata、日報、Markdown、TODO 與 feature agent)
+- `god` (系統大一統理論：LLM 力學、領域探索、融合方法)
 - `review` (審查、系統／商業規劃與 workspace 自演化：廣域思考後收斂成單一設計、更新、驗證與知識整合流程)
 - `team` (代理團隊規劃與設計：team-design, role-generator, orchestration-config)
-- `tmp` (臨時測試)
+- `ultra-explore` (多來源可驗證知識庫建構)
 
 `領域流程 (Domain Flow):`
 
 1. 開發者在對應的 `plugins/<name>/skills/` 目錄下建立 `SKILL.md`（符合 agentskills.io 規範）
 2. 使用 `npx skills add .` 掃描並註冊技能至 `skills.json`，並安裝至多個 AI Agent（Antigravity、Claude Code、Gemini CLI 等）
-3. 各插件的 manifest（`plugins/<name>/.claude-plugin/plugin.json`）定義專屬的 hooks、monitors、MCP/LSP 整合
+3. `plugin.json` 保留空的 `skills`／`agents` 陣列，由標準目錄自動探索；hooks、MCP/LSP 與其他 metadata 仍由 manifest 宣告
 
 `核心實體 (Key Entities):` `SKILL.md`, `plugin.json`, `hooks.json`, `monitors.json`, `skills.json`
 
-`相關處理器 (Related Handlers):` `feature` agent, `post-tool.sh` hook
+`相關處理器 (Related Handlers):` `feature`, `review-coordinator`, `kb-coordinator` agents, `stop-bell.sh` hook
 
 ---
 
@@ -116,6 +116,19 @@ cc-plugin export gbrain
 cc-plugin export claudemem --all
 ```
 
+### Topology 知識圖譜
+
+```bash
+# 驗證 topology-builder 參考圖譜
+cc-plugin topology verify
+
+# 查詢 entity 邊
+cc-plugin topology query service-a
+
+# 重算 backlinks 與 _index.md
+cc-plugin topology rewrite --root <topology-root>
+```
+
 ### 環境初始化
 
 ```bash
@@ -130,8 +143,6 @@ npx skills add .
 
 Based on codebase analysis:
 
-- [ ] `readClaudeMemLogic()` 在 `cmd/read_logic.go` 中重複建立 `StateStore`，應接收外部傳入的 store 以避免連線浪費
-- [ ] `cmd/export/gbrain.go` 與 `cmd/read_logic.go` 中 `readGbrainLogic` / `gbrainRead` 功能幾乎重複，應整合為共用函數
-- [ ] `plugins/general/skills/anti-sabotage-skill.md` 是一個散落的技能草稿，未轉換為正式的 `SKILL.md` 目錄結構
-- [ ] `config/default_settings.json` 為空 (`{}`)，預設設定全部寫死在 `config.go` 中，建議遷移至 JSON 以利外部修改
-- [ ] `cmd/write_agentmemory.go` 中 `resp.Body` 的 `defer resp.Close()` 在迴圈內使用可能造成資源洩漏
+- [ ] `readClaudeMemLogic()` 在 `cmd/memory/read_logic.go` 中重複建立 `StateStore`，應接收外部傳入的 store 以避免連線浪費
+- [ ] `cmd/export/gbrain.go` 與 `cmd/memory/read_logic.go` 中 `readGbrainLogic` / `gbrainRead` 功能幾乎重複，應整合為共用函數
+- [ ] `cmd/memory/write_agentmemory.go` 中 `resp.Body` 的 `defer resp.Close()` 在迴圈內使用可能造成資源延遲釋放

@@ -1,4 +1,4 @@
-# summarize
+# summarize.sh
 
 `Source: https://summarize.sh`
 

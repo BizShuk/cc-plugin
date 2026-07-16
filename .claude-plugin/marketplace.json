@@ -1,100 +1,100 @@
 {
-    "name": "shuk-cc-plugin",
-    "owner": {
-        "name": "DevTools Team",
-        "email": "devtools@example.com"
+  "name": "shuk-cc-plugin",
+  "owner": {
+    "name": "DevTools Team",
+    "email": "devtools@example.com"
+  },
+  "plugins": [
+    {
+      "name": "tools",
+      "source": "./plugins/tools"
     },
-    "plugins": [
-        {
-            "name": "tools",
-            "source": "./plugins/tools"
-        },
-        {
-            "name": "explore",
-            "source": "./plugins/explore"
-        },
-        {
-            "name": "pm2",
-            "source": {
-                "source": "github",
-                "repo": "bizshuk/pm2"
-            }
-        },
-        {
-            "name": "general",
-            "source": "./plugins/general"
-        },
-        {
-            "name": "awesome-claude-code-subagents",
-            "source": {
-                "source": "github",
-                "repo": "VoltAgent/awesome-claude-code-subagents"
-            }
-        },
-        {
-            "name": "experiment",
-            "source": "./plugins/experiment"
-        },
-        {
-            "name": "gosdk",
-            "source": {
-                "source": "github",
-                "repo": "bizshuk/gosdk"
-            }
-        },
-        {
-            "name": "inf",
-            "source": {
-                "source": "github",
-                "repo": "bizshuk/inf"
-            }
-        },
-        {
-            "name": "review",
-            "source": "./plugins/review"
-        },
-        {
-            "name": "superpowers",
-            "source": {
-                "source": "github",
-                "repo": "obra/superpowers"
-            }
-        },
-        {
-            "name": "ip-incubation",
-            "source": {
-                "source": "github",
-                "repo": "bizshuk/ip-incubation"
-            }
-        },
-        {
-            "name": "team",
-            "source": "./plugins/team"
-        },
-        {
-            "name": "ultra-explore",
-            "source": "./plugins/ultra-explore"
-        },
-        {
-            "name": "understand-anything",
-            "source": {
-                "source": "github",
-                "repo": "Egonex-AI/Understand-Anything"
-            }
-        },
-        {
-            "name": "last30days",
-            "source": {
-                "source": "github",
-                "repo": "mvanhorn/last30days-skill"
-            }
-        },
-        {
-            "name": "ui-ux-pro-max-skill",
-            "source": {
-                "source": "github",
-                "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
-            }
-        }
-    ]
+    {
+      "name": "explore",
+      "source": "./plugins/explore"
+    },
+    {
+      "name": "pm2",
+      "source": {
+        "source": "github",
+        "repo": "bizshuk/pm2"
+      }
+    },
+    {
+      "name": "general",
+      "source": "./plugins/general"
+    },
+    {
+      "name": "awesome-claude-code-subagents",
+      "source": {
+        "source": "github",
+        "repo": "VoltAgent/awesome-claude-code-subagents"
+      }
+    },
+    {
+      "name": "experiment",
+      "source": "./plugins/experiment"
+    },
+    {
+      "name": "gosdk",
+      "source": {
+        "source": "github",
+        "repo": "bizshuk/gosdk"
+      }
+    },
+    {
+      "name": "inf",
+      "source": {
+        "source": "github",
+        "repo": "bizshuk/inf"
+      }
+    },
+    {
+      "name": "review",
+      "source": "./plugins/review"
+    },
+    {
+      "name": "superpowers",
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers"
+      }
+    },
+    {
+      "name": "ip-incubation",
+      "source": {
+        "source": "github",
+        "repo": "bizshuk/ip-incubation"
+      }
+    },
+    {
+      "name": "team",
+      "source": "./plugins/team"
+    },
+    {
+      "name": "ultra-explore",
+      "source": "./plugins/ultra-explore"
+    },
+    {
+      "name": "understand-anything",
+      "source": {
+        "source": "github",
+        "repo": "Egonex-AI/Understand-Anything"
+      }
+    },
+    {
+      "name": "last30days",
+      "source": {
+        "source": "github",
+        "repo": "mvanhorn/last30days-skill"
+      }
+    },
+    {
+      "name": "ui-ux-pro-max-skill",
+      "source": {
+        "source": "github",
+        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+      }
+    }
+  ]
 }

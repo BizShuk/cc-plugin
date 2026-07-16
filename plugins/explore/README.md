@@ -1,26 +1,19 @@
 # 探索插件 (Explore Plugin)
 
-`explore` 插件整合 4 個 `抓取`、`爬蟲` 與 `內容摘要` 技能（用於從網頁、檔案、影片等來源擷取並整理內容），加上 `project-explore` 技能做完整 workspace onboarding 與業務萃取。
+`explore` 插件正式註冊 4 個技能：內容摘要、Markdown 轉換、專案探索與跨專案路由。另保留抓取工具的 benchmark 與外部 submodule，作為評估資料，不列入 manifest。
 
 ## 技能清單 (Skills)
 
-### 抓取 / 摘要類 (Fetch & Summarize)
+### 正式註冊技能 (Registered Skills)
 
 | 技能                 | 工具                          | 路徑                          |
 | -------------------- | ----------------------------- | ----------------------------- |
 | `content-summarizer` | workflow（底層 `markitdown`） | `./skills/content-summarizer` |
-| `firecrawl`          | `firecrawl` CLI（雲端）       | `./skills/firecrawl`          |
-| `markitdown`         | `markitdown` Python CLI       | `./skills/markitdown`         |
-| `playwright-cli`     | `playwright-cli` 瀏覽器自動化 | `./skills/playwright-cli`     |
-| `scrapling`          | `scrapling` Python 框架       | `./skills/scrapling`          |
-| `summarize.sh`       | `summarize` CLI               | `./skills/summarize.sh`       |
+| `markitdown` | `markitdown` Python CLI | `./skills/markitdown` |
+| `project-explore` | Workspace 全掃描與業務萃取 | `./skills/project-explore` |
+| `project-route` | 將任意檔案映射到所屬專案 | `./skills/project-route` |
 
-### Onboarding & 業務萃取 (Onboarding & Business)
-
-| 技能              | 用途                                                       | 路徑                         |
-| ----------------- | ---------------------------------------------------------- | ---------------------------- |
-| `project-explore` | Workspace 全掃描 → `README.md` + `CLAUDE.md` + `README.business.md` + symlinks（合併自 `project-explore` + `business-extract`） | `./skills/project-explore` |
-| `project-route`   | 將任意檔案路徑映射到所屬專案                                  | `./skills/project-route`     |
+後續比較表中的 `firecrawl`、`playwright-cli`、`scrapling` 與 `summarize.sh` 是評估標的；對應候選 skill 位於 `experiment` 插件，未由 `explore` manifest 載入。
 
 ## 技能比較 (Skill Comparison)
 

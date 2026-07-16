@@ -2,10 +2,9 @@ package main
 
 import (
 	"github.com/bizshuk/cc-plugin/cmd"
-	"github.com/bizshuk/cc-plugin/config"
+	_ "github.com/bizshuk/gosdk/log"
 )
 
 func main() {
-	config.Init()
 	cmd.Execute()
 }

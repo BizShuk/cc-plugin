@@ -1,16 +1,12 @@
 {
-  "name": "explore",
-  "version": "1.0.0",
-  "description": "Fetching, scraping, and content summarization skills",
+  "agents": [],
   "author": {
-    "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com",
+    "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"
   },
+  "description": "Fetching, scraping, and content summarization skills",
   "homepage": "https://github.com/bizshuk/cc-plugin",
-  "repository": "https://github.com/bizshuk/cc-plugin",
-  "mcpServers": ".mcp.json",
-  "license": "MIT",
   "keywords": [
     "explore",
     "scraping",
@@ -20,5 +16,10 @@
     "business-extract",
     "markitdown"
   ],
-  "skills": []
+  "license": "MIT",
+  "mcpServers": ".mcp.json",
+  "name": "explore",
+  "repository": "https://github.com/bizshuk/cc-plugin",
+  "skills": [],
+  "version": "1.0.0"
 }

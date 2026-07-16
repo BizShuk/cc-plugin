@@ -2,6 +2,7 @@ package memory
 
 import (
 	"fmt"
+	"log/slog"
 	"os"
 	"path/filepath"
 	"time"
@@ -53,14 +54,14 @@ func retainLogic() error {
 			target := filepath.Join(pruneGbrainDir, item.SourceID)
 			if _, err := os.Stat(target); err == nil {
 				if err := os.Remove(target); err != nil {
-					fmt.Fprintf(os.Stderr, "Warning: failed to delete %s: %v\n", target, err)
+					slog.Warn("failed to delete distilled source", "path", target, "err", err)
 				} else {
 					prunedCount++
 				}
 			}
 		}
 		if err := store.DropDistilled(item.Source, item.SourceID); err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: failed to drop distilled item %s: %v\n", item.SourceID, err)
+			slog.Warn("failed to drop distilled item", "source", item.Source, "source_id", item.SourceID, "err", err)
 		}
 	}
 
