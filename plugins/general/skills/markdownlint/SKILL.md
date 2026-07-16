@@ -105,6 +105,7 @@ The following table summarizes core rules from `markdownlint` (v0.40.0) and cust
 | `MD059`     | `descriptive-link-text`            | Link text should be descriptive                                                    | `on`   |
 | `MD060`     | `table-column-style`               | Table column style                                                                 | `on`   |
 | `CUSTOM-01` | `no-bold-formatting`               | Never use double asterisk `**` for bold formatting. Use backticks `` ` `` instead. | `on`   |
+| `CUSTOM-02` | `relative-local-links`             | Local file links must use relative paths, not absolute paths or `file://` URLs.    | `on`   |
 
 ## Core Pattern
 
@@ -148,3 +149,4 @@ We also used `backtick formatting` to highlight text.
 - Trailing spaces: Unintentional space at the end of lines. Always trim trailing spaces.
 - Missing blank lines: Forgetting blank lines before/after lists, code blocks, or headings.
 - Bold text: Using `**bold**` instead of `backticks` for emphasizing terms.
+- Absolute local links: Use relative paths for local files, such as `[README](../../README.md)`, instead of `/Users/...` or `file://` URLs.
