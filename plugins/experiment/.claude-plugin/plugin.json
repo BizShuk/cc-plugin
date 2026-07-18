@@ -22,6 +22,8 @@
   "license": "MIT",
   "name": "experiment",
   "repository": "https://github.com/bizshuk/cc-plugin",
-  "skills": [],
+  "skills": [
+    "guangyuspace/codex-gamestudio-skill"
+  ],
   "version": "1.0.0"
 }
