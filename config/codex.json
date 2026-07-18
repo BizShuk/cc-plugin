@@ -59,7 +59,7 @@
       "Bash(git push:*)",
       "Read(.env*)"
     ],
-    "defaultMode": "acceptEdits",
+    "defaultMode": "auto",
     "additionalDirectories": []
   },
   "worktree": {},
