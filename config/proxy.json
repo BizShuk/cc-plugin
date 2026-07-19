@@ -2,16 +2,32 @@
   "skillListingBudgetFraction": 0.01,
   "env": {
     "_____proxy": "_____",
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:8318",
     "_____prompt": "_____",
-    "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
     "_____model": "_____",
-    "ANTHROPIC_MODEL": "opus",
+    "ANTHROPIC_MODEL": "gemini-3.5-flash",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "gpt-5.6-sol",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL_NAME": "gpt-5.6-sol",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL_DESCRIPTION": "gpt-5.6-sol",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "Minimax-M3",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_NAME": "Minimax-M3",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_DESCRIPTION": "Minimax-M3",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-haiku-4-5",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_NAME": "claude-haiku-4-5",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_DESCRIPTION": "claude-haiku-4-5",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "grok-4.5-latest",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME": "grok-4.5-latest",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL_DESCRIPTION": "grok-4.5-latest",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
     "_____agent": "_____",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "Minimax-M3",
     "_____extra": "_____",
-    "ENABLE_LSP_TOOL": "1",
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
-    "OTEL_METRICS_EXPORTER": "otlp"
+    "CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY": "3",
+    "ENABLE_TOOL_SEARCH": "false"
   },
   "permissions": {
     "allow": [
@@ -37,7 +53,7 @@
       "Read(~/.aws/**)",
       "Read(**/secrets/**)",
       "Read(~/.claude/settings.json)",
-      "Edit(**/.git)"
+      "Edit(./.git)"
     ],
     "ask": [
       "Bash(git push:*)",
@@ -46,7 +62,6 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "fable",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -80,10 +95,9 @@
       }
     }
   },
-  "outputStyle": "Executive Summary",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
   "autoUpdatesChannel": "latest",
@@ -101,7 +115,6 @@
   "theme": "dark-ansi",
   "verbose": false,
   "preferredNotifChannel": "auto",
-  "autoCompactEnabled": true,
   "teammateMode": "in-process",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true
