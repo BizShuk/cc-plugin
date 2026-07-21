@@ -81,6 +81,24 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/utils/superset"]
 trust_level = "trusted"
 
+[projects."/Users/shuk/projects/iphone/iphone_sync"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/iphone/tally"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/go-dependency-analysis"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/sandbox"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/vscoed-plugin-experiment"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/voiceon"]
+trust_level = "trusted"
+
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "approval-mode", "weekly-limit", "task-progress"]
 status_line_use_colors = true
@@ -189,6 +207,9 @@ enabled = true
 [plugins."browser@openai-bundled"]
 enabled = true
 
+[plugins."chrome@openai-bundled"]
+enabled = true
+
 [features]
 js_repl = false
 memories = true
@@ -216,7 +237,7 @@ NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunc
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.715.52143"
+BROWSER_USE_CODEX_APP_VERSION = "26.715.61943"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [desktop]
@@ -224,13 +245,14 @@ conversationDetailMode = "STEPS_COMMANDS"
 ambient-suggestions-enabled = true
 followUpQueueMode = "steer"
 selected-avatar-id = "rocky"
-localeOverride = "en-US"
+localeOverride = "zh-TW"
 show-context-window-usage = true
 notifications-turn-mode = "always"
 dictationDictionary = []
 show-ultra-in-model-picker-slider = true
 avatar-overlay-mascot-width-px = 80
 enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "max"]
+keepRemoteControlAwakeWhilePluggedIn = true
 
 [desktop.open-in-target-preferences]
 global = "systemDefault"
