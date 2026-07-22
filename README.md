@@ -148,3 +148,10 @@ Based on codebase analysis:
 - [ ] `readClaudeMemLogic()` 在 `cmd/memory/read_logic.go` 中重複建立 `StateStore`，應接收外部傳入的 store 以避免連線浪費
 - [ ] `cmd/export/gbrain.go` 與 `cmd/memory/read_logic.go` 中 `readGbrainLogic` / `gbrainRead` 功能幾乎重複，應整合為共用函數
 - [ ] `cmd/memory/write_agentmemory.go` 中 `resp.Body` 的 `defer resp.Close()` 在迴圈內使用可能造成資源延遲釋放
+
+## 已淘汰功能 (Deprecated Features)
+
+| 淘汰日期 | 功能 | 原始文件 | 說明 |
+| -------- | ---- | -------- | ---- |
+| 2026-07-22 | `media` plugin | `2026-06-17-media-plugin.md` | 已於 `de4fad1` 自 `plugins/` 移除，三個影片／劇本技能無替代 |
+| 2026-07-22 | `golang-dev` skill | `2026-05-19-golang-dev-skill-design.md` | 已移出本 repo，現位於 `~/.claude/skills/golang-dev` |

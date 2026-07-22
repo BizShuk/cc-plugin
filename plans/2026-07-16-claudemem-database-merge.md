@@ -2,7 +2,8 @@
 
 日期：`2026-07-16`
 
-狀態：`Spec 已寫入並完成 self-review，待使用者審閱`
+狀態：`approved, pending implementation` — 2026-07-22 驗證 `cmd/export/` 尚無 merge 實作，
+故自 `docs/specs/` 移入 `plans/`；實作完成後回收至 `docs/specs/`。
 
 ## 1. 目標與範圍 (Goal & Scope)
 

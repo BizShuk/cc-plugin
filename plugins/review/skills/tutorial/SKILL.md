@@ -2,7 +2,7 @@
 name: tutorial
 description: >
     Use when generating tutorials, step-by-step guides, domain knowledge documents, onboarding materials, or learning resources for the workspace. Triggers on "create learning document", "generate tutorials", "學習文件", "學習指南".
-version: "1.0.0"
+version: "1.1.0"
 allowed-tools: Read, Write, Glob
 user-invocable: true
 disable-model-invocation: false
@@ -33,12 +33,18 @@ metadata:
 - 領域知識學習與概念導覽 (Domain tutorials)：必須存放在 `./docs/tutorials/` 目錄。
 - 專案架構、開發流程、環境設定等常規文件 (Project guides)：存放在 `./docs/` 根目錄下。
 
+`docs/tutorials/` 是統一介面 (Unified Interface) 的選備項目，規範見
+`~/.claude/CLAUDE.md`。專案可能位於 `~/projects/<project>/` 或
+`~/projects/<category>/<project>/`，路徑一律相對於`專案根目錄`，不寫進分類目錄。
+
 ### 2. 關鍵術語高亮與解釋 (Key Terminology)
 
 專案特有的術語在文件中首次出現時，必須給予特別的高亮與說明：
 
 - 必須使用 `backtick` 包裹該術語。
 - 文件中必須有專屬的 `術語解釋 (Terminology)` 區段，用以說明該術語在當前專案中的意義與上下文（例如 `PSM`, `StateStore`, `Distiller`, `Observation`）。
+- 定義以 `docs/terminology.md`（術語單一定義來源）為準：已收錄者`直接引用`不得改寫，
+  未收錄者先補進術語表再於教學中使用，避免同一概念兩種說法。
 
 ### 3. 循序漸進引導 (Step-by-Step Flow)
 
@@ -51,4 +57,5 @@ metadata:
 
 - 將領域知識教學隨意放在 `./docs/` 根目錄，未歸類至 `tutorials/`。
 - 術語首次出現時未以 `backtick` 高亮，且缺乏專屬的術語對照說明。
+- 自行改寫 `docs/terminology.md` 既有定義，造成同一概念兩種說法。
 - 步驟式說明缺乏程式碼範例或具體指令。

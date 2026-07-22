@@ -2,13 +2,13 @@
 
 本插件提供程式碼審查、系統／商業規劃與 workspace 自演化工具，協助 `Claude Code` 等 AI 代理從多維度診斷問題、設計改善並在獲授權時完成更新。
 
-審查協調代理預設維持 `唯讀 (Read-only)`，專注於衛生、一致性與業務價值診斷，不涵蓋執行邏輯正確性與安全漏洞。兩個技能具備可寫入模式，且都必須由使用者明確要求才會啟用：`auto-evolving` 的 `THINK → DESIGN → UPDATE → VERIFY → CONSOLIDATE` 流程，以及 `project-docs` 的 `refresh` / `bootstrap` 模式（其 `audit` 模式為唯讀預設）。外部、破壞性或不可逆操作仍須另外批准。
+審查協調代理預設維持 `唯讀 (Read-only)`，專注於衛生、一致性與業務價值診斷，不涵蓋執行邏輯正確性與安全漏洞。三個技能具備可寫入模式，且都必須由使用者明確要求才會啟用：`auto-evolving` 的 `THINK → DESIGN → UPDATE → VERIFY → CONSOLIDATE` 流程、`project-docs` 的 `refresh` / `bootstrap` 模式（其 `audit` 模式為唯讀預設），以及 `docs-consolidation`（會 `git rm` 已整併的歷史文件，刪除前必先列出清單）。外部、破壞性或不可逆操作仍須另外批准。
 
 ---
 
 ## 核心架構 (Core Architecture)
 
-本插件由一個核心協調代理與七個專屬技能組成：
+本插件由一個核心協調代理與八個專屬技能組成：
 
 協調代理的 manifest 路徑為 `./agents/review-coordinator.md`。
 
@@ -28,6 +28,8 @@ graph TD
     Session[Session 結束 / 使用者請求復盤] --> S6[Session 復盤 session-retro]
     Workspace[Workspace 廣域演化] --> Evolve[自演化 auto-evolving]
     Evolve --> MainFlow[單一主提案與 canonical workspace update]
+    Docs[docs/specs 與 plans 累積] --> S7[歷史整併 docs-consolidation]
+    S7 --> Summary[單一摘要表 + README 淘汰側記]
 ```
 
 ---
@@ -43,6 +45,7 @@ graph TD
 | 文件與程式碼同步 (Docs vs code sync) | `project-docs` | 涉及 README/CLAUDE.md、註解或文件編輯（協調代理只用 `audit` 唯讀模式） |
 | 專案正典文件建立 (Canonical doc bootstrap) | `project-docs` | `README.md` / `CLAUDE.md` 缺漏、接手陌生 codebase 或大型重構之後 |
 | 業務價值萃取 (Business extraction) | `project-docs` | 請求上下游、狀態流程、業務約束、風險或核心/非核心分析 |
+| 歷史文件整併 (Docs consolidation) | `docs-consolidation` | `docs/specs/` 或 `plans/` 累積過多，需壓縮成單一摘要表並清除已淘汰功能 |
 | 外部依賴管理 (Dependency management) | `system-planner` | 涉及依賴清單檔案（如 go.mod, package.json 等） |
 | 專案引導與學習 (Project onboarding) | `tutorial` | 請求建立步驟式教學、專案引導或概念學習文件時 |
 | 程式碼編寫原則 (Coding principles) | `system-planner` | 任何程式碼、重融或審查請求 |
@@ -63,6 +66,7 @@ graph TD
 └── skills/
     ├── auto-evolving/        # 廣域思考、單點設計、更新與知識整合 (Auto-Evolving Skill)
     ├── business-planner/     # 商業價值分析技能 (Business Value Skill)
+    ├── docs-consolidation/   # 歷史規格與計畫整併技能 (Docs Consolidation Skill)
     ├── naming-convention/    # 命名規範審查技能 (Naming Convention Skill)
     ├── project-docs/         # 正典文件建立、稽核與更新技能 (Canonical Docs Skill)
     ├── session-retro/        # Session 復盤技能 (Session Retro Skill)
@@ -104,3 +108,4 @@ npx skills add .
 - `audit consistency`
 - `evolve this workspace`
 - `think design update`
+- `consolidate docs` / `文件整併`
