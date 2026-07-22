@@ -33,8 +33,8 @@ effort: high
 
 - 跨多來源（repo、folder、GitHub、資料庫、文章、訊息）建立知識圖譜或服務關聯圖
 - 把散落的系統知識整理成可瀏覽、可回溯、可增量更新的拓撲文件庫
-- 不適用：單一 repo 技術文件（用 `project-explore`）、業務價值分析
-  （用 `business-extract`）、程式碼呼叫圖即時查詢（用 codegraph）
+- 不適用：單一 repo 技術文件與業務價值分析（皆用 `project-docs`）、
+  程式碼呼叫圖即時查詢（用 codegraph）
 
 ## Storage Layout
 

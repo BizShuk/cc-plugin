@@ -122,5 +122,5 @@ flowchart TD
   `kb-ingest-history/scripts/kb_history.py`（單檔、純 stdlib、零安裝）：
   確定性管道產出 `_raw/commits.jsonl` + `stats.json` + `_diffs/*.diff` +
   `CHANGELOG.md` 骨架，蒸餾批次順手回填週敘事 — 不依賴原技能的 pip 套件
-- `project-explore` / `business-extract` 仍負責單 repo 文件產出；
+- `review` 插件的 `project-docs` 仍負責單 repo 正典文件產出與業務萃取；
   本插件負責跨來源集中知識庫

@@ -2,7 +2,7 @@
 
 本插件提供程式碼審查、系統／商業規劃與 workspace 自演化工具，協助 `Claude Code` 等 AI 代理從多維度診斷問題、設計改善並在獲授權時完成更新。
 
-審查協調代理預設維持 `唯讀 (Read-only)`，專注於衛生、一致性與業務價值診斷，不涵蓋執行邏輯正確性與安全漏洞。只有直接呼叫 `auto-evolving` 且未指定 plan-only 時，才會進入 `THINK → DESIGN → UPDATE → VERIFY → CONSOLIDATE` 的可寫入流程；外部、破壞性或不可逆操作仍須另外批准。
+審查協調代理預設維持 `唯讀 (Read-only)`，專注於衛生、一致性與業務價值診斷，不涵蓋執行邏輯正確性與安全漏洞。兩個技能具備可寫入模式，且都必須由使用者明確要求才會啟用：`auto-evolving` 的 `THINK → DESIGN → UPDATE → VERIFY → CONSOLIDATE` 流程，以及 `project-docs` 的 `refresh` / `bootstrap` 模式（其 `audit` 模式為唯讀預設）。外部、破壞性或不可逆操作仍須另外批准。
 
 ---
 
@@ -17,7 +17,7 @@ graph TD
     Target[審查目標 Target: Diff/File/Folder] --> Coordinator[審查協調代理 review-coordinator]
     Coordinator --> S1[商業價值 business-planner]
     Coordinator --> S2[命名規範 naming-convention]
-    Coordinator --> S3[文件同步 doc-sync]
+    Coordinator --> S3[正典文件 project-docs]
     Coordinator --> S4[學習文件 tutorial]
     Coordinator --> S5[系統與品質 system-planner]
     S1 --> Report[彙整報告 Consolidated Report]
@@ -40,7 +40,9 @@ graph TD
 | 商業價值分析 (Business value analysis) | `business-planner` | 審查業務摩擦點與缺陷，或規劃新功能的商業變現模式 |
 | 目錄佈局調整 (Directory layout audit) | `system-planner` | 新增/移動檔案，或全專案審查時 |
 | 識別子命名品質 (Identifier naming quality) | `naming-convention` | 任何程式碼、設定鍵值或 API 端點變更 |
-| 文件與程式碼同步 (Docs vs code sync) | `doc-sync` | 涉及 README/CLAUDE.md、註解或文件編輯 |
+| 文件與程式碼同步 (Docs vs code sync) | `project-docs` | 涉及 README/CLAUDE.md、註解或文件編輯（協調代理只用 `audit` 唯讀模式） |
+| 專案正典文件建立 (Canonical doc bootstrap) | `project-docs` | `README.md` / `CLAUDE.md` 缺漏、接手陌生 codebase 或大型重構之後 |
+| 業務價值萃取 (Business extraction) | `project-docs` | 請求上下游、狀態流程、業務約束、風險或核心/非核心分析 |
 | 外部依賴管理 (Dependency management) | `system-planner` | 涉及依賴清單檔案（如 go.mod, package.json 等） |
 | 專案引導與學習 (Project onboarding) | `tutorial` | 請求建立步驟式教學、專案引導或概念學習文件時 |
 | 程式碼編寫原則 (Coding principles) | `system-planner` | 任何程式碼、重融或審查請求 |
@@ -61,10 +63,10 @@ graph TD
 └── skills/
     ├── auto-evolving/        # 廣域思考、單點設計、更新與知識整合 (Auto-Evolving Skill)
     ├── business-planner/     # 商業價值分析技能 (Business Value Skill)
-    ├── doc-sync/             # 文件同步審查技能 (Doc Sync Skill)
-    ├── tutorial/             # 教程建立技能 (Tutorial Skill)
     ├── naming-convention/    # 命名規範審查技能 (Naming Convention Skill)
+    ├── project-docs/         # 正典文件建立、稽核與更新技能 (Canonical Docs Skill)
     ├── session-retro/        # Session 復盤技能 (Session Retro Skill)
+    ├── tutorial/             # 教程建立技能 (Tutorial Skill)
     ├── system-planner/       # 系統架構規劃與品質審查技能 (System & Quality Skill)
 ```
 

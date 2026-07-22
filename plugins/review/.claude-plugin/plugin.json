@@ -11,7 +11,7 @@
     "review",
     "audit",
     "naming",
-    "doc-sync",
+    "project-docs",
     "tutorial",
     "system-planner",
     "business-planner",
@@ -19,11 +19,14 @@
     "auto-evolving",
     "workspace-evolution",
     "think-design-update",
-    "knowledge-consolidation"
+    "knowledge-consolidation",
+    "doc-drift",
+    "business-extract",
+    "project-explore"
   ],
   "license": "MIT",
   "name": "review",
   "repository": "https://github.com/bizshuk/cc-plugin",
   "skills": [],
-  "version": "1.1.0"
+  "version": "1.2.0"
 }

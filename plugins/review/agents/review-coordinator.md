@@ -12,7 +12,7 @@ description: >
 tools: Read, Bash, Grep, Glob, AskUserQuestion, TodoWrite
 model: inherit
 permissionMode: default
-skills: business-planner, doc-sync, tutorial, naming-convention, system-planner
+skills: business-planner, project-docs, tutorial, naming-convention, system-planner
 mcpServers:
 hooks:
 memory: local
@@ -78,13 +78,16 @@ something it can judge; skip the rest and record why.
 | Business value       | `business-planner`     | A feature, flow, or user-facing behavior                |
 | Directory layout     | `system-planner`       | New/moved files or whole-repo scope                     |
 | Identifier quality   | `naming-convention`    | Any code, config keys, or endpoints                     |
-| Docs vs code         | `doc-sync`             | README/CLAUDE.md, comments, or doc edits                |
+| Docs vs code         | `project-docs`         | README/CLAUDE.md, comments, or doc edits                |
 | Dependencies         | `system-planner`       | go.mod, package.json, requirements, locks               |
 | Project onboarding   | `tutorial`             | Step-by-step tutorials, onboarding, or concept docs     |
 
 Routing rules:
 
-- A pure-docs target runs `doc-sync` (+ `system-planner`); skip the code dimensions.
+- A pure-docs target runs `project-docs` (+ `system-planner`); skip the code dimensions.
+- `project-docs` runs in `audit` mode only. This agent is read-only, so never let
+  it escalate to `refresh` or `bootstrap`; report the drift and offer the update
+  as a next step instead.
 - A dependency-manifest-only change runs `system-planner`.
 - Whole-repo scope runs every dimension.
 - `system-planner` runs in every review; it is the backbone that the others feed.
@@ -151,7 +154,7 @@ Ran: consistency, naming-convention, folder-structure · Skipped: dependency-hyg
           ↳ also naming-convention: same concept named "tenant" vs "account"
 [major]   folder-structure  cmd/distill.go:— loose file at cmd/ root
 [minor]   folder-structure cmd/helpers.go → cmd/util/ (loose file)
-[ok]      doc-sync — CLAUDE.md tree matches disk
+[ok]      project-docs — CLAUDE.md tree matches disk
 
 Top fix (value/effort): unify rule X across a.go/b.go, then rename to one term.
 ```
@@ -175,7 +178,7 @@ genuinely matters; a short ranked report beats an exhaustive one.
 
 ## Part 7 — Related
 
-- Skills coordinated: `[[business-planner]]`, `[[doc-sync]]`,
+- Skills coordinated: `[[business-planner]]`, `[[project-docs]]`,
   `[[tutorial]]`, `[[naming-convention]]`, `[[system-planner]]`
 - `auto-evolving` is a separate opt-in writable workflow and must not run as a
   review dimension. `session-retro` runs only for explicit retrospective requests.

@@ -30,7 +30,7 @@
 │   └── usage/                # 使用統計工具設定
 ├── plugins/                  # 8 個本地 Claude Code plugins
 │   ├── experiment/           # 候選技能沙盒
-│   ├── explore/              # 摘要、轉檔、專案探索與路由；含 plugin-scoped MCP
+│   ├── explore/              # 摘要、轉檔與專案路由；含 plugin-scoped MCP
 │   ├── general/              # 通用技能、feature agent、hooks、output styles、Marksman LSP
 │   ├── god/                  # 系統大一統理論與通用算子
 │   ├── review/               # 審查、規劃、自演化與 review-coordinator

@@ -1,6 +1,8 @@
 # 探索插件 (Explore Plugin)
 
-`explore` 插件正式註冊 4 個技能：內容摘要、Markdown 轉換、專案探索與跨專案路由。另保留抓取工具的 benchmark 與外部 submodule，作為評估資料，不列入 manifest。
+`explore` 插件正式註冊 3 個技能：內容摘要、Markdown 轉換與跨專案路由。另保留抓取工具的 benchmark 與外部 submodule，作為評估資料，不列入 manifest。
+
+單一 repo 的正典文件產出與業務萃取已移出本插件，改由 `review` 插件的 `project-docs` 負責（`plugins/review/skills/project-docs`）。
 
 ## 技能清單 (Skills)
 
@@ -10,7 +12,6 @@
 | -------------------- | ----------------------------- | ----------------------------- |
 | `content-summarizer` | workflow（底層 `markitdown`） | `./skills/content-summarizer` |
 | `markitdown` | `markitdown` Python CLI | `./skills/markitdown` |
-| `project-explore` | Workspace 全掃描與業務萃取 | `./skills/project-explore` |
 | `project-route` | 將任意檔案映射到所屬專案 | `./skills/project-route` |
 
 後續比較表中的 `firecrawl`、`playwright-cli`、`scrapling` 與 `summarize.sh` 是評估標的；對應候選 skill 位於 `experiment` 插件，未由 `explore` manifest 載入。

@@ -48,7 +48,7 @@ grep -rl '"skill": "kb-ingest-repo"' <kb>/_state/runs/*/manifest.json 2>/dev/nul
 
 ## Step 2 — 掃描與分批 (Plan)
 
-1. 列出高訊號檔案（沿用 `project-explore` 排除清單：`.git`, `node_modules`,
+1. 列出高訊號檔案（沿用 `project-docs` 排除清單：`.git`, `node_modules`,
    `vendor`, `dist`, `gen/`, 測試檔）：
 
     ```bash
