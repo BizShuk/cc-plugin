@@ -8,6 +8,8 @@
 | `apple-email` | `email` | Apple Mail 郵件讀寫與整理 |
 | `apple-notes` | `notes` | Apple Notes 筆記與資料夾管理 |
 | `apple-reminders` | `remindctl` | 提醒事項與清單管理 |
+| `iphone-deploy` | `xcodegen` / `xcodebuild` / `devicectl` | iPhone 實機一鍵 build/install/launch |
+| `iphone-mac-permission` | `xcodegen` / `plutil` / `rg` | iPhone Sync iOS 與 macOS 權限稽核 |
 
 ## 安裝與使用 (Installation and Usage)
 
