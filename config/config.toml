@@ -15,17 +15,9 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/cc-plugin"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/playground/pkg/game_engine"]
-trust_level = "trusted"
-
 [projects."/Users/shuk/projects/tally"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/tmp/gosdk"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/tmp/skills"]
-trust_level = "trusted"
 
 [projects."/Users/shuk/projects/env_setup"]
 trust_level = "trusted"
@@ -33,11 +25,6 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/yfin"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/tmp/superset"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/tmp/dux"]
-trust_level = "trusted"
 
 [projects."/Users/shuk/projects/data"]
 trust_level = "trusted"
@@ -45,32 +32,19 @@ trust_level = "trusted"
 [projects."/Users/shuk"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/tmp/grok-build"]
-trust_level = "trusted"
 
-[projects."/Users/shuk/projects/playground/pkg/surfboard"]
-trust_level = "trusted"
 
 [projects."/Users/shuk/projects/conversation_agent"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/tmp/map_generator"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/playground/pkg/3DSimulator-Singapore"]
-trust_level = "trusted"
 
 [projects."/Users/shuk/projects/collections"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/playground/pkg/lineage"]
-trust_level = "trusted"
 
 [projects."/Users/shuk/projects/product"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/tmp/port_listenor"]
-trust_level = "trusted"
 
 [projects."/Users/shuk/projects/ai/proxy"]
 trust_level = "trusted"
@@ -97,6 +71,10 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/shuk/projects/tools/voiceon"]
+[projects."/Users/shuk/projects/game/map_generator"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/game/3DSimulator-Singapore"]
 trust_level = "trusted"
 
 [tui]
@@ -168,7 +146,7 @@ cancel = []
 "gpt-5.6-sol" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-07-20T07:55:00Z"
+last_updated = "2026-07-22T01:18:20Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
@@ -231,7 +209,7 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_n
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/shuk/.codex"
 CODEX_HOME = "/Users/shuk/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "583bf903a6cfb9b00a01e1583381ce921c71d7585085c6fa6b805baa0f60230b,6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,7182a69deb1cf34d457c66e124d0df74d480677b1136fc255b1a52074a5b4b6d"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
@@ -272,7 +250,7 @@ exclude_tmpdir_env_var = false
 
 [shell_environment_policy.set]
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "583bf903a6cfb9b00a01e1583381ce921c71d7585085c6fa6b805baa0f60230b,6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,7182a69deb1cf34d457c66e124d0df74d480677b1136fc255b1a52074a5b4b6d"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/shuk/.codex"
 
 [notice]
