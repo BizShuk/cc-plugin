@@ -1,10 +1,12 @@
 model = "gpt-5.6-sol"
 model_reasoning_effort = "max"
+model_context_window = 272000
+model_auto_compact_token_limit = 240000
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 service_tier = "default"
-approvals_reviewer = "user"
+approvals_reviewer = "auto_review"
 
 [projects."/Users/shuk/projects/msgHub"]
 trust_level = "trusted"
@@ -77,6 +79,45 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/game/3DSimulator-Singapore"]
 trust_level = "trusted"
 
+[projects."/Users/shuk/projects/iphone"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/port"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/pm2"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/dux"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/platform"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/platform/superset"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/research"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/game/3DSimulator-Singapore"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/game/game-architect"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/ai/sessiond"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/video-utils"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/web"]
+trust_level = "trusted"
+
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "approval-mode", "weekly-limit", "task-progress"]
 status_line_use_colors = true
@@ -146,7 +187,7 @@ cancel = []
 "gpt-5.6-sol" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-07-22T01:18:20Z"
+last_updated = "2026-07-22T02:24:51Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
@@ -182,10 +223,10 @@ enabled = true
 [plugins."template-creator@openai-primary-runtime"]
 enabled = true
 
-[plugins."browser@openai-bundled"]
+[plugins."chrome@openai-bundled"]
 enabled = true
 
-[plugins."chrome@openai-bundled"]
+[plugins."browser@openai-bundled"]
 enabled = true
 
 [features]
@@ -215,7 +256,7 @@ NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunc
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.715.61943"
+BROWSER_USE_CODEX_APP_VERSION = "26.715.70719"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [desktop]
@@ -255,6 +296,14 @@ NODE_REPL_TRUSTED_CODE_PATHS = "/Users/shuk/.codex"
 
 [notice]
 hide_full_access_warning = true
+
+[hooks.state]
+
+[hooks.state."/Users/shuk/projects/platform/superset/.codex/config.toml:subagent_stop:0:0"]
+trusted_hash = "sha256:53c4c6b023795316ef58f56e1be97a9e0bb0fb56b2690f4da157f333d701f580"
+
+[hooks.state."/Users/shuk/projects/platform/superset/.codex/config.toml:stop:0:0"]
+trusted_hash = "sha256:8469291b414daeba44b054a98ce138eb60c4cc0c1cc8d315c9c77686040c923c"
 
 
 [features.multi_agent_v2]

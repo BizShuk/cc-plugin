@@ -23,7 +23,7 @@
     "ANTHROPIC_DEFAULT_HAIKU_MODEL_DESCRIPTION": "gpt-5.6-luna",
     "ANTHROPIC_DEFAULT_HAIKU_MODEL_SUPPORTED_CAPABILITIES": "effort,xhigh_effort,max_effort,thinking,adaptive_thinking,interleaved_thinking",
     "_____agent": "_____",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "gpt-5.6-luna",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "gpt-5.6-sol",
     "_____extra": "_____",
     "CLAUDE_CODE_ALWAYS_ENABLE_EFFORT": "1",
     "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
