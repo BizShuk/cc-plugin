@@ -60,6 +60,6 @@
     {
       "name": "ultra-explore",
       "source": "./plugins/ultra-explore"
-    },
+    }
   ]
 }
