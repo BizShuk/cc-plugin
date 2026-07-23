@@ -79,43 +79,6 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/game/3DSimulator-Singapore"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/iphone"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/tools/port"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/tools/pm2"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/tools/dux"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/platform"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/platform/superset"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/research"]
-trust_level = "trusted"
-
-
-[projects."/Users/shuk/projects/game/game-architect"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/ai/sessiond"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/tools"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/tools/video-utils"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/web"]
-trust_level = "trusted"
-
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "approval-mode", "weekly-limit", "task-progress"]
 status_line_use_colors = true
@@ -185,7 +148,7 @@ cancel = []
 "gpt-5.6-sol" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-07-22T02:24:51Z"
+last_updated = "2026-07-22T01:18:20Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
@@ -248,13 +211,13 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_n
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/shuk/.codex"
 CODEX_HOME = "/Users/shuk/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,7182a69deb1cf34d457c66e124d0df74d480677b1136fc255b1a52074a5b4b6d"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,d0b55a8f9e8e7e9c88421416ea4ce9542c302abf43aa7fc871be4553ea70dd26"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.715.70719"
+BROWSER_USE_CODEX_APP_VERSION = "26.715.61943"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [desktop]
@@ -289,7 +252,7 @@ exclude_tmpdir_env_var = false
 
 [shell_environment_policy.set]
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,7182a69deb1cf34d457c66e124d0df74d480677b1136fc255b1a52074a5b4b6d"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,d0b55a8f9e8e7e9c88421416ea4ce9542c302abf43aa7fc871be4553ea70dd26"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/shuk/.codex"
 
 [notice]

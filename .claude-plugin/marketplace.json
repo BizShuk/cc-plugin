@@ -25,13 +25,6 @@
       "source": "./plugins/general"
     },
     {
-      "name": "awesome-claude-code-subagents",
-      "source": {
-        "source": "github",
-        "repo": "VoltAgent/awesome-claude-code-subagents"
-      }
-    },
-    {
       "name": "experiment",
       "source": "./plugins/experiment"
     },
@@ -54,13 +47,6 @@
       "source": "./plugins/review"
     },
     {
-      "name": "superpowers",
-      "source": {
-        "source": "github",
-        "repo": "obra/superpowers"
-      }
-    },
-    {
       "name": "ip-incubation",
       "source": {
         "source": "github",
@@ -75,26 +61,5 @@
       "name": "ultra-explore",
       "source": "./plugins/ultra-explore"
     },
-    {
-      "name": "understand-anything",
-      "source": {
-        "source": "github",
-        "repo": "Egonex-AI/Understand-Anything"
-      }
-    },
-    {
-      "name": "last30days",
-      "source": {
-        "source": "github",
-        "repo": "mvanhorn/last30days-skill"
-      }
-    },
-    {
-      "name": "ui-ux-pro-max-skill",
-      "source": {
-        "source": "github",
-        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
-      }
-    }
   ]
 }
