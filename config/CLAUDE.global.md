@@ -35,6 +35,7 @@
 
 - 見到 `# [context_only]` 時，忽略該行至行尾的輸出
 - 遇到執行錯誤時，先嘗試修復，最多重試 5 次；若仍無法解決則明確報錯並停止
+- git worktree branch should be name with `w-<feature>` or `agent-<feature>`
 
 ### 慣例 (Convention)
 
@@ -57,11 +58,11 @@
 └── .project_index/         # 全工作區註冊表 (projects.json + INDEX.md)
 ```
 
-| 型態                 | 判定 (Detection)                                                        | 現況 (Current)                             |
-| -------------------- | ----------------------------------------------------------------------- | ------------------------------------------ |
-| `分類 (Category)`    | 無自身 `README.md`／`CLAUDE.md`，且直屬子目錄有 `2 個以上`專案；或人工列入 | `ai/`, `game/`, `platform/`, `tools/`      |
-| `專案 (Project)`     | 具備統一介面（至少 `README.md` 或 `CLAUDE.md` 或 `.git`）                | `cc-plugin/`, `data/`, `product/` ...      |
-| `子專案 (Subproject)` | 專案內部的可部署單元或子 repo，不獨立列為專案                            | `data/stock`, `product/surf_analysis` ...  |
+| 型態                  | 判定 (Detection)                                                           | 現況 (Current)                            |
+| --------------------- | -------------------------------------------------------------------------- | ----------------------------------------- |
+| `分類 (Category)`     | 無自身 `README.md`／`CLAUDE.md`，且直屬子目錄有 `2 個以上`專案；或人工列入 | `ai/`, `game/`, `platform/`, `tools/`     |
+| `專案 (Project)`      | 具備統一介面（至少 `README.md` 或 `CLAUDE.md` 或 `.git`）                  | `cc-plugin/`, `data/`, `product/` ...     |
+| `子專案 (Subproject)` | 專案內部的可部署單元或子 repo，不獨立列為專案                              | `data/stock`, `product/surf_analysis` ... |
 
 規則：
 
@@ -75,12 +76,12 @@
 
 所有 repo 依職責分四層，依賴方向只能由上往下，禁止反向或跨層循環：
 
-| 層 (Tier)             | 職責                             | 代表專案                                                                       |
-| --------------------- | -------------------------------- | ------------------------------------------------------------------------------ |
-| 匯集層 (Aggregation)  | 產品研究容器 + 各專案產出報告    | `product/`                                                                     |
-| 應用層 (Application)  | 面向使用情境的獨立應用           | `data/`, `collections/`, `playground/`, `ai/*`, `game/*`                       |
-| 框架層 (Framework)    | 服務多個專案的共用能力           | `platform/gosdk`, `platform/inf`, `platform/superset`, `cc-plugin/`, `env_setup/` |
-| 工具層 (Tool)         | 獨立 CLI，以 binary 形式被呼叫   | `tools/*`（`dux`, `pm2`, `port`, `video-utils` ...）                           |
+| 層 (Tier)            | 職責                           | 代表專案                                                                          |
+| -------------------- | ------------------------------ | --------------------------------------------------------------------------------- |
+| 匯集層 (Aggregation) | 產品研究容器 + 各專案產出報告  | `product/`                                                                        |
+| 應用層 (Application) | 面向使用情境的獨立應用         | `data/`, `collections/`, `playground/`, `ai/*`, `game/*`                          |
+| 框架層 (Framework)   | 服務多個專案的共用能力         | `platform/gosdk`, `platform/inf`, `platform/superset`, `cc-plugin/`, `env_setup/` |
+| 工具層 (Tool)        | 獨立 CLI，以 binary 形式被呼叫 | `tools/*`（`dux`, `pm2`, `port`, `video-utils` ...）                              |
 
 ```mermaid
 flowchart TD
