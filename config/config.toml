@@ -1,5 +1,5 @@
-model = "gpt-5.6-sol"
-model_reasoning_effort = "max"
+model = "gpt-5.4-mini"
+model_reasoning_effort = "xhigh"
 model_context_window = 272000
 model_auto_compact_token_limit = 240000
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
@@ -103,6 +103,15 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/shuk/projects/game"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/social"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/ai/msgHub"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/iphone"]
 trust_level = "trusted"
 
 [tui]
@@ -283,6 +292,7 @@ NODE_REPL_TRUSTED_CODE_PATHS = "/Users/shuk/.codex"
 
 [notice]
 hide_full_access_warning = true
+hide_rate_limit_model_nudge = true
 
 [hooks.state]
 
