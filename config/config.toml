@@ -1,5 +1,5 @@
-model = "gpt-5.6-luna"
-model_reasoning_effort = "xhigh"
+model = "gpt-5.6-sol"
+model_reasoning_effort = "max"
 model_context_window = 272000
 model_auto_compact_token_limit = 240000
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
@@ -126,6 +126,12 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/shuk/projects/product/ip-incubation"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/vscoed-plugin"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/tools/autop"]
 trust_level = "trusted"
 
 [tui]
