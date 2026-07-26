@@ -16,31 +16,29 @@ import (
 	"github.com/spf13/viper"
 )
 
-func ExtractCmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "extract",
-		Short: "Directly extract memories from JSON observations on stdin using Ollama",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			var observations []model.Observation
-			if err := json.NewDecoder(os.Stdin).Decode(&observations); err != nil {
-				return fmt.Errorf("failed to parse observations from stdin: %w", err)
-			}
+// ExtractCmd extracts memories from JSON observations on stdin using Ollama.
+var ExtractCmd = &cobra.Command{
+	Use:   "extract",
+	Short: "Directly extract memories from JSON observations on stdin using Ollama",
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		var observations []model.Observation
+		if err := json.NewDecoder(os.Stdin).Decode(&observations); err != nil {
+			return fmt.Errorf("failed to parse observations from stdin: %w", err)
+		}
 
-			svc := NewOllamaService()
-			candidates, err := svc.Extract(cmd.Context(), observations)
-			if err != nil {
-				return err
-			}
+		svc := NewOllamaService()
+		candidates, err := svc.Extract(cmd.Context(), observations)
+		if err != nil {
+			return err
+		}
 
-			output, err := json.MarshalIndent(candidates, "", "  ")
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(output))
-			return nil
-		},
-	}
-	return cmd
+		output, err := json.MarshalIndent(candidates, "", "  ")
+		if err != nil {
+			return err
+		}
+		fmt.Println(string(output))
+		return nil
+	},
 }
 
 type OllamaService struct {

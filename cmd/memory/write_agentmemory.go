@@ -43,43 +43,42 @@ func writeAgentMemoryLogic(memories []model.Memory, url string) error {
 	return nil
 }
 
-func WriteAgentMemoryCmd() *cobra.Command {
-	var url string
+var agentMemoryURL string
 
-	cmd := &cobra.Command{
-		Use:   "write-agentmemory",
-		Short: "Post distilled memories from stdin into agentmemory API",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			url = viper.GetString("stores.agentmemory.url")
+// WriteAgentMemoryCmd writes distilled memories to the agentmemory API.
+var WriteAgentMemoryCmd = &cobra.Command{
+	Use:   "write-agentmemory",
+	Short: "Post distilled memories from stdin into agentmemory API",
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		agentMemoryURL = viper.GetString("stores.agentmemory.url")
 
-			decoder := json.NewDecoder(os.Stdin)
-			var memories []model.Memory
+		decoder := json.NewDecoder(os.Stdin)
+		var memories []model.Memory
 
-			// Read stdin as a JSON array or single object
-			var raw json.RawMessage
-			if err := decoder.Decode(&raw); err != nil {
-				return fmt.Errorf("failed to decode stdin JSON: %w", err)
+		// Read stdin as a JSON array or single object
+		var raw json.RawMessage
+		if err := decoder.Decode(&raw); err != nil {
+			return fmt.Errorf("failed to decode stdin JSON: %w", err)
+		}
+
+		// Try array first
+		if err := json.Unmarshal(raw, &memories); err != nil {
+			var single model.Memory
+			if err2 := json.Unmarshal(raw, &single); err2 != nil {
+				return fmt.Errorf("stdin must be a JSON array of Memory or a single Memory object")
 			}
+			memories = append(memories, single)
+		}
 
-			// Try array first
-			if err := json.Unmarshal(raw, &memories); err != nil {
-				var single model.Memory
-				if err2 := json.Unmarshal(raw, &single); err2 != nil {
-					return fmt.Errorf("stdin must be a JSON array of Memory or a single Memory object")
-				}
-				memories = append(memories, single)
-			}
+		if err := writeAgentMemoryLogic(memories, agentMemoryURL); err != nil {
+			return err
+		}
 
-			if err := writeAgentMemoryLogic(memories, url); err != nil {
-				return err
-			}
+		fmt.Printf("Successfully wrote %d memories into agentmemory.\n", len(memories))
+		return nil
+	},
+}
 
-			fmt.Printf("Successfully wrote %d memories into agentmemory.\n", len(memories))
-			return nil
-		},
-	}
-
-	cmd.Flags().StringVar(&url, "url", "", "agentmemory API remember endpoint")
-
-	return cmd
+func init() {
+	WriteAgentMemoryCmd.Flags().StringVar(&agentMemoryURL, "url", "", "agentmemory API remember endpoint")
 }

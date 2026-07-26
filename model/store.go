@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mitchellh/go-homedir"
+	gosdkconfig "github.com/bizshuk/gosdk/config"
 	"github.com/spf13/viper"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -26,10 +26,7 @@ type StateStore struct {
 
 func NewStateStore() (*StateStore, error) {
 	dbPath := viper.GetString("state.db_path")
-	path, err := homedir.Expand(dbPath)
-	if err != nil {
-		path = dbPath
-	}
+	path := gosdkconfig.ExpandHome(dbPath)
 	dir := filepath.Dir(path)
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return nil, fmt.Errorf("failed to create state directory: %w", err)
@@ -214,13 +211,4 @@ func Fingerprint(text string, entities []string) string {
 	h.Write([]byte("|"))
 	h.Write([]byte(strings.Join(sortedEntities, "|")))
 	return hex.EncodeToString(h.Sum(nil))
-}
-
-// ExpandPath expands ~ to home directory.
-func ExpandPath(p string) string {
-	expanded, err := homedir.Expand(p)
-	if err != nil {
-		return p
-	}
-	return expanded
 }

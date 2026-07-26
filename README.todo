@@ -2,8 +2,6 @@
 
 - [ ] Review plugin consolidation
 
-## 產品與 Agent (Product and Agents)
-
 ## Archive
 
 - [x] [Viper 預設值單一來源](docs/specs/2026-07-02-architecture-config-externalization.md)

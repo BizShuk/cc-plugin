@@ -9,61 +9,59 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// BacklinksCmd returns the backlink regeneration command.
-func BacklinksCmd() *cobra.Command {
-	var write bool
-	cmd := &cobra.Command{
-		Use:   "backlinks",
-		Short: "Recompute Backlinks sections from forward edges",
-		Args:  cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, _ []string) error {
-			topo, err := loadFromFlags(cmd)
-			if err != nil {
-				return err
-			}
-			return rewriteBacklinks(cmd, topo, write)
-		},
-	}
-	cmd.Flags().BoolVar(&write, "write", false, "write changes to entity files")
-	return cmd
+var (
+	backlinksWrite bool
+	indexWrite     bool
+)
+
+// BacklinksCmd recomputes Backlinks sections from forward edges.
+var BacklinksCmd = &cobra.Command{
+	Use:   "backlinks",
+	Short: "Recompute Backlinks sections from forward edges",
+	Args:  cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		topo, err := loadFromFlags(cmd)
+		if err != nil {
+			return err
+		}
+		return rewriteBacklinks(cmd, topo, backlinksWrite)
+	},
 }
 
-// IndexCmd returns the topology-index regeneration command.
-func IndexCmd() *cobra.Command {
-	var write bool
-	cmd := &cobra.Command{
-		Use:   "index",
-		Short: "Regenerate _index.md while preserving Frontier",
-		Args:  cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, _ []string) error {
-			topo, err := loadFromFlags(cmd)
-			if err != nil {
-				return err
-			}
-			return rewriteIndex(cmd, topo, write)
-		},
-	}
-	cmd.Flags().BoolVar(&write, "write", false, "write changes to _index.md")
-	return cmd
+// IndexCmd regenerates the topology index while preserving Frontier.
+var IndexCmd = &cobra.Command{
+	Use:   "index",
+	Short: "Regenerate _index.md while preserving Frontier",
+	Args:  cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		topo, err := loadFromFlags(cmd)
+		if err != nil {
+			return err
+		}
+		return rewriteIndex(cmd, topo, indexWrite)
+	},
 }
 
-// RewriteCmd returns the combined backlink and index rewrite command.
-func RewriteCmd() *cobra.Command {
-	return &cobra.Command{
-		Use:   "rewrite",
-		Short: "Rewrite backlinks and _index.md",
-		Args:  cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, _ []string) error {
-			topo, err := loadFromFlags(cmd)
-			if err != nil {
-				return err
-			}
-			if err := rewriteBacklinks(cmd, topo, true); err != nil {
-				return err
-			}
-			return rewriteIndex(cmd, topo, true)
-		},
-	}
+// RewriteCmd rewrites both backlinks and _index.md.
+var RewriteCmd = &cobra.Command{
+	Use:   "rewrite",
+	Short: "Rewrite backlinks and _index.md",
+	Args:  cobra.NoArgs,
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		topo, err := loadFromFlags(cmd)
+		if err != nil {
+			return err
+		}
+		if err := rewriteBacklinks(cmd, topo, true); err != nil {
+			return err
+		}
+		return rewriteIndex(cmd, topo, true)
+	},
+}
+
+func init() {
+	BacklinksCmd.Flags().BoolVar(&backlinksWrite, "write", false, "write changes to entity files")
+	IndexCmd.Flags().BoolVar(&indexWrite, "write", false, "write changes to _index.md")
 }
 
 func rewriteBacklinks(cmd *cobra.Command, topo *topologypkg.Topology, write bool) error {

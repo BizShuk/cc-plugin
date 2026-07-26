@@ -4,13 +4,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ExportCmd returns the top-level export Cobra command.
-func ExportCmd() *cobra.Command {
-	exportCmd := &cobra.Command{
-		Use:   "export",
-		Short: "Export data from various sources",
-	}
+// ExportCmd exports data from the configured source commands.
+var ExportCmd = &cobra.Command{
+	Use:   "export",
+	Short: "Export data from various sources",
+}
 
-	exportCmd.AddCommand(ClaudeMemCmd())
-	return exportCmd
+func init() {
+	ExportCmd.AddCommand(ClaudeMemCmd)
 }

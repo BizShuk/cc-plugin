@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/bizshuk/cc-plugin/model"
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -91,9 +92,9 @@ func executeClaudeMemCommand(t *testing.T, args ...string) ([]model.Observation,
 	t.Helper()
 
 	var output bytes.Buffer
-	cmd := ClaudeMemCmd()
+	cmd := resetClaudeMemCommand()
 	cmd.SetOut(&output)
-	cmd.SetArgs(args)
+	cmd.SetArgs(append([]string{"claudemem"}, args...))
 	cmd.SilenceErrors = true
 	err := cmd.Execute()
 	if err != nil {
@@ -112,7 +113,7 @@ func TestClaudeMemCmdDoesNotAdvanceCursorWhenOutputFails(t *testing.T) {
 	sourceDB := createClaudeMemSource(t, sourcePath)
 	seedClaudeMemObservation(t, sourceDB, 1, 100, "memory")
 
-	cmd := ClaudeMemCmd()
+	cmd := resetClaudeMemCommand()
 	cmd.SetOut(failingWriter{})
 	cmd.SilenceErrors = true
 
@@ -183,8 +184,8 @@ func TestClaudeMemCmdReturnsCursorReadError(t *testing.T) {
 	sourceDB := createClaudeMemSource(t, sourcePath)
 	seedClaudeMemObservation(t, sourceDB, 1, 100, "memory")
 
-	cmd := ClaudeMemCmd()
-	cmd.SetArgs([]string{"--all"})
+	cmd := resetClaudeMemCommand()
+	cmd.SetArgs([]string{"claudemem", "--all"})
 	cmd.SilenceErrors = true
 	droppedCursorTable := false
 	cmd.SetOut(writerFunc(func(p []byte) (int, error) {
@@ -223,7 +224,7 @@ func TestClaudeMemCmdWritesEmptyJSONAsArray(t *testing.T) {
 	createClaudeMemSource(t, sourcePath)
 
 	var output bytes.Buffer
-	cmd := ClaudeMemCmd()
+	cmd := resetClaudeMemCommand()
 	cmd.SetOut(&output)
 	if err := cmd.Execute(); err != nil {
 		t.Fatalf("execute export: %v", err)
@@ -231,4 +232,13 @@ func TestClaudeMemCmdWritesEmptyJSONAsArray(t *testing.T) {
 	if output.String() != "[]\n" {
 		t.Fatalf("expected empty JSON array, got %q", output.String())
 	}
+}
+
+func resetClaudeMemCommand() *cobra.Command {
+	claudeMemAllFlag = false
+	ClaudeMemCmd.Flags().Lookup("all").Changed = false
+	ExportCmd.SetArgs([]string{"claudemem"})
+	ExportCmd.SilenceErrors = true
+	ExportCmd.SilenceUsage = true
+	return ExportCmd
 }

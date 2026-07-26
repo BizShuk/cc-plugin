@@ -9,22 +9,22 @@ import (
 
 const defaultRoot = "plugins/ultra-explore/skills/topology-builder/references"
 
-// TopologyCmd returns the top-level topology command.
-func TopologyCmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "topology",
-		Short: "Operate on topology-builder knowledge graphs",
-	}
-	cmd.PersistentFlags().String("root", defaultRoot, "topology root directory")
-	cmd.AddCommand(
-		VerifyCmd(),
-		UnlinkedCmd(),
-		QueryCmd(),
-		BacklinksCmd(),
-		IndexCmd(),
-		RewriteCmd(),
+// TopologyCmd operates on topology-builder knowledge graphs.
+var TopologyCmd = &cobra.Command{
+	Use:   "topology",
+	Short: "Operate on topology-builder knowledge graphs",
+}
+
+func init() {
+	TopologyCmd.PersistentFlags().String("root", defaultRoot, "topology root directory")
+	TopologyCmd.AddCommand(
+		VerifyCmd,
+		UnlinkedCmd,
+		QueryCmd,
+		BacklinksCmd,
+		IndexCmd,
+		RewriteCmd,
 	)
-	return cmd
 }
 
 func loadFromFlags(cmd *cobra.Command) (*topologypkg.Topology, error) {

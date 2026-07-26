@@ -1,4 +1,4 @@
-model = "gpt-5.6-sol"
+model = "gpt-5.6-luna"
 model_reasoning_effort = "xhigh"
 model_context_window = 272000
 model_auto_compact_token_limit = 240000
@@ -272,7 +272,7 @@ BROWSER_USE_CODEX_APP_VERSION = "26.721.41059"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [desktop]
-conversationDetailMode = "STEPS_COMMANDS"
+conversationDetailMode = "STEPS_PROSE"
 ambient-suggestions-enabled = true
 followUpQueueMode = "steer"
 selected-avatar-id = "rocky"

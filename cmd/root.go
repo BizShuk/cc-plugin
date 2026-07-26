@@ -19,8 +19,8 @@ var RootCmd = &cobra.Command{
 func init() {
 	config.Init()
 
-	RootCmd.AddCommand(export.ExportCmd())
-	RootCmd.AddCommand(topology.TopologyCmd())
+	RootCmd.AddCommand(export.ExportCmd)
+	RootCmd.AddCommand(topology.TopologyCmd)
 }
 
 func Execute() {

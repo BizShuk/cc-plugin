@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/bizshuk/cc-plugin/model"
+	gosdkconfig "github.com/bizshuk/gosdk/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"gorm.io/driver/sqlite"
@@ -30,7 +31,7 @@ func claudeMemRead(s *model.StateStore, fromCursor bool) ([]model.Observation, m
 		}
 	}
 
-	dbPath := model.ExpandPath(viper.GetString("sources.claude_mem.db_path"))
+	dbPath := gosdkconfig.ExpandHome(viper.GetString("sources.claude_mem.db_path"))
 	dbURL := (&url.URL{Scheme: "file", Path: dbPath, RawQuery: "mode=ro"}).String()
 	cmDB, err := gorm.Open(sqlite.Open(dbURL), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
@@ -76,49 +77,52 @@ func claudeMemRead(s *model.StateStore, fromCursor bool) ([]model.Observation, m
 	return observations, maxPosition, nil
 }
 
-// ClaudeMemCmd returns the claude-mem export subcommand.
-func ClaudeMemCmd() *cobra.Command {
-	var allFlag bool
+var claudeMemAllFlag bool
 
-	cmd := &cobra.Command{
-		Use:   "claudemem",
-		Short: "Export observations from claude-mem SQLite DB",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			s, err := model.NewStateStore()
+// ClaudeMemCmd exports observations from the claude-mem SQLite database.
+var ClaudeMemCmd = &cobra.Command{
+	Use:   "claudemem",
+	Short: "Export observations from claude-mem SQLite DB",
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		s, err := model.NewStateStore()
+		if err != nil {
+			return err
+		}
+		defer s.Close()
+
+		observations, maxPosition, err := claudeMemRead(s, !claudeMemAllFlag)
+		if err != nil {
+			return err
+		}
+
+		encoder := json.NewEncoder(cmd.OutOrStdout())
+		encoder.SetIndent("", "  ")
+		if err := encoder.Encode(observations); err != nil {
+			return fmt.Errorf("write claude-mem export: %w", err)
+		}
+
+		// Update cursor only after export/write finished
+		if maxPosition.LastID > 0 {
+			lastPosition, err := s.GetCursorPosition(claudeMemExportCursorSource)
 			if err != nil {
-				return err
+				return fmt.Errorf("get claude-mem export cursor: %w", err)
 			}
-			defer s.Close()
-
-			observations, maxPosition, err := claudeMemRead(s, !allFlag)
-			if err != nil {
-				return err
-			}
-
-			encoder := json.NewEncoder(cmd.OutOrStdout())
-			encoder.SetIndent("", "  ")
-			if err := encoder.Encode(observations); err != nil {
-				return fmt.Errorf("write claude-mem export: %w", err)
-			}
-
-			// Update cursor only after export/write finished
-			if maxPosition.LastID > 0 {
-				lastPosition, err := s.GetCursorPosition(claudeMemExportCursorSource)
-				if err != nil {
-					return fmt.Errorf("get claude-mem export cursor: %w", err)
-				}
-				if maxPosition.LastID > lastPosition.LastID {
-					if err := s.SetCursorPosition(claudeMemExportCursorSource, maxPosition); err != nil {
-						return fmt.Errorf("set claude-mem export cursor: %w", err)
-					}
+			if maxPosition.LastID > lastPosition.LastID {
+				if err := s.SetCursorPosition(claudeMemExportCursorSource, maxPosition); err != nil {
+					return fmt.Errorf("set claude-mem export cursor: %w", err)
 				}
 			}
+		}
 
-			return nil
-		},
-	}
+		return nil
+	},
+}
 
-	cmd.Flags().BoolVar(&allFlag, "all", false, "Export all records from epoch 0 instead of from cursor")
-
-	return cmd
+func init() {
+	ClaudeMemCmd.Flags().BoolVar(
+		&claudeMemAllFlag,
+		"all",
+		false,
+		"Export all records from epoch 0 instead of from cursor",
+	)
 }

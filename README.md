@@ -17,7 +17,7 @@
 
 `核心實體 (Key Entities):` `Observation`, `Candidate`, `Memory`, `Fact`, `Cursor`, `Seen`, `Distilled`
 
-`相關處理器 (Related Handlers):` `DistillCmd()`, `ExtractCmd()`, `WriteAgentMemoryCmd()`, `WriteMempalaceCmd()`, `RetainCmd()`, `ResetCmd()`
+`相關處理器 (Related Handlers):` `memory.DistillCmd`, `memory.ExtractCmd`, `memory.WriteAgentMemoryCmd`, `memory.WriteMempalaceCmd`, `memory.RetainCmd`, `memory.ResetCmd`
 
 ---
 
@@ -35,7 +35,14 @@
 
 `核心實體 (Key Entities):` `DrawerRow`, `Observation`
 
-`相關處理器 (Related Handlers):` `ExportCmd()`, `GbrainCmd()`, `ClaudeMemCmd()`, `MempalaceCmd()`
+`相關處理器 (Related Handlers):` `export.ExportCmd`, `export.ClaudeMemCmd`
+
+---
+
+### LLM CLI 統一入口 (LLM CLI Façade)
+
+`autop` 已抽成獨立 package，完整需求、設定、命令與 PM2 流程見
+[`cmd/autop/README.md`](cmd/autop/README.md)。
 
 ---
 
@@ -86,8 +93,12 @@
 - `記憶蒸餾管道` 的輸出（`Memory`、`Fact`）寫入外部記憶儲存庫，而 `資料匯出` 則可從同一儲存庫反向匯出資料
 - `環境初始化` 負責將 `AI 技能與代理` 的設定檔同步至各個 AI Agent 的家目錄
 - `資料匯出` 與 `記憶蒸餾管道` 共用 `StateStore`（遊標機制）以支援增量操作
+- `autop` 的 client、template、task prompt、permission bypass、model 與 effort 定義集中
+  於 [`cmd/autop/`](cmd/autop/)；provider-specific flags 由 autop driver 統一映射。
 
 ## 使用方式 (Usage)
+
+Autop 的實際使用方式與範例集中在 [`cmd/autop/README.md`](cmd/autop/README.md)。
 
 ### 記憶蒸餾
 

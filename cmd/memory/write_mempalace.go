@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 
 	"github.com/bizshuk/cc-plugin/model"
+	gosdkconfig "github.com/bizshuk/gosdk/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -52,49 +53,50 @@ func writeMempalaceLogic(facts []model.Fact, tempDir, wing string) error {
 	return nil
 }
 
-func WriteMempalaceCmd() *cobra.Command {
-	var tempDir string
-	var wing string
+var (
+	mempalaceTempDir string
+	mempalaceWing    string
+)
 
-	cmd := &cobra.Command{
-		Use:   "write-mempalace",
-		Short: "Write verified facts to temp files and run mempalace mine",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			if tempDir == "" {
-				tempDir = model.ExpandPath(viper.GetString("stores.mempalace.temp_dir"))
+// WriteMempalaceCmd writes verified facts and runs mempalace mine.
+var WriteMempalaceCmd = &cobra.Command{
+	Use:   "write-mempalace",
+	Short: "Write verified facts to temp files and run mempalace mine",
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		if mempalaceTempDir == "" {
+			mempalaceTempDir = gosdkconfig.ExpandHome(viper.GetString("stores.mempalace.temp_dir"))
+		}
+		if mempalaceWing == "" {
+			mempalaceWing = viper.GetString("stores.mempalace.wing")
+		}
+
+		decoder := json.NewDecoder(os.Stdin)
+		var facts []model.Fact
+
+		var raw json.RawMessage
+		if err := decoder.Decode(&raw); err != nil {
+			return fmt.Errorf("failed to decode stdin JSON: %w", err)
+		}
+
+		// Try array first
+		if err := json.Unmarshal(raw, &facts); err != nil {
+			var single model.Fact
+			if err2 := json.Unmarshal(raw, &single); err2 != nil {
+				return fmt.Errorf("stdin must be a JSON array of Fact or a single Fact object")
 			}
-			if wing == "" {
-				wing = viper.GetString("stores.mempalace.wing")
-			}
+			facts = append(facts, single)
+		}
 
-			decoder := json.NewDecoder(os.Stdin)
-			var facts []model.Fact
+		if err := writeMempalaceLogic(facts, mempalaceTempDir, mempalaceWing); err != nil {
+			return err
+		}
 
-			var raw json.RawMessage
-			if err := decoder.Decode(&raw); err != nil {
-				return fmt.Errorf("failed to decode stdin JSON: %w", err)
-			}
+		fmt.Printf("Successfully mined %d facts into mempalace (wing %s).\n", len(facts), mempalaceWing)
+		return nil
+	},
+}
 
-			// Try array first
-			if err := json.Unmarshal(raw, &facts); err != nil {
-				var single model.Fact
-				if err2 := json.Unmarshal(raw, &single); err2 != nil {
-					return fmt.Errorf("stdin must be a JSON array of Fact or a single Fact object")
-				}
-				facts = append(facts, single)
-			}
-
-			if err := writeMempalaceLogic(facts, tempDir, wing); err != nil {
-				return err
-			}
-
-			fmt.Printf("Successfully mined %d facts into mempalace (wing %s).\n", len(facts), wing)
-			return nil
-		},
-	}
-
-	cmd.Flags().StringVar(&tempDir, "temp-dir", "", "Temporary directory to stage facts")
-	cmd.Flags().StringVar(&wing, "wing", "", "Wing name to mine into")
-
-	return cmd
+func init() {
+	WriteMempalaceCmd.Flags().StringVar(&mempalaceTempDir, "temp-dir", "", "Temporary directory to stage facts")
+	WriteMempalaceCmd.Flags().StringVar(&mempalaceWing, "wing", "", "Wing name to mine into")
 }

@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/bizshuk/cc-plugin/model"
+	gosdkconfig "github.com/bizshuk/gosdk/config"
 	"github.com/spf13/viper"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -69,7 +70,7 @@ func readClaudeMemLogic() ([]model.Observation, int64, error) {
 		return nil, 0, err
 	}
 
-	dbPath := model.ExpandPath(viper.GetString("sources.claude_mem.db_path"))
+	dbPath := gosdkconfig.ExpandHome(viper.GetString("sources.claude_mem.db_path"))
 	cmDB, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})

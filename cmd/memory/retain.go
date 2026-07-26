@@ -7,32 +7,33 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/bizshuk/cc-plugin/model"
+	gosdkconfig "github.com/bizshuk/gosdk/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-func RetainCmd() *cobra.Command {
-	var maxAgeDays int
-	var pruneGbrainDir string
+var (
+	retainMaxAgeDays int
+	retainGbrainDir  string
+)
 
-	cmd := &cobra.Command{
-		Use:   "retain",
-		Short: "Sweep distilled memories older than max age",
-		RunE: func(cmd *cobra.Command, args []string) error {
-			return retainLogic()
-		},
-	}
+// RetainCmd sweeps distilled memories older than the configured maximum age.
+var RetainCmd = &cobra.Command{
+	Use:   "retain",
+	Short: "Sweep distilled memories older than max age",
+	RunE: func(cmd *cobra.Command, _ []string) error {
+		return retainLogic()
+	},
+}
 
-	cmd.Flags().IntVar(&maxAgeDays, "max-age", 0, "Max age in days to retain")
-	cmd.Flags().StringVar(&pruneGbrainDir, "prune-gbrain", "", "Path to gbrain/working directory")
-
-	return cmd
+func init() {
+	RetainCmd.Flags().IntVar(&retainMaxAgeDays, "max-age", 0, "Max age in days to retain")
+	RetainCmd.Flags().StringVar(&retainGbrainDir, "prune-gbrain", "", "Path to gbrain/working directory")
 }
 
 func retainLogic() error {
 	maxAgeDays := viper.GetInt("retention.max_age_days")
-	pruneGbrainDir := model.ExpandPath(viper.GetString("sources.gbrain_working.root"))
+	pruneGbrainDir := gosdkconfig.ExpandHome(viper.GetString("sources.gbrain_working.root"))
 
 	store, err := NewStateStore()
 	if err != nil {

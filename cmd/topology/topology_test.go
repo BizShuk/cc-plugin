@@ -6,6 +6,9 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 )
 
 func writeFixture(t *testing.T) string {
@@ -67,7 +70,7 @@ kind: method
 
 func run(t *testing.T, args ...string) (string, error) {
 	t.Helper()
-	cmd := TopologyCmd()
+	cmd := resetTopologyCommand()
 	var output bytes.Buffer
 	cmd.SetOut(&output)
 	cmd.SetErr(&output)
@@ -76,6 +79,23 @@ func run(t *testing.T, args ...string) (string, error) {
 	cmd.SetArgs(args)
 	err := cmd.Execute()
 	return output.String(), err
+}
+
+func resetTopologyCommand() *cobra.Command {
+	flags := []*cobra.Command{
+		TopologyCmd,
+		QueryCmd,
+		BacklinksCmd,
+		IndexCmd,
+	}
+	for _, command := range flags {
+		command.Flags().VisitAll(func(flag *pflag.Flag) {
+			_ = flag.Value.Set(flag.DefValue)
+			flag.Changed = false
+		})
+	}
+	TopologyCmd.SetArgs(nil)
+	return TopologyCmd
 }
 
 func TestVerifyCommand(t *testing.T) {
