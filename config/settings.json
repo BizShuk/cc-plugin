@@ -46,7 +46,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "fable",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
