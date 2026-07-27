@@ -208,15 +208,20 @@ codex -c model_reasoning_effort="max" "..."
 
 ## 五、本機設定現況 (Local Configuration)
 
-本 repo 內三份設定同時涉及兩套 effort 語彙：
+本 repo 內四份設定同時涉及兩套 effort 語彙：
 
-| 檔案                   | 關鍵設定                                                                                                      | 意義                                                      |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `config/settings.json` | `effortLevel: "high"`、`alwaysThinkingEnabled: true`                                                          | Claude Code 常駐 `high`（= API 預設）                     |
-| `config/codex.json`    | `CLAUDE_CODE_ALWAYS_ENABLE_EFFORT: "1"`、capabilities 含 `effort,xhigh_effort,max_effort`                     | 以 Claude Code 介面驅動 `gpt-5.6-*`，宣告該端支援到 `max` |
-| `config/config.toml`   | `model_reasoning_effort = "max"`、`enabled-reasoning-efforts = ["low","medium","high","xhigh","ultra","max"]` | Codex 原生端固定跑 `max`，desktop slider 六檔全開         |
+| 檔案 | 關鍵設定 | 意義 |
+| --- | --- | --- |
+| `config/settings.json` | `effortLevel: "high"`、`alwaysThinkingEnabled: true` | Claude Code 常駐 `high`（= API 預設） |
+| `config/openai.json` | `CLAUDE_CODE_ALWAYS_ENABLE_EFFORT: "1"`、capabilities 含 `effort,xhigh_effort,max_effort` | 以 Claude Code 介面驅動 `gpt-5.6-*`，宣告該端支援到 `max` |
+| `config/xai.json` | 所有 model alias 指向 `grok-4.5-latest` | 以 Claude Code 介面經本地 proxy 驅動 Grok |
+| `config/config.toml` | `model_reasoning_effort = "max"`、`enabled-reasoning-efforts = ["low","medium","high","xhigh","ultra","max"]` | Codex 原生端固定跑 `max`，desktop slider 六檔全開 |
 
-值得注意的組合：`config/codex.json` 把 `ANTHROPIC_BASE_URL` 指到 `http://127.0.0.1:8317` 的本地 proxy，等於`用 Anthropic 的 effort 詞彙去驅動 OpenAI 的模型`。這條路徑上 effort 需要被 proxy 翻譯，而社群已回報過對應失敗：上游回 `level 'max' not supported, valid levels: low, medium, high, xhigh`。
+值得注意的組合：`config/openai.json` 與 `config/xai.json` 把
+`ANTHROPIC_BASE_URL` 指到 `http://127.0.0.1:8317` 的本地 proxy，等於
+`用 Anthropic 的 effort 詞彙去驅動 OpenAI 或 xAI 的模型`。這條路徑上 effort
+需要被 proxy 翻譯，而社群已回報過對應失敗：上游回
+`level 'max' not supported, valid levels: low, medium, high, xhigh`。
 
 也就是說 —— `Claude Code 端設 max，不保證上游真的收到 max`。若要確認，看 proxy 實際送出的 request body，不要只看本地設定值。
 
