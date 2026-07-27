@@ -134,6 +134,9 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/tools/autop"]
 trust_level = "trusted"
 
+[projects."/Users/shuk/projects/ai/auth"]
+trust_level = "trusted"
+
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "approval-mode", "weekly-limit", "task-progress"]
 status_line_use_colors = true
@@ -315,6 +318,9 @@ NODE_REPL_TRUSTED_CODE_PATHS = "/Users/shuk/.codex"
 [notice]
 hide_full_access_warning = true
 hide_rate_limit_model_nudge = true
+
+[notice.model_migrations]
+"gpt-5.4-mini" = "gpt-5.6-luna"
 
 [hooks.state]
 
