@@ -1,30 +1,19 @@
-# 專案工作區 (Projects Workspace) — 管理方向 (Management Direction)
+# Global Rule
 
-本檔為 `~/projects/` 全工作區的方向性規範 (direction)，所有 repo 的 session 均會繼承。
-各 repo 細節以其自身 `CLAUDE.md` 為準；本檔只定規則與分層，不放具體內容。
+## Principles
 
-## 工作規則 (Working Rules)
+- one file one responsibility. one package/folder one domain
+- 遇到執行錯誤時，先嘗試修復，最多重試 5 次；若仍無法解決則明確報錯並停止, 多次遭遇相同錯誤/問題時，將解法記錄至 Memory
+- git worktree branch should be name with `w-<feature>` or `agent-<feature>`
 
 ### 上下文 (Context)
 
 - 載入 `@./CLAUDE.md` 作為專案結構
 - 載入 `@./README.md` 作為業務核心
 
-### 習慣 (Behaviors)
+## Directory structure
 
-- 遇到執行錯誤時，先嘗試修復，最多重試 5 次；若仍無法解決則明確報錯並停止
-- git worktree branch should be name with `w-<feature>` or `agent-<feature>`
-
-### 慣例 (Convention)
-
-既有慣例 (convention) 不得額外建立自訂選項。
-例如 `gosdk` 已有 app log dir / app config dir / app data dir，service layer 不得再建 config path 指向 data dir。
-
-### 演化 (Evolution)
-
-- 多次遭遇相同錯誤/問題時，將解法記錄至 Memory
-
-## 目錄佈局 (Directory Layout)
+### Project category
 
 `~/projects/` 是`兩層 (two-level)` 結構：專案可放在根目錄，也可放在分類目錄之下。
 
@@ -66,3 +55,6 @@
 | `docs/tutorials/`           | 選備   | 領域知識學習與概念導覽 (domain tutorials)；專案架構/流程/環境等常規指南放 `docs/` 根層 |
 | `scripts/`                  | 選備   | 專案相關腳本 (project related script)                                                  |
 | `tmp/`                      | 選備   | 實例專屬之資料與設定 (data/config per instance, not source code/logic)                 |
+
+- golang-dev skill for golang structure
+- pm2 skill for pm2 structure
