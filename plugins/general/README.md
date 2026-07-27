@@ -5,7 +5,7 @@
 - 4 個跨場景技能（插件 metadata、每日彙整、文件檢查、待辦排序）
 - 1 個 `feature` 功能實作代理
 - 1 個 always-on hook（agent loop 結束時的終端機鈴聲）
-- 3 種 output-style（`brief` / `detailed` / `review`）
+- 1 份 output-style 樣板（`brief`）
 
 源自兩個先前的插件合併：
 
@@ -38,15 +38,14 @@
 
 ## Output Styles
 
-Claude Code 的 `outputStyle` 自訂風格檔案：
+本資料夾只保留`一份樣板 (single template)`，作為撰寫自訂 `outputStyle` 的起點：
 
-| 檔案          | 風格 | 長度       | 適合情境                     |
-| ------------- | ---- | ---------- | ---------------------------- |
-| `brief.md`    | 精簡 | 1–10 行    | 日常查詢、簡單任務、結論先行 |
-| `detailed.md` | 詳盡 | 5 段固定   | 學習、設計、文件、複雜 bug   |
-| `review.md`   | 審查 | 結構化發現 | 程式碼審查、PR review        |
+| 檔案       | 風格 | 長度    | 適合情境                     |
+| ---------- | ---- | ------- | ---------------------------- |
+| `brief.md` | 精簡 | 1–10 行 | 日常查詢、簡單任務、結論先行 |
 
-詳見 `output-styles/README.md`。
+實際啟用的風格由 `config/settings.json` 的 `outputStyle` 指定，風格檔本體放在
+`config/output-styles/`。寫法與放置位置詳見 `output-styles/README.md`。
 
 ## 檔案結構
 
@@ -61,9 +60,7 @@ plugins/general/
 │   ├── hooks.json       # Stop / StopFailure 註冊
 │   └── stop-bell.sh     # 終端機 bell 實作
 ├── output-styles/
-│   ├── brief.md
-│   ├── detailed.md
-│   ├── review.md
+│   ├── brief.md         # 唯一樣板
 │   └── README.md
 ├── skills/              # 4 個技能目錄
 └── README.md
@@ -89,7 +86,7 @@ plugins/general/
 
 ```bash
 # 技能開頭先跑預檢掃描（read-only），只處理 [OK] 來源
-bash skills/daily-summary/scan.sh 24   # 參數 = 視窗小時數
+bash skills/daily-summary/scripts/scan.sh 24   # 參數 = 視窗小時數
 ```
 
 觸發詞："daily summary"、"工作日報"、"summarize my work today"、"今天做了什麼"。

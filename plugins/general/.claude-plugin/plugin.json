@@ -5,7 +5,7 @@
     "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"
   },
-  "description": "General-purpose Claude Code plugin — bundles cross-cutting skills (business / system planners, daily summary, sort-todo, markdownlint), always-on hooks (terminal bell on Stop / StopFailure), and a small set of output styles (brief / detailed / review) that the agent selects based on task shape.",
+  "description": "General-purpose Claude Code plugin — bundles cross-cutting skills (plugin metadata, daily summary, sort-todo, markdownlint), always-on hooks (terminal bell on Stop / StopFailure), and a single output-style template (brief) to copy when authoring a custom style.",
   "homepage": "https://github.com/bizshuk/cc-plugin",
   "keywords": [
     "general",

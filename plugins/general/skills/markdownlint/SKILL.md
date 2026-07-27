@@ -3,7 +3,6 @@ name: markdownlint
 description: >
     Use when generating or modifying Markdown files under plugins/experiment/skills directory. Triggers on Markdown file creation or modification in the experiment skills workspace.
 version: "1.0.0"
-allowed-tools: Read, write_file
 user-invocable: false
 disable-model-invocation: false
 effort: low

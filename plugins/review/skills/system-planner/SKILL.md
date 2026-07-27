@@ -4,7 +4,6 @@ description: >
     Use when planning a system architecture for a feature (placement, boundaries, interface, data flow, incremental landing steps) or when performing codebase quality reviews (code standards, directory layout, cross-file consistency, dependency hygiene).
     Triggers on: "system design", "architecture plan", "reduce coupling", "modularization", "系統架構", "架構規劃", "system-planner", "review code", "folder structure", "check consistency", "dependency audit", "unused packages", "are these deps needed".
 version: "2.0.0"
-allowed-tools: read_file, write_file, search_web
 user-invocable: true
 disable-model-invocation: false
 effort: high

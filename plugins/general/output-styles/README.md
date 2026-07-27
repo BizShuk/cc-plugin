@@ -1,14 +1,16 @@
 # Output Styles
 
-Claude Code 的 `outputStyle` 自訂風格檔案，提供三種切換選擇。
+Claude Code 的 `outputStyle` 自訂風格寫法說明，附一份可直接複製的樣板。
 
 ## 本資料夾內容
 
-| 檔案          | 風格 | 長度       | 適合情境                     |
-| ------------- | ---- | ---------- | ---------------------------- |
-| `brief.md`    | 精簡 | 1–10 行    | 日常查詢、簡單任務、結論先行 |
-| `detailed.md` | 詳盡 | 5 段固定   | 學習、設計、文件、複雜 bug   |
-| `review.md`   | 審查 | 結構化清單 | Code Review、重構前評估      |
+| 檔案       | 角色 | 長度    | 適合情境                     |
+| ---------- | ---- | ------- | ---------------------------- |
+| `brief.md` | 樣板 | 1–10 行 | 日常查詢、簡單任務、結論先行 |
+
+`單一樣板 (single template)`：本資料夾只示範格式，不收納實際啟用的風格。
+專案實際生效的風格放在 `config/output-styles/`，由 `config/settings.json`
+的 `outputStyle` 欄位指定。要新增風格，複製 `brief.md` 後改寫。
 
 ## 放置位置 — User vs Project
 

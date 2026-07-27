@@ -6,7 +6,7 @@ description: >
     and checking availability/free-busy times. Triggers on: "check my calendar",
     "schedule a meeting", "what's on my schedule", "am I free tomorrow", or any
     calendar-related operations.
-version: "1.0.0"
+version: "1.1.0"
 allowed-tools: Bash
 metadata:
     type: reference
@@ -17,214 +17,47 @@ metadata:
 
 # Apple Calendar CLI (accli)
 
-## Installation
+命令列存取 macOS Apple Calendar：列出日曆、查詢事件、建立／更新／刪除事件、
+以及跨日曆查空檔 (free/busy)。
 
 ```bash
-npm install -g @joargp/accli
+npm install -g @joargp/accli   # macOS only — 底層使用 JavaScript for Automation
 ```
 
-**Requirements:** macOS only (uses JavaScript for Automation)
+## 指令總覽 (Commands)
 
-## Overview
+完整旗標、選項表與範例見 [references/commands.md](references/commands.md)。
 
-The accli tool provides command-line access to macOS Apple Calendar. It enables listing calendars, querying events, creating/updating/deleting events, and checking availability across calendars.
+| 指令 | 用途 |
+| --- | --- |
+| `accli calendars` | 列出所有日曆與其 persistent ID — 任何操作前先跑這個 |
+| `accli events <cal>` | 查詢區間內事件（`--from` / `--to` / `--query` / `--max`） |
+| `accli event <cal> <id>` | 取得單一事件細節 |
+| `accli create <cal>` | 建立事件（`--summary` / `--start` / `--end` 必填） |
+| `accli update <cal> <id>` | 更新事件，只帶要改的欄位 |
+| `accli delete <cal> <id>` | 刪除事件 — 破壞性，執行前必須向使用者確認 |
+| `accli freebusy` | 跨日曆查忙碌時段，排除已取消／已婉拒／transparent 事件 |
+| `accli config` | 設定／顯示／清除預設日曆 |
 
-## Quick Reference
+`DateTime 格式`：timed 事件用 `YYYY-MM-DDTHH:mm`，all-day 事件用 `YYYY-MM-DD`。
 
-### DateTime Formats
+## 工作流程 (Workflow)
 
-- Timed events: YYYY-MM-DDTHH:mm or YYYY-MM-DDTHH:mm:ss
-- All-day events: YYYY-MM-DD
+建立事件前，依序：
 
-### Global Options
+1. `accli calendars` 取得可用日曆名稱與 ID。
+2. `accli freebusy` 找出空檔。
+3. 與使用者確認事件細節後才建立。
 
-- --json - Output as JSON (recommended for parsing)
-- --help - Show help for any command
+## Rules
 
-## Commands
+- 一律加 `--json`，輸出才可解析
+- 能用 `--calendar-id` 就不要用日曆名稱（名稱可能重複或被改名）
+- 查詢事件先給合理的日期區間，不要一次拉全部
+- `delete` 屬破壞性操作，執行前必須明確確認
+- 日期時間一律用 ISO 8601，不要混用在地格式
 
-### List Calendars
+## Related
 
-```
-accli calendars [--json]
-```
-
-Lists all available calendars with names and persistent IDs. Run this first to discover available calendars and their IDs.
-
-### List Events
-
-```
-accli events <calendarName> [options]
-```
-
-Options:
-
-- --calendar-id <id> - Persistent calendar ID (recommended over name)
-- --from <datetime> - Start of range (default: now)
-- --to <datetime> - End of range (default: from + 7 days)
-- --max <n> - Maximum events to return (default: 50)
-- --query <q> - Case-insensitive filter on summary/location/description
-- --json - Output JSON
-
-Examples:
-
-```bash
-# Events from Work calendar for this week
-accli events Work --json
-
-# Events in January
-accli events Work --from 2025-01-01 --to 2025-01-31 --json
-
-# Search for specific events
-accli events Work --query "standup" --max 10 --json
-```
-
-### Get Single Event
-
-```
-accli event <calendarName> <eventId> [--json]
-```
-
-Retrieves details for a specific event by its ID.
-
-### Create Event
-
-```
-accli create <calendarName> --summary <s> --start <datetime> --end <datetime> [options]
-```
-
-Required Options:
-
-- --summary <s> - Event title
-- --start <datetime> - Start time
-- --end <datetime> - End time
-
-Optional:
-
-- --location <l> - Event location
-- --description <d> - Event description
-- --all-day - Create an all-day event
-- --json - Output JSON
-
-Examples:
-
-```bash
-# Create a timed meeting
-accli create Work --summary "Team Standup" --start 2025-01-15T09:00 --end 2025-01-15T09:30 --json
-
-# Create an all-day event
-accli create Personal --summary "Vacation" --start 2025-07-01 --end 2025-07-05 --all-day --json
-
-# Create with location and description
-accli create Work --summary "Client Meeting" --start 2025-01-15T14:00 --end 2025-01-15T15:00 \
-  --location "Conference Room A" --description "Q1 planning discussion" --json
-```
-
-### Update Event
-
-```
-accli update <calendarName> <eventId> [options]
-```
-
-Options (all optional - only provide what to change):
-
-- --summary <s> - New title
-- --start <datetime> - New start time
-- --end <datetime> - New end time
-- --location <l> - New location
-- --description <d> - New description
-- --all-day - Convert to all-day event
-- --no-all-day - Convert to timed event
-- --json - Output JSON
-
-Example:
-
-```bash
-accli update Work event-id-123 --summary "Updated Meeting Title" --start 2025-01-15T15:00 --end 2025-01-15T16:00 --json
-```
-
-### Delete Event
-
-```
-accli delete <calendarName> <eventId> [--json]
-```
-
-Permanently deletes an event. Confirm with user before executing.
-
-### Check Free/Busy
-
-```
-accli freebusy --calendar <name> --from <datetime> --to <datetime> [options]
-```
-
-Options:
-
-- --calendar <name> - Calendar name (can repeat for multiple calendars)
-- --calendar-id <id> - Persistent calendar ID (can repeat)
-- --from <datetime> - Start of range (required)
-- --to <datetime> - End of range (required)
-- --json - Output JSON
-
-Shows busy time slots, excluding cancelled, declined, and transparent events.
-
-Examples:
-
-```bash
-# Check availability across calendars
-accli freebusy --calendar Work --calendar Personal --from 2025-01-15 --to 2025-01-16 --json
-
-# Check specific hours
-accli freebusy --calendar Work --from 2025-01-15T09:00 --to 2025-01-15T18:00 --json
-```
-
-### Configuration
-
-```bash
-# Set default calendar (interactive)
-accli config set-default
-
-# Set default by name
-accli config set-default --calendar Work
-
-# Show current config
-accli config show
-
-# Clear default
-accli config clear
-```
-
-When a default calendar is set, commands automatically use it if no calendar is specified.
-
-## Workflow Guidelines
-
-### Before Creating Events
-
-1. List calendars to get available calendar names/IDs
-2. Check free/busy to find available time slots
-3. Confirm event details with user before creating
-
-### Best Practices
-
-- Always use --json flag for programmatic parsing
-- Prefer --calendar-id over calendar names for reliability
-- When querying events, start with reasonable date ranges
-- Confirm with user before delete operations
-- Use ISO 8601 datetime format consistently
-
-### Common Patterns
-
-Find a free slot and schedule:
-
-```bash
-# 1. Check availability
-accli freebusy --calendar Work --from 2025-01-15T09:00 --to 2025-01-15T18:00 --json
-
-# 2. Create event in available slot
-accli create Work --summary "Meeting" --start 2025-01-15T14:00 --end 2025-01-15T15:00 --json
-```
-
-View today's schedule:
-
-```bash
-accli events Work --from $(date +%Y-%m-%d) --to $(date -v+1d +%Y-%m-%d) --json
-```
+- `[[apple-reminders]]` 待辦事項；有截止日的工作歸提醒事項，不要塞進日曆
+- `[[apple-notes]]` 會議記錄與筆記

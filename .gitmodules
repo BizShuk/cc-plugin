@@ -1,5 +1,5 @@
 [submodule "pkg/system-prompts/CL4R1T4S"]
-	path = pkg/system-prompts/CL4R1T4S
+	path = pkg/prompt/system-prompts/CL4R1T4S
 	url = https://github.com/elder-plinius/CL4R1T4S.git
 [submodule "pkg/tools/career-ops"]
 	path = pkg/tools/career-ops

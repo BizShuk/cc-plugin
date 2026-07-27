@@ -242,11 +242,11 @@ done
 
 ## Workflow Script
 
-支援 Workflow tool 的環境可直接執行本目錄的 `workflow.js`：
+支援 Workflow tool 的環境可直接執行本技能的 `scripts/workflow.js`：
 
 ```text
 Workflow({
-  scriptPath: "<skill_dir>/workflow.js",
+  scriptPath: "<skill_dir>/scripts/workflow.js",
   args: {
     root: "~/projects/product/topologies",
     sources: [{ "type": "repo", "target": "/path/to/repo" }]

@@ -6,7 +6,7 @@ description: >
     explicitly types "/model-evaluator".
 user-invocable: true
 disable-model-invocation: true
-allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuest
+allowed-tools: Bash, Read, Edit, Grep, Glob, AskUserQuestion
 context: fork
 effort: medium
 ---

@@ -46,7 +46,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "fable",
+  "model": "haiku",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -64,7 +64,8 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "claude-notifications-go@claude-notifications-go": true
+    "claude-notifications-go@claude-notifications-go": true,
+    "proxy-imagegen@proxy-local": true
   },
   "extraKnownMarketplaces": {
     "claude-notifications-go": {
@@ -86,6 +87,15 @@
   "effortLevel": "high",
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
+  "pluginConfigs": {
+    "proxy-imagegen@proxy-local": {
+      "options": {
+        "base_url": "http://127.0.0.1",
+        "port": 8317,
+        "model": "grok-imagine-image-quality"
+      }
+    }
+  },
   "autoUpdatesChannel": "latest",
   "minimumVersion": "2.1.150",
   "plansDirectory": "./plans",

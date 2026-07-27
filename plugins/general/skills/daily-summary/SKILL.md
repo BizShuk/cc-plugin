@@ -22,7 +22,7 @@ Aggregate the last 24h of work from five local sources, synthesize a summary +
 TODO lists, and write it to Apple Notes (`iCloud` › `Daily`) titled
 `Daily Summary - {YYYY-MM-DD}`. If today's note already exists, append to it.
 
-Core rule: always run `scan.sh` first. It tells you which sources actually have
+Core rule: always run `scripts/scan.sh` first. It tells you which sources actually have
 data in the window so you don't waste calls on empty ones.
 
 ## When to Use
@@ -33,10 +33,10 @@ data in the window so you don't waste calls on empty ones.
 
 ## Step 0 — Preflight scan (ALWAYS FIRST)
 
-Run the `scan.sh` that sits beside this SKILL.md (arg = window hours):
+Run `scripts/scan.sh` from this skill directory (arg = window hours):
 
 ```bash
-bash "${CLAUDE_PLUGIN_ROOT:-$HOME/projects/cc-plugin/plugins/general}/skills/daily-summary/scan.sh" 24
+bash "${CLAUDE_PLUGIN_ROOT:-$HOME/projects/cc-plugin/plugins/general}/skills/daily-summary/scripts/scan.sh" 24
 ```
 
 Read its output. Process only sources marked `[OK]` with a non-zero count.
@@ -133,4 +133,4 @@ fi
 | Reading Hermes from `sessions/*.jsonl` | That dir is legacy (dead since ~2026-05). Use `~/.hermes/state.db` (`sessions`+`messages`). |
 | Ignoring Hermes channel attribution | Group Hermes work by `sessions.source` (slack/whatsapp/cron/cli…) so message-channel work is visible, not lumped together. |
 | Overwriting an existing daily note | Check for the title first; append with a `---` divider. |
-| Skipping the scan | Run `scan.sh` first — it prevents querying empty sources and prints the cutoff. |
+| Skipping the scan | Run `scripts/scan.sh` first — it prevents querying empty sources and prints the cutoff. |

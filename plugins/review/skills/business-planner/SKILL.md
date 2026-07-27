@@ -4,7 +4,6 @@ description: >
     Use when reviewing a codebase for business-value improvements (gaps, friction, missed revenue/retention) or when planning and expanding the commercial value of a feature (asset inventory, opportunity scoring, MVP design).
     Triggers on: "business value", "business improvement", "how to improve this", "業務改善", "增加價值", "business expansion plan", "expand commercial value", "monetization", "hidden value", "商業價值", "業務規劃", "商業模式設計", "business-planner".
 version: "1.0.0"
-allowed-tools: read_file, write_file, search_web
 user-invocable: true
 disable-model-invocation: false
 effort: high

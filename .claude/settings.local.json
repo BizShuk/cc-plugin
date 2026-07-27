@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.litellm.ai)",
+      "WebFetch(domain:rhettbull.github.io)",
+      "Bash(notes --help)",
+      "mcp__codegraph__codegraph_search",
+      "mcp__plugin_claude-mem_mcp-search__observation_context",
+      "Skill(markdownlint)",
+      "Bash(npx markdownlint *)",
+      "Bash(mkdir -p /tmp/topology-green/pipeline /tmp/topology-green/infra)",
+      "Read(//tmp/**)",
+      "Bash(node --check plugins/general/skills/topology-builder/workflow.js)",
+      "Bash(node --input-type=module --check)",
+      "Bash(git checkout *)",
+      "Read(//Users/shuk/.agents/skills/subagent-driven-development/**)",
+      "Bash(gofmt *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(sed -n '1,15p' plugins/general/skills/business-extract/SKILL.md)",
+      "Bash(sed -n '1,15p' plugins/tmp/skills/social-business-explore/SKILL.md)",
+      "Bash(git check-ignore *)",
+      "Bash(command -v markdownlint markdownlint-cli2)",
+      "Bash(sqlite3 ~/.claude-mem/claude-mem.db \".tables\")",
+      "Bash(sqlite3 ~/.claude-mem/claude-mem.db \".schema observations\")",
+      "Bash(sqlite3 ~/.claude-mem/claude-mem.db \"SELECT name FROM sqlite_master WHERE type='table';\")"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "playwright"
+  ],
+  "outputStyle": "Executive Summary"
+}

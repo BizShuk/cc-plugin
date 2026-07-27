@@ -14,7 +14,7 @@ description: >
     the structure tree", "文件同步", "更新文件了嗎", "extract business",
     "business value", "業務萃取", "上下游分析", "術語表", "terminology",
     "glossary".
-version: "3.1.0"
+version: "4.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true
 disable-model-invocation: false
@@ -26,502 +26,153 @@ metadata:
 
 # project-docs
 
-一個專案的四份正典文件由本技能統一負責建立、稽核與更新。文件不會憑空重寫：
-先驗證，後寫入。
-
-| File                  | 回答的問題 | 焦點                                                        |
-| --------------------- | ---------- | ----------------------------------------------------------- |
-| `README.md`           | `WHAT`     | `功能性需求`：業務領域、領域流程、實體、使用情境            |
-| `CLAUDE.md`           | `HOW`      | `非功能性需求`：專案結構、技術棧、建置/部署、慣例           |
-| `docs/terminology.md` | `WHICH`    | `術語表`：領域名詞、縮寫、狀態值的單一定義來源              |
-| `README.business.md`  | `WHY`      | 純業務價值：上下游、常見操作、狀態/流程、約束、風險、核心性 |
-
-## 統一介面 (Unified Interface)
-
-本技能產出的文件是 workspace 統一介面的一部分，規範以 `~/.claude/CLAUDE.md`
-（`cc-plugin/config/CLAUDE.global.md`）為準，兩者必須同步。目標 repo 應具備：
-
-| 檔案                  | 必要性 | 本技能負責 |
-| --------------------- | ------ | ---------- |
-| `README.md`           | 必備   | ✅ 建立/稽核 |
-| `CLAUDE.md`           | 必備   | ✅ 建立/稽核 |
-| `AGENTS.md`           | 必備   | ✅ symlink  |
-| `docs/terminology.md` | 必備   | ✅ 建立/稽核 |
-| `README.business.md`  | 選備   | ✅ `business` 模式 |
-| `README.todo`         | 必備   | ➖ 僅回報缺漏 |
-| `docs/memory/`        | 必備   | ➖ 僅回報缺漏 |
-| `docs/tutorials/`     | 選備   | ➖ 交由 `[[tutorial]]` |
-| `plans/`、`docs/specs/`、`docs/backlog/`、`scripts/`、`tmp/`、`run.sh`、`ecosystem.config.js` | 選備 | ➖ |
-
-`專案位址 (Project Location):` 目標 repo 可能位於 `~/projects/<project>/`
-或 `~/projects/<category>/<project>/`（分類目錄如 `ai/`、`game/`、`platform/`、
-`tools/`）。分類目錄`本身不是專案`，不要對它跑 `bootstrap`；統一介面只作用在
-專案根目錄。要確認一個路徑的歸屬，先用 `[[project-route]]`。
-
-## Modes
-
-四個模式，由 `Phase 0` 自動判定；判定不明時預設 `audit`。
-
-| 模式        | 觸發情境                                            | 寫入行為                            |
-| ----------- | --------------------------------------------------- | ----------------------------------- |
-| `audit`     | 「doc sync」「文件同步」「does the README match」   | 無 — 只輸出漂移報告                 |
-| `refresh`   | 「更新文件」「explore project」且文件已存在          | 僅改寫已證實漂移的段落              |
-| `bootstrap` | `README.md` 或 `CLAUDE.md` 缺漏、為空、僅剩標題      | 四份文件全產出 + symlinks           |
-| `business`  | 「業務萃取」「extract business」「上下游分析」       | 僅 `README.business.md`             |
-
-`預設唯讀 (Read-only by default):` `audit` 是安全預設。`refresh` 與 `bootstrap`
-會寫檔，必須由使用者明確要求或由文件缺漏事實觸發；不要因為「順手」就升級模式。
-
-### Design Philosophy
-
-一個專案可能有幾十個 handler / service / module，但它們只屬於少數幾個
-`業務領域 (Business Domains)`。README 應該以領域為單位組織，不是以檔案或
-handler 為單位。
-
-`Example:` 一個資料服務有 20+ 個 handler，但只屬於約 4 個領域：
-
-- `資料複製 (Data Replication)` — 跨區純資料同步
-- `用戶遷移 (User Migration)` — 用戶區域切換工作流
-- `資料修復 (Data Fix)` — 臨時資料修正工具
-- `稽核日誌 (Audit Log)` — 追蹤與合規
-
-README 把這些按領域分組並描述流程，而不是列出每個 handler。
-
-## When to Use
-
-- 專案沒有 `README.md` 或 `CLAUDE.md` → `bootstrap`
-- 懷疑文件在大改動後過期，想先知道差在哪 → `audit`
-- 已知文件過期，要求更新 → `refresh`
-- 接手陌生 codebase、大型重構或遷移之後 → `bootstrap` 或 `refresh`
-- 要求萃取任何輸入（folder / repo / 檔案 / 文件 / 純文字）的業務價值 → `business`
-- 要求「業務上下游」「風險評估」「核心 vs 非核心」分析 → `business`
-
-不適用：跨 repo 知識庫建構（用 `ultra-explore`）、程式碼對程式碼的矛盾
-（用 `[[consistency]]`）、真實目錄樹本身有問題（用 `[[system-planner]]`）。
+一個專案的正典文件由本技能統一負責建立、稽核與更新。
+程式碼是真理來源；文件同步至程式碼，從不反向。
 
 ---
 
-## Phase 0 — Mode Resolution
+## 文件目標與格式 (Document Goals & Format)
 
-0. 確認目標是`專案根目錄`而非分類目錄（`~/projects/<category>/`）。分類目錄下
-   有多個獨立專案時，要求使用者指定，或逐一處理，不得把分類當成一個專案。
-1. 檢查 `README.md` 與 `CLAUDE.md` 是否存在且非空（>10 行有效內容）。
-2. 任一缺漏或為空 → `bootstrap`。
-3. 兩者皆在 → 依觸發詞選 `audit`（預設）或 `refresh`；
-   `docs/terminology.md` 缺漏時不觸發 `bootstrap`，改在報告中列為缺件，
-   使用者要求更新時（`refresh`）補齊。
-4. 輸入不是完整 workspace，或請求純業務分析 → `business`。
+規範來源：`cc-plugin/config/CLAUDE.global.md` 統一介面。
+各文件的模板與寫入規則詳見 [references/](references/)。
 
-把判定結果與理由用一行說明後再開始，例如
-`Mode: audit（README.md 與 CLAUDE.md 皆存在，未要求寫入）`。
+| 檔案 | 問題 | 目標 | 樣板 |
+| ---- | ---- | ---- | ---- |
+| `README.md` | `WHAT` | 業務領域、領域流程、實體、使用情境 | [readme.md](references/readme.md) |
+| `CLAUDE.md` | `HOW` | 專案結構、技術棧、模組對應、建置/部署、慣例 | [claude.md](references/claude.md) |
+| `docs/terminology.md` | `WHICH` | 術語單一定義來源：領域名詞、縮寫、狀態值 | [docs-terminology.md](references/docs-terminology.md) |
+| `README.business.md` | `WHY` | 業務價值：上下游、約束、風險、核心/非核心 | [readme-business.md](references/readme-business.md) |
+| `AGENTS.md` | — | symlink → `CLAUDE.md`（必備） | — |
+| `README.todo` | — | 待辦事項（必備，僅回報缺漏） | [readme-todo.md](references/readme-todo.md) |
+| `docs/memory/` | — | 歷史決策（必備，僅回報缺漏） | — |
+| `docs/tutorials/` | — | 領域知識導覽（選備，交由 `[[tutorial]]`） | [docs-structure.md](references/docs-structure.md) |
+| `plans/` | — | 進行中計畫，`YYYY-MM-DD-<topic>.md`（選備） | — |
+| `docs/specs/` | — | 既有設計與規格，`YYYY-MM-DD-<topic>.md`（選備） | — |
+| `docs/backlog/` | — | 待辦想法（選備） | — |
+| `.geminiignore` | — | symlink → `.gitignore`（選備） | — |
+
+`專案位址:` `~/projects/<project>/` 或 `~/projects/<category>/<project>/`。
+分類目錄`不是專案`，不跑 `bootstrap`。歸屬確認用 `[[project-route]]`。
 
 ---
 
-## Phase 1 — Scan
+## 偵測一致性 (Consistency Detection)
 
-`audit` 只需掃到足以驗證 claim 的程度；`refresh` / `bootstrap` 需完整掃描。
+文件在程式碼改動的當下就開始漂移。本技能檢測兩個維度的一致性：
 
-### Step 1.1 — Discover project layout
+- `縱向:` 每份文件 vs 程式碼（文件宣稱的事實是否仍為真）
+- `橫向:` 文件 vs 文件（同一概念在不同文件中是否一致）
 
-使用 `Glob` 探索檔案，套用以下排除模式：
+### 檢測流程
+
+1. 從所有文件抽出可驗證的宣稱 — 路徑、指令、模組對應、術語、狀態值、領域名稱。
+2. `縱向驗證:` 逐條對 repo 驗證，以 `doc says X → actually Y` 回報。
+3. `橫向驗證:` 交叉比對文件間的引用，以 `A says X / B says Y` 回報。
+
+### 縱向：文件 vs 程式碼
+
+| 文件 | 檢查項 |
+| ---- | ------ |
+| `README.md` | 業務領域仍對應到真實 handler/module；CLI/API 指令仍可執行 |
+| `CLAUDE.md` | 目錄樹 diff 真實目錄；模組對應 entry point 仍存在；build/deploy 指令有效；設定路徑一致 |
+| `docs/terminology.md` | 術語出處路徑仍存在；狀態字面值與程式碼 enum/const 一致 |
+| `README.business.md` | 狀態名稱能在程式中找到；上游服務在程式碼中有對應呼叫 |
+| 統一介面 | 必備檔案存在：`AGENTS.md`、`README.todo`、`docs/memory/`、`docs/terminology.md` |
+
+### 橫向：文件 vs 文件
+
+| 比對對 | 檢查項 |
+| ------ | ------ |
+| `README.md` ↔ `CLAUDE.md` | README 的業務領域必須全數出現在 CLAUDE 的模組對應表；反之模組對應不得列出 README 未定義的領域 |
+| `README.md` ↔ `docs/terminology.md` | README 中出現的領域名詞必須在術語表有定義；術語表的領域分節必須與 README 業務領域對齊 |
+| `CLAUDE.md` ↔ `docs/terminology.md` | CLAUDE 使用的技術術語（若為領域詞）必須與術語表一致；不得出現同義詞漂移 |
+| `README.business.md` ↔ `README.md` | business 的業務目的/常見操作必須與 README 業務領域對應；不得出現 README 未提及的領域 |
+| `README.business.md` ↔ `docs/terminology.md` | 狀態值名稱必須與術語表的狀態值章節一致 |
+| 所有文件 ↔ `docs/terminology.md` | 同一概念在所有文件中只能使用術語表定義的正名，不得有第二種說法 |
+
+### audit 輸出格式
 
 ```text
-Excluded directories and files:
-  .git, .svn, .hg, .DS_Store, Thumbs.db
-  archive/, *.bak*
-  .geminiignore, .gitlab, .pre-commit-config.yaml
-  *.code-workspace, .golangci.yml, go.sum
-  .specify, .gemini, .agent, .serena, .ttadk, .coco
-  .devops, .settings
-  .classpath, .project
-  target/, out/, dist/, output/
-  .mvn/, node_modules/, __pycache__/, .venv/
-  __debug_bin*
-  gen/**, kitex_gen/**, thrift_gen/**
-  .playwright-mcp
-  .vscode/, .claude/
-```
+Doc consistency review — <scope>
 
-```bash
-# Step 1a: top-level structure
-Glob("*", maxDepth=1)
-
-# Step 1b: deeper structure (exclude noise)
-Glob("**/*", maxDepth=5, exclude=[
-  "**/.git/**", "**/.svn/**", "**/.hg/**",
-  "**/.DS_Store", "**/Thumbs.db",
-  "**/archive/**", "**/*.bak*",
-  "**/.geminiignore", "**/.gitlab/**",
-  "**/.pre-commit-config.yaml",
-  "**/*.code-workspace", "**/.golangci.yml", "**/go.sum",
-  "**/.specify/**", "**/.gemini/**", "**/.agent/**",
-  "**/.serena/**", "**/.ttadk/**", "**/.coco/**",
-  "**/.devops/**", "**/.settings/**",
-  "**/.classpath", "**/.project",
-  "**/target/**", "**/out/**", "**/dist/**", "**/output/**",
-  "**/.mvn/**", "**/node_modules/**",
-  "**/__pycache__/**", "**/.venv/**",
-  "**/__debug_bin*",
-  "**/gen/**", "**/kitex_gen/**", "**/thrift_gen/**",
-  "**/.playwright-mcp/**"
-])
-```
-
-若無 `Glob` 工具，fall back 到 bash：
-
-```bash
-find . -maxdepth 3 -type f \
-  -not -path '*/.git/*' -not -path '*/.svn/*' -not -path '*/.hg/*' \
-  -not -name '.DS_Store' -not -name 'Thumbs.db' \
-  -not -path '*/archive/*' -not -name '*.bak*' \
-  -not -path '*/.gemini/*' -not -path '*/.agent/*' \
-  -not -path '*/.serena/*' -not -path '*/.ttadk/*' -not -path '*/.coco/*' \
-  -not -path '*/.specify/*' -not -path '*/.gitlab/*' \
-  -not -path '*/.devops/*' -not -path '*/.settings/*' \
-  -not -path '*/target/*' -not -path '*/out/*' \
-  -not -path '*/dist/*' -not -path '*/output/*' \
-  -not -path '*/.mvn/*' -not -path '*/node_modules/*' \
-  -not -path '*/__pycache__/*' -not -path '*/.venv/*' \
-  -not -name '__debug_bin*' \
-  -not -path '*/gen/*' -not -path '*/kitex_gen/*' -not -path '*/thrift_gen/*' \
-  -not -path '*/.playwright-mcp/*' \
-  -not -name '*.code-workspace' -not -name '.golangci.yml' -not -name 'go.sum' \
-  | sort | head -200
-```
-
-### Step 1.2 — Identify key files
-
-依序讀取下列檔案（若存在）：
-
-1. `package.json` / `go.mod` / `pyproject.toml` / `Cargo.toml` — 語言與依賴
-2. `Makefile` / `Dockerfile` / `docker-compose.yml` — 建置與啟動
-3. `*.config.*` / `.env.example` — 設定形狀
-4. Entry points: `main.*`, `index.*`, `app.*`, `cmd/`
-5. 現有 `README.md`、`CLAUDE.md`、`docs/terminology.md`、`README.business.md`
-   — 進入 `Phase 2` 驗證
-
-### Step 1.3 — Read critical source files
-
-skim 前 5-10 個最重要的原始檔以理解：
-
-- 核心 domain models / types
-- 主要 entry point 邏輯
-- API routes 或 CLI commands
-- 關鍵業務規則或演算法
-
-不要逐檔閱讀，只看高訊號檔案。
-
-### Step 1.4 — Identify business domains
-
-這是關鍵的分析步驟。把所有 handler / service / module 分組成
-`業務領域 (Business Domains)`：
-
-1. 列出所有 handler/controller/route 檔案
-2. 識別共同主題與目的
-3. 分組成 3-7 個領域
-4. 為每個領域追溯資料流：`entry point → service → repository → external`
-
----
-
-## Phase 2 — Verify（`audit` 與 `refresh` 必做）
-
-文件在程式碼改動的當下就開始漂移。本階段找出漂移，不改寫。每個發現都必須
-把一句文件宣稱配上一個矛盾的事實。
-
-1. 從 `README.md`、`CLAUDE.md`、`docs/terminology.md`、`README.business.md`
-   抽出所有可驗證的宣稱 — 檔案/目錄路徑、指令、模組對應、entry point、
-   設定路徑、版本 pin、數量清單、術語與狀態值。
-2. 逐條對 repo 驗證：路徑存在嗎？指令跑得動嗎？函數還在嗎？目錄樹對得上 `find` 嗎？
-3. 以 `doc says X → actually Y` 回報，依檔案分組。
-
-### 最常漂移的宣稱
-
-| Claim type     | 驗證方式                                                  |
-| -------------- | --------------------------------------------------------- |
-| Structure tree | 把文件裡的樹狀圖對 diff 真實目錄樹                        |
-| Module map     | 每個列名的 entry point 仍存在於列名的路徑                 |
-| Build / run    | 文件寫的指令存在，而且仍是實際使用的那一個                |
-| Config paths   | 文件引用的 `~/...` 路徑與程式碼實際讀取的一致             |
-| Counts / lists | `"skills": [...]` 之類的陣列與磁碟上的資料夾一致          |
-| Comments       | 描述某行為的註解，而該行為程式碼已不再具備                |
-| Domain map     | `README.md` 的業務領域仍對應到真實存在的 handler / module |
-| Business flow  | `README.business.md` 的狀態名稱仍能在程式或設定中找到     |
-| Terminology    | `docs/terminology.md` 的術語出處仍存在；且文件中出現的領域名詞都能在術語表找到（同義詞漂移） |
-| Interface      | 統一介面缺件：`AGENTS.md`、`README.todo`、`docs/memory/`、`docs/terminology.md` |
-
-### `audit` 輸出格式
-
-```text
-Doc sync review — <scope>
+[縱向] 文件 vs 程式碼:
 - CLAUDE.md tree: omits plugins/god/ and plugins/superpower/ (both exist)
-- CLAUDE.md module map: DistillCmd() — confirmed at cmd/distill.go
 - README.md: "uses MySQL" → code uses SQLite (model/store.go)
 - README.business.md: state "archived" not found in code
-- docs/terminology.md: missing (統一介面必備)
-- terminology drift: README 用「蒸餾管道」/ CLAUDE.md 用「distiller pipeline」— 未定義於術語表
-```
 
-`audit` 到此為止。要修，改跑 `refresh`：以程式碼為真理來源更新文件，然後重跑
-`Phase 2` 複驗。同步時不得夾帶範圍變更。
+[橫向] 文件 vs 文件:
+- README ↔ CLAUDE: README 列「資料匯出」領域，CLAUDE 模組對應表無此領域
+- README ↔ terminology: README 用「蒸餾管道」，CLAUDE 用「distiller pipeline」— 術語表未定義
+- business ↔ terminology: business 狀態 "pending" vs 術語表 "waiting" — 應統一
+
+[統一介面] 缺件:
+- docs/terminology.md: missing (必備)
+```
 
 ---
 
-## Phase 3 — Write
+## 同步文件 (Syncing Documents)
 
-`refresh` 只改寫 `Phase 2` 證實漂移的段落，保留其餘內容原文。
-`bootstrap` 依模板產出全文。
+檢測後根據模式決定寫入行為。程式碼永遠是真理來源；
+橫向不一致以 `docs/terminology.md` 為裁決依據。
 
-### Step 3.1 — `README.md`
+### 模式 (Modes)
 
-```markdown
-# <Project Name>
+由 Phase 0 自動判定；判定不明時預設 `audit`。
 
-<1-2 句 elevator pitch：解決什麼業務問題>
+| 模式 | 觸發情境 | 寫入行為 |
+| ---- | -------- | -------- |
+| `audit` | 「doc sync」「文件同步」「does the README match」 | 無 — 只輸出一致性報告 |
+| `refresh` | 「更新文件」「explore project」且文件已存在 | 僅改寫已證實不一致的段落 |
+| `bootstrap` | `README.md` 或 `CLAUDE.md` 缺漏、為空、僅剩標題 | 四份文件全產出 + symlinks |
+| `business` | 「業務萃取」「extract business」「上下游分析」 | 僅 `README.business.md` |
 
-## 業務領域 (Business Domains)
+`預設唯讀:` `audit` 是安全預設。`refresh` 與 `bootstrap`
+會寫檔，必須由使用者明確要求或由文件缺漏事實觸發。
 
-### <Domain 1 Name>
+### 同步流程
 
-<2-3 句：此領域做什麼、為何存在、何時觸發>
+#### Phase 0 — 模式判定
 
-`領域流程 (Domain Flow):`
+0. 確認目標是`專案根目錄`而非分類目錄。
+1. 檢查 `README.md` 與 `CLAUDE.md` 是否存在且非空（>10 行有效內容）。
+2. 任一缺漏或為空 → `bootstrap`。
+3. 兩者皆在 → 依觸發詞選 `audit`（預設）或 `refresh`。
+4. 輸入不是完整 workspace，或請求純業務分析 → `business`。
 
-1. <Step 1: entry point / trigger>
-2. <Step 2: core processing>
-3. <Step 3: outcome / side effects>
+輸出判定結果：`Mode: audit（README.md 與 CLAUDE.md 皆存在，未要求寫入）`。
 
-`核心實體 (Key Entities):` <Entity A>, <Entity B>, <Entity C>
+#### Phase 1 — 掃描
 
-`相關處理器 (Related Handlers):` <HandlerX>, <HandlerY>
+`audit` 只需掃到足以驗證的程度；`refresh` / `bootstrap` 需完整掃描。
 
----
+1. `Discover layout` — Glob 探索（排除 `.git`, `node_modules`, `vendor`, `dist`, `gen/` 等噪音）。
+2. `Identify key files` — 讀取依賴檔、建置檔、entry points、現有文件。
+3. `Read critical source` — skim 前 5-10 個高訊號原始檔。不逐檔閱讀。
+4. `Identify business domains` — handler/service/module 分組成 3-7 個業務領域。
 
-### <Domain 2 Name>
+#### Phase 2 — 檢測一致性（`audit` 與 `refresh` 必做）
 
-<同上結構>
+依上方「偵測一致性」章節執行縱向 + 橫向檢測。
 
----
+`audit` 到此為止。要修，改跑 `refresh`：以程式碼為真理來源、`docs/terminology.md`
+為用詞裁決依據更新文件，然後重跑 Phase 2 複驗。同步時不得夾帶範圍變更。
 
-## 領域關聯 (Domain Relationships)
+#### Phase 3 — 寫入（`refresh` / `bootstrap`）
 
-<描述領域之間如何互動。哪個領域的輸出是另一個領域的輸入？有沒有共用實體？>
+`refresh` 只改寫 Phase 2 證實不一致的段落，保留其餘原文。
+`bootstrap` 依樣板產出全文。寫入順序：
 
-## 使用方式 (Usage)
+1. `docs/terminology.md` — 先建立用詞基準
+2. `README.md` — 依術語表用詞撰寫
+3. `CLAUDE.md` — 模組對應與 README 領域對齊
+4. `README.business.md` — 引用已確立的領域與術語
+5. `Symbolic links` — `AGENTS.md` → `CLAUDE.md`；`.geminiignore` → `.gitignore`
 
-<主要 CLI commands、API endpoints、UI flows — 按領域分組>
+各文件依 [references/](references/) 對應樣板產出。
+若連結已存在或目標是普通檔案（log `WARN`）就跳過。
 
-## 改善建議 (Improvement Suggestions)
-
-根據 codebase 分析：
-
-- [ ] 建議 1：理由
-- [ ] 建議 2：理由
-- [ ] 建議 3：理由
-```
-
-`Rules for README.md:`
-
-- 章節標題用繁體中文加英文括號
-- 以 `業務領域 (Business Domain)` 為單位組織，不是以檔案或 handler 為單位
-- 每個領域必須有：描述、流程、核心實體、相關處理器
-- 領域流程要追溯真實程式碼路徑，不要抽象描述
-- 使用專案中實際找到的 function/handler 名稱
-- 改善建議必須具體可執行，根據真實發現；最少 3 個、最多 7 個
-- 建議應涵蓋：領域邊界、缺漏的使用情境、資料流缺口
-
-### Step 3.2 — `CLAUDE.md`
-
-```markdown
-# <Project Name> — 技術脈絡 (Technical Context)
-
-## 專案結構 (Project Structure)
-
-<實際目錄樹，2-3 層深>
-
-## 技術棧 (Tech Stack)
-
-- Language: <detected>
-- Framework: <detected>
-- Build tool: <detected>
-- Key dependencies: <top 5-8 deps>
-
-## 關鍵決策 (Key Decisions)
-
-- Decision 1：為何選擇此做法（從程式碼模式推斷）
-- Decision 2：...
-
-## 模組對應 (Module Mapping)
-
-把每個業務領域（從 README）對應到技術實作：
-
-| 業務領域 (Domain) | 套件/模組 (Package/Module) | 進入點 (Entry Point) |
-| ----------------- | -------------------------- | -------------------- |
-| <Domain 1>        | `pkg/xxx`, `handler/yyy`   | `HandleXxx()`        |
-| <Domain 2>        | `pkg/aaa`, `handler/bbb`   | `HandleAaa()`        |
-
-## 開發指南 (Development Guide)
-
-### 前置需求 (Prerequisites)
-
-- Requirement 1
-- Requirement 2
-
-### 安裝 (Installation)
-
-<專案實際的 install commands>
-
-### 建置 (Build)
-
-<精確的 build commands>
-
-### 測試 (Test)
-
-<精確的 test commands，或註明無測試>
-
-### 部署 (Deploy)
-
-<可偵測的部署方式，或「未偵測到部署設定 (No deployment config detected)」>
-
-## 慣例 (Conventions)
-
-- Naming: <detected patterns>
-- Error handling: <detected patterns>
-- Logging: <detected patterns>
-- Testing: <detected patterns>
-```
-
-`Rules for CLAUDE.md:`
-
-- 章節標題用繁體中文加英文括號
-- 專案結構必須是實際目錄樹，不是模板
-- 必須包含 `模組對應 (Module Mapping)` 表格把領域連結到程式碼位置
-- 關鍵決策應從程式碼模式推斷（例如「uses dependency injection via constructor」而非猜測）
-- Commands 必須是專案裡實際找到的指令，不是佔位符
-- 若偵測不到，明確寫出來，不要編造
-
-### Step 3.3 — `docs/terminology.md`
-
-專案的`術語單一定義來源 (single source of truth for terms)`。README、CLAUDE.md、
-程式碼、commit message 一律引用此處用詞；同一概念不得有第二種說法。
-
-```markdown
-# <Project Name> — 術語表 (Terminology)
-
-## <領域 Domain 1>
-
-| 術語 (Term) | 英文 (English) | 定義 (Definition) | 出處 (Source) |
-| ----------- | -------------- | ----------------- | ------------- |
-| 記憶蒸餾    | Distillation   | 從多來源抽取候選記憶並去重後寫入儲存的流程 | `cmd/memory/distill.go` |
-
-## 狀態值 (Status Values)
-
-| 狀態 | 字面值 (Literal) | 語意 | 出處 |
-| ---- | ---------------- | ---- | ---- |
-
-## 縮寫 (Abbreviations)
-
-| 縮寫 | 全稱 | 說明 |
-| ---- | ---- | ---- |
-```
-
-`Rules for docs/terminology.md:`
-
-- 每筆術語必須有`出處 (Source)`：檔案路徑、識別符、或文件章節；查無出處者不得列入
-- 狀態值以程式碼中的`字面值`為準（如 `"pending"`），不得寫美化過的說法
-- 只收`領域名詞`與專案自訂縮寫；通用技術詞（HTTP、JSON、CLI）不收
-- 一個概念一行；發現同義詞時挑一個為正名，其餘列入定義欄註明「舊稱」
-- 依領域分節，與 `README.md` 的業務領域分節對齊
-- 起始規模 10-30 筆；找不到足夠術語時寫最小表格並註明「待補 (To be extended)」
-
-### Step 3.4 — `README.business.md`（業務萃取八個章節）
-
-八個章節缺一不可。
-
-````markdown
-# <Project Name> — 業務分析 (Business Analysis)
-
-## 業務目的 (Purpose)
-
-<1-3 句：替誰、解決什麼問題、產生什麼業務價值>
-
-## 常見業務操作 (Common Operations)
-
-<以業務動詞描述使用者或排程實際觸發的動作（不是函數名清單）>
-
-## 上下游服務 (Upstream / Downstream)
-
-`上游 (Upstream):` 資料或請求來源（外部服務、資料庫、使用者輸入）
-`本體 (Core):` 本系統的業務處理
-`下游 (Downstream):` 輸出去向（寫入的儲存、呼叫的外部 API、通知對象）
-
-```mermaid
-flowchart LR
-    subgraph upstream [上游 Upstream]
-        A[來源服務]
-    end
-    subgraph core [核心業務 Core]
-        B[業務處理]
-    end
-    subgraph downstream [下游 Downstream]
-        C[目的儲存/服務]
-    end
-    A --> B --> C
-```
-
-## 狀態與流程 (Status / Flow)
-
-<業務物件的生命週期狀態（如 `pending → processed → archived`），
-以 Mermaid `stateDiagram-v2` 呈現；若無明確狀態機，改用 `flowchart TD`
-描述主要業務流程。狀態名稱必須來自實際程式或文件，不可虛構。>
-
-## 業務約束 (Constraints)
-
-列出限制業務行為的規則，每條附上來源依據：
-
-- 准入/品質門檻（如真實性驗證、來源數量要求）
-- 去重/冪等規則
-- 時效/保留政策 (retention)
-- 額度、頻率、排程限制
-
-## 風險偵測 (Risk Detection)
-
-逐項檢查並回報「有/無/不適用」，不可整節省略：
-
-| 風險類別            | 檢查重點                         |
-| :------------------ | :------------------------------- |
-| 身分/合規 (KYC/AML) | 是否處理身分、金流、需驗證的對象 |
-| 隱私 (Privacy)      | 個資、對話紀錄是否外流至第三方   |
-| 資料完整性          | 遺失、重複、競態造成的業務錯誤   |
-| 依賴風險            | 上下游服務不可用時業務是否停擺   |
-
-## 核心業務 (Core Business)
-
-<直接產生主要價值的業務>
-
-## 非核心業務 (Non-core Business)
-
-<支撐核心業務成長的業務（匯出、清理、報表、初始化等），
-每項需註明它如何幫助核心業務>
-````
-
-### Step 3.5 — Symbolic links（僅 `bootstrap`）
-
-寫完 docs 後，執行 setup 腳本建立符號連結以便多個 AI agent 共享設定：
-
-```bash
-bash "$(dirname "$0")/setup-links.sh" "${workspace}"
-```
-
-| Symlink         | Target       | 用途                |
-| --------------- | ------------ | ------------------- |
-| `AGENTS.md`     | `CLAUDE.md`  | 通用 agent context  |
-| `.geminiignore` | `.gitignore` | Gemini CLI 忽略檔案 |
-
-`Safety:` 若連結已存在或目標是普通檔案（會 log `WARN`）就跳過。詳見 `setup-links.sh`。
-
----
-
-## Phase 4 — Report
+#### Phase 4 — 報告
 
 ```text
 ✅ project-docs 完成 — Mode: <audit | refresh | bootstrap | business>
@@ -543,104 +194,82 @@ Symlinks:
 - <Domain 2>: <1-sentence summary>
 ```
 
-`audit` 模式省略行數與 symlink 區塊，只輸出 `Phase 2` 的漂移清單。
+`audit` 模式省略行數與 symlink 區塊，只輸出漂移清單。
 
 ---
 
-## Mode `business` — Business-only Analysis
+### business 模式 — 純業務分析
 
-輸入不是完整 workspace，或明確要求純業務分析時，跳過 `README.md` /
-`CLAUDE.md` / symlinks，僅產出 `README.business.md`。
+輸入不是完整 workspace，或明確要求純業務分析時，
+跳過 `README.md` / `CLAUDE.md` / symlinks，僅產出 `README.business.md`。
 
-### Step B1 — Scope 界定
+1. `Scope 界定` — folder/repo 用 Glob 鎖定 entry points；單一檔案直接讀取；
+   純文字直接分析。
+2. `Core Business & Operations` — 找出系統的存在理由、列出常見業務操作
+   （業務動詞，不是函數名清單）。
+3. `其餘章節` — 依 [readme-business.md](references/readme-business.md) 八章節完成。
+4. `Write Report` — folder/repo 同步寫入兩個位置：
+   - `<target>/README.business.md`
+   - `~/projects/product/projects/<name>/README.business.md`
+   既有檔案先讀取後合併，保留仍正確的內容。
 
-| 輸入型態    | 處理方式                                                      |
-| :---------- | :------------------------------------------------------------ |
-| folder/repo | Glob 頂層結構，鎖定 entry points、handler/service/cmd、設定檔 |
-| 單一檔案    | 直接 Read，必要時追蹤其直接相依檔案                           |
-| 文件/純文字 | 直接分析，不掃描檔案系統                                      |
+---
 
-排除噪音：`.git`, `node_modules`, `vendor`, `dist`, 產生碼 (`gen/`, `*_gen/`)。
-只讀高訊號檔案，不逐檔閱讀。
+## 設計哲學 (Design Philosophy)
 
-### Step B2 — Core Business & Operations
+一個專案可能有幾十個 handler / service / module，但它們只屬於少數幾個
+`業務領域 (Business Domains)`。README 應該以領域為單位組織，不是以檔案或
+handler 為單位。
 
-1. 找出系統存在的理由：它替誰、解決什麼問題、產生什麼價值
-2. 列出常見業務操作：使用者或排程實際觸發的動作，以業務動詞描述
-   （如「蒸餾記憶」「匯出資料」），不是函數名清單
-
-### Step B3 — 其餘章節
-
-依 `Step 3.4` 的八章節模板完成上下游、狀態流程、約束、風險、核心/非核心。
-
-### Step B4 — Write Report
-
-folder/repo 輸入時，報告同步寫入兩個位置（`<name>` 為目標路徑最後一段，
-即專案名稱；位於分類目錄下的專案也只取`專案名`，不含 `<category>/` 前綴）：
-
-1. `<target>/README.business.md` — 分析目標根目錄
-2. `~/projects/product/projects/<name>/README.business.md` — 集中產品文件庫
-   （目錄不存在時先 `mkdir -p` 建立）
-
-使用者指定路徑時以指定為準；純文字輸入且未指定路徑時，輸出於對話並
-詢問是否落檔。既有檔案先讀取後合併，保留仍正確的內容。
+`專案位址:` 目標 repo 可能位於 `~/projects/<project>/`
+或 `~/projects/<category>/<project>/`。分類目錄`本身不是專案`，
+不要對它跑 `bootstrap`。要確認歸屬，先用 `[[project-route]]`。
 
 ---
 
 ## Rules
 
 - 章節標題用繁體中文加英文括號；內文遵循輸入專案的原始語言慣例
-- 寫入前先驗證：`refresh` 未經 `Phase 2` 佐證的段落不得改寫
+- 寫入前先驗證：`refresh` 未經 Phase 2 佐證的段落不得改寫
 - 四份文件用詞一律以 `docs/terminology.md` 為準；發現新名詞先入表再使用
 - 八個業務章節缺一不可；查無資料的章節明寫「未偵測到 (Not detected)」
-- 禁止技術實作細節進入 `README.business.md`：建置、部署、設定同步、套件清單都不屬於業務
-- 圖表一律 Mermaid；Mermaid 邊線文字必須雙引號包覆（`A -->|"文字"| B`）
+- 禁止技術實作細節進入 `README.business.md`
+- 圖表一律 Mermaid；邊線文字必須雙引號包覆（`A -->|"文字"| B`）
 - 狀態與名詞必須有程式或文件依據，禁止虛構
 - 不使用粗體強調，改用 `backtick`
+- 同步只對齊事實，範圍變更另案提出
 
 ## Common Mistakes
 
-| 錯誤                               | 修正                                    |
-| ---------------------------------- | --------------------------------------- |
-| 沒驗證就整份覆寫既有 README        | 先跑 `Phase 2`，只改證實漂移的段落      |
-| 把環境初始化、設定同步當成業務領域 | 歸入非核心或直接排除                    |
-| 只描述流程、不畫狀態機             | 業務物件有狀態欄位就必須有 stateDiagram |
-| 略過風險章節因為「看起來沒風險」   | 逐類別回報「無」也是結論                |
-| 全部列為核心業務                   | 強制二分，非核心需說明如何支撐核心      |
-| 用函數名稱清單冒充業務操作         | 改寫為業務動詞 + 觸發者 + 結果          |
-| 同步文件時順手改了業務範圍         | 同步只對齊事實，範圍變更另案提出        |
-| 術語表塞入通用技術詞 (HTTP/JSON)   | 只收領域名詞與專案自訂縮寫              |
-| 對分類目錄跑 `bootstrap`           | 分類不是專案；逐一處理其下的專案        |
+| 錯誤 | 修正 |
+| ---- | ---- |
+| 沒驗證就整份覆寫既有 README | 先跑 Phase 2，只改證實漂移的段落 |
+| 把環境初始化、設定同步當成業務領域 | 歸入非核心或直接排除 |
+| 只描述流程、不畫狀態機 | 業務物件有狀態欄位就必須有 stateDiagram |
+| 略過風險章節因為「看起來沒風險」 | 逐類別回報「無」也是結論 |
+| 全部列為核心業務 | 強制二分，非核心需說明如何支撐核心 |
+| 用函數名稱清單冒充業務操作 | 改寫為業務動詞 + 觸發者 + 結果 |
+| 術語表塞入通用技術詞 (HTTP/JSON) | 只收領域名詞與專案自訂縮寫 |
+| 對分類目錄跑 `bootstrap` | 分類不是專案；逐一處理其下的專案 |
 
 ## Failure Modes
 
-| 情境                               | 動作                                                          |
-| ---------------------------------- | ------------------------------------------------------------- |
-| Workspace is empty                 | 寫最小 stub，註明「空專案 (Empty project)」                   |
-| Cannot detect language/framework   | 在對應章節註明「未偵測到 (Not detected)」                     |
-| 既有 README/CLAUDE 有價值內容      | 合併 — 經 `Phase 2` 驗證後保留有效章節，只更新漂移部分        |
-| 太多檔案無法全掃                   | 聚焦頂層 + entry points，註明「僅掃描部分檔案 (Partial scan)」 |
-| 找不到明確狀態機                   | 改用 flowchart 描述業務流程並註明                             |
-| 業務邊界不明                       | 依目錄/模組分組並註明「邊界不明確」                           |
-| 文件宣稱的指令無法執行             | 回報為漂移，不要自行發明替代指令                              |
-| 任一位置已有 `README.business.md`  | 讀取後合併更新，保留仍正確的內容                              |
-| 找不到足夠術語建表                 | 寫最小表格並註明「待補 (To be extended)」，不得虛構定義        |
-| 目標路徑是分類目錄 (category)      | 停止並列出其下專案，請使用者指定；或逐一處理                  |
-
-## Important
-
-- Never fabricate information. If you cannot determine something, say so.
-- Code is the source of truth; docs are synchronized to it, never the reverse.
-- Preserve any existing content that is still accurate.
-- Commands must be real commands found in the project, not placeholders.
-- Organize README by business domain, not by file structure.
-- Business chapters must come from code/doc evidence — never invent upstream
-  services, states, or constraints.
+| 情境 | 動作 |
+| ---- | ---- |
+| Workspace is empty | 寫最小 stub，註明「空專案 (Empty project)」 |
+| Cannot detect language/framework | 在對應章節註明「未偵測到 (Not detected)」 |
+| 既有 README/CLAUDE 有價值內容 | 合併 — 經 Phase 2 驗證後保留有效章節，只更新漂移部分 |
+| 太多檔案無法全掃 | 聚焦頂層 + entry points，註明「僅掃描部分檔案 (Partial scan)」 |
+| 找不到明確狀態機 | 改用 flowchart 描述業務流程並註明 |
+| 業務邊界不明 | 依目錄/模組分組並註明「邊界不明確」 |
+| 文件宣稱的指令無法執行 | 回報為漂移，不要自行發明替代指令 |
+| 找不到足夠術語建表 | 寫最小表格並註明「待補 (To be extended)」 |
+| 目標路徑是分類目錄 | 停止並列出其下專案，請使用者指定 |
 
 ## Related
 
-- `[[project-route]]` 先解析路徑歸屬（`<project>` 或 `<category>/<project>`），再進入本技能
+- `[[project-route]]` 先解析路徑歸屬，再進入本技能
 - `[[system-planner]]` 當真實目錄樹本身有問題，而非文件寫錯
-- `[[consistency]]` 處理程式碼對程式碼的矛盾，而非文件對程式碼；術語衝突以 `docs/terminology.md` 為裁決依據
-- `[[tutorial]]` 產出 `docs/tutorials/` 學習導向文件，與正典文件互補；其術語以 `docs/terminology.md` 為準
+- `[[consistency]]` 處理程式碼對程式碼的矛盾；術語衝突以 `docs/terminology.md` 為裁決依據
+- `[[tutorial]]` 產出 `docs/tutorials/` 學習導向文件；其術語以 `docs/terminology.md` 為準
 - `ultra-explore` 處理跨 repo 知識庫；本技能綁定單一 repo 根目錄
