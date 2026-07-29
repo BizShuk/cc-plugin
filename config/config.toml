@@ -145,10 +145,7 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/iphone/md-viewer"]
 trust_level = "trusted"
 
-[projects."/Users/shuk/projects/platform"]
-trust_level = "trusted"
-
-[projects."/Users/shuk/projects/platform/n8n"]
+[projects."/Users/shuk/projects/iphone/surf_eye"]
 trust_level = "trusted"
 
 [tui]
