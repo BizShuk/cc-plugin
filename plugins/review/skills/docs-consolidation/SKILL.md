@@ -13,10 +13,18 @@ description: >
     the next one is generated. Use when specs or plans have piled up, when
     `CLAUDE.md` or `README.todo` has grown a long history tail, after shipping
     a batch of features, or before onboarding someone to a long-lived repo.
+    Also runs a `scope cleanup` mode that removes from `README.md` and
+    `CLAUDE.md` what does not belong there — another repo's internals,
+    history already recorded in `docs/CHANGELOG.md`, measured numbers that
+    rot on the next commit, duplicated trees and sections, machine-specific
+    absolute paths, and executable assertions that no one runs — relocating
+    each to its rightful owner or automating it into a test or script.
     Triggers on: "consolidate docs", "merge specs", "clean up plans",
     "move changelog", "archive todo", "文件整併", "合併規格", "整理 plans",
-    "搬移變更紀錄", "整理已完成待辦", "docs consolidation".
-version: "1.1.0"
+    "搬移變更紀錄", "整理已完成待辦", "docs consolidation", "scope cleanup",
+    "doc scope", "文件瘦身", "範疇清理", "這兩份文件不該有什麼",
+    "what should not be in README".
+version: "1.2.0"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
 disable-model-invocation: false
@@ -34,6 +42,16 @@ metadata:
 把正典文件（canonical docs）越撐越長。本技能把`兩週以前`的歷史壓縮成`每個資料夾一份`的摘要表，
 只保留仍然存在於 workspace 的功能，其餘轉為 `README.md` 的淘汰註記；
 並把已完成的變更紀錄搬到 `docs/CHANGELOG.md`，讓正典文件只描述`現況`。
+
+本技能有`兩個模式`，可分別執行也可接續執行：
+
+| 模式                       | 對象                                  | 問題                       |
+| -------------------------- | ------------------------------------- | -------------------------- |
+| `整併 (Consolidate)`：預設 | `docs/specs/`、`plans/`、變更紀錄章節 | 歷史文件太多，壓縮成摘要表 |
+| `範疇清理 (Scope Cleanup)` | `README.md`、`CLAUDE.md` 本身         | 正典文件裡有`不該在那裡`的內容 |
+
+兩者互補：`整併`處理`歷史文件的數量`，`範疇清理`處理`正典文件的內容歸屬`。
+使用者問「這兩份文件不該有什麼」、「文件瘦身」、「範疇清理」時走後者。
 
 | 來源 (Source)                 | 產出 (Output)                        | 舊產物 (Previous) |
 | ----------------------------- | ------------------------------------ | ----------------- |
@@ -53,6 +71,14 @@ metadata:
 - 接手長期 repo，需要一張「有什麼功能、怎麼用、值多少」的表
 - `CLAUDE.md` 長出一段越寫越長的變更紀錄，或 `README.todo` 的 `## Archive` 佔滿整個檔案
 - 定期維護（如每季）壓縮文件目錄
+
+`範疇清理`模式另適用於：
+
+- 使用者問「這兩份文件不該有什麼」、要求文件瘦身或範疇稽核
+- `README.md` 與 `CLAUDE.md` 出現重複章節或兩份會分岔的結構樹
+- 正典文件裡有描述`外部 repo` 的章節（本 repo 無法 build 或 test 它）
+- 文件裡有整段可執行的驗證指令，但沒有任何 CI 或測試在跑
+- 大型重構之後，正典文件仍在描述`曾經如何`
 
 不適用：`docs/backlog/`（尚未實作的想法，沒有「是否仍存在」可驗證）、
 `docs/memory/`（歷史決策本身就是保存目的）、`docs/tutorials/`（教學文件用
@@ -79,10 +105,32 @@ metadata:
       未勾選項目與其他章節不動。
 - `docs/CHANGELOG.md` 只增不減：既有內容不得改寫、重排或刪除，新條目`合併`進去。
 
+## 範疇判準 (Scope Ownership)
+
+`範疇清理`模式的唯一判準是一個問題：**「這句話會因為什麼而變成假的？」**
+
+| 失效原因                                          | 歸屬                                                        | 典型徵狀                                             |
+| ------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------- |
+| 別的 repo 改動                                    | 那個 repo；只留`消費端契約`                                 | 章節以「本節描述`外部 repo`」開頭                    |
+| 時間經過（已經發生的事）                          | `docs/CHANGELOG.md`                                         | `已移除` / `已解體` / `已併回` / `不再` / `原 X 是`  |
+| 還沒做完                                          | `README.todo`                                               | 「不另立 X」「暫不支援 Y」其實是待辦                 |
+| 一次 commit（行數、檔案數、byte 上限、module 數） | 刪除                                                        | `333→101 行`、`共 10 個 module`、`上限 128 MiB`      |
+| 程式碼改了，且可用指令驗證                        | 測試或 `scripts/`                                           | 文件裡整段可執行的 `grep` / `go list` 斷言           |
+| 換一台機器                                        | 相對路徑                                                    | `/Users/<name>/...`、`~/projects/<other-repo>/...`   |
+| 都不會失效（不變式）                              | 留在 `CLAUDE.md`                                            | 「只有 X 可以 import Y」                             |
+
+`README.md` 是`為什麼用它、怎麼開始`；`CLAUDE.md` 是`邊界是什麼、誰擁有什麼`。
+一個事實只能有`一個` owner —— 兩份重複的結構樹必然分岔，且`兩份都會不準`。
+
+`消費端契約 (consumer-side contract)` 是唯一可以描述外部 repo 的內容：誰能 import 它、
+誰擁有哪張對照表、優先序是什麼。它的對立面是`實作細節`（對方的檔案權限、預設 port、
+內部路由表）—— 判準是`本 repo 能不能 build 或 test 它`，不能就不寫。
+
 ## 執行程序 (Procedure)
 
 各階段的指令、判定表與輸出樣板見
-[references/procedure.md](references/procedure.md)。
+[references/procedure.md](references/procedure.md)；
+`範疇清理`模式見 [references/scope-cleanup.md](references/scope-cleanup.md)。
 
 | Phase         | 動作                                                                | 產物                                |
 | ------------- | ------------------------------------------------------------------- | ----------------------------------- |
@@ -95,6 +143,19 @@ metadata:
 
 `先寫後刪`：Phase 4 的寫入失敗時，絕不進入刪除步驟；
 變更紀錄同理，`docs/CHANGELOG.md` 寫入成功之後才清空 `CLAUDE.md` 與 `README.todo` 的原章節。
+
+`範疇清理`模式的階段（細節見 `references/scope-cleanup.md`）：
+
+| Phase           | 動作                                                       | 產物                     |
+| --------------- | ---------------------------------------------------------- | ------------------------ |
+| S0 `Audit`      | 逐段套範疇判準，每筆標`失效原因`與`目的地`                 | 處置表（doc 說 X → 實際 Y） |
+| S1 `Automate`   | 可執行的斷言先落成測試／腳本，並`注入違規證明它會紅`       | 測試檔／`scripts/`       |
+| S2 `Verify dst` | 確認要搬的內容`目的地已有`；已有則是`刪除`不是搬移         | 前提查核結果             |
+| S3 `Cut`        | 以 anchor 文字（非行號）逐段刪改                           | 瘦身後的正典文件         |
+| S4 `Sweep`      | `重讀全文`找殘留：懸空引用、被刪章節的交叉連結、孤立表格列 | 殘留清單                 |
+| S5 `Lint`       | 連結解析、機器路徑、外部細節、測試與腳本全綠               | 驗收輸出                 |
+
+`先自動化再刪除`：S1 未完成前不得進入 S3 —— 否則斷言會出現無人把關的空窗期。
 
 ## Rules
 
@@ -110,6 +171,17 @@ metadata:
 - 變更紀錄條目`原文照搬`，不重寫措辭、不合併相似項
 - `CLAUDE.md` 與 `README.todo` 只做`就地移除已搬走的條目`，檔案本身不刪、其他章節不動
 - 日期`未定`的條目留在原檔，不搬進 `docs/CHANGELOG.md`
+
+`範疇清理`模式另加：
+
+- 稽核先於改寫：每筆先寫成 `doc 說 X → 實際 Y`，經確認才動手
+- 刪除前必須`實測目的地已有該內容`，否則是遺失不是搬移
+- 文件裡的斷言`預設為錯`，一律先實跑；把錯的斷言原樣搬進測試等於固化錯誤
+- guard test 必須`注入違規證明它會紅`，天生全綠的守護測試等於沒寫
+- 編輯用 anchor 文字定位，`不用行號` —— 前面的刪除會讓後面的行號全部失效
+- 刪完`重讀全文`，不只看改動處：被刪章節的交叉引用會變成懸空
+- 驗證工具必須唯讀；會寫檔的建置指令要導向暫存目錄
+- 不預告最終行數 —— 刪完才知道，硬湊數字只能靠刪真契約
 
 常見錯誤與失效情境處置見
 [references/troubleshooting.md](references/troubleshooting.md)。

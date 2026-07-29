@@ -82,3 +82,26 @@
 
 - golang-dev skill for golang structure
 - pm2 skill for pm2 structure
+
+### 內容歸屬 (Content Ownership)
+
+`README.md` 是`為什麼用它、怎麼開始`；`CLAUDE.md` 是`邊界是什麼、誰擁有什麼`。
+一個事實只能有`一個` owner —— 重複的兩份必然分岔，結果是兩份都不準。
+
+歸屬用單一問題判定：「這句話會因為什麼而變成假的？」
+
+| 失效原因                                          | 歸屬                                                                     |
+| ------------------------------------------------- | ------------------------------------------------------------------------ |
+| 別的 repo 改動                                    | 那個 repo；本檔只留`消費端契約`（誰能 import、誰擁有哪張對照、優先序）   |
+| 時間經過（已經發生的事）                          | `docs/CHANGELOG.md`                                                      |
+| 還沒做完                                          | `README.todo`                                                            |
+| 一次 commit（行數、檔案數、byte 上限、module 數） | 刪除；量測值屬於程式碼與測試                                             |
+| 程式碼改了，且可用指令驗證                        | 測試或 `scripts/`；文件只留一句規則 + 測試名稱                           |
+| 換一台機器（絕對路徑）                            | 改相對路徑或 `$(git rev-parse --show-toplevel)`                          |
+| 都不會失效（不變式）                              | 留在 `CLAUDE.md`                                                         |
+
+- 結構樹、ownership、架構決策由 `CLAUDE.md` 單一擁有，`README.md` 用一行指過去。
+- `README.md` 出現需要先讀原始碼才懂的型別名，就是越界。
+- 寫得出 pass/fail 的斷言不放 Markdown ——`沒人執行的斷言會腐爛成錯誤資訊`。
+  先把斷言自動化，才有資格刪文件。
+- 稽核與瘦身用 `[[docs-consolidation]]` 的`範疇清理 (Scope Cleanup)` 模式。
