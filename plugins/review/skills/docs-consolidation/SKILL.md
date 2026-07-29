@@ -31,7 +31,7 @@ metadata:
 
 `docs/specs/` 與 `plans/` 會隨時間累積成一堆單次性文件，每份都只記錄「當時想做什麼」，
 沒有人回頭讀；`CLAUDE.md` 的變更紀錄章節與 `README.todo` 的 `## Archive` 同樣只增不減，
-把正典文件 (canonical docs) 越撐越長。本技能把`兩週以前`的歷史壓縮成`每個資料夾一份`的摘要表，
+把正典文件（canonical docs）越撐越長。本技能把`兩週以前`的歷史壓縮成`每個資料夾一份`的摘要表，
 只保留仍然存在於 workspace 的功能，其餘轉為 `README.md` 的淘汰註記；
 並把已完成的變更紀錄搬到 `docs/CHANGELOG.md`，讓正典文件只描述`現況`。
 
@@ -84,14 +84,14 @@ metadata:
 各階段的指令、判定表與輸出樣板見
 [references/procedure.md](references/procedure.md)。
 
-| Phase | 動作 | 產物 |
-| ----- | ---- | ---- |
-| 0 `Preflight` | 確認專案根目錄、git 乾淨、算出兩週門檻 | 門檻日期 |
-| 1 `Inventory` | 列出文件來源與變更紀錄條目，判定各自日期 | 來源清單 + 條目清單 |
-| 2 `Extract` | 逐份讀取，抽出日期／功能／使用方式／價值 | 四欄表格列 |
-| 3 `Verify` | 驗證每列的功能是否仍存在於 workspace | live / deprecated / unknown |
-| 4 `Write` | 寫摘要檔 → 補 README 側記 → `git rm` 來源 → 搬變更紀錄 → 清空原章節 | 摘要檔 + 側記 + `docs/CHANGELOG.md` |
-| 5 `Report` | 回報門檻、列數、刪除清單、搬移條數與待確認項 | 報告 |
+| Phase         | 動作                                                                | 產物                                |
+| ------------- | ------------------------------------------------------------------- | ----------------------------------- |
+| 0 `Preflight` | 確認專案根目錄、git 乾淨、算出兩週門檻                              | 門檻日期                            |
+| 1 `Inventory` | 列出文件來源與變更紀錄條目，判定各自日期                            | 來源清單 + 條目清單                 |
+| 2 `Extract`   | 逐份讀取，抽出日期／功能／使用方式／價值                            | 四欄表格列                          |
+| 3 `Verify`    | 驗證每列的功能是否仍存在於 workspace                                | live / deprecated / unknown         |
+| 4 `Write`     | 寫摘要檔 → 補 README 側記 → `git rm` 來源 → 搬變更紀錄 → 清空原章節 | 摘要檔 + 側記 + `docs/CHANGELOG.md` |
+| 5 `Report`    | 回報門檻、列數、刪除清單、搬移條數與待確認項                        | 報告                                |
 
 `先寫後刪`：Phase 4 的寫入失敗時，絕不進入刪除步驟；
 變更紀錄同理，`docs/CHANGELOG.md` 寫入成功之後才清空 `CLAUDE.md` 與 `README.todo` 的原章節。

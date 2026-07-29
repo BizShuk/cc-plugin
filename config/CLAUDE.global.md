@@ -13,7 +13,31 @@
 
 ## Directory structure
 
-### Project category
+- 見到 `# [context_only]` 時，忽略該行至行尾的輸出
+- 遇到執行錯誤時，先嘗試修復，最多重試 5 次；若仍無法解決則明確報錯並停止
+- git worktree branch should be name with `w-<feature>` or `agent-<feature>`
+
+### 慣例 (Convention)
+
+既有慣例 (convention) 不得額外建立自訂選項。
+例如 `gosdk` 已有 app log dir / app config dir / app data dir，service layer 不得再建 config path 指向 data dir。
+
+### 計畫與規格命名 (Plan & Spec Naming)
+
+`plans/` 與 `docs/specs/` 統一採用 `YYYY-MM-DD-<topic>.md` 格式：
+
+- 日期：本地時區（Asia/Taipei），與既有 `docs/memory/` convention 一致
+- `<topic>`：kebab-case 英文 topic name，必須 meaningful to the change（例：`windows-11-desktop-receiver`）
+- 範例：✅ `2026-07-25-windows-11-desktop-receiver.md`；❌ `delegated-wishing-spark.md`
+- 反例（system-generated slug，禁止使用）：`hashed-dancing-pascal.md`、`partitioned-rolling-gosling.md`
+
+例外：plan-mode 系統啟動時自動產生的暫存檔（隨機 slug 命名）僅在 plan mode 內部使用，**離開 plan mode 前必須** rename 為正式檔名，並同步更新所有 cross-reference（README、CLAUDE.md、specs、plans）。
+
+### 演化 (Evolution)
+
+- 多次遭遇相同錯誤/問題時，將解法記錄至 Memory
+
+## 目錄佈局 (Directory Layout)
 
 `~/projects/` 是`兩層 (two-level)` 結構：專案可放在根目錄，也可放在分類目錄之下。
 
