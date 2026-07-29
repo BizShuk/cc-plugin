@@ -39,25 +39,17 @@
 
 ---
 
-### LLM CLI 統一入口 (LLM CLI Façade)
-
-`autop` 已抽成獨立 package，完整需求、設定、命令與 PM2 流程見
-[`cmd/autop/README.md`](cmd/autop/README.md)。
-
----
-
 ### 環境初始化與配置同步 (Environment Initialization & Config Sync)
 
-透過 `run.sh`（macOS/Unix）將本庫的設定檔與範本軟連結至使用者的家目錄資料夾（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes` 等），同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。
+透過 `run.sh`（macOS/Unix）將本庫的設定檔與範本軟連結至使用者的家目錄資料夾（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes` 等），同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。切換供應商的方式是把 `~/.claude/settings.json` 的連結目標改指向對應的 `config/<provider>.json`。
 
 `領域流程 (Domain Flow):`
 
 1. 執行 `run.sh` → 建立家目錄結構
-2. 軟連結全域設定檔（`CLAUDE.global.md`、`settings.json`）→ 至 Claude Code 與 Gemini CLI
-3. 複製或連結外部工具設定（LiteLLM、CCStatusline、Tokscale）
-4. 建立本專案 `tmp/` 下的反向連結以供調試
+2. 軟連結全域設定檔（`CLAUDE.global.md`、`settings.json`）→ 至 Claude Code、Gemini CLI、Codex、Hermes
+3. 複製或連結外部工具設定（LiteLLM、CCStatusline、Tokscale），並建立 `tmp/` 反向連結以供調試
 
-`核心實體 (Key Entities):` `CLAUDE.global.md`, `settings.json`, `litellm_config.yaml`
+`核心實體 (Key Entities):` `Active settings`, `Provider settings`, `Global rule`（定義見 [`docs/terminology.md`](docs/terminology.md)）
 
 `相關處理器 (Related Handlers):` `run.sh`
 
@@ -93,12 +85,8 @@
 - `記憶蒸餾管道` 的輸出（`Memory`、`Fact`）寫入外部記憶儲存庫，而 `資料匯出` 則可從同一儲存庫反向匯出資料
 - `環境初始化` 負責將 `AI 技能與代理` 的設定檔同步至各個 AI Agent 的家目錄
 - `資料匯出` 與 `記憶蒸餾管道` 共用 `StateStore`（遊標機制）以支援增量操作
-- `autop` 的 client、template、task prompt、permission bypass、model 與 effort 定義集中
-  於 [`cmd/autop/`](cmd/autop/)；provider-specific flags 由 autop driver 統一映射。
 
 ## 使用方式 (Usage)
-
-Autop 的實際使用方式與範例集中在 [`cmd/autop/README.md`](cmd/autop/README.md)。
 
 ### 記憶蒸餾
 
@@ -152,17 +140,5 @@ chmod +x run.sh && ./run.sh
 npx skills add .
 ```
 
-## 改善建議 (Improvement Suggestions)
-
-Based on codebase analysis:
-
-- [ ] `readClaudeMemLogic()` 在 `cmd/memory/read_logic.go` 中重複建立 `StateStore`，應接收外部傳入的 store 以避免連線浪費
-- [ ] `cmd/export/gbrain.go` 與 `cmd/memory/read_logic.go` 中 `readGbrainLogic` / `gbrainRead` 功能幾乎重複，應整合為共用函數
-- [ ] `cmd/memory/write_agentmemory.go` 中 `resp.Body` 的 `defer resp.Close()` 在迴圈內使用可能造成資源延遲釋放
-
-## 已淘汰功能 (Deprecated Features)
-
-| 淘汰日期 | 功能 | 原始文件 | 說明 |
-| -------- | ---- | -------- | ---- |
-| 2026-07-22 | `media` plugin | `2026-06-17-media-plugin.md` | 已於 `de4fad1` 自 `plugins/` 移除，三個影片／劇本技能無替代 |
-| 2026-07-22 | `golang-dev` skill | `2026-05-19-golang-dev-skill-design.md` | 已移出本 repo，現位於 `~/.claude/skills/golang-dev` |
+待辦與改善項目見 [`README.todo`](README.todo)；已淘汰功能見
+[`docs/specs/2026-07-22-Summary.md`](docs/specs/2026-07-22-Summary.md) 的「已淘汰」章節。

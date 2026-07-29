@@ -1,32 +1,41 @@
 {
   "name": "shuk-cc-plugin",
   "owner": {
-    "name": "DevTools Team",
-    "email": "devtools@example.com"
+    "name": "Shuk Liu",
+    "email": "shuk.liu@gmail.com"
   },
   "plugins": [
     {
-      "name": "tools",
-      "source": "./plugins/tools"
+      "name": "experiment",
+      "source": "./plugins/experiment"
     },
     {
       "name": "explore",
       "source": "./plugins/explore"
     },
     {
-      "name": "pm2",
-      "source": {
-        "source": "github",
-        "repo": "bizshuk/pm2"
-      }
-    },
-    {
       "name": "general",
       "source": "./plugins/general"
     },
     {
-      "name": "experiment",
-      "source": "./plugins/experiment"
+      "name": "god",
+      "source": "./plugins/god"
+    },
+    {
+      "name": "review",
+      "source": "./plugins/review"
+    },
+    {
+      "name": "team",
+      "source": "./plugins/team"
+    },
+    {
+      "name": "tools",
+      "source": "./plugins/tools"
+    },
+    {
+      "name": "ultra-explore",
+      "source": "./plugins/ultra-explore"
     },
     {
       "name": "gosdk",
@@ -43,10 +52,6 @@
       }
     },
     {
-      "name": "review",
-      "source": "./plugins/review"
-    },
-    {
       "name": "ip-incubation",
       "source": {
         "source": "github",
@@ -54,12 +59,11 @@
       }
     },
     {
-      "name": "team",
-      "source": "./plugins/team"
-    },
-    {
-      "name": "ultra-explore",
-      "source": "./plugins/ultra-explore"
+      "name": "pm2",
+      "source": {
+        "source": "github",
+        "repo": "bizshuk/pm2"
+      }
     }
   ]
 }

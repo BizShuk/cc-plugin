@@ -51,7 +51,7 @@
             "Bash(git:*)",
             "Bash(cat:*)",
             "Bash(chmod +x:*)",
-            "Read(//Users/shuk/.gbrain/**)"
+            "Read(~/.gbrain/**)"
         ],
         "deny": [
             "Read(~/.ssh/**)",

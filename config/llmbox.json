@@ -55,7 +55,7 @@
             "Bash(git:*)",
             "Bash(cat:*)",
             "Bash(chmod +x:*)",
-            "Read(//Users/shuk/.gbrain/**)"
+            "Read(~/.gbrain/**)"
         ],
         "deny": [
             "Read(~/.ssh/**)",
@@ -82,7 +82,6 @@
         "MY_TOKEN",
         "HOOK_SECRET"
     ],
-    "CLAUDE_CODE_DISABLE_FAST_MODE": "1",
     "skillListingBudgetFraction": 0.02,
     "statusLine": {
         "type": "command",

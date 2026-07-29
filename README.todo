@@ -1,12 +1,19 @@
 # TODO
 
-- [ ] Review plugin consolidation
+- [ ] `readClaudeMemLogic()`（`cmd/memory/read_logic.go`）重複建立 `StateStore`，應改為接收外部傳入的 store
+- [ ] `cmd/export/gbrain.go` 的 `gbrainRead` 與 `cmd/memory/read_logic.go` 的 `readGbrainLogic` 功能幾乎重複，應整合為共用函數
+- [ ] `cmd/memory/write_agentmemory.go` 迴圈內的 `defer resp.Body.Close()` 會延遲釋放連線
+- [ ] `plugins/experiment` 中已穩定的 skill（`firecrawl`／`mermaid`／`model-evaluator`／`playwright-cli`／`scrapling`）遷出至正式插件
 
 ## Archive
 
-- [x] [Viper 預設值單一來源](docs/specs/2026-07-02-architecture-config-externalization.md)
-- [x] [結構化日誌](docs/specs/2026-07-02-architecture-structured-logging.md)
-- [x] [Topology 套件與 CLI](docs/specs/2026-07-02-topology-extraction.md)
-- [x] [Skill metadata 標準化](docs/specs/2026-07-06-skill-metadata-standardization.md)
-- [x] [Feature agent 與專門 agent 邊界](docs/specs/2026-05-14-feature-agent-design.md)
-- [x] [一致性清理與結構性整合](docs/memory/2026-07-16-consolidation-and-structural.md)
+已整併的設計文件統一入口：
+[`docs/specs/2026-07-22-Summary.md`](docs/specs/2026-07-22-Summary.md)（原始檔名清單見該檔「來源檔案」）
+
+- [x] Viper 預設值單一來源（2026-07-02）
+- [x] 結構化日誌 `log/slog`（2026-07-02）
+- [x] `pkg/topology` 套件與 CLI（2026-07-02）
+- [x] Skill metadata 標準化（2026-07-06）
+- [x] Feature agent 與專門 agent 邊界（2026-05-14）
+- [x] [一致性清理與結構性整合](docs/memory/2026-07-16-consolidation-and-structural.md)（2026-07-16）
+- [x] `config/*.json` 六份供應商設定：修正錯誤家目錄路徑、`Read(~/.gbrain/**)`、`Edit(**/.git)` 與 `ENABLE_TOOL_SEARCH` 飄移（2026-07-29）

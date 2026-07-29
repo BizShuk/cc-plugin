@@ -430,3 +430,7 @@ plans/draft.md
 .md-tree-highlight/
 data/state_store.db/
 .gitignore
+
+# Skill 依賴的本機 clone（非 submodule，不進 .gitmodules）
+
+plugins/experiment/skills/summarize.sh/

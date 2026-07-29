@@ -30,7 +30,7 @@
             "Bash(git:*)",
             "Bash(cat:*)",
             "Bash(chmod +x:*)",
-            "Read(//Users/shuk/.gbrain/**)"
+            "Read(~/.gbrain/**)"
         ],
         "deny": [
             "Read(~/.ssh/**)",
@@ -39,7 +39,10 @@
             "Read(~/.claude/settings.json)",
             "Edit(**/.git)"
         ],
-        "ask": ["Bash(git push:*)", "Read(.env*)"],
+        "ask": [
+            "Bash(git push:*)",
+            "Read(.env*)"
+        ],
         "defaultMode": "auto",
         "additionalDirectories": []
     },
@@ -47,8 +50,13 @@
     "worktree": {},
     "enableWorkflows": true,
     "defaultShell": "bash",
-    "allowedHttpHookUrls": ["http://localhost:*"],
-    "httpHookAllowedEnvVars": ["MY_TOKEN", "HOOK_SECRET"],
+    "allowedHttpHookUrls": [
+        "http://localhost:*"
+    ],
+    "httpHookAllowedEnvVars": [
+        "MY_TOKEN",
+        "HOOK_SECRET"
+    ],
     "statusLine": {
         "type": "command",
         "command": "npx ccstatusline",
@@ -71,7 +79,7 @@
         "shuk-cc-plugin": {
             "source": {
                 "source": "directory",
-                "path": "/Users/bytedance/projects/cc-plugin"
+                "path": "/Users/shuk/projects/cc-plugin"
             }
         }
     },

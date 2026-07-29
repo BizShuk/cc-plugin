@@ -96,7 +96,7 @@ metadata:
 Doc consistency review — <scope>
 
 [縱向] 文件 vs 程式碼:
-- CLAUDE.md tree: omits plugins/god/ and plugins/superpower/ (both exist)
+- CLAUDE.md tree: omits plugins/god/ and plugins/team/ (both exist)
 - README.md: "uses MySQL" → code uses SQLite (model/store.go)
 - README.business.md: state "archived" not found in code
 
