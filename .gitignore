@@ -434,3 +434,4 @@ data/state_store.db/
 # Skill 依賴的本機 clone（非 submodule，不進 .gitmodules）
 
 plugins/experiment/skills/summarize.sh/
+bin/cc-plugin
