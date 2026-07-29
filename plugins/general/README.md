@@ -2,7 +2,7 @@
 
 通用、跨專案的 Claude Code 插件。整合：
 
-- 4 個跨場景技能（插件 metadata、每日彙整、文件檢查、待辦排序）
+- 5 個跨場景技能（插件 metadata、每日彙整、文件檢查、待辦排序、專案任務）
 - 1 個 `feature` 功能實作代理
 - 1 個 always-on hook（agent loop 結束時的終端機鈴聲）
 - 1 份 output-style 樣板（`brief`）
@@ -19,6 +19,7 @@
 | `claude-plugin-metadata` | 建立與更新 Claude 插件與技能的元資料（含 plugin.json 與 marketplace.json） |
 | `daily-summary` | 彙整過去 24h 跨來源工作，產生工作日報並寫入 Apple Notes |
 | `markdownlint` | Markdown 格式檢查（精選 rule + CUSTOM-01 no-bold），所有插件的 `.md` 檔通用 |
+| `project-task` | 為任意語言專案產生 package.json 任務跑器（dev/test/build/deploy） |
 | `sort-todo` | 排序並格式化待辦清單 |
 
 ## 代理 (Agents)
@@ -62,7 +63,7 @@ plugins/general/
 ├── output-styles/
 │   ├── brief.md         # 唯一樣板
 │   └── README.md
-├── skills/              # 4 個技能目錄
+├── skills/              # 5 個技能目錄
 └── README.md
 ```
 
