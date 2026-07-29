@@ -1,0 +1,12 @@
+{
+  "name": "cc-plugin",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Claude Code plugin and memory distillation CLI runner",
+  "scripts": {
+    "setup": "./run.sh",
+    "dev": "go run main.go",
+    "test": "go test ./...",
+    "build": "go build -o bin/cc-plugin ."
+  }
+}

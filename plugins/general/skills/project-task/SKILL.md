@@ -44,9 +44,9 @@ metadata:
 | 腳本 (Script) | 用途 | 執行方式 |
 | --- | --- | --- |
 | `dev` | 啟動本機開發環境 | 平行執行所有 `dev:*` |
-| `test` | 執行完整測試套件 | 循序執行所有 `test:*` |
-| `build` | 產生建構產物 | 循序執行所有 `build:*` |
-| `deploy` | 部署至目標環境 | 循序執行所有 `deploy:*` |
+| `test` | 執行完整測試套件 | 平行執行所有 `test:*` |
+| `build` | 產生建構產物 | 平行執行所有 `build:*` |
+| `deploy` | 部署至目標環境 | 平行執行所有 `deploy:*` |
 
 管線相關的額外腳本（僅在需要時加入）：
 
@@ -97,22 +97,20 @@ metadata:
 
 ## 聚合模式 (Aggregation Pattern)
 
-頂層腳本透過 `npm-run-all` 聚合其子項（平行或循序）：
+頂層腳本透過 `npm-run-all` 聚合其子項，預設皆平行執行 (`--parallel`)：
 
 ```json
 {
   "dev": "npx npm-run-all --parallel dev:*",
-  "test": "npx npm-run-all --sequential test:*",
-  "build": "npx npm-run-all --sequential build:*",
-  "deploy": "npx npm-run-all --sequential deploy:*"
+  "test": "npx npm-run-all --parallel test:*",
+  "build": "npx npm-run-all --parallel build:*",
+  "deploy": "npx npm-run-all --parallel deploy:*"
 }
 ```
 
 **平行 vs 循序規則：**
-- `dev` — 平行（服務同時執行）
-- `test` — 循序（fail-fast，確定性輸出）
-- `build` — 循序（建構順序可能有依賴）
-- `deploy` — 循序（部署順序重要）
+- **預設平行**：所有頂層階段 (`dev`, `test`, `build`, `deploy` 等) 預設皆使用平行執行 (`--parallel`)。
+- **特例循序**：僅當子項元件有明確的建構順序依賴時，才調整為循序 (`--sequential`)。
 
 **單一元件捷徑：** 若某階段只有一個元件，頂層腳本可直接呼叫，無需 `npm-run-all`：
 
@@ -135,15 +133,15 @@ metadata:
     "dev:api": "cd api && go run ./cmd/server",
     "dev:web": "cd web && npm run dev",
 
-    "test": "npx npm-run-all --sequential test:*",
+    "test": "npx npm-run-all --parallel test:*",
     "test:api": "cd api && go test ./...",
     "test:web": "cd web && npm test",
 
-    "build": "npx npm-run-all --sequential build:*",
+    "build": "npx npm-run-all --parallel build:*",
     "build:api": "cd api && go build -o bin/server ./cmd/server",
     "build:web": "cd web && npm run build",
 
-    "deploy": "npx npm-run-all --sequential deploy:*",
+    "deploy": "npx npm-run-all --parallel deploy:*",
     "deploy:api": "cd api && ./scripts/deploy.sh",
     "deploy:web": "cd web && ./scripts/deploy.sh"
   }
