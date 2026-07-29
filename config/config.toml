@@ -135,6 +135,7 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/shuk/projects/ai/auth"]
+trust_level = "trusted"
 [projects."/Users/shuk/projects/ai/agentSDK"]
 trust_level = "trusted"
 
@@ -142,6 +143,12 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/shuk/projects/iphone/md-viewer"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/platform"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/platform/n8n"]
 trust_level = "trusted"
 
 [tui]
