@@ -15,21 +15,15 @@
 
 技能一律位於 `plugins/experiment/skills/<name>/`，由目錄自動探索，manifest 不列舉。
 
-| 技能 (Skill)      | 預期歸屬 (Destination) | 說明 (Notes)                                                |
-| ----------------- | ---------------------- | ----------------------------------------------------------- |
-| `anti-sabotage`   | `experiment`（常駐）   | 防範 Agent 自我破壞作業流程的檢查清單                       |
-| `firecrawl`       | `explore`              | Firecrawl 網頁爬取 SDK                                      |
-| `mermaid`         | `general`              | Mermaid.js 圖表語法指南                                      |
-| `model-evaluator` | `general`              | 評估 LLM 模型品質／表現                                      |
-| `playwright-cli`  | `explore`              | Playwright 瀏覽器自動化 CLI                                  |
-| `scrapling`       | `explore`              | Scrapling 反爬網頁抓取框架                                   |
-| `summarize-sh`    | `experiment`（常駐）   | 透過 `summarize.sh` CLI 摘要網頁／檔案／YouTube／Podcast     |
-
-`skills/summarize.sh/` 是 `summarize-sh` 依賴的本機 clone（未追蹤、已 gitignore），
-不是技能目錄。
-
-另有一個歸屬本插件的`外部`技能，由 manifest 的 `skills` 宣告、skills cmd 自動取得：
-`guangyuspace/codex-gamestudio-skill`。
+| 技能 (Skill)      | 預期歸屬 (Destination) | 說明 (Notes)                                             |
+| ----------------- | ---------------------- | -------------------------------------------------------- |
+| `anti-sabotage`   | `experiment`（常駐）   | 防範 Agent 自我破壞作業流程的檢查清單                    |
+| `firecrawl`       | `explore`              | Firecrawl 網頁爬取 SDK                                   |
+| `mermaid`         | `general`              | Mermaid.js 圖表語法指南                                  |
+| `model-evaluator` | `general`              | 評估 LLM 模型品質／表現                                  |
+| `playwright-cli`  | `explore`              | Playwright 瀏覽器自動化 CLI                              |
+| `scrapling`       | `explore`              | Scrapling 反爬網頁抓取框架                               |
+| `summarize-sh`    | `experiment`（常駐）   | 透過 `summarize.sh` CLI 摘要網頁／檔案／YouTube／Podcast |
 
 ## 結構 (Structure)
 
