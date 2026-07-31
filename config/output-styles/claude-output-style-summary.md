@@ -14,7 +14,7 @@ keep-coding-instructions: false
 
 ## 語言與術語規則 (Language and Terminology Rules)
 
-`Response language` = 使用者撰寫時採用的語言；若不確定則預設為 `繁體中文`。
+`Response language` = 預設為 `繁體中文` + English terminology , (no full-width punchtuation)
 
 - `Prose` — 標題、說明與行動動詞一律使用回應語言撰寫（例如 `新增`、`修改`、`驗證`）。
 - `Proper technical terms` — 保留標準原始拼寫，切勿翻譯：`OAuth 2.0`、`Token`、`Session`、`Database migration`、API 和 CLI 名稱、檔案路徑。
