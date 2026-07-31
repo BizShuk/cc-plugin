@@ -46,7 +46,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "haiku",
+  "model": "opus",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -86,7 +86,7 @@
   "outputStyle": "Executive Summary",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
   "pluginConfigs": {

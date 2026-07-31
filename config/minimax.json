@@ -89,7 +89,7 @@
     "extraKnownMarketplaces": {},
     "syntaxHighlightingDisabled": false,
     "alwaysThinkingEnabled": true,
-    "effortLevel": "xhigh",
+    "effortLevel": "max",
     "fastModePerSessionOptIn": true,
     "promptSuggestionEnabled": false,
     "autoUpdatesChannel": "latest",
