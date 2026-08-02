@@ -43,6 +43,7 @@ mkdir -p \
     "$HOME/.gemini" \
     "$HOME/.claude-mem" \
     "$HOME/.hermes" \
+    "$HOME/.grok" \
     "$TMP_DIR"
 
 backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md"
@@ -50,6 +51,7 @@ backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.gemini/GEMINI.md"
 backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.codex/AGENTS.md"
 backup_and_link "$REPO_ROOT/config/settings.json" "$HOME/.claude/settings.json"
 backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
+backup_and_link "$REPO_ROOT/config/grok.toml" "$HOME/.grok/config.toml"
 
 backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.hermes/AGENTS.md"
 backup_and_link "$REPO_ROOT/pkg/hermes/MEMORY.md" "$HOME/.hermes/MEMORY.md"
@@ -78,6 +80,7 @@ for path in \
     "$HOME/.cli-proxy-api" \
     "$HOME/.auth2api" \
     "$HOME/.hermes" \
+    "$HOME/.grok" \
     "$HOME/.gbrain" \
     "$HOME/.mempalace" \
     "$HOME/.config/cc-plugin" \

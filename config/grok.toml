@@ -1,0 +1,169 @@
+[cli]
+installer = "internal"
+auto_update = true
+
+[models]
+default = "grok-4.5"
+web_search = "grok-4.5"
+default_reasoning_effort = "high"
+
+[ui]
+max_thoughts_width = 120
+fork_secondary_model = "grok-build"
+yolo = true
+compact_mode = true
+permission_mode = "always-approve"
+screen_mode = "fullscreen"
+show_thinking_blocks = true
+group_tool_verbs = true
+collapsed_edit_blocks = false
+page_flip_on_send = true
+default_selected_permission = "always_allow_all_sessions"
+remember_tool_approvals = true
+simple_mode = true
+vim_mode = false
+
+[ui.notifications]
+method = "auto"
+condition = "unfocused"
+idle_threshold_secs = 3
+events = ["turn_complete", "approval_required", "task_complete"]
+sleep_prevention = true
+progress_bar = true
+
+[ui.notifications.title]
+enabled = true
+items = ["action-required"]
+
+[features]
+telemetry = false
+feedback = true
+lsp_tools = true
+codebase_indexing = true
+two_pass_compaction = false
+remote_fetch = true
+
+[session]
+auto_compact_threshold_percent = 85
+load_envrc = true
+
+[workflows]
+enabled = true
+
+[memory]
+enabled = true
+
+[memory.session]
+save_on_end = true
+
+[memory.watcher]
+enabled = true
+
+[memory.search]
+max_results = 6
+min_score = 0.35
+
+[memory.initial_injection]
+enabled = true
+min_score = 0.0
+
+[permission]
+allow = [
+  "Bash(ls:*)",
+  "Bash(df:*)",
+  "Bash(du:*)",
+  "Bash(mkdir:*)",
+  "Bash(head:*)",
+  "Bash(find:*)",
+  "Bash(sed:*)",
+  "Bash(grep:*)",
+  "Bash(go:*)",
+  "Bash(python:*)",
+  "Bash(python3:*)",
+  "Bash(rm:*)",
+  "Bash(git:*)",
+  "Bash(cat:*)",
+  "Bash(chmod +x:*)",
+  "Read(~/.gbrain/**)",
+]
+deny = [
+  "Read(~/.ssh/**)",
+  "Read(~/.aws/**)",
+  "Read(**/secrets/**)",
+  "Read(~/.grok/auth.json)",
+  "Read(~/.grok/config.toml)",
+  "Edit(**/.git)",
+]
+ask = [
+  "Bash(git push:*)",
+  "Read(.env*)",
+]
+
+[subagents]
+enabled = true
+
+[subagents.toggle]
+explore = true
+plan = true
+
+[subagents.models]
+explore = "grok-4.5"
+plan = "grok-4.5"
+general-purpose = "grok-4.5"
+
+[tools]
+respect_gitignore = false
+
+[toolset.bash]
+timeout_secs = 120.0
+output_byte_limit = 20000
+
+[toolset.web_fetch]
+allow_local = true
+
+[telemetry]
+otel_enabled = false
+otel_metrics_exporter = "none"
+mixpanel_enabled = false
+trace_upload = false
+
+[hints]
+project_picker_disabled = false
+new_session_worktree_mode = "ask"
+fork_worktree_mode = "ask"
+
+[compat.claude]
+skills = true
+rules = true
+agents = true
+mcps = true
+hooks = true
+sessions = true
+
+[compat.cursor]
+skills = true
+rules = true
+agents = true
+mcps = true
+hooks = true
+sessions = true
+
+[compat.codex]
+sessions = true
+
+[plugins]
+paths = []
+disabled = []
+
+[skills]
+paths = []
+ignore = []
+disabled = []
+
+[marketplace]
+official_marketplace_auto_installed = true
+default_skills_installs_purged = true
+
+[[marketplace.sources]]
+name = "xAI Official"
+git = "https://github.com/xai-org/plugin-marketplace.git"

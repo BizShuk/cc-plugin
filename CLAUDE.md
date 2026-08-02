@@ -55,6 +55,7 @@
 | `config/<provider>.json` | Claude Code（手動替換 `settings.json` 連結目標） | 該供應商的完整設定：端點、模型別名、effort、權限模式 |
 | `config/CLAUDE.global.md` | Claude／Gemini／Codex／Hermes | 跨專案的全域規則與目錄佈局 |
 | `config/config.toml` | Codex CLI | Codex 模型、審批政策與 per-project trust |
+| `config/grok.toml` | Grok Build（經 `run.sh` 軟連結至 `~/.grok/config.toml`） | Grok 模型、reasoning effort、permission / UI 預設 |
 | `config/keybindings.json` | Claude Code | 鍵盤綁定 |
 | `config/output-styles/` | Claude Code | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名） |
 | `config/config.go` | cc-plugin CLI | 執行期 viper 預設值 |
