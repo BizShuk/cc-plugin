@@ -18,6 +18,8 @@
   "license": "MIT",
   "name": "tools",
   "repository": "https://github.com/bizshuk/cc-plugin",
-  "skills": [],
+  "skills": [
+    "bizshuk/autop"
+  ],
   "version": "1.0.0"
 }
