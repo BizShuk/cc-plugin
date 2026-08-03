@@ -20,9 +20,9 @@ metadata:
 
 ## 概要 (Overview)
 
-產生一份 `package.json` 作為任意專案的**通用任務跑器 (universal task runner)** — 無論 Go、Python、Rust、多服務 monorepo 或混合技術棧皆適用。檔案不包含任何 JS 依賴；其唯一用途是讓 VSCode 的 NPM Scripts 面板與 CI/CD 管線有一個統一、可探索的介面。
+產生一份 `package.json` 作為任意專案的`通用任務跑器 (universal task runner)` — 無論 Go、Python、Rust、多服務 monorepo 或混合技術棧皆適用。檔案不包含任何 JS 依賴；其唯一用途是讓 VSCode 的 NPM Scripts 面板與 CI/CD 管線有一個統一、可探索的介面。
 
-核心原則：**頂層腳本 = 管線階段 (pipeline stages)；第二層腳本 = 元件 (components)。**
+核心原則：`頂層腳本 = 管線階段 (pipeline stages)；第二層腳本 = 元件 (components)`。
 
 ## 使用時機 (When to Use)
 
@@ -108,11 +108,11 @@ metadata:
 }
 ```
 
-**平行 vs 循序規則：**
-- **預設平行**：所有頂層階段 (`dev`, `test`, `build`, `deploy` 等) 預設皆使用平行執行 (`--parallel`)。
-- **特例循序**：僅當子項元件有明確的建構順序依賴時，才調整為循序 (`--sequential`)。
+`平行 vs 循序規則`：
+- `預設平行`：所有頂層階段 (`dev`, `test`, `build`, `deploy` 等) 預設皆使用平行執行 (`--parallel`)。
+- `特例循序`：僅當子項元件有明確的建構順序依賴時，才調整為循序 (`--sequential`)。
 
-**單一元件捷徑：** 若某階段只有一個元件，頂層腳本可直接呼叫，無需 `npm-run-all`：
+`單一元件捷徑`：若某階段只有一個元件，頂層腳本可直接呼叫，無需 `npm-run-all`：
 
 ```json
 {
@@ -148,25 +148,25 @@ metadata:
 }
 ```
 
-**必要欄位：**
+`必要欄位`：
 - `name` — 專案目錄名稱，kebab-case
 - `version` — `"0.0.0"`（非發布套件）
 - `private` — `true`（防止意外 `npm publish`）
 - `scripts` — 任務定義
 
-**省略欄位：**
+`省略欄位`：
 - 不加 `main`、`module`、`type` — 這不是 JS 套件
 - 不加 `dependencies` 或 `devDependencies` — 工具透過 `npx` 或語言原生指令呼叫
 - 除非使用者要求，否則不加 `license`
 
 ## 工作流程 (Workflow)
 
-1. **掃描專案** — 辨識元件（含有獨立建構系統的目錄：`go.mod`、`Cargo.toml`、`pyproject.toml`、巢狀 `package.json` 等）
-2. **偵測既有指令** — 檢查 `Makefile`、`run.sh`、`scripts/`、既有 `package.json`
-3. **對應元件至腳本** — 分配 `<stage>:<component>` 名稱
-4. **選擇聚合方式** — 單一元件 = 直接呼叫；多元件 = `npm-run-all`
-5. **產生 `package.json`** — 套用範本，填入探索到的指令
-6. **保留既有內容** — 若 `package.json` 已存在，僅合併 `scripts`；不得刪除既有欄位
+1. `掃描專案` — 辨識元件（含有獨立建構系統的目錄：`go.mod`、`Cargo.toml`、`pyproject.toml`、巢狀 `package.json` 等）
+2. `偵測既有指令` — 檢查 `Makefile`、`run.sh`、`scripts/`、既有 `package.json`
+3. `對應元件至腳本` — 分配 `<stage>:<component>` 名稱
+4. `選擇聚合方式` — 單一元件 = 直接呼叫；多元件 = `npm-run-all`
+5. 產生 `package.json` — 套用範本，填入探索到的指令
+6. `保留既有內容` — 若 `package.json` 已存在，僅合併 `scripts`；不得刪除既有欄位
 
 ## 語言指令參照 (Language Command Reference)
 
@@ -182,7 +182,7 @@ metadata:
 ## VSCode 整合 (VSCode Integration)
 
 `package.json` 存在於專案根目錄後，VSCode 自動：
-- 在 **NPM Scripts** 面板（Explorer 側邊欄）顯示所有腳本
+- 在 `NPM Scripts` 面板（Explorer 側邊欄）顯示所有腳本
 - 提供點擊即執行功能
 - 支援 `Ctrl/Cmd+Shift+P` → "Tasks: Run Task" → "npm"
 

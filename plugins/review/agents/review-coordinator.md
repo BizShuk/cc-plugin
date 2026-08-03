@@ -120,8 +120,8 @@ and a suggested change. Do not fix anything yet.
 ### Phase 4 — Aggregate
 
 1. Deduplicate: when two dimensions flag the same line, keep one finding and note
-   both lenses (e.g. a renamed concept is both `consistency` drift and a
-   `naming-convention` issue).
+   both lenses (e.g. a renamed concept is both a `system-planner` cross-file
+   coherence drift and a `naming-convention` issue).
 2. Cross-link related findings so a fix in one place resolves the cluster.
 3. Rank: severity first, then value-over-effort within a severity band.
 
@@ -144,16 +144,18 @@ Severity ladder (cost of ignoring, high to low):
 | `nit`     | Cosmetic; mention once, do not insist                       |
 | `ok`      | Dimension reviewed, nothing found (state it)                |
 
-Output format:
+Output format. Label every finding with the skill that produced it (the Skill
+column of Part 3), never with a free-form dimension name — a reader must be able
+to look the label up:
 
 ```text
 Review — <scope in one line>
-Ran: consistency, naming-convention, folder-structure · Skipped: dependency-hygiene (no manifests touched)
+Ran: system-planner, naming-convention, project-docs · Skipped: business-planner (no user-facing behavior), tutorial (no onboarding docs)
 
-[blocker] consistency  a.go:42 ↔ b.go:88 — rule X enforced inversely
+[blocker] system-planner  a.go:42 ↔ b.go:88 — rule X enforced inversely
           ↳ also naming-convention: same concept named "tenant" vs "account"
-[major]   folder-structure  cmd/distill.go:— loose file at cmd/ root
-[minor]   folder-structure cmd/helpers.go → cmd/util/ (loose file)
+[major]   system-planner  cmd/distill.go:— loose file at cmd/ root
+[minor]   system-planner  cmd/helpers.go → cmd/util/ (loose file)
 [ok]      project-docs — CLAUDE.md tree matches disk
 
 Top fix (value/effort): unify rule X across a.go/b.go, then rename to one term.

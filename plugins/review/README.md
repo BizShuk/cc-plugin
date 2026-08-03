@@ -69,6 +69,8 @@ graph TD
 │   └── review-coordinator.md # 審查協調代理 (Review Coordinator Agent)
 └── skills/
     ├── auto-evolving/        # 廣域思考、單點設計、更新與知識整合 (Auto-Evolving Skill)
+    │   └── references/
+    │       └── scoring.md    # 候選挑選用的八維權重表；`挑選啟發式，非驗證`
     ├── business-planner/     # 商業價值分析技能 (Business Value Skill)
     ├── docs-consolidation/   # 歷史規格與計畫整併技能 (Docs Consolidation Skill)
     ├── naming-convention/    # 命名規範審查技能 (Naming Convention Skill)

@@ -17,7 +17,7 @@
 
 | 技能 (Skill)      | 預期歸屬 (Destination) | 說明 (Notes)                                             |
 | ----------------- | ---------------------- | -------------------------------------------------------- |
-| `anti-sabotage`   | `experiment`（常駐）   | 防範 Agent 自我破壞作業流程的檢查清單                    |
+| `anti-sabotage`   | `experiment`（常駐）   | Code review 檢查清單：偵測人為的測試造假與環境落差       |
 | `firecrawl`       | `explore`              | Firecrawl 網頁爬取 SDK                                   |
 | `mermaid`         | `general`              | Mermaid.js 圖表語法指南                                  |
 | `model-evaluator` | `general`              | 評估 LLM 模型品質／表現                                  |

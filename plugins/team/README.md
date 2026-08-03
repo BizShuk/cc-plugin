@@ -1,45 +1,37 @@
 # AI 代理團隊規劃與設計插件 (AI Agent Team Planning & Design Plugin)
 
-此插件提供了一套完整的 AI `代理團隊 (Agent Team)` 規劃與配置技能。其工作流可協助使用者從專案需求出發，規劃跨職能團隊的角色編制與主要職責，設計精確且具備大廠特質的 `系統提示 (System Prompt)`，並設定高效的編排與共享規則。
+此插件提供了一套完整的 AI `代理團隊 (Agent Team)` 規劃與配置技能。其工作流可協助使用者從專案需求出發，規劃跨職能團隊的角色編制與主要職責，設計精確的 `系統提示 (System Prompt)`，並設定高效的編排與共享規則。
 
 ---
 
 ## 技能清單 (Skills List)
 
-### 1. 團隊架構設計 (team-design)
+### 1. 團隊架構設計與編排 (team-design)
 - 路徑：`./skills/team-design`
-- 用途：根據專案需求與交付目標，規劃跨職能團隊的角色編制、工作站位與主要職責。
+- 用途：根據專案需求與交付目標，規劃跨職能團隊的角色編制、工作站位與主要職責；並選定 `協調者模式 (Orchestrator Pattern)` 或 `流水線模式 (Pipeline Pattern)` 的編排邏輯與專案層級共享規則。產出兩份範本文件（團隊架構、編排與共享設定）。
 
 ### 2. 角色提示生成器 (role-generator)
 - 路徑：`./skills/role-generator`
-- 用途：依據五大原則（身分、職責、思考方式、格式、限制）設計與生成 `系統提示 (System Prompt)`，並可選融合 Meta、Google、Amazon 與 TikTok 等大廠的文化特質。
-
-### 3. 團隊編排設定 (orchestration-config)
-- 路徑：`./skills/orchestration-config`
-- 用途：規劃 `協調者模式 (Orchestrator Pattern)` 或 `流水線模式 (Pipeline Pattern)` 的編排邏輯，並設定專案層級的共享規則。
+- 用途：依據五大原則（身分、職責、思考方式、格式、限制）設計與生成 `系統提示 (System Prompt)`，以 `./roles/` 內 12 份現成角色作為 few-shot 範例與品質門檻。
 
 ---
 
 ## 工作流 (Workflow)
 
-一整個 AI 代理團隊的設計與配置流程可以透過以下三個步驟串聯完成：
+一整個 AI 代理團隊的設計與配置流程可以透過以下兩個步驟串聯完成：
 
 ```
 專案需求 (Project Requirements)
     │
     ▼ (team-design)
-團隊架構與角色分工 (Team Architecture & Roles)
+團隊架構、角色分工、編排拓撲與專案層級設定
     │
     ▼ (role-generator)
 角色提示詞與技能配置 (System Prompts & Skills)
-    │
-    ▼ (orchestration-config)
-編排拓撲與專案層級設定 (Orchestration & Project-level Config)
 ```
 
-1. 透過 `team-design` 釐清專案目標並定義所需站位。
+1. 透過 `team-design` 釐清專案目標、定義所需站位，並決定代理間的溝通與流水線關係。
 2. 使用 `role-generator` 為每個站位產生符合 high-standard 人設定錨的 `系統提示 (System Prompt)`。
-3. 透過 `orchestration-config` 定義代理間的溝通與流水線關係，並整理出專案層級的共享設定。
 
 ---
 
@@ -115,9 +107,9 @@ flowchart TD
 
 ---
 
-## 大廠跨職能團隊範例 (Big Tech Cross-Functional Team)
+## 跨職能團隊角色範例 (Cross-Functional Team Exemplars)
 
-_以 Meta / Google / Amazon / TikTok 等大廠跨職能產品團隊為藍本。_
+_12 份現成的 system prompt，同時是 `role-generator` 的 few-shot 素材。_
 
 - `使用方式 (How to use)`：將各角色的 Prompt 複製並貼入該 AI 代理的 `系統提示 (System Prompt)` 中。若欲指定輸出語言，可在尾端加上：`Always respond in Traditional Chinese, keeping technical terms in English.`
 - `編排模式 (Team Pattern)`：`產品經理 (Product Manager / PM)` + `工程主管 (Engineering Manager)` = `協調者 (Orchestrators)`；其他專家角色為 `執行者 (Workers)`。設計師 -> 工程師 -> QA -> SRE 構成基本的 `流水線 (Pipeline)` 關係。

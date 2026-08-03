@@ -80,7 +80,8 @@ metadata:
 
 ## Output Examples
 
-規劃結果寫入 `plans/architecture-<feature_name>.md`
+規劃結果寫入 `plans/YYYY-MM-DD-architecture-<topic>.md`（日期為 Asia/Taipei 本地日期，
+`<topic>` 為 kebab-case 且需明確指涉本次變更）
 
 ### Output Structure
 

@@ -46,7 +46,12 @@ npx markdownlint --fix path/to/file.md
 
 ## Quick Reference Table
 
-The following table summarizes core rules from `markdownlint` (v0.40.0) and custom constraints:
+The following table summarizes core rules from `markdownlint` (v0.40.0) and custom constraints.
+
+`MD043` and `MD044` are marked `off (需 config)`: both are inert without a rule
+configuration (`MD043` needs a `headings` array, `MD044` a `names` array), and this
+repository ships no `.markdownlintrc` / `.markdownlint.json`. Turn them on only
+together with the config that gives them content.
 
 | Rule ID     | Alias                              | Key Requirement                                                                    | Status |
 | :---------- | :--------------------------------- | :--------------------------------------------------------------------------------- | :----- |
@@ -86,8 +91,8 @@ The following table summarizes core rules from `markdownlint` (v0.40.0) and cust
 | `MD040`     | `fenced-code-language`             | Fenced code blocks must have a language specified (e.g., `bash`, `go`, `text`).    | `on`   |
 | `MD041`     | `first-line-heading`               | First line in a file must be a top-level heading.                                  | `on`   |
 | `MD042`     | `no-empty-links`                   | No empty links                                                                     | `on`   |
-| `MD043`     | `required-headings`                | Required heading structure                                                         | `on`   |
-| `MD044`     | `proper-names`                     | Proper names should have the correct capitalization                                | `on`   |
+| `MD043`     | `required-headings`                | Required heading structure                                                         | `off (需 config)` |
+| `MD044`     | `proper-names`                     | Proper names should have the correct capitalization                                | `off (需 config)` |
 | `MD045`     | `no-alt-text`                      | Images should have alternate text (alt text)                                       | `on`   |
 | `MD046`     | `code-block-style`                 | Code block style                                                                   | `on`   |
 | `MD047`     | `single-trailing-newline`          | Files must end with a single trailing newline.                                     | `on`   |

@@ -22,8 +22,10 @@ YAML frontmatter 分三個 tier，由簡至詳擇一使用：
 
 - `name` 必須與所在子目錄名稱一致，使用 `kebab-case`
 - `description` 採用 `>` 折疊式（`>` 或 `|`），長度 ≤ 1024 字元，且`必須`包含觸發詞（"Use when...", "Triggers on..."）
-- `versio` 之類的拼字錯誤禁止（CI 將以 `yaml.Unmarshal` 驗證）
-- Rules-style frontmatter（`trigger: always_on` + `globs` + `scope`）僅 `consistency` 與 `go-convention` 兩個常駐技能使用，其餘不得混用
+- 欄位名稱拼字必須精確（`versio`、`allowed_tools` 之類的錯字會讓該欄位被靜默忽略，
+  不會報錯）；改完自行以 `python3 -c "import yaml,sys;yaml.safe_load(...)"` 之類的方式驗一次
+- Rules-style frontmatter（`trigger: always_on` + `globs` + `scope`）不是本 workspace
+  的慣例，不得與上表三個 tier 混用
 - 標準 frontmatter 範例（`full` tier）：
 
 ```yaml

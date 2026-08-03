@@ -1,15 +1,9 @@
 ---
 name: kb-ingest-history
 description: >
-    Use when ingesting a git repository's development history into the
-    knowledge base — runs the bundled kb_history.py deterministic pipeline
-    (commits jsonl, stats, weekly diffs; stdlib-only, no install) as evidence
-    material, keeps a last-commit cursor so later runs only process new
-    commits, distills the history into development phases, key decisions,
-    and refactor events as captures, and fills the CHANGELOG.md weekly
-    narratives as a by-product. Triggers on: "ingest git history",
-    "understand the development history", "匯入開發歷史", "分析 commit 歷史",
-    "generate changelog into kb".
+    Use when ingesting a git repository's development history (phases, key
+    decisions, refactor events) into the knowledge base with a last-commit
+    cursor for incremental runs.
 version: "1.1.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true

@@ -1,11 +1,11 @@
 ---
 name: universal-review
 description: >
-  Use when evaluating any artifact for defects, gaps, or quality — code
-  review, document review, plan validation, architecture review, skill
-  audit — especially when needing systematic coverage instead of ad-hoc
-  inspection. Triggers on: "review", "audit", "evaluate", "check quality",
-  "find issues", "what's missing", "審查", "評估", "找問題".
+  Use only when no concrete review skill and no built-in review command
+  applies to the artifact, and systematic gap-finding (negative-space
+  reasoning) is needed on an unfamiliar artifact type. Not for code review
+  or diff review — those have dedicated tooling. Triggers on: "無既有具體
+  skill 適用時的通用審查", "這份產物缺了什麼", "negative-space 缺口盤點".
 version: "2.0.0"
 metadata:
   type: pattern

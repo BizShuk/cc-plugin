@@ -33,10 +33,17 @@ docs so downstream work obeys the project's conventions. This skill decides
     └── <project>/        # 專案 inside a category
 ```
 
-- Current categories: `ai`, `game`, `platform`, `tools`.
-- A `category` is a pure container: no `ecosystem.config.js`, no code of its
-  own. It may carry an umbrella `README.md` (e.g. `game/`), but it is never a
-  routing destination — always route to a project inside it.
+- Current categories (all 13): `ai`, `collections`, `data`, `env_setup`,
+  `game`, `iphone`, `platform`, `playground`, `product`, `research`, `social`,
+  `tools`, `web`. The live list is `router.py categories`; if it disagrees
+  with this line, the index is authoritative — rebuild and trust it.
+- Some categories are `hybrids`: `collections`/`social`/`web` carry their own
+  docs or code and can themselves be routing destinations; `env_setup` has its
+  own `go.mod` yet also holds projects. Never infer container-ness from the
+  name; check the index.
+- A pure-container category (e.g. `game/`) may carry an umbrella `README.md`
+  but is never a routing destination itself — route to a project inside it.
+  Hybrid categories above are the exception.
 - Category depth is fixed at one level; `<category>/<category>/<project>` does
   not exist.
 - Project names are unique across the whole tree, so the bare name still
@@ -74,6 +81,20 @@ New categories are auto-detected: a top-level dir with no own `README.md` /
 `CLAUDE.md` and `2+` project-like children becomes a category. A container that
 does have its own docs (like `game/`) must be listed by hand in `categories`.
 
+`Do not take the auto-rebuild on trust` — it only fires when the router is
+actually invoked, so an index nobody has queried for weeks stays stale and fails
+silently. Check the timestamp yourself before relying on a routing answer:
+
+```bash
+python3 -c "import json,datetime;d=json.load(open('$HOME/projects/.project_index/projects.json'));g=datetime.datetime.fromisoformat(d['generated_at']);print(g, (datetime.datetime.now()-g).days, 'days old')"
+```
+
+If it is older than `stale_after_days` (default 3), run
+`python3 ~/projects/.project_index/router.py rebuild` before routing. If the
+rebuild cannot run (index missing, not writable, `router.py` absent), say so
+in the routing answer and mark the result as based on a stale index — never
+present a stale match as if it were current.
+
 ## Procedure
 
 1. Extract routing keywords from the content (vendor, currency, domain words,
@@ -98,9 +119,9 @@ does have its own docs (like `game/`) must be listed by hand in `categories`.
     ```
 
 3. Decide by confidence:
-    - `Single clear top hit` → that is the destination. Print the project's absolute path clearly to the user.
+    - `Single clear top hit` → that is the destination.
     - `Several close scores / ambiguous` → read the candidates' `purpose` from the
-      index (or `router.py show <name>`) and pick; if still tied, ask the user. Once chosen, print the project's absolute path clearly to the user.
+      index (or `router.py show <name>`) and pick; if still tied, ask the user.
     - `Category matched, no project` → never file into the category directory
       itself; list its projects (`router.py category <name>`) and pick or ask.
     - `No hit` → do NOT guess. Report "unmatched" and ask, or hold the item.
@@ -117,26 +138,19 @@ does have its own docs (like `game/`) must be listed by hand in `categories`.
     when naming files or writing anything into the project.
 
     Honour that project's CLAUDE.md (naming, folder layout, hard rules). For
-    `collections`, that means the `receipts/invoices/agreements` layout and the
+    `collections` — a top-level project, not a category, so it is a valid
+    destination — that means the `receipts/invoices/agreements` layout and the
     `<source>_<date>_<target>_<amount>.<ext>` naming convention.
 
-5. Propose the destination path and the action. When the target project is found or selected, you must explicitly print its absolute path to the user so they know where it is located. `Confirm before moving, renaming, or creating any file` — these are real records. This skill returns a routing decision; the caller performs the move only after confirmation.
+5. Propose the destination path and the action. `Confirm before moving,
+   renaming, or creating any file` — these are real records. This skill returns
+   a routing decision; the caller performs the move only after confirmation.
 
 ## Maintaining the index
 
-- **You rarely need to rebuild manually** — the router does it for you every
-  time the index is >3 days old. Run `python3 ~/projects/.project_index/router.py
-rebuild` only if you want to force a refresh right now (e.g. you just added
-  a project, edited tags, or want to bypass the 3-day window).
-- A project with no tags is invisible to tag-based routing — add tags so it
-  can receive content. Check for untagged projects with:
-
-    ```bash
-    python3 -c "import json;d=json.load(open('$HOME/projects/.project_index/projects.json'));print([k for k,v in d['projects'].items() if not v['tags']])"
-    ```
-
-- Moving a project into a category does not change its key or its tags; only its
-  `path` and `category` change. Re-run `rebuild` after any such move.
+Rebuild triggers, tag hygiene, and how a category is detected or hand-listed:
+[references/maintenance.md](references/maintenance.md). Routing never needs
+these commands — only a wrong index does.
 
 ## Hard rules
 

@@ -10,7 +10,6 @@
 
 ```mermaid
 graph TD
-    GUT[grand-unified-theory 頂層索引] --> OPS
     subgraph OPS [五大通用算子]
         G[universal-generate 創生]
         R[universal-review 審視]
@@ -38,8 +37,19 @@ graph TD
 | `universal-evolve` | 算子 | 迴圈 + 選擇 + 記憶；編排其他四算子 |
 | `system-laws` | 透鏡 | 13 法則 × 10 角色透鏡表，缺格即候選缺陷 |
 | `domain-exploration` | 前置 | 未知領域三階段漸進式收斂 |
-| `llm-mechanics` | 基底 | LLM 的高維矩陣運算本質與提示詞策略 |
-| `grand-unified-theory` | 索引 | 全理論頂層參考 |
+| `llm-mechanics` | 基底 | Thinking Mode 模型的 prompt 詳略取捨 |
+
+## 算子組合總覽 (Operator Composition)
+
+原 `grand-unified-theory` skill 的索引內容併入本節；它沒有可執行步驟，不適合作為 skill 存在。
+
+- `封閉性`：`evolve` 是前四個算子的閉合迴圈 — `generate → review → consolidate → aggregate` 產出的缺口回饋給 `evolve`，由它決定下一輪作用於誰。
+- `自我適用 (self-hosting)`：五算子可作用於自身 — 生成技能、審視審查流程、凝聚技能庫、聚合成插件、演化整個系統。
+- `透鏡供應`：`system-laws` 的 13 法則 × 10 角色表同時餵給三個算子 — `review` 用它找缺陷、`aggregate` 用它找缺格、`generate` 用它設約束。
+- `四大域`：`宇宙基石`（空間、時間、重力、因果）、`系統意志`（混沌、精神、生命、破壞）、`元素力量`（冰霜、烈焰、雷霆）、`狀態邊界`（光明、黑暗）。
+- `四大融合思維工具`：正交性、同構性、催化劑、辯證循環 — 方法細節見 `universal-consolidate`。
+- `四大終極融合體`：時空運行矩陣（正交性）、能量守恆引擎（同構性）、零信任稜鏡（催化劑）、無限演化之輪（辯證循環） — 矩陣全表與完整性檢查見 `universal-aggregate`。
+- `感知前置`：面對未知領域時 `domain-exploration` 先於 `generate`，先收斂再創生。
 
 ## 使用方式
 
@@ -58,10 +68,13 @@ claude --plugin-dir .
 
 ## 參考資料 (references/)
 
-- `ontology-template.md` — 系統本體論與資料定義範本（座標系統、詞彙表、元素透鏡、城市透鏡）
-- `12條宇宙法則.md` — 理論的靈感來源文獻
+參考檔案隨其唯一消費者的 skill 存放，不集中在 plugin 根層：
+
+- `skills/universal-aggregate/references/ontology-template.md` — 系統本體論與資料定義範本（座標系統、詞彙表、元素透鏡、城市透鏡）
+- `skills/system-laws/references/design-principles.md` — 13 法則各自的設計原則
 
 ## 版本沿革
 
+- `2.1.0` — `grand-unified-theory` skill 移除（內容併入本 README 的算子組合總覽）；`llm-mechanics` 改寫為 prompt 詳略取捨；`system-laws` 設計原則與 `universal-aggregate` 本體論範本外移至各自 `references/`
 - `2.0.0` — 以五大通用算子重構：8 個 `system-law-*` 凝聚為 `system-laws`（並補齊冰霜/烈焰/雷霆/光明/黑暗 5 法則）、`fusion-methods` 併入 `universal-consolidate`、`unified-matrix` 併入 `universal-aggregate`
 - `1.0.0` — 以 13 法則為軸的初版

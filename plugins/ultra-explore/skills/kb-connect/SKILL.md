@@ -1,12 +1,8 @@
 ---
 name: kb-connect
 description: >
-    Use when building edges between knowledge base entities — adds evidence-
-    backed wikilink References between dimensions, rebuilds Backlinks from
-    forward edges, and regenerates the _index.md registry with a Mermaid
-    overview. Processes entities in resumable batches with progress persisted.
-    Triggers on: "connect the knowledge base", "build kb edges", "rebuild kb
-    index", "知識庫建邊", "重建知識庫索引", "kb connect".
+    Use when building evidence-backed wikilink edges between knowledge base
+    entities, rebuilding Backlinks, and regenerating the _index.md registry.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true

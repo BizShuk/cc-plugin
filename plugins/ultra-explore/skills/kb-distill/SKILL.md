@@ -2,11 +2,7 @@
 name: kb-distill
 description: >
     Use when distilling raw inbox captures into curated knowledge base entities
-    — resolves identity (dedupe/merge), applies the truth qualification gate,
-    assigns zones, and writes entity dimension sections with sources cited.
-    Processes captures in resumable batches with progress persisted. Triggers
-    on: "distill the inbox", "promote captures to entities", "蒸餾知識庫",
-    "整理 inbox", "kb distill".
+    through identity resolution, the truth qualification gate, and zone assignment.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true

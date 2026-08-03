@@ -1,29 +1,12 @@
 ---
 name: docs-consolidation
 description: >
-    Collapse a project's accumulated design and planning history into one file
-    per folder — `docs/specs/*.md` into `docs/specs/<YYYY-MM-DD>-Summary.md`
-    and `plans/*.md` into `plans/<YYYY-MM-DD>-Refresh.md` — as a
-    date / feature / how-to-use / value table, and migrate the hand-written
-    change log in `CLAUDE.md` plus completed `## Archive` items in
-    `README.todo` into an append-only `docs/CHANGELOG.md`. Only documents and
-    entries older than two weeks are consolidated; features no longer present
-    in the workspace are dropped from the table and recorded as a side note in
-    `README.md`. The previous consolidated file is absorbed and removed when
-    the next one is generated. Use when specs or plans have piled up, when
-    `CLAUDE.md` or `README.todo` has grown a long history tail, after shipping
-    a batch of features, or before onboarding someone to a long-lived repo.
-    Also runs a `scope cleanup` mode that removes from `README.md` and
-    `CLAUDE.md` what does not belong there — another repo's internals,
-    history already recorded in `docs/CHANGELOG.md`, measured numbers that
-    rot on the next commit, duplicated trees and sections, machine-specific
-    absolute paths, and executable assertions that no one runs — relocating
-    each to its rightful owner or automating it into a test or script.
-    Triggers on: "consolidate docs", "merge specs", "clean up plans",
-    "move changelog", "archive todo", "文件整併", "合併規格", "整理 plans",
-    "搬移變更紀錄", "整理已完成待辦", "docs consolidation", "scope cleanup",
-    "doc scope", "文件瘦身", "範疇清理", "這兩份文件不該有什麼",
-    "what should not be in README".
+    Two modes. `Consolidate`: fold `docs/specs/` and `plans/` files older than
+    two weeks into one summary table per folder, and move hand-written change
+    logs into `docs/CHANGELOG.md`. `Scope cleanup`: strip from `README.md` /
+    `CLAUDE.md` whatever another file owns. Triggers on: "consolidate docs",
+    "merge specs", "clean up plans", "scope cleanup", "文件整併", "合併規格",
+    "整理 plans", "範疇清理".
 version: "1.2.0"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
@@ -107,24 +90,11 @@ metadata:
 
 ## 範疇判準 (Scope Ownership)
 
-`範疇清理`模式的唯一判準是一個問題：**「這句話會因為什麼而變成假的？」**
+`範疇清理`模式的唯一判準是一個問題：「這句話會因為什麼而變成假的？」
 
-| 失效原因                                          | 歸屬                                                        | 典型徵狀                                             |
-| ------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------- |
-| 別的 repo 改動                                    | 那個 repo；只留`消費端契約`                                 | 章節以「本節描述`外部 repo`」開頭                    |
-| 時間經過（已經發生的事）                          | `docs/CHANGELOG.md`                                         | `已移除` / `已解體` / `已併回` / `不再` / `原 X 是`  |
-| 還沒做完                                          | `README.todo`                                               | 「不另立 X」「暫不支援 Y」其實是待辦                 |
-| 一次 commit（行數、檔案數、byte 上限、module 數） | 刪除                                                        | `333→101 行`、`共 10 個 module`、`上限 128 MiB`      |
-| 程式碼改了，且可用指令驗證                        | 測試或 `scripts/`                                           | 文件裡整段可執行的 `grep` / `go list` 斷言           |
-| 換一台機器                                        | 相對路徑                                                    | `/Users/<name>/...`、`~/projects/<other-repo>/...`   |
-| 都不會失效（不變式）                              | 留在 `CLAUDE.md`                                            | 「只有 X 可以 import Y」                             |
-
-`README.md` 是`為什麼用它、怎麼開始`；`CLAUDE.md` 是`邊界是什麼、誰擁有什麼`。
-一個事實只能有`一個` owner —— 兩份重複的結構樹必然分岔，且`兩份都會不準`。
-
-`消費端契約 (consumer-side contract)` 是唯一可以描述外部 repo 的內容：誰能 import 它、
-誰擁有哪張對照表、優先序是什麼。它的對立面是`實作細節`（對方的檔案權限、預設 port、
-內部路由表）—— 判準是`本 repo 能不能 build 或 test 它`，不能就不寫。
+七種失效原因對應的歸屬與典型徵狀、`消費端契約`的定義，以及 `plans/`／`docs/specs/`
+的檔名規範，全部見 [references/content-ownership.md](references/content-ownership.md)
+—— 該檔是唯一 owner，`config/CLAUDE.global.md` 也指向它。動手前先讀。
 
 ## 執行程序 (Procedure)
 

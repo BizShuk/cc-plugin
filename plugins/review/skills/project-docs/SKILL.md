@@ -269,7 +269,7 @@ handler 為單位。
 ## Related
 
 - `[[project-route]]` 先解析路徑歸屬，再進入本技能
-- `[[system-planner]]` 當真實目錄樹本身有問題，而非文件寫錯
-- `[[consistency]]` 處理程式碼對程式碼的矛盾；術語衝突以 `docs/terminology.md` 為裁決依據
+- `[[system-planner]]` 當真實目錄樹本身有問題、或程式碼對程式碼互相矛盾，而非文件寫錯；
+  術語衝突則以 `docs/terminology.md` 為裁決依據
 - `[[tutorial]]` 產出 `docs/tutorials/` 學習導向文件；其術語以 `docs/terminology.md` 為準
 - `ultra-explore` 處理跨 repo 知識庫；本技能綁定單一 repo 根目錄

@@ -1,12 +1,9 @@
 ---
 name: kb-ingest-schema
 description: >
-    Use when ingesting a storage schema into the knowledge base — relational
-    databases (tables/DDL), key-value stores (key patterns), message queues
-    (topics/queues), or file storage (directory layouts/formats). Writes
-    datastore captures with object inventories in resumable batches. Triggers
-    on: "ingest this schema", "add database to knowledge base",
-    "把資料庫結構加入知識庫", "匯入 schema", "記錄 MQ topics".
+    Use when ingesting a storage schema (relational DDL, key-value patterns,
+    message queue topics, file layouts) into the knowledge base as datastore
+    captures with object inventories.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true

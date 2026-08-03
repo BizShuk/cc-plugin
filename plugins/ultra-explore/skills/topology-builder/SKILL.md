@@ -1,16 +1,13 @@
 ---
 name: topology-builder
 description: >
-    Use when asked to build a connection topology or knowledge graph across
-    one or more sources — repo, folder, GitHub, database, articles, messages —
-    producing one markdown file per entity (sections as dimensions, wikilink
-    edges) under ~/projects/product/topologies. Triggers on: "build knowledge
-    graph", "connection topology", "entity map", "service topology",
-    "建立知識圖譜", "連結拓撲", "服務關聯圖".
+    Use when building a connection topology or knowledge graph across sources
+    (repo, folder, GitHub, database, articles, messages) as one markdown file
+    per entity with wikilink edges.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit, Agent, Workflow, WebFetch
 user-invocable: true
-disable-model-invocation: false
+disable-model-invocation: true
 effort: high
 ---
 

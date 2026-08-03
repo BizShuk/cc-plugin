@@ -67,12 +67,12 @@ into a single `AskUserQuestion` call at the end of Phase 2.
 
 | Priority | NFR                                                                                                                                                                                                       | Blocking?                   |
 | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| 1        | **Security** — authentication required? row-level authorization? input validation at entry point? no secrets in code/logs/error responses                                                                 | Yes — blocking              |
-| 2        | **Testability** — all new exported functions/methods interface-injectable; unit tests for business logic; table-driven test format                                                                        | Yes — required before merge |
-| 3        | **Observability** — structured logging at service call entry/exit; success + error counter metrics per new endpoint/job; trace span around cross-service calls; user-safe error messages in API responses | Yes — required before prod  |
-| 4        | **Performance** — expected throughput/latency target; hot paths needing pooling or caching; new DB queries audited for N+1                                                                                | No — validate post-deploy   |
-| 5        | **Maintainability** — no business logic duplication across layers; magic numbers/strings become named constants; naming follows project conventions                                                       | No — ongoing                |
-| 6        | **Backward compatibility** — additive-only or does it modify an existing API/schema? migration plan required before implementation if modifying                                                           | Context-dependent           |
+| 1        | `Security` — authentication required? row-level authorization? input validation at entry point? no secrets in code/logs/error responses                                                                 | Yes — blocking              |
+| 2        | `Testability` — all new exported functions/methods interface-injectable; unit tests for business logic; table-driven test format                                                                        | Yes — required before merge |
+| 3        | `Observability` — structured logging at service call entry/exit; success + error counter metrics per new endpoint/job; trace span around cross-service calls; user-safe error messages in API responses | Yes — required before prod  |
+| 4        | `Performance` — expected throughput/latency target; hot paths needing pooling or caching; new DB queries audited for N+1                                                                                | No — validate post-deploy   |
+| 5        | `Maintainability` — no business logic duplication across layers; magic numbers/strings become named constants; naming follows project conventions                                                       | No — ongoing                |
+| 6        | `Backward compatibility` — additive-only or does it modify an existing API/schema? migration plan required before implementation if modifying                                                           | Context-dependent           |
 
 ---
 
@@ -150,8 +150,8 @@ For non-Go projects, follow general best practices for the language/framework.
 
 | Trigger | Response |
 | ------- | -------- |
-| Refactoring request | "This is a refactoring task, not a new feature. Please use `@golang-refactor` instead." |
+| Refactoring request | "This is a refactoring task, not a new feature. Load the `golang-code-quality` skill (Go) or the language's own refactoring conventions instead." |
 | Bug fix request | "This appears to be a bug fix, not a new feature. Use your debugging workflow or `systematic-debugging` skill." |
-| Dead code removal | "Dead code removal is handled by `@golang-refactor` with the `golang-dead-code` skill." |
-| Performance review | "Performance tuning is handled by `@golang-refactor` with the `golang-performance-tuning` skill." |
+| Dead code removal | "Dead code removal is out of scope here. Load the `golang-dead-code` skill." |
+| Performance review | "Performance tuning is out of scope here. Load the `golang-performance-tuning` skill." |
 | Non-code request (docs only) | "This is a documentation-only task. I focus on end-to-end feature implementation. Please edit the docs directly." |

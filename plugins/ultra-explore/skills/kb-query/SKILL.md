@@ -1,11 +1,8 @@
 ---
 name: kb-query
 description: >
-    Use when answering a question from the knowledge base — resolves the
-    question to entities via the index, walks wikilink edges (2 hops max),
-    and answers with truth-tier-labelled citations; unanswerable gaps are
-    logged to the Frontier. Triggers on: "ask the knowledge base",
-    "what does the kb say about", "查知識庫", "知識庫怎麼說", "kb query".
+    Use when answering a question from the knowledge base by walking wikilink
+    edges and citing entities with their truth tiers.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep
 user-invocable: true

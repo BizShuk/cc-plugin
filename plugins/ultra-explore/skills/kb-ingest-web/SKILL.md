@@ -2,11 +2,7 @@
 name: kb-ingest-web
 description: >
     Use when ingesting web links (articles, docs sites, index pages, videos)
-    into the knowledge base — fetches with markitdown (scrapling fallback),
-    strips page chrome, and writes clean raw captures with provenance into the
-    KB inbox. Handles large document sets (10000+) in resumable batches with
-    per-batch progress persisted. Triggers on: "ingest this url",
-    "add this link to knowledge base", "把這篇文章加入知識庫", "匯入網頁知識".
+    into the knowledge base as clean raw captures with provenance.
 version: "1.0.0"
 allowed-tools: Read, Bash, Write, Edit, WebFetch
 user-invocable: true

@@ -1,10 +1,14 @@
 ---
 name: changelog
 description: >
-    Use when generating or maintaining CHANGELOG.md with weekly LLM-narrated
-    sections for git repositories under a root directory. Runs a deterministic
-    stats pipeline first, then spawns parallel agents per repository. Triggers on:
-    "generate changelog", "update CHANGELOG", "summarize git history".
+    Use when generating or maintaining per-repo CHANGELOG.md files with weekly
+    LLM-narrated sections from git history under a root directory.
+version: "1.0.0"
+allowed-tools: Read, Bash, Glob, Grep, Write, Edit, Agent
+user-invocable: true
+disable-model-invocation: true
+effort: high
+context: fork
 ---
 
 # /changelog
@@ -26,9 +30,11 @@ Defaults to current working directory if no root given.
 First install the package, then run the pipeline for all repos:
 
 ```bash
-pip install -e .claude/skills/changelog/scripts
+pip install -e "${CLAUDE_PLUGIN_ROOT}/skills/changelog/scripts"
 repo-changelog run-all <root>
 ```
+
+`CLAUDE_PLUGIN_ROOT` 未定義時，改用本 SKILL.md 所在目錄下的 `scripts/` 絕對路徑。
 
 This produces per repo: `stats.json`, `_diffs/*.diff`, and a `CHANGELOG.md` skeleton with `<!-- LLM: ... -->` placeholders.
 

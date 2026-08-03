@@ -8,10 +8,17 @@
 | `apple-email` | `email` | Apple Mail 郵件讀寫與整理 |
 | `apple-notes` | `notes` | Apple Notes 筆記與資料夾管理 |
 | `apple-reminders` | `remindctl` | 提醒事項與清單管理 |
-| `iphone-deploy` | `xcodegen` / `xcodebuild` / `devicectl` | iPhone 實機一鍵 build/install/launch |
-| `iphone-mac-permission` | `xcodegen` / `plutil` / `rg` | iPhone Sync iOS 與 macOS 權限稽核 |
+
+## 外部技能 (External Skills)
+
+由 `.claude-plugin/plugin.json` 的 `skills[]` 宣告，原始碼不在本 repo：
+
+| 來源 (Source) | 說明 |
+| :--- | :--- |
+| `bizshuk/autop` | 外部 GitHub 來源；能力與觸發條件以該 repo 的 `SKILL.md` 為準 |
 
 ## 安裝與使用 (Installation and Usage)
 
 此插件由根目錄 `.claude-plugin/marketplace.json` 以 `./plugins/tools` 註冊。
+本地技能由 `plugins/tools/skills/` 自動探索，不在 manifest 重複列舉；外部技能才寫進 `skills[]`。
 各技能只在對應 Apple 應用操作或使用者明確要求時觸發；實際 CLI 的權限與安全守衛以各自 `SKILL.md` 為準。

@@ -5,6 +5,15 @@ description: >
     videos, or podcasts is needed. Invokes the `summarize` command-line tool.
     Triggers on: "summarize this URL", "extract content from", or when needing
     fast CLI-based summaries.
+version: "1.0.0"
+allowed-tools: Bash, Read
+user-invocable: true
+disable-model-invocation: false
+effort: low
+metadata:
+    type: reference
+    platforms: [macos, linux]
+    homepage: https://summarize.sh
 ---
 
 # Summarize
@@ -20,15 +29,6 @@ Ensure the CLI is installed globally:
 ```bash
 npm i -g @steipete/summarize
 ```
-
-## Features
-
-- `Real extraction`: Readability for articles, `markitdown` for files, Firecrawl as a fallback when sites fight back.
-- `Media-aware`: YouTube and podcast pages prefer published transcripts, then `yt-dlp` + Whisper, then optional ONNX models (Parakeet/Canary).
-- `Provider-agnostic models`: xAI, OpenAI, Google, Anthropic, NVIDIA, Z.AI, OpenRouter, GitHub Copilot, Ollama (local) — plus local CLI providers.
-- `Shaped output`: Streamed ANSI Markdown for terminals, plain text for pipes, JSON envelope for scripts, ANSI-stripped under `--no-color`.
-- `Slides for video`: `--slides` extracts scene-change keyframes and renders them inline or saves them to disk.
-- `Stays local`: Optional daemon + Chrome Side Panel pair the CLI with the active tab.
 
 ## Usage Examples
 

@@ -61,14 +61,8 @@ cat document.docx | markitdown
 cat data | markitdown -x .json
 ```
 
-```python
-from markitdown import MarkItDown
-
-md = MarkItDown()
-result = md.convert("report.pdf")                # local file
-result = md.convert_url("https://example.com")   # URL
-print(result.text_content)
-```
+Python 函式庫用法（`MarkItDown().convert(...)`）見
+[references/python-api.md](references/python-api.md)。
 
 Key flags (`markitdown --help` for all): `-o FILE` output to file, `-x .EXT`
 extension hint, `-p / --use-plugins`, `--keep-data-uris` (keep base64 images,
@@ -79,34 +73,6 @@ truncated by default), `-d / --use-docintel` (Azure Document Intelligence).
 Clean Markdown for LLM consumption (not high-fidelity human rendering):
 headings → `#`, lists → `-` / `1.`, tables → pipe tables, links → `[text](url)`,
 images → `![alt](src)` (data URIs truncated by default).
-
-## Workflow: 轉換後存入 Apple Notes (Convert → Save to Apple Notes)
-
-把任意來源（URL / PDF / DOCX…）轉成 Markdown 後存進 Apple Notes 長期保存，搭配
-`apple-notes` skill 寫入。
-
-內容規則：
-
-- 只留主要內容：去掉導覽列、頁尾、廣告、側欄等雜訊，只保留正文
-- 保留所有連結／參考：markitdown 產出的 `[text](url)` 與引用清單不要刪
-- Source 連結要帶頁面標題：在筆記開頭補一行 `Source: [頁面標題](原始 URL)`
-
-```bash
-# 1) 轉成 markdown
-markitdown https://example.com/article -o /tmp/page.md
-
-# 2) 清掉雜訊、保留正文與連結，並在開頭補上 `Source: [頁面標題](URL)`
-
-# 3) 用 apple-notes skill 存入（-m 吃 markdown；-f 指定資料夾）
-notes add -F /tmp/page.md -m -f Report
-```
-
-要在 Notes 內取得「可點擊超連結 + 原生標題高亮」，改產生 HTML 並用 `notes add -h`
-（`<h1>` 原生標題、`<a href>` 超連結；見 `apple-notes` skill 的 Rich Text
-Formatting 說明）。
-
-> 純 URL 文章其實 `notes add -u <URL>` 就會自動抓取並清理；markitdown 路線的價值
-> 在於 PDF / DOCX / PPTX 等非 URL 來源，或需要精準控制 Markdown 結構時。
 
 ## Common Mistakes
 
@@ -124,3 +90,8 @@ Formatting 說明）。
 - Login-gated pages → authenticate with browser, then pipe HTML to markitdown
 - High-fidelity rendering for humans → use dedicated viewers
 - Real-time web scraping at scale → use a dedicated scraper
+
+## Related
+
+- `[[apple-notes]]` 轉檔後存入 Apple Notes 的流程歸它擁有，見該技能的
+  `references/workflows.md`

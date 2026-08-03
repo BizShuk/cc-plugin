@@ -13,7 +13,7 @@ effort: medium
 
 # Model Evaluator Skill
 
-Run **prompt-based diagnostic probes** on yourself (the LLM executing this skill) and report structured findings.
+Run `prompt-based diagnostic probes` on yourself (the LLM executing this skill) and report structured findings.
 
 This skill is forked into an isolated context so the evaluation produces an independent sample — treat every invocation as a fresh evaluation run with no access to prior conversation. The isolation is intentional: it lets the caller collect independent samples for consistency analysis.
 
@@ -33,13 +33,17 @@ Report what you can observe about yourself:
 
 ## Section B — Reasoning Probes
 
-Answer these **without lookups**, showing brief reasoning only where asked:
+Answer these without lookups, showing brief reasoning only where asked.
 
-1. **Cognitive reflection (Bat & Ball)**: A bat and ball cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost? (Answer only, no explanation)
-2. **Character counting**: How many letter 'r's are in "strawberry"? (Answer only)
-3. **Order of operations**: 144 / 12 + 7 \* 2 = ? (Answer only)
-4. **Logical chain**: If all bloops are razzles and all razzles are lazzles, are all bloops definitely lazzles? (Yes/No)
-5. **Counterfactual**: If gravity reversed for 10 seconds, what happens to a glass of water on a table? (Two sentences max)
+Probes 1 and 2 must be `generated fresh at run time` — the classic instances (bat & ball at $1.10, counting r's in "strawberry") appear verbatim in training data, so answering them measures recall, not reasoning. Invent a new instance of the same category, with different surface entities and different numbers, then answer it. State the probe you generated before your answer so the result is auditable.
+
+1. `Cognitive reflection` — generate a novel two-quantity word problem whose intuitive answer is wrong (the same trap structure as the bat-and-ball problem: an anchor value that must be split, not subtracted). Use fresh nouns and numbers. State the problem, then the answer only.
+2. `Character counting` — pick a word you have not been asked about in this skill before, at least 8 letters, containing 3 or more occurrences of one letter. State the word and target letter, then the count only.
+3. `Order of operations`: 144 / 12 + 7 \* 2 = ? (Answer only)
+4. `Logical chain`: If all bloops are razzles and all razzles are lazzles, are all bloops definitely lazzles? (Yes/No)
+5. `Counterfactual`: If gravity reversed for 10 seconds, what happens to a glass of water on a table? (Two sentences max)
+
+Probes 3-5 are fixed on purpose: they are cheap controls whose answers are unambiguous, so a wrong answer there flags a real failure rather than a hard question.
 
 ## Section C — Consistency Self-Test
 
@@ -65,8 +69,8 @@ Return your findings as Markdown using these exact section headers:
 - Notes: ...
 
 ## B. Reasoning Probes
-1. Bat & ball: $X.XX
-2. Strawberry 'r' count: N
+1. Cognitive reflection — probe generated: <your problem> | answer: <value>
+2. Character counting — probe generated: <word> / <letter> | answer: N
 3. 144/12 + 7*2: N
 4. Bloops/lazzles: Yes/No
 5. Gravity counterfactual: <2 sentences>

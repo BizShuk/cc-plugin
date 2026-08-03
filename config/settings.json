@@ -7,6 +7,7 @@
     "_____model": "_____",
     "ANTHROPIC_MODEL": "opus",
     "_____agent": "_____",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "opus",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "_____extra": "_____",
     "ENABLE_LSP_TOOL": "1",
@@ -46,7 +47,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "claude-fable-5[1m]",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -86,7 +87,7 @@
   "outputStyle": "Executive Summary",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
   "pluginConfigs": {

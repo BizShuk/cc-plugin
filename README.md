@@ -65,7 +65,7 @@
 - `general` (通用 metadata、日報、Markdown、TODO 與 feature agent)
 - `god` (系統大一統理論：LLM 力學、領域探索、融合方法)
 - `review` (審查、系統／商業規劃與 workspace 自演化：廣域思考後收斂成單一設計、更新、驗證與知識整合流程)
-- `team` (代理團隊規劃與設計：team-design, role-generator, orchestration-config)
+- `team` (代理團隊規劃與設計：team-design, role-generator)
 - `ultra-explore` (多來源可驗證知識庫建構)
 
 `領域流程 (Domain Flow):`

@@ -1,12 +1,9 @@
 ---
 name: kb-verify
 description: >
-    Use when verifying knowledge base integrity — broken wikilinks, orphans,
-    missing kind/truth labels, candidate facts leaked into the curated zone,
-    unsourced dimensions, edge grounding audits, contradiction and staleness
-    reports. Persists a dated verification report for tracking. Triggers on:
-    "verify the knowledge base", "kb health check", "驗證知識庫",
-    "知識庫健檢", "kb verify".
+    Use when verifying knowledge base integrity (broken wikilinks, missing
+    kind/truth labels, candidate leakage, edge grounding, contradictions,
+    staleness) and persisting a dated verification report.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true
@@ -31,15 +28,18 @@ context: fork
 - [ ] Step 5: 回報結論與待裁決清單
 ```
 
+路徑佔位符 `<kb>`／`<proj>` 依 `kb-spec`（預設全域根 `<kb>` =
+`~/projects/product/`，專案庫 `<proj>` = `<kb>/projects/<project>/`）。
+
 驗證範圍以「專案」為單位：使用者指定 `<project>` 就只驗該庫；未指定則
-`ls ~/projects/product/projects/` 逐專案跑一輪（wikilink 不跨專案，
+`ls <kb>/projects/` 逐專案跑一輪（wikilink 不跨專案，
 逐專案驗才不會誤報跨庫斷鏈）。以下 `$root` 為單一專案根 `<proj>`；
 curated 檔案 = 排除 `_inbox/`、`_sources/`、`_index.md` 後的 `*.md`。
 
 ## Step 1 — 結構檢查 (Structural, 全量腳本)
 
 ```bash
-root=~/projects/product/projects/<project>
+root=<proj>                      # = <kb>/projects/<project>
 curated() { find "$root" -name '*.md' ! -path '*/_inbox/*' \
   ! -path '*/_sources/*' ! -name '_index.md' ! -name 'CHANGELOG.md'; }
 

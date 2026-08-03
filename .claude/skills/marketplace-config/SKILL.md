@@ -3,9 +3,8 @@ name: marketplace-config
 description: >
     Use when configuring Claude Code plugin manifests — `marketplace.json`
     (multi-plugin catalog) or `plugin.json` (single plugin). Triggers on:
-    "set up a new plugin", "register a skill", "add a plugin entry",
-    "fix plugin.json", "marketplace.json schema", "github source format",
-    "git-subdir source", "hook not firing", "skill not picked up".
+    "set up a new plugin", "register a skill", "fix plugin.json",
+    "marketplace.json schema", "plugin source format", "skill not picked up".
 allowed-tools: Read, Bash, Glob
 user-invocable: true
 disable-model-invocation: false
@@ -249,12 +248,6 @@ git check-ignore -v .claude/skills/<skill-name>
     ]
 }
 ```
-
-## 與其他技能 (Related Skills)
-
-- `plugin-development` — 開發新插件的全流程（若存在）
-- `vercel-skills-cli` — 用 `skills add` / `skills find` 操作
-- `claude-code-hooks` — Hook 撰寫細節
 
 ## 設計原則
 

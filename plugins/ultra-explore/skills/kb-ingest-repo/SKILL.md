@@ -1,12 +1,8 @@
 ---
 name: kb-ingest-repo
 description: >
-    Use when ingesting a git repository (local path or remote URL) into the
-    knowledge base — scans entry points, domain models, and business rules in
-    resumable batches, then writes raw captures and entity candidates into the
-    KB inbox with per-batch progress persisted. Built for 1000+ file repos.
-    Triggers on: "ingest this repo", "add repo to knowledge base",
-    "把 repo 加入知識庫", "匯入程式庫知識".
+    Use when ingesting a git repository's current state (entry points, domain
+    models, business rules) into the knowledge base inbox as raw captures.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true

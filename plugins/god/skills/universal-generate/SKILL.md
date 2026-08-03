@@ -1,11 +1,12 @@
 ---
 name: universal-generate
 description: >
-  Use when creating any artifact from intent — code, document, skill,
-  plan, schema, diagram, dataset — especially when starting from a vague
-  requirement or blank page. Triggers on: "create", "build", "write a
-  new", "generate", "draft", "scaffold", "from scratch", "產生", "建立",
-  "從零開始".
+  Use only when no concrete skill covers the artifact being produced and a
+  target-agnostic creation procedure is needed — an unfamiliar artifact
+  type, or a requirement too vague to pick a specific skill. Do not use
+  when a language-, format-, or domain-specific skill already applies.
+  Triggers on: "target-agnostic 生成程序", "沒有現成範例可循", "不知道該用
+  哪個 skill 來做這個產物".
 version: "2.0.0"
 metadata:
   type: pattern

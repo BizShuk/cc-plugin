@@ -1,11 +1,6 @@
 ---
 name: kb-spec
-description: >
-    Reference spec for the knowledge base storage layout, capture/entity file
-    formats, truth tiers, fingerprint dedup, and edge rules. Use when reading or
-    writing any file under the knowledge base root, or when another kb-* skill
-    needs the canonical format. Triggers on: "kb spec", "knowledge base format",
-    "知識庫格式", "知識庫規範".
+description: Reference spec read by other kb-* skills; not directly invocable.
 version: "1.1.0"
 user-invocable: false
 disable-model-invocation: true

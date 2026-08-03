@@ -72,8 +72,8 @@ flowchart TD
 | 8   | `kb-connect`        | 建邊 + Backlinks 重算 + `_index.md` 重建                 | 僅手動   |
 | 9   | `kb-verify`         | 健檢：斷鏈/佐證抽查/矛盾/過期，報告落盤                  | 僅手動   |
 | 10  | `kb-query`          | 帶引用查詢，缺口記入 Frontier                            | 僅手動   |
-| 11  | `topology-builder`  | 跨來源連結拓撲／知識圖譜構建                              | 自動觸發 |
-| 12  | `changelog`         | git log 增量 → 結構化 commits.jsonl + CHANGELOG.md      | 僅手動 |
+| 11  | `topology-builder`  | 跨來源連結拓撲／知識圖譜構建                              | 僅手動   |
+| 12  | `changelog`         | `repo-changelog` 管道（需 pip 安裝）→ 多 repo CHANGELOG.md + 每週敘事 | 僅手動 |
 
 代理 (Agent)：`kb-coordinator` (`./agents/kb-coordinator.md`) — 由入口技能派工，phase gate 依 `_state/` 判定。
 
@@ -118,9 +118,10 @@ flowchart TD
 - 格式相容 `topology-builder`（entity/wikilink/邊規則），另加 truth 標註與
   `supersedes` / `contradicts` 動詞
 - 抓取複用 `explore` 插件的 `markitdown` / `scrapling` 工具鏈
-- `general` 插件的 `changelog` 技能已在本插件內重新開發為
-  `kb-ingest-history/scripts/kb_history.py`（單檔、純 stdlib、零安裝）：
-  確定性管道產出 `_raw/commits.jsonl` + `stats.json` + `_diffs/*.diff` +
-  `CHANGELOG.md` 骨架，蒸餾批次順手回填週敘事 — 不依賴原技能的 pip 套件
+- 本插件內的 `changelog` 技能（`skills/changelog/scripts/`，需 `pip install -e`）
+  已由 `kb-ingest-history/scripts/kb_history.py`（單檔、純 stdlib、零安裝）取代：
+  同樣的確定性管道產出 `_raw/commits.jsonl` + `stats.json` + `_diffs/*.diff` +
+  `CHANGELOG.md` 骨架，蒸餾批次順手回填週敘事 — 入庫流程一律走 `kb-ingest-history`，
+  `changelog` 只保留給不建 kb、單純要多 repo CHANGELOG 的情境
 - `review` 插件的 `project-docs` 仍負責單 repo 正典文件產出與業務萃取；
   本插件負責跨來源集中知識庫

@@ -76,24 +76,10 @@ metadata:
    - 有至少兩項 workspace 證據，或一個可重現的測試／日誌證據。
    - 有可驗收結果、驗證方式與最小可逆落地路徑。
    - 不依賴未獲授權的外部或受保護操作。
-3. 對通過門檻的候選以 0–5 評分，依 `總分 = Σ(評分 ÷ 5 × 權重)` 換算為 100 分：
-
-| 維度 | 權重 |
-| --- | ---: |
-| 使用者／業務價值 | 20 |
-| 系統槓桿 | 15 |
-| Workspace 契合度 | 15 |
-| 證據與信心 | 15 |
-| 急迫性／風險降低 | 10 |
-| 可行性／可逆性 | 10 |
-| 可驗證性／學習價值 | 10 |
-| 跨面向正向效益 | 5 |
-
-評分後執行以下收斂規則：
-
-1. 只選最高分主提案。低於 70 分時，將它縮小成可驗證實驗後重新評分；仍低於 70 分或無法通過門檻則以 `no-change` 結束，不強迫修改。
-2. 分數差小於 5 時，依序選擇較小可逆變更、較強證據、較高契合度、較低成本者。
-3. 落選候選只在當次決策表記一行淘汰理由，不建立檔案或獨立待辦。確有獨立價值且已有證據者，最多新增一項下一週期 seed。
+3. 有兩個以上候選通過門檻時，用 `references/scoring.md` 的八維權重表排序，選出唯一主提案。
+   該表是`挑選用的啟發式 (selection heuristic)`，把「先做哪一個」寫成可複述的判斷；
+   它不產生任何有效性證據，分數永遠不能取代 VERIFY 階段的實測結果。只有一個候選時
+   不必計分，檢查硬門檻即可。
 
 ## 2. DESIGN — 統一主提案
 
@@ -148,16 +134,6 @@ metadata:
 - 被證偽或取代的概念從 canonical owner 移除；只有能防止重犯時才在 `docs/memory/` 保留簡短原因。
 - 若變更未影響某 canonical file，記錄 `checked — no change`，不要為了顯示同步而製造內容。
 
-## 舊版分支遷移 (Legacy Migration)
-
-若目標 workspace 存在舊版專屬標記，例如 `engine/system_prompt.md`、`branches/scoreboard.md` 或 `foundation/confidence.yaml`：
-
-1. 將其視為唯讀歷史輸入，不再新增分支內容。
-2. 去重現有候選，依本流程只選一個仍有效主提案。
-3. 將已驗證知識增量合併至 canonical owner；未驗證項目回到單一計畫或 TODO。
-4. 將必要決策歷史濃縮成一份 `docs/memory/` 記錄。
-5. 只有使用者明確要求遷移或清理時，才封存或刪除舊目錄。
-
 ## 輸出契約 (Output Contract)
 
 每次回覆只呈現一個主提案：
@@ -171,7 +147,7 @@ Status: plan-only | applied | no-change | blocked
 
 - Selected gap and evidence
 - Relevant lens findings
-- Candidate score and decision reason
+- Candidate selection reason (with the scoring heuristic result when more than one candidate qualified)
 
 ## Design
 

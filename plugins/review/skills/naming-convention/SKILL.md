@@ -58,5 +58,5 @@ codebase's own consistency.
 
 ## Related
 
-- `[[consistency]]` for terminology drift beyond identifiers
-- `[[folder-structure]]` for the names of directories
+- `[[system-planner]]` for cross-file terminology drift beyond identifiers, and for
+  directory layout and folder naming

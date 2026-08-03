@@ -60,18 +60,19 @@ metadata:
 4. `RICE 評分`：用簡化公式 `Score = Reach × Impact × Confidence ÷ Effort` 評分，決定 1 個主提案與 1 個備案。
 5. `商業模式`：選擇 `訂閱` / `用量計費` / `授權` / `平台抽成` / `內部降本` 之一並說明定價假設。
 6. `MVP 驗證`：規劃 2 週內可交付的 MVP 範圍、北極星指標 (具體數字門檻) 與假設驗證清單。
-7. `寫入計畫`：輸出 `plans/business-<feature_name>.md` 並在 `README.todo` 追加待辦行。
+7. `寫入計畫`：輸出 `plans/YYYY-MM-DD-business-<topic>.md` 並在 `README.todo` 追加待辦行。
 
 ---
 
 ## Output Examples
 
-規劃結果寫入 `plans/<YYYY-MM-DD>-business-<feature_name>.md`
+規劃結果寫入 `plans/YYYY-MM-DD-business-<topic>.md`（日期為 Asia/Taipei 本地日期，
+`<topic>` 為 kebab-case 且需明確指涉本次規劃）
 
-### Planning Mode Output Structure (plans/business-\*.md)
+### Planning Mode Output Structure
 
 ```markdown
-# 商業價值計畫 — <feature_name> (Business Value Plan)
+# 商業價值計畫 — <topic> (Business Value Plan)
 
 ## 1. 目標與範圍 (Goal & Scope)
 

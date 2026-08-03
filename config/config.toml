@@ -241,12 +241,12 @@ cancel = []
 "gpt-5.6-sol" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-08-02T08:12:43Z"
+last_updated = "2026-08-03T10:52:32Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-08-01T22:13:10Z"
+last_updated = "2026-08-02T19:50:28Z"
 source_type = "local"
 source = "/Users/shuk/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 

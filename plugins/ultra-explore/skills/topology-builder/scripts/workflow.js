@@ -15,7 +15,7 @@ const root = (args && args.root) || '~/projects/product/topologies'
 const sources = (args && args.sources) || []
 if (!sources.length) throw new Error('args.sources is required: [{ type, target }]')
 
-const SKILL = 'plugins/general/skills/topology-builder/SKILL.md (read the nearest copy; ' +
+const SKILL = 'plugins/ultra-explore/skills/topology-builder/SKILL.md (read the nearest copy; ' +
     'if unreadable, follow the rules embedded in this prompt)'
 
 const CANDIDATES_SCHEMA = {

@@ -1,13 +1,9 @@
 ---
 name: kb-ingest-chat
 description: >
-    Use when ingesting chat histories (Slack/Discord exports, meeting notes,
-    pasted conversations, or the current session) into the knowledge base —
-    distills decisions, facts, and commitments from noisy dialogue into raw
-    captures with speaker attribution, processed in resumable batches with
-    progress persisted. Triggers on: "ingest this chat", "save this
-    conversation to knowledge base", "把對話加入知識庫", "匯入聊天紀錄",
-    "記住這段討論".
+    Use when ingesting chat histories (exports, meeting notes, pasted
+    conversations, the current session) into the knowledge base as raw captures
+    of decisions, facts, and commitments with speaker attribution.
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Write, Edit
 user-invocable: true
