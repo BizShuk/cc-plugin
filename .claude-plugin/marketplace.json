@@ -31,7 +31,10 @@
     },
     {
       "name": "tools",
-      "source": "./plugins/tools"
+      "source": {
+        "source": "github",
+        "repo": "bizshuk/tools"
+      }
     },
     {
       "name": "ultra-explore",

@@ -10,10 +10,10 @@
 
 `領域流程 (Domain Flow):`
 
-1. `distill` 主命令啟動管道 → 呼叫 `readGbrainLogic()` 與 `readClaudeMemLogic()` 讀取新增觀察值
-2. 呼叫 `OllamaService.Extract()` 透過 LLM 提取候選記憶 → 分類為 `Memory` 與 `Fact`
+1. `distill` 主命令啟動管道 → 從 `gbrain` 與 `claude-mem` 讀取新增觀察值
+2. 透過本地 LLM 提取候選記憶 → 分類為 `Memory` 與 `Fact`
 3. 寫入 `agentmemory` API（所有記憶）與 `mempalace mine`（通過真實性門檻的事實）
-4. 更新 `StateStore` 中的遊標與蒸餾狀態 → 由 `retain` 清理過期資料與檔案
+4. 更新遊標與蒸餾狀態 → 清理過期資料與檔案
 
 `核心實體 (Key Entities):` `Observation`, `Candidate`, `Memory`, `Fact`, `Cursor`, `Seen`, `Distilled`
 
@@ -26,7 +26,7 @@
 `領域流程 (Domain Flow):`
 
 1. 使用者執行 `cc-plugin export <子命令>` → 選擇匯出 `gbrain`、`claudemem` 或 `mempalace`
-2. 讀取 `StateStore` 遊標（增量模式）或從 epoch 0 開始（`--all` 模式）
+2. 讀取遊標（增量模式）或從頭開始（`--all` 全量模式）
 3. `mempalace` 子命令支援類別清單（CSV）與完整 Markdown 結構匯出（`--data`）
 
 `核心實體 (Key Entities):` `DrawerRow`, `Observation`
@@ -66,7 +66,7 @@
 
 - `記憶蒸餾管道` 的輸出（`Memory`、`Fact`）寫入外部記憶儲存庫，而 `資料匯出` 則可從同一儲存庫反向匯出資料
 - `環境初始化` 負責將 `AI 技能與代理` 的設定檔同步至各個 AI Agent 的家目錄
-- `資料匯出` 與 `記憶蒸餾管道` 共用 `StateStore`（遊標機制）以支援增量操作
+- `資料匯出` 與 `記憶蒸餾管道` 共用同一份遊標狀態以支援增量操作
 
 ## 使用方式 (Usage)
 
