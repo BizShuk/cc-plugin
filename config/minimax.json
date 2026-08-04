@@ -7,7 +7,7 @@
         "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
         "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "75",
         "_____model": "_____",
-        "ANTHROPIC_MODEL": "MiniMax-M3",
+        "ANTHROPIC_MODEL": "MiniMax-M3[1m]",
         "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
         "ANTHROPIC_DEFAULT_FABLE_MODEL": "MiniMax-M3[1m]",
         "ANTHROPIC_DEFAULT_FABLE_MODEL_NAME": "MiniMax-M3[1m]",
