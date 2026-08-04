@@ -8,7 +8,19 @@
 `稽核先於改寫`。每一筆發現寫成 `doc 說 X → 實際 Y`，附檔名與行號，
 經使用者確認後才進入後續階段。未經確認不得動手改寫。
 
-### Step S0.1 — 掃描六類徵狀
+### Step S0.0 — Token 基線 (Token Baseline)
+
+改寫前先記錄正典文件的 token 數；S6 以`同一指令`重測，回報前後差異：
+
+```bash
+python3 -c 'import sys,tiktoken; e=tiktoken.get_encoding("o200k_base");
+[print(len(e.encode(open(f).read())), f) for f in sys.argv[1:]]' README.md CLAUDE.md
+```
+
+無 `tiktoken` 時改用 `wc -c` 除以 4 估算，並在報告標註`估算值`。
+基線只做`量測`，不做承諾 ——「不預告最終行數」對 token 數同樣適用。
+
+### Step S0.1 — 掃描七類徵狀
 
 ```bash
 # 1) 外部 repo：自承範疇的章節，以及對方的實作細節
@@ -29,7 +41,16 @@ grep -n "/Users/\|/home/\|~/projects/" README.md CLAUDE.md
 # 6) 重複：兩檔都有的章節標題與結構樹
 grep -c '^```tree\|^```text' README.md CLAUDE.md
 diff <(grep '^## ' README.md) <(grep '^## ' CLAUDE.md)
+
+# 7) 過長章節（細節下放候選）：逐章節統計行數
+for f in README.md CLAUDE.md; do
+  awk -v f="$f" '/^## /{if(s)print f": "c" 行  "s; s=$0; c=0; next}{c++}
+                 END{if(s)print f": "c" 行  "s}' "$f"
+done
 ```
+
+第 7 類的判定：`使用方式`／`開發指南`類章節超過約 25 行即為`細節下放`候選，
+目的地與保留規則見 [content-ownership.md](content-ownership.md) 的`細節下放`章節。
 
 ### Step S0.2 — 逐筆驗證文件宣稱
 
@@ -166,9 +187,12 @@ git status --short
 - 易腐計數：<n> 處 → 刪除
 - 可執行斷言：<n> 條 → <測試檔>（其中 <m> 條原本就是錯的，已改寫）
 - 重複章節：<清單> → 由 <owner 檔> 單一擁有
+- 細節下放：<n> 行 → docs/cli.md、docs/development.md（正典檔留 quick start + 指標）
 - 機器路徑：<n> 處 → 相對路徑
 
 行數：README.md <a> → <b>；CLAUDE.md <c> → <d>
+Token：README.md <a> → <b>（-<x>%）；CLAUDE.md <c> → <d>（-<y>%）
+  （S0.0 同一指令重測；含下放後的 docs/cli.md、docs/development.md 新增量）
 驗收：測試全綠 / 連結全解析 / working tree 只含預期檔案
 未處理：<清單與理由>
 ```

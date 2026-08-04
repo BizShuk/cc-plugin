@@ -4,10 +4,12 @@ description: >
     Two modes. `Consolidate`: fold `docs/specs/` and `plans/` files older than
     two weeks into one summary table per folder, and move hand-written change
     logs into `docs/CHANGELOG.md`. `Scope cleanup`: strip from `README.md` /
-    `CLAUDE.md` whatever another file owns. Triggers on: "consolidate docs",
-    "merge specs", "clean up plans", "scope cleanup", "文件整併", "合併規格",
-    "整理 plans", "範疇清理".
-version: "1.2.0"
+    `CLAUDE.md` whatever another file owns, and demote high-churn detail
+    (full CLI reference, dev setup) to `docs/cli.md` / `docs/development.md`.
+    Triggers on: "consolidate docs", "merge specs", "clean up plans",
+    "scope cleanup", "文件整併", "合併規格", "整理 plans", "範疇清理",
+    "文件瘦身", "下放 docs".
+version: "1.3.0"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true
 disable-model-invocation: false
@@ -61,6 +63,8 @@ metadata:
 - `README.md` 與 `CLAUDE.md` 出現重複章節或兩份會分岔的結構樹
 - 正典文件裡有描述`外部 repo` 的章節（本 repo 無法 build 或 test 它）
 - 文件裡有整段可執行的驗證指令，但沒有任何 CI 或測試在跑
+- `使用方式`／`開發指南`章節長成完整參考（約 25 行以上），需下放
+  `docs/cli.md`／`docs/development.md`，正典文件只留 quick start 與指標
 - 大型重構之後，正典文件仍在描述`曾經如何`
 
 不適用：`docs/backlog/`（尚未實作的想法，沒有「是否仍存在」可驗證）、
@@ -118,12 +122,12 @@ metadata:
 
 | Phase           | 動作                                                       | 產物                     |
 | --------------- | ---------------------------------------------------------- | ------------------------ |
-| S0 `Audit`      | 逐段套範疇判準，每筆標`失效原因`與`目的地`                 | 處置表（doc 說 X → 實際 Y） |
+| S0 `Audit`      | 記錄 token 基線；逐段套範疇判準，每筆標`失效原因`與`目的地` | 處置表（doc 說 X → 實際 Y） |
 | S1 `Automate`   | 可執行的斷言先落成測試／腳本，並`注入違規證明它會紅`       | 測試檔／`scripts/`       |
 | S2 `Verify dst` | 確認要搬的內容`目的地已有`；已有則是`刪除`不是搬移         | 前提查核結果             |
 | S3 `Cut`        | 以 anchor 文字（非行號）逐段刪改                           | 瘦身後的正典文件         |
 | S4 `Sweep`      | `重讀全文`找殘留：懸空引用、被刪章節的交叉連結、孤立表格列 | 殘留清單                 |
-| S5 `Lint`       | 連結解析、機器路徑、外部細節、測試與腳本全綠               | 驗收輸出                 |
+| S5 `Lint`       | 連結解析、機器路徑、外部細節、測試與腳本全綠；token 重測前後差異 | 驗收輸出 + token 差異    |
 
 `先自動化再刪除`：S1 未完成前不得進入 S3 —— 否則斷言會出現無人把關的空窗期。
 
