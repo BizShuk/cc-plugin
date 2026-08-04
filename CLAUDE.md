@@ -62,6 +62,7 @@
 | `config/keybindings.json`                | Claude Code（經 `scripts/run.sh` 軟連結）                              | 鍵盤綁定                                                                       |
 | `config/output-styles/`                  | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）                       | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名）                |
 | `config/config.go`                       | cc-plugin CLI                                                          | 執行期 viper 預設值                                                            |
+| `scripts/aliases.sh`                     | bash（由 `~/.bash_aliases` source，`非` 軟連結）                        | 各 provider 的 CLI alias：flag 組合、settings 指向、token 變數名               |
 | `README.md`                              | 人類                                                                   | 業務定義與 domain flow                                                         |
 | `CLAUDE.md`                              | 模型與人類                                                             | 技術脈絡、關鍵決策、ownership（本表）                                          |
 | `docs/terminology.md`                    | 模型與人類                                                             | 領域名詞定義                                                                   |
