@@ -19,7 +19,7 @@
 | `claude-plugin-metadata` | 建立與更新 Claude 插件與技能的元資料（含 plugin.json 與 marketplace.json） |
 | `daily-summary` | 彙整過去 24h 跨來源工作，產生工作日報並寫入 Apple Notes |
 | `markdownlint` | Markdown 格式檢查（精選 rule + CUSTOM-01 no-bold）；`範圍限 plugins/experiment/skills/` 下的 `.md` 檔 |
-| `project-task` | 為任意語言專案產生 package.json 任務跑器（dev/test/build/deploy） |
+| `project-task` | 為任意語言專案產生 package.json 任務跑器（dev/test/build/deploy/lint/clean/destroy/run） |
 | `sort-todo` | 排序並格式化 `.todo` 待辦清單（P0/P1/P2 三鏡頭評分 + 依目標 repo 的 feature 目錄推導章節；`專案無關 (project-agnostic)`） |
 
 ## 代理 (Agents)

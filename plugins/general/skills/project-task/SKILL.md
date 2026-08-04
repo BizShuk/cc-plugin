@@ -39,22 +39,23 @@ metadata:
 
 ### 第一層 — 管線階段 (Pipeline Stages)
 
-對應標準 CI/CD 管線。每個專案預設包含以下四項；確實不適用者可省略：
+頂層類別 (top entry category) 對應標準 CI/CD 管線，每個類別皆可帶第二層子任務 (`<stage>:<component>`)。每個專案預設包含以下項目；確實不適用者可省略：
 
 | 腳本 (Script) | 用途 | 執行方式 |
 | --- | --- | --- |
 | `dev` | 啟動本機開發環境 | 平行執行所有 `dev:*` |
 | `test` | 執行完整測試套件 | 平行執行所有 `test:*` |
-| `build` | 產生建構產物 | 平行執行所有 `build:*` |
+| `build` | 安裝依賴並產生建構產物（含 `npm install` 等安裝步驟） | 平行執行所有 `build:*` |
 | `deploy` | 部署至目標環境 | 平行執行所有 `deploy:*` |
+| `lint` | 執行所有 linter 與格式化工具（不另設 `format`，格式化屬於 lint） | 平行執行所有 `lint:*` |
+| `clean` | 移除產出物 (artifacts)：output、build files、`node_modules` | 平行執行所有 `clean:*` |
+| `destroy` | 終止執行中的服務 (kill running services) | 平行執行所有 `destroy:*` |
+| `run` | 執行專案腳本 (project script)，腳本通常位於 `scripts/` 目錄 | 不聚合 — 個別執行 `run:<script>` |
 
 管線相關的額外腳本（僅在需要時加入）：
 
 | 腳本 (Script) | 用途 |
 | --- | --- |
-| `lint` | 執行所有 linter (`lint:*`) |
-| `format` | 執行所有格式化工具 (`format:*`) |
-| `clean` | 清除產生的產物 |
 | `ci` | 完整 CI 管線：`lint && test && build` |
 
 ### 第二層 — 元件 (Components)
@@ -78,12 +79,27 @@ metadata:
   "test:e2e": "cd e2e && npx playwright test",
 
   "build:api": "cd api && go build -o bin/server ./cmd/server",
-  "build:web": "cd web && npm run build",
+  "build:web": "cd web && npm install && npm run build",
 
   "deploy:api": "cd api && ./scripts/deploy.sh",
-  "deploy:web": "cd web && ./scripts/deploy.sh"
+  "deploy:web": "cd web && ./scripts/deploy.sh",
+
+  "lint:api": "cd api && gofmt -l . && go vet ./...",
+  "lint:web": "cd web && npx eslint . && npx prettier --check .",
+
+  "clean:api": "rm -rf api/bin",
+  "clean:web": "rm -rf web/dist web/node_modules",
+
+  "destroy:api": "pkill -f 'bin/server' || true",
+  "destroy:web": "pkill -f 'vite' || true",
+
+  "run:seed": "./scripts/seed.sh",
+  "run:migrate": "./scripts/migrate.sh",
+  "run:backfill": "python scripts/backfill.py"
 }
 ```
+
+`run` 類別的第二層以`腳本名稱`而非元件命名（`run:<script>`），對應 `scripts/` 目錄下的檔案；各腳本獨立執行，頂層不設 `run` 聚合腳本。
 
 ### 第三層 — 變體 (Variants)（少用）
 
@@ -104,13 +120,17 @@ metadata:
   "dev": "npx npm-run-all --parallel dev:*",
   "test": "npx npm-run-all --parallel test:*",
   "build": "npx npm-run-all --parallel build:*",
-  "deploy": "npx npm-run-all --parallel deploy:*"
+  "deploy": "npx npm-run-all --parallel deploy:*",
+  "lint": "npx npm-run-all --parallel lint:*",
+  "clean": "npx npm-run-all --parallel clean:*",
+  "destroy": "npx npm-run-all --parallel destroy:*"
 }
 ```
 
 `平行 vs 循序規則`：
-- `預設平行`：所有頂層階段 (`dev`, `test`, `build`, `deploy` 等) 預設皆使用平行執行 (`--parallel`)。
+- `預設平行`：所有頂層類別 (`dev`, `test`, `build`, `deploy`, `lint`, `clean`, `destroy` 等) 預設皆使用平行執行 (`--parallel`)。
 - `特例循序`：僅當子項元件有明確的建構順序依賴時，才調整為循序 (`--sequential`)。
+- `run 不聚合`：`run:*` 各腳本互不相關，只個別執行（`npm run run:seed`），不建立頂層 `run` 聚合腳本。
 
 `單一元件捷徑`：若某階段只有一個元件，頂層腳本可直接呼叫，無需 `npm-run-all`：
 
@@ -139,11 +159,26 @@ metadata:
 
     "build": "npx npm-run-all --parallel build:*",
     "build:api": "cd api && go build -o bin/server ./cmd/server",
-    "build:web": "cd web && npm run build",
+    "build:web": "cd web && npm install && npm run build",
 
     "deploy": "npx npm-run-all --parallel deploy:*",
     "deploy:api": "cd api && ./scripts/deploy.sh",
-    "deploy:web": "cd web && ./scripts/deploy.sh"
+    "deploy:web": "cd web && ./scripts/deploy.sh",
+
+    "lint": "npx npm-run-all --parallel lint:*",
+    "lint:api": "cd api && gofmt -l . && go vet ./...",
+    "lint:web": "cd web && npx eslint .",
+
+    "clean": "npx npm-run-all --parallel clean:*",
+    "clean:api": "rm -rf api/bin",
+    "clean:web": "rm -rf web/dist web/node_modules",
+
+    "destroy": "npx npm-run-all --parallel destroy:*",
+    "destroy:api": "pkill -f 'bin/server' || true",
+    "destroy:web": "pkill -f 'vite' || true",
+
+    "run:seed": "./scripts/seed.sh",
+    "run:migrate": "./scripts/migrate.sh"
   }
 }
 ```
@@ -163,21 +198,23 @@ metadata:
 
 1. `掃描專案` — 辨識元件（含有獨立建構系統的目錄：`go.mod`、`Cargo.toml`、`pyproject.toml`、巢狀 `package.json` 等）
 2. `偵測既有指令` — 檢查 `Makefile`、`run.sh`、`scripts/`、既有 `package.json`
-3. `對應元件至腳本` — 分配 `<stage>:<component>` 名稱
+3. `對應元件至腳本` — 分配 `<stage>:<component>` 名稱；`scripts/` 目錄下不屬於管線階段的獨立腳本對應為 `run:<script>`
 4. `選擇聚合方式` — 單一元件 = 直接呼叫；多元件 = `npm-run-all`
 5. 產生 `package.json` — 套用範本，填入探索到的指令
 6. `保留既有內容` — 若 `package.json` 已存在，僅合併 `scripts`；不得刪除既有欄位
 
 ## 語言指令參照 (Language Command Reference)
 
-| 語言 | Dev | Test | Build |
-| --- | --- | --- | --- |
-| Go | `go run ./cmd/<name>` | `go test ./...` | `go build -o bin/<name> ./cmd/<name>` |
-| Python | `python -m <module>` | `pytest` | `python -m build` |
-| Rust | `cargo run` | `cargo test` | `cargo build --release` |
-| Java/Kotlin | `./gradlew run` | `./gradlew test` | `./gradlew build` |
-| C/C++ | `make run` | `make test` | `make build` |
-| JS/TS (巢狀) | `npm run dev` | `npm test` | `npm run build` |
+主要語言為 Golang、Node.js 相關 (tsc、vite 等) 與 Python：
+
+| 語言 | Dev | Test | Build（含安裝） | Lint | Clean |
+| --- | --- | --- | --- | --- | --- |
+| Go | `go run ./cmd/<name>` | `go test ./...` | `go build -o bin/<name> ./cmd/<name>` | `gofmt -l . && go vet ./...` | `rm -rf bin` |
+| Node.js (tsc) | `npx tsc --watch` | `npm test` | `npm install && npx tsc` | `npx eslint .` | `rm -rf dist node_modules` |
+| Node.js (vite) | `npm run dev` | `npm test` | `npm install && npm run build` | `npx eslint .` | `rm -rf dist node_modules` |
+| Python | `python -m <module>` | `pytest` | `pip install -e . && python -m build` | `ruff check .` | `rm -rf dist build *.egg-info` |
+
+其他語言（Rust、Java 等）依相同模式類推，不在預設參照範圍。
 
 ## VSCode 整合 (VSCode Integration)
 
@@ -198,3 +235,7 @@ metadata:
 | 忘記加 `"private": true` | 務必設定以防止意外 `npm publish` |
 | 腳本中使用絕對路徑 | 使用專案根目錄的相對路徑搭配 `cd` |
 | 加入 `node_modules` 依賴 | 保持無依賴；透過 `npx` 使用 `npm-run-all` |
+| 另設 `format` 頂層腳本 | 格式化屬於 lint — 併入 `lint:*`，不獨立成類別 |
+| `build` 未含依賴安裝 | `build:*` 應包含安裝步驟（如 `npm install`），確保 clean checkout 可直接建構 |
+| 用 `clean` 停服務或用 `destroy` 刪檔案 | `clean` 只移除 artifacts；`destroy` 只終止執行中的服務 |
+| 把 `scripts/` 的獨立腳本塞進 `dev`/`build` | 不屬於管線階段的腳本歸入 `run:<script>` |
