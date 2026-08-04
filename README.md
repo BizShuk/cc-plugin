@@ -41,17 +41,17 @@
 
 ### 環境初始化與配置同步 (Environment Initialization & Config Sync)
 
-透過 `run.sh`（macOS/Unix）將本庫的設定檔與範本軟連結至使用者的家目錄資料夾（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes` 等），同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。切換供應商的方式是把 `~/.claude/settings.json` 的連結目標改指向對應的 `config/<provider>.json`。
+透過 `scripts/run.sh`（macOS/Unix）將本庫的設定檔與範本軟連結至使用者的家目錄資料夾（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes` 等），同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。切換供應商的方式是把 `~/.claude/settings.json` 的連結目標改指向對應的 `config/<provider>.json`。
 
 `領域流程 (Domain Flow):`
 
-1. 執行 `run.sh` → 建立家目錄結構
+1. 執行 `scripts/run.sh` → 建立家目錄結構
 2. 軟連結全域設定檔（`CLAUDE.global.md`、`settings.json`）→ 至 Claude Code、Gemini CLI、Codex、Hermes
 3. 複製或連結外部工具設定（LiteLLM、CCStatusline、Tokscale），並建立 `tmp/` 反向連結以供調試
 
 `核心實體 (Key Entities):` `Active settings`, `Provider settings`, `Global rule`（定義見 [`docs/terminology.md`](docs/terminology.md)）
 
-`相關處理器 (Related Handlers):` `run.sh`
+`相關處理器 (Related Handlers):` `scripts/run.sh`
 
 ---
 
@@ -134,7 +134,7 @@ cc-plugin topology rewrite --root <topology-root>
 
 ```bash
 # 初始化軟連結與設定同步
-chmod +x run.sh && ./run.sh
+chmod +x scripts/run.sh && ./scripts/run.sh
 
 # 安裝技能至 AI Agents
 npx skills add .

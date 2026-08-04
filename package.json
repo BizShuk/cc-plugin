@@ -4,16 +4,17 @@
   "private": true,
   "description": "Claude Code plugin and memory distillation CLI runner",
   "scripts": {
-    "setup": "./run.sh",
-    "dev": "npx npm-run-all --parallel dev:*",
-    "dev:cli": "go run main.go",
-    "test": "npx npm-run-all --parallel test:*",
-    "test:cli": "go test ./...",
-    "lint": "npx npm-run-all --parallel lint:*",
-    "lint:cli": "go vet ./...",
-    "build": "npx npm-run-all --parallel build:*",
-    "build:cli": "go build -o bin/cc-plugin .",
-    "deploy": "npx npm-run-all --parallel deploy:*",
-    "deploy:cli": "go install ."
+    "dev": "go run main.go",
+    "test": "go test ./...",
+    "build": "go build -o bin/cc-plugin .",
+    "deploy": "go install .",
+    "lint": "gofmt -l . && go vet ./...",
+    "clean": "rm -rf bin",
+    "destroy": "pkill -f 'bin/cc-plugin' || true",
+    "ci": "npm run lint && npm run test && npm run build",
+    "run:setup": "./scripts/run.sh",
+    "run:distill": "go run main.go distill",
+    "run:export-claudemem": "go run main.go export claudemem",
+    "run:topology-verify": "go run main.go topology verify"
   }
 }

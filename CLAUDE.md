@@ -35,7 +35,7 @@
 | 資料匯出 | `cmd/export/` | `export.ExportCmd`, `export.ClaudeMemCmd` |
 | Topology 圖譜 | `cmd/topology/`, `pkg/topology/` | `topology.TopologyCmd`, `LoadTopology()` |
 | 狀態管理 | `model/store.go`, `model/cursor.go` | `NewStateStore()`, `GetCursorPosition()`, `SetCursorPosition()` |
-| 環境初始化 | `run.sh`, `config/` | `config.Init()` |
+| 環境初始化 | `scripts/run.sh`, `config/` | `config.Init()` |
 | AI 技能 | `plugins/` | 各 `SKILL.md` |
 | 知識庫建構 | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/` | `ultra-explore`, `kb-coordinator.md` |
 | 審查、規劃與演化 | `plugins/review/skills/` | `auto-evolving` 與各專項 `SKILL.md` |
@@ -54,13 +54,13 @@
 | `plugins/<p>/agents/<a>.md` | 子代理 spawn | 該 agent 的 system prompt 與工具邊界 |
 | `plugins/<p>/README.md` | 人類 | 該 plugin 的技能清單與用途 |
 | `plugins/README.md` | 人類 | 本地／外部／submodule 三類 plugin 的分界與清單 |
-| `config/settings.json` | Claude Code（經 `run.sh` 軟連結） | 目前啟用的完整 Claude Code 設定（Anthropic 原生端） |
+| `config/settings.json` | Claude Code（經 `scripts/run.sh` 軟連結） | 目前啟用的完整 Claude Code 設定（Anthropic 原生端） |
 | `config/<provider>.json` | Claude Code（手動替換 `settings.json` 連結目標） | 該供應商的完整設定：端點、模型別名、effort、權限模式 |
 | `config/CLAUDE.global.md` | Claude／Gemini／Codex／Hermes（經 `skills install` 複製，`非` 軟連結） | 跨專案的全域規則與目錄佈局 |
 | `config/config.toml` | Codex CLI | Codex 模型、審批政策與 per-project trust |
-| `config/grok.toml` | Grok Build（經 `run.sh` 軟連結至 `~/.grok/config.toml`） | Grok 模型、reasoning effort、permission / UI 預設 |
-| `config/keybindings.json` | Claude Code（經 `run.sh` 軟連結） | 鍵盤綁定 |
-| `config/output-styles/` | Claude Code（經 `run.sh` 軟連結整個目錄） | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名） |
+| `config/grok.toml` | Grok Build（經 `scripts/run.sh` 軟連結至 `~/.grok/config.toml`） | Grok 模型、reasoning effort、permission / UI 預設 |
+| `config/keybindings.json` | Claude Code（經 `scripts/run.sh` 軟連結） | 鍵盤綁定 |
+| `config/output-styles/` | Claude Code（經 `scripts/run.sh` 軟連結整個目錄） | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名） |
 | `config/config.go` | cc-plugin CLI | 執行期 viper 預設值 |
 | `README.md` | 人類 | 業務定義與 domain flow |
 | `CLAUDE.md` | 模型與人類 | 技術脈絡、關鍵決策、ownership（本表） |
@@ -88,7 +88,7 @@ git clone https://github.com/bizshuk/cc-plugin.git
 git submodule update --init --recursive
 
 # 初始化環境（建立軟連結、同步設定）
-chmod +x run.sh && ./run.sh
+chmod +x scripts/run.sh && ./scripts/run.sh
 
 # 安裝為 Claude Code 插件
 claude --plugin-dir .

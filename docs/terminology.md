@@ -19,7 +19,7 @@
 
 | 名詞 | 定義 |
 | :--- | :--- |
-| `Active settings` | `config/settings.json`，經 `run.sh` 軟連結至 `~/.claude/settings.json` 的啟用設定 |
+| `Active settings` | `config/settings.json`，經 `scripts/run.sh` 軟連結至 `~/.claude/settings.json` 的啟用設定 |
 | `Provider settings` | `config/<provider>.json`（`openai`／`xai`／`proxy`／`minimax`／`llmbox`），各自完整自足；Claude Code 一次只讀一個檔，故共用區塊刻意重複 |
 | `Global rule` | `config/CLAUDE.global.md`，同時軟連結為 Claude／Gemini／Codex／Hermes 的全域指令 |
 | `Viper default` | `config/config.go` 的 `viper.SetDefault`，cc-plugin CLI 執行期設定的唯一預設來源 |

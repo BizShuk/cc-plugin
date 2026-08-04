@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)"
+REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)"
 TMP_DIR="$REPO_ROOT/tmp"
 
 backup_and_link() {
