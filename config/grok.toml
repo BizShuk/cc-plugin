@@ -27,13 +27,23 @@ vim_mode = false
 method = "auto"
 condition = "unfocused"
 idle_threshold_secs = 3
-events = ["turn_complete", "approval_required", "task_complete"]
+events = [
+    "turn_complete",
+    "approval_required",
+    "task_complete",
+]
 sleep_prevention = true
 progress_bar = true
 
 [ui.notifications.title]
 enabled = true
-items = ["action-required"]
+items = [
+    "action-required",
+    "spinner",
+    "activity",
+    "session-name",
+    "grok",
+]
 
 [features]
 telemetry = false
@@ -69,34 +79,34 @@ min_score = 0.0
 
 [permission]
 allow = [
-  "Bash(ls:*)",
-  "Bash(df:*)",
-  "Bash(du:*)",
-  "Bash(mkdir:*)",
-  "Bash(head:*)",
-  "Bash(find:*)",
-  "Bash(sed:*)",
-  "Bash(grep:*)",
-  "Bash(go:*)",
-  "Bash(python:*)",
-  "Bash(python3:*)",
-  "Bash(rm:*)",
-  "Bash(git:*)",
-  "Bash(cat:*)",
-  "Bash(chmod +x:*)",
-  "Read(~/.gbrain/**)",
+    "Bash(ls:*)",
+    "Bash(df:*)",
+    "Bash(du:*)",
+    "Bash(mkdir:*)",
+    "Bash(head:*)",
+    "Bash(find:*)",
+    "Bash(sed:*)",
+    "Bash(grep:*)",
+    "Bash(go:*)",
+    "Bash(python:*)",
+    "Bash(python3:*)",
+    "Bash(rm:*)",
+    "Bash(git:*)",
+    "Bash(cat:*)",
+    "Bash(chmod +x:*)",
+    "Read(~/.gbrain/**)",
 ]
 deny = [
-  "Read(~/.ssh/**)",
-  "Read(~/.aws/**)",
-  "Read(**/secrets/**)",
-  "Read(~/.grok/auth.json)",
-  "Read(~/.grok/config.toml)",
-  "Edit(**/.git)",
+    "Read(~/.ssh/**)",
+    "Read(~/.aws/**)",
+    "Read(**/secrets/**)",
+    "Read(~/.grok/auth.json)",
+    "Read(~/.grok/config.toml)",
+    "Edit(**/.git)",
 ]
 ask = [
-  "Bash(git push:*)",
-  "Read(.env*)",
+    "Bash(git push:*)",
+    "Read(.env*)",
 ]
 
 [subagents]
@@ -153,11 +163,6 @@ sessions = true
 
 [plugins]
 paths = []
-disabled = []
-
-[skills]
-paths = []
-ignore = []
 disabled = []
 
 [marketplace]

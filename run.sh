@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)"
 TMP_DIR="$REPO_ROOT/tmp"
 
 backup_and_link() {
@@ -46,14 +46,17 @@ mkdir -p \
     "$HOME/.grok" \
     "$TMP_DIR"
 
-backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.claude/CLAUDE.md"
-backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.gemini/GEMINI.md"
-backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.codex/AGENTS.md"
+# Global rule (config/CLAUDE.global.md) is NOT linked here.
+# `skills install` owns it and writes a real copy into each agent's config dir
+# (~/.claude/CLAUDE.md, ~/.gemini/GEMINI.md, ~/.codex/AGENTS.md, ~/.hermes/AGENTS.md).
+# Skills are likewise NOT linked here -- `skills add` owns ~/.agents/skills.
+
 backup_and_link "$REPO_ROOT/config/settings.json" "$HOME/.claude/settings.json"
+backup_and_link "$REPO_ROOT/config/keybindings.json" "$HOME/.claude/keybindings.json"
+backup_and_link "$REPO_ROOT/config/output-styles" "$HOME/.claude/output-styles"
 backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$REPO_ROOT/config/grok.toml" "$HOME/.grok/config.toml"
 
-backup_and_link "$REPO_ROOT/config/CLAUDE.global.md" "$HOME/.hermes/AGENTS.md"
 backup_and_link "$REPO_ROOT/pkg/hermes/MEMORY.md" "$HOME/.hermes/MEMORY.md"
 backup_and_link "$REPO_ROOT/pkg/hermes/USER.md" "$HOME/.hermes/USER.md"
 

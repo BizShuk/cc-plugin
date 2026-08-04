@@ -16,7 +16,10 @@
 - `指紋 (Fingerprint) 去重`：透過 SHA-256 雜湊（正規化文本 + 排序實體）避免重複記憶
 - `真實性門檻 (Truth Qualification)`：僅經人類確認、第一人稱事實/經驗、或 2+ 來源佐證的候選才寫入 mempalace 作為 Fact
 - `agentskills.io 規範`：技能採用 YAML frontmatter + Markdown 格式，支援跨 Agent 安裝
-- `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源
+- `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源。
+  例外`兩類`，一律不由 `run.sh` 連結：`skill` 由 `skills add` 安裝至
+  `~/.agents/skills`，`全域規則 (config/CLAUDE.global.md)` 由 `skills install`
+  複製成實體檔至各 agent 設定目錄。`run.sh` 只連結 `config/*` 與 `pkg/*` 設定檔
 - `模組化插件架構 (Modular Plugin Architecture)`：本地 plugin 依職責拆分，skill/agent 由標準目錄自動探索，manifest 不重複列舉檔案。
 - `LSP 整合`：`gopls` (Go) 與 `marksman` (Markdown) 提供補全、診斷與檔案鏈結管理。
 - `Claude-mem 匯出 ID 遊標`：`export claudemem` 使用獨立 `claude-mem-export` 狀態與 `observations.id` autoincrement 順序，避免 timestamp 相同或回填造成漏匯，並以 SQLite `mode=ro` 讀取來源。
@@ -53,11 +56,11 @@
 | `plugins/README.md` | 人類 | 本地／外部／submodule 三類 plugin 的分界與清單 |
 | `config/settings.json` | Claude Code（經 `run.sh` 軟連結） | 目前啟用的完整 Claude Code 設定（Anthropic 原生端） |
 | `config/<provider>.json` | Claude Code（手動替換 `settings.json` 連結目標） | 該供應商的完整設定：端點、模型別名、effort、權限模式 |
-| `config/CLAUDE.global.md` | Claude／Gemini／Codex／Hermes | 跨專案的全域規則與目錄佈局 |
+| `config/CLAUDE.global.md` | Claude／Gemini／Codex／Hermes（經 `skills install` 複製，`非` 軟連結） | 跨專案的全域規則與目錄佈局 |
 | `config/config.toml` | Codex CLI | Codex 模型、審批政策與 per-project trust |
 | `config/grok.toml` | Grok Build（經 `run.sh` 軟連結至 `~/.grok/config.toml`） | Grok 模型、reasoning effort、permission / UI 預設 |
-| `config/keybindings.json` | Claude Code | 鍵盤綁定 |
-| `config/output-styles/` | Claude Code | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名） |
+| `config/keybindings.json` | Claude Code（經 `run.sh` 軟連結） | 鍵盤綁定 |
+| `config/output-styles/` | Claude Code（經 `run.sh` 軟連結整個目錄） | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名） |
 | `config/config.go` | cc-plugin CLI | 執行期 viper 預設值 |
 | `README.md` | 人類 | 業務定義與 domain flow |
 | `CLAUDE.md` | 模型與人類 | 技術脈絡、關鍵決策、ownership（本表） |
