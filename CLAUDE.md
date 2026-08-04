@@ -4,10 +4,9 @@
 
 - `Cobra + Viper` 組合：CLI 指令定義與設定管理標準模式，支援環境變數覆蓋
 - `Viper 預設值單一來源`：預設值集中於 `config/config.go`
-- `每個供應商一份完整 settings`：Claude Code 一次只讀`一個` settings 檔，不支援
-  base／override 合併，因此 `config/<provider>.json` 六份各自完整自足。
-  跨檔重複（`permissions`、`statusLine`、`extraKnownMarketplaces`、UI 旗標）是
-  `刻意的`，不得拆成 base + profile；改動共用區塊時六份必須同步
+- `每個供應商一份完整 settings`：Claude Code 一次只讀`一個` settings 檔，
+  `config/<provider>.json` 六份各自完整自足；跨檔重複是`刻意的`，不得拆成
+  base + profile，改動共用區塊時六份必須同步
 - `Home path resolution`：所有 `~` 路徑統一使用 `gosdk/config.ExpandHome`；不保留
   自訂 home expansion wrapper 或 `go-homedir` dependency
 - `GORM + SQLite` 作為狀態儲存：輕量、無需外部資料庫服務、適合單機排程任務
@@ -16,13 +15,14 @@
 - `指紋 (Fingerprint) 去重`：透過 SHA-256 雜湊（正規化文本 + 排序實體）避免重複記憶
 - `真實性門檻 (Truth Qualification)`：僅經人類確認、第一人稱事實/經驗、或 2+ 來源佐證的候選才寫入 mempalace 作為 Fact
 - `agentskills.io 規範`：技能採用 YAML frontmatter + Markdown 格式，支援跨 Agent 安裝
-- `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源。
-  例外`兩類`，一律不由 `run.sh` 連結：`skill` 由 `skills add` 安裝至
-  `~/.agents/skills`，`全域規則 (config/CLAUDE.global.md)` 由 `skills install`
-  複製成實體檔至各 agent 設定目錄。`run.sh` 只連結 `config/*` 與 `pkg/*` 設定檔
+- `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源；
+  例外`兩類`（skill 與全域規則）不由 `run.sh` 連結，
+  同步範圍與操作見 [`docs/development.md`](docs/development.md)
 - `模組化插件架構 (Modular Plugin Architecture)`：本地 plugin 依職責拆分，skill/agent 由標準目錄自動探索，manifest 不重複列舉檔案。
 - `LSP 整合`：`gopls` (Go) 與 `marksman` (Markdown) 提供補全、診斷與檔案鏈結管理。
-- `Claude-mem 匯出 ID 遊標`：`export claudemem` 使用獨立 `claude-mem-export` 狀態與 `observations.id` autoincrement 順序，避免 timestamp 相同或回填造成漏匯，並以 SQLite `mode=ro` 讀取來源。
+- `Claude-mem 匯出 ID 遊標`：`export claudemem` 使用獨立遊標依 `observations.id`
+  順序增量，設計見
+  [`docs/specs/2026-07-16-claudemem-export-reliability-design.md`](docs/specs/2026-07-16-claudemem-export-reliability-design.md)
 
 ## 模組對應 (Module Mapping)
 
@@ -66,45 +66,19 @@
 | `README.md`                              | 人類                                                                   | 業務定義與 domain flow                                                         |
 | `CLAUDE.md`                              | 模型與人類                                                             | 技術脈絡、關鍵決策、ownership（本表）                                          |
 | `docs/terminology.md`                    | 模型與人類                                                             | 領域名詞定義                                                                   |
+| `docs/cli.md`                            | 人類                                                                   | CLI 完整參考（README 使用方式的下放）                                          |
+| `docs/development.md`                    | 人類                                                                   | 開發環境細節：前置需求、安裝、部署、設定同步範圍                               |
 | `README.todo`                            | 人類                                                                   | 未完成事項                                                                     |
 | `docs/specs/` `docs/memory/`             | 人類                                                                   | 已定案設計與歷史決策                                                           |
 
 ## 開發指南 (Development Guide)
 
-### 前置需求 (Prerequisites)
+- Build: `go install`
+- Test: `go test ./...`
+- Deploy: crontab 每日 03:00 執行 `cc-plugin distill`
 
-- Go 1.26.3+
-- SQLite3
-- Ollama（用於 LLM 提取，預設 `http://localhost:11434`）
-- `mempalace` CLI（用於事實寫入）
-- `jq`（用於 hook 腳本解析 JSON）
-- `marksman`（選用；`plugins/general/.lsp.json` 的 Markdown LSP）
-- `codegraph`（選用；`plugins/explore/.mcp.json` 的 MCP server）
-
-### 安裝 (Installation)
-
-```bash
-# 複製專案（含 vendored submodule）
-git clone https://github.com/bizshuk/cc-plugin.git
-git submodule update --init --recursive
-
-# 初始化環境（建立軟連結、同步設定）
-chmod +x scripts/run.sh && ./scripts/run.sh
-
-# 安裝為 Claude Code 插件
-claude --plugin-dir .
-```
-
-### 部署 (Deploy)
-
-```bash
-# 安裝至 $GOPATH/bin
-go install
-
-# 排程執行（每日 03:00）
-crontab -e
-# 加入: 0 3 * * * $HOME/go/bin/cc-plugin distill >> $HOME/.config/cc-plugin/logs/run.log 2>&1
-```
+前置需求、安裝步驟、排程與設定同步細節見
+[`docs/development.md`](docs/development.md)；指令一覽見 [`docs/cli.md`](docs/cli.md)。
 
 ## 慣例 (Conventions)
 

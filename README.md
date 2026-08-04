@@ -17,8 +17,6 @@
 
 `核心實體 (Key Entities):` `Observation`, `Candidate`, `Memory`, `Fact`, `Cursor`, `Seen`, `Distilled`
 
-`相關處理器 (Related Handlers):` `memory.DistillCmd`, `memory.ExtractCmd`, `memory.WriteAgentMemoryCmd`, `memory.WriteMempalaceCmd`, `memory.RetainCmd`, `memory.ResetCmd`
-
 ---
 
 ### 資料匯出 (Data Export)
@@ -31,11 +29,7 @@
 2. 讀取 `StateStore` 遊標（增量模式）或從 epoch 0 開始（`--all` 模式）
 3. `mempalace` 子命令支援類別清單（CSV）與完整 Markdown 結構匯出（`--data`）
 
-`claudemem` 增量匯出使用獨立的 `claude-mem-export` 遊標，依 `observations.id` 的 autoincrement 順序讀取，不與記憶蒸餾的 timestamp 遊標共用。從舊版本升級後，第一次增量匯出會安全地完整匯出既有資料一次。
-
 `核心實體 (Key Entities):` `DrawerRow`, `Observation`
-
-`相關處理器 (Related Handlers):` `export.ExportCmd`, `export.ClaudeMemCmd`
 
 ---
 
@@ -47,26 +41,16 @@
 
 1. 執行 `scripts/run.sh` → 建立家目錄結構
 2. 軟連結全域設定檔（`CLAUDE.global.md`、`settings.json`）→ 至 Claude Code、Gemini CLI、Codex、Hermes
-3. 複製或連結外部工具設定（LiteLLM、CCStatusline、Tokscale），並建立 `tmp/` 反向連結以供調試
+3. 同步外部工具設定並建立調試用反向連結（同步範圍見 [`docs/development.md`](docs/development.md)）
 
 `核心實體 (Key Entities):` `Active settings`, `Provider settings`, `Global rule`（定義見 [`docs/terminology.md`](docs/terminology.md)）
-
-`相關處理器 (Related Handlers):` `scripts/run.sh`
 
 ---
 
 ### AI 技能與代理生態 (AI Skills & Agents Ecosystem)
 
-提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為八個本地模組化插件目錄：
-
-- `tools` (macOS Apple Calendar、Mail、Notes、Reminders 整合)
-- `explore` (內容摘要、Markdown 轉換、專案探索與路由)
-- `experiment` (候選技能沙盒)
-- `general` (通用 metadata、日報、Markdown、TODO 與 feature agent)
-- `god` (系統大一統理論：LLM 力學、領域探索、融合方法)
-- `review` (審查、系統／商業規劃與 workspace 自演化：廣域思考後收斂成單一設計、更新、驗證與知識整合流程)
-- `team` (代理團隊規劃與設計：team-design, role-generator)
-- `ultra-explore` (多來源可驗證知識庫建構)
+提供可跨 AI 編碼代理共用的自訂技能集與專屬代理定義，劃分為八個本地模組化插件目錄；
+插件的分界與清單由 [`plugins/README.md`](plugins/README.md) 單一擁有。
 
 `領域流程 (Domain Flow):`
 
@@ -75,8 +59,6 @@
 3. `plugin.json` 保留空的 `skills`／`agents` 陣列，由標準目錄自動探索；hooks、MCP/LSP 與其他 metadata 仍由 manifest 宣告
 
 `核心實體 (Key Entities):` `SKILL.md`, `plugin.json`, `hooks.json`, `monitors.json`, `skills.json`
-
-`相關處理器 (Related Handlers):` `feature`, `review-coordinator`, `kb-coordinator` agents, `stop-bell.sh` hook
 
 ---
 
@@ -88,57 +70,14 @@
 
 ## 使用方式 (Usage)
 
-### 記憶蒸餾
-
 ```bash
-# 執行完整蒸餾管道（讀取 → 提取 → 寫入 → 清理）
-cc-plugin distill
-
-# 僅提取記憶（從 stdin 讀取 JSON 觀察值）
-cc-plugin extract < observations.json
-
-# 清理狀態（重置遊標、已見、已蒸餾紀錄）
-cc-plugin reset
+cc-plugin distill                      # 記憶蒸餾管道（讀取 → 提取 → 寫入 → 清理）
+cc-plugin export mempalace             # 資料匯出（gbrain / claudemem / mempalace）
+cc-plugin topology verify              # Topology 圖譜驗證
+./scripts/run.sh && npx skills add .   # 環境初始化與技能安裝
 ```
 
-### 資料匯出
-
-```bash
-# 匯出 mempalace 類別清單
-cc-plugin export mempalace
-
-# 匯出 mempalace 完整 Markdown 結構
-cc-plugin export mempalace --data -o ./export
-
-# 匯出 gbrain 觀察值（增量）
-cc-plugin export gbrain
-
-# 匯出 claude-mem 觀察值（全量）
-cc-plugin export claudemem --all
-```
-
-### Topology 知識圖譜
-
-```bash
-# 驗證 topology-builder 參考圖譜
-cc-plugin topology verify
-
-# 查詢 entity 邊
-cc-plugin topology query service-a
-
-# 重算 backlinks 與 _index.md
-cc-plugin topology rewrite --root <topology-root>
-```
-
-### 環境初始化
-
-```bash
-# 初始化軟連結與設定同步
-chmod +x scripts/run.sh && ./scripts/run.sh
-
-# 安裝技能至 AI Agents
-npx skills add .
-```
+完整 CLI 參考（含 flags、增量／全量模式）見 [`docs/cli.md`](docs/cli.md)。
 
 待辦與改善項目見 [`README.todo`](README.todo)；已淘汰功能見
 [`docs/specs/2026-07-22-Summary.md`](docs/specs/2026-07-22-Summary.md) 的「已淘汰」章節。

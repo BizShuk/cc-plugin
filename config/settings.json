@@ -47,7 +47,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "claude-fable-5[1m]",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
