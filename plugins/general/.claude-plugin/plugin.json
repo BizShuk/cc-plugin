@@ -23,8 +23,6 @@
   "license": "MIT",
   "name": "general",
   "repository": "https://github.com/bizshuk/cc-plugin",
-  "skills": [
-    "bizshuk/mdserver"
-  ],
+  "skills": [],
   "version": "1.0.0"
 }
