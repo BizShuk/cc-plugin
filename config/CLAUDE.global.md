@@ -41,7 +41,7 @@
 | `README.md`                 | 必備   | 業務定義 (business definition)、domain flow                                               |
 | `CLAUDE.md`                 | 必備   | 技術脈絡 (technical context)、結構、關鍵決策                                              |
 | `AGENTS.md`                 | 必備   | 軟連結 `AGENTS.md -> CLAUDE.md`（一律建立，不例外）                                       |
-| `run.sh`                    | 選備   | 預設執行 metadata setup，不啟動服務，可重複執行 (idempotent)                              |
+| `scripts/run.sh`            | 選備   | 預設執行 metadata setup，不啟動服務，可重複執行 (idempotent)；由 `package.json` 的 `run:setup` 叫用 |
 | `ecosystem.config.js`       | 選備   | 常駐程序或 cron 任務，置於 repo 根目錄由 pm2 管理                                         |
 | `README.todo`               | 必備   | 待辦事項 (pending todo item)                                                              |
 | `~/.config/<app_name>/`     | 必備   | 由 gosdk `config.Default` 固定的設定根目錄；`data/` 放資料、`logs/` 放 pm2 task logs      |
