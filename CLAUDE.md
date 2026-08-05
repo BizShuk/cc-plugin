@@ -5,8 +5,8 @@
 - `Cobra + Viper` 組合：CLI 指令定義與設定管理標準模式，支援環境變數覆蓋
 - `Viper 預設值單一來源`：預設值集中於 `config/config.go`
 - `每個供應商一份完整 settings`：Claude Code 一次只讀`一個` settings 檔，
-  `config/<provider>.json` 六份各自完整自足；跨檔重複是`刻意的`，不得拆成
-  base + profile，改動共用區塊時六份必須同步
+  `config/<provider>.json` 七份各自完整自足；跨檔重複是`刻意的`，不得拆成
+  base + profile，改動共用區塊時七份必須同步
 - `Home path resolution`：所有 `~` 路徑統一使用 `gosdk/config.ExpandHome`；不保留
   自訂 home expansion wrapper 或 `go-homedir` dependency
 - `GORM + SQLite` 作為狀態儲存：輕量、無需外部資料庫服務、適合單機排程任務

@@ -28,6 +28,7 @@ alias claude='claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGI
 alias claudep='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/config/proxy.json'
 alias claudec='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/config/openai.json'
 alias claudex='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/config/xai.json'
+alias claudea='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/config/antigravity.json'
 
 # [Claude] — llmbox profile 的一次性 (one-shot) 巡檢任務
 alias claudew-s='ANTHROPIC_AUTH_TOKEN=$TIKTOK_API_KEY claude --allow-dangerously-skip-permissions --effort max --model glm-5.2 --settings '"$CC_PLUGIN_DIR"'/config/llmbox.json -p "look whole project for consistency, remove redundancy, structural, scalable. make a plan to ./plans/ and add an entry in README.todo"'
