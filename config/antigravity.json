@@ -2,7 +2,7 @@
     "skillListingBudgetFraction": 0.02,
     "env": {
         "_____proxy": "_____",
-        "ANTHROPIC_BASE_URL": "http://127.0.0.1:8318",
+        "ANTHROPIC_BASE_URL": "http://127.0.0.1:8317",
         "API_TIMEOUT_MS": "3000000",
         "_____prompt": "_____",
         "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
