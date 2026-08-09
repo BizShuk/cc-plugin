@@ -1,5 +1,5 @@
 model = "gpt-5.6-sol"
-model_reasoning_effort = "max"
+model_reasoning_effort = "xhigh"
 model_context_window = 272000
 model_auto_compact_token_limit = 240000
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
@@ -185,8 +185,26 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/ai/cc-plugin"]
 trust_level = "trusted"
 
+[projects."/home/shuk/projects"]
+trust_level = "trusted"
+
+[projects."/home/shuk"]
+trust_level = "trusted"
+
+[projects."/home/shuk/projects/platform"]
+trust_level = "trusted"
+
+[projects."/home/shuk/projects/platform/cloud"]
+trust_level = "trusted"
+
+[projects."/home/shuk/projects/env_setup"]
+trust_level = "trusted"
+
+[projects."/home/shuk/projects/cc-plugin"]
+trust_level = "trusted"
+
 [tui]
-status_line = ["model-with-reasoning", "current-dir", "approval-mode", "weekly-limit", "task-progress", "git-branch"]
+status_line = ["model-with-reasoning", "current-dir", "weekly-limit", "permissions", "git-branch"]
 status_line_use_colors = true
 terminal_title = ["activity", "task-progress"]
 
@@ -254,9 +272,9 @@ cancel = []
 "gpt-5.6-sol" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-08-04T02:24:49Z"
+last_updated = "2026-08-09T05:39:20Z"
 source_type = "local"
-source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
+source = "/home/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
 last_updated = "2026-08-02T19:42:20Z"
