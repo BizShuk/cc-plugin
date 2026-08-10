@@ -18,6 +18,9 @@
 - `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源；
   例外`兩類`（skill 與全域規則）不由 `run.sh` 連結，
   同步範圍與操作見 [`docs/development.md`](docs/development.md)
+- `自訂主題只改色不改樣式`：`config/themes/<slug>.json` 以 `base` + `overrides`
+  覆寫色票 token，只有 base 主題已存在的 key 會生效；粗體／底線等 text decoration
+  寫死在 Claude Code 的 markdown renderer，`不可`由主題調整
 - `模組化插件架構 (Modular Plugin Architecture)`：本地 plugin 依職責拆分，skill/agent 由標準目錄自動探索，manifest 不重複列舉檔案。
 - `LSP 整合`：`gopls` (Go) 與 `marksman` (Markdown) 提供補全、診斷與檔案鏈結管理。
 - `Claude-mem 匯出 ID 遊標`：`export claudemem` 使用獨立遊標依 `observations.id`
@@ -61,6 +64,7 @@
 | `config/grok.toml`                       | Grok Build（經 `scripts/run.sh` 軟連結至 `~/.grok/config.toml`）       | Grok 模型、reasoning effort、permission / UI 預設                              |
 | `config/keybindings.json`                | Claude Code（經 `scripts/run.sh` 軟連結）                              | 鍵盤綁定                                                                       |
 | `config/output-styles/`                  | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）                       | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名）                |
+| `config/themes/`                         | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）                       | 自訂主題色票覆寫（由 settings 的 `theme: custom:<slug>` 指名）                 |
 | `config/config.go`                       | cc-plugin CLI                                                          | 執行期 viper 預設值                                                            |
 | `scripts/aliases.sh`                     | bash（由 `~/.bash_aliases` source，`非` 軟連結）                        | 各 provider 的 CLI alias：flag 組合、settings 指向、token 變數名               |
 | `README.md`                              | 人類                                                                   | 業務定義與 domain flow                                                         |

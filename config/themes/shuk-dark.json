@@ -1,0 +1,8 @@
+{
+  "name": "Shuk Dark",
+  "base": "dark-ansi",
+  "overrides": {
+    "permission": "ansi:yellow",
+    "permissionShimmer": "ansi:yellowBright"
+  }
+}

@@ -206,6 +206,18 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/iphone/MinimalBrowser"]
 trust_level = "trusted"
 
+[projects."/Users/shuk/projects/tools/trans"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/data/vid-note"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/ai"]
+trust_level = "trusted"
+
+[projects."/Users/shuk/projects/platform/inf"]
+trust_level = "trusted"
+
 [projects."/Users/shuk/projects/platform"]
 trust_level = "trusted"
 
@@ -281,12 +293,12 @@ cancel = []
 "gpt-5.6-sol" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-08-10T11:24:52Z"
+last_updated = "2026-08-10T05:38:44Z"
 source_type = "local"
 source = "/home/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-08-02T19:42:20Z"
+last_updated = "2026-08-06T03:13:49Z"
 source_type = "local"
 source = "/Users/shuk/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 

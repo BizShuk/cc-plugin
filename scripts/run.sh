@@ -54,6 +54,7 @@ mkdir -p \
 backup_and_link "$REPO_ROOT/config/settings.json" "$HOME/.claude/settings.json"
 backup_and_link "$REPO_ROOT/config/keybindings.json" "$HOME/.claude/keybindings.json"
 backup_and_link "$REPO_ROOT/config/output-styles" "$HOME/.claude/output-styles"
+backup_and_link "$REPO_ROOT/config/themes" "$HOME/.claude/themes"
 backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$REPO_ROOT/config/grok.toml" "$HOME/.grok/config.toml"
 
