@@ -4,6 +4,9 @@
     "name": "Shuk Liu",
     "email": "shuk.liu@gmail.com"
   },
+  "metadata": {
+    "description": "AI 編碼代理的全域設定目錄：Skills、Agents、審查與探索 plugin"
+  },
   "plugins": [
     {
       "name": "experiment",
@@ -32,13 +35,6 @@
     {
       "name": "ultra-explore",
       "source": "./plugins/ultra-explore"
-    },
-    {
-      "name": "ip-incubation",
-      "source": {
-        "source": "github",
-        "repo": "bizshuk/ip-incubation"
-      }
     }
   ]
 }
