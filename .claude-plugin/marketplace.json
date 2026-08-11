@@ -30,42 +30,14 @@
       "source": "./plugins/team"
     },
     {
-      "name": "tools",
-      "source": {
-        "source": "github",
-        "repo": "bizshuk/tools"
-      }
-    },
-    {
       "name": "ultra-explore",
       "source": "./plugins/ultra-explore"
-    },
-    {
-      "name": "gosdk",
-      "source": {
-        "source": "github",
-        "repo": "bizshuk/gosdk"
-      }
-    },
-    {
-      "name": "inf",
-      "source": {
-        "source": "github",
-        "repo": "bizshuk/inf"
-      }
     },
     {
       "name": "ip-incubation",
       "source": {
         "source": "github",
         "repo": "bizshuk/ip-incubation"
-      }
-    },
-    {
-      "name": "pm2",
-      "source": {
-        "source": "github",
-        "repo": "bizshuk/pm2"
       }
     }
   ]
