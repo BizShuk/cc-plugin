@@ -2,13 +2,15 @@ model = "gpt-5.6-sol"
 model_reasoning_effort = "max"
 model_context_window = 272000
 model_auto_compact_token_limit = 240000
+default_subagent_model = "gpt-5.3-codex-spark"
+default_subagent_reasoning_effort = "medium"
 notify = ["/Users/shuk/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 service_tier = "default"
 approvals_reviewer = "auto_review"
 personality = "pragmatic"
-plan_mode_reasoning_effort = "xhigh"
+plan_mode_reasoning_effort = "max"
 
 [projects."/Users/shuk/projects/msgHub"]
 trust_level = "trusted"
@@ -224,6 +226,9 @@ trust_level = "trusted"
 [projects."/Users/shuk/projects/game/history_map"]
 trust_level = "trusted"
 
+[projects."/Users/shuk/projects/game/gameboy-rpg"]
+trust_level = "trusted"
+
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "weekly-limit", "permissions", "git-branch"]
 status_line_use_colors = true
@@ -293,7 +298,7 @@ cancel = []
 "gpt-5.6-sol" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-08-11T14:56:12Z"
+last_updated = "2026-08-12T16:14:31Z"
 source_type = "local"
 source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
