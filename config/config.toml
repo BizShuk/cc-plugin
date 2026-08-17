@@ -1,5 +1,5 @@
-model = "gpt-5.6-sol"
-model_reasoning_effort = "max"
+model = "gpt-5.6-luna"
+model_reasoning_effort = "low"
 model_context_window = 272000
 model_auto_compact_token_limit = 240000
 default_subagent_model = "gpt-5.3-codex-spark"
@@ -300,7 +300,7 @@ cancel = []
 [marketplaces.openai-bundled]
 last_updated = "2026-08-12T16:14:31Z"
 source_type = "local"
-source = "/Users/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
+source = "/home/shuk/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
 last_updated = "2026-08-06T03:13:49Z"
