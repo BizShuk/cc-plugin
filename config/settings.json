@@ -60,7 +60,7 @@
   ],
   "statusLine": {
     "type": "command",
-    "command": "npx ccstatusline",
+    "command": "ccstatusline",
     "padding": 0
   },
   "enabledPlugins": {
