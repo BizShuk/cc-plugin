@@ -47,7 +47,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "opus[1m]",
+  "model": "claude-fable-5[1m]",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -87,7 +87,12 @@
   "outputStyle": "Executive Summary",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-fable-5": {
+      "effortLevel": "high"
+    }
+  },
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
   "pluginConfigs": {
