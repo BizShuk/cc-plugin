@@ -2,7 +2,6 @@
 
 - [ ] `readClaudeMemLogic()`（`cmd/memory/read_logic.go`）重複建立 `StateStore`，應改為接收外部傳入的 store
 - [ ] `cmd/export/gbrain.go` 的 `gbrainRead` 與 `cmd/memory/read_logic.go` 的 `readGbrainLogic` 功能幾乎重複，應整合為共用函數
-- [ ] `cmd/memory/write_agentmemory.go` 迴圈內的 `defer resp.Body.Close()` 會延遲釋放連線
 - [ ] `plugins/experiment` 中已穩定的 skill（`firecrawl`／`mermaid`／`model-evaluator`／`playwright-cli`／`scrapling`）遷出至正式插件
 - [ ] Prompt review P1 重複整併（pending，2026-08-03）：統一介面表三份 owner 收斂、`topology-builder` ⟷ `kb-spec` 約 150 行重複、`kb-coordinator` ⟷ `ultra-explore` 約 70 行重複、`changelog` skill 由 `kb_history.py` 取代後刪除、`anti-sabotage.md` 逐字複本、`claude-plugin-metadata` 與 `marketplace-config` 收斂 — 完整清單見 [`plans/2026-08-03-prompt-effectiveness-review.md`](plans/2026-08-03-prompt-effectiveness-review.md) P1 段
 
