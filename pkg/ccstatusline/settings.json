@@ -102,9 +102,15 @@
     ],
     [
       {
-        "id": "8c24ed91-2f40-4cb0-9e88-10a620845ab1",
-        "type": "session-usage",
-        "color": "yellow",
+        "id": "e8d975a1-4fc3-463e-b52e-ec5fca5adcf2",
+        "type": "custom-text",
+        "customText": "Weekly: ",
+        "color": "cyan"
+      },
+      {
+        "id": "8b3281d6-ca0b-48b1-b3fa-dee193b87434",
+        "type": "weekly-usage",
+        "color": "cyan",
         "metadata": {
           "display": "slider",
           "cursor": "true"
@@ -115,9 +121,15 @@
         "type": "separator"
       },
       {
-        "id": "8b3281d6-ca0b-48b1-b3fa-dee193b87434",
-        "type": "weekly-usage",
-        "color": "",
+        "id": "5f134bd9-9430-4e3a-9669-026c449c2eb5",
+        "type": "custom-text",
+        "customText": "5h: ",
+        "color": "yellow"
+      },
+      {
+        "id": "8c24ed91-2f40-4cb0-9e88-10a620845ab1",
+        "type": "session-usage",
+        "color": "yellow",
         "metadata": {
           "display": "slider",
           "cursor": "true"
