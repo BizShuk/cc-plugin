@@ -11,12 +11,16 @@ backup_and_link() {
     local backup="${target}.bak"
 
     mkdir -p "$(dirname -- "$target")"
-    if [[ -e "$target" && ! -L "$target" ]]; then
-        if [[ -e "$backup" || -L "$backup" ]]; then
-            printf 'Refusing to overwrite existing backup: %s\n' "$backup" >&2
-            return 1
+    if [[ -L "$target" ]]; then
+        ln -sfn -- "$source" "$target"
+        return 0
+    fi
+    if [[ -e "$target" ]]; then
+        if [[ ! -e "$backup" && ! -L "$backup" ]]; then
+            mv -- "$target" "$backup"
+        else
+            rm -rf -- "$target"
         fi
-        mv -- "$target" "$backup"
     fi
     ln -sfn -- "$source" "$target"
 }
@@ -41,9 +45,11 @@ mkdir -p \
     "$HOME/.claude" \
     "$HOME/.codex" \
     "$HOME/.gemini" \
+    "$HOME/.gemini/antigravity-cli" \
     "$HOME/.claude-mem" \
     "$HOME/.hermes" \
     "$HOME/.grok" \
+    "$HOME/.local/bin" \
     "$TMP_DIR"
 
 # Global rule (config/CLAUDE.global.md) is NOT linked here.
@@ -57,6 +63,9 @@ backup_and_link "$REPO_ROOT/config/output-styles" "$HOME/.claude/output-styles"
 backup_and_link "$REPO_ROOT/config/themes" "$HOME/.claude/themes"
 backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$REPO_ROOT/config/grok.toml" "$HOME/.grok/config.toml"
+backup_and_link "$REPO_ROOT/config/settings.agy.json" "$HOME/.gemini/antigravity-cli/settings.json"
+chmod +x "$REPO_ROOT/config/statusline.sh"
+backup_and_link "$REPO_ROOT/config/statusline.sh" "$HOME/.local/bin/agy-statusline"
 
 backup_and_link "$REPO_ROOT/pkg/hermes/MEMORY.md" "$HOME/.hermes/MEMORY.md"
 backup_and_link "$REPO_ROOT/pkg/hermes/USER.md" "$HOME/.hermes/USER.md"
