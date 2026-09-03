@@ -1,126 +1,145 @@
 {
-  "skillListingBudgetFraction": 0.01,
-  "env": {
-    "_____proxy": "_____",
-    "_____prompt": "_____",
-    "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
-    "_____model": "_____",
-    "ANTHROPIC_MODEL": "opus",
-    "_____agent": "_____",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "opus",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "_____extra": "_____",
-    "ENABLE_LSP_TOOL": "1",
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
-    "OTEL_METRICS_EXPORTER": "otlp"
-  },
-  "permissions": {
-    "allow": [
-      "Bash(ls:*)",
-      "Bash(df:*)",
-      "Bash(du:*)",
-      "Bash(mkdir:*)",
-      "Bash(head:*)",
-      "Bash(find:*)",
-      "Bash(sed:*)",
-      "Bash(grep:*)",
-      "Bash(go:*)",
-      "Bash(python:*)",
-      "Bash(python3:*)",
-      "Bash(rm:*)",
-      "Bash(git:*)",
-      "Bash(cat:*)",
-      "Bash(chmod +x:*)",
-      "Read(~/.gbrain/**)"
-    ],
-    "deny": [
-      "Read(~/.ssh/**)",
-      "Read(~/.aws/**)",
-      "Read(**/secrets/**)",
-      "Read(~/.claude/settings.json)",
-      "Edit(**/.git)"
-    ],
-    "ask": [
-      "Bash(git push:*)",
-      "Read(.env*)"
-    ],
-    "defaultMode": "auto",
-    "additionalDirectories": []
-  },
-  "model": "claude-fable-5[1m]",
-  "worktree": {},
-  "enableWorkflows": true,
-  "defaultShell": "bash",
-  "allowedHttpHookUrls": [
-    "http://localhost:*"
-  ],
-  "httpHookAllowedEnvVars": [
-    "MY_TOKEN",
-    "HOOK_SECRET"
-  ],
-  "statusLine": {
-    "type": "command",
-    "command": "ccstatusline",
-    "padding": 0
-  },
-  "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true,
-    "claude-notifications-go@claude-notifications-go": true,
-    "proxy-imagegen@proxy-local": true,
-    "frontend-design@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "claude-notifications-go": {
-      "source": {
-        "source": "github",
-        "repo": "777genius/claude-notifications-go"
-      }
+    "skillListingBudgetFraction": 0.01,
+    "env": {
+        "_____proxy": "_____",
+        "_____prompt": "_____",
+        "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
+        "_____model": "_____",
+        "ANTHROPIC_MODEL": "opus",
+        "_____agent": "_____",
+        "CLAUDE_CODE_SUBAGENT_MODEL": "opus",
+        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+        "_____extra": "_____",
+        "ENABLE_LSP_TOOL": "1",
+        "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+        "OTEL_METRICS_EXPORTER": "otlp"
     },
-    "shuk-cc-plugin": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/shuk/projects/cc-plugin"
-      }
+    "permissions": {
+        "allow": [
+            "Bash(ls:*)",
+            "Bash(df:*)",
+            "Bash(du:*)",
+            "Bash(mkdir:*)",
+            "Bash(head:*)",
+            "Bash(find:*)",
+            "Bash(sed:*)",
+            "Bash(grep:*)",
+            "Bash(go:*)",
+            "Bash(git:*)",
+            "Bash(cat:*)",
+            "Read(~/.gbrain/**)"
+        ],
+        "deny": [
+            "Read(~/.ssh/**)",
+            "Read(~/.aws/**)",
+            "Read(**/secrets/**)",
+            "Read(~/.claude/settings.json)",
+            "Edit(**/.git)"
+        ],
+        "ask": ["Bash(git push:*)", "Read(.env*)"],
+        "defaultMode": "auto",
+        "additionalDirectories": []
+    },
+    "model": "opus",
+    "worktree": {},
+    "enableWorkflows": true,
+    "defaultShell": "bash",
+    "allowedHttpHookUrls": ["http://localhost:*"],
+    "httpHookAllowedEnvVars": ["MY_TOKEN", "HOOK_SECRET"],
+    "statusLine": {
+        "type": "command",
+        "command": "ccstatusline",
+        "padding": 0
+    },
+    "enabledPlugins": {
+        "gopls-lsp@claude-plugins-official": true,
+        "claude-notifications-go@claude-notifications-go": true,
+        "proxy-imagegen@proxy-local": true,
+        "frontend-design@claude-plugins-official": true,
+        "swift-lsp@claude-plugins-official": true
+    },
+    "extraKnownMarketplaces": {
+        "claude-notifications-go": {
+            "source": {
+                "source": "github",
+                "repo": "777genius/claude-notifications-go"
+            }
+        },
+        "shuk-cc-plugin": {
+            "source": {
+                "source": "directory",
+                "path": "/Users/shuk/projects/cc-plugin"
+            }
+        }
+    },
+    "outputStyle": "Executive Summary",
+    "syntaxHighlightingDisabled": false,
+    "alwaysThinkingEnabled": true,
+    "effortLevel": "low",
+    "modelSettings": {
+        "claude-fable-5": {
+            "effortLevel": "high"
+        },
+        "claude-opus-5": {
+            "effortLevel": "low"
+        }
+    },
+    "fastModePerSessionOptIn": true,
+    "promptSuggestionEnabled": false,
+    "pluginConfigs": {
+        "proxy-imagegen@proxy-local": {
+            "options": {
+                "base_url": "http://127.0.0.1",
+                "port": 8317,
+                "model": "grok-imagine-image-quality"
+            }
+        }
+    },
+    "autoUpdatesChannel": "latest",
+    "minimumVersion": "2.1.150",
+    "plansDirectory": "./plans",
+    "tui": "fullscreen",
+    "voice": {
+        "enabled": true
+    },
+    "prefersReducedMotion": true,
+    "autoMemoryEnabled": true,
+    "autoMemoryDirectory": "~/memory",
+    "skipDangerousModePermissionPrompt": true,
+    "skipWorkflowUsageWarning": true,
+    "theme": "dark-ansi",
+    "verbose": false,
+    "preferredNotifChannel": "auto",
+    "autoCompactEnabled": true,
+    "teammateMode": "in-process",
+    "inputNeededNotifEnabled": true,
+    "agentPushNotifEnabled": true,
+    "autoMode": {
+        "environment": [
+            "### Org-wide",
+            "**Organization**: None configured",
+            "**Cloud provider(s)**: None configured",
+            "**Repository visibility**: private (bizshuk/product, confirmed via gh)",
+            "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+            "**Secrets management**: None configured",
+            "**Default / protected branches**: Default branch `master`; no protected branches listed and rulesets not queryable here — do not assume unprotected",
+            "**CI/CD deploy targets**: None configured — repo docs state no CI/CD",
+            "**Network posture**: None configured",
+            "**Source control**: The trusted repo (github.com/bizshuk/product) and its remote(s) only (no additional orgs configured)",
+            "**Trusted internal domains**: None configured",
+            "**Trusted cloud buckets**: None configured",
+            "**Key internal services**: None configured",
+            "**Internal package registry**: None configured",
+            "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar; note repo docs flag `docs/`, `pendings/` and personal-privacy assets as content intended to eventually move to an external private repo, and `fun/.env.example`, `outfit/.env.example`, `payment/.env.example` as env-example filenames present in this repo",
+            "**Data retention / declassification**: None configured",
+            "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+            "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+            "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+            "### User-specific",
+            "**Primary use of Claude Code**: software development (Markdown-first research container; pkg/stock/ has Python/Bash automation, surfer_profile/ is a TypeScript/React/Next.js site)",
+            "**Trusted repo**: /Users/shuk/projects/product (github.com/bizshuk/product), private — confidential material OK to commit here; content ported or first read from outside this session's repo is not this repo's own work, whoever directed the port; secrets and sensitive personal/entrusted data are never cleared into the repo by visibility alone",
+            "**Org-specific CLIs**: None configured",
+            "routine operations under /Users/shuk/projects/product/ prefix are within the trusted repo scope"
+        ]
     }
-  },
-  "outputStyle": "Executive Summary",
-  "syntaxHighlightingDisabled": false,
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
-  "modelSettings": {
-    "claude-fable-5": {
-      "effortLevel": "high"
-    }
-  },
-  "fastModePerSessionOptIn": true,
-  "promptSuggestionEnabled": false,
-  "pluginConfigs": {
-    "proxy-imagegen@proxy-local": {
-      "options": {
-        "base_url": "http://127.0.0.1",
-        "port": 8317,
-        "model": "grok-imagine-image-quality"
-      }
-    }
-  },
-  "autoUpdatesChannel": "latest",
-  "minimumVersion": "2.1.150",
-  "plansDirectory": "./plans",
-  "tui": "fullscreen",
-  "voice": {
-    "enabled": true
-  },
-  "prefersReducedMotion": true,
-  "autoMemoryEnabled": true,
-  "autoMemoryDirectory": "~/memory",
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
-  "theme": "custom:shuk-dark",
-  "verbose": false,
-  "preferredNotifChannel": "auto",
-  "autoCompactEnabled": true,
-  "teammateMode": "in-process",
-  "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
 }
