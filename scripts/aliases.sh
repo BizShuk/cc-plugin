@@ -21,6 +21,9 @@ export CC_PLUGIN_DIR
 alias codex="codex --dangerously-bypass-approvals-and-sandbox"
 alias codexm='codex --profile m3'
 
+# [Antigravity]
+alias agy="agy --dangerously-skip-permissions"
+
 # [Claude] — Anthropic 原生端 (native endpoint)
 alias claude='claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/config/settings.json'
 
