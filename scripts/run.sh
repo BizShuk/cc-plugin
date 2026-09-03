@@ -64,8 +64,6 @@ backup_and_link "$REPO_ROOT/config/themes" "$HOME/.claude/themes"
 backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$REPO_ROOT/config/grok.toml" "$HOME/.grok/config.toml"
 backup_and_link "$REPO_ROOT/config/settings.agy.json" "$HOME/.gemini/antigravity-cli/settings.json"
-chmod +x "$REPO_ROOT/config/statusline.sh"
-backup_and_link "$REPO_ROOT/config/statusline.sh" "$HOME/.local/bin/agy-statusline"
 
 backup_and_link "$REPO_ROOT/pkg/hermes/MEMORY.md" "$HOME/.hermes/MEMORY.md"
 backup_and_link "$REPO_ROOT/pkg/hermes/USER.md" "$HOME/.hermes/USER.md"
@@ -80,6 +78,10 @@ install_sample_if_missing \
 backup_and_link \
     "$REPO_ROOT/pkg/ccstatusline/settings.json" \
     "$HOME/.config/ccstatusline/settings.json"
+chmod +x "$REPO_ROOT/pkg/ccstatusline/agy-statusline"
+backup_and_link \
+    "$REPO_ROOT/pkg/ccstatusline/agy-statusline" \
+    "$HOME/.local/bin/agy-statusline"
 backup_and_link \
     "$REPO_ROOT/pkg/usage/tokscale/settings.json" \
     "$HOME/.config/tokscale/settings.json"

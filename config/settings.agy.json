@@ -17,18 +17,22 @@
       "command(strings *)",
       "command(which *)",
       "command(/home/shuk/.bun/bin/ccstatusline*)",
+      "command(/Users/shuk/.bun/bin/ccstatusline*)",
+      "command(~/.bun/bin/ccstatusline*)",
       "command(/home/shuk/.local/bin/agy-statusline*)",
-      "command(/home/shuk/projects/ai/cc-plugin/config/statusline.sh*)",
+      "command(/Users/shuk/.local/bin/agy-statusline*)",
+      "command(~/.local/bin/agy-statusline*)",
       "command(/tmp/*.sh*)"
     ]
   },
   "runningLightSpeed": "fast",
   "statusLine": {
     "type": "command",
-    "command": "/home/shuk/.local/bin/agy-statusline",
+    "command": "~/.local/bin/agy-statusline",
     "enabled": true
   },
   "trustedWorkspaces": [
-    "/home/shuk"
+    "/home/shuk",
+    "/Users/shuk"
   ]
 }
