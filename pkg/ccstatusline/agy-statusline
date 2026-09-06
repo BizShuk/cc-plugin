@@ -125,8 +125,8 @@ def main():
     line1 = SEP.join(line1_parts)
 
     # Line 2: Weekly & 5h limits for Gemini and Claude
-    gem_section = f"{C_CYAN}Gemini W: {gem_w_str}{C_RESET} {C_YELLOW}5h: {gem_5_str}{C_RESET}"
-    cla_section = f"{C_CYAN}Claude W: {cla_w_str}{C_RESET} {C_YELLOW}5h: {cla_5_str}{C_RESET}"
+    gem_section = f"{C_YELLOW}Gemini 5h: {gem_5_str}{C_RESET} {C_CYAN}W: {gem_w_str}{C_RESET}"
+    cla_section = f"{C_YELLOW}Claude 5h: {cla_5_str}{C_RESET} {C_CYAN}W: {cla_w_str}{C_RESET}"
 
     # Decide layout based on terminal width and active model
     line2_parts = []
@@ -141,9 +141,9 @@ def main():
     else:
         # Compact / Narrow screen: Show active model
         if is_claude:
-            active_section = f"{C_CYAN}Claude W: {cla_w_str}{C_RESET} {C_YELLOW}5h: {cla_5_str}{C_RESET}"
+            active_section = cla_section
         else:
-            active_section = f"{C_CYAN}Gemini W: {gem_w_str}{C_RESET} {C_YELLOW}5h: {gem_5_str}{C_RESET}"
+            active_section = gem_section
         line2_parts.append(active_section)
         if git_info:
             line2_parts.append(f"{C_MAGENTA}{git_info}{C_RESET}")
