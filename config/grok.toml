@@ -3,8 +3,8 @@ installer = "internal"
 auto_update = true
 
 [models]
-default = "grok-4.5"
-web_search = "grok-4.5"
+default = "grok-4.6"
+web_search = "grok-4.6"
 default_reasoning_effort = "high"
 
 [ui]
@@ -117,9 +117,9 @@ explore = true
 plan = true
 
 [subagents.models]
-explore = "grok-4.5"
-plan = "grok-4.5"
-general-purpose = "grok-4.5"
+explore = "grok-4.6"
+plan = "grok-4.6"
+general-purpose = "grok-4.6"
 
 [tools]
 respect_gitignore = false
