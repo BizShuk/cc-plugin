@@ -131,11 +131,8 @@ def main():
     # Decide layout based on terminal width and active model
     line2_parts = []
     if term_width >= 115 and q_gem_w and q_cla_w:
-        # Wide screen: Show both Gemini and Claude, active model first
-        if is_claude:
-            line2_parts.extend([cla_section, gem_section])
-        else:
-            line2_parts.extend([gem_section, cla_section])
+        # Wide screen: Show both Gemini and Claude in fixed sequence
+        line2_parts.extend([gem_section, cla_section])
         if git_info:
             line2_parts.append(f"{C_MAGENTA}{git_info}{C_RESET}")
     else:
