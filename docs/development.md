@@ -8,6 +8,7 @@
 - SQLite3
 - Ollama（用於 LLM 提取，預設 `http://localhost:11434`）
 - `mempalace` CLI（用於事實寫入）
+- `skills` CLI（`go install github.com/bizshuk/skills@latest`，用於全域規則安裝與技能管理）
 - `jq`（用於 hook 腳本解析 JSON）
 - `marksman`（選用；`plugins/general/.lsp.json` 的 Markdown LSP）
 - `codegraph`（選用；`plugins/explore/.mcp.json` 的 MCP server）
@@ -21,6 +22,10 @@ git submodule update --init --recursive
 
 # 初始化環境（建立軟連結、同步設定）
 chmod +x scripts/run.sh && ./scripts/run.sh
+
+# 安裝全域規則與技能
+skills install
+skills add .
 
 # 安裝為 Claude Code 插件
 claude --plugin-dir .

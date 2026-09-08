@@ -96,12 +96,12 @@ graph TD
 
 ## 安裝與使用 (Installation and Usage)
 
-### 透過 `npx skills` 工具安裝
+### 透過 `skills` 工具安裝
 
 於專案根目錄下執行以下指令以安裝並註冊此插件：
 
 ```bash
-npx skills add .
+skills add .
 ```
 
 ### 觸發審查

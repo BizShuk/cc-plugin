@@ -55,7 +55,7 @@
 `領域流程 (Domain Flow):`
 
 1. 開發者在對應的 `plugins/<name>/skills/` 目錄下建立 `SKILL.md`（符合 agentskills.io 規範）
-2. 使用 `npx skills add .` 掃描並註冊技能至 `skills.json`，並安裝至多個 AI Agent（Antigravity、Claude Code、Gemini CLI 等）
+2. 使用 `skills add .` 掃描並註冊技能至 `skills.json`，並安裝至多個 AI Agent（Antigravity、Claude Code、Gemini CLI 等）
 3. `plugin.json` 保留空的 `skills`／`agents` 陣列，由標準目錄自動探索；hooks、MCP/LSP 與其他 metadata 仍由 manifest 宣告
 
 `核心實體 (Key Entities):` `SKILL.md`, `plugin.json`, `hooks.json`, `monitors.json`, `skills.json`
@@ -74,7 +74,7 @@
 cc-plugin distill                      # 記憶蒸餾管道（讀取 → 提取 → 寫入 → 清理）
 cc-plugin export mempalace             # 資料匯出（gbrain / claudemem / mempalace）
 cc-plugin topology verify              # Topology 圖譜驗證
-./scripts/run.sh && npx skills add .   # 環境初始化與技能安裝
+./scripts/run.sh && skills install && skills add .   # 環境初始化、全域規則與技能安裝
 ```
 
 完整 CLI 參考（含 flags、增量／全量模式）見 [`docs/cli.md`](docs/cli.md)。
