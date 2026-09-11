@@ -2,7 +2,7 @@
 
 通用、跨專案的 Claude Code 插件。整合：
 
-- 5 個本地跨場景技能（插件 metadata、每日彙整、文件檢查、待辦排序、專案任務）
+- 4 個本地跨場景技能（插件 metadata、每日彙整、文件檢查、專案任務）
 - 1 個外部技能（`bizshuk/mdserver`）
 - 1 個 `feature` 功能實作代理
 - 1 個 always-on hook（agent loop 結束時的終端機鈴聲）
@@ -21,7 +21,6 @@
 | `daily-summary` | 彙整過去 24h 跨來源工作，產生工作日報並寫入 Apple Notes |
 | `markdownlint` | Markdown 格式檢查（精選 rule + CUSTOM-01 no-bold）；`範圍限 plugins/experiment/skills/` 下的 `.md` 檔 |
 | `mdserver` | 從外部來源 `bizshuk/mdserver` 安裝，用於 preview、serve 與本機瀏覽 Markdown 目錄 |
-| `sort-todo` | 排序並格式化 `.todo` 待辦清單（P0/P1/P2 三鏡頭評分 + 依目標 repo 的 feature 目錄推導章節；`專案無關 (project-agnostic)`） |
 
 ## 代理 (Agents)
 
