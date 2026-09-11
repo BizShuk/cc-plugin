@@ -2,6 +2,8 @@
 
 `ccstatusline` 是一個為 `Claude Code` CLI 設計的高度可自定義狀態欄工具。它能美化終端機界面，並即時顯示模型資訊、Git 狀態及 Token 使用量等關鍵數據。
 
+Grok Build 使用同目錄的 `grok-statusline`（經 `scripts/run.sh` 軟連結至 `~/.grok/statusline.sh`）：兩行佈局對齊 `agy-statusline`，顯示 Grok stdin 欄位（模型、effort、路徑、session tokens、context %、cost、git），以及 Grok 已抓到的 weekly credit（`W` bar；游標為本週週期進度）。不含 Gemini / Claude quota。
+
 ## 主要特色 (Features)
 
 - **豐富的組件 (Widgets)**：支援顯示模型名稱、Token 速度、上下文長度 (Context Length)、Git 分支、PR 狀態及剩餘配額。

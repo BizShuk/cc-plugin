@@ -22,6 +22,7 @@ default_selected_permission = "always_allow_all_sessions"
 remember_tool_approvals = true
 simple_mode = true
 vim_mode = false
+show_timeline = true
 
 [ui.notifications]
 method = "auto"
@@ -44,6 +45,10 @@ items = [
     "session-name",
     "grok",
 ]
+
+[ui.status_line]
+type = "command"
+command = "~/.grok/statusline.sh"
 
 [features]
 telemetry = false
@@ -172,3 +177,6 @@ default_skills_installs_purged = true
 [[marketplace.sources]]
 name = "xAI Official"
 git = "https://github.com/xai-org/plugin-marketplace.git"
+
+[privacy]
+privacy_banner_acked = "2026-09-08T06:30:45Z"

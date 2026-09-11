@@ -82,6 +82,10 @@ chmod +x "$REPO_ROOT/pkg/ccstatusline/agy-statusline"
 backup_and_link \
     "$REPO_ROOT/pkg/ccstatusline/agy-statusline" \
     "$HOME/.local/bin/agy-statusline"
+chmod +x "$REPO_ROOT/pkg/ccstatusline/grok-statusline"
+backup_and_link \
+    "$REPO_ROOT/pkg/ccstatusline/grok-statusline" \
+    "$HOME/.grok/statusline.sh"
 backup_and_link \
     "$REPO_ROOT/pkg/usage/tokscale/settings.json" \
     "$HOME/.config/tokscale/settings.json"

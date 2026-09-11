@@ -1,0 +1,287 @@
+#!/bin/sh
+"exec" "python3" "$0" "$@"
+# -*- coding: utf-8 -*-
+import json
+import os
+import subprocess
+import sys
+import time
+from datetime import datetime
+
+
+def render_bar(used_pct, cursor_pct=None, width=10, fill_char="█"):
+    if used_pct is None:
+        return "N/A"
+    used_pct = max(0.0, min(100.0, float(used_pct)))
+    filled = max(0, min(width, round(used_pct / 100.0 * width)))
+    cursor = None
+    if cursor_pct is not None:
+        cursor = max(0, min(width - 1, int(float(cursor_pct) / 100.0 * width)))
+
+    chars = []
+    for i in range(width):
+        if cursor is not None and i == cursor:
+            chars.append("│")
+        elif i < filled:
+            chars.append(fill_char)
+        else:
+            chars.append("░")
+    return f"[{''.join(chars)}] {used_pct:.0f}%"
+
+
+def format_tokens(n):
+    if n is None:
+        return "0"
+    try:
+        n = int(n)
+    except (TypeError, ValueError):
+        return "0"
+    if n >= 1_000_000:
+        return f"{n / 1_000_000:.1f}M"
+    if n >= 1_000:
+        return f"{n / 1_000:.1f}k"
+    return str(n)
+
+
+def format_cost(cost):
+    if cost is None:
+        return None
+    try:
+        cost = float(cost)
+    except (TypeError, ValueError):
+        return None
+    if cost < 0.005:
+        return None
+    if cost < 0.01:
+        return f"${cost:.3f}"
+    return f"${cost:.2f}"
+
+
+def format_elapsed(started_at_ms):
+    if not started_at_ms:
+        return None
+    try:
+        started_at_ms = float(started_at_ms)
+    except (TypeError, ValueError):
+        return None
+    elapsed = max(0.0, time.time() * 1000.0 - started_at_ms) / 1000.0
+    if elapsed < 1:
+        return None
+    if elapsed < 60:
+        return f"{elapsed:.0f}s"
+    minutes, seconds = divmod(int(elapsed), 60)
+    if minutes < 60:
+        return f"{minutes}m{seconds:02d}s"
+    hours, minutes = divmod(minutes, 60)
+    return f"{hours}h{minutes:02d}m"
+
+
+WEEKLY_CACHE = os.path.join(
+    os.environ.get("TMPDIR") or "/tmp",
+    "grok-statusline-weekly.json",
+)
+WEEKLY_LOG = os.path.join(os.path.expanduser("~"), ".grok", "logs", "unified.jsonl")
+WEEKLY_SCAN_BYTES = 262144
+
+
+def _parse_iso(value):
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp()
+    except Exception:
+        return None
+
+
+def _elapsed_pct(start, end):
+    t0 = _parse_iso(start)
+    t1 = _parse_iso(end)
+    if t0 is None or t1 is None or t1 <= t0:
+        return None
+    return max(0.0, min(100.0, (time.time() - t0) / (t1 - t0) * 100.0))
+
+
+def _weekly_from_config(cfg):
+    if not cfg or "creditUsagePercent" not in cfg:
+        return None
+    period = cfg.get("currentPeriod") or {}
+    start = period.get("start") or cfg.get("billingPeriodStart")
+    end = period.get("end") or cfg.get("billingPeriodEnd")
+    return {
+        "used": float(cfg["creditUsagePercent"]),
+        "start": start,
+        "end": end,
+    }
+
+
+def _scan_weekly_log():
+    try:
+        size = os.path.getsize(WEEKLY_LOG)
+        mtime = os.path.getmtime(WEEKLY_LOG)
+        with open(WEEKLY_LOG, "rb") as f:
+            f.seek(max(0, size - WEEKLY_SCAN_BYTES))
+            chunk = f.read().decode("utf-8", errors="ignore")
+    except Exception:
+        return None
+    weekly = None
+    for line in reversed(chunk.splitlines()):
+        if "billing: fetched credits config" not in line:
+            continue
+        try:
+            obj = json.loads(line)
+        except Exception:
+            continue
+        weekly = _weekly_from_config((obj.get("ctx") or {}).get("config"))
+        if weekly is not None:
+            weekly["log_size"] = size
+            weekly["log_mtime"] = mtime
+            break
+    return weekly
+
+
+def get_weekly_usage():
+    cached = None
+    try:
+        with open(WEEKLY_CACHE, encoding="utf-8") as f:
+            cached = json.load(f)
+    except Exception:
+        cached = None
+
+    try:
+        size = os.path.getsize(WEEKLY_LOG)
+        mtime = os.path.getmtime(WEEKLY_LOG)
+    except Exception:
+        size = mtime = None
+
+    if (
+        cached
+        and cached.get("used") is not None
+        and cached.get("log_size") == size
+        and cached.get("log_mtime") == mtime
+    ):
+        weekly = cached
+    else:
+        weekly = _scan_weekly_log() or cached
+        if weekly and weekly.get("used") is not None:
+            try:
+                with open(WEEKLY_CACHE, "w", encoding="utf-8") as f:
+                    json.dump(weekly, f)
+            except Exception:
+                pass
+
+    if not weekly or weekly.get("used") is None:
+        return None, None
+    return weekly["used"], _elapsed_pct(weekly.get("start"), weekly.get("end"))
+
+
+def get_git_info(cwd, branch, worktree):
+    if not branch:
+        try:
+            branch = subprocess.check_output(
+                ["git", "-C", cwd, "rev-parse", "--abbrev-ref", "HEAD"],
+                stderr=subprocess.DEVNULL,
+                timeout=0.3,
+            ).decode().strip()
+        except Exception:
+            branch = ""
+    if not branch or branch == "HEAD":
+        return ""
+    dirty = ""
+    try:
+        status = subprocess.check_output(
+            ["git", "-C", cwd, "status", "--porcelain"],
+            stderr=subprocess.DEVNULL,
+            timeout=0.3,
+        ).decode().strip()
+        dirty = "*" if status else ""
+    except Exception:
+        pass
+    label = f"⎇ {branch}{dirty}"
+    if worktree:
+        label += f" ({worktree})"
+    return label
+
+
+def main():
+    try:
+        raw_input = sys.stdin.read()
+        if not raw_input.strip():
+            return
+        data = json.loads(raw_input)
+    except Exception:
+        return
+
+    model_info = data.get("model") or {}
+    model_name = model_info.get("display_name") or model_info.get("id") or "Grok"
+    effort = (data.get("effort") or {}).get("level")
+    effort_str = f" [{effort}]" if effort else ""
+
+    cwd = data.get("cwd") or (data.get("workspace") or {}).get("current_dir") or os.getcwd()
+    home = os.path.expanduser("~")
+    short_cwd = cwd.replace(home, "~") if cwd.startswith(home) else cwd
+
+    workspace = data.get("workspace") or {}
+    git_info = get_git_info(
+        cwd,
+        workspace.get("branch"),
+        workspace.get("git_worktree"),
+    )
+
+    ctx = data.get("context_window") or {}
+    ctx_pct = ctx.get("used_percentage")
+    session_in = ctx.get("session_input_tokens") or 0
+    session_out = ctx.get("session_output_tokens") or 0
+    session_usage = ctx.get("session_usage") or {}
+    cached_tokens = session_usage.get("cache_read_input_tokens") or 0
+
+    cost_str = format_cost((data.get("cost") or {}).get("total_cost_usd"))
+    turn_str = format_elapsed((data.get("turn") or {}).get("started_at_ms"))
+    session_name = data.get("session_name")
+
+    C_RESET = "\033[0m"
+    C_DIM = "\033[2m"
+    C_BLUE = "\033[1;34m"
+    C_CYAN = "\033[1;36m"
+    C_MAGENTA = "\033[1;35m"
+    C_WHITE = "\033[1;37m"
+    C_GREEN = "\033[1;32m"
+    SEP = f"{C_DIM} | {C_RESET}"
+
+    tokens_str = (
+        f"{format_tokens(session_in + session_out)}"
+        f" ({format_tokens(session_in)}, {format_tokens(cached_tokens)}, {format_tokens(session_out)})"
+    )
+    if ctx_pct is None:
+        ctx_label = "Context: —"
+    else:
+        ctx_label = f"Context: {float(ctx_pct):.0f}%"
+
+    line1_parts = [
+        f"{C_BLUE}{model_name}{C_RESET}{C_DIM}{effort_str}{C_RESET}",
+        f"{C_WHITE}{short_cwd}{C_RESET}",
+        f"{C_DIM}{tokens_str}{C_RESET}",
+        f"{C_WHITE}{ctx_label}{C_RESET}",
+    ]
+    if session_name:
+        line1_parts.append(f"{C_DIM}{session_name}{C_RESET}")
+    line1 = SEP.join(line1_parts)
+
+    weekly_used, weekly_elapsed = get_weekly_usage()
+    weekly_bar = render_bar(weekly_used, weekly_elapsed, width=10, fill_char="█")
+    line2_parts = []
+    if weekly_used is not None:
+        line2_parts.append(f"{C_CYAN}W: {weekly_bar}{C_RESET}")
+    if cost_str:
+        line2_parts.append(f"{C_GREEN}{cost_str}{C_RESET}")
+    if turn_str:
+        line2_parts.append(f"{C_CYAN}{turn_str}{C_RESET}")
+    if git_info:
+        line2_parts.append(f"{C_MAGENTA}{git_info}{C_RESET}")
+    if line2_parts:
+        print(f"{line1}\n{SEP.join(line2_parts)}")
+    else:
+        print(line1)
+
+
+if __name__ == "__main__":
+    main()
