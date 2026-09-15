@@ -93,7 +93,10 @@
 - Configuration: 設定路徑統一使用 `~` 前綴並展開；預設值寫在 `config/config.go`
 - Skills: 遵循 `agentskills.io` 規範，YAML frontmatter 必須包含 `name` 與 `description`；
   完整 frontmatter tier 規範見 `.claude/skills/skill-frontmatter/SKILL.md`
-- Plugin Manifest: `skills`／`agents` 只宣告`外部`來源（如 `owner/repo-skill`）；本地
-  `plugins/<name>/skills/` 與 `plugins/<name>/agents/` 由 skills cmd 自動探索，不得重複列舉
+- Plugin Manifest: `skills` 只宣告非預設路徑或外部來源（如 `./lib/extra-skills/`、
+  `owner/repo-skill`）；預設 `plugins/<name>/skills/` 與底下的 submodule 由目錄
+  自動探索，不得列舉。`agents` 同理：預設 `agents/` 不列
+- Marketplace `source`：本 repo 自有 plugin 用 `./plugins/<name>`；plugin 若是
+  git submodule 且本身是 GitHub repo，用 `owner/repo_name`，不得用本地路徑
 - 鬆散技能檔案禁止：`plugins/<plugin>/skills/` 頂層只放子目錄，所有 `SKILL.md` 必須位於獨立子目錄內
 - 插件說明文件 (Plugin README)：位於 `plugins/` 目錄下的每個插件 (Plugin) 都必須在其資料夾內擁有一個 `README.md` 用以說明該插件的用途與使用方法；更新插件 (Plugin) 時亦必須同步更新對應的 `README.md`

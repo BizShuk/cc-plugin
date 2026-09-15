@@ -56,7 +56,7 @@
 
 1. 開發者在對應的 `plugins/<name>/skills/` 目錄下建立 `SKILL.md`（符合 agentskills.io 規範）
 2. 使用 `skills add .` 掃描並註冊技能至 `skills.json`，並安裝至多個 AI Agent（Antigravity、Claude Code、Gemini CLI 等）
-3. `plugin.json` 保留空的 `skills`／`agents` 陣列，由標準目錄自動探索；hooks、MCP/LSP 與其他 metadata 仍由 manifest 宣告
+3. `plugin.json` 的 `skills`／`agents` 只列非預設路徑或外部來源；預設目錄由自動探索，不必列舉。hooks、MCP/LSP 與其他 metadata 仍由 manifest 宣告
 
 `核心實體 (Key Entities):` `SKILL.md`, `plugin.json`, `hooks.json`, `monitors.json`, `skills.json`
 

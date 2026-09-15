@@ -11,8 +11,8 @@
 | `Skill` | `plugins/<p>/skills/<name>/SKILL.md`，符合 agentskills.io 規範的能力定義；由目錄自動探索，manifest 不列舉 |
 | `Agent` | `plugins/<p>/agents/<name>.md`，具獨立 system prompt 與工具集的子代理定義 |
 | `Hook` | `hooks/hooks.json` 註冊的事件腳本（如 `Stop` / `StopFailure`），由 harness 執行而非模型 |
-| `Marketplace` | `.claude-plugin/marketplace.json`，plugin 來源目錄；本地用相對路徑、外部用 GitHub source |
-| `Manifest` | `plugin.json`；`skills`／`agents` 只列歸屬本 plugin 的`外部`來源（本地由目錄自動探索），hooks／MCP／LSP 等 metadata 亦在此宣告 |
+| `Marketplace` | `.claude-plugin/marketplace.json`，plugin 來源目錄；本 repo 自有用相對路徑，submodule（本身是 GitHub repo）與外部用 `owner/repo_name` |
+| `Manifest` | `plugin.json`；`skills`／`agents` 只列非預設路徑或外部來源（預設 `skills/`／`agents/` 與 submodule 由目錄自動探索），hooks／MCP／LSP 等 metadata 亦在此宣告 |
 | `Submodule` | `.gitmodules` 記錄的 gitlink（vendored 外部 repo），與 skill 依賴的本機 clone 不同 |
 
 ## 設定層 (Configuration Layers)

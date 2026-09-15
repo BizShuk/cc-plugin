@@ -42,7 +42,8 @@ project-root/
 .claude/skills/<skill-name>/SKILL.md
 ```
 
-`hooks/`、`agents/`、`output-styles/` 都是**自動發現** — 不需要在 `plugin.json` 內列名。
+`skills/`、`hooks/`、`agents/`、`output-styles/` 都是**自動發現** — 不需要在 `plugin.json` 內列名。
+`skills` 欄位只列非預設路徑或外部來源；預設 `skills/` 與 submodule 不寫。詳見 `[[claude-plugin-metadata]]`。
 
 ## marketplace.json
 
@@ -63,28 +64,33 @@ project-root/
     "name": "unique-plugin-id",
     "source": "./plugins/<id>",
     "description": "...",
-    "keywords": ["..."],
-    "agents": ["./agents/<name>.md"],
+    "keywords": ["..."]
+}
+```
+
+預設 `skills/` 與 `agents/` 不列。只有非預設路徑或外部來源才寫 `skills`：
+
+```json
+{
+    "name": "unique-plugin-id",
+    "source": "./plugins/<id>",
     "skills": [
-        "./skills/<skill-name>",
-        "./skills/<other>/SKILL.md"
+        "./lib/extra-skills/",
+        "owner/repo-skill"
     ]
 }
 ```
 
-`skills[]` 接受兩種路徑：
-
-- `./skills/<dir>` — 指向整個技能目錄（內含 `SKILL.md`）
-- `./skills/<file>.md` — 指向獨立 skill 檔案
-
 ## source 欄位的三種形式
 
+判定：本 repo 自有 plugin 用相對路徑；plugin 若是 git submodule 且本身是 GitHub repo，用 `owner/repo_name`，不要寫本地 checkout 路徑。詳見 `[[claude-plugin-metadata]]`。
+
 ```jsonc
-// 1. 本地相對路徑（最常見）
+// 1. 本 repo 自有（非 submodule）
 "source": "./plugins/my-plugin"
 
-// 2. GitHub shorthand — owner/repo 或 github:owner/repo
-"source": "owner/my-plugin"
+// 2. GitHub repo — 含「submodule 本身就是一個 repo」
+"source": "owner/repo_name"
 
 // 3. Object 形式（明確指定來源類型）
 "source": {
@@ -132,12 +138,11 @@ Self-hosted git（url 形式）：
     "homepage": "...",
     "repository": "...",
     "license": "MIT",
-    "keywords": ["..."],
-    "skills": ["./skills/<name>"]
+    "keywords": ["..."]
 }
 ```
 
-`plugin.json` **不列** `hooks`、`agents`、`output-styles` — 從子目錄自動發現。
+`plugin.json` **不列** 預設 `skills/`、`hooks`、`agents`、`output-styles` — 從子目錄自動發現。`skills` 只在非預設路徑或外部來源時才出現。
 
 ## SKILL.md frontmatter（必要）
 
@@ -165,8 +170,8 @@ metadata:
 
 ## 路徑慣例 (Path Conventions)
 
-- 技能路徑必須以 `./` 開頭（`./skills/<name>`）
-- 本地 `source` 必須以 `./` 開頭（`./plugins/<name>`）
+- 非預設 skill 路徑必須以 `./` 開頭（例如 `./lib/extra-skills/`）；預設 `skills/` 不列
+- 本 repo 自有 plugin 的 `source` 必須以 `./` 開頭；submodule／外部 GitHub 用 `owner/repo_name`
 - 技能目錄名必須 = SKILL.md frontmatter 的 `name:`
 
 ## 驗證 (Validation)
@@ -197,6 +202,8 @@ git check-ignore -v .claude/skills/<skill-name>
 | Hook 從未觸發 | `hooks.json` 事件名稱錯誤 | 必須用 `Stop`、`StopFailure`、`UserPromptSubmit` 等 |
 | 技能被 gitignore 排除 | 路徑在 `.claude/skills/*` 規則下 | 加 negation 行 `!.claude/skills/<skill>/` |
 | 重複追蹤既有技能 | `marketplace.json` 內已有同名技能 | 用 `git ls-files` 與插件 manifest 比對 |
+| 預設路徑被寫進 `skills` | 列了 `./skills` 或 submodule | 刪掉；預設目錄會自動探索 |
+| submodule plugin 寫成本地路徑 | 因為資料夾在 `plugins/` 就填 `./plugins/<name>` | 改成 GitHub `owner/repo_name` |
 | Frontmatter `description` 缺觸發詞 | 沒寫 `Use when` / `Triggers on` | 加上去 — 否則模型不會自動呼叫 |
 
 ## 範例 (Examples)
@@ -209,8 +216,7 @@ git check-ignore -v .claude/skills/<skill-name>
     "plugins": [
         {
             "name": "hello",
-            "source": "./plugins/hello",
-            "skills": ["./skills/greet"]
+            "source": "./plugins/hello"
         }
     ]
 }
@@ -221,8 +227,7 @@ git check-ignore -v .claude/skills/<skill-name>
 ```json
 {
     "name": "hello",
-    "version": "1.0.0",
-    "skills": ["./skills/greet"]
+    "version": "1.0.0"
 }
 ```
 
@@ -233,6 +238,7 @@ git check-ignore -v .claude/skills/<skill-name>
     "name": "mixed",
     "plugins": [
         { "name": "local-tool", "source": "./plugins/local-tool" },
+        { "name": "vendored-plugin", "source": "owner/repo_name" },
         {
             "name": "external",
             "source": { "source": "github", "repo": "owner/external", "sha": "<pinned-sha>" }
@@ -252,5 +258,5 @@ git check-ignore -v .claude/skills/<skill-name>
 ## 設計原則
 
 - **最小 manifest**：只列需要的欄位；auto-discover 子目錄
-- **明確 source**：本地用 `./plugins/...`，github 用物件形式並鎖 `sha`
+- **明確 source**：本 repo 自有用 `./plugins/...`；submodule／外部 GitHub 用 `owner/repo_name`
 - **description 含觸發詞**：模型靠這個判斷何時呼叫技能

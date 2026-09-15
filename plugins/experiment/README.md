@@ -29,7 +29,7 @@
 
 ```tree
 plugins/experiment/
-├── .claude-plugin/plugin.json   # manifest（skills／agents 只列外部來源）
+├── .claude-plugin/plugin.json   # manifest（skills／agents 只列非預設路徑或外部來源）
 ├── README.md                    # 本文件
 └── skills/<name>/SKILL.md       # 每個技能一個子目錄
 ```
@@ -41,4 +41,4 @@ plugins/experiment/
 3. 若 `~/.claude/skills/` 仍有指向舊路徑的符號連結，同步更新。
 
 本地技能由目錄自動探索，遷移不需要改動 `plugin.json` 或 `marketplace.json`；
-manifest 的 `skills`／`agents` 只在增減`外部`來源時才需要編輯。
+manifest 的 `skills`／`agents` 只在增減非預設路徑或外部來源時才需要編輯。

@@ -10,11 +10,8 @@
       "source": "./plugins/plugin-name"
     },
     {
-      "name": "external-plugin",
-      "source": {
-        "source": "github",
-        "repo": "username/repository"
-      }
+      "name": "vendored-plugin",
+      "source": "owner/repo_name"
     }
   ]
 }
