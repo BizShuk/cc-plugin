@@ -61,25 +61,10 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
-    "claude-notifications-go@claude-notifications-go": true,
-    "proxy-imagegen@proxy-local": true,
     "frontend-design@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
   },
-  "extraKnownMarketplaces": {
-    "claude-notifications-go": {
-      "source": {
-        "source": "github",
-        "repo": "777genius/claude-notifications-go"
-      }
-    },
-    "shuk-cc-plugin": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/shuk/projects/cc-plugin"
-      }
-    }
-  },
+  "extraKnownMarketplaces": {},
   "outputStyle": "Executive Summary",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
@@ -100,15 +85,7 @@
   },
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
-  "pluginConfigs": {
-    "proxy-imagegen@proxy-local": {
-      "options": {
-        "base_url": "http://127.0.0.1",
-        "port": 8317,
-        "model": "grok-imagine-image-quality"
-      }
-    }
-  },
+  "pluginConfigs": {},
   "autoUpdatesChannel": "latest",
   "minimumVersion": "2.1.150",
   "plansDirectory": "./plans",
