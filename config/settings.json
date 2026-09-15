@@ -66,6 +66,7 @@
   },
   "extraKnownMarketplaces": {},
   "outputStyle": "Executive Summary",
+  "feedbackDrafts": "quiet",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
   "effortLevel": "low",
