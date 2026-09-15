@@ -69,5 +69,5 @@
 ### 內容歸屬與檔案命名 (Content Ownership and File Naming)
 
 `README.md` 與 `CLAUDE.md` 的內容歸屬判準，以及 `plans/`／`docs/specs/` 的
-`YYYY-MM-DD-<topic>.md` 檔名規範，由 `[[docs-consolidation]]` 技能的
+`YYYY-MM-DD-<topic>.md` 檔名規範，由 `[[project-docs]]` 技能的
 `references/content-ownership.md` 單一擁有 —— 寫或稽核文件前先讀它。

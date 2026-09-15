@@ -93,6 +93,9 @@
     },
     "claude-sonnet-5": {
       "effortLevel": "low"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "high"
     }
   },
   "fastModePerSessionOptIn": true,

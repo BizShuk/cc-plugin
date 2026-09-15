@@ -1,5 +1,8 @@
 # README.md 模板與規則
 
+歸屬判準見 [content-ownership.md](content-ownership.md)：`README.md` 回答
+`為什麼用它、怎麼開始`，不擁有 entry point、結構樹與待辦。
+
 ## 模板 (Template)
 
 ```markdown
@@ -21,8 +24,6 @@
 
 `核心實體 (Key Entities):` <Entity A>, <Entity B>, <Entity C>
 
-`相關處理器 (Related Handlers):` <HandlerX>, <HandlerY>
-
 ---
 
 ### <Domain 2 Name>
@@ -37,23 +38,19 @@
 
 ## 使用方式 (Usage)
 
-<主要 CLI commands、API endpoints、UI flows — 按領域分組>
+<每個領域 1-2 個 quick start 範例：最常用的一行指令或呼叫>
 
-## 改善建議 (Improvement Suggestions)
-
-根據 codebase 分析：
-
-- [ ] 建議 1：理由
-- [ ] 建議 2：理由
-- [ ] 建議 3：理由
+完整參考見 [docs/cli.md](docs/cli.md)。
 ```
 
 ## 規則 (Rules)
 
 - 章節標題用繁體中文加英文括號
 - 以 `業務領域 (Business Domain)` 為單位組織，不是以檔案或 handler 為單位
-- 每個領域必須有：描述、流程、核心實體、相關處理器
+- 每個領域必須有：描述、流程、核心實體
 - 領域流程要追溯真實程式碼路徑，不要抽象描述
-- 使用專案中實際找到的 function/handler 名稱
-- 改善建議必須具體可執行，根據真實發現；最少 3 個、最多 7 個
-- 建議應涵蓋：領域邊界、缺漏的使用情境、資料流缺口
+- `不寫 entry point 與型別名`：handler／function 名稱由 `CLAUDE.md` 模組對應表單一擁有，
+  領域名稱即兩表的對照鍵。需要先讀原始碼才懂的名詞出現在這裡就是越界
+- `使用方式`只留 quick start；章節超過約 25 行即下放 `docs/cli.md`，本檔留指標
+- `不寫待辦`：分析出的改善建議寫進 `README.todo`，不進 `README.md`
+- 結構樹、架構決策一律不複製，用一行指向 `CLAUDE.md`

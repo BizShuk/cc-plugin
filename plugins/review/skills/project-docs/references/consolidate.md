@@ -1,4 +1,7 @@
-# docs-consolidation — 執行程序 (Procedure)
+# 整併模式 (Consolidate) — 執行程序
+
+`docs/specs/` 與 `plans/` 的歷史壓縮，以及變更紀錄搬移的逐階段指令。
+判準與範圍規則見 `SKILL.md` 的`整併模式`章節。
 
 ## Phase 0 — Preflight
 
@@ -14,7 +17,7 @@ date -v-14d +%F 2>/dev/null || date -d '14 days ago' +%F
    不確定歸屬時先跑 `[[project-route]]`。
 2. `未提交變更 (uncommitted changes)` 存在於 `docs/specs/`、`plans/`、`CLAUDE.md`、
    `README.todo` 或 `docs/CHANGELOG.md` 時，停下來回報，請使用者先提交 —
-   本技能會刪檔並就地改寫正典文件，git 是唯一的還原路徑。
+   本模式會刪檔並就地改寫正典文件，git 是唯一的還原路徑。
 3. 非 git repo 時：不刪除任何檔案，改為把來源檔案移到 `docs/specs/archive/`
    並在報告中說明。變更紀錄搬移（Step 4.4）`不受此限`——它是搬移不是刪除，
    內容完整落在 `docs/CHANGELOG.md`。
@@ -80,7 +83,7 @@ ls docs/CHANGELOG.md 2>/dev/null
 
 ## Phase 3 — Verify Existence
 
-每一列都必須驗證`功能是否仍存在於當前 workspace`。這是本技能唯一會刪除資訊的判斷，
+每一列都必須驗證`功能是否仍存在於當前 workspace`。這是整份技能唯一會刪除資訊的判斷，
 不得憑印象。
 
 ```bash
@@ -163,7 +166,7 @@ git rm docs/specs/2026-05-14-feature-agent-design.md ...   # 逐檔列出，不�
 ```markdown
 # 變更紀錄 (Changelog)
 
-由 `docs-consolidation` 自 `CLAUDE.md` 與 `README.todo` 搬移彙整，新的在上。
+由 `project-docs` 的整併模式自 `CLAUDE.md` 與 `README.todo` 搬移彙整，新的在上。
 
 | 日期 (Date) | 變更 (Change) | 來源 (Source) | 原始文件 (Reference) |
 | ----------- | ------------- | ------------- | -------------------- |
@@ -202,7 +205,7 @@ git rm docs/specs/2026-05-14-feature-agent-design.md ...   # 逐檔列出，不�
 ## Phase 5 — Report
 
 ```text
-✅ docs-consolidation 完成 — <YYYY-MM-DD>
+✅ project-docs 完成 — Mode: consolidate — <YYYY-MM-DD>
 
 門檻 (Cutoff): <today - 14d>，門檻內 <N> 份文件未動
 
@@ -222,3 +225,43 @@ plans/:      <N> 份 → 2026-07-22-Refresh.md（<M> 列，<K> 淘汰）
 README.md 側記: 新增 <K> 筆淘汰記錄
 待確認 (⚠️): <列出每筆及查無實證的理由>
 ```
+
+## Common Mistakes
+
+| 錯誤 | 修正 |
+| ---- | ---- |
+| 用今天的日期填表格的`日期`欄 | 日期欄是來源文件的日期，檔名的日期才是今天 |
+| 舊摘要檔被當成一般來源重新解析 | 舊摘要的列直接沿用，其來源已不存在 |
+| 查不到實證就判定淘汰 | 無刪除紀錄一律標 `⚠️ 待確認`並保留 |
+| 用 `rm` 或萬用字元刪檔 | 逐檔 `git rm`，history 是唯一還原路徑 |
+| 把 `docs/backlog/` 一起整併 | backlog 是未實作想法，無存在性可驗證 |
+| 連兩週內的新文件一起吸收 | 門檻是硬規則，新文件還在活躍使用 |
+| 改寫 `README.md` 既有的淘汰記錄 | 側記只累加 |
+| 只有 1 份文件也照跑一次整併 | 回報「不足以整併」並跳過 |
+| 把 `關鍵決策 (Key Decisions)` 當成變更紀錄搬走 | 它描述`現況`不是歷史，是 `CLAUDE.md` 存在的理由 |
+| 搬走 `README.todo` 未勾選的待辦 | 只搬 `## Archive` 內的 `- [x]` 項目 |
+| 刪掉 `## Archive` 標題 | 標題是 `README.todo` 格式規範的一部分，一律保留 |
+| 重寫變更紀錄的措辭讓表格「好看」 | 原文照搬，本技能是搬移不是改寫 |
+| 重跑一次就把條目寫進 `CHANGELOG.md` 兩份 | 以 `日期 + 變更` 去重，本步驟必須可重複執行 |
+| 查不到日期就用今天填進 `CHANGELOG.md` | 未定日期的條目留在原檔並在報告標註 |
+| `CHANGELOG.md` 沿用 `README.todo` 的原始連結路徑 | 路徑相對於 `docs/CHANGELOG.md`；已被吸收的文件改指摘要檔 |
+
+## Failure Modes
+
+| 情境 | 動作 |
+| ---- | ---- |
+| 非 git repo | 不刪檔，改 `mv` 到 `archive/` 並在報告註明 |
+| `docs/specs/` 或 `plans/` 有未提交變更 | 停止，請使用者先提交 |
+| 來源文件無日期可判定 | 用 mtime 並在報告標註 `日期來源: mtime` |
+| 來源文件內容過短無法抽四欄 | 缺的欄位寫「未記載」，不猜 |
+| 全部項目都判定為淘汰 | 仍產生摘要檔（只有淘汰章節），並在報告醒目提示 |
+| 舊摘要檔格式不符（非四欄表格） | 整份內容以 `## 舊摘要 (Legacy)` 原文附在新檔末尾，不強轉 |
+| 資料夾不存在 | 跳過，不建立空資料夾 |
+| `CLAUDE.md` 無變更紀錄章節 | 跳過該來源，`不得`自行從 git history 生成（那是 `[[changelog]]` 的職責） |
+| `README.todo` 無 `## Archive` 或無已勾選項目 | 跳過該來源並在報告註明 |
+| 章節標題模稜兩可（如 `## 進度`） | 標題不在既定關鍵字清單內時不動，於報告列為`待確認`請使用者裁定 |
+| `docs/CHANGELOG.md` 既有格式非四欄表格 | 不改寫既有內容，新條目以 `## 搬移紀錄 (Migrated) — <today>` 章節附在檔案末尾 |
+| 已存在由 `[[changelog]]` 從 git 生成的 `CHANGELOG.md` | 視同格式不符，附加章節處理，不與自動生成內容混排 |
+| 條目搬移後原檔連結失效 | 連結改指向吸收它的摘要檔，括號內保留原檔名 |
+| `CLAUDE.md` 或 `README.todo` 有未提交變更 | 停止，請使用者先提交 |
+| 變更紀錄條目全部未定日期 | 不建立 `docs/CHANGELOG.md`，原檔不動，報告列出無法判定日期的條目 |
