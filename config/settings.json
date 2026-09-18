@@ -43,7 +43,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "sonnet",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -78,7 +78,7 @@
       "effortLevel": "high"
     },
     "claude-sonnet-5": {
-      "effortLevel": "low"
+      "effortLevel": "medium"
     },
     "claude-fable-5-1": {
       "effortLevel": "high"
