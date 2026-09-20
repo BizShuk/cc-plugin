@@ -43,7 +43,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "sonnet",
+  "model": "opus",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",

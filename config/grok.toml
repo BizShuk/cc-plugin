@@ -108,9 +108,9 @@ deny = [
     "Read(~/.grok/auth.json)",
     "Read(~/.grok/config.toml)",
     "Edit(**/.git)",
+    "Bash(git push:*)",
 ]
 ask = [
-    "Bash(git push:*)",
     "Read(.env*)",
 ]
 
