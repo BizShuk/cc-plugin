@@ -82,6 +82,9 @@
     },
     "claude-fable-5-1": {
       "effortLevel": "high"
+    },
+    "minimax-m3": {
+      "effortLevel": "xhigh"
     }
   },
   "fastModePerSessionOptIn": true,
