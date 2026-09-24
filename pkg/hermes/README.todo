@@ -8,8 +8,7 @@
 
 ## 任務委派 (Task Delegation)
 
-- [ ] 決定委派入口：直接呼叫三個 CLI，或統一走 `autop -c <client>`（已支援三者，可集中 model／effort／權限設定）
-- [ ] 為 `agy`、`grok` 補 Hermes skill（上游只內建 claude-code、codex）
+- [*] 安裝 `agy`、`grok` 的 Hermes 技能（`hermes skills install official/autonomous-ai-agents/antigravity-cli` 與 `hermes skills install official/autonomous-ai-agents/grok`）以操控 CLI
 - [ ] 限定執行者可操作的工作目錄，避免從聊天室改到任意路徑
 
 ## 訊息通道 (Message Channel)

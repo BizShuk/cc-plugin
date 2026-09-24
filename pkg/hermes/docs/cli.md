@@ -10,6 +10,16 @@ hermes doctor   # 驗證安裝
 hermes model    # 設定推理模型
 ```
 
+## Skills (任務委派)
+
+安裝執行者委派技能以操控 `agy` 與 `grok` CLI：
+
+```bash
+hermes skills install official/autonomous-ai-agents/antigravity-cli
+hermes skills install official/autonomous-ai-agents/grok
+```
+
+
 ## 檔案與指令
 
 ```bash

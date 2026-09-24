@@ -49,7 +49,7 @@ pkg/hermes/
 | 業務領域 (Domain) | 套件/模組 (Package/Module) | 進入點 (Entry Point) |
 | ----------------- | -------------------------- | -------------------- |
 | 代理執行環境 | 上游 Hermes（`~/.hermes`） | `hermes`、`hermes setup` |
-| 任務委派 | 上游 bundled skill `autonomous-ai-agents/*`；自訂 skill 未建立 | `claude -p`、`agy`、`grok`（或 `autop -c <client>`） |
+| 任務委派 | 上游 bundled / official skills (`autonomous-ai-agents/*`) | `hermes skills install`、`claude -p`、`agy`、`grok`（或 `autop -c <client>`） |
 | 訊息通道 | 上游閘道 | `hermes gateway setup`、`hermes gateway start` |
 
 ## 開發指南 (Development Guide)
