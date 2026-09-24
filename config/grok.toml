@@ -3,7 +3,7 @@ installer = "internal"
 auto_update = true
 
 [models]
-default = "grok-4.6"
+default = "grok-4.7"
 web_search = "grok-4.6"
 default_reasoning_effort = "high"
 
@@ -23,6 +23,8 @@ remember_tool_approvals = true
 simple_mode = true
 vim_mode = false
 show_timeline = true
+theme = "oscura-midnight"
+dashboard_preview = true
 
 [ui.notifications]
 method = "auto"
@@ -98,6 +100,7 @@ allow = [
     "Bash(rm:*)",
     "Bash(git:*)",
     "Bash(cat:*)",
+    "Bash(git push:*)",
     "Bash(chmod +x:*)",
     "Read(~/.gbrain/**)",
 ]
@@ -108,7 +111,6 @@ deny = [
     "Read(~/.grok/auth.json)",
     "Read(~/.grok/config.toml)",
     "Edit(**/.git)",
-    "Bash(git push:*)",
 ]
 ask = [
     "Read(.env*)",
