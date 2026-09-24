@@ -65,8 +65,8 @@ backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$REPO_ROOT/config/grok.toml" "$HOME/.grok/config.toml"
 backup_and_link "$REPO_ROOT/config/settings.agy.json" "$HOME/.gemini/antigravity-cli/settings.json"
 
-# Hermes is a sub-project with its own run:setup (memory links, templates, .env keys).
-"$REPO_ROOT/pkg/hermes/scripts/run.sh"
+# Hermes is NOT set up here -- run it explicitly: `pnpm run hermes:setup`
+# (install / upgrade / webui are likewise explicit `hermes:*` tasks).
 
 install_sample_if_missing \
     "$REPO_ROOT/pkg/litellm/litellm_config.sample.yaml" \
