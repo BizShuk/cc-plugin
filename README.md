@@ -40,7 +40,8 @@
 `領域流程 (Domain Flow):`
 
 1. 執行 `scripts/run.sh` → 建立家目錄結構
-2. 軟連結全域設定檔（`CLAUDE.global.md`、`settings.json`）→ 至 Claude Code、Gemini CLI、Codex、Hermes
+2. 軟連結全域設定檔（`CLAUDE.global.md`、`settings.json`）→ 至 Claude Code、Gemini CLI、Codex；
+   Hermes 的設定交給子專案 [`pkg/hermes/`](pkg/hermes/README.md) 自己的 `run:setup`
 3. 同步外部工具設定並建立調試用反向連結（同步範圍見 [`docs/development.md`](docs/development.md)）
 
 `核心實體 (Key Entities):` `Active settings`, `Provider settings`, `Global rule`（定義見 [`docs/terminology.md`](docs/terminology.md)）

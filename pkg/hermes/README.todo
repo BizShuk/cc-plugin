@@ -1,0 +1,23 @@
+# TODO
+
+## 代理執行環境 (Agent Runtime)
+
+- [ ] 決定常駐機器：本機 Mac 或 liva；影響執行者能否存取 `~/projects` 與各 CLI 的登入狀態
+- [ ] 在常駐機器跑 `pnpm run run:install`、`pnpm run run:setup`，再跑 `hermes setup` 選推理模型
+- [ ] 決定常駐方式：pm2 `ecosystem.config.js` 或上游 `hermes gateway` 的服務安裝，二擇一
+
+## 任務委派 (Task Delegation)
+
+- [ ] 決定委派入口：直接呼叫三個 CLI，或統一走 `autop -c <client>`（已支援三者，可集中 model／effort／權限設定）
+- [ ] 為 `agy`、`grok` 補 Hermes skill（上游只內建 claude-code、codex）
+- [ ] 限定執行者可操作的工作目錄，避免從聊天室改到任意路徑
+
+## 訊息通道 (Message Channel)
+
+- [ ] 從 Feishu／DingTalk／WeCom／Weixin／QQ 選定通道；優先 WebSocket 型（Feishu、DingTalk）以免開對外 port
+- [ ] 設定授權使用者 allowlist 與主通道
+- [ ] 在中國大陸網路下實測收發與延遲
+
+## Archive
+
+- [x] 建 `package.json` + 冪等腳本：`scripts/setup.sh` 安裝／升級上游 Hermes；`scripts/run.sh` 同步 `config/` 樣板到 `~/.hermes`，不覆寫既有 `.env`
