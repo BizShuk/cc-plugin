@@ -79,7 +79,7 @@
       "effortLevel": "high"
     },
     "claude-sonnet-5": {
-      "effortLevel": "medium"
+      "effortLevel": "low"
     },
     "claude-fable-5-1": {
       "effortLevel": "high"
@@ -93,7 +93,13 @@
   },
   "fastModePerSessionOptIn": true,
   "promptSuggestionEnabled": false,
-  "pluginConfigs": {},
+  "pluginConfigs": {
+    "agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md-or-agents-md"
+      }
+    }
+  },
   "autoUpdatesChannel": "latest",
   "minimumVersion": "2.1.150",
   "plansDirectory": "./plans",
