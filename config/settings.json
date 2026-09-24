@@ -86,6 +86,9 @@
     },
     "minimax-m3": {
       "effortLevel": "xhigh"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
     }
   },
   "fastModePerSessionOptIn": true,
