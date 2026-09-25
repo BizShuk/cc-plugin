@@ -2423,3 +2423,6 @@ known_builtin_toolsets:
     - web
     - x_search
     - yuanbao
+onboarding:
+  seen:
+    busy_input_prompt: true
