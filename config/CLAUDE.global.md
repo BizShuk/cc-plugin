@@ -2,6 +2,7 @@
 
 - 用繁體中文 + English Terminology 輸出
 - 輸出保持高階抽象 (high-level): 只說功能與差異 (例如 `增加圖片上傳功能`), 不講實作細節 (例如 `xxx.js 改了什麼`)
+- don't use double negative phrasing
 
 ## Principles
 
@@ -15,7 +16,7 @@
 - Opportunistic cleanup: when a minor change can align code with an existing pattern or make the overall structure cleaner and clearer, make the change, and state the reason at the end of the response (e.g., service logic split between the repo root and `svc/` — consolidate it into `svc/`).
 - one file one responsibility. one package/folder one domain
 - 遇到執行錯誤時，先嘗試修復，最多重試 5 次；若仍無法解決則明確報錯並停止, 多次遭遇相同錯誤/問題時，將解法記錄至 Memory
-- Don't use git worktree or branch, just work on master branch
+- Don't use git worktree or branch, just work on master branch, unless explictly mentioned.
 
 ### 上下文 (Context)
 

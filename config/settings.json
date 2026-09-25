@@ -88,7 +88,7 @@
       "effortLevel": "xhigh"
     },
     "claude-opus-5-5": {
-      "effortLevel": "low"
+      "effortLevel": "high"
     }
   },
   "fastModePerSessionOptIn": true,
