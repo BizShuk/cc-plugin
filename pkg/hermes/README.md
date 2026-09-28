@@ -85,4 +85,4 @@ flowchart LR
 
 ## 使用方式 (Usage)
 
-尚無可執行內容。技術脈絡與目前結構見 [CLAUDE.md](CLAUDE.md)。
+尚無可執行內容。技術脈絡與目前結構見 [AGENTS.md](AGENTS.md)。

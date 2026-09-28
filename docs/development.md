@@ -1,13 +1,11 @@
 # 開發環境 (Development Guide)
 
-`CLAUDE.md` 開發指南的展開細節; 指令一覽見 [`docs/cli.md`](cli.md)。
+`AGENTS.md` 開發指南的展開細節; 指令一覽見 [`docs/cli.md`](cli.md)。
 
 ## 前置需求 (Prerequisites)
 
 - Go 1.26.3+
 - SQLite3
-- Ollama（用於 LLM 提取，預設 `http://localhost:11434`）
-- `mempalace` CLI（用於事實寫入）
 - `skills` CLI（`go install github.com/bizshuk/skills@latest`，用於全域規則安裝與技能管理）
 - `jq`（用於 hook 腳本解析 JSON）
 - `marksman`（選用；`plugins/general/.lsp.json` 的 Markdown LSP）
@@ -36,10 +34,6 @@ claude --plugin-dir .
 ```bash
 # 安裝至 $GOPATH/bin
 go install
-
-# 排程執行（每日 03:00）
-crontab -e
-# 加入: 0 3 * * * $HOME/go/bin/cc-plugin distill >> $HOME/.config/cc-plugin/logs/run.log 2>&1
 ```
 
 ## 設定同步範圍 (Config Sync Scope)

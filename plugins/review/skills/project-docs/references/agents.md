@@ -5,18 +5,15 @@
 
 ## 檔案佈局 (File Layout)
 
-`AGENTS.md` 與 `.agents/` 是`跨代理 (agent-agnostic)` 的實體來源；Claude Code
-專用的名稱一律是指向它們的 symlink，不另存內容。
+`AGENTS.md` 是`跨代理 (agent-agnostic)` 的實體來源；`CLAUDE.md` 是指向它的 symlink，不另存內容。
 
 | 實體 (Real) | Symlink | 內容 |
 | ----------- | ------- | ---- |
 | `AGENTS.md` | `CLAUDE.md -> AGENTS.md` | 技術脈絡（本模板） |
-| `.agents/` | `.claude -> .agents` | 專案層代理設定：`settings.json`、`skills/`、`agents/`、`commands/` |
 
 - 撰寫、稽核、編輯一律對 `AGENTS.md`；`CLAUDE.md` 只是入口。
-- 舊佈局（`CLAUDE.md` 為實體檔、`AGENTS.md -> CLAUDE.md`；或 `.claude/` 為實體目錄）
+- 舊佈局（`CLAUDE.md` 為實體檔、`AGENTS.md -> CLAUDE.md`）
   以 [setup-links.sh](../scripts/setup-links.sh) 反轉，不手動複製內容。
-- `.claude/` 與 `.agents/` 同時為非空實體目錄時，腳本不合併，回報 `WARN` 交由使用者處理。
 
 ## 模板 (Template)
 

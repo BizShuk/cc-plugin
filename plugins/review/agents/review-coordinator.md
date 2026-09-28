@@ -79,7 +79,7 @@ something it can judge; skip the rest and record why.
 | Directory layout     | `planner/system`       | New/moved files or whole-repo scope                     |
 | Identifier quality   | `code-audit`           | Any code, config keys, or endpoints                     |
 | Security exposure    | `code-audit`           | Input handling, auth, secrets, outbound calls, deps     |
-| Docs vs code         | `project-docs`         | README/CLAUDE.md, comments, or doc edits                |
+| Docs vs code         | `project-docs`         | README/AGENTS.md, comments, or doc edits                |
 | Dependencies         | `planner/system`       | go.mod, package.json, requirements, locks               |
 | Project onboarding   | `tutorial`             | Step-by-step tutorials, onboarding, or concept docs     |
 
@@ -162,7 +162,7 @@ Ran: code-audit, planner/system, project-docs · Skipped: planner/business (no u
           ↳ also code-audit/naming: same concept named "tenant" vs "account"
 [major]   planner/system           cmd/distill.go:— loose file at cmd/ root
 [minor]   planner/system           cmd/helpers.go → cmd/util/ (loose file)
-[ok]      project-docs — CLAUDE.md tree matches disk
+[ok]      project-docs — AGENTS.md tree matches disk
 
 Top fix (value/effort): unify rule X across a.go/b.go, then rename to one term.
 ```

@@ -55,7 +55,7 @@ metadata:
 
 ## 共通流程 (Shared Procedure)
 
-1. `讀上下文`：先讀 `README.md`（業務）與 `CLAUDE.md`（技術）掌握專案範疇與慣例。
+1. `讀上下文`：先讀 `README.md`（業務）與 `AGENTS.md`（技術）掌握專案範疇與慣例。
 2. `選模式`：依上表決定軸線與方向，載入對應的 reference 檔案。
 3. `界定範圍`：規劃方向一次只處理`一個 feature`，決定 `feature_name` (kebab-case) 並明列 out of scope。
 4. `執行`：依 reference 內的步驟逐項完成。

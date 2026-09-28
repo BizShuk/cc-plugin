@@ -1,6 +1,6 @@
 # 審查插件 (Review Plugin)
 
-本插件提供程式碼審查、系統／商業規劃與 workspace 自演化工具，協助 `Claude Code` 等 AI 代理從多維度診斷問題、設計改善並在獲授權時完成更新。
+本插件提供程式碼審查、系統／商業規劃、workspace 自演化，以及個人與事業的成長目標審查工具，協助 `Claude Code` 等 AI 代理從多維度診斷問題、設計改善並在獲授權時完成更新。
 
 審查協調代理預設維持 `唯讀 (Read-only)`，專注於衛生、一致性、安全與業務價值診斷，不涵蓋需要實際執行才能判定的邏輯正確性。兩個技能具備可寫入模式，且都必須由使用者明確要求才會啟用：`auto-evolving` 的 `THINK → DESIGN → UPDATE → VERIFY → CONSOLIDATE` 流程，以及 `project-docs` 的 `refresh` / `bootstrap` / `consolidate` / `scope` 模式（其 `audit` 模式為唯讀預設）。
 其中 `consolidate` 會 `git rm` 已整併的歷史文件並就地移除已搬進 `docs/CHANGELOG.md` 的變更紀錄條目，`scope` 會刪除正典文件中越界的段落，兩者刪除前必先列出清單。外部、破壞性或不可逆操作仍須另外批准。
@@ -9,7 +9,7 @@
 
 ## 核心架構 (Core Architecture)
 
-本插件由一個核心協調代理與六個專屬技能組成：
+本插件由一個核心協調代理與七個專屬技能組成：
 
 協調代理的 manifest 路徑為 `./agents/review-coordinator.md`。
 
@@ -28,9 +28,11 @@ graph TD
     S5 --> Report
     Session[Session 結束 / 使用者請求復盤] --> S6[Session 復盤 session-retro]
     Workspace[Workspace 廣域演化] --> Evolve[自演化 auto-evolving]
+    Growth[帳號/生活/旅行/業績/事業內容] --> GT[成長目標 review-target]
+    GT --> Actions[主攻 KPI + 工具化行動項目]
     Evolve --> MainFlow[單一主提案與 canonical workspace update]
     Docs[docs/specs 與 plans 累積] --> S3
-    Hist[CLAUDE.md 變更紀錄與 README.todo Archive] --> S3
+    Hist[AGENTS.md 變更紀錄與 README.todo Archive] --> S3
     S3 --> Summary[單一摘要表 + README 淘汰側記]
     S3 --> Changelog[docs/CHANGELOG.md 累加變更紀錄]
 ```
@@ -54,10 +56,11 @@ graph TD
 | 內容範疇清理 (Scope cleanup) | `project-docs` | `README.md` / `AGENTS.md` 出現別的檔案擁有的內容，或高變動細節需下放 `docs/cli.md`、`docs/development.md` |
 | 外部依賴管理 (Dependency management) | `planner` | 涉及依賴清單檔案（如 go.mod, package.json 等） |
 | 專案引導與學習 (Project onboarding) | `tutorial` | 請求建立步驟式教學、專案引導或概念學習文件時 |
-| 程式碼編寫原則 (Coding principles) | `planner` | 任何程式碼、重融或審查請求 |
+| 程式碼編寫原則 (Coding principles) | `planner` | 任何程式碼、重構或審查請求 |
 | 系統架構規劃 (System architecture planning) | `planner` | 規劃新功能或重構的系統架構與資料流 |
 | 商業模式規劃 (Business model planning) | `planner` | 規劃新功能的資產盤點、RICE 評分、商業模式與 MVP 驗證 |
 | Session 復盤 (Session retro) | `session-retro` | 請求復盤/post-mortem，分析 skill/token/錯誤率與委託邊界 |
+| 成長目標審查 (Growth target review) | `review-target` | 使用者提供社群帳號、生活習慣、旅行、業績或事業內容，詢問該成長什麼、怎麼做 |
 | Workspace 廣域自演化 (Workspace evolution) | `auto-evolving` | 從使用者、業務、領域、系統、品質、運維、安全與知識等面向收斂一項改善，完成設計、更新、驗證與主流程知識整合 |
 
 ---
@@ -88,6 +91,13 @@ graph TD
     │       ├── content-ownership.md  # 內容歸屬判準與檔名規範；`全域規則的單一 owner`
     │       ├── consolidate.md        # 歷史壓縮與變更紀錄搬移的逐階段程序
     │       └── scope-cleanup.md      # 正典文件瘦身的逐階段程序
+    ├── review-target/        # 成長目標審查：類別分類、主攻 KPI、工具化行動 (Review Target Skill)
+    │   └── references/
+    │       ├── social-media.md # 社群媒體：Instagram、Threads、YouTube、TikTok、LinkedIn、自有受眾
+    │       ├── life.md         # 生活：體能、恢復、心智、財務、人際、學習與職涯
+    │       ├── travel.md       # 旅行：頻率、成本、體驗、旅行能力、紀錄
+    │       ├── sales.md        # 銷售：開發、成交、客單價、電商與門市、客戶擴展
+    │       └── business.md     # 事業：PMF、AARRR、單位經濟、營運
     ├── session-retro/        # Session 復盤技能 (Session Retro Skill)
     └── tutorial/             # 教程建立技能 (Tutorial Skill)
 ```
@@ -129,3 +139,4 @@ skills add .
 - `evolve this workspace`
 - `think design update`
 - `consolidate docs` / `文件整併`
+- `growth strategy` / `成長目標`

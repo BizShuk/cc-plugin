@@ -1,6 +1,6 @@
 # 術語表 (Terminology)
 
-本檔是 cc-plugin 領域名詞的`單一定義來源`。README.md 描述流程、CLAUDE.md 描述邊界，
+本檔是 cc-plugin 領域名詞的`單一定義來源`。README.md 描述流程、AGENTS.md 描述邊界，
 兩者都只引用此處的名詞，不重複定義。
 
 ## 插件生態 (Plugin Ecosystem)
@@ -24,18 +24,13 @@
 | `Global rule` | `config/CLAUDE.global.md`，同時軟連結為 Claude／Gemini／Codex／Hermes 的全域指令 |
 | `Viper default` | `config/config.go` 的 `viper.SetDefault`，cc-plugin CLI 執行期設定的唯一預設來源 |
 
-## 記憶蒸餾 (Memory Distillation)
+## 資料匯出 (Data Export)
 
 | 名詞 | 定義 |
 | :--- | :--- |
-| `Observation` | 來源儲存（`gbrain`、`claude-mem`）的一筆原始紀錄，蒸餾管道的輸入 |
-| `Candidate` | LLM 從 observation 提取出、尚未分類寫入的記憶候選 |
-| `Memory` | 通過提取的一般記憶，寫入 `agentmemory` API |
-| `Fact` | 通過`真實性門檻`的第一人稱事實，額外寫入 `mempalace`；`agentmemory ⊋ mempalace` |
-| `真實性門檻 (Truth Qualification)` | 人類確認、第一人稱事實／經驗、或 2+ 來源佐證，三者滿其一才升級為 `Fact` |
-| `指紋 (Fingerprint)` | 正規化文本 + 排序實體的 SHA-256 雜湊，用於跨來源去重 |
+| `Observation` | `claude-mem` 的一筆原始紀錄，`export claudemem` 的輸出單位 |
 | `Cursor` | `StateStore` 中每個來源的讀取位置；`claude-mem` 匯出使用獨立的 `claude-mem-export` 遊標與 `observations.id` 順序 |
-| `StateStore` | `model/store.go` 的 GORM + SQLite 狀態儲存，記錄 `Cursor` / `Seen` / `Distilled` |
+| `StateStore` | `model/store.go` 的 GORM + SQLite 狀態儲存，只記錄 `Cursor` |
 
 ## 知識圖譜 (Topology)
 

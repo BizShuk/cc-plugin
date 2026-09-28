@@ -1,7 +1,7 @@
 # 內容歸屬與檔案命名 (Content Ownership and File Naming)
 
 本檔是`內容歸屬判準`與 `plans/`／`docs/specs/` 檔名規範的單一 owner。
-`config/CLAUDE.global.md`（全域規則）與本技能的 `SKILL.md` 都只留指標指向這裡。
+全域規則與本技能的 `SKILL.md` 都只留指標指向這裡。
 
 ## 內容歸屬 (Content Ownership)
 

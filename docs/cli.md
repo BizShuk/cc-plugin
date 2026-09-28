@@ -2,30 +2,11 @@
 
 `cc-plugin` 的完整指令參考; quick start 見 [`README.md`](../README.md) 的使用方式章節。
 
-## 記憶蒸餾 (Memory Distillation)
-
-```bash
-# 執行完整蒸餾管道（讀取 → 提取 → 寫入 → 清理）
-cc-plugin distill
-
-# 僅提取記憶（從 stdin 讀取 JSON 觀察值）
-cc-plugin extract < observations.json
-
-# 清理狀態（重置遊標、已見、已蒸餾紀錄）
-cc-plugin reset
-```
-
 ## 資料匯出 (Data Export)
 
 ```bash
-# 匯出 mempalace 類別清單
-cc-plugin export mempalace
-
-# 匯出 mempalace 完整 Markdown 結構
-cc-plugin export mempalace --data -o ./export
-
-# 匯出 gbrain 觀察值（增量）
-cc-plugin export gbrain
+# 匯出 claude-mem 觀察值（增量）
+cc-plugin export claudemem
 
 # 匯出 claude-mem 觀察值（全量）
 cc-plugin export claudemem --all

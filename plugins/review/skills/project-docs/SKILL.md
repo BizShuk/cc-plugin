@@ -37,7 +37,7 @@ metadata:
 
 ## 文件目標與格式 (Document Goals & Format)
 
-規範來源：`cc-plugin/config/CLAUDE.global.md` 統一介面。
+目錄佈局與統一介面由 [unified-interface.md](references/unified-interface.md) 單一擁有。
 各文件的模板與寫入規則詳見 [references/](references/)。
 `哪句話該放哪個檔案`由 [content-ownership.md](references/content-ownership.md) 單一擁有
 （含 `plans/`／`docs/specs/` 檔名規範與細節下放門檻）—— 寫或稽核文件前先讀它。
@@ -49,8 +49,6 @@ metadata:
 | `docs/terminology.md` | `WHICH` | 術語單一定義來源：領域名詞、縮寫、狀態值 | [docs-terminology.md](references/docs-terminology.md) |
 | `README.business.md` | `WHY` | 業務價值：上下游、約束、風險、核心/非核心 | [readme-business.md](references/readme-business.md) |
 | `CLAUDE.md` | — | symlink → `AGENTS.md`（必備） | [agents.md](references/agents.md) |
-| `.agents/` | — | 專案層代理設定的實體目錄（選備） | [agents.md](references/agents.md) |
-| `.claude` | — | symlink → `.agents`（`.agents/` 存在時必備） | [agents.md](references/agents.md) |
 | `README.todo` | — | 待辦事項（必備，改善建議的唯一去處） | [readme-todo.md](references/readme-todo.md) |
 | `docs/memory/` | — | 歷史決策（必備，僅回報缺漏） | — |
 | `docs/tutorials/` | — | 領域知識導覽（選備，交由 `[[tutorial]]`） | [docs-structure.md](references/docs-structure.md) |
@@ -137,8 +135,7 @@ metadata:
 4. `README.business.md` — 引用已確立的領域與術語
 5. `README.todo` — 分析出的改善建議寫成待辦項，`不`寫進 `README.md`
 6. `Symbolic links` — 執行 [setup-links.sh](scripts/setup-links.sh)：`CLAUDE.md` → `AGENTS.md`、
-   `.claude` → `.agents`、`.geminiignore` → `.gitignore`；舊佈局（`CLAUDE.md` 或 `.claude/`
-   為實體）就地反轉
+   `.geminiignore` → `.gitignore`；舊佈局（`CLAUDE.md` 為實體）就地反轉
 
 各文件依 [references/](references/) 對應樣板產出。
 連結已正確時跳過；兩邊皆為實體且無法安全反轉時 log `WARN` 並跳過。
@@ -158,7 +155,6 @@ README.business.md: <line count> 行, <N> 個業務約束, <N> 項風險
 
 Symlinks:
 - CLAUDE.md -> AGENTS.md ✅ (created | moved | already exists | skipped)
-- .claude -> .agents ✅ (created | moved | already exists | skipped)
 - .geminiignore -> .gitignore ✅ (created | already exists | skipped)
 
 業務領域摘要:

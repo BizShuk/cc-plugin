@@ -19,7 +19,7 @@
 | `AGENTS.md` | 目錄樹 diff 真實目錄；模組對應 entry point 仍存在；build/deploy 指令有效；設定路徑一致 |
 | `docs/terminology.md` | 術語出處路徑仍存在；狀態字面值與程式碼 enum/const 一致 |
 | `README.business.md` | 狀態名稱能在程式中找到；上游服務在程式碼中有對應呼叫 |
-| 統一介面 | 必備檔案存在：`AGENTS.md`、`README.todo`、`docs/memory/`、`docs/terminology.md`；`CLAUDE.md` 是指向 `AGENTS.md` 的 symlink；`.agents/` 存在時 `.claude` 是指向它的 symlink |
+| 統一介面 | 必備檔案存在：`AGENTS.md`、`README.todo`、`docs/memory/`、`docs/terminology.md`；`CLAUDE.md` 是指向 `AGENTS.md` 的 symlink |
 
 ## 橫向：文件 vs 文件
 

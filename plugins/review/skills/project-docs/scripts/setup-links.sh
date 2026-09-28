@@ -6,10 +6,9 @@
 #
 # Real sources are agent-agnostic; Claude-specific names are symlinks:
 #   CLAUDE.md     -> AGENTS.md
-#   .claude       -> .agents
 #   .geminiignore -> .gitignore
 #
-# Legacy layouts (CLAUDE.md / .claude as the real entry) are inverted in place.
+# Legacy layouts (CLAUDE.md as the real entry) are inverted in place.
 # Idempotent: re-running on a converged repo changes nothing.
 
 set -euo pipefail
@@ -18,10 +17,6 @@ WORKSPACE="${1:-.}"
 cd "$WORKSPACE"
 
 # ── helpers ──────────────────────────────────────────────────────────
-is_empty_dir() {
-    [ -d "$1" ] && [ -z "$(ls -A "$1")" ]
-}
-
 # Make $real the real file and $link a symlink to it.
 converge_file() {
     local real="$1"   # e.g. AGENTS.md
@@ -39,31 +34,6 @@ converge_file() {
         fi
     fi
 
-    create_symlink "$real" "$link"
-}
-
-# Make $real the real directory and $link a symlink to it.
-converge_dir() {
-    local real="$1"   # e.g. .agents
-    local link="$2"   # e.g. .claude
-
-    if [ -d "$link" ] && [ ! -L "$link" ]; then
-        if [ -L "$real" ]; then
-            rm "$real"
-        fi
-        if [ ! -e "$real" ] || is_empty_dir "$real"; then
-            [ -d "$real" ] && rmdir "$real"
-            mv "$link" "$real"
-            echo "🔁 $link/ -> $real/ (moved content into $real/)"
-        elif is_empty_dir "$link"; then
-            rmdir "$link"
-        else
-            echo "⚠️  WARN: both $real/ and $link/ are non-empty directories, merge manually."
-            return 0
-        fi
-    fi
-
-    [ -d "$real" ] || return 0
     create_symlink "$real" "$link"
 }
 
@@ -95,7 +65,6 @@ create_symlink() {
 echo "── setup-links: $(pwd) ──"
 
 converge_file "AGENTS.md" "CLAUDE.md"
-converge_dir  ".agents"   ".claude"
 create_symlink ".gitignore" ".geminiignore"
 
 echo "── done ──"

@@ -36,7 +36,7 @@
 
 ## 使用邊界 (Boundaries)
 
-- 分數是`決策紀錄`，寫進回覆的 Think 區塊，不寫入 `README.md`、`CLAUDE.md` 或
+- 分數是`決策紀錄`，寫進回覆的 Think 區塊，不寫入 `README.md`、`AGENTS.md` 或
   `docs/specs/` 等 canonical file。
 - 只有一個候選時不必計分，直接檢查硬門檻即可。
 - 不得為了達到 70 分而調整權重或事後改分。

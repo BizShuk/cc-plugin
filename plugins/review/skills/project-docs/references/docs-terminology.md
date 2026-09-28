@@ -12,7 +12,7 @@
 
 | 術語 (Term) | 英文 (English) | 定義 (Definition) | 出處 (Source) |
 | ----------- | -------------- | ----------------- | ------------- |
-| 記憶蒸餾    | Distillation   | 從多來源抽取候選記憶並去重後寫入儲存的流程 | `cmd/memory/distill.go` |
+| 圖譜驗證    | Topology Verify | 檢查知識圖譜的節點與邊是否完整一致 | `cmd/topology/verify.go` |
 
 ## 狀態值 (Status Values)
 

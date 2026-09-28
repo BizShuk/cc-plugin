@@ -19,7 +19,7 @@ submodule checkout 到本地，`source` 仍寫 repo，不用 `./plugins/<name>`�
 每個本地 plugin 都有 `.claude-plugin/plugin.json` 與 `README.md`，七個都登錄於
 `.claude-plugin/marketplace.json`。預設 `skills/`／`agents/` 與 submodule 由目錄
 自動探索；manifest 的 `skills`／`agents` 只宣告非預設路徑或外部來源。詳見根目錄
-`CLAUDE.md` 的「檔案職責」與「慣例」章節。
+`AGENTS.md` 的「檔案職責」與「慣例」章節。
 
 ## 外部 Marketplace Plugins
 

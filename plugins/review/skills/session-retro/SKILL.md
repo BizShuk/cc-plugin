@@ -107,7 +107,7 @@ git -C <repo> diff --stat HEAD~N   # 若已 commit
 （每項含五要素；若執行，附產物路徑與驗證結果）
 ```
 
-復盤全文另存 `docs/memory/YYYY-MM-DD-session-retro.md`，重點併入該 repo 的 `CLAUDE.md`。
+復盤全文另存 `docs/memory/YYYY-MM-DD-session-retro.md`，重點併入該 repo 的 `AGENTS.md`。
 
 ## 常見錯誤 (Common Mistakes)
 

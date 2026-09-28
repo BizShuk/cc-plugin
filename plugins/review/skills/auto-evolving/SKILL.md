@@ -31,7 +31,7 @@ metadata:
 
 - 將多種觀點當成暫時的分析鏡頭 (lens)，不得建立永久候選分支。
 - 每次只推進一個最高槓桿問題；新發現留給下一週期，不分叉目前週期。
-- 以 workspace 的原始碼、測試、`README.md`、`CLAUDE.md`、`docs/` 與 `README.todo` 為主流程及真實來源 (source of truth)。
+- 以 workspace 的原始碼、測試、`README.md`、`AGENTS.md`、`docs/` 與 `README.todo` 為主流程及真實來源 (source of truth)。
 - 不為分析結果建立 `branches/`、`foundation/`、`cycles/` 或其他平行知識樹，也不以模板覆蓋 workspace 根文件。
 - 模型評分不是驗證。只有可重現的測試、觀察、使用結果或明確人工確認，才能升格為穩定知識。
 
@@ -47,7 +47,7 @@ metadata:
 
 ### 錨定 workspace
 
-1. 讀取 workspace instructions、`README.md`、`CLAUDE.md`、`README.todo` 與相關 `docs/`。
+1. 讀取 workspace instructions、`README.md`、`AGENTS.md`、`README.todo` 與相關 `docs/`。
 2. 檢視相關程式碼、設定、測試、執行結果、git diff 與近期歷史；保留使用者既有未提交變更。
 3. 用一句話分別寫出目前的產品承諾、技術主流程、使用者當前目標與已知限制。
 4. 先搜尋既有實作、計畫與待辦，避免重新命名或重複建立同一概念。
@@ -123,7 +123,7 @@ metadata:
 | --- | --- |
 | 實際行為與合約 | 原始碼、設定、schema 與測試 |
 | 業務定義、使用方式、domain flow | `README.md` |
-| 技術結構、介面、依賴、關鍵決策與慣例 | `CLAUDE.md` |
+| 技術結構、介面、依賴、關鍵決策與慣例 | `AGENTS.md` |
 | 已完成且仍有效的設計 | `docs/specs/YYYY-MM-DD-<topic>.md` |
 | 決策緣由、驗證證據、反例與 retrospective | `docs/memory/YYYY-MM-DD-<topic>.md` |
 | 尚未完成且可執行的工作 | `README.todo` |

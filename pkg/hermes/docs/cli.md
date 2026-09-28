@@ -2,7 +2,7 @@
 
 ## Installation
 
-安裝與升級走 `pnpm run hermes:install`／`pnpm run hermes:upgrade`（於 `cc-plugin` 根層）（見 [CLAUDE.md](../CLAUDE.md)）。
+安裝與升級走 `pnpm run hermes:install`／`pnpm run hermes:upgrade`（於 `cc-plugin` 根層）（見 [AGENTS.md](../AGENTS.md)）。
 `pip install hermes-agent` 與 `brew install hermes-agent` 不採用：少了 whatsapp 腳本。
 
 ```bash
