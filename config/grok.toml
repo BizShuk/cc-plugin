@@ -4,8 +4,8 @@ auto_update = true
 
 [models]
 default = "grok-4.7"
-web_search = "grok-4.6"
-default_reasoning_effort = "high"
+web_search = "grok-4.7"
+default_reasoning_effort = "medium"
 
 [ui]
 max_thoughts_width = 120
@@ -102,6 +102,7 @@ allow = [
     "Bash(cat:*)",
     "Bash(git push:*)",
     "Bash(chmod +x:*)",
+    "Bash(ssh liva:*)",
     "Read(~/.gbrain/**)",
 ]
 deny = [
@@ -112,9 +113,7 @@ deny = [
     "Read(~/.grok/config.toml)",
     "Edit(**/.git)",
 ]
-ask = [
-    "Read(.env*)",
-]
+ask = ["Read(.env*)"]
 
 [subagents]
 enabled = true
@@ -124,9 +123,9 @@ explore = true
 plan = true
 
 [subagents.models]
-explore = "grok-4.6"
-plan = "grok-4.6"
-general-purpose = "grok-4.6"
+explore = "grok-4.7"
+plan = "grok-4.7"
+general-purpose = "grok-4.7"
 
 [tools]
 respect_gitignore = false
