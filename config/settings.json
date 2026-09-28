@@ -27,6 +27,7 @@
       "Bash(go:*)",
       "Bash(git:*)",
       "Bash(cat:*)",
+      "Bash(ssh liva:*)",
       "Read(~/.gbrain/**)"
     ],
     "deny": [
