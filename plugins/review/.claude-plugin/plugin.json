@@ -5,7 +5,7 @@
     "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"
   },
-  "description": "Review, planning, and workspace evolution skills — audit consistency, security, and naming, then converge broad analysis into one designed, verified, and consolidated update",
+  "description": "Review, planning, and workspace evolution skills — audit consistency, security, and naming, then converge broad analysis into one designed, verified, and consolidated update; turn personal, social, sales, or business content into growth KPIs with tool-scoped actions",
   "homepage": "https://github.com/bizshuk/cc-plugin",
   "keywords": [
     "review",
@@ -28,11 +28,14 @@
     "knowledge-consolidation",
     "doc-drift",
     "business-extract",
-    "project-explore"
+    "project-explore",
+    "review-target",
+    "growth-strategy",
+    "kpi"
   ],
   "license": "MIT",
   "name": "review",
   "repository": "https://github.com/bizshuk/cc-plugin",
   "skills": [],
-  "version": "1.5.0"
+  "version": "1.6.0"
 }
