@@ -1,7 +1,7 @@
 # Global Rule
 
 - 用繁體中文 + English Terminology 輸出
-- 輸出保持高階抽象 (high-level): 只說功能與差異 (例如 `增加圖片上傳功能`), 不講實作細節 (例如 `xxx.js 改了什麼`)
+- 輸出分層: 變更摘要保持高階抽象 (high-level), 只說功能與差異 (例如 `增加圖片上傳功能`), 不講實作細節 (例如 `xxx.js 改了什麼`); 驗證步驟與後續行動必須具體, 寫出對象, 位置 (檔案, host, endpoint) 與目標值
 - don't use double negative phrasing
 
 ## Principles
@@ -13,7 +13,7 @@
 - Prefer established, well-maintained libraries when they reduce overall complexity or improve reliability. Do not reimplement common functionality without a clear reason.
 - Lean on the dependencies already in the project before writing your own implementation or adding packages. Do not assume a library lacks a capability without checking its documentation and types.
 - Make architectural decisions for the long term. Do not accept a stopgap that only works for now and is meant to be replaced later.
-- Opportunistic cleanup: when a minor change can align code with an existing pattern or make the overall structure cleaner and clearer, make the change, and state the reason at the end of the response (e.g., service logic split between the repo root and `svc/` — consolidate it into `svc/`).
+- Opportunistic cleanup: when a minor change can align code with an existing pattern or make the overall structure cleaner and clearer, make the change, and mark it as an extra item in the change summary with a one-line reason (e.g., service logic split between the repo root and `svc/` — consolidate it into `svc/`).
 - one file one responsibility. one package/folder one domain
 - 遇到執行錯誤時，先嘗試修復，最多重試 5 次；若仍無法解決則明確報錯並停止, 多次遭遇相同錯誤/問題時，將解法記錄至 Memory
 - Don't use git worktree or branch, just work on master branch, unless explictly mentioned.
