@@ -49,8 +49,8 @@
 - 以 `業務領域 (Business Domain)` 為單位組織，不是以檔案或 handler 為單位
 - 每個領域必須有：描述、流程、核心實體
 - 領域流程要追溯真實程式碼路徑，不要抽象描述
-- `不寫 entry point 與型別名`：handler／function 名稱由 `CLAUDE.md` 模組對應表單一擁有，
+- `不寫 entry point 與型別名`：handler／function 名稱由 `AGENTS.md` 模組對應表單一擁有，
   領域名稱即兩表的對照鍵。需要先讀原始碼才懂的名詞出現在這裡就是越界
 - `使用方式`只留 quick start；章節超過約 25 行即下放 `docs/cli.md`，本檔留指標
 - `不寫待辦`：分析出的改善建議寫進 `README.todo`，不進 `README.md`
-- 結構樹、架構決策一律不複製，用一行指向 `CLAUDE.md`
+- 結構樹、架構決策一律不複製，用一行指向 `AGENTS.md`

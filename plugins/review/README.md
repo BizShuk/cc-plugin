@@ -46,12 +46,12 @@ graph TD
 | 商業價值分析 (Business value analysis) | `planner` | 審查業務摩擦點與缺陷，或規劃新功能的商業變現模式 |
 | 目錄佈局調整 (Directory layout audit) | `planner` | 新增/移動檔案，或全專案審查時 |
 | 識別子命名品質 (Identifier naming quality) | `code-audit` | 任何程式碼、設定鍵值或 API 端點變更 |
-| 文件與程式碼同步 (Docs vs code sync) | `project-docs` | 涉及 README/CLAUDE.md、註解或文件編輯（協調代理只用 `audit` 唯讀模式） |
-| 專案正典文件建立 (Canonical doc bootstrap) | `project-docs` | `README.md` / `CLAUDE.md` 缺漏、接手陌生 codebase 或大型重構之後 |
+| 文件與程式碼同步 (Docs vs code sync) | `project-docs` | 涉及 README/AGENTS.md、註解或文件編輯（協調代理只用 `audit` 唯讀模式） |
+| 專案正典文件建立 (Canonical doc bootstrap) | `project-docs` | `README.md` / `AGENTS.md` 缺漏、接手陌生 codebase 或大型重構之後 |
 | 業務價值萃取 (Business extraction) | `project-docs` | 請求上下游、狀態流程、業務約束、風險或核心/非核心分析 |
 | 歷史文件整併 (Docs consolidation) | `project-docs` | `docs/specs/` 或 `plans/` 累積過多，需壓縮成單一摘要表並清除已淘汰功能 |
-| 變更紀錄搬移 (Changelog migration) | `project-docs` | `CLAUDE.md` 變更紀錄章節或 `README.todo` 的 `## Archive` 過長，需搬進 `docs/CHANGELOG.md` |
-| 內容範疇清理 (Scope cleanup) | `project-docs` | `README.md` / `CLAUDE.md` 出現別的檔案擁有的內容，或高變動細節需下放 `docs/cli.md`、`docs/development.md` |
+| 變更紀錄搬移 (Changelog migration) | `project-docs` | `AGENTS.md` 變更紀錄章節或 `README.todo` 的 `## Archive` 過長，需搬進 `docs/CHANGELOG.md` |
+| 內容範疇清理 (Scope cleanup) | `project-docs` | `README.md` / `AGENTS.md` 出現別的檔案擁有的內容，或高變動細節需下放 `docs/cli.md`、`docs/development.md` |
 | 外部依賴管理 (Dependency management) | `planner` | 涉及依賴清單檔案（如 go.mod, package.json 等） |
 | 專案引導與學習 (Project onboarding) | `tutorial` | 請求建立步驟式教學、專案引導或概念學習文件時 |
 | 程式碼編寫原則 (Coding principles) | `planner` | 任何程式碼、重融或審查請求 |

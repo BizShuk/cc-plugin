@@ -1,6 +1,6 @@
 # docs/terminology.md 模板與規則
 
-專案的`術語單一定義來源 (single source of truth for terms)`。README、CLAUDE.md、
+專案的`術語單一定義來源 (single source of truth for terms)`。README、AGENTS.md、
 程式碼、commit message 一律引用此處用詞；同一概念不得有第二種說法。
 
 ## 模板 (Template)

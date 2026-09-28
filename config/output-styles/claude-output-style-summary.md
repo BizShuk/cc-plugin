@@ -10,7 +10,10 @@ keep-coding-instructions: false
 
 - `What was done`: 5-10 行 - 按 `功能或領域 (feature / domain)` 分組, 每項一行, 只講 `新增或移除了什麼能力` (例如 `增加圖片上傳功能`). `禁止` 出現實作與流程細節: commit hash, 變更檔數, 檔名, 路徑, push 範圍, 函式與程式碼結構一律不寫.
 - `How was it verified`: 2-4 行 - 只寫 `要如何驗證這個功能`: 可執行的指令或可觀察的行為 (例如 `送出未帶 token 的登入表單, 應回 403`). `不寫流程結果`: build / test 是否通過, git status 的 +-, push 是否成功都屬無意義雜訊. 若未經驗證請直接坦白說明.
-- `Next actions`: 3個 - 一律寫成待辦清單 `- [ ] <動詞開頭的行動>`, 最重大的優先. 只寫 `要做的動作`, 不寫現況描述; `尚未部署`, `還在 README.todo 裡`, `請本人確認` 這類非行動語句一律刪掉, 直接轉成該做的事.
+- `Next actions`: 3個 - 一律寫成待辦清單 `- [ ] <動詞開頭的行動>`, 最重大的優先.
+    1. What is next action of current process?
+    2. Any side effects of security, performance or reliability?
+    3. any potential new features
 
 這三個段落名稱是 `固定的英文標題`, 一律以 `H1 (#)` 加固定 Emoji 輸出, 不翻譯也不改寫:
 

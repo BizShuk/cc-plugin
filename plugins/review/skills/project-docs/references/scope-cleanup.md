@@ -1,7 +1,15 @@
 # 範疇清理模式 (Scope Cleanup) — 執行程序
 
-對象是 `README.md` 與 `CLAUDE.md` `本身的內容`，不是歷史文件的數量。
+對象是 `README.md` 與 `AGENTS.md` `本身的內容`，不是歷史文件的數量。
 歸屬判準見 [content-ownership.md](content-ownership.md)；本檔是逐階段的指令與樣板。
+
+## 規則 (Rules)
+
+- 稽核先於改寫：每筆先寫成 `doc 說 X → 實際 Y`，經確認才動手
+- 刪除前必須`實測目的地已有該內容`，否則是遺失不是搬移
+- 文件裡的斷言`預設為錯`，一律先實跑；guard test 必須`注入違規證明它會紅`
+- 編輯用 anchor 文字定位，`不用行號`；刪完`重讀全文`，不只看改動處
+- 驗證工具必須唯讀；不預告最終行數
 
 ## Phase S0 — Audit
 
@@ -14,7 +22,7 @@
 
 ```bash
 python3 -c 'import sys,tiktoken; e=tiktoken.get_encoding("o200k_base");
-[print(len(e.encode(open(f).read())), f) for f in sys.argv[1:]]' README.md CLAUDE.md
+[print(len(e.encode(open(f).read())), f) for f in sys.argv[1:]]' README.md AGENTS.md
 ```
 
 無 `tiktoken` 時改用 `wc -c` 除以 4 估算，並在報告標註`估算值`。
@@ -24,26 +32,26 @@ python3 -c 'import sys,tiktoken; e=tiktoken.get_encoding("o200k_base");
 
 ```bash
 # 1) 外部 repo：自承範疇的章節，以及對方的實作細節
-grep -n "外部 repo\|external repo\|本節描述\|不對應本 repo" README.md CLAUDE.md
+grep -n "外部 repo\|external repo\|本節描述\|不對應本 repo" README.md AGENTS.md
 
 # 2) 歷史敘述
-grep -n "已移除\|已刪除\|已解體\|已併回\|已下沉\|已脫離\|不再\|原 \`\|曾經" README.md CLAUDE.md
+grep -n "已移除\|已刪除\|已解體\|已併回\|已下沉\|已脫離\|不再\|原 \`\|曾經" README.md AGENTS.md
 
 # 3) 易腐計數（行數、檔案數、容量、版本數）
-grep -nE '[0-9]+ 行|[0-9]+ 個(檔案|模組|module|package)|[0-9]+ ?(MiB|KiB|MB|KB)|→[0-9]+' README.md CLAUDE.md
+grep -nE '[0-9]+ 行|[0-9]+ 個(檔案|模組|module|package)|[0-9]+ ?(MiB|KiB|MB|KB)|→[0-9]+' README.md AGENTS.md
 
 # 4) 可執行斷言（文件裡的 pass/fail 指令）
-grep -n "必須為空\|必須非空\|只該有\|不該出現\|grep -\|go list -deps\|test ! -" README.md CLAUDE.md
+grep -n "必須為空\|必須非空\|只該有\|不該出現\|grep -\|go list -deps\|test ! -" README.md AGENTS.md
 
 # 5) 機器專屬路徑
-grep -n "/Users/\|/home/\|~/projects/" README.md CLAUDE.md
+grep -n "/Users/\|/home/\|~/projects/" README.md AGENTS.md
 
 # 6) 重複：兩檔都有的章節標題與結構樹
-grep -c '^```tree\|^```text' README.md CLAUDE.md
-diff <(grep '^## ' README.md) <(grep '^## ' CLAUDE.md)
+grep -c '^```tree\|^```text' README.md AGENTS.md
+diff <(grep '^## ' README.md) <(grep '^## ' AGENTS.md)
 
 # 7) 過長章節（細節下放候選）：逐章節統計行數
-for f in README.md CLAUDE.md; do
+for f in README.md AGENTS.md; do
   awk -v f="$f" '/^## /{if(s)print f": "c" 行  "s; s=$0; c=0; next}{c++}
                  END{if(s)print f": "c" 行  "s}' "$f"
 done
@@ -67,7 +75,7 @@ go list -m -f '{{.Dir}}' | wc -l        # Go workspace 為例
 ls <文件提到的每個具體檔案路徑>
 
 # 連結目標是否可解析
-grep -oE '\]\([^)h][^)]*\)' README.md CLAUDE.md \
+grep -oE '\]\([^)h][^)]*\)' README.md AGENTS.md \
   | sed 's/.*](//; s/)$//; s/#.*//' | sort -u \
   | while read -r f; do [ -z "$f" ] || [ -e "$f" ] || echo "BROKEN: $f"; done
 ```
@@ -158,13 +166,13 @@ grep -n "M1\|M2\|里程碑" docs/CHANGELOG.md
 
 ```bash
 # 連結可解析
-grep -oE '\]\([^)h][^)]*\)' README.md CLAUDE.md \
+grep -oE '\]\([^)h][^)]*\)' README.md AGENTS.md \
   | sed 's/.*](//; s/)$//; s/#.*//' | sort -u \
   | while read -r f; do [ -z "$f" ] || [ -e "$f" ] || echo "BROKEN: $f"; done
 
 # 機器路徑、外部 repo 細節、歷史敘述、易腐計數皆已清空
-grep -n "/Users/\|/home/" README.md CLAUDE.md
-grep -n "已移除\|已解體\|已併回\|已下沉" README.md CLAUDE.md
+grep -n "/Users/\|/home/" README.md AGENTS.md
+grep -n "已移除\|已解體\|已併回\|已下沉" README.md AGENTS.md
 
 # 測試與腳本全綠，且 repo 未被弄髒
 <專案的預設測試指令>
@@ -190,8 +198,8 @@ git status --short
 - 細節下放：<n> 行 → docs/cli.md、docs/development.md（正典檔留 quick start + 指標）
 - 機器路徑：<n> 處 → 相對路徑
 
-行數：README.md <a> → <b>；CLAUDE.md <c> → <d>
-Token：README.md <a> → <b>（-<x>%）；CLAUDE.md <c> → <d>（-<y>%）
+行數：README.md <a> → <b>；AGENTS.md <c> → <d>
+Token：README.md <a> → <b>（-<x>%）；AGENTS.md <c> → <d>（-<y>%）
   （S0.0 同一指令重測；含下放後的 docs/cli.md、docs/development.md 新增量）
 驗收：測試全綠 / 連結全解析 / working tree 只含預期檔案
 未處理：<清單與理由>

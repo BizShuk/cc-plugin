@@ -5,7 +5,7 @@
 
 ## 內容歸屬 (Content Ownership)
 
-`README.md` 是`為什麼用它、怎麼開始`；`CLAUDE.md` 是`邊界是什麼、誰擁有什麼`。
+`README.md` 是`為什麼用它、怎麼開始`；`AGENTS.md` 是`邊界是什麼、誰擁有什麼`。
 一個事實只能有`一個` owner —— 重複的兩份必然分岔，結果是兩份都不準。
 
 歸屬用單一問題判定：「這句話會因為什麼而變成假的？」
@@ -19,11 +19,11 @@
 | 程式碼改了，且可用指令驗證                        | 測試或 `scripts/`；文件只留一句規則 + 測試名稱                         | 文件裡整段可執行的 `grep` / `go list` 斷言          |
 | 細節層級改動（CLI flag、依賴版本、安裝步驟）      | `docs/` 根層指南；正典檔留 quick start／一行指令 + 指標（見下節）      | `使用方式`／`開發指南`章節長成完整參考              |
 | 換一台機器（絕對路徑）                            | 改相對路徑或 `$(git rev-parse --show-toplevel)`                        | `/Users/<name>/...`、`~/projects/<other-repo>/...`  |
-| 都不會失效（不變式）                              | 留在 `CLAUDE.md`                                                       | 「只有 X 可以 import Y」                            |
+| 都不會失效（不變式）                              | 留在 `AGENTS.md`                                                       | 「只有 X 可以 import Y」                            |
 
-- 結構樹、ownership、架構決策由 `CLAUDE.md` 單一擁有，`README.md` 用一行指過去。
+- 結構樹、ownership、架構決策由 `AGENTS.md` 單一擁有，`README.md` 用一行指過去。
 - `README.md` 出現需要先讀原始碼才懂的型別名，就是越界 —— `刪除`，不下放：
-  entry point 由 `CLAUDE.md` 模組對應表單一擁有，領域名稱即對照鍵。
+  entry point 由 `AGENTS.md` 模組對應表單一擁有，領域名稱即對照鍵。
 - 清單另有 owner 檔時（如 `plugins/README.md` 擁有 plugin 清單），
   正典檔改`一行指標`，不複製清單。
 - 寫得出 pass/fail 的斷言不放 Markdown ——`沒人執行的斷言會腐爛成錯誤資訊`。
@@ -42,7 +42,7 @@
 | 來源章節                                                        | 目的地                | 正典檔保留                          |
 | --------------------------------------------------------------- | --------------------- | ----------------------------------- |
 | `README.md` `使用方式`的完整 CLI／API 參考                      | `docs/cli.md`         | 每領域 1-2 個 quick start 例 + 指標 |
-| `CLAUDE.md` `開發指南`的展開細節（前置需求、clone、部署、排程） | `docs/development.md` | build／test／deploy 各一行指令 + 指標 |
+| `AGENTS.md` `開發指南`的展開細節（前置需求、clone、部署、排程） | `docs/development.md` | build／test／deploy 各一行指令 + 指標 |
 
 - 判定門檻：章節超過約 `25 行`，或單一子命令／步驟的說明超過一個 code block。
 - 內容`原文搬移`不重寫；遵循`先寫後刪`（scope-cleanup 的 Phase S2）。
@@ -62,4 +62,4 @@
 
 例外：plan-mode 系統啟動時自動產生的暫存檔（隨機 slug 命名）僅在 plan mode 內部使用，
 `離開 plan mode 前必須` rename 為正式檔名，並同步更新所有 cross-reference
-（README、CLAUDE.md、specs、plans）。
+（README、AGENTS.md、specs、plans）。
