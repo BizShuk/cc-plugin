@@ -21,6 +21,7 @@
     "hermes:upgrade:webui": "./pkg/hermes/scripts/setup-webui.sh --upgrade",
     "hermes:setup": "./pkg/hermes/scripts/run.sh",
     "hermes:persona": "f() { HERMES_PERSONA=\"$1\" ./pkg/hermes/scripts/run.sh; }; f",
-    "hermes:webui": "\"${HERMES_HOME:-$HOME/.hermes}/hermes-webui/ctl.sh\""
+    "hermes:webui": "\"${HERMES_HOME:-$HOME/.hermes}/hermes-webui/ctl.sh\"",
+    "hermes:gateway": "./pkg/hermes/scripts/gateway.sh"
   }
 }

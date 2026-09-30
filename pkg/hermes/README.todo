@@ -4,7 +4,7 @@
 
 - [ ] 決定常駐機器：本機 Mac 或 liva；影響執行者能否存取 `~/projects` 與各 CLI 的登入狀態
 - [ ] 在常駐機器跑 `pnpm run run:install`、`pnpm run run:setup`，再跑 `hermes setup` 選推理模型
-- [ ] 決定常駐方式：pm2 `ecosystem.config.js` 或上游 `hermes gateway` 的服務安裝，二擇一
+- [x] 決定常駐方式：採用 pm2 (`ecosystem.config.js`) 宣告 `Hermes Gateway` (Agent)，由 `scripts/gateway.sh` 啟動 `--external-supervisor` 接管生命週期
 
 ## 任務委派 (Task Delegation)
 

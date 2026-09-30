@@ -31,13 +31,15 @@ pkg/hermes/
 - Agent: Hermes Agent（Python，上游 `NousResearch/hermes-agent`）
 - Executors: `agy`（Antigravity CLI）、`claude`（Claude Code）、`grok`（Grok Build）
 - Delegation facade 候選: `autop`（工作區既有 Go CLI，已支援上述三個 client）
-- Process manager: 未決定（pm2 或上游 `hermes gateway` 自帶的服務安裝）
+- Process manager: `pm2`（宣告在 `cc-plugin/ecosystem.config.js`，由 `scripts/gateway.sh` 啟動 `--external-supervisor`）
 - Channel: 未決定（見 README.md 訊息通道）
 
 ## 關鍵決策 (Key Decisions)
 
 - `只設定不 fork`：Hermes 以上游安裝為準，本專案只放設定樣板、自訂 skill 與安裝腳本；
   不修改上游原始碼，升級走上游安裝程序。
+- `常駐交由 PM2 守護`：Hermes Gateway 以前台 `--external-supervisor` 由 PM2 (`Agent:Hermes Gateway`) 常駐管理，
+  執行期依 `inf-spec` 載入指定 Python 虛擬環境 (`/Users/shuk/.venv`)。
 - `執行期根目錄由上游固定`：Hermes 家目錄是 `~/.hermes`，不遵循工作區 `~/.config/<app>/` 慣例
   （該慣例來自 gosdk，Hermes 不是 gosdk 應用）。本專案的樣板與記憶檔由 `run:setup` 同步過去。
 - `通道必須中國可達`：候選限於上游已有 adapter 的中國大陸原生平台；
@@ -50,13 +52,14 @@ pkg/hermes/
 | ----------------- | -------------------------- | -------------------- |
 | 代理執行環境 | 上游 Hermes（`~/.hermes`） | `hermes`、`hermes setup` |
 | 任務委派 | 上游 bundled / official skills (`autonomous-ai-agents/*`) | `hermes skills install`、`claude -p`、`agy`、`grok`（或 `autop -c <client>`） |
-| 訊息通道 | 上游閘道 | `hermes gateway setup`、`hermes gateway start` |
+| 訊息通道 | 上游閘道 | `hermes gateway setup`、`pnpm run hermes:gateway`、`pm2 task resume "Hermes Gateway"` |
 
 ## 開發指南 (Development Guide)
 
 - 任務一律在 `cc-plugin` 根層以 `hermes:*` 前綴執行（本子專案不自帶 `package.json`）
 - Install: `pnpm run hermes:install` —— 缺 `hermes` 才以上游安裝器安裝（`--skip-setup`）
 - Install WebUI: `pnpm run hermes:install:webui` —— 缺 WebUI 才 clone `nesquena/hermes-webui`；`pnpm run hermes:webui start|status|stop` 管理 daemon（:8787）
+- Gateway: `pnpm run hermes:gateway` —— 以 `--external-supervisor` 前台啟動 Gateway；PM2 註冊於 `ecosystem.config.js`
 - Upgrade: `pnpm run hermes:upgrade`（WebUI：`hermes:upgrade:webui`） —— 對既有安裝跑 `hermes update`
 - Setup: `pnpm run hermes:setup` —— `config/config.yaml`、`config/memory/`（→ `~/.hermes/memories`）與人設 `SOUL.md` 連結進 `~/.hermes`，
   `~/workspace` 連結到 `config/workspace/`，
@@ -67,7 +70,7 @@ pkg/hermes/
 - Lint: 根層 `pnpm run lint` 含 shellcheck
 - Build: 不適用（無程式碼）
 - Test: 未偵測到 (Not detected)
-- Deploy: 未偵測到部署設定 (Not detected)
+- Deploy: `deployment.yml` 宣告 `hermes-gateway` 於 `mac-server`（artifact: process, 由 pm2 管理）
 
 ## 消費端契約 (Consumer Contracts)
 

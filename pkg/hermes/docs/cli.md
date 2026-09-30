@@ -69,3 +69,24 @@ ln -s ~/.hermes/hermes-webui/start.sh ~/.local/bin/
 
 Retrieve and follow the instructions at:
 <https://raw.githubusercontent.com/garrytan/gbrain/master/INSTALL_FOR_AGENTS.md>
+
+## PM2 常駐管理 (PM2 Process Management)
+
+Hermes Gateway 於 `cc-plugin` 根目錄 `ecosystem.config.js` 登記為 `Agent` namespace 的常駐程序 (`Hermes Gateway`)，執行腳本為 `pkg/hermes/scripts/gateway.sh`（自動載入 `/Users/shuk/.venv` 環境並以 `--external-supervisor` 模式運作）：
+
+```bash
+# 註冊 / 套用設定（預設 optional: true，處於 paused 狀態）
+pm2 apply ecosystem.config.js
+
+# 啟動 / 恢復 Hermes Gateway
+pm2 task resume "Agent:Hermes Gateway"
+
+# 暫停 Hermes Gateway
+pm2 task pause "Agent:Hermes Gateway"
+
+# 查看狀態與即時日誌
+pm2 list
+pm2 logs "Hermes Gateway" --lines 50
+```
+
+> 若先前已透過 `hermes gateway install` 安裝 launchd 服務，切換至 PM2 前請先執行 `hermes gateway stop` 停止 launchd 服務，以避免雙重派發衝突。
