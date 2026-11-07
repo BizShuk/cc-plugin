@@ -20,7 +20,7 @@
 
 ### 上下文 (Context)
 
-- 載入 `@./CLAUDE.md` 作為專案結構
+- 載入 `@./AGENTS.md` 作為專案結構 (技術脈絡唯一來源, 實體檔; 專案不得有 `CLAUDE.md`)
 - 載入 `@./README.md` 作為業務核心
 
 ## 專案結構 (Project Structure)
