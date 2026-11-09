@@ -1,10 +1,10 @@
 ---
 name: firecrawl
 description: >
-    Use when AI agents or apps need fast, reliable web search, scraping, or
-    interaction through Firecrawl. Triggers on: "Firecrawl", "scrape this site",
-    "web search API", "crawl this domain". Route the reader to the appropriate
-    CLI, app-integration, or outcome-focused workflow after installation.
+    Use when the user invokes /firecrawl to install or drive the Firecrawl CLI
+    for web search, scraping, and live-page interaction, or to integrate
+    Firecrawl into an application. Triggers on: "Firecrawl", "firecrawl search",
+    "firecrawl scrape".
 disable-model-invocation: true
 user-invocable: true
 ---

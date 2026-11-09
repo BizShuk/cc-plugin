@@ -1,16 +1,16 @@
 ---
 name: code-audit
 description: >
-    Use when auditing existing code or a diff for defects that are visible
-    without running it. Covers cross-file consistency (contradictory business
-    rules, drifting domain models, producer/consumer contract mismatches),
-    security (secrets, input validation, authn/authz, injection, unsafe
-    dependencies, sensitive data in logs), and identifier naming (casing drift,
-    synonym sprawl, vague or misleading names).
-    Triggers on: "review this code", "audit this diff", "check consistency",
-    "is this secure", "security review", "any vulnerabilities", "review naming",
-    "naming convention", "rename suggestions", "程式碼審查", "一致性檢查",
-    "安全稽核", "命名規範", "code-audit".
+    Use when auditing existing code or a diff for defects visible without
+    running it: cross-file consistency (contradictory business rules, drifting
+    domain models, producer/consumer contract mismatches), security (secrets,
+    input validation, authn/authz, injection, unsafe dependencies, sensitive
+    data in logs), and identifier naming (casing drift, synonym sprawl, vague or
+    misleading names). Not for runtime logic bugs (use /code-review) or
+    folder-level structure (use planner). Triggers on: "review this code",
+    "audit this diff", "check consistency", "is this secure", "security review",
+    "any vulnerabilities", "review naming", "naming convention", "rename
+    suggestions", "程式碼審查", "一致性檢查", "安全稽核", "命名規範", "code-audit".
 version: "1.0.0"
 allowed-tools: Read, Bash, Glob, Grep
 user-invocable: true

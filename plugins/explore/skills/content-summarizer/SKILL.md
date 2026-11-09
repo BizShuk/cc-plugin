@@ -2,11 +2,12 @@
 name: content-summarizer
 description: >
     Use when the user shares a URL, file, PDF, social post, or video and asks to
-    summarize, extract key points, get a TL;DR, brief them, or "tell me what this
-    says". Also use when the user shares a list/index page (trending projects, event
-    line-ups, link round-ups, top-N lists) and wants an overview of its items.
-    Triggers on: "summarize this", "TL;DR", "brief me", "what does this say",
-    "key points from", "read this for me".
+    summarize it, extract key points, get a TL;DR, or "tell me what this says" —
+    or shares a list/index page (trending projects, event line-ups, link
+    round-ups, top-N lists) and wants an overview of its items. For plain
+    conversion to Markdown without summarizing, use markitdown. Triggers on:
+    "summarize this", "TL;DR", "brief me", "what does this say", "key points
+    from", "read this for me", "幫我摘要", "重點整理".
 ---
 
 # Content Summarizer

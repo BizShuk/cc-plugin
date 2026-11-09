@@ -1,11 +1,11 @@
 ---
 name: universal-review
 description: >
-  Use only when no concrete review skill and no built-in review command
-  applies to the artifact, and systematic gap-finding (negative-space
-  reasoning) is needed on an unfamiliar artifact type. Not for code review
-  or diff review — those have dedicated tooling. Triggers on: "無既有具體
-  skill 適用時的通用審查", "這份產物缺了什麼", "negative-space 缺口盤點".
+    Use only when no concrete review skill or built-in review command applies
+    and an unfamiliar artifact type needs systematic gap-finding (negative-space
+    reasoning: what is missing, not what is wrong). Not for code or diff review
+    — those have dedicated tooling. Triggers on: "what is missing from this",
+    "這份產物缺了什麼", "negative-space review", "無既有具體 skill 適用時的通用審查".
 version: "2.0.0"
 metadata:
   type: pattern

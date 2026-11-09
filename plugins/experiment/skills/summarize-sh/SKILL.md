@@ -1,10 +1,12 @@
 ---
 name: summarize-sh
 description: >
-    Use when a fast summary or extraction of web pages, local files, YouTube
-    videos, or podcasts is needed. Invokes the `summarize` command-line tool.
-    Triggers on: "summarize this URL", "extract content from", or when needing
-    fast CLI-based summaries.
+    Use when the user names the `summarize` CLI (summarize.sh) or needs what
+    only that tool adds — streamed terminal summaries, pipe-friendly text
+    extraction, or podcast / audio / YouTube summaries that require
+    transcription. For an ordinary "summarize this link or file", use
+    content-summarizer. Triggers on: "summarize.sh", "summarize CLI", "用
+    summarize 指令", "summarize this podcast", "transcribe and summarize".
 version: "1.0.0"
 allowed-tools: Bash, Read
 user-invocable: true

@@ -1,7 +1,12 @@
 ---
 name: tutorial
 description: >
-    Use when generating tutorials, step-by-step guides, domain knowledge documents, onboarding materials, or learning resources for the workspace. Triggers on "create learning document", "generate tutorials", "學習文件", "學習指南".
+    Use when the user wants learning material for the workspace — tutorials,
+    step-by-step guides, domain knowledge explainers, or onboarding docs, saved
+    under docs/tutorials/. Not for the canonical README / AGENTS docs (use
+    project-docs). Triggers on: "create learning document", "generate
+    tutorials", "onboarding guide", "explain this domain", "學習文件", "學習指南",
+    "教學文件".
 version: "1.2.0"
 allowed-tools: Read, Write, Glob
 user-invocable: true

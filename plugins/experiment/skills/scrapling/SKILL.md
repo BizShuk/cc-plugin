@@ -1,11 +1,13 @@
 ---
 name: scrapling
 description: >
-    Scrape web pages using Scrapling with anti-bot bypass (like Cloudflare Turnstile),
-    stealth headless browsing, spiders framework, adaptive scraping, and JavaScript
-    rendering. Use when asked to scrape, crawl, or extract data from websites;
-    web_fetch fails; the site has anti-bot protections; write Python code to
-    scrape/crawl; or write spiders.
+    Use when scraping, crawling, or extracting data from websites and plain
+    fetching is not enough — WebFetch or curl gets blocked, the site has
+    anti-bot protection (e.g. Cloudflare Turnstile), pages need JavaScript
+    rendering or stealth headless browsing — or when the user wants Python
+    scraping code or a Scrapling spider. Triggers on: "scrape this site",
+    "crawl", "extract data from website", "bypass Cloudflare", "anti-bot",
+    "spider", "scrapling", "爬蟲", "爬網站".
 version: "0.4.8"
 license: Complete terms in LICENSE.txt
 metadata:

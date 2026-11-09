@@ -1,16 +1,13 @@
 ---
 name: review-target
 description: >
-    Use when the user shares content about themselves, a social account, a
-    trip, a sales pipeline, or a business and asks what to grow and how. Maps
-    the content to growth categories (social media, life, travel, sales,
-    business) and their sub-categories, picks the KPI (target attribute) to
-    grow in each, and breaks every KPI into concrete, tool-scoped actions —
-    e.g. Instagram Reel / Story / carousel post, a pull-up progression.
-    Triggers on: "how do I grow", "growth strategy", "what should I focus on",
-    "set my KPI", "grow my Instagram", "get more followers", "get fitter",
-    "improve my sales", "grow my business", "成長目標", "成長策略",
-    "要怎麼成長", "該專注什麼", "漲粉", "提升業績", "review-target".
+    Use when the user shares content about themselves, a social account, a trip,
+    a sales pipeline, or a business and asks what to grow and how — picks the
+    KPI to grow in each area and breaks every KPI into concrete, tool-scoped
+    actions. Not for reviewing code or documents. Triggers on: "how do I grow",
+    "growth strategy", "what should I focus on to grow", "set my KPI", "grow my
+    Instagram", "get more followers", "get fitter", "improve my sales", "grow my
+    business", "成長目標", "成長策略", "要怎麼成長", "該專注什麼", "漲粉", "提升業績", "review-target".
 version: "1.0.0"
 allowed-tools: Read, Glob, Grep, WebFetch, AskUserQuestion
 user-invocable: true

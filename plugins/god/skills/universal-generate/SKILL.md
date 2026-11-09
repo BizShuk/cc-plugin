@@ -1,12 +1,11 @@
 ---
 name: universal-generate
 description: >
-  Use only when no concrete skill covers the artifact being produced and a
-  target-agnostic creation procedure is needed — an unfamiliar artifact
-  type, or a requirement too vague to pick a specific skill. Do not use
-  when a language-, format-, or domain-specific skill already applies.
-  Triggers on: "target-agnostic 生成程序", "沒有現成範例可循", "不知道該用
-  哪個 skill 來做這個產物".
+    Use only when no concrete skill covers the artifact being produced and a
+    target-agnostic creation procedure is needed — an unfamiliar artifact type,
+    or a requirement too vague to pick a specific skill. Do not use when a
+    language-, format-, or domain-specific skill already applies. Triggers on:
+    "no existing template for this", "沒有現成範例可循", "不知道該用哪個 skill 來做這個產物".
 version: "2.0.0"
 metadata:
   type: pattern

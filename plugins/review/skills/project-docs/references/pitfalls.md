@@ -25,7 +25,7 @@
 | ---- | ---- |
 | Workspace is empty | 寫最小 stub，註明「空專案 (Empty project)」 |
 | Cannot detect language/framework | 在對應章節註明「未偵測到 (Not detected)」 |
-| 既有 README/CLAUDE 有價值內容 | 合併 — 經 Phase 2 驗證後保留有效章節，只更新漂移部分 |
+| 既有 README/AGENTS 有價值內容 | 合併 — 經 Phase 2 驗證後保留有效章節，只更新漂移部分 |
 | 太多檔案無法全掃 | 聚焦頂層 + entry points，註明「僅掃描部分檔案 (Partial scan)」 |
 | 找不到明確狀態機 | 改用 flowchart 描述業務流程並註明 |
 | 業務邊界不明 | 依目錄/模組分組並註明「邊界不明確」 |

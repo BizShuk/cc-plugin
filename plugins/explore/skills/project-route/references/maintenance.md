@@ -29,7 +29,7 @@ python3 -c "import json;d=json.load(open('$HOME/projects/.project_index/projects
 ## Categories
 
 A top-level directory becomes a category automatically when it has no
-`README.md` / `CLAUDE.md` of its own and holds 2+ project-like children. A
+`README.md` / `AGENTS.md` of its own and holds 2+ project-like children. A
 container that does carry its own umbrella docs (for example `game/`,
 `collections/`) is not auto-detected and must be listed by hand in the index's
 `categories` array — otherwise its children are indexed as subprojects rather

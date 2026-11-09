@@ -1,14 +1,19 @@
 #!/bin/bash
-# setup-links.sh — Create symbolic links for multi-agent project setup
+# setup-links.sh — Converge agent entry files for a project
 #
 # Usage: ./setup-links.sh [workspace_root]
 #   workspace_root: path to the project root (default: current directory)
 #
-# Real sources are agent-agnostic; Claude-specific names are symlinks:
-#   CLAUDE.md     -> AGENTS.md
-#   .geminiignore -> .gitignore
+# Target layout:
+#   AGENTS.md     real file, the only technical-context entry (Claude reads it directly)
+#   CLAUDE.md     must not exist
+#   .geminiignore -> .gitignore (symlink)
 #
-# Legacy layouts (CLAUDE.md as the real entry) are inverted in place.
+# Legacy layouts are converged in place:
+#   AGENTS.md -> CLAUDE.md (symlink)  → AGENTS.md becomes a real file, CLAUDE.md removed
+#   CLAUDE.md -> AGENTS.md (symlink)  → CLAUDE.md removed
+#   CLAUDE.md real, AGENTS.md absent  → CLAUDE.md renamed to AGENTS.md
+#   both real with different content  → WARN and skip (merge by hand)
 # Idempotent: re-running on a converged repo changes nothing.
 
 set -euo pipefail
@@ -17,29 +22,53 @@ WORKSPACE="${1:-.}"
 cd "$WORKSPACE"
 
 # ── helpers ──────────────────────────────────────────────────────────
-# Make $real the real file and $link a symlink to it.
-converge_file() {
-    local real="$1"   # e.g. AGENTS.md
-    local link="$2"   # e.g. CLAUDE.md
+# Replace a symlink with a real copy of what it points to.
+materialize() {
+    local file="$1"
+    if [ ! -L "$file" ]; then
+        return 0
+    fi
+    if [ ! -e "$file" ]; then
+        rm "$file"
+        echo "🗑  $file removed (dangling symlink)"
+        return 0
+    fi
+    local tmp
+    tmp="$(mktemp "$file.XXXXXX")"
+    cat "$file" > "$tmp"
+    chmod 644 "$tmp"
+    rm "$file"
+    mv "$tmp" "$file"
+    echo "📄 $file materialized (symlink -> real file)"
+}
 
-    # Legacy: link is the real file, real is a symlink back to it (or absent).
-    if [ -f "$link" ] && [ ! -L "$link" ]; then
-        if [ -L "$real" ] || [ ! -e "$real" ]; then
-            rm -f "$real"
-            mv "$link" "$real"
-            echo "🔁 $link -> $real (moved content into $real)"
-        else
-            echo "⚠️  WARN: both $real and $link are regular files, skipping."
-            return 0
-        fi
+converge_agents() {
+    materialize "AGENTS.md"
+
+    if [ ! -e "AGENTS.md" ] && [ -f "CLAUDE.md" ] && [ ! -L "CLAUDE.md" ]; then
+        mv "CLAUDE.md" "AGENTS.md"
+        echo "🔁 CLAUDE.md -> AGENTS.md (renamed)"
+        return 0
     fi
 
-    create_symlink "$real" "$link"
+    if [ -L "CLAUDE.md" ]; then
+        rm "CLAUDE.md"
+        echo "🗑  CLAUDE.md removed (was a symlink)"
+    elif [ -f "CLAUDE.md" ]; then
+        if [ -f "AGENTS.md" ] && cmp -s "CLAUDE.md" "AGENTS.md"; then
+            rm "CLAUDE.md"
+            echo "🗑  CLAUDE.md removed (identical to AGENTS.md)"
+        else
+            echo "⚠️  WARN: CLAUDE.md and AGENTS.md are both real files with different content, skipping."
+        fi
+    else
+        echo "⏭  CLAUDE.md absent (already converged)"
+    fi
 }
 
 create_symlink() {
-    local target="$1"   # existing file or dir (e.g. AGENTS.md)
-    local link="$2"     # symlink to create (e.g. CLAUDE.md)
+    local target="$1"   # existing file or dir (e.g. .gitignore)
+    local link="$2"     # symlink to create (e.g. .geminiignore)
 
     if [ -L "$link" ]; then
         if [ "$(readlink "$link")" = "$target" ]; then
@@ -64,7 +93,7 @@ create_symlink() {
 # ── main ─────────────────────────────────────────────────────────────
 echo "── setup-links: $(pwd) ──"
 
-converge_file "AGENTS.md" "CLAUDE.md"
+converge_agents
 create_symlink ".gitignore" ".geminiignore"
 
 echo "── done ──"

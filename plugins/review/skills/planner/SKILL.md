@@ -1,19 +1,15 @@
 ---
 name: planner
 description: >
-    Use when planning a feature before implementation, or reviewing an existing
-    codebase for structural or commercial defects. Covers system architecture
-    (placement, boundaries, interfaces, data flow, incremental landing steps),
-    code quality review (folder layout, dependency hygiene, structural
-    defects), business value review (friction, gaps, leverage, measurability),
-    and business value planning (asset inventory, RICE scoring, business model,
-    MVP validation).
-    Triggers on: "system design", "architecture plan", "reduce coupling",
-    "modularization", "review code", "folder structure", "dependency audit",
-    "unused packages", "business value", "business
-    improvement", "monetization", "hidden value", "MVP", "RICE",
-    "系統架構", "架構規劃", "商業價值", "業務規劃", "業務改善", "商業模式設計",
-    "planner".
+    Use when planning a feature's architecture before implementation (placement,
+    boundaries, interfaces, data flow, landing steps), reviewing a codebase's
+    structure (folder layout, coupling, dependency hygiene), or planning or
+    reviewing business value (friction, gaps, monetization, RICE, MVP). Not for
+    line-level code defects (use code-audit). Triggers on: "system design",
+    "architecture plan", "reduce coupling", "modularization", "folder
+    structure", "dependency audit", "unused packages", "business value",
+    "business improvement", "monetization", "hidden value", "MVP", "RICE",
+    "系統架構", "架構規劃", "商業價值", "業務規劃", "業務改善", "商業模式設計", "planner".
 version: "1.0.0"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true

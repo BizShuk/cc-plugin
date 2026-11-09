@@ -5,15 +5,17 @@
 
 ## 檔案佈局 (File Layout)
 
-`AGENTS.md` 是`跨代理 (agent-agnostic)` 的實體來源；`CLAUDE.md` 是指向它的 symlink，不另存內容。
+`AGENTS.md` 是`跨代理 (agent-agnostic)` 的唯一技術脈絡檔，必須是`實體檔`（不是 symlink）。
+Claude 直接讀取 `AGENTS.md`，因此專案`不得`再有 `CLAUDE.md`。
 
-| 實體 (Real) | Symlink | 內容 |
-| ----------- | ------- | ---- |
-| `AGENTS.md` | `CLAUDE.md -> AGENTS.md` | 技術脈絡（本模板） |
+| 檔案 | 型態 | 內容 |
+| ---- | ---- | ---- |
+| `AGENTS.md` | 實體檔 | 技術脈絡（本模板） |
+| `CLAUDE.md` | 不存在 | — |
 
-- 撰寫、稽核、編輯一律對 `AGENTS.md`；`CLAUDE.md` 只是入口。
-- 舊佈局（`CLAUDE.md` 為實體檔、`AGENTS.md -> CLAUDE.md`）
-  以 [setup-links.sh](../scripts/setup-links.sh) 反轉，不手動複製內容。
+- 撰寫、稽核、編輯一律對 `AGENTS.md`。
+- 舊佈局（`CLAUDE.md -> AGENTS.md`、`AGENTS.md -> CLAUDE.md`、或只有實體 `CLAUDE.md`）
+  以 [setup-links.sh](../scripts/setup-links.sh) 收斂，不手動複製內容。
 
 ## 模板 (Template)
 

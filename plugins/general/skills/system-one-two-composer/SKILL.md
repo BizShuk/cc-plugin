@@ -1,15 +1,13 @@
 ---
 name: system-one-two-composer
 description: >
-  Analyze a task, feature, or AI workflow and split it into Code / System One
-  (TypeSafe Jev, typed fast judgments) / System Two (general LLM, generation and
-  multi-step reasoning) / Human steps, then recommend how to compose them
-  (early-exit cascade, filter-then-reason, reason-then-verify, select-not-generate,
-  composite scoring, beam search, map-reduce). Use when designing or reviewing an
-  AI pipeline, deciding whether a step fits Jev or an LLM, cutting LLM cost or
-  latency, or when the user mentions System 1 / System 2, 快思慢想, Jev, TypeSafe,
-  拆解任務, 該用 Jev 還是 LLM, 任務分流, or 組合架構. For TypeSafe API/SDK details,
-  use the official typesafe-ai skill or https://docs.typesafe.ai/llms.txt.
+    Use when designing or reviewing an AI pipeline and deciding which steps
+    belong to deterministic code, a fast typed judgment (System One, TypeSafe
+    Jev), a general LLM (System Two), or a human — and how to compose them to
+    cut LLM cost or latency. For TypeSafe API/SDK details use the typesafe-ai
+    skill or https://docs.typesafe.ai/llms.txt. Triggers on: "System 1 / System
+    2", "Jev", "TypeSafe", "該用 Jev 還是 LLM", "reduce LLM cost", "快思慢想", "拆解任務",
+    "任務分流", "組合架構".
 ---
 
 # System One / System Two 組合設計 (Composer)

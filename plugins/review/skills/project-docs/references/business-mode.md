@@ -1,7 +1,7 @@
 # business 模式 — 純業務分析
 
 輸入不是完整 workspace，或明確要求純業務分析時，
-跳過 `README.md` / `AGENTS.md` / symlinks，僅產出 `README.business.md`。
+跳過 `README.md` / `AGENTS.md` / entry files 收斂，僅產出 `README.business.md`。
 
 1. `Scope 界定` — folder/repo 用 Glob 鎖定 entry points；單一檔案直接讀取；
    純文字直接分析。

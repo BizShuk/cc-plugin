@@ -1,11 +1,12 @@
 ---
 name: markitdown
 description: >
-    Use when converting files or URLs to Markdown for LLM consumption. Handles
-    PDF, DOCX, PPTX, XLSX, HTML, CSV, JSON, XML, images, audio, YouTube,
-    EPUB, ZIP, and Outlook messages. Triggers on: "convert to markdown",
-    "extract text from", "read this PDF", "parse this document", or any
-    file-to-text conversion need.
+    Use when a file or URL must become Markdown text — producing a .md file,
+    feeding a document into a pipeline, or extracting text from formats the Read
+    tool cannot open (DOCX, PPTX, XLSX, EPUB, ZIP, Outlook .msg, audio, YouTube
+    transcripts). Not for summarizing (use content-summarizer). Triggers on:
+    "convert to markdown", "markitdown", "extract text from this docx", "parse
+    this document", "轉成 markdown".
 ---
 
 # MarkItDown

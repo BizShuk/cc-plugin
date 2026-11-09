@@ -1,7 +1,12 @@
 ---
 name: claude-plugin-metadata
 description: >
-    Use when authoring, initializing, or updating plugin.json and marketplace.json manifests for a Claude Code workspace plugin or individual skills. Triggers on: "create plugin", "update plugin", "plugin.json", "marketplace.json", "register skill".
+    Use when creating or editing a Claude Code plugin's
+    `.claude-plugin/plugin.json` or a repo's `.claude-plugin/marketplace.json` —
+    adding a plugin, registering skills or agents from a non-default path, or
+    filling name, version, author, and keywords. Triggers on: "create plugin",
+    "update plugin", "plugin.json", "marketplace.json", "register skill", "新增
+    plugin".
 version: "1.0.0"
 allowed-tools: Read, Write, Bash
 user-invocable: true

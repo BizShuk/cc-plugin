@@ -1,7 +1,13 @@
 ---
 name: auto-evolving
 description: >
-    Use when a workspace should autonomously discover one high-leverage improvement, design it, apply a safe coherent update, verify the result, and consolidate durable knowledge into the project's canonical files. Scan broadly across user, business, domain, data, architecture, code, testing, reliability, operations, performance, cost, security, privacy, documentation, developer experience, and future adaptability, but converge on one main flow. Triggers on: "auto-evolving", "evolve this workspace", "improve this project end to end", "think design update", "自主改善", "自我演化", "廣域改善".
+    Use when the user wants the workspace to improve itself autonomously, end to
+    end — find the single highest-leverage improvement in any dimension
+    (product, code, reliability, security, docs, developer experience, ...),
+    design it, apply it safely, verify it, and record durable knowledge in the
+    canonical docs. Not for a change the user has already scoped. Triggers on:
+    "auto-evolving", "evolve this workspace", "improve this project end to end",
+    "think design update", "自主改善", "自我演化", "廣域改善".
 version: "2.0.0"
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep
 user-invocable: true

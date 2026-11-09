@@ -1,12 +1,12 @@
 ---
 name: universal-consolidate
 description: >
-  Use when merging same-kind artifacts into one canonical version —
-  deduplicating skills, unifying duplicate docs or configs, resolving
-  conflicting designs, merging overlapping findings — or when two
-  incompatible abstractions must coexist. Triggers on: "merge",
-  "deduplicate", "unify", "canonical", "conflicting designs", "overlap",
-  "design conflict", "how to combine", "合併", "去重", "整併".
+    Use only when no concrete skill covers the merge — folding same-kind
+    artifacts (skills, docs, configs, designs, review findings) into one
+    canonical version, or reconciling two incompatible abstractions that must
+    coexist. Not for git merges or merging code branches. Triggers on:
+    "deduplicate", "unify", "canonical version", "conflicting designs", "how to
+    combine these", "合併", "去重", "整併".
 version: "2.0.0"
 metadata:
   type: pattern

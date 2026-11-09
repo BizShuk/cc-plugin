@@ -1,16 +1,14 @@
 ---
 name: project-route
 description: >
-    Use to route inbound content/files to the correct project under ~/projects/
-    and load that project's context. Given a receipt, a stock CSV, a log dump, a
-    note, or any artifact whose home project is unclear, this skill resolves it to
-    exactly one project via the tag index, then loads that project's README.md and
-    CLAUDE.md so the work follows the project's own conventions. Triggers on:
-    "which project does this go to", "route this file", "把這個歸到哪個專案",
-    "where should this live", "find the project for", or any cross-project
-    filing/dispatch decision. Other agents (e.g. hermes) should invoke this FIRST,
-    before moving or creating any file.
-version: "1.1.0"
+    Use when inbound content or a file (a receipt, a stock CSV, a log dump, a
+    note) has to be filed under ~/projects/ and its home project is unclear —
+    resolves it to exactly one project and loads that project's README.md and
+    AGENTS.md before anything is moved or created. Other agents (e.g. hermes)
+    should invoke this first for any cross-project filing decision. Triggers on:
+    "which project does this go to", "route this file", "where should this
+    live", "find the project for", "把這個歸到哪個專案", "這個要放哪".
+version: "1.2.0"
 allowed-tools: Bash, Read
 metadata:
     type: reference
@@ -58,10 +56,10 @@ docs so downstream work obeys the project's conventions. This skill decides
     - Top-level: `generated_at` (ISO timestamp), `stale_after_days` (default 3),
       `projects_root`, `categories`, `projects`.
     - Per project: `path`, `category` (`null` when at root), `aliases`, `tags`,
-      `purpose`, `stack`, `subprojects`, `has_readme`, `has_claude`,
+      `purpose`, `stack`, `subprojects`, `has_readme`, `has_agents`,
       `is_category_root`.
     - Per subproject: `name`, `purpose` (extracted from its own `README.md`),
-      `has_readme`, `has_claude`.
+      `has_readme`, `has_agents`.
 - Router CLI: `~/projects/.project_index/router.py` — reads the same index.
 - `tags` is the routing signal (bilingual, lowercase). `tags` and `categories`
   are hand-curated and are preserved across `router.py rebuild`; the auto-scan
@@ -72,13 +70,13 @@ docs so downstream work obeys the project's conventions. This skill decides
 The router **auto-rebuilds** when the index's `generated_at` is older than
 `stale_after_days` (default 3 days). Every `search` / `list` / `show` / `cd` /
 `stack` / `category` call checks the timestamp first; if stale, it re-scans both
-levels of `~/projects/` (reading each project's `README.md` + `CLAUDE.md` AND
-every direct subfolder's `README.md` + `CLAUDE.md` to extract subproject
+levels of `~/projects/` (reading each project's `README.md` + `AGENTS.md` AND
+every direct subfolder's `README.md` + `AGENTS.md` to extract subproject
 purpose), then refreshes `projects.json` and `INDEX.md`. Pass
 `--no-auto-rebuild` to skip the check (use the stale index as-is).
 
 New categories are auto-detected: a top-level dir with no own `README.md` /
-`CLAUDE.md` and `2+` project-like children becomes a category. A container that
+`AGENTS.md` and `2+` project-like children becomes a category. A container that
 does have its own docs (like `game/`) must be listed by hand in `categories`.
 
 `Do not take the auto-rebuild on trust` — it only fires when the router is
@@ -107,7 +105,7 @@ present a stale match as if it were current.
     ```
 
     The CLI scores `name` (10) > `tags` (8) > `purpose` (5) > `stack` (3) >
-    `subprojects` (2) > `category` (2) > README/CLAUDE full-text (1). The top hit
+    `subprojects` (2) > `category` (2) > README/AGENTS full-text (1). The top hit
     is the candidate; results are labelled `<category>/<name>`. For a precise
     candidate, confirm its path:
 
@@ -131,13 +129,13 @@ present a stale match as if it were current.
 
     ```bash
     P=$(python3 ~/projects/.project_index/router.py cd <name>)
-    cat "$P/README.md" "$P/CLAUDE.md" "$P/docs/terminology.md" 2>/dev/null
+    cat "$P/README.md" "$P/AGENTS.md" "$P/docs/terminology.md" 2>/dev/null
     ```
 
     `docs/terminology.md` is the project's term glossary — follow its wording
     when naming files or writing anything into the project.
 
-    Honour that project's CLAUDE.md (naming, folder layout, hard rules). For
+    Honour that project's AGENTS.md (naming, folder layout, hard rules). For
     `collections` — a top-level project, not a category, so it is a valid
     destination — that means the `receipts/invoices/agreements` layout and the
     `<source>_<date>_<target>_<amount>.<ext>` naming convention.
@@ -159,11 +157,11 @@ these commands — only a wrong index does.
 - Never route to a `category` directory — it is a container, not a destination.
 - Prefer the physical path over a symlinked alias (`ai/cc-plugin` → `cc-plugin`).
 - Never move/rename/delete without explicit confirmation.
-- The index is the routing signal; per-project README.md + CLAUDE.md +
+- The index is the routing signal; per-project README.md + AGENTS.md +
   docs/terminology.md are the authority on how to file inside the chosen project.
 
 ## Related
 
 - `[[project-docs]]` establishes/audits the target project's README.md,
-  CLAUDE.md, and docs/terminology.md — run it after routing when the project's
+  AGENTS.md, and docs/terminology.md — run it after routing when the project's
   canonical docs are missing.

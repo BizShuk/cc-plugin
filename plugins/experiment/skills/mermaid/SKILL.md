@@ -1,13 +1,13 @@
 ---
 name: mermaid
 description: >
-    Use when creating, choosing, or writing the syntax for any Mermaid.js diagram —
-    flowcharts, sequence / state / class / ER diagrams, gantt, kanban, mindmap,
-    timeline, journey, requirement, C4, packet, block, architecture, treemap,
-    treeView, pie / xy / quadrant / sankey / radar / venn charts, git graphs and
-    ishikawa. Triggers on: "draw a diagram", "mermaid", "flowchart", "sequence
-    diagram", "visualize this architecture", "which chart type should I use",
-    "render a graph", "畫一張圖", "用 mermaid".
+    Use when the output should be a Mermaid.js diagram — writing or fixing
+    Mermaid syntax, or choosing which Mermaid diagram type fits the data
+    (flowchart, sequence, state, class, ER, gantt, C4, architecture, mindmap,
+    timeline, sankey, git graph, and more). Not for raster images, canvas art,
+    or hand-drawn SVG. Triggers on: "mermaid", "draw a diagram", "flowchart",
+    "sequence diagram", "ER diagram", "visualize this architecture", "which
+    chart type should I use", "畫一張圖", "用 mermaid".
 version: "1.0.0"
 allowed-tools: Read, Glob, Bash
 disable-model-invocation: false

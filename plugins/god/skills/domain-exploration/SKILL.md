@@ -1,10 +1,12 @@
 ---
 name: domain-exploration
 description: >
-  Use when entering an unfamiliar domain, technology, or problem space and
-  needing a structured approach to reduce uncertainty. Triggers on: "new
-  territory", "unknown domain", "feasibility study", "PoC", "spike",
-  "exploration", "where do I even start".
+    Use when entering an unfamiliar domain, technology, or problem space with
+    high uncertainty and no obvious first step — scoping a feasibility study,
+    PoC, or spike before committing to a design. Not for searching an existing
+    codebase (use Explore) or building a knowledge base (use ultra-explore).
+    Triggers on: "new territory", "unknown domain", "feasibility study", "PoC",
+    "spike", "where do I even start", "完全不熟的領域".
 version: "1.0.0"
 metadata:
   type: pattern

@@ -1,11 +1,12 @@
 ---
 name: session-retro
 description: >
-    Use when the user asks for a retrospective, post-mortem, or 復盤 of the current AI
-    session — analyzing skills used, token cost per module, error rate and root causes,
-    trust/review-boundary gaps, then turning findings into SMART goals (optionally executed).
-    Triggers on "retro", "retrospective", "post-mortem", "復盤", "session 檢討",
-    "分析這個 session", "what can be done better".
+    Use when the user asks for a retrospective or 復盤 of the current AI session —
+    which skills and tokens were spent, which errors happened and why, where
+    review boundaries were missing — turned into SMART goals that can optionally
+    be executed. Not for a production incident post-mortem (use
+    incident-response). Triggers on: "retro", "retrospective", "session
+    post-mortem", "復盤", "session 檢討", "分析這個 session", "what can be done better".
 version: "1.0.0"
 allowed-tools: Read, Write, Bash, Glob, Grep
 user-invocable: true

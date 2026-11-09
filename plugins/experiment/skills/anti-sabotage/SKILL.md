@@ -1,10 +1,12 @@
 ---
 name: anti-sabotage
 description: >
-    Use when reviewing changes whose tests may conceal production-only behavior,
-    runtime condition branches, or cross-system state risks. Triggers on:
-    "environment parity", "dormant branch", "test rigging", "internal sabotage",
-    "測試造假", "內部破壞".
+    Use when reviewing a change whose passing tests might hide behavior that
+    only shows up in production — environment-gated branches, test fakes or
+    fixtures that diverge from real dependencies, dormant code paths, or state
+    shared across systems. Not a general static review (use code-audit).
+    Triggers on: "environment parity", "dormant branch", "test rigging", "tests
+    pass but prod breaks", "internal sabotage", "測試造假", "內部破壞".
 version: "1.0.0"
 allowed-tools: Read, Bash, Grep, Glob
 user-invocable: true

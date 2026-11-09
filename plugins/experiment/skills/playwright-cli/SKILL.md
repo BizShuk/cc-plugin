@@ -1,9 +1,13 @@
 ---
 name: playwright-cli
 description: >
-    Use when automating browser interactions, testing web pages, or working with
-    Playwright tests. Triggers on: "playwright-cli", "browser automation",
-    "test this web page", "record a browser flow".
+    Use when a task needs a scripted, headless browser driven through the
+    `playwright-cli` command — navigating, clicking, filling forms, snapshots,
+    screenshots, network routing — or when writing and running Playwright tests.
+    Not for acting inside the user's own signed-in Chrome (use
+    claude-in-chrome). Triggers on: "playwright-cli", "playwright", "browser
+    automation", "headless browser", "test this web page", "record a browser
+    flow".
 allowed-tools: Bash(playwright-cli:*) Bash(npx:*) Bash(npm:*)
 ---
 

@@ -1,12 +1,13 @@
 ---
 name: universal-evolve
 description: >
-  Use when iterating any artifact or system across versions — refactoring
-  cycles, deprecation and rebirth, continuous improvement loops, skill or
-  plugin restructuring, or deciding when to stop iterating. Triggers on:
-  "evolve", "iterate", "next version", "improve over time", "refactor
-  cycle", "deprecate and replace", "when to stop", "演化", "迭代",
-  "重構循環".
+    Use only when no concrete skill covers the iteration — planning how an
+    artifact or system changes across versions: refactor cycles,
+    deprecate-and-replace, skill or plugin restructuring, or deciding when to
+    stop iterating. Not for a one-off code refactor, nor for autonomously
+    improving a workspace (use auto-evolving). Triggers on: "next version",
+    "improve over time", "deprecate and replace", "when to stop iterating",
+    "演化", "迭代", "重構循環".
 version: "2.0.0"
 metadata:
   type: pattern

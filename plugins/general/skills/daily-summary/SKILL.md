@@ -1,12 +1,11 @@
 ---
 name: daily-summary
 description: >
-  Use when the user asks to summarize the day's work, generate a daily summary
-  / 工作日報, recap what was done across AI sessions and repos, or extract today's
-  TODOs into Apple Notes. Pulls from claude-mem, Claude sessions, Antigravity
-  sessions, Hermes sessions, and git log across ~/projects, then writes a note to
-  the iCloud "Daily" folder. Triggers on: "daily summary", "summarize my work
-  today", "工作日報", "what did I do today", "今天做了什麼".
+    Use when the user wants a recap of today's work across AI sessions
+    (claude-mem, Claude, Antigravity, Hermes) and git activity in ~/projects,
+    saved as a daily note in the Apple Notes iCloud "Daily" folder with today's
+    TODOs extracted. Triggers on: "daily summary", "summarize my work today",
+    "what did I do today", "工作日報", "今天做了什麼".
 version: "1.0.0"
 allowed-tools: Read, Bash, Write
 metadata:

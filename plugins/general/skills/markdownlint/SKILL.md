@@ -1,7 +1,11 @@
 ---
 name: markdownlint
 description: >
-    Use when generating or modifying Markdown files under plugins/experiment/skills directory. Triggers on Markdown file creation or modification in the experiment skills workspace.
+    Use when creating or editing any Markdown file under
+    plugins/experiment/skills/ in this repo, to check it against the repo's
+    markdownlint rule subset before finishing. Triggers on: writing a SKILL.md
+    or reference .md under plugins/experiment/skills/, "markdownlint", "lint
+    this markdown".
 version: "1.0.0"
 user-invocable: false
 disable-model-invocation: false

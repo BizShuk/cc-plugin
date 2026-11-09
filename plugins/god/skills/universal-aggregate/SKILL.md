@@ -1,12 +1,12 @@
 ---
 name: universal-aggregate
 description: >
-  Use when composing parts into a higher-order whole — building an index,
-  summary, matrix, dashboard, ontology, roll-up report, or assembling
-  components into a system view — or when checking completeness of a
-  collection. Triggers on: "aggregate", "roll up", "index", "summary of
-  all", "big picture", "matrix", "ontology", "completeness", "彙總",
-  "總覽", "拼圖".
+    Use only when no concrete skill covers the roll-up — composing many parts
+    into one higher-order view (index, matrix, ontology, roll-up report, system
+    map) or checking a collection for completeness on an unfamiliar artifact
+    type. Not for summarizing a single source (use content-summarizer) or
+    building a dashboard UI. Triggers on: "roll up", "big picture", "summary of
+    all", "completeness check", "彙總", "總覽", "拼圖".
 version: "2.0.0"
 metadata:
   type: pattern

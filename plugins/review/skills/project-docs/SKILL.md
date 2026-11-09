@@ -1,21 +1,17 @@
 ---
 name: project-docs
 description: >
-    Owns a project's canonical docs end to end — README.md (business domains),
-    AGENTS.md (technical context, CLAUDE.md symlinks to it), docs/terminology.md (glossary),
-    README.business.md (business value) — plus their content ownership and
-    their history. Six modes: audit (verify every doc claim against the repo,
-    reported as `doc says X → actually Y`), refresh, bootstrap, business,
-    consolidate (fold `docs/specs/` and `plans/` older than two weeks into one
-    summary table, move hand-written change logs into `docs/CHANGELOG.md`), and
-    scope (strip from README/CLAUDE whatever another file owns, demote CLI and
-    dev-setup detail to `docs/cli.md` / `docs/development.md`). Read-only by
-    default. Triggers on: "explore project", "summarize codebase", "doc sync",
-    "docs out of date", "does the README match", "extract business",
-    "consolidate docs", "merge specs", "clean up plans", "scope cleanup",
-    "文件同步", "更新文件了嗎", "術語表", "terminology", "業務萃取", "上下游分析",
-    "文件整併", "合併規格", "整理 plans", "範疇清理", "文件瘦身", "下放 docs".
-version: "6.0.0"
+    Use when a project's canonical docs (README.md, AGENTS.md,
+    docs/terminology.md, README.business.md) must be checked against the repo,
+    bootstrapped, refreshed, consolidated, or trimmed to the scope each file
+    owns — including folding old docs/specs/ and plans/ into one summary and
+    demoting CLI or dev-setup detail into docs/. Read-only (audit) by default.
+    Triggers on: "explore project", "summarize codebase", "doc sync", "docs out
+    of date", "does the README match", "extract business", "consolidate docs",
+    "merge specs", "clean up plans", "scope cleanup", "文件同步", "更新文件了嗎", "術語表",
+    "terminology", "業務萃取", "上下游分析", "文件整併", "合併規格", "整理 plans", "範疇清理", "文件瘦身",
+    "下放 docs".
+version: "7.0.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true
 disable-model-invocation: false
@@ -48,7 +44,7 @@ metadata:
 | `AGENTS.md` | `HOW` | 專案結構、技術棧、模組對應、建置/部署、慣例 | [agents.md](references/agents.md) |
 | `docs/terminology.md` | `WHICH` | 術語單一定義來源：領域名詞、縮寫、狀態值 | [docs-terminology.md](references/docs-terminology.md) |
 | `README.business.md` | `WHY` | 業務價值：上下游、約束、風險、核心/非核心 | [readme-business.md](references/readme-business.md) |
-| `CLAUDE.md` | — | symlink → `AGENTS.md`（必備） | [agents.md](references/agents.md) |
+| `CLAUDE.md` | — | `不得存在`；Claude 直接讀 `AGENTS.md`，舊佈局由 setup-links 收斂 | [agents.md](references/agents.md) |
 | `README.todo` | — | 待辦事項（必備，改善建議的唯一去處） | [readme-todo.md](references/readme-todo.md) |
 | `docs/memory/` | — | 歷史決策（必備，僅回報缺漏） | — |
 | `docs/tutorials/` | — | 領域知識導覽（選備，交由 `[[tutorial]]`） | [docs-structure.md](references/docs-structure.md) |
@@ -85,7 +81,7 @@ metadata:
 | ---- | -------- | -------- |
 | `audit` | 「doc sync」「文件同步」「does the README match」 | 無 — 只輸出一致性報告 |
 | `refresh` | 「更新文件」「explore project」且文件已存在 | 僅改寫已證實不一致的段落 |
-| `bootstrap` | `README.md` 或 `AGENTS.md` 缺漏、為空、僅剩標題 | 四份文件全產出 + symlinks |
+| `bootstrap` | `README.md` 或 `AGENTS.md` 缺漏、為空、僅剩標題 | 四份文件全產出 + 收斂 entry files |
 | `business` | 「業務萃取」「extract business」「上下游分析」 | 僅 `README.business.md` |
 | `consolidate` | 「文件整併」「整理 plans」「合併規格」 | 壓縮 `docs/specs/`／`plans/`，搬變更紀錄，`git rm` 來源 |
 | `scope` | 「範疇清理」「文件瘦身」「這兩份文件不該有什麼」 | 刪除越界內容、下放高變動細節 |
@@ -134,11 +130,13 @@ metadata:
 3. `AGENTS.md` — 模組對應與 README 領域對齊
 4. `README.business.md` — 引用已確立的領域與術語
 5. `README.todo` — 分析出的改善建議寫成待辦項，`不`寫進 `README.md`
-6. `Symbolic links` — 執行 [setup-links.sh](scripts/setup-links.sh)：`CLAUDE.md` → `AGENTS.md`、
-   `.geminiignore` → `.gitignore`；舊佈局（`CLAUDE.md` 為實體）就地反轉
+6. `Entry files` — 執行 [setup-links.sh](scripts/setup-links.sh)：`AGENTS.md` 收斂為實體檔、
+   移除 `CLAUDE.md`（symlink 或內容相同的複本）、建立 `.geminiignore` → `.gitignore`；
+   舊佈局（`CLAUDE.md` 為實體、`AGENTS.md -> CLAUDE.md`）就地改名為 `AGENTS.md`
 
 各文件依 [references/](references/) 對應樣板產出。
-連結已正確時跳過；兩邊皆為實體且無法安全反轉時 log `WARN` 並跳過。
+已收斂時跳過；`CLAUDE.md` 與 `AGENTS.md` 皆為實體且內容不同時 log `WARN` 並跳過，
+交由使用者手動合併後再刪 `CLAUDE.md`。
 
 #### Phase 4 — 報告
 
@@ -151,10 +149,11 @@ AGENTS.md: <line count> 行, <N> 個核心模組
 docs/terminology.md: <N> 筆術語, <N> 個狀態值, <N> 筆缺出處
 README.business.md: <line count> 行, <N> 個業務約束, <N> 項風險
 
-統一介面缺件 (Missing): <AGENTS.md | CLAUDE.md | README.todo | docs/memory/ | 無>
+統一介面缺件 (Missing): <AGENTS.md | README.todo | docs/memory/ | 無>
 
-Symlinks:
-- CLAUDE.md -> AGENTS.md ✅ (created | moved | already exists | skipped)
+Entry files:
+- AGENTS.md 實體檔 ✅ (materialized | renamed from CLAUDE.md | already real)
+- CLAUDE.md ✅ (removed | absent | ⚠️ skipped: 內容不同)
 - .geminiignore -> .gitignore ✅ (created | already exists | skipped)
 
 業務領域摘要:
@@ -162,7 +161,7 @@ Symlinks:
 - <Domain 2>: <1-sentence summary>
 ```
 
-`audit` 模式省略行數與 symlink 區塊，只輸出漂移清單。
+`audit` 模式省略行數與 entry files 區塊，只輸出漂移清單。
 
 ---
 

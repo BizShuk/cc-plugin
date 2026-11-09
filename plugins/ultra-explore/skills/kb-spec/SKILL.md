@@ -1,6 +1,8 @@
 ---
 name: kb-spec
-description: Reference spec read by other kb-* skills; not directly invocable.
+description: >
+    Use when another kb-* skill needs the shared knowledge base spec (layout,
+    naming, truth tiers, fingerprint dedup); not invoked directly.
 version: "1.1.0"
 user-invocable: false
 disable-model-invocation: true
