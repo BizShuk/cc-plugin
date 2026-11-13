@@ -118,7 +118,7 @@
   "autoMemoryDirectory": "~/memory",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
-  "theme": "dark-ansi",
+  "theme": "auto",
   "verbose": false,
   "preferredNotifChannel": "auto",
   "autoCompactEnabled": true,

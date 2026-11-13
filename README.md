@@ -19,12 +19,12 @@
 
 ### 環境初始化與配置同步 (Environment Initialization & Config Sync)
 
-透過 `scripts/run.sh`（macOS/Unix）將本庫的設定檔與範本軟連結至使用者的家目錄資料夾（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes` 等），同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。切換供應商的方式是把 `~/.claude/settings.json` 的連結目標改指向對應的 `config/<provider>.json`。
+透過 `scripts/run.sh`（macOS/Unix）將本庫的設定檔與範本軟連結至使用者的家目錄資料夾（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes` 等），同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。切換供應商的方式是把 `~/.claude/settings.json` 的連結目標改指向對應的 `config/claude.<provider>.json`。
 
 `領域流程 (Domain Flow):`
 
 1. 執行 `scripts/run.sh` → 建立家目錄結構
-2. 軟連結全域設定檔（`CLAUDE.global.md`、`settings.json`）→ 至 Claude Code、Gemini CLI、Codex；
+2. 軟連結全域設定檔（`CLAUDE.global.md`、`claude.json`）→ 至 Claude Code、Gemini CLI、Codex；
    Hermes 不在此流程內, 須另外明確執行 `pnpm run hermes:setup`（見 [`pkg/hermes/`](pkg/hermes/README.md)）
 3. 同步外部工具設定並建立調試用反向連結（同步範圍見 [`docs/development.md`](docs/development.md)）
 

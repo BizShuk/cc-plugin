@@ -57,13 +57,14 @@ mkdir -p \
 # (~/.claude/CLAUDE.md, ~/.gemini/GEMINI.md, ~/.codex/AGENTS.md, ~/.hermes/AGENTS.md).
 # Skills are likewise NOT linked here -- `skills add` owns ~/.agents/skills.
 
-backup_and_link "$REPO_ROOT/config/settings.json" "$HOME/.claude/settings.json"
-backup_and_link "$REPO_ROOT/config/keybindings.json" "$HOME/.claude/keybindings.json"
+backup_and_link "$REPO_ROOT/config/claude.json" "$HOME/.claude/settings.json"
+backup_and_link "$REPO_ROOT/config/claude.keybinding.json" "$HOME/.claude/keybindings.json"
 backup_and_link "$REPO_ROOT/config/output-styles" "$HOME/.claude/output-styles"
 backup_and_link "$REPO_ROOT/config/themes" "$HOME/.claude/themes"
 backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$REPO_ROOT/config/grok.toml" "$HOME/.grok/config.toml"
-backup_and_link "$REPO_ROOT/config/settings.agy.json" "$HOME/.gemini/antigravity-cli/settings.json"
+backup_and_link "$REPO_ROOT/config/antigravity-cli.json" "$HOME/.gemini/antigravity-cli/settings.json"
+backup_and_link "$REPO_ROOT/config/antigravity-cli.keybinding.json" "$HOME/.gemini/antigravity-cli/keybindings.json"
 
 # Hermes is NOT set up here -- run it explicitly: `pnpm run hermes:setup`
 # (install / upgrade / webui are likewise explicit `hermes:*` tasks).

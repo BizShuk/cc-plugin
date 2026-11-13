@@ -4,8 +4,8 @@ auto_update = true
 
 [models]
 default = "grok-4.7"
-web_search = "grok-4.7"
-default_reasoning_effort = "medium"
+web_search = "grok-4.6"
+default_reasoning_effort = "low"
 
 [ui]
 max_thoughts_width = 120
@@ -23,8 +23,6 @@ remember_tool_approvals = true
 simple_mode = true
 vim_mode = false
 show_timeline = true
-theme = "oscura-midnight"
-dashboard_preview = true
 
 [ui.notifications]
 method = "auto"
@@ -51,6 +49,9 @@ items = [
 [ui.status_line]
 type = "command"
 command = "~/.grok/statusline.sh"
+
+[ui.contextual_hints]
+undo = true
 
 [features]
 telemetry = false
@@ -100,9 +101,7 @@ allow = [
     "Bash(rm:*)",
     "Bash(git:*)",
     "Bash(cat:*)",
-    "Bash(git push:*)",
     "Bash(chmod +x:*)",
-    "Bash(ssh liva:*)",
     "Read(~/.gbrain/**)",
 ]
 deny = [
@@ -113,7 +112,10 @@ deny = [
     "Read(~/.grok/config.toml)",
     "Edit(**/.git)",
 ]
-ask = ["Read(.env*)"]
+ask = [
+    "Bash(git push:*)",
+    "Read(.env*)",
+]
 
 [subagents]
 enabled = true
@@ -123,9 +125,9 @@ explore = true
 plan = true
 
 [subagents.models]
-explore = "grok-4.7"
-plan = "grok-4.7"
-general-purpose = "grok-4.7"
+explore = "grok-4.6"
+plan = "grok-4.6"
+general-purpose = "grok-4.6"
 
 [tools]
 respect_gitignore = false
@@ -145,7 +147,7 @@ trace_upload = false
 
 [hints]
 project_picker_disabled = false
-new_session_worktree_mode = "ask"
+new_session_worktree_mode = "never"
 fork_worktree_mode = "ask"
 
 [compat.claude]

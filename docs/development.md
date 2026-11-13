@@ -44,7 +44,7 @@ go install
 - Hermes 例外：`~/.hermes` 的記憶檔、樣板與 `.env` key 由子專案 `pkg/hermes/scripts/run.sh`
   負責，根層 `run.sh` `不`叫用它，須明確執行 `pnpm run hermes:setup`；安裝上游 Hermes 另跑 `pnpm run hermes:install`（WebUI：`pnpm run hermes:install:webui`）。
 - 切換供應商：把 `~/.claude/settings.json` 的連結目標改指向對應的
-  `config/<provider>.json`。
+  `config/claude.<provider>.json`。
 - symlink 的兩類例外，一律不由 `run.sh` 連結：
   - `skill` 由 `skills add` 安裝至 `~/.agents/skills`
   - `全域規則 (config/CLAUDE.global.md)` 由 `skills install` 複製成實體檔至各

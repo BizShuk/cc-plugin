@@ -45,7 +45,7 @@
 | ---------- | ---- | ------- | ---------------------------- |
 | `brief.md` | 精簡 | 1–10 行 | 日常查詢、簡單任務、結論先行 |
 
-實際啟用的風格由 `config/settings.json` 的 `outputStyle` 指定，風格檔本體放在
+實際啟用的風格由 `config/claude.json` 的 `outputStyle` 指定，風格檔本體放在
 `config/output-styles/`。寫法與放置位置詳見 `output-styles/README.md`。
 
 ## 檔案結構

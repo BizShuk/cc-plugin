@@ -9,7 +9,7 @@ Claude Code 的 `outputStyle` 自訂風格寫法說明，附一份可直接複�
 | `brief.md` | 樣板 | 1–10 行 | 日常查詢、簡單任務、結論先行 |
 
 `單一樣板 (single template)`：本資料夾只示範格式，不收納實際啟用的風格。
-專案實際生效的風格放在 `config/output-styles/`，由 `config/settings.json`
+專案實際生效的風格放在 `config/output-styles/`，由 `config/claude.json`
 的 `outputStyle` 欄位指定。要新增風格，複製 `brief.md` 後改寫。
 
 ## 放置位置 — User vs Project
