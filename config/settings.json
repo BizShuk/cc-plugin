@@ -66,29 +66,34 @@
     "frontend-design@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
   },
-  "extraKnownMarketplaces": {},
+  "extraKnownMarketplaces": {
+    "threads-skills": {
+      "source": {
+        "source": "github",
+        "repo": "sergebulaev/threads-skills"
+      },
+      "autoUpdate": true
+    }
+  },
   "outputStyle": "Executive Summary",
   "feedbackDrafts": "quiet",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,
   "effortLevel": "low",
   "modelSettings": {
-    "claude-fable-5": {
-      "effortLevel": "high"
-    },
-    "claude-opus-5": {
-      "effortLevel": "high"
-    },
-    "claude-sonnet-5": {
+    "claude-opus-5-5": {
       "effortLevel": "low"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "low"
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "medium"
     },
     "claude-fable-5-1": {
       "effortLevel": "high"
     },
     "minimax-m3": {
-      "effortLevel": "high"
-    },
-    "claude-opus-5-5": {
       "effortLevel": "high"
     }
   },
