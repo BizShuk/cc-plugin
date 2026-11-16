@@ -28,7 +28,8 @@
       "Bash(git:*)",
       "Bash(cat:*)",
       "Bash(ssh liva:*)",
-      "Read(~/.gbrain/**)"
+      "Read(~/.gbrain/**)",
+      "Bash(inf deploy run:*)"
     ],
     "deny": [
       "Read(~/.bash_local)",
@@ -44,7 +45,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "opus",
+  "model": "fable",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -62,9 +63,8 @@
   },
   "enabledPlugins": {
     "claude-mem@thedotmack": true,
-    "gopls-lsp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true
+    "demo-mod@inline": false
   },
   "extraKnownMarketplaces": {
     "threads-skills": {
@@ -95,6 +95,9 @@
     },
     "minimax-m3": {
       "effortLevel": "high"
+    },
+    "claude-haiku-5-5": {
+      "effortLevel": "medium"
     }
   },
   "fastModePerSessionOptIn": true,
