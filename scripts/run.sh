@@ -70,25 +70,22 @@ backup_and_link "$REPO_ROOT/config/antigravity-cli.keybinding.json" "$HOME/.gemi
 # (install / upgrade / webui are likewise explicit `hermes:*` tasks).
 
 install_sample_if_missing \
-    "$REPO_ROOT/pkg/litellm/litellm_config.sample.yaml" \
-    "$HOME/.config/litellm/litellm_config.yaml"
-install_sample_if_missing \
     "$REPO_ROOT/plugins/experiment/skills/summarize-sh/config.sample.json" \
     "$HOME/.summarize/config.json"
 
 backup_and_link \
-    "$REPO_ROOT/pkg/ccstatusline/settings.json" \
+    "$REPO_ROOT/config/claude-statusline.json" \
     "$HOME/.config/ccstatusline/settings.json"
-chmod +x "$REPO_ROOT/pkg/ccstatusline/agy-statusline"
+chmod +x "$REPO_ROOT/config/agy-statusline"
 backup_and_link \
-    "$REPO_ROOT/pkg/ccstatusline/agy-statusline" \
+    "$REPO_ROOT/config/agy-statusline" \
     "$HOME/.local/bin/agy-statusline"
-chmod +x "$REPO_ROOT/pkg/ccstatusline/grok-statusline"
+chmod +x "$REPO_ROOT/config/grok-statusline"
 backup_and_link \
-    "$REPO_ROOT/pkg/ccstatusline/grok-statusline" \
+    "$REPO_ROOT/config/grok-statusline" \
     "$HOME/.grok/statusline.sh"
 backup_and_link \
-    "$REPO_ROOT/pkg/usage/tokscale/settings.json" \
+    "$REPO_ROOT/config/tokscale.json" \
     "$HOME/.config/tokscale/settings.json"
 
 for path in \
