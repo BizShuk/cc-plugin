@@ -63,7 +63,7 @@ date -v-14d +%F 2>/dev/null || date -d '14 days ago' +%F
 ```
 
 1. 目標必須是`專案根目錄`（有 `README.md` 或 `.git`），不是分類目錄。
-   不確定歸屬時先跑 `[[project-route]]`。
+   不確定歸屬時依 [project-index.md](project-index.md) 找專案。
 2. `未提交變更 (uncommitted changes)` 存在於 `docs/specs/`、`plans/`、`AGENTS.md`、
    `README.todo` 或 `docs/CHANGELOG.md` 時，停下來回報，請使用者先提交 —
    本模式會刪檔並就地改寫正典文件，git 是唯一的還原路徑。

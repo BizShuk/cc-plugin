@@ -12,7 +12,6 @@
 | -------------------- | ----------------------------- | ----------------------------- |
 | `content-summarizer` | workflow（底層 `markitdown`） | `./skills/content-summarizer` |
 | `markitdown` | `markitdown` Python CLI | `./skills/markitdown` |
-| `project-route` | 將任意檔案映射到所屬專案 | `./skills/project-route` |
 
 後續比較表中的 `firecrawl`、`playwright-cli`、`scrapling` 與 `summarize.sh` 是評估標的；對應候選 skill 位於 `experiment` 插件，未由 `explore` manifest 載入。
 

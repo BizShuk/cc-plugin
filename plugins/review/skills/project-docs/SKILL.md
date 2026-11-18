@@ -10,8 +10,9 @@ description: >
     of date", "does the README match", "extract business", "consolidate docs",
     "merge specs", "clean up plans", "scope cleanup", "文件同步", "更新文件了嗎", "術語表",
     "terminology", "業務萃取", "上下游分析", "文件整併", "合併規格", "整理 plans", "範疇清理", "文件瘦身",
-    "下放 docs".
-version: "7.0.0"
+    "下放 docs", "todo-review", "sort README.todo", "prioritize todo",
+    "待辦排序", "整理 README.todo".
+version: "7.1.0"
 allowed-tools: Read, Bash, Glob, Grep, Write, Edit
 user-invocable: true
 disable-model-invocation: false
@@ -56,7 +57,8 @@ metadata:
 | `.geminiignore` | — | symlink → `.gitignore`（選備） | — |
 
 `專案位址:` `~/projects/<project>/` 或 `~/projects/<category>/<project>/`。
-分類目錄`不是專案`，不跑 `bootstrap`。歸屬確認用 `[[project-route]]`。
+分類目錄`不是專案`，不跑 `bootstrap`。歸屬確認見 [project-index.md](references/project-index.md)。
+第一層分類簡介與找專案的步驟見 [project-index.md](references/project-index.md)。
 
 ---
 
@@ -85,9 +87,10 @@ metadata:
 | `business` | 「業務萃取」「extract business」「上下游分析」 | 僅 `README.business.md` |
 | `consolidate` | 「文件整併」「整理 plans」「合併規格」 | 壓縮 `docs/specs/`／`plans/`，搬變更紀錄，`git rm` 來源 |
 | `scope` | 「範疇清理」「文件瘦身」「這兩份文件不該有什麼」 | 刪除越界內容、下放高變動細節 |
+| `todo` | 「todo-review」「待辦排序」「整理 README.todo」 | 只改 `.todo` 檔：P0/P1/P2 分級、依 feature 分組、完成項移入 `## Archive`、已完成計畫 `git mv` 到 `docs/specs/` |
 
 `預設唯讀:` `audit` 是安全預設。其餘四個會寫檔的模式（`refresh`、`bootstrap`、
-`consolidate`、`scope`）必須由使用者明確要求或由文件缺漏事實觸發；
+`consolidate`、`scope`、`todo`）必須由使用者明確要求或由文件缺漏事實觸發；
 `consolidate` 與 `scope` 另外會刪除內容，刪除前一律先列清單。
 
 ### 同步流程
@@ -101,6 +104,7 @@ metadata:
 4. 輸入不是完整 workspace，或請求純業務分析 → `business`。
 5. 對象是`歷史文件的數量`（`docs/specs/`、`plans/`、變更紀錄章節）→ `consolidate`。
 6. 對象是`正典文件的內容歸屬`（該不該寫在這裡）→ `scope`。
+7. 對象是 `.todo` 檔的`排序與分級` → `todo`；目標副檔名不是 `.todo` 時停止。
 
 輸出判定結果：`Mode: audit（README.md 與 AGENTS.md 皆存在，未要求寫入）`。
 
@@ -196,6 +200,14 @@ Entry files:
 `先自動化再刪除`：S1 未完成前不得進入 S3 —— 否則斷言會出現無人把關的空窗期。
 各階段指令、規則、掃描樣板與常見錯誤見 [scope-cleanup.md](references/scope-cleanup.md)。
 
+### todo 模式 — 待辦排序
+
+只處理副檔名為 `.todo` 的檔案（慣例為 `README.todo`）。以業務、UX、系統三個視角
+給每筆未完成項 `P0/P1/P2`，依程式碼的 feature 目錄重新分組，非功能性工作集中到
+`## Architecture`，完成項附加到 `## Archive`（既有項不動），全部完成的計畫從
+`plans/` 移到 `docs/specs/`。只改 working tree，不 commit。評分規則、分組判準與
+行格式契約見 [todo-review.md](references/todo-review.md)。
+
 ---
 
 ## 設計哲學 (Design Philosophy)
@@ -206,7 +218,7 @@ handler 為單位。
 
 `專案位址:` 目標 repo 可能位於 `~/projects/<project>/`
 或 `~/projects/<category>/<project>/`。分類目錄`本身不是專案`，
-不要對它跑 `bootstrap`。要確認歸屬，先用 `[[project-route]]`。
+不要對它跑 `bootstrap`。要確認歸屬，依 [project-index.md](references/project-index.md) 的找專案步驟。
 
 ---
 
@@ -228,7 +240,6 @@ handler 為單位。
 
 ## Related
 
-- `[[project-route]]` 先解析路徑歸屬，再進入本技能
 - `[[planner]]` 當真實目錄樹本身有問題、或程式碼對程式碼互相矛盾，而非文件寫錯；
   術語衝突則以 `docs/terminology.md` 為裁決依據
 - `[[tutorial]]` 產出 `docs/tutorials/` 學習導向文件；其術語以 `docs/terminology.md` 為準

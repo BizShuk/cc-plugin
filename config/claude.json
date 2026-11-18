@@ -45,7 +45,7 @@
     "defaultMode": "auto",
     "additionalDirectories": []
   },
-  "model": "fable",
+  "model": "opus",
   "worktree": {},
   "enableWorkflows": true,
   "defaultShell": "bash",
@@ -88,7 +88,7 @@
       "effortLevel": "low"
     },
     "claude-fable-5-2": {
-      "effortLevel": "medium"
+      "effortLevel": "low"
     },
     "claude-fable-5-1": {
       "effortLevel": "high"

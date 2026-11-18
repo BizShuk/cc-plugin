@@ -19,3 +19,4 @@
 - 每筆待辦具體可執行，說明理由；依主題分組在 `## <feature>` 之下
 - 完成的項目勾選為 `- [x]` 並移入 `## Archive`，由 `consolidate` 模式搬進
   `docs/CHANGELOG.md`；`## Archive` 標題一律保留
+- 排序、`P0/P1/P2` 分級與重新分組交由 `todo` 模式，規則見 [todo-review.md](todo-review.md)
