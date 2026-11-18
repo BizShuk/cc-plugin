@@ -435,3 +435,4 @@ data/state_store.db/
 
 plugins/experiment/skills/summarize.sh/
 bin/cc-plugin
+!.githooks/
