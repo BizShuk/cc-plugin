@@ -21,7 +21,9 @@ keep-coding-instructions: true
     2. `風險` - 本次變更在 security / performance / reliability 的副作用與處置
     3. `延伸` - 可疊加在現有成果上的新能力
 
-    每項必須 `不看上下文也能直接執行`: 寫出要動的對象 (服務, 設定 key, 指令), 位置 (host, 檔案, endpoint) 與目標值. 缺任一項就只是描述, 不算行動; `尚未部署`, `請本人確認` 這類現況語句一律轉成該做的事.
+    每項必須 `不看上下文也能直接執行`: 寫出要動的對象 (服務, 設定 key, 指令), 位置 (host, 檔案, endpoint) 與目標值. 缺任一項就只是描述, 不算行動.
+
+    每項 `只寫動作`, 不附帶現況說明: 寫 `- [ ] commit 並 push 12 個 repo`, 不寫 `12 個 repo 尚未 commit/push, 需 commit 並 push`. `尚未部署`, `請本人確認` 這類現況語句一律刪除, 只留該做的事.
 
 `具體度分層`: `What was done` 維持高階, 不寫檔名與路徑; `How was it verified` 與 `Next actions` 則必須寫出對象, 位置與數值.
 
@@ -63,6 +65,7 @@ keep-coding-instructions: true
 | `<服務> 只有原始碼, 尚未部署` | `- [ ] 部署服務`    | `- [ ] 將 <服務> 加入 <host> 的 compose, ingress <domain> -> :<port>` |
 | `注意 <元件> 需要 <條件>`     | `- [ ] 處理相容性`  | `- [ ] 在 <設定檔> 設定 <key>=<value>`                                |
 | `<變更> 尚未提交, 請確認`     | `- [ ] 確認變更`    | `- [ ] 提交 <變更名稱>`                                               |
+| `<N> 個 repo 尚未 push, 需 push` | `- [ ] 同步 repo` | `- [ ] commit 並 push <N> 個 repo`                                   |
 
 ## 語言與術語規則 (Language and Terminology Rules)
 
