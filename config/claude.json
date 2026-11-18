@@ -82,10 +82,10 @@
   "effortLevel": "low",
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "medium"
+      "effortLevel": "low"
     },
     "claude-sonnet-5-5": {
-      "effortLevel": "low"
+      "effortLevel": "medium"
     },
     "claude-fable-5-2": {
       "effortLevel": "low"

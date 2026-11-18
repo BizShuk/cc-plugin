@@ -28,7 +28,7 @@
 | 業務領域 (Domain) | 套件/模組 (Package/Module)                                       | 進入點 (Entry Point)                                            |
 | ----------------- | ---------------------------------------------------------------- | --------------------------------------------------------------- |
 | 資料匯出          | `cmd/export/`                                                    | `export.ExportCmd`, `export.ClaudeMemCmd`                       |
-| Topology 圖譜     | `cmd/topology/`, `pkg/topology/`                                 | `topology.TopologyCmd`, `LoadTopology()`                        |
+| Topology 圖譜     | `cmd/topology/`                                                  | `topology.TopologyCmd`, `LoadTopology()`                        |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                              | `NewStateStore()`, `GetCursorPosition()`, `SetCursorPosition()` |
 | 環境初始化        | `scripts/run.sh`, `config/`                                      | `config.Init()`                                                 |
 | Hermes 部署與設定 | `pkg/hermes/`（子專案，自帶統一介面；任務併入根層 `package.json`） | `pnpm run hermes:install` / `hermes:install:webui` / `hermes:setup`（皆須明確執行，不隨 `run:setup`） |
