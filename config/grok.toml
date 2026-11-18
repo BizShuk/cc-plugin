@@ -5,7 +5,7 @@ auto_update = true
 [models]
 default = "grok-4.7"
 web_search = "grok-4.6"
-default_reasoning_effort = "low"
+default_reasoning_effort = "medium"
 
 [ui]
 max_thoughts_width = 120
