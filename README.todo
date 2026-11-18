@@ -6,7 +6,7 @@
 ## Archive
 
 已整併的設計文件統一入口：
-[`docs/specs/2026-07-22-Summary.md`](docs/specs/2026-07-22-Summary.md)（原始檔名清單見該檔「來源檔案」）
+[`docs/specs/2026-07-22-summary.md`](docs/specs/2026-07-22-summary.md)（原始檔名清單見該檔「來源檔案」）
 
 - [x] Viper 預設值單一來源（2026-07-02）
 - [x] 結構化日誌 `log/slog`（2026-07-02）

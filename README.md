@@ -62,4 +62,4 @@ cc-plugin topology verify              # Topology 圖譜驗證
 完整 CLI 參考（含 flags、增量／全量模式）見 [`docs/cli.md`](docs/cli.md)。
 
 待辦與改善項目見 [`README.todo`](README.todo)；已淘汰功能見
-[`docs/specs/2026-07-22-Summary.md`](docs/specs/2026-07-22-Summary.md) 的「已淘汰」章節。
+[`docs/specs/2026-07-22-summary.md`](docs/specs/2026-07-22-summary.md) 的「已淘汰」章節。

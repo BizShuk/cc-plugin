@@ -258,7 +258,7 @@ git rm docs/specs/2026-05-14-feature-agent-design.md ...   # 逐檔列出，不�
 
 門檻 (Cutoff): <today - 14d>，門檻內 <N> 份文件未動
 
-docs/specs/: <N> 份 → 2026-07-22-Summary.md（<M> 列，<K> 淘汰，<J> 待確認）
+docs/specs/: <N> 份 → 2026-07-22-summary.md（<M> 列，<K> 淘汰，<J> 待確認）
 plans/:      <N> 份 → 2026-07-22-Refresh.md（<M> 列，<K> 淘汰）
 
 變更紀錄 (Changelog) → docs/CHANGELOG.md（<新建 | 合併>）:
