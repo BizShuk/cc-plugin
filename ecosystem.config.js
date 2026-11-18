@@ -1,23 +1,17 @@
 module.exports = {
     apps: [
-        // Ollama
+        // Local Ollama LLM server (`ollama serve`), registered paused.
         {
-            name: "Ollama",
+            name: "Ollama Server - Always",
             script: "ollama",
             namespace: "Agent",
             args: ["serve"],
             instances: 1,
             optional: true
-        }, // Agent Memory (Agent)
+        },
+        // Hermes agent gateway on the shared ~/.venv, registered paused.
         {
-            name: "Agent Memory",
-            script: "agentmemory",
-            namespace: "Agent",
-            instances: 1,
-            optional: true
-        }, // Hermes Gateway (Agent)
-        {
-            name: "Hermes Gateway",
+            name: "Hermes Gateway - Always",
             script: "./pkg/hermes/scripts/gateway.sh",
             namespace: "Agent",
             instances: 1,
