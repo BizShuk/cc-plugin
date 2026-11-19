@@ -73,8 +73,6 @@ def main():
     effort = model_info.get("effort")
     effort_str = f" [{effort}]" if effort else ""
 
-    is_claude = "claude" in model_name.lower() or "sonnet" in model_name.lower() or "opus" in model_name.lower()
-
     # 2. Workspace & Git
     cwd = data.get("cwd") or data.get("workspace", {}).get("current_dir") or os.getcwd()
     home = os.path.expanduser("~")
@@ -128,31 +126,22 @@ def main():
     ]
     line1 = SEP.join(line1_parts)
 
-    # Line 2: Weekly & 5h limits for Gemini and Claude
+    # Line 2: Gemini (5h & W) and Argon (W)
     gem_section = f"{C_YELLOW}Gemini 5h: {gem_5_str}{C_RESET} {C_CYAN}W: {gem_w_str}{C_RESET}"
+    argon_section = f"{C_CYAN}Argon W: {argon_w_str}{C_RESET}"
+    # Line 3: Claude (5h & W)
     cla_section = f"{C_YELLOW}Claude 5h: {cla_5_str}{C_RESET} {C_CYAN}W: {cla_w_str}{C_RESET}"
 
-    # Decide layout based on terminal width and active model
-    line2_parts = []
-    if term_width >= 115 and q_gem_w and q_cla_w:
-        # Wide screen: Show both Gemini and Claude in fixed sequence
-        line2_parts.extend([gem_section, cla_section])
-        if git_info:
+    line2_parts = [gem_section, argon_section]
+    line3_parts = [cla_section]
+    if git_info:
+        if term_width >= 100:
             line2_parts.append(f"{C_MAGENTA}{git_info}{C_RESET}")
-    else:
-        # Compact / Narrow screen: Show active model
-        if is_claude:
-            active_section = cla_section
         else:
-            active_section = gem_section
-        line2_parts.append(active_section)
-        if git_info:
-            line2_parts.append(f"{C_MAGENTA}{git_info}{C_RESET}")
+            line3_parts.append(f"{C_MAGENTA}{git_info}{C_RESET}")
 
     line2 = SEP.join(line2_parts)
-
-    # Line 3: Gemini 4 Argon weekly limit
-    line3 = f"{C_CYAN}Argon W: {argon_w_str}{C_RESET}"
+    line3 = SEP.join(line3_parts)
 
     print(f"{line1}\n{line2}\n{line3}")
 
