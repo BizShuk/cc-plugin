@@ -35,8 +35,7 @@ cc-plugin topology rewrite --root <topology-root>
 # 初始化軟連結與設定同步
 chmod +x scripts/run.sh && ./scripts/run.sh
 
-# 安裝全域規則與技能至 AI Agents
-skills install
+# 安裝技能至 AI Agents (全域規則已由 run.sh 連結)
 skills add .
 ```
 

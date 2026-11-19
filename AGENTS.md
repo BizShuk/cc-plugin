@@ -5,7 +5,7 @@
 - `Cobra + Viper` 組合：CLI 指令定義與設定管理標準模式，支援環境變數覆蓋
 - `Viper 預設值單一來源`：預設值集中於 `config/config.go`
 - `每個供應商一份完整 settings`：Claude Code 一次只讀`一個` settings 檔，
-  `config/claude.json` 與 `config/claude.<provider>.json` 七份各自完整自足；跨檔重複是`刻意的`，不得拆成
+  `plugins/default/config/settings/claude.json` 與 `plugins/default/config/settings/claude.<provider>.json` 七份各自完整自足；跨檔重複是`刻意的`，不得拆成
   base + profile，改動共用區塊時七份必須同步
 - `Home path resolution`：所有 `~` 路徑統一使用 `gosdk/config.ExpandHome`；不保留
   自訂 home expansion wrapper 或 `go-homedir` dependency
@@ -14,9 +14,6 @@
 - `軟連結同步`：以 symlink 而非複製來管理跨目錄設定，確保單一來源；
   例外`兩類`（skill 與全域規則）不由 `run.sh` 連結，
   同步範圍與操作見 [`docs/development.md`](docs/development.md)
-- `自訂主題只改色不改樣式`：`config/themes/<slug>.json` 以 `base` + `overrides`
-  覆寫色票 token，只有 base 主題已存在的 key 會生效；粗體／底線等 text decoration
-  寫死在 Claude Code 的 markdown renderer，`不可`由主題調整
 - `模組化插件架構 (Modular Plugin Architecture)`：本地 plugin 依職責拆分，skill/agent 由標準目錄自動探索，manifest 不重複列舉檔案。
 - `LSP 整合`：`gopls` (Go) 與 `marksman` (Markdown) 提供補全、診斷與檔案鏈結管理。
 - `Claude-mem 匯出 ID 遊標`：`export claudemem` 使用獨立遊標依 `observations.id`
@@ -30,7 +27,7 @@
 | 資料匯出          | `cmd/export/`                                                    | `export.ExportCmd`, `export.ClaudeMemCmd`                       |
 | Topology 圖譜     | `cmd/topology/`                                                  | `topology.TopologyCmd`, `LoadTopology()`                        |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                              | `NewStateStore()`, `GetCursorPosition()`, `SetCursorPosition()` |
-| 環境初始化        | `scripts/run.sh`, `config/`                                      | `config.Init()`                                                 |
+| 環境初始化        | `scripts/run.sh`, `plugins/default/config/`                             | `config.Init()`                                                 |
 | Hermes 部署與設定 | `pkg/hermes/`（子專案，自帶統一介面；任務併入根層 `package.json`） | `pnpm run hermes:install` / `hermes:install:webui` / `hermes:setup`（皆須明確執行，不隨 `run:setup`） |
 | AI 技能           | `plugins/`                                                       | 各 `SKILL.md`                                                   |
 | 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/` | `ultra-explore`, `kb-coordinator.md`                            |
@@ -50,17 +47,16 @@
 | `plugins/<p>/agents/<a>.md`              | 子代理 spawn                                                           | 該 agent 的 system prompt 與工具邊界                                           |
 | `plugins/<p>/README.md`                  | 人類                                                                   | 該 plugin 的技能清單與用途                                                     |
 | `plugins/README.md`                      | 人類                                                                   | 本地／外部／submodule 三類 plugin 的分界與清單                                 |
-| `config/claude.json`                     | Claude Code（經 `scripts/run.sh` 軟連結至 `~/.claude/settings.json`）  | 目前啟用的完整 Claude Code 設定（Anthropic 原生端）                            |
-| `config/claude.<provider>.json`          | Claude Code（手動替換 `settings.json` 連結目標）                       | 該供應商的完整設定：端點、模型別名、effort、權限模式                           |
-| `config/claude.keybinding.json`          | Claude Code（經 `scripts/run.sh` 軟連結至 `~/.claude/keybindings.json`） | 鍵盤綁定                                                                       |
-| `config/antigravity-cli.json`            | Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/antigravity-cli/settings.json`） | Antigravity CLI 設定：模型、權限、statusLine                                   |
-| `config/antigravity-cli.keybinding.json` | Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/antigravity-cli/keybindings.json`） | Antigravity CLI 鍵盤綁定                                                       |
-| `plugins/default/`                       | Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/config/plugins/default`） | Antigravity 預設規則插件，`rules/AGENTS.md` 軟連結至 `config/output-styles/executive_summary.md` |
-| `config/CLAUDE.global.md`                | Claude／Gemini／Codex／Hermes（經 `skills install` 複製，`非` 軟連結） | 跨專案的全域規則與目錄佈局                                                     |
-| `config/config.toml`                     | Codex CLI                                                              | Codex 模型、審批政策與 per-project trust                                       |
-| `config/grok.toml`                       | Grok Build（經 `scripts/run.sh` 軟連結至 `~/.grok/config.toml`）       | Grok 模型、reasoning effort、permission / UI 預設                              |
-| `config/output-styles/`                  | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）；`executive_summary.md` 另軟連結至 `~/.grok/rules/` | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名），同一份亦是 Grok 全域規則 |
-| `config/themes/`                         | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）                       | 自訂主題色票覆寫（由 settings 的 `theme: custom:<slug>` 指名）                 |
+| `plugins/default/config/settings/claude.json`                     | Claude Code（經 `scripts/run.sh` 軟連結至 `~/.claude/settings.json`）  | 目前啟用的完整 Claude Code 設定（Anthropic 原生端）                            |
+| `plugins/default/config/settings/claude.<provider>.json`          | Claude Code（手動替換 `settings.json` 連結目標）                       | 該供應商的完整設定：端點、模型別名、effort、權限模式                           |
+| `plugins/default/config/settings/claude.keybinding.json`          | Claude Code（經 `scripts/run.sh` 軟連結至 `~/.claude/keybindings.json`） | 鍵盤綁定                                                                       |
+| `plugins/default/config/settings/antigravity-cli.json`            | Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/antigravity-cli/settings.json`） | Antigravity CLI 設定：模型、權限、statusLine                                   |
+| `plugins/default/config/settings/antigravity-cli.keybinding.json` | Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/antigravity-cli/keybindings.json`） | Antigravity CLI 鍵盤綁定                                                       |
+| `plugins/default/`                       | Claude Code（`scripts/run.sh` 登錄本 repo 為 marketplace `shuk-cc-plugin` 並安裝）；Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/config/plugins/default`） | 雙相容預設插件：`output-styles/executive_summary.md` 是 output style 本體（Claude 經 plugin 安裝以 `default:executive_summary` 載入，`rules/output-style.md` 與 `~/.grok/rules/` 軟連結指向它）；各資料夾相容性見其 `README.md` |
+| `plugins/default/AGENTS.md`              | Claude／Antigravity／Codex／Pi／Hermes／Grok（偵測到 CLI 才由 `scripts/run.sh` 軟連結至 `~/.claude/CLAUDE.md`、`~/.gemini/GEMINI.md`、`~/.codex/AGENTS.md`、`~/.pi/agent/AGENTS.md`、`~/.hermes/AGENTS.md`、`~/.grok/rules/AGENTS.md`） | 跨專案的全域規則與目錄佈局 |
+| `plugins/default/config/settings/codex.toml`                      | Codex CLI（經 `scripts/run.sh` 軟連結至 `~/.codex/config.toml`）       | Codex 模型、審批政策與 per-project trust                                       |
+| `plugins/default/config/settings/grok.toml`                       | Grok Build（經 `scripts/run.sh` 軟連結至 `~/.grok/config.toml`）       | Grok 模型、reasoning effort、permission / UI 預設                              |
+| `plugins/default/config/statusline/`     | Claude Code／Antigravity／Grok（經 `scripts/run.sh` 分別軟連結至 `~/.config/ccstatusline/settings.json`、`~/.local/bin/agy-statusline`、`~/.grok/statusline.sh`） | 三個 CLI 的 statusline 設定與腳本 |
 | `config/config.go`                       | cc-plugin CLI                                                          | 執行期 viper 預設值                                                            |
 | `scripts/aliases.sh`                     | bash（由 `~/.bash_aliases` source，`非` 軟連結）                        | 各 provider 的 CLI alias：flag 組合、settings 指向、token 變數名               |
 | `README.md`                              | 人類                                                                   | 業務定義與 domain flow                                                         |

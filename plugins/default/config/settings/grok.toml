@@ -172,6 +172,7 @@ sessions = true
 [plugins]
 paths = []
 disabled = []
+enabled = ["default"]
 
 [marketplace]
 official_marketplace_auto_installed = true
@@ -180,6 +181,10 @@ default_skills_installs_purged = true
 [[marketplace.sources]]
 name = "xAI Official"
 git = "https://github.com/xai-org/plugin-marketplace.git"
+
+[[marketplace.sources]]
+name = "cc-plugin"
+path = "/Users/shuk/projects/ai/cc-plugin"
 
 [privacy]
 privacy_banner_acked = "2026-09-08T06:30:45Z"

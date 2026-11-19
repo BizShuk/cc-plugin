@@ -21,8 +21,7 @@ git submodule update --init --recursive
 # 初始化環境（建立軟連結、同步設定）
 chmod +x scripts/run.sh && ./scripts/run.sh
 
-# 安裝全域規則與技能
-skills install
+# 安裝技能 (全域規則已由 run.sh 連結)
 skills add .
 
 # 安裝為 Claude Code 插件
@@ -44,14 +43,13 @@ go install
 - Hermes 例外：`~/.hermes` 的記憶檔、樣板與 `.env` key 由子專案 `pkg/hermes/scripts/run.sh`
   負責，根層 `run.sh` `不`叫用它，須明確執行 `pnpm run hermes:setup`；安裝上游 Hermes 另跑 `pnpm run hermes:install`（WebUI：`pnpm run hermes:install:webui`）。
 - 切換供應商：把 `~/.claude/settings.json` 的連結目標改指向對應的
-  `config/claude.<provider>.json`。
+  `plugins/default/config/settings/claude.<provider>.json`。
 - Grok 全域規則目錄是 `~/.grok/rules/`（只掃該層 `*.md`）。
-  `config/output-styles/executive_summary.md` 由 `run.sh` 軟連結至
+  `plugins/default/output-styles/executive_summary.md` 由 `run.sh` 軟連結至
   `~/.grok/rules/executive_summary.md`。
-- Antigravity 本地插件 `plugins/default/` 由 `run.sh` 軟連結至
-  `~/.gemini/config/plugins/default`，其 `rules/AGENTS.md` 軟連結至
-  `config/output-styles/executive_summary.md`（可用 `agy plugin enable/disable default` 開關）。
-- symlink 的兩類例外，一律不由 `run.sh` 連結：
-  - `skill` 由 `skills add` 安裝至 `~/.agents/skills`
-  - `全域規則 (config/CLAUDE.global.md)` 由 `skills install` 複製成實體檔至各
-    agent 設定目錄
+- 雙相容插件 `plugins/default/`：Claude Code 由 `run.sh` 登錄 marketplace `shuk-cc-plugin` 並安裝；
+  Antigravity 由 `run.sh` 軟連結至 `~/.gemini/config/plugins/default`，其 `rules/output-style.md` 軟連結至
+  `output-styles/executive_summary.md`（可用 `agy plugin enable/disable default` 開關）。
+- `全域規則 (plugins/default/AGENTS.md)` 由 `run.sh` 軟連結至各 agent 設定目錄，只連結 PATH 上偵測到的 CLI
+  （`claude`、`agy`、`codex`、`pi`、`hermes`、`grok`）。
+- symlink 的例外：`skill` 由 `skills add` 安裝至 `~/.agents/skills`，不由 `run.sh` 連結。

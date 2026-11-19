@@ -26,7 +26,7 @@
 - Code grouped by domain (`cmd/`, `svc/`, `model/`), not by file type. Share settings/ignores through symlinks (one source of truth).
 §
 ## Memory file layout warning
-- `~/.hermes/memories/USER.md` is a SYMLINK → `~/projects/ai/cc-plugin/config/CLAUDE.global.md` (git-tracked). NEVER edit via memory tool — pollutes skills installs and cc-plugin tree.
+- `~/.hermes/memories/USER.md` is a SYMLINK → `~/projects/ai/cc-plugin/plugins/default/AGENTS.md` (git-tracked global rule, symlinked into every agent CLI). NEVER edit via memory tool — pollutes every agent and the cc-plugin tree.
 - `~/.hermes/memories/MEMORY.md` is currently the same APFS inode (hardlink) as `~/projects/ai/cc-plugin/pkg/hermes/config/memory/MEMORY.md`. Edits here show as a working-tree `M` in that cc-plugin subdir. Per user 2026-09-24: modify freely but DO NOT commit or push; user will handle the cc-plugin side manually.
 - For one-off env facts outside the user profile, use this file (`memory target=memory`).
 §

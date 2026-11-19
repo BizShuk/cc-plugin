@@ -1,1 +1,1 @@
-../../../../config/CLAUDE.global.md
+../../../../plugins/default/AGENTS.md

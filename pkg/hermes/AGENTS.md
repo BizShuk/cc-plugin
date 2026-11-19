@@ -17,7 +17,7 @@ pkg/hermes/
 ├── scripts/run.sh       # 冪等設定同步（樣板、.env key、tmp/config），不安裝也不啟動服務
 ├── config/              # 與 ~/.hermes 同形；config.yaml 版控並 symlink，.env.example 只列 key
 │   ├── workspace/       # ~/workspace 指向此處
-│   └── memory/          # Hermes 記憶（→ ~/.hermes/memories）；USER.md 是指向 config/CLAUDE.global.md 的 symlink
+│   └── memory/          # Hermes 記憶（→ ~/.hermes/memories）；USER.md 是指向 plugins/default/AGENTS.md 的 symlink
 ├── persona/<name>/      # 人設 (persona)：IDENTITY.md、SOUL.md，另可帶 skills/
 └── docs/
     ├── terminology.md

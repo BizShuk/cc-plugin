@@ -9,6 +9,10 @@
   },
   "plugins": [
     {
+      "name": "default",
+      "source": "./plugins/default"
+    },
+    {
       "name": "experiment",
       "source": "./plugins/experiment"
     },

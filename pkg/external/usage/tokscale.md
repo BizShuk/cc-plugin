@@ -25,7 +25,7 @@ tokscale submit --dry-run               # 預覽會上傳的內容
 
 ## 本 repo 的設定
 
-TUI 偏好設定 [config/tokscale.json](../../../config/tokscale.json) 由 `scripts/run.sh` link 到 `~/.config/tokscale/settings.json` (green palette, 60 秒 auto refresh).
+TUI 偏好設定 [plugins/default/config/settings/tokscale.json](../../../plugins/default/config/settings/tokscale.json) 由 `scripts/run.sh` link 到 `~/.config/tokscale/settings.json` (green palette, 60 秒 auto refresh).
 
 ## 適用情境
 
