@@ -74,15 +74,17 @@ backup_and_link "$REPO_ROOT/plugins/default/config/settings/claude.json" "$HOME/
 backup_and_link "$REPO_ROOT/plugins/default/config/settings/claude.keybinding.json" "$HOME/.claude/keybindings.json"
 backup_and_link "$REPO_ROOT/plugins/default/config/settings/codex.toml" "$HOME/.codex/config.toml"
 backup_and_link "$REPO_ROOT/plugins/default/config/settings/grok.toml" "$HOME/.grok/config.toml"
-# Grok has no outputStyle setting. ~/.grok/rules/*.md (this directory only) loads as global rules.
 backup_and_link \
-    "$REPO_ROOT/plugins/default/output-styles/executive_summary.md" \
-    "$HOME/.grok/rules/executive_summary.md"
+    "$REPO_ROOT/plugins/default/rules/output-style.md" \
+    "$HOME/.grok/rules/output-style.md"
 backup_and_link "$REPO_ROOT/plugins/default/config/settings/antigravity-cli.json" "$HOME/.gemini/antigravity-cli/settings.json"
 backup_and_link "$REPO_ROOT/plugins/default/config/settings/antigravity-cli.keybinding.json" "$HOME/.gemini/antigravity-cli/keybindings.json"
 backup_and_link \
     "$REPO_ROOT/plugins/default" \
     "$HOME/.gemini/config/plugins/default"
+backup_and_link \
+    "$REPO_ROOT/plugins/default/rules/output-style.md" \
+    "$HOME/.gemini/config/rules/output-style.md"
 
 # Claude Code: register this repo as a local marketplace and install its plugins.
 # Local plugins are read from their folder; re-running is idempotent (add/install once, then update).

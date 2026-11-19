@@ -44,9 +44,9 @@ go install
   負責，根層 `run.sh` `不`叫用它，須明確執行 `pnpm run hermes:setup`；安裝上游 Hermes 另跑 `pnpm run hermes:install`（WebUI：`pnpm run hermes:install:webui`）。
 - 切換供應商：把 `~/.claude/settings.json` 的連結目標改指向對應的
   `plugins/default/config/settings/claude.<provider>.json`。
-- Grok 全域規則目錄是 `~/.grok/rules/`（只掃該層 `*.md`）。
-  `plugins/default/output-styles/executive_summary.md` 由 `run.sh` 軟連結至
-  `~/.grok/rules/executive_summary.md`。
+- Grok 全域規則目錄是 `~/.grok/rules/`（只掃該層 `*.md`）。`run.sh` 把
+  `plugins/default/AGENTS.md` 連到 `~/.grok/rules/AGENTS.md`, 並把
+  `plugins/default/rules/output-style.md` 連到 `~/.grok/rules/output-style.md`。
 - 雙相容插件 `plugins/default/`：Claude Code 由 `run.sh` 登錄 marketplace `shuk-cc-plugin` 並安裝；
   Antigravity 由 `run.sh` 軟連結至 `~/.gemini/config/plugins/default`，其 `rules/output-style.md` 軟連結至
   `output-styles/executive_summary.md`（可用 `agy plugin enable/disable default` 開關）。
