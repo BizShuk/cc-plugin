@@ -1,0 +1,12 @@
+{
+  "name": "default",
+  "displayName": "Default",
+  "version": "1.0.0",
+  "description": "Default Antigravity rules — enforces the three-section executive_summary output style (What was done / How was it verified / Next actions) in Traditional Chinese with half-width punctuation.",
+  "author": {
+    "name": "Shuk Liu",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin"
+}

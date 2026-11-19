@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "skills": {
+    "gmail-workflows": {
+      "source": "claude-office-skills/skills",
+      "commit": "9c4c7d5cd2813a8936bf2c9fdb174ea883b85a11",
+      "sourceType": "github",
+      "skillPath": "gmail-workflows/SKILL.md",
+      "computedHash": "0fc342c05b0a92196df433b97ca149e230b74676b2de2a292ef2653bc3f2ea57"
+    },
+    "gws-gmail": {
+      "source": "googleworkspace/cli",
+      "commit": "cd3697e07eb520056dcf142d0c7439bbb9ba32e9",
+      "sourceType": "github",
+      "skillPath": "skills/gws-gmail/SKILL.md",
+      "computedHash": "aea4c2a07360c1872eb0ab6ede403b4accd4d86983b5be5253b156ea763785b2"
+    },
+    "gws-gmail-read": {
+      "source": "googleworkspace/cli",
+      "commit": "cd3697e07eb520056dcf142d0c7439bbb9ba32e9",
+      "sourceType": "github",
+      "skillPath": "skills/gws-gmail-read/SKILL.md",
+      "computedHash": "9eafc1ea7d953c5298e174f20c4f349200ff5ac64027868401cf4287025856a6"
+    },
+    "recipe-create-gmail-filter": {
+      "source": "googleworkspace/cli",
+      "commit": "cd3697e07eb520056dcf142d0c7439bbb9ba32e9",
+      "sourceType": "github",
+      "skillPath": "skills/recipe-create-gmail-filter/SKILL.md",
+      "computedHash": "150aa314290f033f182e5e657debee23ad0c59b66a8b28ab2acb68c034e1799f"
+    },
+    "recipe-save-email-attachments": {
+      "source": "googleworkspace/cli",
+      "commit": "cd3697e07eb520056dcf142d0c7439bbb9ba32e9",
+      "sourceType": "github",
+      "skillPath": "skills/recipe-save-email-attachments/SKILL.md",
+      "computedHash": "3c2f24324ec972a62ae89a99d3208566af39ea607d08ed037088b8ec0c7b33d0"
+    }
+  }
+}

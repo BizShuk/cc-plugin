@@ -46,8 +46,11 @@ go install
 - 切換供應商：把 `~/.claude/settings.json` 的連結目標改指向對應的
   `config/claude.<provider>.json`。
 - Grok 全域規則目錄是 `~/.grok/rules/`（只掃該層 `*.md`）。
-  `config/output-styles/claude-output-style-summary.md` 由 `run.sh` 軟連結至
-  `~/.grok/rules/claude-output-style-summary.md`。
+  `config/output-styles/executive_summary.md` 由 `run.sh` 軟連結至
+  `~/.grok/rules/executive_summary.md`。
+- Antigravity 本地插件 `plugins/default/` 由 `run.sh` 軟連結至
+  `~/.gemini/config/plugins/default`，其 `rules/AGENTS.md` 軟連結至
+  `config/output-styles/executive_summary.md`（可用 `agy plugin enable/disable default` 開關）。
 - symlink 的兩類例外，一律不由 `run.sh` 連結：
   - `skill` 由 `skills add` 安裝至 `~/.agents/skills`
   - `全域規則 (config/CLAUDE.global.md)` 由 `skills install` 複製成實體檔至各

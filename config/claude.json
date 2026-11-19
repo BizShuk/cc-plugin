@@ -75,7 +75,7 @@
       "autoUpdate": true
     }
   },
-  "outputStyle": "Executive Summary",
+  "outputStyle": "executive_summary",
   "feedbackDrafts": "quiet",
   "syntaxHighlightingDisabled": false,
   "alwaysThinkingEnabled": true,

@@ -1,6 +1,6 @@
 # 插件目錄說明 (Plugins Directory Overview)
 
-`plugins/` 只收納七個本地 plugin；外部 plugin 由根目錄
+`plugins/` 收納八個本地 plugin：七個 Claude Code 插件與一個 Antigravity (`agy`) 原生插件；外部 plugin 由根目錄
 `.claude-plugin/marketplace.json` 以 GitHub `owner/repo_name` 引用。即使以
 submodule checkout 到本地，`source` 仍寫 repo，不用 `./plugins/<name>`。
 
@@ -8,6 +8,7 @@ submodule checkout 到本地，`source` 仍寫 repo，不用 `./plugins/<name>`�
 
 | Plugin | 職責 |
 | :--- | :--- |
+| `default` | Antigravity (`agy`) 預設輸出格式規則（`rules/AGENTS.md` 軟連結至 `executive_summary.md`） |
 | `experiment` | 候選 skill 沙盒 |
 | `explore` | 摘要、轉檔、專案探索與路由 |
 | `general` | 通用 skill、feature agent、hooks 與 output styles |
@@ -16,8 +17,8 @@ submodule checkout 到本地，`source` 仍寫 repo，不用 `./plugins/<name>`�
 | `team` | Agent team、角色與 orchestration 設計 |
 | `ultra-explore` | 可續跑、可驗證的知識庫建構管道 |
 
-每個本地 plugin 都有 `.claude-plugin/plugin.json` 與 `README.md`，七個都登錄於
-`.claude-plugin/marketplace.json`。預設 `skills/`／`agents/` 與 submodule 由目錄
+七個 Claude Code 本地 plugin 都有 `.claude-plugin/plugin.json` 與 `README.md`，並登錄於
+`.claude-plugin/marketplace.json`；`default` 採 Antigravity 原生根目錄 `plugin.json` 與 `README.md`，由 `scripts/run.sh` 軟連結至 `~/.gemini/config/plugins/default`。預設 `skills/`／`agents/` 與 submodule 由目錄
 自動探索；manifest 的 `skills`／`agents` 只宣告非預設路徑或外部來源。詳見根目錄
 `AGENTS.md` 的「檔案職責」與「慣例」章節。
 

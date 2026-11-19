@@ -1,5 +1,5 @@
 ---
-name: Executive Summary
+name: executive_summary
 description: 所有回覆的三段式摘要格式
 keep-coding-instructions: true
 ---

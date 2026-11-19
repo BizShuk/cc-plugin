@@ -1,0 +1,1 @@
+../../../config/output-styles/executive_summary.md

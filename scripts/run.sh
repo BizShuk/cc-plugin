@@ -65,10 +65,13 @@ backup_and_link "$REPO_ROOT/config/config.toml" "$HOME/.codex/config.toml"
 backup_and_link "$REPO_ROOT/config/grok.toml" "$HOME/.grok/config.toml"
 # Grok has no outputStyle setting. ~/.grok/rules/*.md (this directory only) loads as global rules.
 backup_and_link \
-    "$REPO_ROOT/config/output-styles/claude-output-style-summary.md" \
-    "$HOME/.grok/rules/claude-output-style-summary.md"
+    "$REPO_ROOT/config/output-styles/executive_summary.md" \
+    "$HOME/.grok/rules/executive_summary.md"
 backup_and_link "$REPO_ROOT/config/antigravity-cli.json" "$HOME/.gemini/antigravity-cli/settings.json"
 backup_and_link "$REPO_ROOT/config/antigravity-cli.keybinding.json" "$HOME/.gemini/antigravity-cli/keybindings.json"
+backup_and_link \
+    "$REPO_ROOT/plugins/default" \
+    "$HOME/.gemini/config/plugins/default"
 
 # Hermes is NOT set up here -- run it explicitly: `pnpm run hermes:setup`
 # (install / upgrade / webui are likewise explicit `hermes:*` tasks).

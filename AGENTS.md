@@ -55,10 +55,11 @@
 | `config/claude.keybinding.json`          | Claude Code（經 `scripts/run.sh` 軟連結至 `~/.claude/keybindings.json`） | 鍵盤綁定                                                                       |
 | `config/antigravity-cli.json`            | Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/antigravity-cli/settings.json`） | Antigravity CLI 設定：模型、權限、statusLine                                   |
 | `config/antigravity-cli.keybinding.json` | Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/antigravity-cli/keybindings.json`） | Antigravity CLI 鍵盤綁定                                                       |
+| `plugins/default/`                       | Antigravity CLI（經 `scripts/run.sh` 軟連結至 `~/.gemini/config/plugins/default`） | Antigravity 預設規則插件，`rules/AGENTS.md` 軟連結至 `config/output-styles/executive_summary.md` |
 | `config/CLAUDE.global.md`                | Claude／Gemini／Codex／Hermes（經 `skills install` 複製，`非` 軟連結） | 跨專案的全域規則與目錄佈局                                                     |
 | `config/config.toml`                     | Codex CLI                                                              | Codex 模型、審批政策與 per-project trust                                       |
 | `config/grok.toml`                       | Grok Build（經 `scripts/run.sh` 軟連結至 `~/.grok/config.toml`）       | Grok 模型、reasoning effort、permission / UI 預設                              |
-| `config/output-styles/`                  | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）；`claude-output-style-summary.md` 另軟連結至 `~/.grok/rules/` | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名），同一份亦是 Grok 全域規則 |
+| `config/output-styles/`                  | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）；`executive_summary.md` 另軟連結至 `~/.grok/rules/` | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名），同一份亦是 Grok 全域規則 |
 | `config/themes/`                         | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）                       | 自訂主題色票覆寫（由 settings 的 `theme: custom:<slug>` 指名）                 |
 | `config/config.go`                       | cc-plugin CLI                                                          | 執行期 viper 預設值                                                            |
 | `scripts/aliases.sh`                     | bash（由 `~/.bash_aliases` source，`非` 軟連結）                        | 各 provider 的 CLI alias：flag 組合、settings 指向、token 變數名               |
