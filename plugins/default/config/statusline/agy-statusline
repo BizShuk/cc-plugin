@@ -89,7 +89,7 @@ def main():
     cur_usage = ctx.get("current_usage") or {}
     cached_tokens = cur_usage.get("cache_read_input_tokens", 0)
 
-    # 4. Quotas: Gemini and Claude (3p)
+    # 4. Quotas: Gemini, Claude (3p), and Gemini 4 Argon
     quotas = data.get("quota", {})
     
     # Gemini (7d & 5h)
@@ -103,6 +103,10 @@ def main():
     q_cla_5 = quotas.get("3p-5h")
     cla_w_str = render_quota(q_cla_w, 7 * 86400, width=10, fill_char="█")
     cla_5_str = render_quota(q_cla_5, 5 * 3600, width=10, fill_char="▓")
+
+    # Gemini 4 Argon (7d)
+    q_argon_w = quotas.get("gemini-argon-wtu-weekly")
+    argon_w_str = render_quota(q_argon_w, 7 * 86400, width=10, fill_char="█")
 
     # ANSI Colors
     C_RESET = "\033[0m"
@@ -147,7 +151,10 @@ def main():
 
     line2 = SEP.join(line2_parts)
 
-    print(f"{line1}\n{line2}")
+    # Line 3: Gemini 4 Argon weekly limit
+    line3 = f"{C_CYAN}Argon W: {argon_w_str}{C_RESET}"
+
+    print(f"{line1}\n{line2}\n{line3}")
 
 if __name__ == "__main__":
     main()

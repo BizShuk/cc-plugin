@@ -19,14 +19,13 @@
 
 ### 環境初始化與配置同步 (Environment Initialization & Config Sync)
 
-透過 `scripts/run.sh`（macOS/Unix）將本庫的設定檔與範本軟連結至使用者的家目錄資料夾（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.hermes` 等），同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。切換供應商的方式是把 `~/.claude/settings.json` 的連結目標改指向對應的 `plugins/default/config/settings/claude.<provider>.json`。
+透過 `scripts/run.sh`（macOS/Unix）將本庫的設定檔、預設插件 (`plugins/default`) 與全域規則軟連結至使用者的家目錄（`$HOME/.claude`、`$HOME/.gemini`、`$HOME/.codex`、`$HOME/.grok` 等），並同步外部工具設定（LiteLLM、CCStatusline、Tokscale）。切換供應商的方式是把 `~/.claude/settings.json` 的連結目標改指向對應的 `plugins/default/config/settings/claude.<provider>.json`（或使用 `scripts/aliases.sh`）。
 
 `領域流程 (Domain Flow):`
 
 1. 執行 `scripts/run.sh` → 建立家目錄結構
-2. 軟連結全域規則（`plugins/default/AGENTS.md`）至偵測到的 Claude Code、Antigravity、Codex、Pi、Hermes、Grok，並連結 `claude.json` 等設定檔；
-   Hermes 不在此流程內, 須另外明確執行 `pnpm run hermes:setup`（見 [`pkg/hermes/`](pkg/hermes/README.md)）
-3. 同步外部工具設定並建立調試用反向連結（同步範圍見 [`docs/development.md`](docs/development.md)）
+2. 軟連結全域規則（`plugins/default/AGENTS.md`）至 PATH 上偵測到的 Claude Code、Antigravity（`~/.gemini/GEMINI.md`）、Codex、Pi、Hermes、Grok，並同步 `plugins/default` 插件與 `output-style` 規則（`plugins/default/rules/output-style.md` → `~/.gemini/config/rules/output-style.md`、`~/.grok/rules/output-style.md`）及各 CLI 設定檔；Hermes 的完整環境與 `.env` 設定不在 `scripts/run.sh` 流程內，須另外明確執行 `pnpm run hermes:setup`（見 [`pkg/hermes/`](pkg/hermes/README.md)）
+3. 同步外部工具設定並建立調試用反向連結（完整同步範圍與各 Agent 規則路徑見 [`docs/development.md`](docs/development.md) 與 [`plugins/default/README.md`](plugins/default/README.md)）
 
 `核心實體 (Key Entities):` `Active settings`, `Provider settings`, `Global rule`（定義見 [`docs/terminology.md`](docs/terminology.md)）
 

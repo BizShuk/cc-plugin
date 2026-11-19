@@ -48,8 +48,8 @@ go install
   `plugins/default/AGENTS.md` 連到 `~/.grok/rules/AGENTS.md`, 並把
   `plugins/default/rules/output-style.md` 連到 `~/.grok/rules/output-style.md`。
 - 雙相容插件 `plugins/default/`：Claude Code 由 `run.sh` 登錄 marketplace `shuk-cc-plugin` 並安裝；
-  Antigravity 由 `run.sh` 軟連結至 `~/.gemini/config/plugins/default`，其 `rules/output-style.md` 軟連結至
-  `output-styles/executive_summary.md`（可用 `agy plugin enable/disable default` 開關）。
+  Antigravity 由 `run.sh` 軟連結至 `~/.gemini/config/plugins/default`，並將其 `rules/output-style.md`（軟連結至
+  `output-styles/executive_summary.md`，含 `trigger: always_on`）連至 `~/.gemini/config/rules/output-style.md`（plugin 本體仍可用 `agy plugin enable/disable default` 開關）。
 - `全域規則 (plugins/default/AGENTS.md)` 由 `run.sh` 軟連結至各 agent 設定目錄，只連結 PATH 上偵測到的 CLI
   （`claude`、`agy`、`codex`、`pi`、`hermes`、`grok`）。
 - symlink 的例外：`skill` 由 `skills add` 安裝至 `~/.agents/skills`，不由 `run.sh` 連結。
