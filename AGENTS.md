@@ -58,7 +58,7 @@
 | `config/CLAUDE.global.md`                | Claude／Gemini／Codex／Hermes（經 `skills install` 複製，`非` 軟連結） | 跨專案的全域規則與目錄佈局                                                     |
 | `config/config.toml`                     | Codex CLI                                                              | Codex 模型、審批政策與 per-project trust                                       |
 | `config/grok.toml`                       | Grok Build（經 `scripts/run.sh` 軟連結至 `~/.grok/config.toml`）       | Grok 模型、reasoning effort、permission / UI 預設                              |
-| `config/output-styles/`                  | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）                       | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名）                |
+| `config/output-styles/`                  | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）；`claude-output-style-summary.md` 另軟連結至 `~/.grok/rules/` | 啟用中的 output style 本體（由 settings 的 `outputStyle` 指名），同一份亦是 Grok 全域規則 |
 | `config/themes/`                         | Claude Code（經 `scripts/run.sh` 軟連結整個目錄）                       | 自訂主題色票覆寫（由 settings 的 `theme: custom:<slug>` 指名）                 |
 | `config/config.go`                       | cc-plugin CLI                                                          | 執行期 viper 預設值                                                            |
 | `scripts/aliases.sh`                     | bash（由 `~/.bash_aliases` source，`非` 軟連結）                        | 各 provider 的 CLI alias：flag 組合、settings 指向、token 變數名               |
