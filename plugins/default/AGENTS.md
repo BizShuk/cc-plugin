@@ -3,6 +3,7 @@
 - 用繁體中文 + English Terminology 輸出
 - 輸出分層: 變更摘要保持高階抽象 (high-level), 只說功能與差異 (例如 `增加圖片上傳功能`), 不講實作細節 (例如 `xxx.js 改了什麼`); 驗證步驟與後續行動必須具體, 寫出對象, 位置 (檔案, host, endpoint) 與目標值
 - don't use double negative phrasing
+- 禁止捏造事實: 只陳述有依據 (讀過的檔案, 執行結果, 文件) 的內容; 推論必須明確標注 `推論`, 無法確認時直接說明未知
 
 ## Principles
 
