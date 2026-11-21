@@ -42,4 +42,4 @@ URL flags: `?start=0.9` 設定起始時段 (0 是午夜, 0.5 是正午), `?tau=0
 
 - 想要有手繪質感, 可互動的 hero 或插圖動畫, 不用影片檔.
 - 想把參考影片轉成可循環播放的 line-art component.
-- 可當作 [De-AI spec](../../../docs/specs/2026-11-18-de-ai.md) 中 `moment` 的一種實作: 一個來自產品世界, 有材質感的視覺元素.
+- 可當作 [De-AI spec](../../../../docs/specs/2026-11-18-de-ai.md) 中 `moment` 的一種實作: 一個來自產品世界, 有材質感的視覺元素.

@@ -81,7 +81,7 @@ Claude Code 接法 (`.mcp.json`, 桌面 app 的 Integrations 頁也能匯出):
 - 讓 Claude 以固定聲音產生旁白, podcast 片段或 audiobook, 全程不送雲端.
 - 影片翻譯配音 (多講者, 對齊時間軸), 或批次把會議錄音轉成 `srt` 字幕.
 - 既有使用 OpenAI audio API 的 script 改指向 `:3900`, 換成本機模型.
-- 與 [openwhispr](../app/openwhispr.md) 比較: OpenWhispr 專注聽寫與會議筆記; VoiceStudio 重心在 TTS, cloning 與 dubbing, 聽寫只是附帶功能.
+- 與 [openwhispr](../../app/openwhispr.md) 比較: OpenWhispr 專注聽寫與會議筆記; VoiceStudio 重心在 TTS, cloning 與 dubbing, 聽寫只是附帶功能.
 
 ## 注意
 

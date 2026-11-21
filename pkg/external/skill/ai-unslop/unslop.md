@@ -4,7 +4,7 @@
 
 一個 Claude Code / Codex / Google Antigravity 通用的 skill, 把 `vibecoded UI` (AI 隨手生成, 一看就是 AI 做的介面) 改成有自己個性的設計. 它先找出 slop (紫藍漸層, glow, emoji label, 喊口號的文案, 不一致的間距), 再從產品本身推導 direction, 像設計師做 redline review 一樣逐層修正. 適用 Next.js, React, Vue, Svelte, Tailwind 或純 HTML / CSS, 涵蓋 dashboard, app 與 landing page; 只有網址或截圖時也能做.
 
-設計概念 (direction 五欄, 9 個 pass, slop 特徵清單, template check) 已整理在 [De-AI spec](../../../docs/specs/2026-11-18-de-ai.md), 本文只講怎麼裝, 怎麼用, 以及 skill 的運作邊界.
+設計概念 (direction 五欄, 9 個 pass, slop 特徵清單, template check) 已整理在 [De-AI spec](../../../../docs/specs/2026-11-18-de-ai.md), 本文只講怎麼裝, 怎麼用, 以及 skill 的運作邊界.
 
 ## 內容
 
@@ -111,4 +111,4 @@ story file 只是展示用; 正式成果仍以專案原本的 stack 交付, 不�
 
 - 用 AI 快速做出的 dashboard / landing page 需要在上線前收斂成有設計感的版本, 且不想動到功能與資訊架構.
 - 只拿到客戶的網址或截圖, 要產出一份可交付的 redesign code 與前後對照.
-- 想把「先 audit, 再定方向, 停下確認, 再分層修」的審查節奏套用到其他設計任務. 與 [pixelfx](pixelfx.md), [line-art-animation](line-art-animation.md) 搭配時, unslop 負責讓 chrome 安靜, 後兩者負責提供有材質感的 `moment`.
+- 想把「先 audit, 再定方向, 停下確認, 再分層修」的審查節奏套用到其他設計任務. 與 [pixelfx](../animation/pixelfx.md), [line-art-animation](../animation/line-art-animation.md) 搭配時, unslop 負責讓 chrome 安靜, 後兩者負責提供有材質感的 `moment`.

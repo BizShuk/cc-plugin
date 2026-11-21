@@ -133,4 +133,4 @@ node tools/render.mjs fire --sheet             # 整個分類
 
 - 瀏覽器小遊戲或 pixel art 介面需要現成特效, 且想保留換色與參數化能力.
 - 需要給 Godot / Unity 的 sprite sheet, 但不想手繪.
-- 想讓 Claude 產出視覺品質可控的動畫: 靠 render 後「看圖迭代」而非一次生成, 這個迴圈也可借用到其他視覺任務. 與 [line-art-animation](line-art-animation.md) 同屬 [De-AI spec](../../../docs/specs/2026-11-18-de-ai.md) 中有材質感的 `moment` 實作.
+- 想讓 Claude 產出視覺品質可控的動畫: 靠 render 後「看圖迭代」而非一次生成, 這個迴圈也可借用到其他視覺任務. 與 [line-art-animation](line-art-animation.md) 同屬 [De-AI spec](../../../../docs/specs/2026-11-18-de-ai.md) 中有材質感的 `moment` 實作.
