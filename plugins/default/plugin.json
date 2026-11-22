@@ -1,8 +1,8 @@
 {
   "name": "default",
   "displayName": "Default",
-  "version": "1.0.0",
-  "description": "Default Antigravity rules — enforces the three-section executive_summary output style (What was done / How was it verified / Next actions) in Traditional Chinese with half-width punctuation.",
+  "version": "1.1.0",
+  "description": "Default Antigravity rules and hooks — enforces the three-section executive_summary output style (What was done / How was it verified / Next actions) in Traditional Chinese with half-width punctuation, and posts a macOS notification summarizing each final response.",
   "author": {
     "name": "Shuk Liu",
     "url": "https://github.com/bizshuk"

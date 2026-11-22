@@ -1,0 +1,11 @@
+{
+  "notify-done": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "./hooks/notify-done.sh agy",
+        "timeout": 10
+      }
+    ]
+  }
+}
