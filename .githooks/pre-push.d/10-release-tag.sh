@@ -7,7 +7,6 @@
 #
 #   - 目前最高的 v<major>.<minor>.<patch> tag 的下一個 patch。
 #   - package.json 的 version（若存在）。
-#   - .claude-plugin/plugin.json 的 version（若存在）。
 #
 # Manifest 只讀不寫；版本必須是不含 prerelease 或 build metadata 的
 # <major>.<minor>.<patch>。
@@ -30,19 +29,20 @@
 # 契約：git 從 stdin 餵 <local_ref> <local_sha> <remote_ref> <remote_sha>，
 #       一行一個 ref；args 是 <remote-name> <remote-url>。
 #       本 hook 永遠 exit 0，不 reject push。
+#       tag 推送成功時以 scripts/notify.sh 通知 (`<tag> Released`)。
 
 set -uo pipefail
 
 readonly TAG_PREFIX="v"
 readonly TAG_GLOB="v[0-9]*"
 readonly PACKAGE_FILE="package.json"
-readonly PLUGIN_FILE=".claude-plugin/plugin.json"
 
 # 只有推這個 branch 才打 release tag。feature branch 不該產生 release tag，
 # 尤其這個 tag 會被立刻推上公開 remote。
 readonly RELEASE_BRANCH="master"
 
 note() { echo "pre-push: $1" >&2; }
+notify="$(dirname "$0")/../scripts/notify.sh"
 
 # 只接受 stable SemVer 核心版本；數字欄位除了 0 以外不得有前導零。
 is_version() {
@@ -105,7 +105,7 @@ next_release_tag() {
 	highest="$(highest_tag_version)"
 	selected="$(next_patch_version "$highest")" || return 1
 
-	for manifest in "$PACKAGE_FILE" "$PLUGIN_FILE"; do
+	for manifest in "$PACKAGE_FILE"; do
 		[[ -f "$manifest" ]] || continue
 		if candidate="$(manifest_version "$manifest")"; then
 			if version_greater_than "$candidate" "$selected"; then
@@ -162,6 +162,7 @@ while read -r local_ref local_sha _remote_ref remote_sha; do
 
 	if git push --quiet "$remote" "refs/tags/${tag}"; then
 		note "已推送 ${tag} 至 ${remote}"
+		"$notify" "$(git rev-parse --show-toplevel)" "${tag} Released" || true
 	else
 		note "推送 ${tag} 失敗；tag 留在本地，可稍後手動 git push ${remote} ${tag}"
 	fi
