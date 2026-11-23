@@ -62,6 +62,8 @@ pkg/hermes/
 - Install WebUI: `pnpm run hermes:install:webui` —— 缺 WebUI 才 clone `nesquena/hermes-webui`
 - WebUI: `pnpm run hermes:webui` —— 前台啟動 WebUI（bootstrap `--foreground`, :8787）；PM2 註冊於 `ecosystem.config.js`
 - Gateway: `pnpm run hermes:gateway` —— 以 `--external-supervisor` 前台啟動 Gateway；PM2 註冊於 `ecosystem.config.js`
+- Start / Restart: `pnpm run hermes:start` / `pnpm run hermes:restart` —— 對 PM2 的 `Hermes Gateway - Always` 與 `Hermes WebUI - Always`
+  執行 `pm2 task resume` / `pm2 task restart`（任務須已由 `pm2 apply` 註冊）
 - Upgrade: `pnpm run hermes:upgrade`（WebUI：`hermes:upgrade:webui`） —— 對既有安裝跑 `hermes update`
 - Setup: `pnpm run hermes:setup` —— `config/config.yaml`、`config/memory/`（→ `~/.hermes/memories`）與人設 `SOUL.md` 連結進 `~/.hermes`，
   `~/workspace` 連結到 `config/workspace/`，
