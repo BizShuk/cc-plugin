@@ -18,6 +18,19 @@ module.exports = {
             optional: true,
             env: {
                 HERMES_HOME: "/Users/shuk/.hermes",
+                VENV_PATH: "/Users/shuk/.venv",
+                HERMES_SUPERVISED_CHILD: "1"
+            }
+        },
+        // Hermes WebUI (foreground bootstrap on :8787) on the shared ~/.venv, registered paused.
+        {
+            name: "Hermes WebUI - Always",
+            script: "./pkg/hermes/scripts/webui.sh",
+            namespace: "Agent",
+            instances: 1,
+            optional: true,
+            env: {
+                HERMES_HOME: "/Users/shuk/.hermes",
                 VENV_PATH: "/Users/shuk/.venv"
             }
         }

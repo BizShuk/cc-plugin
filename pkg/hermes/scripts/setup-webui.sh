@@ -36,4 +36,4 @@ else
     echo "安裝 Hermes WebUI：$REPO_URL → $WEBUI_DIR"
     git clone --depth 1 "$REPO_URL" "$WEBUI_DIR"
 fi
-echo "啟動：$WEBUI_DIR/ctl.sh start（預設 http://127.0.0.1:8787）"
+echo "啟動：pm2 task resume \"Agent:Hermes WebUI - Always\"（預設 http://127.0.0.1:8787）"

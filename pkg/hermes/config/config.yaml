@@ -52,7 +52,7 @@ plugins:
 model:
   # Default model to use (can be overridden with --model flag)
   # Both "default" and "model" work as the key name here.
-  default: "MiniMax-M3"
+  default: "MiniMax-M3.1-Flash"
 
   # Inference provider selection:
   #   "auto"         - Auto-detect from credentials (default)
@@ -567,31 +567,6 @@ browser:
   # Let an authenticated browser extension register as the controller for an
   # existing Hermes session. Disabled by default. Local API registration also
   # requires the API server bearer key to be configured.
-  extension_control:
-    enabled: false
-
-  # Maximum characters of snapshot content before truncate-and-store.
-  # Increase for long pages (for example, documentation or financial reports),
-  # or decrease to reduce context usage. Minimum: 1000; default: 15000
-  # (same per-page budget as web_extract).
-  # snapshot_threshold: 15000
-
-  # JavaScript evaluation guardrails (both default false). restrict_evaluate
-  # opts into a denylist that blocks sensitive primitives (cookies, storage,
-  # clipboard, network, form values) in browser_console(expression=...) — use
-  # it when the agent drives a logged-in profile. allow_unsafe_evaluate is the
-  # legacy override that switches the denylist back off even when restrict is on.
-  # restrict_evaluate: false
-  # allow_unsafe_evaluate: false
-
-# =============================================================================
-# Tool Loop Guardrails
-# =============================================================================
-# Soft warnings are enabled by default. They append guidance to repeated failed
-# or non-progressing tool results but still let the tool execute. Hard stops stay
-# opt-in for interactive CLI/TUI/Desktop/ACP sessions, but default on for unattended
-# gateway/cron sessions where nobody is present to interrupt a model that
-# ignores loop warnings.
   cloud_provider: local
 tool_loop_guardrails:
   warnings_enabled: true
@@ -677,10 +652,6 @@ compression:
   # bounding large-window sessions while lower proportional triggers still win
   # whenever they fall below the cap. The cap survives model switches and fallbacks.
   # Set null to restore ratio-only behavior.
-  threshold_tokens: 256000
-
-  # Existing Codex gpt-5.5 behavior: raise Hermes' compaction trigger to 85%
-  # for the ChatGPT Codex OAuth route. Set false to opt back down to threshold.
   codex_gpt55_autoraise: true
 
   # Fraction of the threshold to preserve as recent tail (default: 0.20 = 20%)
@@ -820,153 +791,7 @@ compression:
 # Anthropic supports two TTL tiers for cached prefixes: "5m" (default) and
 # "1h". Other values are ignored and "5m" is used.
 #
-prompt_caching:
-  cache_ttl: "5m" # use "1h" for long sessions with pauses between turns
-
-# =============================================================================
-# Auxiliary Models (Advanced — Experimental)
-# =============================================================================
-# Hermes uses lightweight "auxiliary" models for side tasks: image analysis,
-# browser screenshot analysis, web page summarization, TTS audio-tag insertion,
-# and context compression.
-#
-# By default these use Gemini Flash via OpenRouter or Nous Portal and are
-# auto-detected from your credentials.  You do NOT need to change anything
-# here for normal usage.
-#
-# WARNING: Overriding these with providers other than OpenRouter or Nous Portal
-# is EXPERIMENTAL and may not work.  Not all models/providers support vision,
-# produce usable summaries, or accept the same API format.  Change at your own
-# risk — if things break, reset to "auto" / empty values.
-#
-# Each task has its own provider + model pair so you can mix providers.
-# For example: OpenRouter for vision (needs multimodal), but your main
-# local endpoint for compression (just needs text).
-#
-# Provider options:
-#   "auto"       - Best available: OpenRouter → Nous Portal → main endpoint (default)
-#   "openrouter" - Force OpenRouter (requires OPENROUTER_API_KEY)
-#   "nous"       - Force Nous Portal (requires: hermes auth add nous)
-#   "gemini"      - Force Google AI Studio direct (requires: GOOGLE_API_KEY or GEMINI_API_KEY)
-#   "ollama-cloud" - Ollama Cloud (requires: OLLAMA_API_KEY)
-#   "codex"       - Force Codex OAuth (requires: hermes model → Codex).
-#                  Uses gpt-5.3-codex which supports vision.
-#   "main"       - Use your custom endpoint (OPENAI_BASE_URL + OPENAI_API_KEY).
-#                  Works with OpenAI API, local models, or any OpenAI-compatible
-#                  endpoint.  Also falls back to Codex OAuth and API-key providers.
-#
-# Model: leave empty to use the provider's default.  When empty, OpenRouter
-# uses "google/gemini-3-flash-preview" and Nous uses "gemini-3-flash".
-# Other providers pick a sensible default automatically.
-#
-# Native vision embeds (vision_analyze / browser screenshots when the MAIN model
-# is vision-capable) ride conversation history and are re-sent on every later
-# API call, so both knobs below bound recurring cost:
-#
-# vision:
-#   # Byte budget for one embedded image (clamped 64 KiB..4 MiB). Raise it for
-#   # dense phone screenshots of tables that read as "unreadable" at 256 KB.
-#   embed_target_bytes: 262144
-#   # How often vision_analyze may embed the SAME image (region crops included)
-#   # per session. Unset = 3 inside delegated subagents, unlimited for the main
-#   # agent; a number applies everywhere; 0 = unlimited.
-#   max_calls_per_image: 3
-#
-# auxiliary:
-#   # Image analysis: vision_analyze tool + browser screenshots
-#   vision:
-#     provider: "auto"
-#     model: ""              # e.g. "google/gemini-2.5-flash", "openai/gpt-4o"
-#     timeout: 30            # LLM API call timeout (seconds)
-#     download_timeout: 30   # Image HTTP download timeout (seconds)
-#                            # Increase for slow connections or self-hosted image servers
-#     reasoning_effort: ""   # Per-task thinking level: none, minimal, low, medium,
-#                            # high, xhigh, max, ultra. Empty = provider default.
-#                            # Works on every auxiliary task block (vision,
-#                            # web_extract, compression, title_generation, curator,
-#                            # background_review, moa_reference, ...). Example: run
-#                            # compression at "low" and vision at "none" to cut
-#                            # side-task latency/cost on reasoning models.
-#
-#   # Web page scraping / summarization + browser page text extraction
-#   web_extract:
-#     provider: "auto"
-#     model: ""
-#     reasoning_effort: "low"
-#
-#   # Gemini 3.1 TTS hidden audio-tag insertion
-#   tts_audio_tags:
-#     provider: "auto"       # empty model = your main chat model
-#     model: ""
-#     timeout: 30
-#
-#   # Automatic session title generation after the first exchange
-#   title_generation:
-#     enabled: true          # set false to disable auto-title generation
-#     model_upgrade_enabled: true  # set false to keep the instant derived title and skip the model call
-#     provider: "auto"
-#     model: ""
-#     timeout: 30
-#     language: ""           # empty = match the user's language; or e.g. "English"
-#
-#   # Session search — summarizes matching past sessions
-#   session_search:
-#     provider: "auto"
-#     model: ""
-#     timeout: 30
-#     max_concurrency: 3    # Limit parallel summaries to reduce request-burst 429s
-#     extra_body: {}        # Provider-specific OpenAI-compatible request fields
-#                           # Example for providers that support request-body
-#                           # reasoning controls:
-#                           # extra_body:
-#                           #   enable_thinking: false
-#                           # Some vLLM/Qwen deployments expect this nested:
-#                           # extra_body:
-#                           #   chat_template_kwargs:
-#                           #     enable_thinking: false
-#
-#   # Auto-generated short session titles after the first exchange.
-#   # Each active Discord/Telegram channel can spawn a background title
-#   # call.  Cap concurrency to keep retries during provider incidents
-#   # from amplifying the request burst.  Leave unset for legacy behavior
-#   # (unlimited).
-#   title_generation:
-#     provider: "auto"
-#     model: ""
-#     # max_concurrency: 2    # Optional: cap simultaneous title calls
-#
-#   # Context compression — summarizes long sessions to shrink the prompt.
-#   # Heavy and often hits the slowest provider chain.  Setting a small
-#   # cap prevents many sessions from compressing simultaneously during
-#   # provider degradation.  Leave unset for legacy behavior (unlimited).
-#   compression:
-#     provider: "auto"
-#     model: ""
-#     # max_concurrency: 2    # Optional: cap simultaneous compression calls
-#     # no_progress_timeout: 60   # Codex/Responses-only: seconds a stream may go without a
-#                                 # substantive event before it fails fast (default: 60).
-#                                 # Independent of "timeout" above (the overall request
-#                                 # budget) — raising "timeout" alone does not widen this
-#                                 # window. Each substantive event re-arms it; a slow but
-#                                 # progressing reasoning/summary stream is not affected.
-#
-#   # Post-turn memory/skill self-improvement review fork. Runs after a turn
-#   # when the nudge intervals fire; writes skills/memories in a daemon thread.
-#   # Usage is recorded under session_model_usage task='background_review'.
-#   background_review:
-#     enabled: true            # false = skip automatic forks (/refine still works)
-#     provider: "auto"         # or pin a cheaper model (see memory.md)
-#     model: ""
-
-# =============================================================================
-# Persistent Memory
-# =============================================================================
-# Bounded curated memory injected into the system prompt every session.
-# Two stores: MEMORY.md (agent's notes) and USER.md (user profile).
-# Character limits keep the memory small and focused. The agent manages
-# pruning -- when at the limit, it must consolidate or replace entries.
-# Disabled by default in batch_runner.
-#
+prompt_caching: {}
 memory:
   # Agent's personal notes: environment facts, conventions, things learned
   memory_enabled: true
@@ -1851,31 +1676,6 @@ display:
   #   verbose: Full args, results, and debug logs (same as /verbose)
   #   log:     Silent in chat; append every tool call to ~/.hermes/logs/tool_calls.log (gateway only)
   # Toggle at runtime with /verbose in the CLI
-  tool_progress: all
-
-  # Per-platform defaults can be quieter than the global setting. Telegram
-  # tunes for mobile: tool_progress and busy_ack_detail default off (no
-  # per-tool breadcrumb stream, no "iteration 21/60" debug detail in busy
-  # acks or heartbeats), but interim_assistant_messages and
-  # long_running_notifications STAY ON so the user has real signal between
-  # turn start and final answer (mid-turn assistant commentary + a single
-  # edit-in-place "⏳ Working — N min" heartbeat). Override under
-  # display.platforms.telegram.
-
-  # Auto-cleanup of temporary progress bubbles after the final response lands.
-  # On platforms that support message deletion (currently Telegram), this
-  # removes the tool-progress bubble, "⏳ Still working..." notices, and
-  # context-pressure status messages once the final reply has been delivered —
-  # keeping long-running turns visible live, then tidy afterward. Failed runs
-  # leave the bubbles in place as breadcrumbs. Off by default.
-  # Per-platform override: display.platforms.telegram.cleanup_progress
-  #   true:  Delete tracked progress/status bubbles on successful turn
-  #   false: Leave everything in place (default)
-  # Example:
-  #   display:
-  #     platforms:
-  #       telegram:
-  #         cleanup_progress: true
   cleanup_progress: false
 
   # Natural mid-turn assistant updates.
@@ -2118,6 +1918,7 @@ display:
 #     shared-metrics directory resets it.
 # See docs/observability/relay-shared-metrics.md (Appendix A) for the full
 # consent, identity, retention, and deletion decisions.
+  tool_progress: false
 telemetry:
   shared_metrics:
     enabled: false
@@ -2313,7 +2114,7 @@ updates:
 #   # This runs ONCE per process at startup, so it cannot replace a credential
 #   # that expires mid-session. For a single provider whose token needs
 #   # re-minting during a session, use `providers.<name>.key_cmd` instead.
-_config_version: 46
+_config_version: 54
 web:
   backend: xai
 computer_use:
@@ -2426,3 +2227,5 @@ known_builtin_toolsets:
 onboarding:
   seen:
     busy_input_prompt: true
+command_allowlist:
+  - hermes update (restarts gateway, kills running agents)

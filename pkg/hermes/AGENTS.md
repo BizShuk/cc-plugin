@@ -14,6 +14,7 @@ pkg/hermes/
 ├── README.todo          # 待辦（含未定的設計決策）
 ├── scripts/setup.sh     # 冪等安裝／升級上游 Hermes
 ├── scripts/setup-webui.sh # 冪等安裝／升級上游 Hermes WebUI（clone 至 ~/.hermes/hermes-webui）
+├── scripts/webui.sh     # 前台啟動 WebUI（供 PM2 常駐）
 ├── scripts/run.sh       # 冪等設定同步（樣板、.env key、tmp/config），不安裝也不啟動服務
 ├── config/              # 與 ~/.hermes 同形；config.yaml 版控並 symlink，.env.example 只列 key
 │   ├── workspace/       # ~/workspace 指向此處
@@ -58,7 +59,8 @@ pkg/hermes/
 
 - 任務一律在 `cc-plugin` 根層以 `hermes:*` 前綴執行（本子專案不自帶 `package.json`）
 - Install: `pnpm run hermes:install` —— 缺 `hermes` 才以上游安裝器安裝（`--skip-setup`）
-- Install WebUI: `pnpm run hermes:install:webui` —— 缺 WebUI 才 clone `nesquena/hermes-webui`；`pnpm run hermes:webui start|status|stop` 管理 daemon（:8787）
+- Install WebUI: `pnpm run hermes:install:webui` —— 缺 WebUI 才 clone `nesquena/hermes-webui`
+- WebUI: `pnpm run hermes:webui` —— 前台啟動 WebUI（bootstrap `--foreground`, :8787）；PM2 註冊於 `ecosystem.config.js`
 - Gateway: `pnpm run hermes:gateway` —— 以 `--external-supervisor` 前台啟動 Gateway；PM2 註冊於 `ecosystem.config.js`
 - Upgrade: `pnpm run hermes:upgrade`（WebUI：`hermes:upgrade:webui`） —— 對既有安裝跑 `hermes update`
 - Setup: `pnpm run hermes:setup` —— `config/config.yaml`、`config/memory/`（→ `~/.hermes/memories`）與人設 `SOUL.md` 連結進 `~/.hermes`，

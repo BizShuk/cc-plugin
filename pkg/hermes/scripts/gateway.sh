@@ -40,8 +40,7 @@ if launchctl list ai.hermes.gateway >/dev/null 2>&1; then
     if [ "$has_force" = false ]; then
         echo "注意：macOS launchd 正在守護 ai.hermes.gateway。" >&2
         echo "若要完全改由 PM2 接管，建議先卸載 launchd 服務：" >&2
-        echo "  hermes gateway stop" >&2
-        echo "  launchctl unload ~/Library/LaunchAgents/ai.hermes.gateway.plist" >&2
+        echo "  hermes gateway uninstall   # bootout + 刪除 plist，登入時不再自動啟動" >&2
         echo "或帶 --force 強制前台啟動：" >&2
         echo "  $0 --force" >&2
     fi
