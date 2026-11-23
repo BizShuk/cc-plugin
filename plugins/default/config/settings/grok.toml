@@ -172,7 +172,7 @@ sessions = true
 [plugins]
 paths = []
 disabled = []
-enabled = ["default"]
+enabled = ["default", "review"]
 
 [marketplace]
 official_marketplace_auto_installed = true

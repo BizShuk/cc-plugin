@@ -5,10 +5,10 @@ description: >
     scoping any new feature end-to-end: "implement X", "add support for Y", "build
     the Z endpoint/service/flow". Does NOT trigger for refactoring, dead-code removal,
     or performance review — use the appropriate specialized agent for those.
-tools: Read, Edit, Write, Bash, Grep, Glob, AskUserQuestion, TodoWrite
+tools: [Read, Edit, Write, Bash, Grep, Glob, AskUserQuestion, TodoWrite]
 model: inherit
 permissionMode: acceptEdits
-skills: golang-code-quality, golang-dev, golang-mvc, golang-naming
+skills: [golang-code-quality, golang-dev, golang-mvc, golang-naming]
 mcpServers:
 hooks:
 memory: local

@@ -9,10 +9,10 @@ description: >
     naming, business value, structure, docs, dependencies, and onboarding /
     learning docs together. Does NOT hunt for runtime logic bugs — route those
     to /code-review and the systematic-debugging skill.
-tools: Read, Bash, Grep, Glob, AskUserQuestion, TodoWrite
+tools: [Read, Bash, Grep, Glob, AskUserQuestion, TodoWrite]
 model: inherit
 permissionMode: default
-skills: planner, project-docs, tutorial, code-audit
+skills: [planner, project-docs, tutorial, code-audit]
 mcpServers:
 hooks:
 memory: local

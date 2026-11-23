@@ -65,7 +65,8 @@
     "claude-mem@thedotmack": true,
     "frontend-design@claude-plugins-official": true,
     "demo-mod@inline": false,
-    "default@shuk-cc-plugin": true
+    "default@shuk-cc-plugin": true,
+    "review@shuk-cc-plugin": true
   },
   "extraKnownMarketplaces": {
     "threads-skills": {
@@ -89,7 +90,7 @@
   "effortLevel": "low",
   "modelSettings": {
     "claude-opus-5-5": {
-      "effortLevel": "low"
+      "effortLevel": "high"
     },
     "claude-sonnet-5-5": {
       "effortLevel": "medium"

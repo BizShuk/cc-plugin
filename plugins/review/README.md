@@ -118,13 +118,20 @@ graph TD
 
 ## 安裝與使用 (Installation and Usage)
 
-### 透過 `skills` 工具安裝
+### 安裝 (Install)
 
-於專案根目錄下執行以下指令以安裝並註冊此插件：
+與 `default` 相同, 同時相容 Claude Code、Antigravity (`agy`) 與 Grok Build。[`scripts/run.sh`](../../scripts/run.sh) 會處理 Claude 與 `agy`；Grok 由 marketplace 安裝：
 
-```bash
-skills add .
-```
+| 路徑 | Claude Code | Antigravity (`agy`) | Grok |
+| :--- | :--- | :--- | :--- |
+| `.claude-plugin/plugin.json` | ✅ manifest | — | ✅ manifest |
+| `plugin.json` | — | ✅ manifest（含 `displayName`） | — |
+| `skills/` | ✅ | ✅ | ✅ |
+| `agents/` | ✅ `review:review-coordinator` | ✅ subagent | ✅ `review:review-coordinator` |
+
+- Claude Code：`run.sh` 登錄本 repo 為 marketplace `shuk-cc-plugin` 並安裝 `review`；手動安裝為 `/plugin install review@shuk-cc-plugin`。
+- Antigravity：軟連結至 `~/.gemini/config/plugins/review`，以 `agy plugin enable review` / `agy plugin disable review` 開關。
+- Grok：`~/.grok/config.toml` 的 `[plugins].enabled` 含 `review`；首次執行 `grok plugin install /Users/shuk/projects/ai/cc-plugin/plugins/review`，Grok 安裝的是`複本`，改動後執行 `grok plugin update review`。
 
 ### 觸發審查
 

@@ -1,0 +1,12 @@
+{
+  "name": "review",
+  "displayName": "Review",
+  "version": "1.7.0",
+  "description": "Review, planning, and workspace evolution skills plus the review-coordinator agent — audit consistency, security, and naming, consolidate canonical docs, and turn content into growth KPIs.",
+  "author": {
+    "name": "Shuk Liu",
+    "url": "https://github.com/bizshuk"
+  },
+  "homepage": "https://github.com/bizshuk/cc-plugin",
+  "repository": "https://github.com/bizshuk/cc-plugin"
+}

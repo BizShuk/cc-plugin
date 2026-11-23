@@ -79,9 +79,11 @@ backup_and_link \
     "$HOME/.grok/rules/output-style.md"
 backup_and_link "$REPO_ROOT/plugins/default/config/settings/antigravity-cli.json" "$HOME/.gemini/antigravity-cli/settings.json"
 backup_and_link "$REPO_ROOT/plugins/default/config/settings/antigravity-cli.keybinding.json" "$HOME/.gemini/antigravity-cli/keybindings.json"
-backup_and_link \
-    "$REPO_ROOT/plugins/default" \
-    "$HOME/.gemini/config/plugins/default"
+for plugin in default review; do
+    backup_and_link \
+        "$REPO_ROOT/plugins/$plugin" \
+        "$HOME/.gemini/config/plugins/$plugin"
+done
 backup_and_link \
     "$REPO_ROOT/plugins/default/rules/output-style.md" \
     "$HOME/.gemini/config/rules/output-style.md"
@@ -89,7 +91,7 @@ backup_and_link \
 # Claude Code: register this repo as a local marketplace and install its plugins.
 # Local plugins are read from their folder; re-running is idempotent (add/install once, then update).
 MARKETPLACE="shuk-cc-plugin"
-CLAUDE_PLUGINS=(default)
+CLAUDE_PLUGINS=(default review)
 
 install_claude_plugins() {
     if ! command -v claude >/dev/null 2>&1; then

@@ -12,7 +12,7 @@
 | `output-styles/` | ✅ output style | — | `executive_summary.md` 本體；安裝後以 `default:executive_summary` 出現，`plugins/default/config/settings/claude.json` 的 `outputStyle` 指名它 |
 | `rules/` | — | ✅ 啟用時載入的 rule | `output-style.md` 軟連結至 `output-styles/executive_summary.md` |
 | `skills/` | ✅ | ✅ | `<name>/SKILL.md`，兩邊格式相同，唯一可直接共用的元件 |
-| `agents/` | ✅ subagent | ❌ 未支援 | `<name>.md`，含 frontmatter |
+| `agents/` | ✅ subagent | ✅ subagent | `<name>.md`，含 frontmatter；Grok 也讀，以 `default:<name>` 出現 |
 | `commands/` | ✅ slash command | ❌ 未支援 | `<name>.md`，以 `/default:<name>` 叫用 |
 | `hooks/` | ✅ `hooks/hooks.json` | ✅ 腳本本體 | `hooks/hooks.json` 是 Claude 格式（Grok 也讀這份）；`notify-done.sh` 是三家共用的腳本，見下方 Hooks |
 | `hooks.json` | — | ✅ plugin root | `agy` 只從 plugin root 讀 `hooks.json`，且格式不同（具名 hook，`Stop` 為扁平清單），呼叫同一支腳本 |
@@ -48,3 +48,7 @@
 - Claude Code：登錄本 repo 為 marketplace `shuk-cc-plugin` 並安裝 `default`；手動安裝為 `/plugin install default@shuk-cc-plugin`，再於 `/config` 選 `default:executive_summary`。
 - Antigravity：軟連結至 `~/.gemini/config/plugins/default`，以 `agy plugin enable default` / `agy plugin disable default` 開關。
 - Grok：`~/.grok/config.toml` 已登錄 marketplace `cc-plugin` 並啟用 `default`；Grok 安裝的是`複本`，改動後執行 `grok plugin update default`。
+
+## 參考資源 (References)
+
+- [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)：社群整理的 Claude Code subagent 範本集，新增 `agents/` 元件前可先參考現成定義

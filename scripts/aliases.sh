@@ -17,10 +17,6 @@
 CC_PLUGIN_DIR="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 export CC_PLUGIN_DIR
 
-# [Codex]
-alias codex="codex --dangerously-bypass-approvals-and-sandbox"
-alias codexm='codex --profile m3'
-
 # [Antigravity]
 alias agy="agy --dangerously-skip-permissions"
 
