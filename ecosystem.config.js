@@ -33,6 +33,16 @@ module.exports = {
                 HERMES_HOME: "/Users/shuk/.hermes",
                 VENV_PATH: "/Users/shuk/.venv"
             }
+        },
+        // Antigravity CLI Remote Control foreground server (`mac-server`), clearing GEMINI_API_KEY so OAuth auth is used; registered paused and restarted daily at 00:00.
+        {
+            name: "Agy Remote Control - Always",
+            script: "agy",
+            args: ["remote-control", "serve"],
+            namespace: "Agent",
+            instances: 1,
+            cron_restart: "0 0 * * *",
+            optional: true
         }
     ]
 };
