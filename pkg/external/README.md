@@ -27,4 +27,5 @@
 | `skill/google-workspace/` | Gmail 與 Google Workspace 操作 skill (gmail, gmail-workflows, gws) |
 | `tool/` | 命令列與開發輔助工具 |
 | `usage/` | Token 用量與花費追蹤工具 |
+| `video/` | 影片理解, 剪輯與自動化後製工具及 Agent Skills (openshot-qt, video-use) |
 | `web/water/` | WebGL / WebGPU 即時水面與海洋渲染實作及比較 |
