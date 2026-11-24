@@ -17,14 +17,6 @@
       "source": "./plugins/experiment"
     },
     {
-      "name": "explore",
-      "source": "./plugins/explore"
-    },
-    {
-      "name": "general",
-      "source": "./plugins/general"
-    },
-    {
       "name": "god",
       "source": "./plugins/god"
     },
@@ -35,10 +27,6 @@
     {
       "name": "team",
       "source": "./plugins/team"
-    },
-    {
-      "name": "ultra-explore",
-      "source": "./plugins/ultra-explore"
     }
   ]
 }
