@@ -24,14 +24,5 @@ alias agy="agy --dangerously-skip-permissions"
 alias claude='claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.json'
 
 # [Claude] — 代理端 (proxy / third-party endpoints)
-alias claudep='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.proxy.json'
-alias claudec='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.openai.json'
-alias claudex='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.xai.json'
-alias claudea='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.antigravity.json'
+# alias claudep='ANTHROPIC_AUTH_TOKEN=$PROXY_API_KEY claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.proxy.json'
 
-# [Claude] — llmbox profile 的一次性 (one-shot) 巡檢任務
-alias claudew-s='ANTHROPIC_AUTH_TOKEN=$TIKTOK_API_KEY claude --allow-dangerously-skip-permissions --effort max --model glm-5.2 --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.llmbox.json -p "look whole project for consistency, remove redundancy, structural, scalable. make a plan to ./plans/ and add an entry in README.todo"'
-alias claudew-b='ANTHROPIC_AUTH_TOKEN=$TIKTOK_API_KEY claude --allow-dangerously-skip-permissions --effort max --model glm-5.2 --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.llmbox.json -p "evaluate current business scope and find out high value aspects. make a plan to ./plans/ and add an entry in README.todo"'
-
-# [Claude] — llmbox profile 的第二組 token
-alias claudew2='ANTHROPIC_AUTH_TOKEN=$TIKTOK_API_KEY2 claude --allow-dangerously-skip-permissions --settings '"$CC_PLUGIN_DIR"'/plugins/default/config/settings/claude.llmbox.json'
