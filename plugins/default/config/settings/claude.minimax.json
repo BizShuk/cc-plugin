@@ -4,7 +4,6 @@
         "_____proxy": "_____",
         "ANTHROPIC_BASE_URL": "https://api.minimax.io/anthropic",
         "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "524288",
-        "CLAUDE_CODE_EFFORT_LEVEL": "max",
         "API_TIMEOUT_MS": "3000000",
         "_____prompt": "_____",
         "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION": "1",
@@ -108,7 +107,7 @@
     "feedbackDrafts": "quiet",
     "syntaxHighlightingDisabled": false,
     "alwaysThinkingEnabled": true,
-    "effortLevel": "low",
+    "effortLevel": "high",
     "modelSettings": {
         "claude-opus-5-5": {
             "effortLevel": "low"
