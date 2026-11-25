@@ -33,19 +33,17 @@ When NOT to use:
 
 ## Usage
 
-Use `npx markdownlint` to check and format Markdown files. This avoids installing `markdownlint-cli` globally.
-
-If the command is not found, install `markdownlint-cli` locally first:
+Use the global `markdownlint` CLI (`markdownlint-cli`) to check and format Markdown files (the `PostToolUse` hook automatically checks for a global install and runs `npm install -g markdownlint-cli` if missing).
 
 ```bash
 # Check a specific file
-npx markdownlint path/to/file.md
+markdownlint path/to/file.md
 
 # Check all Markdown files in a directory
-npx markdownlint plugins/experiment/skills/**/*.md
+markdownlint plugins/experiment/skills/**/*.md
 
 # Automatically fix basic issues
-npx markdownlint --fix path/to/file.md
+markdownlint --fix path/to/file.md
 ```
 
 ## Quick Reference Table

@@ -27,10 +27,11 @@
 
 | Hook | 事件 | 行為 |
 | :--- | :--- | :--- |
+| `markdownlint.sh` | `PostToolUse`（寫入或編輯 `.md` 後） | 檢查全域是否已安裝 `markdownlint`（未安裝則執行 `npm install -g markdownlint-cli`），先以 `--fix` 自動修復（優先讀取專案本身的 `.markdownlint*`，否則套用 `hooks/markdownlint.json` 關閉 `MD013`），Claude 與 Grok 若仍有未修掉的錯誤會透過 `additionalContext` 回饋給模型；`agy` 僅靜默修復並回傳 `{}` |
 | `notify-done.sh` | `Stop`（每回合最終回應完成） | 發 macOS 通知：標題 `<CLI> <專案資料夾名>`、內文為最終回應的第 1 行（`executive_summary` 規定的單行 recap；其他回應取第一個非標題文字行），上限 120 字；同一 CLI 同一目錄的新通知會取代舊的 |
 | `focus-window.sh` | 點擊通知 | 把執行該 CLI 的視窗切到前景：宿主是 Antigravity IDE 時，從 IDE 的 `storage.json` 找出包含 CLI 工作目錄的最深層已開啟資料夾並聚焦該視窗；其他宿主 (以 `__CFBundleIdentifier` 辨識) 只把該 app 切到前景 |
 
-三家交付最終回應的方式不同，由腳本分流：Claude 讀 stdin `last_assistant_message`；Grok（以 `$GROK_HOOK_EVENT` 辨識）讀 `lastAssistantMessage`，略過 session 結束時的 `Stop`；`agy`（參數 `agy`）讀 `transcriptPath` 最後一筆有文字的 `PLANNER_RESPONSE`，略過 `USER_CANCELED`。依賴 macOS 內建的 `jq`、`open` 與 `terminal-notifier`（`brew install terminal-notifier`，`osascript` 的通知無法設定點擊動作）；非 macOS 直接略過。
+`notify-done.sh` 在三家交付最終回應的方式不同，由腳本分流：Claude 讀 stdin `last_assistant_message`；Grok（以 `$GROK_HOOK_EVENT` 辨識）讀 `lastAssistantMessage`，略過 session 結束時的 `Stop`；`agy`（參數 `agy`）讀 `transcriptPath` 最後一筆有文字的 `PLANNER_RESPONSE`，略過 `USER_CANCELED`。依賴 macOS 內建的 `jq`、`open` 與 `terminal-notifier`（`brew install terminal-notifier`，`osascript` 的通知無法設定點擊動作）；非 macOS 直接略過。`markdownlint.sh` 同樣以三家分流讀取 `PostToolUse` 檔案路徑（Claude 讀 `tool_input.file_path`、Grok 讀 `tool_input`／`toolInput`、Antigravity 讀 `toolCall.args.Path`／`TargetFile`）。
 
 ### Statusline
 

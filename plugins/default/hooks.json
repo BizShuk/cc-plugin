@@ -1,11 +1,25 @@
 {
-  "notify-done": {
-    "Stop": [
+  "markdownlint": {
+    "PostToolUse": [
       {
-        "type": "command",
-        "command": "./hooks/notify-done.sh agy",
-        "timeout": 10
+        "matcher": "write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/markdownlint.sh agy",
+            "timeout": 30
+          }
+        ]
       }
-    ]
+    ],
+    "notify-done": {
+      "Stop": [
+        {
+          "type": "command",
+          "command": "./hooks/notify-done.sh agy",
+          "timeout": 10
+        }
+      ]
+    }
   }
 }
