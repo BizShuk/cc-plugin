@@ -8,22 +8,12 @@
     "test": "go test ./...",
     "build": "go build -o bin/cc-plugin .",
     "deploy": "go install .",
-    "lint": "gofmt -l . && go vet ./... && shellcheck pkg/hermes/scripts/*.sh",
+    "lint": "gofmt -l . && go vet ./...",
     "clean": "rm -rf bin",
     "destroy": "pkill -f 'bin/cc-plugin' || true",
     "ci": "pnpm run lint && pnpm run test && pnpm run build",
     "run:setup": "./scripts/run.sh",
     "run:export-claudemem": "go run main.go export claudemem",
-    "run:topology-verify": "go run main.go topology verify",
-    "hermes:install": "./pkg/hermes/scripts/setup.sh",
-    "hermes:upgrade": "./pkg/hermes/scripts/setup.sh --upgrade",
-    "hermes:install:webui": "./pkg/hermes/scripts/setup-webui.sh",
-    "hermes:upgrade:webui": "./pkg/hermes/scripts/setup-webui.sh --upgrade",
-    "hermes:setup": "./pkg/hermes/scripts/run.sh",
-    "hermes:persona": "f() { HERMES_PERSONA=\"$1\" ./pkg/hermes/scripts/run.sh; }; f",
-    "hermes:webui": "./pkg/hermes/scripts/webui.sh",
-    "hermes:gateway": "./pkg/hermes/scripts/gateway.sh",
-    "hermes:start": "pm2 task resume \"Hermes Gateway - Always\" && pm2 task resume \"Hermes WebUI - Always\"",
-    "hermes:restart": "pm2 task restart \"Hermes Gateway - Always\" && pm2 task restart \"Hermes WebUI - Always\""
+    "run:topology-verify": "go run main.go topology verify"
   }
 }

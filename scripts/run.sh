@@ -116,8 +116,8 @@ install_claude_plugins() {
 
 install_claude_plugins
 
-# Hermes is NOT set up here -- run it explicitly: `pnpm run hermes:setup`
-# (install / upgrade / webui are likewise explicit `hermes:*` tasks).
+# Hermes is NOT set up here -- it is its own repo at ~/.hermes: `pnpm -C ~/.hermes run run:setup`
+# (install / upgrade are `run:install` / `run:upgrade` there).
 
 install_sample_if_missing \
     "$REPO_ROOT/plugins/experiment/skills/summarize-sh/config.sample.json" \

@@ -24,7 +24,7 @@
 `領域流程 (Domain Flow):`
 
 1. 執行 `scripts/run.sh` → 建立家目錄結構
-2. 軟連結全域規則（`plugins/default/AGENTS.md`）至 PATH 上偵測到的 Claude Code、Antigravity（`~/.gemini/GEMINI.md`）、Codex、Pi、Hermes、Grok，並同步 `plugins/default` 插件與 `output-style` 規則（`plugins/default/rules/output-style.md` → `~/.gemini/config/rules/output-style.md`、`~/.grok/rules/output-style.md`）及各 CLI 設定檔；Hermes 的完整環境與 `.env` 設定不在 `scripts/run.sh` 流程內，須另外明確執行 `pnpm run hermes:setup`（見 [`pkg/hermes/`](pkg/hermes/README.md)）
+2. 軟連結全域規則（`plugins/default/AGENTS.md`）至 PATH 上偵測到的 Claude Code、Antigravity（`~/.gemini/GEMINI.md`）、Codex、Pi、Hermes、Grok，並同步 `plugins/default` 插件與 `output-style` 規則（`plugins/default/rules/output-style.md` → `~/.gemini/config/rules/output-style.md`、`~/.grok/rules/output-style.md`）及各 CLI 設定檔；Hermes 的完整環境與 `.env` 設定由獨立 repo `~/.hermes` 管理，執行 `pnpm -C ~/.hermes run run:setup`
 3. 同步外部工具設定並建立調試用反向連結（完整同步範圍與各 Agent 規則路徑見 [`docs/development.md`](docs/development.md) 與 [`plugins/default/README.md`](plugins/default/README.md)）
 
 `核心實體 (Key Entities):` `Active settings`, `Provider settings`, `Global rule`（定義見 [`docs/terminology.md`](docs/terminology.md)）

@@ -28,7 +28,7 @@
 | Topology 圖譜     | `cmd/topology/`                                                  | `topology.TopologyCmd`, `LoadTopology()`                        |
 | 狀態管理          | `model/store.go`, `model/cursor.go`                              | `NewStateStore()`, `GetCursorPosition()`, `SetCursorPosition()` |
 | 環境初始化        | `scripts/run.sh`, `plugins/default/config/`                             | `config.Init()`                                                 |
-| Hermes 部署與設定 | `pkg/hermes/`（子專案，自帶統一介面；任務併入根層 `package.json`） | `pnpm run hermes:install` / `hermes:install:webui` / `hermes:setup`（皆須明確執行，不隨 `run:setup`） |
+| Hermes 部署與設定 | 獨立 repo `~/.hermes`（本 repo 只提供共用 `AGENTS.md` 與 PM2 註冊） | `pnpm -C ~/.hermes run run:install` / `run:setup` |
 | AI 技能           | `plugins/`                                                       | 各 `SKILL.md`                                                   |
 | 知識庫建構        | `plugins/ultra-explore/skills/`, `plugins/ultra-explore/agents/` | `ultra-explore`, `kb-coordinator.md`                            |
 | 審查、規劃與演化  | `plugins/review/skills/`                                         | `auto-evolving` 與各專項 `SKILL.md`                             |
